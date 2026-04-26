@@ -10,7 +10,7 @@ namespace CLRHack.Tests
     [Collection("Sequential")]
     public class LispTestsSuite
     {
-        private const string TestDir = "/mnt/c/Users/JosephMarshall/AppData/Roaming/source/repos/CLRHack/LispTests";
+        private static readonly string TestDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../LispTests");
 
         [Fact]
         public void TestLoadAllLispFiles()
