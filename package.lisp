@@ -1,10 +1,35 @@
 ;;; -*- Lisp -*-
 
 (defpackage "CLRHACK"
-    (:shadowing-import-from "FUNCTION" "COMPOSE")
+  (:shadowing-import-from "FUNCTION" "COMPOSE")
   (:shadowing-import-from "NAMED-LET" "LET" "NAMED-LAMBDA")
   (:shadowing-import-from "SERIES" "DEFUN" "FUNCALL" "LET*" "MULTIPLE-VALUE-BIND")
-  (:use "ALEXANDRIA" "CL" "FOLD" "FUNCTION" "NAMED-LET" "PROMISE" "SERIES"))
+  (:use "ALEXANDRIA" "CL" "FOLD" "FUNCTION" "NAMED-LET" "PROMISE" "SERIES")
+  (:export
+   "AST-NODE"
+   "AST-LITERAL"
+   "AST-LITERAL-VALUE"
+   "AST-VARIABLE"
+   "AST-VARIABLE-NAME"
+   "AST-IF"
+   "AST-IF-TEST"
+   "AST-IF-CONSEQUENT"
+   "AST-IF-ALTERNATE"
+   "AST-PROGN"
+   "AST-PROGN-FORMS"
+   "AST-SETQ"
+   "AST-SETQ-NAME"
+   "AST-SETQ-VALUE"
+   "AST-LET"
+   "AST-LET-BINDINGS"
+   "AST-LET-BODY"
+   "AST-LAMBDA"
+   "AST-LAMBDA-PARAMS"
+   "AST-LAMBDA-BODY"
+   "AST-APPLICATION"
+   "AST-APPLICATION-OPERATOR"
+   "AST-APPLICATION-OPERANDS"
+   "LISP->AST"))
 
 (defpackage "IL"
   (:shadow "AND" "OR" "XOR" "NOT" "POP")
