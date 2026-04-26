@@ -4,5 +4,6 @@
   :license "MIT"
   :depends-on ()
   :components ((:file "data"      :depends-on ("package"))
+               (:file "ast"       :depends-on ("package"))
                (:file "package")
                (:module "CLSymbols" :components ((:file "write-symbols")))))
