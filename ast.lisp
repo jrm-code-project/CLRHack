@@ -16,6 +16,22 @@
   ((name :initarg :name :accessor ast-variable-name))
   (:documentation "A variable reference."))
 
+(defclass ast-argument-variable (ast-variable)
+  ()
+  (:documentation "An argument variable reference."))
+
+(defclass ast-local-variable (ast-variable)
+  ()
+  (:documentation "A local variable reference."))
+
+(defclass ast-lexical-variable (ast-variable)
+  ()
+  (:documentation "A lexical variable reference."))
+
+(defclass ast-global-variable (ast-variable)
+  ()
+  (:documentation "A global variable reference."))
+
 (defclass ast-if (ast-node)
   ((test :initarg :test :accessor ast-if-test)
    (consequent :initarg :consequent :accessor ast-if-consequent)
@@ -71,7 +87,7 @@
                          :forms (mapcar #'lisp->ast args)))
          (setq
           (make-instance 'ast-setq
-                         :name (first args)
+                         :name (make-instance 'ast-variable :name (first args))
                          :value (lisp->ast (second args))))
          (let
           (make-instance 'ast-let
@@ -92,3 +108,82 @@
                                        (lisp->ast op))
                          :operands (mapcar #'lisp->ast args))))))
     (t (error "Unknown expression type: ~A" expr))))
+
+;;; Scope Analysis
+
+(defun lookup-variable (env var)
+  "Looks up a variable in the environment and returns its scope type:
+   :argument, :local, :lexical, or :global."
+  (let ((crossed-lambda-p nil))
+    (dolist (frame env)
+      (let ((frame-type (car frame))
+            (vars (cdr frame)))
+        (if (member var vars :test #'eq)
+            (return-from lookup-variable
+              (if crossed-lambda-p
+                  :lexical
+                  (ecase frame-type
+                    (:lambda :argument)
+                    (:let :local))))
+            (when (eq frame-type :lambda)
+              (setq crossed-lambda-p t)))))
+    :global))
+
+(defgeneric analyze-environment (node env)
+  (:documentation "Walks the AST, returning a new tree with variables typed by their scope."))
+
+(defmethod analyze-environment ((node ast-literal) env)
+  (declare (ignore env))
+  node)
+
+(defmethod analyze-environment ((node ast-variable) env)
+  (let* ((name (ast-variable-name node))
+         (scope (lookup-variable env name)))
+    (ecase scope
+      (:argument (make-instance 'ast-argument-variable :name name))
+      (:local (make-instance 'ast-local-variable :name name))
+      (:lexical (make-instance 'ast-lexical-variable :name name))
+      (:global (make-instance 'ast-global-variable :name name)))))
+
+(defmethod analyze-environment ((node ast-if) env)
+  (make-instance 'ast-if
+                 :test (analyze-environment (ast-if-test node) env)
+                 :consequent (analyze-environment (ast-if-consequent node) env)
+                 :alternate (analyze-environment (ast-if-alternate node) env)))
+
+(defmethod analyze-environment ((node ast-progn) env)
+  (make-instance 'ast-progn
+                 :forms (mapcar (lambda (form) (analyze-environment form env))
+                                (ast-progn-forms node))))
+
+(defmethod analyze-environment ((node ast-setq) env)
+  (make-instance 'ast-setq
+                 :name (analyze-environment (ast-setq-name node) env)
+                 :value (analyze-environment (ast-setq-value node) env)))
+
+(defmethod analyze-environment ((node ast-let) env)
+  ;; LET evaluates its init-forms in the outer environment.
+  (let* ((analyzed-bindings
+          (mapcar (lambda (b)
+                    (list (car b) (analyze-environment (cadr b) env)))
+                  (ast-let-bindings node)))
+         (bound-vars (mapcar #'car (ast-let-bindings node)))
+         (inner-env (cons (cons :let bound-vars) env)))
+    (make-instance 'ast-let
+                   :bindings analyzed-bindings
+                   :body (mapcar (lambda (form) (analyze-environment form inner-env))
+                                 (ast-let-body node)))))
+
+(defmethod analyze-environment ((node ast-lambda) env)
+  ;; LAMBDA parameters are evaluated in the inner environment.
+  (let ((inner-env (cons (cons :lambda (ast-lambda-params node)) env)))
+    (make-instance 'ast-lambda
+                   :params (ast-lambda-params node)
+                   :body (mapcar (lambda (form) (analyze-environment form inner-env))
+                                 (ast-lambda-body node)))))
+
+(defmethod analyze-environment ((node ast-application) env)
+  (make-instance 'ast-application
+                 :operator (analyze-environment (ast-application-operator node) env)
+                 :operands (mapcar (lambda (op) (analyze-environment op env))
+                                   (ast-application-operands node))))
