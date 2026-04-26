@@ -4,7 +4,7 @@
   (:shadowing-import-from "FUNCTION" "COMPOSE")
   (:shadowing-import-from "NAMED-LET" "LET" "NAMED-LAMBDA")
   (:shadowing-import-from "SERIES" "DEFUN" "FUNCALL" "LET*" "MULTIPLE-VALUE-BIND" "ITERATE")
-  (:use "ALEXANDRIA" "CL" "FOLD" "FUNCTION" "NAMED-LET" "ORG.SHIRAKUMO.PROMISE" "SERIES")
+  (:use "ALEXANDRIA" "CL" "FOLD" "FUNCTION" "NAMED-LET" "SERIES")
   (:export
    "AST-NODE"
    "AST-LITERAL"

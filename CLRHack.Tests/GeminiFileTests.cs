@@ -45,7 +45,7 @@ namespace CLRHack.Tests
 
         private void CreateStubPackages()
         {
-            string[] stubs = { "ALEXANDRIA", "FOLD", "FUNCTION", "JSONX", "NAMED-LET", "PROMISE", "SERIES", "TRIVIAL-TIMEOUT" };
+            string[] stubs = { "ALEXANDRIA", "FOLD", "FUNCTION", "JSONX", "NAMED-LET", "SERIES", "TRIVIAL-TIMEOUT" };
             foreach (var name in stubs)
             {
                 if (Package.Find(name) == null)
