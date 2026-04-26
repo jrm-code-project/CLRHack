@@ -107,7 +107,7 @@ namespace CLRHack.Tests
             var objects = new List<object>();
 
             // Act
-            using (var fileStream = File.OpenText("/mnt/c/Users/JosephMarshall/AppData/Roaming/source/repos/CLRHack/s-code.lisp"))
+            using (var fileStream = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../s-code.lisp")))
             {
                 var reader = new Reader(fileStream, readtable);
                 object? form;
