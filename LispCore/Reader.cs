@@ -1,0 +1,884 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Numerics;
+using System.Text;
+
+namespace Lisp
+{
+    public class Reader
+    {
+        private readonly TextReader input;
+        private readonly Readtable readtable;
+        private readonly Dictionary<int, object> labels = new Dictionary<int, object>();
+        public static readonly object CloseParenMarker = new object();
+
+        public Reader(TextReader input, Readtable? readtable = null)
+        {
+            this.input = input;
+            this.readtable = readtable ?? Readtable.Current;
+        }
+
+        public object? Read(bool eofErrorP = true, object? eofValue = null, bool recursiveP = false)
+        {
+            var result = ReadInternal(eofErrorP, eofValue, recursiveP);
+            if (result == null) return null;
+            if (result == CloseParenMarker) return result;
+            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            return result;
+        }
+
+        private object? ReadInternal(bool eofErrorP, object? eofValue, bool recursiveP)
+        {
+            while (true)
+            {
+                int cInt = input.Read();
+                if (cInt == -1)
+                {
+                    if (recursiveP) throw new EndOfStreamException("End of file while reading list.");
+                    if (eofErrorP) throw new EndOfStreamException("End of file while reading.");
+                    return eofValue;
+                }
+
+                char c = (char)cInt;
+                var type = readtable.GetSyntax(c);
+
+                switch (type)
+                {
+                    case SyntaxType.Whitespace:
+                        continue;
+
+                    case SyntaxType.TerminatingMacro:
+                    case SyntaxType.NonTerminatingMacro:
+                        {
+                            var (func, nonTerminatingP) = readtable.GetMacroCharacter(c);
+                            if (func != null)
+                            {
+                                var result = func(this, c);
+                                if (result == null) continue;
+                                if (result == CloseParenMarker && !recursiveP) throw new InvalidOperationException("Unmatched ')' found.");
+                                return result;
+                            }
+                            var hardcodedResult = HandleHardcodedMacro(c, type);
+                            if (hardcodedResult == null) continue;
+                            if (hardcodedResult == CloseParenMarker && !recursiveP) throw new InvalidOperationException("Unmatched ')' found.");
+                            return hardcodedResult;
+                        }
+
+                    case SyntaxType.Constituent:
+                    case SyntaxType.SingleEscape:
+                    case SyntaxType.MultipleEscape:
+                        {
+                            var (token, anyEscape) = ReadToken(c, type);
+                            return ParseToken(token, anyEscape);
+                        }
+
+                    default:
+                        throw new NotImplementedException($"Syntax type '{type}' for character '{c}' is not implemented.");
+                }
+            }
+        }
+
+        private object? HandleHardcodedMacro(char c, SyntaxType type)
+        {
+            if (c == '(') return ReadList();
+            if (c == ')') return CloseParenMarker;
+            if (c == '\'') return ReadQuote();
+            if (c == '`') return ReadBackquote();
+            if (c == ',') return ReadComma();
+            if (c == ';') { ReadLineComment(); return null; }
+            if (c == '"') return ReadString();
+            if (c == '#') return HandleDispatchMacro(c);
+
+            if (type == SyntaxType.NonTerminatingMacro)
+            {
+                var (token, anyEscape) = ReadToken(c, type);
+                return ParseToken(token, anyEscape);
+            }
+
+            throw new NotImplementedException($"Reader macro for '{c}' is not implemented.");
+        }
+
+        public object? HandleDispatchMacro(char dispatchChar)
+        {
+            int? param = null;
+            while (true)
+            {
+                int nextInt = input.Peek();
+                if (nextInt == -1) break;
+                char nextChar = (char)nextInt;
+                if (char.IsDigit(nextChar))
+                {
+                    input.Read();
+                    param = (param ?? 0) * 10 + (nextChar - '0');
+                }
+                else break;
+            }
+
+            int subCharInt = input.Read();
+            if (subCharInt == -1) throw new EndOfStreamException($"End of file after dispatch character '{dispatchChar}'.");
+            char subChar = (char)subCharInt;
+
+            var func = readtable.GetDispatchMacroCharacter(dispatchChar, subChar);
+            if (func != null)
+            {
+                return func(this, dispatchChar, subChar, param);
+            }
+
+            if (subChar == '=') return HandleLabel(param);
+            if (subChar == '#') return HandleReference(param);
+
+            throw new NotImplementedException($"Reader dispatch macro for '{dispatchChar}{subChar}' is not implemented.");
+        }
+
+        public object? HandleLabel(int? label)
+        {
+            if (!label.HasValue) throw new InvalidOperationException("Label macro #= requires a numeric parameter.");
+            // Use a temporary placeholder to allow for forward references within the same object.
+            // Note: True circularity is not yet supported due to the immutable nature of our List struct.
+            var placeholder = new object();
+            labels[label.Value] = placeholder;
+            
+            var obj = Read();
+            if (obj != null) labels[label.Value] = obj;
+            return obj;
+        }
+
+        public object? HandleReference(int? label)
+        {
+            if (!label.HasValue) throw new InvalidOperationException("Reference macro ## requires a numeric parameter.");
+            if (labels.TryGetValue(label.Value, out var obj)) return obj;
+            throw new InvalidOperationException($"Reference to undefined label #{label.Value}#");
+        }
+
+        public object? HandleReadTimeEvaluation()
+        {
+            var form = Read();
+            return form;
+        }
+
+        public object HandleUninternedSymbol()
+        {
+            var (token, anyEscape) = ReadToken(' ', SyntaxType.Whitespace);
+            return new Symbol(token, null);
+        }
+
+        public object? HandleConditional(bool onFeaturePresent)
+        {
+            var oldSuppress = CL.StrReadSuppressStr;
+            CL.StrReadSuppressStr = CL.Nil;
+            object? featureExpr;
+            try
+            {
+                featureExpr = Read();
+            }
+            finally
+            {
+                CL.StrReadSuppressStr = oldSuppress;
+            }
+
+            if (IsFeaturePresent(featureExpr))
+            {
+                if (onFeaturePresent) return Read();
+                else
+                {
+                    SuppressRead();
+                    return null;
+                }
+            }
+            else
+            {
+                if (onFeaturePresent)
+                {
+                    SuppressRead();
+                    return null;
+                }
+                else return Read();
+            }
+        }
+
+        private bool IsFeaturePresent(object? expr)
+        {
+            if (expr is Symbol sym)
+            {
+                if (CL.StrFeaturesStr is List features)
+                {
+                    foreach (var f in features)
+                    {
+                        if (f is Symbol s && s.Name == sym.Name) return true;
+                    }
+                }
+                return false;
+            }
+            if (expr is List list && !list.EndP)
+            {
+                var first = list.First();
+                if (first is Symbol op)
+                {
+                    var args = (List)list.Rest();
+                    switch (op.Name)
+                    {
+                        case "AND":
+                            foreach (var arg in args) if (!IsFeaturePresent(arg)) return false;
+                            return true;
+                        case "OR":
+                            foreach (var arg in args) if (IsFeaturePresent(arg)) return true;
+                            return false;
+                        case "NOT":
+                            return !IsFeaturePresent(args.First());
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void SuppressRead()
+        {
+            var oldSuppress = CL.StrReadSuppressStr;
+            CL.StrReadSuppressStr = CL.T;
+            try
+            {
+                Read();
+            }
+            finally
+            {
+                CL.StrReadSuppressStr = oldSuppress;
+            }
+        }
+
+        public object HandleBitVector()
+        {
+            var bits = new List<int>();
+            while (true)
+            {
+                int nextInt = input.Peek();
+                if (nextInt == -1) break;
+                char nextChar = (char)nextInt;
+                if (nextChar == '0') { input.Read(); bits.Add(0); }
+                else if (nextChar == '1') { input.Read(); bits.Add(1); }
+                else break;
+            }
+            return bits.ToArray();
+        }
+
+        public object HandleVector()
+        {
+            var listObj = ReadList();
+            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            var list = (List)listObj;
+            var items = new List<object>();
+            foreach(var item in list)
+            {
+                items.Add(item!);
+            }
+            return items.ToArray();
+        }
+
+        public object HandleArray(int? rank)
+        {
+            if (rank == 2) return ReadArray2D();
+            throw new NotImplementedException($"Array rank {rank} is not implemented.");
+        }
+
+        public object ReadArray2D()
+        {
+            var listObj = ReadInternal(true, null, false);
+            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            var list = (List)listObj!;
+            var rows = new List<List<object>>();
+            int cols = -1;
+
+            foreach (var rowList in list)
+            {
+                var row = new List<object>();
+                foreach (var item in (List)rowList!)
+                {
+                    row.Add(item!);
+                }
+                if (cols == -1) cols = row.Count;
+                else if (cols != row.Count) throw new InvalidOperationException("Ragged 2D array.");
+                rows.Add(row);
+            }
+
+            var array = new object[rows.Count, cols];
+            for (int i = 0; i < rows.Count; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    array[i, j] = rows[i][j];
+                }
+            }
+            return array;
+        }
+
+        public object HandleComplex()
+        {
+            var listObj = ReadInternal(true, null, false);
+            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            if (!(listObj is List list)) throw new InvalidOperationException("Invalid complex number syntax.");
+
+            var real = list.First();
+            var rest = (List)list.Rest();
+            if (rest.EndP) throw new InvalidOperationException("Complex number must have two parts.");
+            var imag = rest.First();
+            if (!((List)rest.Rest()).EndP) throw new InvalidOperationException("Complex number must have exactly two parts.");
+
+            return new Complex(real!, imag!);
+        }
+
+        public object HandleCharacter()
+        {
+            int cInt = input.Read();
+            if (cInt == -1) throw new EndOfStreamException("End of file after #\\.");
+            char firstChar = (char)cInt;
+
+            var sb = new StringBuilder();
+            sb.Append(firstChar);
+
+            while (true)
+            {
+                int nextInt = input.Peek();
+                if (nextInt == -1) break;
+                char nextChar = (char)nextInt;
+                var syntax = readtable.GetSyntax(nextChar);
+                if (syntax == SyntaxType.Whitespace || syntax == SyntaxType.TerminatingMacro) break;
+                input.Read();
+                sb.Append(nextChar);
+            }
+
+            string name = sb.ToString();
+            if (name.Length == 1) return name[0];
+            
+            switch (name.ToUpper())
+            {
+                case "SPACE": return ' ';
+                case "NEWLINE": return '\n';
+                case "TAB": return '\t';
+                case "PAGE": return '\f';
+                case "RETURN": return '\r';
+                case "BACKSPACE": return '\b';
+                default: throw new InvalidOperationException($"Unknown character name: {name}");
+            }
+        }
+
+        public object HandleRadix(int radix)
+        {
+            var (s, anyEscape) = ReadToken(' ', SyntaxType.Whitespace);
+            if (anyEscape) throw new InvalidOperationException("Radix literals cannot contain escapes.");
+            if (IsInteger(s, radix, out int sign, out string digits))
+            {
+                return ParseInteger(digits, sign, radix);
+            }
+            throw new InvalidOperationException($"Invalid number for radix {radix}: {s}");
+        }
+
+        public object HandleFunction()
+        {
+            var obj = Read();
+            return AdtList.Of(Package.CommonLisp.Intern("FUNCTION"), obj!);
+        }
+
+        public void HandleBlockComment()
+        {
+            int depth = 1;
+            while (depth > 0)
+            {
+                int cInt = input.Read();
+                if (cInt == -1) throw new EndOfStreamException("End of file inside block comment.");
+                char c = (char)cInt;
+
+                if (c == '#')
+                {
+                    int next = input.Peek();
+                    if (next == '|') 
+                    {
+                        input.Read();
+                        depth++;
+                    }
+                }
+                else if (c == '|') 
+                {
+                    int next = input.Peek();
+                    if (next == '#')
+                    {
+                        input.Read();
+                        depth--;
+                    }
+                }
+            }
+        }
+
+        public object ParseToken(string s, bool anyEscape)
+        {
+            if (!anyEscape)
+            {
+                int colonIndex = s.IndexOf(':');
+                if (colonIndex != -1)
+                {
+                    string packageName = s.Substring(0, colonIndex);
+                    string symbolName = s.Substring(colonIndex + 1);
+
+                    if (packageName == "")
+                    {
+                        return Package.Keyword.Intern(symbolName);
+                    }
+
+                    var package = Package.Find(packageName);
+                    if (package == null)
+                    {
+                        package = new Package(packageName);
+                    }
+
+                    if (symbolName.StartsWith(":"))
+                    {
+                        return package.Intern(symbolName.Substring(1));
+                    }
+
+                    var (symbol, status) = package.FindSymbol(symbolName);
+                    if (status != SymbolStatus.None)
+                    {
+                        return symbol!;
+                    }
+                    return package.Intern(symbolName);
+                }
+
+                var result = ParseNumber(s);
+                if (result != null) return result;
+            }
+
+            if (Package.Current is null) throw new InvalidOperationException("No current package defined.");
+            return Package.Current.Intern(s);
+        }
+
+        public string ReadString()
+        {
+            var sb = new StringBuilder();
+            while (input.Peek() != '"')
+            {
+                if (input.Peek() == -1) throw new EndOfStreamException("Unmatched '\"' found.");
+                char c = (char)input.Read();
+                if (c == '\\') 
+                {
+                    c = (char)input.Read();
+                }
+                sb.Append(c);
+            }
+            input.Read();
+            return sb.ToString();
+        }
+
+        public object? ReadSingleObject()
+        {
+            var obj = ReadInternal(eofErrorP: false, eofValue: null, recursiveP: false);
+            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+
+            while (true)
+            {
+                int cInt = input.Peek();
+                if (cInt == -1) break;
+
+                char c = (char)cInt;
+                if (readtable.GetSyntax(c) == SyntaxType.Whitespace)
+                {
+                    input.Read();
+                    continue;
+                }
+
+                throw new InvalidOperationException("Extra characters found after reading a single object.");
+            }
+
+            return obj;
+        }
+
+        public object ReadList()
+        {
+            var elements = new List<object>();
+            while (true)
+            {
+                var element = ReadInternal(eofErrorP: true, eofValue: null, recursiveP: true);
+                if (element == CloseParenMarker)
+                {
+                    return AdtList.VectorToList(elements.ToArray());
+                }
+
+                if (element is Symbol s && s.Name == ".")
+                {
+                    if (elements.Count == 0) throw new InvalidOperationException("No car before dot.");
+
+                    var tail = ReadInternal(eofErrorP: true, eofValue: null, recursiveP: true);
+                    if (tail == CloseParenMarker) throw new InvalidOperationException("No cdr after dot.");
+
+                    var next = ReadInternal(eofErrorP: true, eofValue: null, recursiveP: true);
+                    if (next != CloseParenMarker)
+                    {
+                        if (next is Symbol s2 && s2.Name == ".")
+                        {
+                             throw new InvalidOperationException("Multiple dots in list.");
+                        }
+                        throw new InvalidOperationException("More than one object after dot.");
+                    }
+
+                    object result = tail!;
+                    for (int i = elements.Count - 1; i >= 0; i--)
+                    {
+                        result = AdtList.Cons(elements[i], result);
+                    }
+                    return result;
+                }
+
+                elements.Add(element!);
+            }
+        }
+
+        public object ReadQuote()
+        {
+            var quotedObject = ReadInternal(true, null, false);
+            if (Package.Current is null) throw new InvalidOperationException("No current package defined.");
+            return AdtList.Of(Package.Current.Intern("QUOTE"), quotedObject!);
+        }
+
+        public object ReadBackquote()
+        {
+            var obj = Read();
+            return AdtList.Of(Package.System.Intern("BACKQUOTE"), obj!);
+        }
+
+        public object ReadComma()
+        {
+            int next = input.Peek();
+            if (next == '@')
+            {
+                input.Read();
+                var obj = Read();
+                return AdtList.Of(Package.System.Intern("COMMA-AT"), obj!);
+            }
+            else
+            {
+                var obj = Read();
+                return AdtList.Of(Package.System.Intern("COMMA"), obj!);
+            }
+        }
+
+        public void ReadLineComment()
+        {
+            while (true)
+            {
+                int cInt = input.Read();
+                if (cInt == -1 || cInt == '\n') break;
+            }
+        }
+
+        private string FoldCase(string token)
+        {
+            switch (readtable.Case)
+            {
+                case ReadtableCase.Preserve:
+                    return token;
+
+                case ReadtableCase.Upcase:
+                case ReadtableCase.Downcase:
+                    var final = new StringBuilder(token.Length);
+                    var segment = new StringBuilder();
+                    bool? segmentIsUpper = null; // null means caseless so far
+
+                    Action processSegment = () => {
+                        if (segment.Length == 0) return;
+                        string s = segment.ToString();
+                        if (readtable.Case == ReadtableCase.Upcase) {
+                            final.Append(s.ToUpper());
+                        } else {
+                            final.Append(s.ToLower());
+                        }
+                        segment.Clear();
+                        segmentIsUpper = null;
+                    };
+
+                    foreach (char c in token)
+                    {
+                        bool cIsUpper = char.IsUpper(c);
+                        bool cIsLower = char.IsLower(c);
+                        bool? charIsUpper = cIsUpper ? true : (cIsLower ? false : (bool?)null);
+
+                        if (segment.Length == 0) {
+                            segment.Append(c);
+                            segmentIsUpper = charIsUpper;
+                        } else if (segmentIsUpper.HasValue && charIsUpper.HasValue && segmentIsUpper != charIsUpper) {
+                            processSegment();
+                            segment.Append(c);
+                            segmentIsUpper = charIsUpper;
+                        } else {
+                            segment.Append(c);
+                            if (!segmentIsUpper.HasValue && charIsUpper.HasValue) {
+                                segmentIsUpper = charIsUpper;
+                            }
+                        }
+                    }
+                    processSegment();
+                    return final.ToString();
+
+                case ReadtableCase.Invert:
+                    bool allUpper = true;
+                    bool allLower = true;
+                    bool hasLetters = false;
+                    foreach (char ch in token) {
+                        if (char.IsLetter(ch)) {
+                            hasLetters = true;
+                            if (!char.IsUpper(ch)) allUpper = false;
+                            if (!char.IsLower(ch)) allLower = false;
+                        }
+                    }
+                    if (hasLetters && allUpper) return token.ToLower();
+                    if (hasLetters && allLower) return token.ToUpper();
+                    return token;
+
+                default:
+                    return token;
+            }
+        }
+
+        private (string token, bool anyEscape) ReadToken(char initialChar, SyntaxType initialType)
+        {
+            var sb = new StringBuilder();
+            var escaped = new List<bool>();
+            bool multipleEscape = false;
+            bool anyEscape = false;
+
+            Action<char, bool> addChar = (c, isEscaped) => {
+                sb.Append(c);
+                escaped.Add(isEscaped);
+                if (isEscaped) anyEscape = true;
+            };
+
+            if (initialType == SyntaxType.SingleEscape)
+            {
+                int next = input.Read();
+                if (next == -1) throw new EndOfStreamException("End of file after \\.");
+                addChar((char)next, true);
+            }
+            else if (initialType == SyntaxType.MultipleEscape)
+            {
+                multipleEscape = true;
+            }
+            else if (initialType != SyntaxType.Whitespace)
+            {
+                addChar(initialChar, false);
+            }
+
+            while (true)
+            {
+                int cInt = input.Peek();
+                if (cInt == -1) break;
+                char c = (char)cInt;
+                var type = readtable.GetSyntax(c);
+
+                if (multipleEscape)
+                {
+                    input.Read();
+                    if (type == SyntaxType.MultipleEscape)
+                    {
+                        multipleEscape = false;
+                    }
+                    else if (type == SyntaxType.SingleEscape)
+                    {
+                        int next = input.Read();
+                        if (next == -1) throw new EndOfStreamException("End of file after \\.");
+                        addChar((char)next, true);
+                    }
+                    else
+                    {
+                        addChar(c, true);
+                    }
+                }
+                else
+                {
+                    if (type == SyntaxType.Whitespace || type == SyntaxType.TerminatingMacro) break;
+                    
+                    input.Read();
+                    if (type == SyntaxType.SingleEscape)
+                    {
+                        int next = input.Read();
+                        if (next == -1) throw new EndOfStreamException("End of file after \\.");
+                        addChar((char)next, true);
+                    }
+                    else if (type == SyntaxType.MultipleEscape)
+                    {
+                        multipleEscape = true;
+                    }
+                    else
+                    {
+                        addChar(c, false);
+                    }
+                }
+            }
+
+            if (multipleEscape) throw new EndOfStreamException("Unmatched | found.");
+
+            string tokenStr = sb.ToString();
+            if (!anyEscape)
+            {
+                tokenStr = FoldCase(tokenStr);
+            }
+            else
+            {
+                var finalSb = new StringBuilder();
+                
+                bool allUpper = true;
+                bool allLower = true;
+                bool hasLetters = false;
+                if (readtable.Case == ReadtableCase.Invert)
+                {
+                    for (int i = 0; i < sb.Length; i++)
+                    {
+                        if (!escaped[i] && char.IsLetter(sb[i]))
+                        {
+                            hasLetters = true;
+                            if (!char.IsUpper(sb[i])) allUpper = false;
+                            if (!char.IsLower(sb[i])) allLower = false;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < sb.Length; i++)
+                {
+                    char c = sb[i];
+                    if (escaped[i])
+                    {
+                        finalSb.Append(c);
+                    }
+                    else
+                    {
+                        switch (readtable.Case)
+                        {
+                            case ReadtableCase.Upcase: finalSb.Append(char.ToUpper(c)); break;
+                            case ReadtableCase.Downcase: finalSb.Append(char.ToLower(c)); break;
+                            case ReadtableCase.Invert:
+                                if (hasLetters && allUpper) finalSb.Append(char.ToLower(c));
+                                else if (hasLetters && allLower) finalSb.Append(char.ToUpper(c));
+                                else finalSb.Append(c);
+                                break;
+                            default: finalSb.Append(c); break;
+                        }
+                    }
+                }
+                tokenStr = finalSb.ToString();
+            }
+            
+            return (tokenStr, anyEscape);
+        }
+
+        private object? ParseNumber(string token)
+        {
+            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+
+            int readBase = 10;
+            var baseVal = CL.StrReadBaseStr;
+            if (baseVal is int i) readBase = i;
+            else if (baseVal is long l) readBase = (int)l;
+            else if (baseVal is BigInteger bi) readBase = (int)bi;
+
+            if (token == "+" || token == "-") return null;
+
+            int slashIndex = token.IndexOf('/');
+            if (slashIndex > 0 && slashIndex < token.Length - 1)
+            {
+                string numPart = token.Substring(0, slashIndex);
+                string denPart = token.Substring(slashIndex + 1);
+                if (IsInteger(numPart, readBase, out int numSign, out string numDigits) &&
+                    IsInteger(denPart, readBase, out int denSign, out string denDigits))
+                {
+                    var numerator = ParseBigInteger(numDigits, numSign, readBase);
+                    var denominator = ParseBigInteger(denDigits, denSign, readBase);
+                    var rational = new Rational(numerator, denominator);
+                    if (rational.Denominator == 1)
+                    {
+                        BigInteger val = rational.Numerator;
+                        if (val >= int.MinValue && val <= int.MaxValue) return (int)val;
+                        if (val >= long.MinValue && val <= long.MaxValue) return (long)val;
+                        return val;
+                    }
+                    return rational;
+                }
+            }
+
+            if (token.EndsWith(".") && token.Length > 1)
+            {
+                string intPart = token.Substring(0, token.Length - 1);
+                if (IsInteger(intPart, 10, out int sign10, out string digits10))
+                {
+                    return ParseInteger(digits10, sign10, 10);
+                }
+            }
+
+            if (IsInteger(token, readBase, out int sign, out string digits))
+            {
+                return ParseInteger(digits, sign, readBase);
+            }
+
+            string normalized = token.ToLower().Replace('s', 'e').Replace('f', 'e').Replace('d', 'e').Replace('l', 'e');
+            if ((normalized.Contains(".") || normalized.Contains("e")) && double.TryParse(normalized, out double doubleResult))
+            {
+                return doubleResult;
+            }
+            
+            return null;
+        }
+
+        private bool IsInteger(string token, int radix, out int sign, out string digits)
+        {
+            sign = 1;
+            digits = token;
+            if (string.IsNullOrEmpty(token)) return false;
+
+            int startIndex = 0;
+            if (token[0] == '+') { startIndex = 1; } 
+            else if (token[0] == '-') { sign = -1; startIndex = 1; }
+
+            if (startIndex >= token.Length) return false;
+
+            digits = token.Substring(startIndex);
+            foreach (char c in digits)
+            {
+                int val = CharToDigit(c);
+                if (val < 0 || val >= radix) return false;
+            }
+            return true;
+        }
+
+        private int CharToDigit(char c)
+        {
+            if (c >= '0' && c <= '9') return c - '0';
+            if (c >= 'A' && c <= 'Z') return c - 'A' + 10;
+            if (c >= 'a' && c <= 'z') return c - 'a' + 10;
+            return -1;
+        }
+
+        private object ParseInteger(string digits, int sign, int radix)
+        {
+            BigInteger result = 0;
+            BigInteger multiplier = 1;
+            for (int i = digits.Length - 1; i >= 0; i--)
+            {
+                result += CharToDigit(digits[i]) * multiplier;
+                multiplier *= radix;
+            }
+            if (sign < 0) result = -result;
+
+            if (result >= int.MinValue && result <= int.MaxValue) return (int)result;
+            if (result >= long.MinValue && result <= long.MaxValue) return (long)result;
+            return result;
+        }
+
+        private BigInteger ParseBigInteger(string digits, int sign, int radix)
+        {
+            BigInteger result = 0;
+            BigInteger multiplier = 1;
+            for (int i = digits.Length - 1; i >= 0; i--)
+            {
+                result += CharToDigit(digits[i]) * multiplier;
+                multiplier *= radix;
+            }
+            if (sign < 0) result = -result;
+            return result;
+        }
+    }
+}

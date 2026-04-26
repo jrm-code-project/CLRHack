@@ -1,0 +1,72 @@
+(in-package "CL-USER")
+
+(defparameter *char-map*
+  '((#\! "Bng") (#\" "Qut2") (#\# "Shrp") (#\$ "Dllr") (#\% "Pct")
+    (#\& "Ampr") (#\' "Qut1") (#\( "Lpar") (#\) "Rpar") (#\* "Str")
+    (#\+ "Pls")  (#\, "Cmma") (#\- "Mns")  (#\. "Prd")  (#\/ "Slsh")
+    (#\: "Cln")  (#\; "Smicln") (#\< "Lss") (#\= "Equl") (#\> "Grt")
+    (#\? "Qst")  (#\@ "Atsgn") (#\[ "Lbrk") (#\\ "Bslsh") (#\] "Rbrk")
+    (#\^ "Uparw") (#\_ "Undr") (#\` "Bquot") (#\{ "Lbrc") (#\| "Vbar")
+    (#\} "Rbrc") (#\~ "Tld")))
+
+(defun get-code (char) (second (assoc char *char-map*)))
+(defun get-char (code) (first (find code *char-map* :key #'second :test #'string-equal)))
+
+(defun title-case (str)
+  (if (string= str "") ""
+      (concatenate 'string (string-upcase (subseq str 0 1)) (string-downcase (subseq str 1)))))
+
+;;; ---------------------------------------------------------------------------
+;;; Encoder
+;;; ---------------------------------------------------------------------------
+
+(defun encode (symbol)
+  (let* ((name (string symbol))
+         (len (length name))
+         (syllables '()))
+    (let ((i 0))
+      (loop while (< i len)
+            do (let ((char (char name i)))
+                 (cond
+                   ((and (char= char #\-)
+                         (plusp i) (< (1+ i) len)
+                         (alpha-char-p (char name (1- i)))
+                         (alpha-char-p (char name (1+ i))))
+                    (incf i))
+                   ((alphanumericp char)
+                    (let ((start i))
+                      (loop while (and (< i len) (alphanumericp (char name i)))
+                            do (incf i))
+                      (let ((text (subseq name start i)))
+                        (push (cond
+                                ((or (get-char text)
+                                     (digit-char-p (char text 0)) ;; Digits get quoted
+                                     (and (>= (length text) 2) (string-equal (subseq text 0 2) "QQ")))
+                                 (concatenate 'string "QQ" (title-case text)))
+                                (t (title-case text)))
+                              syllables))))
+                   (t
+                    (incf i)
+                    (let ((code (get-code char)))
+                      (if code (push code syllables)
+                          (error "Unknown char: ~A" char))))))))
+    (format nil "~{~A~}" (nreverse syllables))))
+
+(defun write-symbols ()
+  (with-open-file (stream (merge-pathnames 
+                           (make-pathname :directory '(:relative "CLSymbols")
+                                          :name "CL" :type "il")
+                           (asdf:system-source-file "clrhack"))
+                          :direction :output
+                          :if-exists :supersede)
+    (format stream ".assembly extern mscorlib { .publickeytoken = (B7 7A 5C 56 19 34 E0 89 ) .ver 4:0:0:0 }~%")
+    (format stream ".assembly extern LispBase { .ver 1:0:0:0 }~%")
+    (format stream ".assembly CLSymbols { .ver .1:0:0:0 }~%")
+    (format stream ".module CLSymbols.dll~%~%")
+
+    (format stream ".class public abstract auto ansi sealed beforefieldinit Lisp.CL~%")
+    (format stream "       extends [mscorlib]System.Object~%")
+    (format stream "{~%")
+    (do-external-symbols (sym (find-package "CL"))
+      (format stream "   .field public static class [LispBase]Lisp.Symbol '~a'~%" (encode sym)))
+    (format stream "}~%")))

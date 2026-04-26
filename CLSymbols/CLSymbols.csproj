@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LispBase\LispBase.csproj" />
+  </ItemGroup>
+
+  <Target Name="CompileIL" AfterTargets="CoreCompile">
+    <Exec Command="ilasm /dll /output:$(IntermediateOutputPath)$(TargetFileName) CL.il" />
+    <Copy SourceFiles="$(IntermediateOutputPath)$(TargetFileName)" DestinationFolder="$(OutputPath)" />
+  </Target>
+
+</Project>

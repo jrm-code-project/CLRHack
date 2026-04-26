@@ -1,0 +1,304 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Lisp
+{
+    public static class Evaluator
+    {
+        public static object? Process(object? form)
+        {
+            if (form is Symbol sym && sym.Name == "QUIT")
+            {
+                Environment.Exit(0);
+            }
+
+            if (form is List list && !list.EndP)
+            {
+                var first = list.First();
+                if (IsSymbol(first, "DEFPACKAGE", "COMMON-LISP"))
+                {
+                    return ProcessDefpackage(list.Rest());
+                }
+                if (IsSymbol(first, "IN-PACKAGE", "COMMON-LISP"))
+                {
+                    return ProcessInPackage(list.Rest());
+                }
+                if (IsSymbol(first, "EXPORT", "COMMON-LISP"))
+                {
+                    return ProcessExport(list.Rest());
+                }
+                if (IsSymbol(first, "IMPORT", "COMMON-LISP"))
+                {
+                    return ProcessImport(list.Rest());
+                }
+                if (first == CL.SHADOW || IsSymbol(first, "SHADOW", "COMMON-LISP"))
+                {
+                    return ProcessShadow(list.Rest());
+                }
+                if (first == CL.SHADOWING_IMPORT || IsSymbol(first, "SHADOWING-IMPORT", "COMMON-LISP"))
+                {
+                    return ProcessShadowingImport(list.Rest());
+                }
+                if (first is Symbol s && s.Name == "TEST-HELLO")
+                {
+                    return ProcessTestHello();
+                }
+            }
+            return form;
+        }
+
+        private static object ProcessTestHello()
+        {
+            try
+            {
+                var testObj = new Lisp.TestObject();
+                return testObj.Ping();
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        private static bool IsSymbol(object? obj, string name, string packageName)
+        {
+            if (obj is Symbol sym)
+            {
+                return sym.Name == name && sym.Package?.Name == packageName;
+            }
+            return false;
+        }
+
+        private static object ProcessInPackage(object argsObj)
+        {
+            if (!(argsObj is List args) || args.EndP) throw new InvalidOperationException("Invalid in-package form.");
+            
+            string packageName = GetStringValue(args.First()!);
+            var package = Package.Find(packageName);
+            if (package == null)
+            {
+                // Dynamically create the package if it's missing.
+                package = new Package(packageName);
+            }
+
+            Package.Current = package;
+            return package;
+        }
+
+        private static object ProcessShadow(object argsObj)
+        {
+            if (!(argsObj is List args) || args.EndP) throw new InvalidOperationException("Invalid shadow form.");
+
+            var namesObj = Unquote(args.First()!);
+            Package targetPkg = GetTargetPackage(args.Rest());
+
+            if (namesObj is string s) targetPkg.Shadow(s);
+            else if (namesObj is Symbol sym) targetPkg.Shadow(sym.Name);
+            else if (namesObj is List list)
+            {
+                foreach (var item in list)
+                {
+                    if (item is string sItem) targetPkg.Shadow(sItem);
+                    else if (item is Symbol symItem) targetPkg.Shadow(symItem.Name);
+                    else throw new InvalidOperationException("Shadow requires symbol names.");
+                }
+            }
+            else throw new InvalidOperationException("Shadow requires a symbol name or a list of names.");
+
+            return CL.T;
+        }
+
+        private static object ProcessShadowingImport(object argsObj)
+        {
+            if (!(argsObj is List args) || args.EndP) throw new InvalidOperationException("Invalid shadowing-import form.");
+
+            var symbolsObj = Unquote(args.First()!);
+            Package targetPkg = GetTargetPackage(args.Rest());
+
+            if (symbolsObj is Symbol sym) targetPkg.ShadowingImport(sym);
+            else if (symbolsObj is List list)
+            {
+                foreach (var item in list)
+                {
+                    if (item is Symbol symItem) targetPkg.ShadowingImport(symItem);
+                    else throw new InvalidOperationException("Shadowing-import requires symbols.");
+                }
+            }
+            else throw new InvalidOperationException("Shadowing-import requires a symbol or a list of symbols.");
+
+            return CL.T;
+        }
+
+        private static object Unquote(object obj)
+        {
+            if (obj is List list && !list.EndP && list.First() == CL.QUOTE)
+            {
+                return ((List)list.Rest()).First()!;
+            }
+            return obj;
+        }
+
+        private static Package GetTargetPackage(object restObj)
+        {
+            if (restObj is List rest && !rest.EndP)
+            {
+                var pkgArg = Unquote(rest.First()!);
+                string pkgName = GetStringValue(pkgArg);
+                var foundPkg = Package.Find(pkgName);
+                if (foundPkg == null)
+                {
+                    foundPkg = new Package(pkgName);
+                }
+                return foundPkg;
+            }
+            return Package.Current!;
+        }
+
+        private static object ProcessImport(object argsObj)
+        {
+            if (!(argsObj is List args) || args.EndP) throw new InvalidOperationException("Invalid import form.");
+
+            var symbolsObj = Unquote(args.First()!);
+            Package targetPkg = GetTargetPackage(args.Rest());
+
+            if (symbolsObj is Symbol sym) targetPkg.Import(sym);
+            else if (symbolsObj is List list)
+            {
+                foreach (var item in list)
+                {
+                    if (item is Symbol symItem) targetPkg.Import(symItem);
+                    else throw new InvalidOperationException("Import requires symbols.");
+                }
+            }
+            else throw new InvalidOperationException("Import requires a symbol or a list of symbols.");
+
+            return CL.T;
+        }
+
+        private static object ProcessExport(object argsObj)
+        {
+            if (!(argsObj is List args) || args.EndP) throw new InvalidOperationException("Invalid export form.");
+
+            var symbolsObj = Unquote(args.First()!);
+            Package targetPkg = GetTargetPackage(args.Rest());
+
+            if (symbolsObj is Symbol sym)
+            {
+                targetPkg.Export(sym);
+            }
+            else if (symbolsObj is List symList)
+            {
+                foreach (var s in symList)
+                {
+                    if (s is Symbol sSym) targetPkg.Export(sSym);
+                    else throw new InvalidOperationException("Export requires symbols.");
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException("Export requires a symbol or a list of symbols.");
+            }
+
+            return CL.T;
+        }
+
+        private static object ProcessDefpackage(object optionsObj)
+        {
+            if (!(optionsObj is List options)) throw new InvalidOperationException("Invalid defpackage form.");
+            
+            string packageName = GetStringValue(options.First()!);
+            var package = Package.Find(packageName);
+            if (package == null)
+            {
+                package = new Package(packageName);
+            }
+
+            var rest = (List)options.Rest();
+            while (!rest.EndP)
+            {
+                var option = (List)rest.First()!;
+                var keyword = (Symbol)option.First()!;
+                var args = (List)option.Rest();
+
+                switch (keyword.Name)
+                {
+                    case "NICKNAMES":
+                        foreach (var nick in args) package.AddNickname(GetStringValue(nick!));
+                        break;
+                    case "USE":
+                        foreach (var use in args)
+                        {
+                            string usedPkgName = GetStringValue(use!);
+                            var usedPkg = Package.Find(usedPkgName);
+                            if (usedPkg == null)
+                            {
+                                usedPkg = new Package(usedPkgName);
+                            }
+                            package.UsePackage(usedPkg);
+                        }
+                        break;
+                    case "EXPORT":
+                        foreach (var symName in args)
+                        {
+                            var sym = package.Intern(GetStringValue(symName!));
+                            package.Export(sym);
+                        }
+                        break;
+                    case "SHADOW":
+                        foreach (var symName in args) package.Shadow(GetStringValue(symName!));
+                        break;
+                    case "IMPORT-FROM":
+                        ProcessImportFrom(package, args, false);
+                        break;
+                    case "SHADOWING-IMPORT-FROM":
+                        ProcessImportFrom(package, args, true);
+                        break;
+                    case "INTERN":
+                        foreach (var symName in args) package.Intern(GetStringValue(symName!));
+                        break;
+                    default:
+                        // Ignore unknown options for now
+                        break;
+                }
+                rest = (List)rest.Rest();
+            }
+
+            return package;
+        }
+
+        private static void ProcessImportFrom(Package targetPkg, List args, bool shadowing)
+        {
+            var sourcePkgName = GetStringValue(args.First()!);
+            var sourcePkg = Package.Find(sourcePkgName);
+            if (sourcePkg == null)
+            {
+                sourcePkg = new Package(sourcePkgName);
+            }
+
+            var syms = (List)args.Rest();
+            foreach (var symName in syms)
+            {
+                string sName = GetStringValue(symName!);
+                var (sym, status) = sourcePkg.FindSymbol(sName);
+                if (sym == null)
+                {
+                    // Dynamically create the symbol in the source package if it's missing.
+                    // This is useful for handling dependencies on external libraries.
+                    sym = sourcePkg.Intern(sName);
+                    sourcePkg.Export(sym);
+                }
+                
+                if (shadowing) targetPkg.ShadowingImport(sym);
+                else targetPkg.Import(sym);
+            }
+        }
+
+        private static string GetStringValue(object obj)
+        {
+            if (obj is string s) return s;
+            if (obj is Symbol sym) return sym.Name;
+            return obj.ToString()!;
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <Target Name="CompileIL" BeforeTargets="BeforeBuild">
+    <Exec Command="ilasm /dll /output:HelloLisp.dll Hello.il" />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="HelloLisp">
+      <HintPath>HelloLisp.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\LispBase\LispBase.csproj" />
+    <Reference Include="CLSymbols">
+      <HintPath>..\CLSymbols\bin\Debug\net8.0\CLSymbols.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

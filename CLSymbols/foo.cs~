@@ -1,0 +1,8 @@
+class foo
+    public Symbol bar;
+
+    foo {
+        Package p = Package.Find("CL")
+        bar = p.Intern("BAR")
+    }
+}

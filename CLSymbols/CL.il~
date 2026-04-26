@@ -1,0 +1,1931 @@
+.assembly extern mscorlib { .publickeytoken = (B7 7A 5C 56 19 34 E0 89 ) .ver 4:0:0:0 }
+.assembly extern LispBase { .ver 1:0:0:0 }
+.module CLSymbols.dll
+
+.class public abstract auto ansi sealed beforefieldinit Lisp.CL
+       extends [mscorlib]System.Object
+{
+   .field public static class [LispBase]Lisp.Symbol 'Pairlis'
+   .field public static class [LispBase]Lisp.Symbol 'Acosh'
+   .field public static class [LispBase]Lisp.Symbol 'FileWriteDate'
+   .field public static class [LispBase]Lisp.Symbol 'BuiltInClass'
+   .field public static class [LispBase]Lisp.Symbol 'StrReadtableStr'
+   .field public static class [LispBase]Lisp.Symbol 'MacroexpandMnsQQ1'
+   .field public static class [LispBase]Lisp.Symbol 'Terpri'
+   .field public static class [LispBase]Lisp.Symbol 'LoopFinish'
+   .field public static class [LispBase]Lisp.Symbol 'Psetf'
+   .field public static class [LispBase]Lisp.Symbol 'MethodCombination'
+   .field public static class [LispBase]Lisp.Symbol 'ShadowingImport'
+   .field public static class [LispBase]Lisp.Symbol 'Subst'
+   .field public static class [LispBase]Lisp.Symbol 'BitVector'
+   .field public static class [LispBase]Lisp.Symbol 'Revappend'
+   .field public static class [LispBase]Lisp.Symbol 'Princ'
+   .field public static class [LispBase]Lisp.Symbol 'Unexport'
+   .field public static class [LispBase]Lisp.Symbol 'CompilerMacro'
+   .field public static class [LispBase]Lisp.Symbol 'SymbolPlist'
+   .field public static class [LispBase]Lisp.Symbol 'Pi'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleBitVector'
+   .field public static class [LispBase]Lisp.Symbol 'StrReadBaseStr'
+   .field public static class [LispBase]Lisp.Symbol 'StandardMethod'
+   .field public static class [LispBase]Lisp.Symbol 'Float'
+   .field public static class [LispBase]Lisp.Symbol 'Ldiff'
+   .field public static class [LispBase]Lisp.Symbol 'RemoveIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'SetPprintDispatch'
+   .field public static class [LispBase]Lisp.Symbol 'Pls'
+   .field public static class [LispBase]Lisp.Symbol 'Sbit'
+   .field public static class [LispBase]Lisp.Symbol 'Logcount'
+   .field public static class [LispBase]Lisp.Symbol 'CompilationSpeed'
+   .field public static class [LispBase]Lisp.Symbol 'Find'
+   .field public static class [LispBase]Lisp.Symbol 'BitAnd'
+   .field public static class [LispBase]Lisp.Symbol 'ShortFloatNegativeEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintReadablyStr'
+   .field public static class [LispBase]Lisp.Symbol 'MakeCondition'
+   .field public static class [LispBase]Lisp.Symbol 'Logxor'
+   .field public static class [LispBase]Lisp.Symbol 'MostNegativeSingleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Load'
+   .field public static class [LispBase]Lisp.Symbol 'RestartName'
+   .field public static class [LispBase]Lisp.Symbol 'TypeOf'
+   .field public static class [LispBase]Lisp.Symbol 'Keyword'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintMiserWidthStr'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleStringP'
+   .field public static class [LispBase]Lisp.Symbol 'Progn'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintRightMarginStr'
+   .field public static class [LispBase]Lisp.Symbol 'TypeErrorExpectedType'
+   .field public static class [LispBase]Lisp.Symbol 'AllocateInstance'
+   .field public static class [LispBase]Lisp.Symbol 'UnboundSlotInstance'
+   .field public static class [LispBase]Lisp.Symbol 'StandardChar'
+   .field public static class [LispBase]Lisp.Symbol 'ReadChar'
+   .field public static class [LispBase]Lisp.Symbol 'Grt'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintArrayStr'
+   .field public static class [LispBase]Lisp.Symbol 'Complement'
+   .field public static class [LispBase]Lisp.Symbol 'Symbol'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleWarning'
+   .field public static class [LispBase]Lisp.Symbol 'Gentemp'
+   .field public static class [LispBase]Lisp.Symbol 'MultipleValueProg1'
+   .field public static class [LispBase]Lisp.Symbol 'Sqrt'
+   .field public static class [LispBase]Lisp.Symbol 'Variable'
+   .field public static class [LispBase]Lisp.Symbol 'Gensym'
+   .field public static class [LispBase]Lisp.Symbol 'SynonymStream'
+   .field public static class [LispBase]Lisp.Symbol 'VectorPushExtend'
+   .field public static class [LispBase]Lisp.Symbol 'InternalTimeUnitsPerSecond'
+   .field public static class [LispBase]Lisp.Symbol 'Bignum'
+   .field public static class [LispBase]Lisp.Symbol 'StringRightTrim'
+   .field public static class [LispBase]Lisp.Symbol 'PprintPop'
+   .field public static class [LispBase]Lisp.Symbol 'Truename'
+   .field public static class [LispBase]Lisp.Symbol 'MethodQualifiers'
+   .field public static class [LispBase]Lisp.Symbol 'CheckType'
+   .field public static class [LispBase]Lisp.Symbol 'Nreconc'
+   .field public static class [LispBase]Lisp.Symbol 'UnboundSlot'
+   .field public static class [LispBase]Lisp.Symbol 'Merge'
+   .field public static class [LispBase]Lisp.Symbol 'StrGensymCounterStr'
+   .field public static class [LispBase]Lisp.Symbol 'BroadcastStream'
+   .field public static class [LispBase]Lisp.Symbol 'Rplaca'
+   .field public static class [LispBase]Lisp.Symbol 'ReadDelimitedList'
+   .field public static class [LispBase]Lisp.Symbol 'CountIf'
+   .field public static class [LispBase]Lisp.Symbol 'Assoc'
+   .field public static class [LispBase]Lisp.Symbol 'Standard'
+   .field public static class [LispBase]Lisp.Symbol 'Cond'
+   .field public static class [LispBase]Lisp.Symbol 'PathnameDirectory'
+   .field public static class [LispBase]Lisp.Symbol 'StandardGenericFunction'
+   .field public static class [LispBase]Lisp.Symbol 'Break'
+   .field public static class [LispBase]Lisp.Symbol 'MakePathname'
+   .field public static class [LispBase]Lisp.Symbol 'Sixth'
+   .field public static class [LispBase]Lisp.Symbol 'Keywordp'
+   .field public static class [LispBase]Lisp.Symbol 'GrtEqul'
+   .field public static class [LispBase]Lisp.Symbol 'Defsetf'
+   .field public static class [LispBase]Lisp.Symbol 'WithSlots'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleVectorP'
+   .field public static class [LispBase]Lisp.Symbol 'Sublis'
+   .field public static class [LispBase]Lisp.Symbol 'Sin'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintPrettyStr'
+   .field public static class [LispBase]Lisp.Symbol 'BooleXor'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveDoubleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'AmprWhole'
+   .field public static class [LispBase]Lisp.Symbol 'StrLoadPrintStr'
+   .field public static class [LispBase]Lisp.Symbol 'Funcall'
+   .field public static class [LispBase]Lisp.Symbol 'Sinh'
+   .field public static class [LispBase]Lisp.Symbol 'Tan'
+   .field public static class [LispBase]Lisp.Symbol 'Sleep'
+   .field public static class [LispBase]Lisp.Symbol 'Prog2'
+   .field public static class [LispBase]Lisp.Symbol 'NstringUpcase'
+   .field public static class [LispBase]Lisp.Symbol 'CharEqual'
+   .field public static class [LispBase]Lisp.Symbol 'Read'
+   .field public static class [LispBase]Lisp.Symbol 'RestartCase'
+   .field public static class [LispBase]Lisp.Symbol 'Etypecase'
+   .field public static class [LispBase]Lisp.Symbol 'StreamExternalFormat'
+   .field public static class [LispBase]Lisp.Symbol 'StrTraceOutputStr'
+   .field public static class [LispBase]Lisp.Symbol 'CallMethod'
+   .field public static class [LispBase]Lisp.Symbol 'MostPositiveShortFloat'
+   .field public static class [LispBase]Lisp.Symbol 'AssocIf'
+   .field public static class [LispBase]Lisp.Symbol 'MethodCombinationError'
+   .field public static class [LispBase]Lisp.Symbol 'ListAllPackages'
+   .field public static class [LispBase]Lisp.Symbol 'Rest'
+   .field public static class [LispBase]Lisp.Symbol 'StrTerminalIoStr'
+   .field public static class [LispBase]Lisp.Symbol 'Mapl'
+   .field public static class [LispBase]Lisp.Symbol 'FileAuthor'
+   .field public static class [LispBase]Lisp.Symbol 'Denominator'
+   .field public static class [LispBase]Lisp.Symbol 'FloatRadix'
+   .field public static class [LispBase]Lisp.Symbol 'StrCompileVerboseStr'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleBaseString'
+   .field public static class [LispBase]Lisp.Symbol 'Tanh'
+   .field public static class [LispBase]Lisp.Symbol 'StrDebugIoStr'
+   .field public static class [LispBase]Lisp.Symbol 'WriteLine'
+   .field public static class [LispBase]Lisp.Symbol 'Cddaar'
+   .field public static class [LispBase]Lisp.Symbol 'LongFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Remf'
+   .field public static class [LispBase]Lisp.Symbol 'InputStreamP'
+   .field public static class [LispBase]Lisp.Symbol 'Stream'
+   .field public static class [LispBase]Lisp.Symbol 'FileLength'
+   .field public static class [LispBase]Lisp.Symbol 'SymbolValue'
+   .field public static class [LispBase]Lisp.Symbol 'Rplacd'
+   .field public static class [LispBase]Lisp.Symbol 'Inline'
+   .field public static class [LispBase]Lisp.Symbol 'Cdr'
+   .field public static class [LispBase]Lisp.Symbol 'CharName'
+   .field public static class [LispBase]Lisp.Symbol 'BooleClr'
+   .field public static class [LispBase]Lisp.Symbol 'Streamp'
+   .field public static class [LispBase]Lisp.Symbol 'Ffloor'
+   .field public static class [LispBase]Lisp.Symbol 'FindIf'
+   .field public static class [LispBase]Lisp.Symbol 'PprintFill'
+   .field public static class [LispBase]Lisp.Symbol 'Fifth'
+   .field public static class [LispBase]Lisp.Symbol 'BooleC2'
+   .field public static class [LispBase]Lisp.Symbol 'Caar'
+   .field public static class [LispBase]Lisp.Symbol 'ReadSequence'
+   .field public static class [LispBase]Lisp.Symbol 'MakeSymbol'
+   .field public static class [LispBase]Lisp.Symbol 'BothCaseP'
+   .field public static class [LispBase]Lisp.Symbol 'Type'
+   .field public static class [LispBase]Lisp.Symbol 'Delete'
+   .field public static class [LispBase]Lisp.Symbol 'DeleteIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'Do'
+   .field public static class [LispBase]Lisp.Symbol 'FindIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'MultipleValueSetq'
+   .field public static class [LispBase]Lisp.Symbol 'BooleNor'
+   .field public static class [LispBase]Lisp.Symbol 'StringEqul'
+   .field public static class [LispBase]Lisp.Symbol 'MapInto'
+   .field public static class [LispBase]Lisp.Symbol 'Continue'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeShortFloat'
+   .field public static class [LispBase]Lisp.Symbol 'InvokeRestart'
+   .field public static class [LispBase]Lisp.Symbol 'CharNotGreaterp'
+   .field public static class [LispBase]Lisp.Symbol 'RowMajorAref'
+   .field public static class [LispBase]Lisp.Symbol 'AmprRest'
+   .field public static class [LispBase]Lisp.Symbol 'CharGrt'
+   .field public static class [LispBase]Lisp.Symbol 'EnsureGenericFunction'
+   .field public static class [LispBase]Lisp.Symbol 'LogicalPathname'
+   .field public static class [LispBase]Lisp.Symbol 'Logior'
+   .field public static class [LispBase]Lisp.Symbol 'MachineType'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeDoubleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'FloatingPointOverflow'
+   .field public static class [LispBase]Lisp.Symbol 'Optimize'
+   .field public static class [LispBase]Lisp.Symbol 'Realpart'
+   .field public static class [LispBase]Lisp.Symbol 'StrCompilePrintStr'
+   .field public static class [LispBase]Lisp.Symbol 'Cdddar'
+   .field public static class [LispBase]Lisp.Symbol 'Declaim'
+   .field public static class [LispBase]Lisp.Symbol 'ReadFromString'
+   .field public static class [LispBase]Lisp.Symbol 'Maplist'
+   .field public static class [LispBase]Lisp.Symbol 'HashTableRehashThreshold'
+   .field public static class [LispBase]Lisp.Symbol 'NoApplicableMethod'
+   .field public static class [LispBase]Lisp.Symbol 'BitEqv'
+   .field public static class [LispBase]Lisp.Symbol 'Set'
+   .field public static class [LispBase]Lisp.Symbol 'Dotimes'
+   .field public static class [LispBase]Lisp.Symbol 'StrDefaultPathnameDefaultsStr'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintLengthStr'
+   .field public static class [LispBase]Lisp.Symbol 'Cddr'
+   .field public static class [LispBase]Lisp.Symbol 'SlshEqul'
+   .field public static class [LispBase]Lisp.Symbol 'Progv'
+   .field public static class [LispBase]Lisp.Symbol 'SharedInitialize'
+   .field public static class [LispBase]Lisp.Symbol 'SlshSlshSlsh'
+   .field public static class [LispBase]Lisp.Symbol 'WriteSequence'
+   .field public static class [LispBase]Lisp.Symbol 'GetUniversalTime'
+   .field public static class [LispBase]Lisp.Symbol 'Cos'
+   .field public static class [LispBase]Lisp.Symbol 'Logorc2'
+   .field public static class [LispBase]Lisp.Symbol 'MostNegativeFixnum'
+   .field public static class [LispBase]Lisp.Symbol 'Logandc1'
+   .field public static class [LispBase]Lisp.Symbol 'Mapcon'
+   .field public static class [LispBase]Lisp.Symbol 'Seventh'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleString'
+   .field public static class [LispBase]Lisp.Symbol 'EchoStreamInputStream'
+   .field public static class [LispBase]Lisp.Symbol 'PositionIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'MergePathnames'
+   .field public static class [LispBase]Lisp.Symbol 'Satisfies'
+   .field public static class [LispBase]Lisp.Symbol 'StrStr'
+   .field public static class [LispBase]Lisp.Symbol 'Inspect'
+   .field public static class [LispBase]Lisp.Symbol 'MachineInstance'
+   .field public static class [LispBase]Lisp.Symbol 'DefineCondition'
+   .field public static class [LispBase]Lisp.Symbol 'CharLss'
+   .field public static class [LispBase]Lisp.Symbol 'CompileFilePathname'
+   .field public static class [LispBase]Lisp.Symbol 'PrintUnreadableObject'
+   .field public static class [LispBase]Lisp.Symbol 'StrStandardOutputStr'
+   .field public static class [LispBase]Lisp.Symbol 'StringDowncase'
+   .field public static class [LispBase]Lisp.Symbol 'StringNotGreaterp'
+   .field public static class [LispBase]Lisp.Symbol 'Eq'
+   .field public static class [LispBase]Lisp.Symbol 'StringLss'
+   .field public static class [LispBase]Lisp.Symbol 'WriteByte'
+   .field public static class [LispBase]Lisp.Symbol 'AmprKey'
+   .field public static class [LispBase]Lisp.Symbol 'UnwindProtect'
+   .field public static class [LispBase]Lisp.Symbol 'Fdefinition'
+   .field public static class [LispBase]Lisp.Symbol 'Cosh'
+   .field public static class [LispBase]Lisp.Symbol 'Print'
+   .field public static class [LispBase]Lisp.Symbol 'EchoStreamOutputStream'
+   .field public static class [LispBase]Lisp.Symbol 'ArithmeticError'
+   .field public static class [LispBase]Lisp.Symbol 'Rationalize'
+   .field public static class [LispBase]Lisp.Symbol 'Caaaar'
+   .field public static class [LispBase]Lisp.Symbol 'Expt'
+   .field public static class [LispBase]Lisp.Symbol 'CharSlshEqul'
+   .field public static class [LispBase]Lisp.Symbol 'StrMacroexpandHookStr'
+   .field public static class [LispBase]Lisp.Symbol 'PackageShadowingSymbols'
+   .field public static class [LispBase]Lisp.Symbol 'NstringCapitalize'
+   .field public static class [LispBase]Lisp.Symbol 'Mismatch'
+   .field public static class [LispBase]Lisp.Symbol 'StringCapitalize'
+   .field public static class [LispBase]Lisp.Symbol 'Real'
+   .field public static class [LispBase]Lisp.Symbol 'Notany'
+   .field public static class [LispBase]Lisp.Symbol 'Listen'
+   .field public static class [LispBase]Lisp.Symbol 'Nsubstitute'
+   .field public static class [LispBase]Lisp.Symbol 'HashTableRehashSize'
+   .field public static class [LispBase]Lisp.Symbol 'Safety'
+   .field public static class [LispBase]Lisp.Symbol 'NsetDifference'
+   .field public static class [LispBase]Lisp.Symbol 'WithInputFromString'
+   .field public static class [LispBase]Lisp.Symbol 'T'
+   .field public static class [LispBase]Lisp.Symbol 'Throw'
+   .field public static class [LispBase]Lisp.Symbol 'PrintObject'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleBitVectorP'
+   .field public static class [LispBase]Lisp.Symbol 'BitNot'
+   .field public static class [LispBase]Lisp.Symbol 'Decf'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintLinesStr'
+   .field public static class [LispBase]Lisp.Symbol 'FileError'
+   .field public static class [LispBase]Lisp.Symbol 'Lognor'
+   .field public static class [LispBase]Lisp.Symbol 'SlotBoundp'
+   .field public static class [LispBase]Lisp.Symbol 'Directory'
+   .field public static class [LispBase]Lisp.Symbol 'Equal'
+   .field public static class [LispBase]Lisp.Symbol 'Intersection'
+   .field public static class [LispBase]Lisp.Symbol 'Schar'
+   .field public static class [LispBase]Lisp.Symbol 'QQ1Mns'
+   .field public static class [LispBase]Lisp.Symbol 'Ash'
+   .field public static class [LispBase]Lisp.Symbol 'PprintIndent'
+   .field public static class [LispBase]Lisp.Symbol 'NsubstituteIf'
+   .field public static class [LispBase]Lisp.Symbol 'EnoughNamestring'
+   .field public static class [LispBase]Lisp.Symbol 'Import'
+   .field public static class [LispBase]Lisp.Symbol 'AmprAllowOtherKeys'
+   .field public static class [LispBase]Lisp.Symbol 'Nbutlast'
+   .field public static class [LispBase]Lisp.Symbol 'UserHomedirPathname'
+   .field public static class [LispBase]Lisp.Symbol 'Reduce'
+   .field public static class [LispBase]Lisp.Symbol 'Reverse'
+   .field public static class [LispBase]Lisp.Symbol 'Cadddr'
+   .field public static class [LispBase]Lisp.Symbol 'Close'
+   .field public static class [LispBase]Lisp.Symbol 'Formatter'
+   .field public static class [LispBase]Lisp.Symbol 'Boole'
+   .field public static class [LispBase]Lisp.Symbol 'BooleAndc2'
+   .field public static class [LispBase]Lisp.Symbol 'FindClass'
+   .field public static class [LispBase]Lisp.Symbol 'Fround'
+   .field public static class [LispBase]Lisp.Symbol 'NsubstIf'
+   .field public static class [LispBase]Lisp.Symbol 'TypeError'
+   .field public static class [LispBase]Lisp.Symbol 'Describe'
+   .field public static class [LispBase]Lisp.Symbol 'Packagep'
+   .field public static class [LispBase]Lisp.Symbol 'MemberIf'
+   .field public static class [LispBase]Lisp.Symbol 'GetProperties'
+   .field public static class [LispBase]Lisp.Symbol 'DoubleFloatNegativeEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'PprintDispatch'
+   .field public static class [LispBase]Lisp.Symbol 'HashTableP'
+   .field public static class [LispBase]Lisp.Symbol 'Fceiling'
+   .field public static class [LispBase]Lisp.Symbol 'Every'
+   .field public static class [LispBase]Lisp.Symbol 'LoadTimeValue'
+   .field public static class [LispBase]Lisp.Symbol 'WithAccessors'
+   .field public static class [LispBase]Lisp.Symbol 'EncodeUniversalTime'
+   .field public static class [LispBase]Lisp.Symbol 'CharDowncase'
+   .field public static class [LispBase]Lisp.Symbol 'Pop'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleArray'
+   .field public static class [LispBase]Lisp.Symbol 'Prog1'
+   .field public static class [LispBase]Lisp.Symbol 'SlotValue'
+   .field public static class [LispBase]Lisp.Symbol 'AdjustableArrayP'
+   .field public static class [LispBase]Lisp.Symbol 'Nreverse'
+   .field public static class [LispBase]Lisp.Symbol 'Psetq'
+   .field public static class [LispBase]Lisp.Symbol 'ListLength'
+   .field public static class [LispBase]Lisp.Symbol 'CompileFile'
+   .field public static class [LispBase]Lisp.Symbol 'AproposList'
+   .field public static class [LispBase]Lisp.Symbol 'Defmethod'
+   .field public static class [LispBase]Lisp.Symbol 'ComputeApplicableMethods'
+   .field public static class [LispBase]Lisp.Symbol 'FilePosition'
+   .field public static class [LispBase]Lisp.Symbol 'FreshLine'
+   .field public static class [LispBase]Lisp.Symbol 'CompiledFunction'
+   .field public static class [LispBase]Lisp.Symbol 'MakeHashTable'
+   .field public static class [LispBase]Lisp.Symbol 'AmprOptional'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveNormalizedLongFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Union'
+   .field public static class [LispBase]Lisp.Symbol 'FindPackage'
+   .field public static class [LispBase]Lisp.Symbol 'If'
+   .field public static class [LispBase]Lisp.Symbol 'CharLessp'
+   .field public static class [LispBase]Lisp.Symbol 'Pprint'
+   .field public static class [LispBase]Lisp.Symbol 'Phase'
+   .field public static class [LispBase]Lisp.Symbol 'Subtypep'
+   .field public static class [LispBase]Lisp.Symbol 'FindAllSymbols'
+   .field public static class [LispBase]Lisp.Symbol 'Realp'
+   .field public static class [LispBase]Lisp.Symbol 'GetSetfExpansion'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeSingleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'DeleteFile'
+   .field public static class [LispBase]Lisp.Symbol 'Readtablep'
+   .field public static class [LispBase]Lisp.Symbol 'SymbolName'
+   .field public static class [LispBase]Lisp.Symbol 'PackageUseList'
+   .field public static class [LispBase]Lisp.Symbol 'Random'
+   .field public static class [LispBase]Lisp.Symbol 'DecodeUniversalTime'
+   .field public static class [LispBase]Lisp.Symbol 'HandlerBind'
+   .field public static class [LispBase]Lisp.Symbol 'StrReadSuppressStr'
+   .field public static class [LispBase]Lisp.Symbol 'SymbolPackage'
+   .field public static class [LispBase]Lisp.Symbol 'StrRandomStateStr'
+   .field public static class [LispBase]Lisp.Symbol 'Readtable'
+   .field public static class [LispBase]Lisp.Symbol 'FindSymbol'
+   .field public static class [LispBase]Lisp.Symbol 'Nil'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayDimensions'
+   .field public static class [LispBase]Lisp.Symbol 'Elt'
+   .field public static class [LispBase]Lisp.Symbol 'ParseInteger'
+   .field public static class [LispBase]Lisp.Symbol 'LispImplementationVersion'
+   .field public static class [LispBase]Lisp.Symbol 'OutputStreamP'
+   .field public static class [LispBase]Lisp.Symbol 'Otherwise'
+   .field public static class [LispBase]Lisp.Symbol 'PathnameMatchP'
+   .field public static class [LispBase]Lisp.Symbol 'BitXor'
+   .field public static class [LispBase]Lisp.Symbol 'StructureObject'
+   .field public static class [LispBase]Lisp.Symbol 'Cdaadr'
+   .field public static class [LispBase]Lisp.Symbol 'WithOutputToString'
+   .field public static class [LispBase]Lisp.Symbol 'Array'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveNormalizedSingleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'ByteSize'
+   .field public static class [LispBase]Lisp.Symbol 'SubstituteIf'
+   .field public static class [LispBase]Lisp.Symbol 'Stringp'
+   .field public static class [LispBase]Lisp.Symbol 'Subseq'
+   .field public static class [LispBase]Lisp.Symbol 'PrincToString'
+   .field public static class [LispBase]Lisp.Symbol 'FinishOutput'
+   .field public static class [LispBase]Lisp.Symbol 'WithConditionRestarts'
+   .field public static class [LispBase]Lisp.Symbol 'InitializeInstance'
+   .field public static class [LispBase]Lisp.Symbol 'BooleIor'
+   .field public static class [LispBase]Lisp.Symbol 'NsetExclusiveOr'
+   .field public static class [LispBase]Lisp.Symbol 'AlphaCharP'
+   .field public static class [LispBase]Lisp.Symbol 'Slsh'
+   .field public static class [LispBase]Lisp.Symbol 'Signal'
+   .field public static class [LispBase]Lisp.Symbol 'NsubstIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'NthValue'
+   .field public static class [LispBase]Lisp.Symbol 'Tenth'
+   .field public static class [LispBase]Lisp.Symbol 'Vectorp'
+   .field public static class [LispBase]Lisp.Symbol 'FloatSign'
+   .field public static class [LispBase]Lisp.Symbol 'And'
+   .field public static class [LispBase]Lisp.Symbol 'BooleSet'
+   .field public static class [LispBase]Lisp.Symbol 'CharGreaterp'
+   .field public static class [LispBase]Lisp.Symbol 'CallNextMethod'
+   .field public static class [LispBase]Lisp.Symbol 'Warn'
+   .field public static class [LispBase]Lisp.Symbol 'Nsubst'
+   .field public static class [LispBase]Lisp.Symbol 'Remhash'
+   .field public static class [LispBase]Lisp.Symbol 'Isqrt'
+   .field public static class [LispBase]Lisp.Symbol 'CodeChar'
+   .field public static class [LispBase]Lisp.Symbol 'NextMethodP'
+   .field public static class [LispBase]Lisp.Symbol 'Proclaim'
+   .field public static class [LispBase]Lisp.Symbol 'Complexp'
+   .field public static class [LispBase]Lisp.Symbol 'ReadPreservingWhitespace'
+   .field public static class [LispBase]Lisp.Symbol 'TwoWayStreamInputStream'
+   .field public static class [LispBase]Lisp.Symbol 'When'
+   .field public static class [LispBase]Lisp.Symbol 'CopyTree'
+   .field public static class [LispBase]Lisp.Symbol 'Acons'
+   .field public static class [LispBase]Lisp.Symbol 'CharNotEqual'
+   .field public static class [LispBase]Lisp.Symbol 'Clrhash'
+   .field public static class [LispBase]Lisp.Symbol 'WithCompilationUnit'
+   .field public static class [LispBase]Lisp.Symbol 'Getf'
+   .field public static class [LispBase]Lisp.Symbol 'Provide'
+   .field public static class [LispBase]Lisp.Symbol 'Character'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleConditionFormatArguments'
+   .field public static class [LispBase]Lisp.Symbol 'LongFloatEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'Rationalp'
+   .field public static class [LispBase]Lisp.Symbol 'Length'
+   .field public static class [LispBase]Lisp.Symbol 'Catch'
+   .field public static class [LispBase]Lisp.Symbol 'CharLssEqul'
+   .field public static class [LispBase]Lisp.Symbol 'DigitCharP'
+   .field public static class [LispBase]Lisp.Symbol 'UpdateInstanceForRedefinedClass'
+   .field public static class [LispBase]Lisp.Symbol 'StyleWarning'
+   .field public static class [LispBase]Lisp.Symbol 'ProgramError'
+   .field public static class [LispBase]Lisp.Symbol 'BitVectorP'
+   .field public static class [LispBase]Lisp.Symbol 'StrStandardInputStr'
+   .field public static class [LispBase]Lisp.Symbol 'GenericFunction'
+   .field public static class [LispBase]Lisp.Symbol 'Nconc'
+   .field public static class [LispBase]Lisp.Symbol 'Round'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveSingleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Ftruncate'
+   .field public static class [LispBase]Lisp.Symbol 'MakeConcatenatedStream'
+   .field public static class [LispBase]Lisp.Symbol 'Logbitp'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayTotalSizeLimit'
+   .field public static class [LispBase]Lisp.Symbol 'DefineModifyMacro'
+   .field public static class [LispBase]Lisp.Symbol 'Remprop'
+   .field public static class [LispBase]Lisp.Symbol 'MachineVersion'
+   .field public static class [LispBase]Lisp.Symbol 'StringSlshEqul'
+   .field public static class [LispBase]Lisp.Symbol 'Eql'
+   .field public static class [LispBase]Lisp.Symbol 'BooleOrc1'
+   .field public static class [LispBase]Lisp.Symbol 'Ldb'
+   .field public static class [LispBase]Lisp.Symbol 'Space'
+   .field public static class [LispBase]Lisp.Symbol 'Apropos'
+   .field public static class [LispBase]Lisp.Symbol 'ShortSiteName'
+   .field public static class [LispBase]Lisp.Symbol 'Defstruct'
+   .field public static class [LispBase]Lisp.Symbol 'EndOfFile'
+   .field public static class [LispBase]Lisp.Symbol 'StrErrorOutputStr'
+   .field public static class [LispBase]Lisp.Symbol 'StrPackageStr'
+   .field public static class [LispBase]Lisp.Symbol 'AmprBody'
+   .field public static class [LispBase]Lisp.Symbol 'Characterp'
+   .field public static class [LispBase]Lisp.Symbol 'Cis'
+   .field public static class [LispBase]Lisp.Symbol 'StrModulesStr'
+   .field public static class [LispBase]Lisp.Symbol 'RemoveMethod'
+   .field public static class [LispBase]Lisp.Symbol 'IntegerDecodeFloat'
+   .field public static class [LispBase]Lisp.Symbol 'CharEqul'
+   .field public static class [LispBase]Lisp.Symbol 'CopyReadtable'
+   .field public static class [LispBase]Lisp.Symbol 'StringStream'
+   .field public static class [LispBase]Lisp.Symbol 'Debug'
+   .field public static class [LispBase]Lisp.Symbol 'LoadLogicalPathnameTranslations'
+   .field public static class [LispBase]Lisp.Symbol 'MultipleValuesLimit'
+   .field public static class [LispBase]Lisp.Symbol 'Eighth'
+   .field public static class [LispBase]Lisp.Symbol 'RemoveIf'
+   .field public static class [LispBase]Lisp.Symbol 'RenameFile'
+   .field public static class [LispBase]Lisp.Symbol 'DivisionByZero'
+   .field public static class [LispBase]Lisp.Symbol 'InvokeDebugger'
+   .field public static class [LispBase]Lisp.Symbol 'Mod'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayRankLimit'
+   .field public static class [LispBase]Lisp.Symbol 'MakeList'
+   .field public static class [LispBase]Lisp.Symbol 'Constantly'
+   .field public static class [LispBase]Lisp.Symbol 'Rem'
+   .field public static class [LispBase]Lisp.Symbol 'Abs'
+   .field public static class [LispBase]Lisp.Symbol 'Special'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayDimensionLimit'
+   .field public static class [LispBase]Lisp.Symbol 'Ecase'
+   .field public static class [LispBase]Lisp.Symbol 'YOrNP'
+   .field public static class [LispBase]Lisp.Symbol 'SlotMakunbound'
+   .field public static class [LispBase]Lisp.Symbol 'Unless'
+   .field public static class [LispBase]Lisp.Symbol 'Cdaar'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeNormalizedShortFloat'
+   .field public static class [LispBase]Lisp.Symbol 'String'
+   .field public static class [LispBase]Lisp.Symbol 'StringLeftTrim'
+   .field public static class [LispBase]Lisp.Symbol 'RassocIf'
+   .field public static class [LispBase]Lisp.Symbol 'StringNotLessp'
+   .field public static class [LispBase]Lisp.Symbol 'StrQueryIoStr'
+   .field public static class [LispBase]Lisp.Symbol 'Mapcan'
+   .field public static class [LispBase]Lisp.Symbol 'SetMacroCharacter'
+   .field public static class [LispBase]Lisp.Symbol 'StandardCharP'
+   .field public static class [LispBase]Lisp.Symbol 'ControlError'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayInBoundsP'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleVector'
+   .field public static class [LispBase]Lisp.Symbol 'Ceiling'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleCondition'
+   .field public static class [LispBase]Lisp.Symbol 'FunctionLambdaExpression'
+   .field public static class [LispBase]Lisp.Symbol 'LambdaParametersLimit'
+   .field public static class [LispBase]Lisp.Symbol 'Lognand'
+   .field public static class [LispBase]Lisp.Symbol 'StrBreakOnSignalsStr'
+   .field public static class [LispBase]Lisp.Symbol 'ConcatenatedStreamStreams'
+   .field public static class [LispBase]Lisp.Symbol 'ProgStr'
+   .field public static class [LispBase]Lisp.Symbol 'HashTableCount'
+   .field public static class [LispBase]Lisp.Symbol 'ShortFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Fmakunbound'
+   .field public static class [LispBase]Lisp.Symbol 'RandomState'
+   .field public static class [LispBase]Lisp.Symbol 'BroadcastStreamStreams'
+   .field public static class [LispBase]Lisp.Symbol 'Lambda'
+   .field public static class [LispBase]Lisp.Symbol 'YesOrNoP'
+   .field public static class [LispBase]Lisp.Symbol 'UsePackage'
+   .field public static class [LispBase]Lisp.Symbol 'NoNextMethod'
+   .field public static class [LispBase]Lisp.Symbol 'PackageErrorPackage'
+   .field public static class [LispBase]Lisp.Symbol 'DoExternalSymbols'
+   .field public static class [LispBase]Lisp.Symbol 'Cerror'
+   .field public static class [LispBase]Lisp.Symbol 'Tailp'
+   .field public static class [LispBase]Lisp.Symbol 'Ctypecase'
+   .field public static class [LispBase]Lisp.Symbol 'HashTable'
+   .field public static class [LispBase]Lisp.Symbol 'EchoStream'
+   .field public static class [LispBase]Lisp.Symbol 'Condition'
+   .field public static class [LispBase]Lisp.Symbol 'ParseNamestring'
+   .field public static class [LispBase]Lisp.Symbol 'CharUpcase'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintCaseStr'
+   .field public static class [LispBase]Lisp.Symbol 'BytePosition'
+   .field public static class [LispBase]Lisp.Symbol 'BitNor'
+   .field public static class [LispBase]Lisp.Symbol 'StringEqual'
+   .field public static class [LispBase]Lisp.Symbol 'UpgradedComplexPartType'
+   .field public static class [LispBase]Lisp.Symbol 'Maphash'
+   .field public static class [LispBase]Lisp.Symbol 'Coerce'
+   .field public static class [LispBase]Lisp.Symbol 'Third'
+   .field public static class [LispBase]Lisp.Symbol 'Equalp'
+   .field public static class [LispBase]Lisp.Symbol 'Byte'
+   .field public static class [LispBase]Lisp.Symbol 'MakeLoadFormSavingSlots'
+   .field public static class [LispBase]Lisp.Symbol 'StandardObject'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayRowMajorIndex'
+   .field public static class [LispBase]Lisp.Symbol 'DefineCompilerMacro'
+   .field public static class [LispBase]Lisp.Symbol 'Butlast'
+   .field public static class [LispBase]Lisp.Symbol 'ReadByte'
+   .field public static class [LispBase]Lisp.Symbol 'SeriousCondition'
+   .field public static class [LispBase]Lisp.Symbol 'Intern'
+   .field public static class [LispBase]Lisp.Symbol 'Car'
+   .field public static class [LispBase]Lisp.Symbol 'GetInternalRealTime'
+   .field public static class [LispBase]Lisp.Symbol 'MacroFunction'
+   .field public static class [LispBase]Lisp.Symbol 'WithOpenFile'
+   .field public static class [LispBase]Lisp.Symbol 'Defmacro'
+   .field public static class [LispBase]Lisp.Symbol 'Nintersection'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeNormalizedSingleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'MakeInstance'
+   .field public static class [LispBase]Lisp.Symbol 'Step'
+   .field public static class [LispBase]Lisp.Symbol 'Nthcdr'
+   .field public static class [LispBase]Lisp.Symbol 'DeleteDuplicates'
+   .field public static class [LispBase]Lisp.Symbol 'Ftype'
+   .field public static class [LispBase]Lisp.Symbol 'MostPositiveDoubleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'GetOutputStreamString'
+   .field public static class [LispBase]Lisp.Symbol 'DigitChar'
+   .field public static class [LispBase]Lisp.Symbol 'CellError'
+   .field public static class [LispBase]Lisp.Symbol 'MakeRandomState'
+   .field public static class [LispBase]Lisp.Symbol 'Lss'
+   .field public static class [LispBase]Lisp.Symbol 'SubstituteIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'PathnameHost'
+   .field public static class [LispBase]Lisp.Symbol 'BitOrc2'
+   .field public static class [LispBase]Lisp.Symbol 'Gcd'
+   .field public static class [LispBase]Lisp.Symbol 'Declare'
+   .field public static class [LispBase]Lisp.Symbol 'SoftwareType'
+   .field public static class [LispBase]Lisp.Symbol 'ForceOutput'
+   .field public static class [LispBase]Lisp.Symbol 'FindMethod'
+   .field public static class [LispBase]Lisp.Symbol 'LowerCaseP'
+   .field public static class [LispBase]Lisp.Symbol 'Labels'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeNormalizedLongFloat'
+   .field public static class [LispBase]Lisp.Symbol 'StringGrtEqul'
+   .field public static class [LispBase]Lisp.Symbol 'Aref'
+   .field public static class [LispBase]Lisp.Symbol 'IgnoreErrors'
+   .field public static class [LispBase]Lisp.Symbol 'BitAndc2'
+   .field public static class [LispBase]Lisp.Symbol 'CharCodeLimit'
+   .field public static class [LispBase]Lisp.Symbol 'CountIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'StringLessp'
+   .field public static class [LispBase]Lisp.Symbol 'HashTableSize'
+   .field public static class [LispBase]Lisp.Symbol 'OpenStreamP'
+   .field public static class [LispBase]Lisp.Symbol 'PeekChar'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeNormalizedDoubleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Export'
+   .field public static class [LispBase]Lisp.Symbol 'ShortFloatEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'Macroexpand'
+   .field public static class [LispBase]Lisp.Symbol 'WithSimpleRestart'
+   .field public static class [LispBase]Lisp.Symbol 'PrintNotReadable'
+   .field public static class [LispBase]Lisp.Symbol 'UpdateInstanceForDifferentClass'
+   .field public static class [LispBase]Lisp.Symbol 'Quote'
+   .field public static class [LispBase]Lisp.Symbol 'DefineSymbolMacro'
+   .field public static class [LispBase]Lisp.Symbol 'FloatPrecision'
+   .field public static class [LispBase]Lisp.Symbol 'Pathname'
+   .field public static class [LispBase]Lisp.Symbol 'Time'
+   .field public static class [LispBase]Lisp.Symbol 'MakePackage'
+   .field public static class [LispBase]Lisp.Symbol 'Mapc'
+   .field public static class [LispBase]Lisp.Symbol 'DefineMethodCombination'
+   .field public static class [LispBase]Lisp.Symbol 'Endp'
+   .field public static class [LispBase]Lisp.Symbol 'FillPointer'
+   .field public static class [LispBase]Lisp.Symbol 'Mapcar'
+   .field public static class [LispBase]Lisp.Symbol 'Mns'
+   .field public static class [LispBase]Lisp.Symbol 'StringGrt'
+   .field public static class [LispBase]Lisp.Symbol 'RenamePackage'
+   .field public static class [LispBase]Lisp.Symbol 'PathnameType'
+   .field public static class [LispBase]Lisp.Symbol 'MakeStringOutputStream'
+   .field public static class [LispBase]Lisp.Symbol 'Disassemble'
+   .field public static class [LispBase]Lisp.Symbol 'Ratio'
+   .field public static class [LispBase]Lisp.Symbol 'Prin1'
+   .field public static class [LispBase]Lisp.Symbol 'Svref'
+   .field public static class [LispBase]Lisp.Symbol 'ReadLine'
+   .field public static class [LispBase]Lisp.Symbol 'Cadadr'
+   .field public static class [LispBase]Lisp.Symbol 'Block'
+   .field public static class [LispBase]Lisp.Symbol 'BooleMnsQQ1'
+   .field public static class [LispBase]Lisp.Symbol 'StoreValue'
+   .field public static class [LispBase]Lisp.Symbol 'LongFloatNegativeEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'Restart'
+   .field public static class [LispBase]Lisp.Symbol 'CharGrtEqul'
+   .field public static class [LispBase]Lisp.Symbol 'StringNotEqual'
+   .field public static class [LispBase]Lisp.Symbol 'MostNegativeLongFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Rational'
+   .field public static class [LispBase]Lisp.Symbol 'Pathnamep'
+   .field public static class [LispBase]Lisp.Symbol 'Zerop'
+   .field public static class [LispBase]Lisp.Symbol 'Or'
+   .field public static class [LispBase]Lisp.Symbol 'MakeBroadcastStream'
+   .field public static class [LispBase]Lisp.Symbol 'BitIor'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveNormalizedShortFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Cdaaar'
+   .field public static class [LispBase]Lisp.Symbol 'WithHashTableIterator'
+   .field public static class [LispBase]Lisp.Symbol 'Cddadr'
+   .field public static class [LispBase]Lisp.Symbol 'Numerator'
+   .field public static class [LispBase]Lisp.Symbol 'ChangeClass'
+   .field public static class [LispBase]Lisp.Symbol 'PprintTab'
+   .field public static class [LispBase]Lisp.Symbol 'Let'
+   .field public static class [LispBase]Lisp.Symbol 'Listp'
+   .field public static class [LispBase]Lisp.Symbol 'Notinline'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveLongFloat'
+   .field public static class [LispBase]Lisp.Symbol 'FloatingPointInvalidOperation'
+   .field public static class [LispBase]Lisp.Symbol 'LetStr'
+   .field public static class [LispBase]Lisp.Symbol 'Caaar'
+   .field public static class [LispBase]Lisp.Symbol 'Lcm'
+   .field public static class [LispBase]Lisp.Symbol 'Locally'
+   .field public static class [LispBase]Lisp.Symbol 'Min'
+   .field public static class [LispBase]Lisp.Symbol 'StrReadEvalStr'
+   .field public static class [LispBase]Lisp.Symbol 'Open'
+   .field public static class [LispBase]Lisp.Symbol 'BitAndc1'
+   .field public static class [LispBase]Lisp.Symbol 'Go'
+   .field public static class [LispBase]Lisp.Symbol 'HashTableTest'
+   .field public static class [LispBase]Lisp.Symbol 'UpperCaseP'
+   .field public static class [LispBase]Lisp.Symbol 'DepositField'
+   .field public static class [LispBase]Lisp.Symbol 'Atom'
+   .field public static class [LispBase]Lisp.Symbol 'Defvar'
+   .field public static class [LispBase]Lisp.Symbol 'Str'
+   .field public static class [LispBase]Lisp.Symbol 'PackageError'
+   .field public static class [LispBase]Lisp.Symbol 'CopyPprintDispatch'
+   .field public static class [LispBase]Lisp.Symbol 'SubstIf'
+   .field public static class [LispBase]Lisp.Symbol 'SlotExistsP'
+   .field public static class [LispBase]Lisp.Symbol 'Cons'
+   .field public static class [LispBase]Lisp.Symbol 'Speed'
+   .field public static class [LispBase]Lisp.Symbol 'UndefinedFunction'
+   .field public static class [LispBase]Lisp.Symbol 'PathnameVersion'
+   .field public static class [LispBase]Lisp.Symbol 'Prin1MnsToString'
+   .field public static class [LispBase]Lisp.Symbol 'Loop'
+   .field public static class [LispBase]Lisp.Symbol 'MultipleValueList'
+   .field public static class [LispBase]Lisp.Symbol 'SignedByte'
+   .field public static class [LispBase]Lisp.Symbol 'Remove'
+   .field public static class [LispBase]Lisp.Symbol 'FileNamestring'
+   .field public static class [LispBase]Lisp.Symbol 'SpecialOperatorP'
+   .field public static class [LispBase]Lisp.Symbol 'GetDispatchMacroCharacter'
+   .field public static class [LispBase]Lisp.Symbol 'Room'
+   .field public static class [LispBase]Lisp.Symbol 'Replace'
+   .field public static class [LispBase]Lisp.Symbol 'TranslateLogicalPathname'
+   .field public static class [LispBase]Lisp.Symbol 'Shadow'
+   .field public static class [LispBase]Lisp.Symbol 'Vector'
+   .field public static class [LispBase]Lisp.Symbol 'WithStandardIoSyntax'
+   .field public static class [LispBase]Lisp.Symbol 'Numberp'
+   .field public static class [LispBase]Lisp.Symbol 'ReadtableCase'
+   .field public static class [LispBase]Lisp.Symbol 'Push'
+   .field public static class [LispBase]Lisp.Symbol 'Return'
+   .field public static class [LispBase]Lisp.Symbol 'Exp'
+   .field public static class [LispBase]Lisp.Symbol 'Cdddr'
+   .field public static class [LispBase]Lisp.Symbol 'Identity'
+   .field public static class [LispBase]Lisp.Symbol 'MakeMethod'
+   .field public static class [LispBase]Lisp.Symbol 'Documentation'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintBaseStr'
+   .field public static class [LispBase]Lisp.Symbol 'Untrace'
+   .field public static class [LispBase]Lisp.Symbol 'FunctionKeywords'
+   .field public static class [LispBase]Lisp.Symbol 'ConcatenatedStream'
+   .field public static class [LispBase]Lisp.Symbol 'SoftwareVersion'
+   .field public static class [LispBase]Lisp.Symbol 'Sxhash'
+   .field public static class [LispBase]Lisp.Symbol 'BaseChar'
+   .field public static class [LispBase]Lisp.Symbol 'StrFeaturesStr'
+   .field public static class [LispBase]Lisp.Symbol 'SubstIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'SymbolFunction'
+   .field public static class [LispBase]Lisp.Symbol 'Count'
+   .field public static class [LispBase]Lisp.Symbol 'WriteChar'
+   .field public static class [LispBase]Lisp.Symbol 'DynamicExtent'
+   .field public static class [LispBase]Lisp.Symbol 'Signum'
+   .field public static class [LispBase]Lisp.Symbol 'LambdaListKeywords'
+   .field public static class [LispBase]Lisp.Symbol 'Member'
+   .field public static class [LispBase]Lisp.Symbol 'AddMethod'
+   .field public static class [LispBase]Lisp.Symbol 'BooleC1'
+   .field public static class [LispBase]Lisp.Symbol 'Imagpart'
+   .field public static class [LispBase]Lisp.Symbol 'Fboundp'
+   .field public static class [LispBase]Lisp.Symbol 'Logorc1'
+   .field public static class [LispBase]Lisp.Symbol 'UnboundVariable'
+   .field public static class [LispBase]Lisp.Symbol 'NsubstituteIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'SlshSlsh'
+   .field public static class [LispBase]Lisp.Symbol 'HandlerCase'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayHasFillPointerP'
+   .field public static class [LispBase]Lisp.Symbol 'TreeEqual'
+   .field public static class [LispBase]Lisp.Symbol 'MuffleWarning'
+   .field public static class [LispBase]Lisp.Symbol 'UnsignedByte'
+   .field public static class [LispBase]Lisp.Symbol 'CompilerMacroFunction'
+   .field public static class [LispBase]Lisp.Symbol 'MakeString'
+   .field public static class [LispBase]Lisp.Symbol 'Prog'
+   .field public static class [LispBase]Lisp.Symbol 'CopyStructure'
+   .field public static class [LispBase]Lisp.Symbol 'UnreadChar'
+   .field public static class [LispBase]Lisp.Symbol 'Unintern'
+   .field public static class [LispBase]Lisp.Symbol 'PackageUsedByList'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintLevelStr'
+   .field public static class [LispBase]Lisp.Symbol 'WithOpenStream'
+   .field public static class [LispBase]Lisp.Symbol 'DestructuringBind'
+   .field public static class [LispBase]Lisp.Symbol 'StreamElementType'
+   .field public static class [LispBase]Lisp.Symbol 'StrLoadPathnameStr'
+   .field public static class [LispBase]Lisp.Symbol 'Require'
+   .field public static class [LispBase]Lisp.Symbol 'Position'
+   .field public static class [LispBase]Lisp.Symbol 'Tagbody'
+   .field public static class [LispBase]Lisp.Symbol 'Shiftf'
+   .field public static class [LispBase]Lisp.Symbol 'SingleFloatEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'Error'
+   .field public static class [LispBase]Lisp.Symbol 'WriteString'
+   .field public static class [LispBase]Lisp.Symbol 'CopySeq'
+   .field public static class [LispBase]Lisp.Symbol 'GetMacroCharacter'
+   .field public static class [LispBase]Lisp.Symbol 'BooleMnsQQ2'
+   .field public static class [LispBase]Lisp.Symbol 'UnusePackage'
+   .field public static class [LispBase]Lisp.Symbol 'Equl'
+   .field public static class [LispBase]Lisp.Symbol 'FloatDigits'
+   .field public static class [LispBase]Lisp.Symbol 'Setq'
+   .field public static class [LispBase]Lisp.Symbol 'Floatp'
+   .field public static class [LispBase]Lisp.Symbol 'MakeLoadForm'
+   .field public static class [LispBase]Lisp.Symbol 'RassocIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'LssEqul'
+   .field public static class [LispBase]Lisp.Symbol 'DoStr'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayDisplacement'
+   .field public static class [LispBase]Lisp.Symbol 'GraphicCharP'
+   .field public static class [LispBase]Lisp.Symbol 'DeletePackage'
+   .field public static class [LispBase]Lisp.Symbol 'Log'
+   .field public static class [LispBase]Lisp.Symbol 'DirectoryNamestring'
+   .field public static class [LispBase]Lisp.Symbol 'CompiledFunctionP'
+   .field public static class [LispBase]Lisp.Symbol 'StringLssEqul'
+   .field public static class [LispBase]Lisp.Symbol 'Deftype'
+   .field public static class [LispBase]Lisp.Symbol 'Defclass'
+   .field public static class [LispBase]Lisp.Symbol 'Logandc2'
+   .field public static class [LispBase]Lisp.Symbol 'Gethash'
+   .field public static class [LispBase]Lisp.Symbol 'Typecase'
+   .field public static class [LispBase]Lisp.Symbol 'Functionp'
+   .field public static class [LispBase]Lisp.Symbol 'MakeEchoStream'
+   .field public static class [LispBase]Lisp.Symbol 'Rassoc'
+   .field public static class [LispBase]Lisp.Symbol 'First'
+   .field public static class [LispBase]Lisp.Symbol 'Complex'
+   .field public static class [LispBase]Lisp.Symbol 'DoAllSymbols'
+   .field public static class [LispBase]Lisp.Symbol 'DeleteIf'
+   .field public static class [LispBase]Lisp.Symbol 'Subsetp'
+   .field public static class [LispBase]Lisp.Symbol 'PprintTabular'
+   .field public static class [LispBase]Lisp.Symbol 'HostNamestring'
+   .field public static class [LispBase]Lisp.Symbol 'WildPathnameP'
+   .field public static class [LispBase]Lisp.Symbol 'MostPositiveLongFloat'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintEscapeStr'
+   .field public static class [LispBase]Lisp.Symbol 'Function'
+   .field public static class [LispBase]Lisp.Symbol 'StringGreaterp'
+   .field public static class [LispBase]Lisp.Symbol 'Write'
+   .field public static class [LispBase]Lisp.Symbol 'BooleAndc1'
+   .field public static class [LispBase]Lisp.Symbol 'Warning'
+   .field public static class [LispBase]Lisp.Symbol 'DoubleFloatEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'ClassName'
+   .field public static class [LispBase]Lisp.Symbol 'Ignorable'
+   .field public static class [LispBase]Lisp.Symbol 'AmprAux'
+   .field public static class [LispBase]Lisp.Symbol 'Floor'
+   .field public static class [LispBase]Lisp.Symbol 'Cadaar'
+   .field public static class [LispBase]Lisp.Symbol 'PathnameDevice'
+   .field public static class [LispBase]Lisp.Symbol 'Assert'
+   .field public static class [LispBase]Lisp.Symbol 'Lognot'
+   .field public static class [LispBase]Lisp.Symbol 'InvokeRestartInteractively'
+   .field public static class [LispBase]Lisp.Symbol 'FloatingPointUnderflow'
+   .field public static class [LispBase]Lisp.Symbol 'MakeSequence'
+   .field public static class [LispBase]Lisp.Symbol 'TranslatePathname'
+   .field public static class [LispBase]Lisp.Symbol 'Macrolet'
+   .field public static class [LispBase]Lisp.Symbol 'StorageCondition'
+   .field public static class [LispBase]Lisp.Symbol 'BooleOrc2'
+   .field public static class [LispBase]Lisp.Symbol 'Case'
+   .field public static class [LispBase]Lisp.Symbol 'CallArgumentsLimit'
+   .field public static class [LispBase]Lisp.Symbol 'Integer'
+   .field public static class [LispBase]Lisp.Symbol 'UseValue'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintRadixStr'
+   .field public static class [LispBase]Lisp.Symbol 'MemberIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'Class'
+   .field public static class [LispBase]Lisp.Symbol 'DefineSetfExpander'
+   .field public static class [LispBase]Lisp.Symbol 'PprintExitIfListExhausted'
+   .field public static class [LispBase]Lisp.Symbol 'Logand'
+   .field public static class [LispBase]Lisp.Symbol 'FindRestart'
+   .field public static class [LispBase]Lisp.Symbol 'BitOrc1'
+   .field public static class [LispBase]Lisp.Symbol 'Concatenate'
+   .field public static class [LispBase]Lisp.Symbol 'FloatingPointInexact'
+   .field public static class [LispBase]Lisp.Symbol 'Acos'
+   .field public static class [LispBase]Lisp.Symbol 'Second'
+   .field public static class [LispBase]Lisp.Symbol 'Substitute'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayDimension'
+   .field public static class [LispBase]Lisp.Symbol 'StrReadDefaultFloatFormatStr'
+   .field public static class [LispBase]Lisp.Symbol 'SynonymStreamSymbol'
+   .field public static class [LispBase]Lisp.Symbol 'UpgradedArrayElementType'
+   .field public static class [LispBase]Lisp.Symbol 'WriteToString'
+   .field public static class [LispBase]Lisp.Symbol 'Ed'
+   .field public static class [LispBase]Lisp.Symbol 'MakeSynonymStream'
+   .field public static class [LispBase]Lisp.Symbol 'Logtest'
+   .field public static class [LispBase]Lisp.Symbol 'TypeErrorDatum'
+   .field public static class [LispBase]Lisp.Symbol 'SlotMissing'
+   .field public static class [LispBase]Lisp.Symbol 'Caaadr'
+   .field public static class [LispBase]Lisp.Symbol 'BooleAnd'
+   .field public static class [LispBase]Lisp.Symbol 'Search'
+   .field public static class [LispBase]Lisp.Symbol 'Nth'
+   .field public static class [LispBase]Lisp.Symbol 'Constantp'
+   .field public static class [LispBase]Lisp.Symbol 'Package'
+   .field public static class [LispBase]Lisp.Symbol 'Ccase'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleError'
+   .field public static class [LispBase]Lisp.Symbol 'ClassOf'
+   .field public static class [LispBase]Lisp.Symbol 'Caddar'
+   .field public static class [LispBase]Lisp.Symbol 'Method'
+   .field public static class [LispBase]Lisp.Symbol 'MaskField'
+   .field public static class [LispBase]Lisp.Symbol 'StandardClass'
+   .field public static class [LispBase]Lisp.Symbol 'TwoWayStreamOutputStream'
+   .field public static class [LispBase]Lisp.Symbol 'Not'
+   .field public static class [LispBase]Lisp.Symbol 'Dpb'
+   .field public static class [LispBase]Lisp.Symbol 'QQ1Pls'
+   .field public static class [LispBase]Lisp.Symbol 'Cdaddr'
+   .field public static class [LispBase]Lisp.Symbol 'Oddp'
+   .field public static class [LispBase]Lisp.Symbol 'AssocIfNot'
+   .field public static class [LispBase]Lisp.Symbol 'ArithmeticErrorOperation'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleConditionFormatControl'
+   .field public static class [LispBase]Lisp.Symbol 'Adjoin'
+   .field public static class [LispBase]Lisp.Symbol 'Fourth'
+   .field public static class [LispBase]Lisp.Symbol 'Defpackage'
+   .field public static class [LispBase]Lisp.Symbol 'SetExclusiveOr'
+   .field public static class [LispBase]Lisp.Symbol 'NameChar'
+   .field public static class [LispBase]Lisp.Symbol 'Declaration'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveShortFloat'
+   .field public static class [LispBase]Lisp.Symbol 'RemoveDuplicates'
+   .field public static class [LispBase]Lisp.Symbol 'PathnameName'
+   .field public static class [LispBase]Lisp.Symbol 'Rotatef'
+   .field public static class [LispBase]Lisp.Symbol 'ScaleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'StringUpcase'
+   .field public static class [LispBase]Lisp.Symbol 'Boundp'
+   .field public static class [LispBase]Lisp.Symbol 'Defconstant'
+   .field public static class [LispBase]Lisp.Symbol 'PprintLinear'
+   .field public static class [LispBase]Lisp.Symbol 'StrDebuggerHookStr'
+   .field public static class [LispBase]Lisp.Symbol 'FileErrorPathname'
+   .field public static class [LispBase]Lisp.Symbol 'Format'
+   .field public static class [LispBase]Lisp.Symbol 'PrintNotReadableObject'
+   .field public static class [LispBase]Lisp.Symbol 'Sort'
+   .field public static class [LispBase]Lisp.Symbol 'RandomStateP'
+   .field public static class [LispBase]Lisp.Symbol 'Ignore'
+   .field public static class [LispBase]Lisp.Symbol 'DoSymbols'
+   .field public static class [LispBase]Lisp.Symbol 'Plusp'
+   .field public static class [LispBase]Lisp.Symbol 'ReadCharNoHang'
+   .field public static class [LispBase]Lisp.Symbol 'Get'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintCircleStr'
+   .field public static class [LispBase]Lisp.Symbol 'Namestring'
+   .field public static class [LispBase]Lisp.Symbol 'Makunbound'
+   .field public static class [LispBase]Lisp.Symbol 'Abort'
+   .field public static class [LispBase]Lisp.Symbol 'InteractiveStreamP'
+   .field public static class [LispBase]Lisp.Symbol 'InvalidMethodError'
+   .field public static class [LispBase]Lisp.Symbol 'PlsPlsPls'
+   .field public static class [LispBase]Lisp.Symbol 'WithPackageIterator'
+   .field public static class [LispBase]Lisp.Symbol 'LongSiteName'
+   .field public static class [LispBase]Lisp.Symbol 'MakeTwoWayStream'
+   .field public static class [LispBase]Lisp.Symbol 'LogicalPathnameTranslations'
+   .field public static class [LispBase]Lisp.Symbol 'MultipleValueBind'
+   .field public static class [LispBase]Lisp.Symbol 'Cddar'
+   .field public static class [LispBase]Lisp.Symbol 'Symbolp'
+   .field public static class [LispBase]Lisp.Symbol 'Values'
+   .field public static class [LispBase]Lisp.Symbol 'ExtendedChar'
+   .field public static class [LispBase]Lisp.Symbol 'AmprEnvironment'
+   .field public static class [LispBase]Lisp.Symbol 'Eval'
+   .field public static class [LispBase]Lisp.Symbol 'Trace'
+   .field public static class [LispBase]Lisp.Symbol 'LispImplementationType'
+   .field public static class [LispBase]Lisp.Symbol 'StreamError'
+   .field public static class [LispBase]Lisp.Symbol 'TwoWayStream'
+   .field public static class [LispBase]Lisp.Symbol 'CopyList'
+   .field public static class [LispBase]Lisp.Symbol 'Flet'
+   .field public static class [LispBase]Lisp.Symbol 'Caaddr'
+   .field public static class [LispBase]Lisp.Symbol 'Truncate'
+   .field public static class [LispBase]Lisp.Symbol 'Cdadar'
+   .field public static class [LispBase]Lisp.Symbol 'Caddr'
+   .field public static class [LispBase]Lisp.Symbol 'ArithmeticErrorOperands'
+   .field public static class [LispBase]Lisp.Symbol 'Sequence'
+   .field public static class [LispBase]Lisp.Symbol 'BooleEqv'
+   .field public static class [LispBase]Lisp.Symbol 'Asin'
+   .field public static class [LispBase]Lisp.Symbol 'RestartBind'
+   .field public static class [LispBase]Lisp.Symbol 'Dolist'
+   .field public static class [LispBase]Lisp.Symbol 'Integerp'
+   .field public static class [LispBase]Lisp.Symbol 'VectorPop'
+   .field public static class [LispBase]Lisp.Symbol 'DoubleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'PackageNicknames'
+   .field public static class [LispBase]Lisp.Symbol 'SymbolMacrolet'
+   .field public static class [LispBase]Lisp.Symbol 'Number'
+   .field public static class [LispBase]Lisp.Symbol 'Caadr'
+   .field public static class [LispBase]Lisp.Symbol 'StreamErrorStream'
+   .field public static class [LispBase]Lisp.Symbol 'CharNotLessp'
+   .field public static class [LispBase]Lisp.Symbol 'CharInt'
+   .field public static class [LispBase]Lisp.Symbol 'ClearInput'
+   .field public static class [LispBase]Lisp.Symbol 'Defgeneric'
+   .field public static class [LispBase]Lisp.Symbol 'SimpleTypeError'
+   .field public static class [LispBase]Lisp.Symbol 'StrLoadVerboseStr'
+   .field public static class [LispBase]Lisp.Symbol 'PprintLogicalBlock'
+   .field public static class [LispBase]Lisp.Symbol 'ComputeRestarts'
+   .field public static class [LispBase]Lisp.Symbol 'Bit'
+   .field public static class [LispBase]Lisp.Symbol 'SetDispatchMacroCharacter'
+   .field public static class [LispBase]Lisp.Symbol 'EvalWhen'
+   .field public static class [LispBase]Lisp.Symbol 'StructureClass'
+   .field public static class [LispBase]Lisp.Symbol 'SingleFloatNegativeEpsilon'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintPprintDispatchStr'
+   .field public static class [LispBase]Lisp.Symbol 'Cadar'
+   .field public static class [LispBase]Lisp.Symbol 'Max'
+   .field public static class [LispBase]Lisp.Symbol 'Pushnew'
+   .field public static class [LispBase]Lisp.Symbol 'ProbeFile'
+   .field public static class [LispBase]Lisp.Symbol 'Defparameter'
+   .field public static class [LispBase]Lisp.Symbol 'Defun'
+   .field public static class [LispBase]Lisp.Symbol 'ValuesList'
+   .field public static class [LispBase]Lisp.Symbol 'MostPositiveFixnum'
+   .field public static class [LispBase]Lisp.Symbol 'Conjugate'
+   .field public static class [LispBase]Lisp.Symbol 'Typep'
+   .field public static class [LispBase]Lisp.Symbol 'Boolean'
+   .field public static class [LispBase]Lisp.Symbol 'Some'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayTotalSize'
+   .field public static class [LispBase]Lisp.Symbol 'CopySymbol'
+   .field public static class [LispBase]Lisp.Symbol 'Char'
+   .field public static class [LispBase]Lisp.Symbol 'Structure'
+   .field public static class [LispBase]Lisp.Symbol 'Arrayp'
+   .field public static class [LispBase]Lisp.Symbol 'Append'
+   .field public static class [LispBase]Lisp.Symbol 'Cdadr'
+   .field public static class [LispBase]Lisp.Symbol 'MakeInstancesObsolete'
+   .field public static class [LispBase]Lisp.Symbol 'FileStringLength'
+   .field public static class [LispBase]Lisp.Symbol 'VectorPush'
+   .field public static class [LispBase]Lisp.Symbol 'The'
+   .field public static class [LispBase]Lisp.Symbol 'BitNand'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayElementType'
+   .field public static class [LispBase]Lisp.Symbol 'MakeArray'
+   .field public static class [LispBase]Lisp.Symbol 'ReaderError'
+   .field public static class [LispBase]Lisp.Symbol 'Fixnum'
+   .field public static class [LispBase]Lisp.Symbol 'Cddddr'
+   .field public static class [LispBase]Lisp.Symbol 'Map'
+   .field public static class [LispBase]Lisp.Symbol 'FileStream'
+   .field public static class [LispBase]Lisp.Symbol 'LeastPositiveNormalizedDoubleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Atan'
+   .field public static class [LispBase]Lisp.Symbol 'PlsPls'
+   .field public static class [LispBase]Lisp.Symbol 'Null'
+   .field public static class [LispBase]Lisp.Symbol 'Minusp'
+   .field public static class [LispBase]Lisp.Symbol 'Fill'
+   .field public static class [LispBase]Lisp.Symbol 'GetInternalRunTime'
+   .field public static class [LispBase]Lisp.Symbol 'NstringDowncase'
+   .field public static class [LispBase]Lisp.Symbol 'Nunion'
+   .field public static class [LispBase]Lisp.Symbol 'Atanh'
+   .field public static class [LispBase]Lisp.Symbol 'Cdar'
+   .field public static class [LispBase]Lisp.Symbol 'Dribble'
+   .field public static class [LispBase]Lisp.Symbol 'MakeDispatchMacroCharacter'
+   .field public static class [LispBase]Lisp.Symbol 'ReinitializeInstance'
+   .field public static class [LispBase]Lisp.Symbol 'SlotUnbound'
+   .field public static class [LispBase]Lisp.Symbol 'StrCompileFilePathnameStr'
+   .field public static class [LispBase]Lisp.Symbol 'Apply'
+   .field public static class [LispBase]Lisp.Symbol 'PositionIf'
+   .field public static class [LispBase]Lisp.Symbol 'MostNegativeShortFloat'
+   .field public static class [LispBase]Lisp.Symbol 'Nsublis'
+   .field public static class [LispBase]Lisp.Symbol 'Evenp'
+   .field public static class [LispBase]Lisp.Symbol 'ArrayRank'
+   .field public static class [LispBase]Lisp.Symbol 'AdjustArray'
+   .field public static class [LispBase]Lisp.Symbol 'LeastNegativeLongFloat'
+   .field public static class [LispBase]Lisp.Symbol 'GetDecodedTime'
+   .field public static class [LispBase]Lisp.Symbol 'Setf'
+   .field public static class [LispBase]Lisp.Symbol 'Logeqv'
+   .field public static class [LispBase]Lisp.Symbol 'Caadar'
+   .field public static class [LispBase]Lisp.Symbol 'Ninth'
+   .field public static class [LispBase]Lisp.Symbol 'DecodeFloat'
+   .field public static class [LispBase]Lisp.Symbol 'MostPositiveSingleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'List'
+   .field public static class [LispBase]Lisp.Symbol 'ParseError'
+   .field public static class [LispBase]Lisp.Symbol 'InPackage'
+   .field public static class [LispBase]Lisp.Symbol 'Incf'
+   .field public static class [LispBase]Lisp.Symbol 'CopyAlist'
+   .field public static class [LispBase]Lisp.Symbol 'ClearOutput'
+   .field public static class [LispBase]Lisp.Symbol 'BooleNand'
+   .field public static class [LispBase]Lisp.Symbol 'LdbTest'
+   .field public static class [LispBase]Lisp.Symbol 'StringTrim'
+   .field public static class [LispBase]Lisp.Symbol 'PprintNewline'
+   .field public static class [LispBase]Lisp.Symbol 'EnsureDirectoriesExist'
+   .field public static class [LispBase]Lisp.Symbol 'Notevery'
+   .field public static class [LispBase]Lisp.Symbol 'IntegerLength'
+   .field public static class [LispBase]Lisp.Symbol 'StableSort'
+   .field public static class [LispBase]Lisp.Symbol 'ListStr'
+   .field public static class [LispBase]Lisp.Symbol 'StrLoadTruenameStr'
+   .field public static class [LispBase]Lisp.Symbol 'Consp'
+   .field public static class [LispBase]Lisp.Symbol 'MakeStringInputStream'
+   .field public static class [LispBase]Lisp.Symbol 'CharCode'
+   .field public static class [LispBase]Lisp.Symbol 'Compile'
+   .field public static class [LispBase]Lisp.Symbol 'ReturnFrom'
+   .field public static class [LispBase]Lisp.Symbol 'SetSyntaxFromChar'
+   .field public static class [LispBase]Lisp.Symbol 'SetDifference'
+   .field public static class [LispBase]Lisp.Symbol 'SingleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'PackageName'
+   .field public static class [LispBase]Lisp.Symbol 'MostNegativeDoubleFloat'
+   .field public static class [LispBase]Lisp.Symbol 'BaseString'
+   .field public static class [LispBase]Lisp.Symbol 'Asinh'
+   .field public static class [LispBase]Lisp.Symbol 'Alphanumericp'
+   .field public static class [LispBase]Lisp.Symbol 'Cadr'
+   .field public static class [LispBase]Lisp.Symbol 'StrCompileFileTruenameStr'
+   .field public static class [LispBase]Lisp.Symbol 'CellErrorName'
+   .field public static class [LispBase]Lisp.Symbol 'Last'
+   .field public static class [LispBase]Lisp.Symbol 'StrStrStr'
+   .field public static class [LispBase]Lisp.Symbol 'StrPrintGensymStr'
+   .field public static class [LispBase]Lisp.Symbol 'MultipleValueCall'
+   .field public static class [LispBase]Lisp.Symbol 'DescribeObject'
+}
+
+
+.method public hidebysig specialname static object 'get_Acosh' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Acosh'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Acosh'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Acosh'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AllocateInstance' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AllocateInstance'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AllocateInstance'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AllocateInstance'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Assoc' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Assoc'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Assoc'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Assoc'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AssocIf' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AssocIf'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AssocIf'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AssocIf'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArithmeticError' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArithmeticError'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArithmeticError'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArithmeticError'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Ash' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Ash'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Ash'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Ash'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AdjustableArrayP' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AdjustableArrayP'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AdjustableArrayP'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AdjustableArrayP'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AproposList' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AproposList'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AproposList'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AproposList'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayDimensions' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDimensions'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayDimensions'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDimensions'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Array' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Array'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Array'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Array'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AlphaCharP' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AlphaCharP'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AlphaCharP'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AlphaCharP'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_And' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'And'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_And'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'And'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Acons' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Acons'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Acons'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Acons'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayTotalSizeLimit' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayTotalSizeLimit'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayTotalSizeLimit'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayTotalSizeLimit'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Apropos' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Apropos'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Apropos'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Apropos'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayRankLimit' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayRankLimit'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayRankLimit'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayRankLimit'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Abs' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Abs'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Abs'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Abs'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayDimensionLimit' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDimensionLimit'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayDimensionLimit'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDimensionLimit'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayInBoundsP' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayInBoundsP'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayInBoundsP'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayInBoundsP'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayRowMajorIndex' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayRowMajorIndex'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayRowMajorIndex'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayRowMajorIndex'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Aref' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Aref'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Aref'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Aref'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Atom' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Atom'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Atom'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Atom'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AddMethod' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AddMethod'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AddMethod'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AddMethod'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayHasFillPointerP' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayHasFillPointerP'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayHasFillPointerP'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayHasFillPointerP'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayDisplacement' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDisplacement'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayDisplacement'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDisplacement'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Assert' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Assert'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Assert'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Assert'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Acos' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Acos'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Acos'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Acos'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayDimension' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDimension'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayDimension'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayDimension'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AssocIfNot' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AssocIfNot'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AssocIfNot'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AssocIfNot'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArithmeticErrorOperation' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArithmeticErrorOperation'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArithmeticErrorOperation'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArithmeticErrorOperation'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Adjoin' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Adjoin'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Adjoin'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Adjoin'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Abort' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Abort'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Abort'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Abort'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArithmeticErrorOperands' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArithmeticErrorOperands'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArithmeticErrorOperands'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArithmeticErrorOperands'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Asin' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Asin'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Asin'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Asin'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayTotalSize' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayTotalSize'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayTotalSize'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayTotalSize'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Arrayp' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Arrayp'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Arrayp'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Arrayp'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Append' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Append'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Append'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Append'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayElementType' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayElementType'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayElementType'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayElementType'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Atan' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Atan'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Atan'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Atan'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Atanh' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Atanh'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Atanh'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Atanh'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Apply' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Apply'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Apply'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Apply'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_ArrayRank' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayRank'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_ArrayRank'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'ArrayRank'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_AdjustArray' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AdjustArray'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_AdjustArray'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'AdjustArray'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Asinh' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Asinh'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Asinh'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Asinh'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'get_Alphanumericp' () cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Alphanumericp'
+  tail. callvirt instance object [LispBase]Symbol::get_Value()
+
+  ret
+}
+
+
+.method public hidebysig specialname static object 'set_Alphanumericp'(object 'value') cil managed
+{
+  .maxstack 1
+  ldsfld class [LispBase]Symbol Lisp.CL::'Alphanumericp'
+  ldarg.0
+  tail. callvirt instance object [LispBase]Symbol::set_Value(object)
+
+  ret
+}

@@ -1,0 +1,18 @@
+;;;
+(defpackage "SCODE"
+  (:shadow "LAMBDA" "PROGN" "VARIABLE")
+  (:shadowing-import-from "NAMED-LET" "LET")
+  (:shadowing-import-from "SERIES" "DEFUN" "FUNCALL" "MULTIPLE-VALUE-CALL" "LET*") 
+  (:use "CL" "FOLD" "NAMED-LET" "SERIES")
+  (:export "SCODE" "COMBINATION" "CONDITIONAL" "LAMBDA" "PROGN" "QUOTATION" "VARIABLE"))
+
+(in-package "SCODE")
+
+(defclass scode () ())
+
+(defclass combination (scode) ())
+(defclass conditional (scode) ())
+(defclass lambda (scode) ())
+(defclass progn (scode) ())
+(defclass quotation (scode) ())
+(defclass variable (scode) ())
