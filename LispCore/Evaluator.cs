@@ -55,7 +55,7 @@ namespace Lisp
                 var testObj = new Lisp.TestObject();
                 return testObj.Ping();
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is InvalidOperationException or NotImplementedException or ArgumentException)
             {
                 return "Error: " + ex.Message;
             }
