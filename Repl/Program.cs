@@ -37,7 +37,7 @@ namespace Lisp
                         Console.WriteLine(result?.ToString() ?? "NIL");
                     }
                 }
-                catch (Exception e)
+                catch (Exception e) when (e is InvalidOperationException or EndOfStreamException or NotImplementedException or ArgumentException or DivideByZeroException)
                 {
                     Console.WriteLine($"Error: {e.Message}");
                 }
@@ -70,7 +70,7 @@ namespace Lisp
                 }
                 Console.WriteLine($"Loaded {filePath}");
             }
-            catch (Exception e)
+            catch (Exception e) when (e is IOException or InvalidOperationException or NotImplementedException or ArgumentException or DivideByZeroException)
             {
                 Console.WriteLine($"Error loading {filePath}: {e.Message}");
             }
