@@ -129,61 +129,154 @@
               (setq crossed-lambda-p t)))))
     :global))
 
-(defgeneric analyze-environment (node env)
+(defun find-mutated-variables (node &optional env)
+  "Returns a list of variables that are targets of SETQ in the AST, considering their scope correctly."
+  (labels ((traverse (n curr-env)
+             (typecase n
+               (ast-literal nil)
+               (ast-variable nil)
+               (ast-if (append (traverse (ast-if-test n) curr-env)
+                               (traverse (ast-if-consequent n) curr-env)
+                               (traverse (ast-if-alternate n) curr-env)))
+               (ast-progn (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-progn-forms n))))
+               (ast-setq
+                (let* ((var-name (ast-variable-name (ast-setq-name n)))
+                       (scope (lookup-variable curr-env var-name)))
+                  ;; We track scope-aware mutations. Since scoping is tied to the name in the environment,
+                  ;; we only care about mutations to locals/lexicals/arguments.
+                  ;; To avoid shadowing conflicts where a global with the same name as a local is mutated,
+                  ;; we collect mutated variables by their name. Since analyze-environment looks up
+                  ;; by name, if it's in `mutated` and it resolves to a local, we convert it.
+                  ;; Wait, but what if an inner local shadows an outer mutated local?
+                  ;; We can simply return a list of (cons var-name frame). But a simpler way
+                  ;; is to just track all names that are mutated as non-globals. The reviewer
+                  ;; mentioned this is "imprecise" but "functionally safe". Let's stick to the names list but make it a bit more scoped if we can, or just keep the name list but only add it if it's NOT :global.
+                  (if (not (eq scope :global))
+                      (cons var-name (traverse (ast-setq-value n) curr-env))
+                      (traverse (ast-setq-value n) curr-env))))
+               (ast-let
+                (let* ((bound-vars (mapcar #'car (ast-let-bindings n)))
+                       (inner-env (cons (cons :let bound-vars) curr-env)))
+                  (append (reduce #'append (mapcar (lambda (b) (traverse (cadr b) curr-env)) (ast-let-bindings n)))
+                          (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-let-body n))))))
+               (ast-lambda
+                (let* ((params (ast-lambda-params n))
+                       (inner-env (cons (cons :lambda params) curr-env)))
+                  (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-lambda-body n)))))
+               (ast-application
+                (append (traverse (ast-application-operator n) curr-env)
+                        (reduce #'append (mapcar (lambda (op) (traverse op curr-env)) (ast-application-operands n))))))))
+    (remove-duplicates (traverse node env))))
+
+(defgeneric analyze-environment (node env &optional mutated)
   (:documentation "Walks the AST, returning a new tree with variables typed by their scope."))
 
-(defmethod analyze-environment ((node ast-literal) env)
-  (declare (ignore env))
+(defmethod analyze-environment :around (node env &optional mutated)
+  (if mutated
+      (call-next-method)
+      (call-next-method node env (find-mutated-variables node env))))
+
+(defmethod analyze-environment ((node ast-literal) env &optional mutated)
+  (declare (ignore env mutated))
   node)
 
-(defmethod analyze-environment ((node ast-variable) env)
+(defmethod analyze-environment ((node ast-variable) env &optional mutated)
   (let* ((name (ast-variable-name node))
-         (scope (lookup-variable env name)))
-    (ecase scope
-      (:argument (make-instance 'ast-argument-variable :name name))
-      (:local (make-instance 'ast-local-variable :name name))
-      (:lexical (make-instance 'ast-lexical-variable :name name))
-      (:global (make-instance 'ast-global-variable :name name)))))
+         (scope (lookup-variable env name))
+         (var-node
+          (ecase scope
+            (:argument (make-instance 'ast-argument-variable :name name))
+            (:local (make-instance 'ast-local-variable :name name))
+            (:lexical (make-instance 'ast-lexical-variable :name name))
+            (:global (make-instance 'ast-global-variable :name name)))))
+    (if (and (not (eq scope :global)) (member name mutated :test #'eq))
+        ;; Replace reference with call to %cell-value
+        (make-instance 'ast-application
+                       :operator (make-instance 'ast-global-variable :name '%cell-value)
+                       :operands (list var-node))
+        var-node)))
 
-(defmethod analyze-environment ((node ast-if) env)
+(defmethod analyze-environment ((node ast-if) env &optional mutated)
   (make-instance 'ast-if
-                 :test (analyze-environment (ast-if-test node) env)
-                 :consequent (analyze-environment (ast-if-consequent node) env)
-                 :alternate (analyze-environment (ast-if-alternate node) env)))
+                 :test (analyze-environment (ast-if-test node) env mutated)
+                 :consequent (analyze-environment (ast-if-consequent node) env mutated)
+                 :alternate (analyze-environment (ast-if-alternate node) env mutated)))
 
-(defmethod analyze-environment ((node ast-progn) env)
+(defmethod analyze-environment ((node ast-progn) env &optional mutated)
   (make-instance 'ast-progn
-                 :forms (mapcar (lambda (form) (analyze-environment form env))
+                 :forms (mapcar (lambda (form) (analyze-environment form env mutated))
                                 (ast-progn-forms node))))
 
-(defmethod analyze-environment ((node ast-setq) env)
-  (make-instance 'ast-setq
-                 :name (analyze-environment (ast-setq-name node) env)
-                 :value (analyze-environment (ast-setq-value node) env)))
+(defmethod analyze-environment ((node ast-setq) env &optional mutated)
+  (let ((name (ast-variable-name (ast-setq-name node)))
+        (value (analyze-environment (ast-setq-value node) env mutated)))
+    (let ((scope (lookup-variable env name)))
+      (if (and (not (eq scope :global)) (member name mutated :test #'eq))
+          ;; Replace assignment with call to %set-cell-value!
+          (let ((var-node
+                 (ecase scope
+                   (:argument (make-instance 'ast-argument-variable :name name))
+                   (:local (make-instance 'ast-local-variable :name name))
+                   (:lexical (make-instance 'ast-lexical-variable :name name)))))
+            (make-instance 'ast-application
+                           :operator (make-instance 'ast-global-variable :name '%set-cell-value!)
+                           :operands (list var-node value)))
+          (make-instance 'ast-setq
+                         :name (analyze-environment (ast-setq-name node) env mutated)
+                         :value value)))))
 
-(defmethod analyze-environment ((node ast-let) env)
+(defmethod analyze-environment ((node ast-let) env &optional mutated)
   ;; LET evaluates its init-forms in the outer environment.
   (let* ((analyzed-bindings
           (mapcar (lambda (b)
-                    (list (car b) (analyze-environment (cadr b) env)))
+                    (let* ((name (car b))
+                           (val (analyze-environment (cadr b) env mutated)))
+                      (if (member name mutated :test #'eq)
+                          (list name (make-instance 'ast-application
+                                                    :operator (make-instance 'ast-global-variable :name '%make-cell)
+                                                    :operands (list val)))
+                          (list name val))))
                   (ast-let-bindings node)))
          (bound-vars (mapcar #'car (ast-let-bindings node)))
          (inner-env (cons (cons :let bound-vars) env)))
     (make-instance 'ast-let
                    :bindings analyzed-bindings
-                   :body (mapcar (lambda (form) (analyze-environment form inner-env))
+                   :body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
                                  (ast-let-body node)))))
 
-(defmethod analyze-environment ((node ast-lambda) env)
+(defmethod analyze-environment ((node ast-lambda) env &optional mutated)
   ;; LAMBDA parameters are evaluated in the inner environment.
-  (let ((inner-env (cons (cons :lambda (ast-lambda-params node)) env)))
-    (make-instance 'ast-lambda
-                   :params (ast-lambda-params node)
-                   :body (mapcar (lambda (form) (analyze-environment form inner-env))
-                                 (ast-lambda-body node)))))
+  (let* ((params (ast-lambda-params node))
+         (inner-env (cons (cons :lambda params) env))
+         (body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
+                       (ast-lambda-body node)))
+         (mutated-params (remove-if-not (lambda (p) (member p mutated :test #'eq)) params)))
+    (if mutated-params
+        (let ((cell-bindings
+               (mapcar (lambda (p)
+                         (list p (make-instance 'ast-application
+                                                :operator (make-instance 'ast-global-variable :name '%make-cell)
+                                                :operands (list (make-instance 'ast-argument-variable :name p)))))
+                       mutated-params)))
+          ;; Wrap body in an ast-let that shadows mutated parameters with cell variables.
+          ;; Note: since the inner body was already analyzed with the same env,
+          ;; the variables resolving to these parameters will naturally resolve as cells inside the LET.
+          ;; Actually, lookup-variable would see the new LET frame as a :local instead of :argument!
+          ;; Wait, we should build the ast-let and then analyze it, or construct it properly.
+          (let ((let-env (cons (cons :let mutated-params) inner-env)))
+            (make-instance 'ast-lambda
+                           :params params
+                           :body (list (make-instance 'ast-let
+                                                      :bindings cell-bindings
+                                                      ;; re-analyze body in the let-env so they resolve as :local instead of :argument
+                                                      :body (mapcar (lambda (form) (analyze-environment form let-env mutated))
+                                                                    (ast-lambda-body node)))))))
+        (make-instance 'ast-lambda
+                       :params params
+                       :body body))))
 
-(defmethod analyze-environment ((node ast-application) env)
+(defmethod analyze-environment ((node ast-application) env &optional mutated)
   (make-instance 'ast-application
-                 :operator (analyze-environment (ast-application-operator node) env)
-                 :operands (mapcar (lambda (op) (analyze-environment op env))
+                 :operator (analyze-environment (ast-application-operator node) env mutated)
+                 :operands (mapcar (lambda (op) (analyze-environment op env mutated))
                                    (ast-application-operands node))))

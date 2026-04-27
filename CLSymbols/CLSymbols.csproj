@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <Target Name="CompileIL" AfterTargets="CoreCompile">
-    <Exec Command="ilasm /dll /output:$(IntermediateOutputPath)$(TargetFileName) CL.il" />
+    <Exec Command="ilasm /dll /output:$(IntermediateOutputPath)$(TargetFileName) CL.il" Condition="'$(OS)' == 'Windows_NT'" />
+    <Exec Command="ilasm /dll /output:$(IntermediateOutputPath)$(TargetFileName) CL.il" Condition="'$(OS)' != 'Windows_NT'" />
     <Copy SourceFiles="$(IntermediateOutputPath)$(TargetFileName)" DestinationFolder="$(OutputPath)" />
   </Target>
 

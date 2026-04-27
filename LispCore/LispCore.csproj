@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <Target Name="CompileIL" BeforeTargets="BeforeBuild">
-    <Exec Command="ilasm /dll /output:HelloLisp.dll Hello.il" />
+    <Exec Command="ilasm /dll /output:HelloLisp.dll Hello.il" Condition="'$(OS)' == 'Windows_NT'" />
+    <Exec Command="ilasm /dll /output:HelloLisp.dll Hello.il" Condition="'$(OS)' != 'Windows_NT'" />
   </Target>
 
   <ItemGroup>
