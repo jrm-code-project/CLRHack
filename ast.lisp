@@ -13,7 +13,8 @@
   (:documentation "A literal value (e.g., number, string, quoted list)."))
 
 (defclass ast-variable (ast-node)
-  ((name :initarg :name :accessor ast-variable-name))
+  ((name :initarg :name :accessor ast-variable-name)
+   (alpha-name :initarg :alpha-name :accessor ast-variable-alpha-name))
   (:documentation "A variable reference."))
 
 (defclass ast-argument-variable (ast-variable)
@@ -64,13 +65,14 @@
 
 ;;; Translation function
 
-(defun lisp->ast (expr)
-  "Translates a Lisp s-expression into an AST node."
+(defun lisp->ast (expr &optional env)
+  "Translates a Lisp s-expression into an AST node, applying alpha renaming."
   (cond
     ((or (numberp expr) (stringp expr) (characterp expr) (vectorp expr) (keywordp expr) (eq expr t) (eq expr nil))
      (make-instance 'ast-literal :value expr))
     ((symbolp expr)
-     (make-instance 'ast-variable :name expr))
+     (let ((alpha (cdr (assoc expr env))))
+       (make-instance 'ast-variable :name expr :alpha-name (or alpha expr))))
     ((consp expr)
      (let ((op (car expr))
            (args (cdr expr)))
@@ -79,34 +81,47 @@
           (make-instance 'ast-literal :value (car args)))
          (if
           (make-instance 'ast-if
-                         :test (lisp->ast (first args))
-                         :consequent (lisp->ast (second args))
-                         :alternate (if (cddr args) (lisp->ast (third args)) (make-instance 'ast-literal :value nil))))
+                         :test (lisp->ast (first args) env)
+                         :consequent (lisp->ast (second args) env)
+                         :alternate (if (cddr args) (lisp->ast (third args) env) (make-instance 'ast-literal :value nil))))
          (progn
           (make-instance 'ast-progn
-                         :forms (mapcar #'lisp->ast args)))
+                         :forms (mapcar (lambda (e) (lisp->ast e env)) args)))
          (setq
-          (make-instance 'ast-setq
-                         :name (make-instance 'ast-variable :name (first args))
-                         :value (lisp->ast (second args))))
+          (let* ((var-name (first args))
+                 (alpha (cdr (assoc var-name env))))
+            (make-instance 'ast-setq
+                           :name (make-instance 'ast-variable :name var-name :alpha-name (or alpha var-name))
+                           :value (lisp->ast (second args) env))))
          (let
-          (make-instance 'ast-let
-                         :bindings (mapcar (lambda (b)
-                                             (if (consp b)
-                                                 (list (car b) (lisp->ast (cadr b)))
-                                                 (list b (make-instance 'ast-literal :value nil))))
-                                           (first args))
-                         :body (mapcar #'lisp->ast (rest args))))
+          (let* ((new-env env)
+                 (bindings (mapcar (lambda (b)
+                                     (let* ((name (if (consp b) (car b) b))
+                                            (val (if (consp b) (lisp->ast (cadr b) env) (make-instance 'ast-literal :value nil)))
+                                            (alpha (gensym (string name))))
+                                       (push (cons name alpha) new-env)
+                                       (list alpha val)))
+                                   (first args))))
+            (make-instance 'ast-let
+                           :bindings bindings
+                           :body (mapcar (lambda (e) (lisp->ast e new-env)) (rest args)))))
          (lambda
-          (make-instance 'ast-lambda
-                         :params (first args)
-                         :body (mapcar #'lisp->ast (rest args))))
+          (let* ((new-env env)
+                 (params (mapcar (lambda (p)
+                                   (let ((alpha (gensym (string p))))
+                                     (push (cons p alpha) new-env)
+                                     alpha))
+                                 (first args))))
+            (make-instance 'ast-lambda
+                           :params params
+                           :body (mapcar (lambda (e) (lisp->ast e new-env)) (rest args)))))
          (t
           (make-instance 'ast-application
                          :operator (if (symbolp op)
-                                       (make-instance 'ast-variable :name op)
-                                       (lisp->ast op))
-                         :operands (mapcar #'lisp->ast args))))))
+                                       (let ((alpha (cdr (assoc op env))))
+                                         (make-instance 'ast-variable :name op :alpha-name (or alpha op)))
+                                       (lisp->ast op env))
+                         :operands (mapcar (lambda (e) (lisp->ast e env)) args))))))
     (t (error "Unknown expression type: ~A" expr))))
 
 ;;; Scope Analysis
@@ -130,7 +145,7 @@
     :global))
 
 (defun find-mutated-variables (node &optional env)
-  "Returns a list of variables that are targets of SETQ in the AST, considering their scope correctly."
+  "Returns a list of alpha-names of variables that are targets of SETQ in the AST, considering their scope correctly."
   (labels ((traverse (n curr-env)
              (typecase n
                (ast-literal nil)
@@ -140,19 +155,13 @@
                                (traverse (ast-if-alternate n) curr-env)))
                (ast-progn (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-progn-forms n))))
                (ast-setq
-                (let* ((var-name (ast-variable-name (ast-setq-name n)))
-                       (scope (lookup-variable curr-env var-name)))
+                (let* ((var-alpha (ast-variable-alpha-name (ast-setq-name n)))
+                       (scope (lookup-variable curr-env var-alpha)))
                   ;; We track scope-aware mutations. Since scoping is tied to the name in the environment,
                   ;; we only care about mutations to locals/lexicals/arguments.
-                  ;; To avoid shadowing conflicts where a global with the same name as a local is mutated,
-                  ;; we collect mutated variables by their name. Since analyze-environment looks up
-                  ;; by name, if it's in `mutated` and it resolves to a local, we convert it.
-                  ;; Wait, but what if an inner local shadows an outer mutated local?
-                  ;; We can simply return a list of (cons var-name frame). But a simpler way
-                  ;; is to just track all names that are mutated as non-globals. The reviewer
-                  ;; mentioned this is "imprecise" but "functionally safe". Let's stick to the names list but make it a bit more scoped if we can, or just keep the name list but only add it if it's NOT :global.
+                  ;; Since alpha-names are unique, there is no shadowing conflict.
                   (if (not (eq scope :global))
-                      (cons var-name (traverse (ast-setq-value n) curr-env))
+                      (cons var-alpha (traverse (ast-setq-value n) curr-env))
                       (traverse (ast-setq-value n) curr-env))))
                (ast-let
                 (let* ((bound-vars (mapcar #'car (ast-let-bindings n)))
@@ -182,17 +191,18 @@
 
 (defmethod analyze-environment ((node ast-variable) env &optional mutated)
   (let* ((name (ast-variable-name node))
-         (scope (lookup-variable env name))
+         (alpha (ast-variable-alpha-name node))
+         (scope (lookup-variable env alpha))
          (var-node
           (ecase scope
-            (:argument (make-instance 'ast-argument-variable :name name))
-            (:local (make-instance 'ast-local-variable :name name))
-            (:lexical (make-instance 'ast-lexical-variable :name name))
-            (:global (make-instance 'ast-global-variable :name name)))))
-    (if (and (not (eq scope :global)) (member name mutated :test #'eq))
+            (:argument (make-instance 'ast-argument-variable :name name :alpha-name alpha))
+            (:local (make-instance 'ast-local-variable :name name :alpha-name alpha))
+            (:lexical (make-instance 'ast-lexical-variable :name name :alpha-name alpha))
+            (:global (make-instance 'ast-global-variable :name name :alpha-name alpha)))))
+    (if (and (not (eq scope :global)) (member alpha mutated :test #'eq))
         ;; Replace reference with call to %cell-value
         (make-instance 'ast-application
-                       :operator (make-instance 'ast-global-variable :name '%cell-value)
+                       :operator (make-instance 'ast-global-variable :name '%cell-value :alpha-name '%cell-value)
                        :operands (list var-node))
         var-node)))
 
@@ -209,17 +219,18 @@
 
 (defmethod analyze-environment ((node ast-setq) env &optional mutated)
   (let ((name (ast-variable-name (ast-setq-name node)))
+        (alpha (ast-variable-alpha-name (ast-setq-name node)))
         (value (analyze-environment (ast-setq-value node) env mutated)))
-    (let ((scope (lookup-variable env name)))
-      (if (and (not (eq scope :global)) (member name mutated :test #'eq))
+    (let ((scope (lookup-variable env alpha)))
+      (if (and (not (eq scope :global)) (member alpha mutated :test #'eq))
           ;; Replace assignment with call to %set-cell-value!
           (let ((var-node
                  (ecase scope
-                   (:argument (make-instance 'ast-argument-variable :name name))
-                   (:local (make-instance 'ast-local-variable :name name))
-                   (:lexical (make-instance 'ast-lexical-variable :name name)))))
+                   (:argument (make-instance 'ast-argument-variable :name name :alpha-name alpha))
+                   (:local (make-instance 'ast-local-variable :name name :alpha-name alpha))
+                   (:lexical (make-instance 'ast-lexical-variable :name name :alpha-name alpha)))))
             (make-instance 'ast-application
-                           :operator (make-instance 'ast-global-variable :name '%set-cell-value!)
+                           :operator (make-instance 'ast-global-variable :name '%set-cell-value! :alpha-name '%set-cell-value!)
                            :operands (list var-node value)))
           (make-instance 'ast-setq
                          :name (analyze-environment (ast-setq-name node) env mutated)
@@ -229,13 +240,13 @@
   ;; LET evaluates its init-forms in the outer environment.
   (let* ((analyzed-bindings
           (mapcar (lambda (b)
-                    (let* ((name (car b))
+                    (let* ((alpha (car b))
                            (val (analyze-environment (cadr b) env mutated)))
-                      (if (member name mutated :test #'eq)
-                          (list name (make-instance 'ast-application
-                                                    :operator (make-instance 'ast-global-variable :name '%make-cell)
+                      (if (member alpha mutated :test #'eq)
+                          (list alpha (make-instance 'ast-application
+                                                    :operator (make-instance 'ast-global-variable :name '%make-cell :alpha-name '%make-cell)
                                                     :operands (list val)))
-                          (list name val))))
+                          (list alpha val))))
                   (ast-let-bindings node)))
          (bound-vars (mapcar #'car (ast-let-bindings node)))
          (inner-env (cons (cons :let bound-vars) env)))
@@ -255,8 +266,11 @@
         (let ((cell-bindings
                (mapcar (lambda (p)
                          (list p (make-instance 'ast-application
-                                                :operator (make-instance 'ast-global-variable :name '%make-cell)
-                                                :operands (list (make-instance 'ast-argument-variable :name p)))))
+                                                :operator (make-instance 'ast-global-variable :name '%make-cell :alpha-name '%make-cell)
+                                                ;; Here `name` is technically lost as we only have the `alpha` parameter `p`.
+                                                ;; In ast-lambda, `params` is a list of alpha-names now.
+                                                ;; For parameter binding cells, we can just use the alpha-name as the name.
+                                                :operands (list (make-instance 'ast-argument-variable :name p :alpha-name p)))))
                        mutated-params)))
           ;; Wrap body in an ast-let that shadows mutated parameters with cell variables.
           ;; Note: since the inner body was already analyzed with the same env,
