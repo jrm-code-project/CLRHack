@@ -7,12 +7,29 @@
     (let* ((converted (closure-convert analyzed)))
       (multiple-value-bind (lifted lambdas) (perform-lambda-lifting converted)
         (let ((asm (generate-assembly lifted lambdas assembly-name)))
-          (with-open-file (stream (format nil "~A.il" assembly-name) :direction :output :if-exists :supersede)
+          (with-open-file (stream (format nil "~A.il" assembly-name) :direction :output :if-exists :supersede)  
             (emit-assembly asm stream))
           (format t "Generated ~A.il successfully.~%" assembly-name)
-          (il:ilasm asm))))))
+          (il:ilasm asm)
+
+          (format t "Publishing ~A to standalone executable...~%" assembly-name)
+          (with-open-file (stream (format nil "~A.ilproj" assembly-name) :direction :output :if-exists :supersede)
+            (format stream "<Project Sdk=\"Microsoft.NET.Sdk.IL/8.0.0\">~%")
+            (format stream "  <PropertyGroup>~%")
+            (format stream "    <OutputType>Exe</OutputType>~%")
+            (format stream "    <TargetFramework>net8.0</TargetFramework>~%")
+            (format stream "  </PropertyGroup>~%")
+            (format stream "  <ItemGroup>~%")
+            (format stream "    <Compile Remove=\"**/*.il\" />~%")
+            (format stream "    <Compile Include=\"~A.il\" />~%" assembly-name)
+            (format stream "    <ProjectReference Include=\"LispBase\\LispBase.csproj\" />~%")
+            (format stream "  </ItemGroup>~%")
+            (format stream "</Project>~%"))
+
+          (uiop:run-program (list "dotnet.exe" "publish" (format nil "~A.ilproj" assembly-name) "-c" "Release" "-r" "win-x64" "--self-contained" "true" "-p:PublishSingleFile=true" "-nologo")
+                            :output *standard-output*
+                            :error-output *error-output*))))))
 
 (compile-and-run '(let ((x 10))
                     (let ((f (lambda (y) x)))
                       (f 20))))
-
