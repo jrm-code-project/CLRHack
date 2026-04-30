@@ -5,7 +5,7 @@
 ;;; AST Nodes
 
 (defclass ast-node ()
-  ()
+  ((basic-block :initform nil :accessor ast-basic-block))
   (:documentation "Base class for all AST nodes."))
 
 (defclass ast-literal (ast-node)
@@ -55,13 +55,217 @@
 
 (defclass ast-lambda (ast-node)
   ((params :initarg :params :accessor ast-lambda-params)
-   (body :initarg :body :accessor ast-lambda-body))
+   (body :initarg :body :accessor ast-lambda-body)
+   (free-vars :initform nil :accessor ast-lambda-free-vars)
+   (lifted-name :initform nil :accessor ast-lambda-lifted-name))
   (:documentation "A LAMBDA expression."))
+
+(defclass ast-class (ast-node)
+  ((name :initarg :name :accessor ast-class-name)
+   (superclasses :initarg :superclasses :accessor ast-class-superclasses)
+   (slots :initarg :slots :accessor ast-class-slots)
+   (options :initarg :options :initform nil :accessor ast-class-options))
+  (:documentation "A DEFCLASS definition."))
+
+(defclass ast-method (ast-node)
+  ((name :initarg :name :accessor ast-method-name)
+   (qualifiers :initarg :qualifiers :initform nil :accessor ast-method-qualifiers)
+   (specialized-lambda-list :initarg :specialized-lambda-list :accessor ast-method-specialized-lambda-list)
+   (body :initarg :body :accessor ast-method-body))
+  (:documentation "A DEFMETHOD definition."))
 
 (defclass ast-application (ast-node)
   ((operator :initarg :operator :accessor ast-application-operator)
    (operands :initarg :operands :accessor ast-application-operands))
   (:documentation "A function application."))
+
+;;; Free Variable Analysis
+
+(defgeneric compute-free-vars (node)
+  (:documentation "Computes and caches free variables in LAMBDA nodes. Returns a list of alpha-names."))
+
+(defmethod compute-free-vars ((node ast-literal))
+  nil)
+
+(defmethod compute-free-vars ((node ast-variable))
+  (list (ast-variable-alpha-name node)))
+
+(defmethod compute-free-vars ((node ast-global-variable))
+  nil)
+
+(defmethod compute-free-vars ((node ast-if))
+  (union (compute-free-vars (ast-if-test node))
+         (union (compute-free-vars (ast-if-consequent node))
+                (compute-free-vars (ast-if-alternate node)))))
+
+(defmethod compute-free-vars ((node ast-progn))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-progn-forms node)
+          :initial-value nil))
+
+(defmethod compute-free-vars ((node ast-setq))
+  (union (compute-free-vars (ast-setq-name node))
+         (compute-free-vars (ast-setq-value node))))
+
+(defmethod compute-free-vars ((node ast-let))
+  (let ((binding-free-vars (reduce (lambda (a b) (union a (compute-free-vars (cadr b))))
+                                   (ast-let-bindings node)
+                                   :initial-value nil))
+        (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (ast-let-body node)
+                                :initial-value nil))
+        (bound-vars (mapcar #'car (ast-let-bindings node))))
+    (union binding-free-vars
+           (set-difference body-free-vars bound-vars))))
+
+(defmethod compute-free-vars ((node ast-lambda))
+  (let* ((body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                 (ast-lambda-body node)
+                                 :initial-value nil))
+         (params (ast-lambda-params node))
+         (free-vars (set-difference body-free-vars params)))
+    (setf (ast-lambda-free-vars node) free-vars)
+    free-vars))
+
+(defmethod compute-free-vars ((node ast-application))
+  (union (compute-free-vars (ast-application-operator node))
+         (reduce (lambda (a b) (union a (compute-free-vars b)))
+                 (ast-application-operands node)
+                 :initial-value nil)))
+
+(defmethod compute-free-vars ((node ast-class))
+  nil)
+
+(defmethod compute-free-vars ((node ast-method))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-method-body node)
+          :initial-value nil))
+
+(defgeneric closure-convert (node)
+  (:documentation "Walks the AST and transforms LAMBDA expressions into explicit closure instantiations using .ctor."))
+
+(defmethod closure-convert ((node ast-literal))
+  node)
+
+(defmethod closure-convert ((node ast-variable))
+  node)
+
+(defmethod closure-convert ((node ast-if))
+  (make-instance 'ast-if
+                 :test (closure-convert (ast-if-test node))
+                 :consequent (closure-convert (ast-if-consequent node))
+                 :alternate (closure-convert (ast-if-alternate node))))
+
+(defmethod closure-convert ((node ast-progn))
+  (make-instance 'ast-progn
+                 :forms (mapcar #'closure-convert (ast-progn-forms node))))
+
+(defmethod closure-convert ((node ast-setq))
+  (make-instance 'ast-setq
+                 :name (closure-convert (ast-setq-name node))
+                 :value (closure-convert (ast-setq-value node))))
+
+(defmethod closure-convert ((node ast-let))
+  (make-instance 'ast-let
+                 :bindings (mapcar (lambda (b) (list (car b) (closure-convert (cadr b))))
+                                   (ast-let-bindings node))
+                 :body (mapcar #'closure-convert (ast-let-body node))))
+
+(defmethod closure-convert ((node ast-lambda))
+  (let ((new-body (mapcar #'closure-convert (ast-lambda-body node)))
+        (free-vars (ast-lambda-free-vars node)))
+    (setf (ast-lambda-body node) new-body)
+    (make-instance 'ast-application
+                   :operator (make-instance 'ast-global-variable :name '.ctor :alpha-name '.ctor)
+                   :operands (cons node
+                                   (mapcar (lambda (v)
+                                             (make-instance 'ast-lexical-variable :name v :alpha-name v))
+                                           free-vars)))))
+
+(defmethod closure-convert ((node ast-application))
+  (make-instance 'ast-application
+                 :operator (closure-convert (ast-application-operator node))
+                 :operands (mapcar #'closure-convert (ast-application-operands node))))
+
+(defmethod closure-convert ((node ast-class))
+  node)
+
+(defmethod closure-convert ((node ast-method))
+  (make-instance 'ast-method
+                 :name (ast-method-name node)
+                 :qualifiers (ast-method-qualifiers node)
+                 :specialized-lambda-list (ast-method-specialized-lambda-list node)
+                 :body (mapcar #'closure-convert (ast-method-body node))))
+
+;;; Lambda Lifting
+
+(defvar *lifted-lambdas* nil
+  "List of (name . ast-lambda) for all lifted lambdas.")
+
+(defgeneric lambda-lift (node)
+  (:documentation "Walks the AST, lifting LAMBDA expressions to the top level. Returns the modified AST."))
+
+(defmethod lambda-lift ((node ast-literal))
+  node)
+
+(defmethod lambda-lift ((node ast-variable))
+  node)
+
+(defmethod lambda-lift ((node ast-if))
+  (make-instance 'ast-if
+                 :test (lambda-lift (ast-if-test node))
+                 :consequent (lambda-lift (ast-if-consequent node))
+                 :alternate (lambda-lift (ast-if-alternate node))))
+
+(defmethod lambda-lift ((node ast-progn))
+  (make-instance 'ast-progn
+                 :forms (mapcar #'lambda-lift (ast-progn-forms node))))
+
+(defmethod lambda-lift ((node ast-setq))
+  (make-instance 'ast-setq
+                 :name (lambda-lift (ast-setq-name node))
+                 :value (lambda-lift (ast-setq-value node))))
+
+(defmethod lambda-lift ((node ast-let))
+  (make-instance 'ast-let
+                 :bindings (mapcar (lambda (b) (list (car b) (lambda-lift (cadr b))))
+                                   (ast-let-bindings node))
+                 :body (mapcar #'lambda-lift (ast-let-body node))))
+
+(defmethod lambda-lift ((node ast-lambda))
+  (let ((new-body (mapcar #'lambda-lift (ast-lambda-body node)))
+        (lifted-name (gensym "L_")))
+    (setf (ast-lambda-body node) new-body)
+    (setf (ast-lambda-lifted-name node) lifted-name)
+    (push (cons lifted-name node) *lifted-lambdas*)
+    (make-instance 'ast-global-variable :name lifted-name :alpha-name lifted-name)))
+
+(defmethod lambda-lift ((node ast-application))
+  (make-instance 'ast-application
+                 :operator (lambda-lift (ast-application-operator node))
+                 :operands (mapcar #'lambda-lift (ast-application-operands node))))
+
+(defmethod lambda-lift ((node ast-class))
+  node)
+
+(defmethod lambda-lift ((node ast-method))
+  (make-instance 'ast-method
+                 :name (ast-method-name node)
+                 :qualifiers (ast-method-qualifiers node)
+                 :specialized-lambda-list (ast-method-specialized-lambda-list node)
+                 :body (mapcar #'lambda-lift (ast-method-body node))))
+
+(defun perform-lambda-lifting (ast)
+  (let ((*lifted-lambdas* nil))
+    (let ((new-ast (lambda-lift ast)))
+      (values new-ast (nreverse *lifted-lambdas*)))))
+
+(defun expand-quote (expr)
+  (cond
+    ((null expr) nil)
+    ((symbolp expr) `(%intern ,(string expr)))
+    ((consp expr) `(%cons ,(expand-quote (car expr)) ,(expand-quote (cdr expr))))
+    (t expr)))
 
 ;;; Translation function
 
@@ -78,7 +282,7 @@
            (args (cdr expr)))
        (case op
          (quote
-          (make-instance 'ast-literal :value (car args)))
+          (lisp->ast (expand-quote (car args)) env))
          (if
           (make-instance 'ast-if
                          :test (lisp->ast (first args) env)
@@ -93,6 +297,33 @@
             (make-instance 'ast-setq
                            :name (make-instance 'ast-variable :name var-name :alpha-name (or alpha var-name))
                            :value (lisp->ast (second args) env))))
+         (defun
+          (let* ((name (first args))
+                 (params (second args))
+                 (body (cddr args)))
+             (lisp->ast `(setq ,name (lambda ,params (progn ,@body))) env)))
+         (defclass
+          (let* ((name (first args))
+                 (superclasses (second args))
+                 (slots (third args))
+                 (options (cdddr args)))
+            (make-instance 'ast-class
+                           :name name
+                           :superclasses superclasses
+                           :slots slots
+                           :options options)))
+         (defmethod
+          (let* ((name (first args))
+                 (rest-args (rest args))
+                 (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
+                 (after-qualifiers (nthcdr (length qualifiers) rest-args))
+                 (lambda-list (first after-qualifiers))
+                 (body (rest after-qualifiers)))
+            (make-instance 'ast-method
+                           :name name
+                           :qualifiers qualifiers
+                           :specialized-lambda-list lambda-list
+                           :body (mapcar (lambda (e) (lisp->ast e env)) body))))
          (let
           (let* ((new-env env)
                  (bindings (mapcar (lambda (b)
@@ -172,6 +403,9 @@
                 (let* ((params (ast-lambda-params n))
                        (inner-env (cons (cons :lambda params) curr-env)))
                   (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-lambda-body n)))))
+               (ast-class nil)
+               (ast-method
+                (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-method-body n))))
                (ast-application
                 (append (traverse (ast-application-operator n) curr-env)
                         (reduce #'append (mapcar (lambda (op) (traverse op curr-env)) (ast-application-operands n))))))))
@@ -258,39 +492,43 @@
 (defmethod analyze-environment ((node ast-lambda) env &optional mutated)
   ;; LAMBDA parameters are evaluated in the inner environment.
   (let* ((params (ast-lambda-params node))
-         (inner-env (cons (cons :lambda params) env))
-         (body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
-                       (ast-lambda-body node)))
          (mutated-params (remove-if-not (lambda (p) (member p mutated :test #'eq)) params)))
     (if mutated-params
-        (let ((cell-bindings
-               (mapcar (lambda (p)
-                         (list p (make-instance 'ast-application
-                                                :operator (make-instance 'ast-global-variable :name '%make-cell :alpha-name '%make-cell)
-                                                ;; Here `name` is technically lost as we only have the `alpha` parameter `p`.
-                                                ;; In ast-lambda, `params` is a list of alpha-names now.
-                                                ;; For parameter binding cells, we can just use the alpha-name as the name.
-                                                :operands (list (make-instance 'ast-argument-variable :name p :alpha-name p)))))
-                       mutated-params)))
-          ;; Wrap body in an ast-let that shadows mutated parameters with cell variables.
-          ;; Note: since the inner body was already analyzed with the same env,
-          ;; the variables resolving to these parameters will naturally resolve as cells inside the LET.
-          ;; Actually, lookup-variable would see the new LET frame as a :local instead of :argument!
-          ;; Wait, we should build the ast-let and then analyze it, or construct it properly.
-          (let ((let-env (cons (cons :let mutated-params) inner-env)))
-            (make-instance 'ast-lambda
-                           :params params
-                           :body (list (make-instance 'ast-let
-                                                      :bindings cell-bindings
-                                                      ;; re-analyze body in the let-env so they resolve as :local instead of :argument
-                                                      :body (mapcar (lambda (form) (analyze-environment form let-env mutated))
-                                                                    (ast-lambda-body node)))))))
-        (make-instance 'ast-lambda
-                       :params params
-                       :body body))))
+        (let* ((inner-env (cons (cons :lambda params) env))
+               (let-env (cons (cons :let mutated-params) inner-env))
+               (cell-bindings
+                (mapcar (lambda (p)
+                          (list p (make-instance 'ast-application
+                                                 :operator (make-instance 'ast-global-variable :name '%make-cell :alpha-name '%make-cell)
+                                                 :operands (list (make-instance 'ast-argument-variable :name p :alpha-name p)))))
+                        mutated-params))
+               (let-node (make-instance 'ast-let 
+                                        :bindings cell-bindings
+                                        :body (mapcar (lambda (form) (analyze-environment form let-env mutated))
+                                                      (ast-lambda-body node)))))
+          (make-instance 'ast-lambda
+                         :params params
+                         :body (list let-node)))
+        (let* ((inner-env (cons (cons :lambda params) env))
+               (body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
+                             (ast-lambda-body node))))
+          (make-instance 'ast-lambda :params params :body body)))))
 
 (defmethod analyze-environment ((node ast-application) env &optional mutated)
   (make-instance 'ast-application
                  :operator (analyze-environment (ast-application-operator node) env mutated)
                  :operands (mapcar (lambda (op) (analyze-environment op env mutated))
                                    (ast-application-operands node))))
+
+(defmethod analyze-environment ((node ast-class) env &optional mutated)
+  (declare (ignore env mutated))
+  node)
+
+(defmethod analyze-environment ((node ast-method) env &optional mutated)
+  ;; Simplified environment analysis.
+  (make-instance 'ast-method
+                 :name (ast-method-name node)
+                 :qualifiers (ast-method-qualifiers node)
+                 :specialized-lambda-list (ast-method-specialized-lambda-list node)
+                 :body (mapcar (lambda (form) (analyze-environment form env mutated))
+                               (ast-method-body node))))

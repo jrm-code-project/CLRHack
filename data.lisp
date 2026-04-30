@@ -66,7 +66,7 @@
   and or xor shl shr 
   neg not 
   nop pop dup ret 
-  ceq cgt clt)
+  ceq cgt cgt.un clt ldnull)
 
 (define-simple-instruction-makers 
   ;; Arguments
@@ -108,6 +108,9 @@
                                  kwargs))))))
 
 ;;; --- Specialized Payloads ---
+
+(define-operand-instruction-makers cil-operand-instruction
+  ldfld stfld)
 
 (defclass cil-numeric-instruction (cil-operand-instruction)
   ((num-type :initarg :num-type :initform :int32 :accessor get-num-type))
@@ -156,7 +159,7 @@
             (get-var-kind inst))))
 
 (define-operand-instruction-makers cil-variable-instruction
-  ldloc stloc ldarg starg ldloca ldarga)
+  ldloc stloc ldarg starg ldloca ldarga ldsfld stsfld)
 
 (defclass cil-branch-instruction (cil-operand-instruction)
   ((short-p :initarg :short-p :initform nil :accessor get-short-p))
@@ -237,6 +240,36 @@
                  :source-form source-form
                  :tail-p tail-p))
 
+(defun il::newobj (&key method class return args label stack-effect source-form)
+  "Constructs a CIL 'newobj' instruction object. Similar to call but for constructors."
+  (make-instance 'cil-call-instruction
+                 :opcode "newobj"
+                 :operand method
+                 :target-class class
+                 :return-type return
+                 :arg-types args
+                 :label label
+                 :stack-effect (or stack-effect 1)
+                 :source-form source-form
+                 :tail-p nil))
+
+(defclass cil-type-instruction (cil-operand-instruction)
+  ()
+  (:documentation "Instructions like box, unbox.any that take a type token."))
+
+(defmethod emit-instruction ((inst cil-type-instruction) stream)
+  (format stream "~A ~A" (get-opcode inst) (get-operand inst)))
+
+(defmethod print-object ((inst cil-type-instruction) stream)
+  (print-unreadable-object (inst stream :type t :identity nil)
+    (format stream "~@[~A: ~]~A ~A" 
+            (get-label inst) 
+            (get-opcode inst) 
+            (get-operand inst))))
+
+(define-operand-instruction-makers cil-type-instruction
+  box unbox.any castclass isinst)
+
 (defclass cil-string-instruction (cil-operand-instruction)
   ()
   (:documentation "For 'ldstr'. Because eventually we'll want to tell the user to fuck off in high-res."))
@@ -259,20 +292,22 @@
 ;;; --- The Method Container ---
 
 (defclass cil-method ()
-  ((name         :initarg :name         :accessor method-name)
-   (return-type  :initarg :return-type  :initform "void" :accessor get-return-type)
-   (arg-types    :initarg :arg-types    :initform nil :accessor get-arg-types)
-   (visibility   :initarg :visibility   :initform :public :accessor get-visibility)
-   (static-p     :initarg :static-p     :initform nil     :accessor get-static-p)
-   (hidebysig-p  :initarg :hidebysig-p  :initform t       :accessor get-hidebysig-p)
-   (virtual-p    :initarg :virtual-p    :initform nil     :accessor get-virtual-p)
+  ((name            :initarg :name            :accessor method-name)
+   (return-type     :initarg :return-type     :initform "void" :accessor get-return-type)
+   (arg-types       :initarg :arg-types       :initform nil :accessor get-arg-types)
+   (visibility      :initarg :visibility      :initform :public :accessor get-visibility)
+   (static-p        :initarg :static-p        :initform nil     :accessor get-static-p)
+   (hidebysig-p     :initarg :hidebysig-p     :initform t       :accessor get-hidebysig-p)
+   (virtual-p       :initarg :virtual-p       :initform nil     :accessor get-virtual-p)
+   (specialname-p   :initarg :specialname-p   :initform nil     :accessor get-specialname-p)
+   (rtspecialname-p :initarg :rtspecialname-p :initform nil     :accessor get-rtspecialname-p)
    ;; --- The Missing Piece ---
-   (entrypoint-p :initarg :entrypoint-p :initform nil :accessor get-entrypoint-p)
-   (maxstack     :initarg :maxstack     :initform 8 :accessor get-maxstack)
-   (locals       :initarg :locals       :initform nil :accessor get-locals)
-   (instructions :initarg :instructions 
-                 :initform (make-array 0 :fill-pointer 0 :adjustable t)
-                 :accessor get-instructions))
+   (entrypoint-p    :initarg :entrypoint-p    :initform nil :accessor get-entrypoint-p)
+   (maxstack        :initarg :maxstack        :initform 8 :accessor get-maxstack)
+   (locals          :initarg :locals          :initform nil :accessor get-locals)
+   (instructions    :initarg :instructions
+                    :initform (make-array 0 :fill-pointer 0 :adjustable t)
+                    :accessor get-instructions))
   (:documentation "A CIL method definition. Added entrypoint-p so the CLR knows where to start."))
 
 ;;; --- Helper to push instructions into the vector ---
@@ -283,11 +318,13 @@
   inst)
 
 (defmethod emit-method ((method cil-method) stream)
-  (format stream ".method ~(~A~)~:[~; static~]~:[~; virtual~]~:[~; hidebysig~] ~A ~A(~{~A~^, ~}) cil managed~%"
+  (format stream ".method ~(~A~)~:[~; static~]~:[~; virtual~]~:[~; hidebysig~]~:[~; specialname~]~:[~; rtspecialname~] ~A '~A'(~{~A~^, ~}) cil managed~%"
           (get-visibility method)
           (get-static-p method)
           (get-virtual-p method)
           (get-hidebysig-p method)
+          (get-specialname-p method)
+          (get-rtspecialname-p method)
           (get-return-type method)
           (method-name method)
           (get-arg-types method))
@@ -301,12 +338,23 @@
   (let ((insts (get-instructions method)))
     (loop for i from 0 below (length insts)
           for inst = (aref insts i)
-          do (emit-instruction inst stream)))
+          do (progn
+               ;; When emitting a call or callvirt instruction, if the immediately
+               ;; following instruction is a ret, make the call be a tail. call.
+               (when (and (typep inst 'cil-call-instruction)
+                          (member (get-opcode inst) '("call" "callvirt") :test #'string-equal)
+                          (< (1+ i) (length insts)))
+                 (let ((next-inst (aref insts (1+ i))))
+                   (when (and (typep next-inst 'cil-simple-instruction)
+                              (string-equal (get-opcode next-inst) "ret"))
+                     (setf (get-tail-p inst) t))))
+               (emit-instruction inst stream))))
   (format stream "}~%~%"))
 
-(defun il::method (&key name (return-type "void") arg-types 
-                        (visibility :public) static-p (hidebysig-p t) virtual-p 
-                        entrypoint-p (maxstack 8) locals instructions)
+(defun il::method (&key name (return-type "void") arg-types
+                        (visibility :public) static-p (hidebysig-p t) virtual-p
+                        specialname-p rtspecialname-p
+                        entrypoint-p (maxstack 256) locals instructions)
   (let ((meth (make-instance 'cil-method
                              :name name
                              :return-type return-type
@@ -315,13 +363,14 @@
                              :static-p static-p
                              :hidebysig-p hidebysig-p
                              :virtual-p virtual-p
+                             :specialname-p specialname-p
+                             :rtspecialname-p rtspecialname-p
                              :entrypoint-p entrypoint-p
                              :maxstack maxstack
                              :locals locals)))
     (dolist (inst instructions)
       (add-instruction meth inst))
     meth))
-
 ;;; --- Printer for the REPL ---
 
 (defmethod print-object ((method cil-method) stream)
@@ -345,7 +394,7 @@
 
 (defmethod emit-field ((field cil-field) stream)
   "Emits a field definition. Corrected format logic."
-  (format stream "    .field ~(~A~)~:[~; static~] ~A ~A~%"
+  (format stream "    .field ~(~A~)~:[~; static~] ~A '~A'~%"
           (get-visibility field)
           (get-static-p field)
           (get-field-type field)
@@ -384,10 +433,32 @@
    (fields            :initarg :fields            
                       :initform (make-array 0 :fill-pointer 0 :adjustable t) 
                       :accessor get-fields)
+   (properties        :initarg :properties
+                      :initform (make-array 0 :fill-pointer 0 :adjustable t)
+                      :accessor get-class-properties)
    (methods           :initarg :methods           
                       :initform (make-array 0 :fill-pointer 0 :adjustable t) 
                       :accessor get-methods))
   (:documentation "A CIL class definition. Visibility is a keyword. Flags are strictly separated."))
+
+(defclass cil-property ()
+  ((name       :initarg :name       :accessor get-name)
+   (prop-type  :initarg :prop-type  :accessor get-prop-type)
+   (getter     :initarg :getter     :initform nil :accessor get-getter)
+   (setter     :initarg :setter     :initform nil :accessor get-setter))
+  (:documentation "A CIL property definition."))
+
+(defmethod emit-property ((prop cil-property) stream class-name)
+  (format stream "    .property instance ~A ~A()~%" (get-prop-type prop) (get-name prop))
+  (format stream "    {~%")
+  (when (get-getter prop)
+    (format stream "        .get instance ~A ~A::~A()~%" (get-prop-type prop) class-name (get-getter prop)))
+  (when (get-setter prop)
+    (format stream "        .set instance void ~A::~A(~A)~%" class-name (get-setter prop) (get-prop-type prop)))
+  (format stream "    }~%"))
+
+(defun il::property (&key name type getter setter)
+  (make-instance 'cil-property :name name :prop-type type :getter getter :setter setter))
 
 (defmethod add-method ((class cil-class) (method cil-method))
   "Mounts a compiled method into the class."
@@ -398,6 +469,11 @@
   "Mounts a field into the class."
   (vector-push-extend field (get-fields class))
   field)
+
+(defmethod add-property ((class cil-class) prop)
+  "Mounts a property into the class."
+  (vector-push-extend prop (get-class-properties class))
+  prop)
 
 (defmethod emit-class ((class cil-class) stream)
   "Dumps the full CIL class. Corrected format logic."
@@ -418,6 +494,12 @@
             for field = (aref fields i)
             do (emit-field field stream))
       (format stream "~%"))) 
+  (let ((properties (get-class-properties class)))
+    (when (> (length properties) 0)
+      (loop for i from 0 below (length properties)
+            for prop = (aref properties i)
+            do (emit-property prop stream (get-name class)))
+      (format stream "~%")))
   (let ((methods (get-methods class)))
     (loop for i from 0 below (length methods)
           for method = (aref methods i)
@@ -441,8 +523,8 @@
 (defun il::class (&key name (parent "[mscorlib]System.Object") 
                        (visibility :public) abstract-p sealed-p 
                        (auto-p t) (ansi-p t) (beforefieldinit-p t)
-                       fields methods)
-  "Constructs a CIL class and automatically mounts its fields and methods.
+                       fields properties methods)
+  "Constructs a CIL class and automatically mounts its fields, properties, and methods.
    Tucked in the IL namespace to avoid clashing with cl:class."
   (let ((cls (make-instance 'cil-class
                             :name name
@@ -456,6 +538,10 @@
     ;; Mount the fields
     (dolist (f fields)
       (add-field cls f))
+      
+    ;; Mount the properties
+    (dolist (p properties)
+      (add-property cls p))
     
     ;; Mount the methods
     (dolist (m methods)
@@ -489,12 +575,12 @@
   (format stream "~%")
   
   ;; 2. Assembly declaration
-  (format stream ".assembly ~A {}~%" (get-name assembly))
+  (format stream ".assembly '~A' {}~%" (get-name assembly))
   
   ;; 3. Module declaration (defaults to name.exe if not explicitly set)
   (let ((mod-name (or (get-module-name assembly)
                       (format nil "~A.exe" (get-name assembly)))))
-    (format stream ".module ~A~%~%" mod-name))
+    (format stream ".module '~A'~%~%" mod-name))
     
   ;; 4. Emit all classes
   (let ((classes (get-classes assembly)))
@@ -562,4 +648,4 @@
       (when (probe-file linux-temp-file)
         (delete-file linux-temp-file)))))
 
-(export '(il::ilasm il::class il::method il::field il::assembly il::call il::callvirt) "IL")
+(export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst) "IL")

@@ -21,19 +21,19 @@ namespace Lisp
         ///     of a list is simply the head cell, not the entire spine.)</item>
         /// </list>
         /// </summary>
-        internal class ListCell
+        public class ListCell
         {
             /// <summary>
             /// The field that holds the first element of the list.
             /// </summary>
             [DebuggerBrowsableAttribute (DebuggerBrowsableState.Never)]
-            private readonly object first;
+            public readonly object first;
 
             /// <summary>
             /// The field that holds the remaining elements of a list after the first.
             /// </summary>
             [DebuggerBrowsableAttribute (DebuggerBrowsableState.Never)]
-            private readonly object rest;
+            public readonly object rest;
 
             /// <summary>
             /// Constructs the concrete representation of a List.  This should eventually be turned into
