@@ -2,14 +2,14 @@
 
 (progn
   (defun say-hello (name)
-    (%write-line "Hello from:")
-    (%write-line name))
+    (print "Hello from:")
+    (print name))
 
   (defun make-multiplier (factor)
     (lambda (x)
-      (%write-line "Multiplying by captured factor (simulated)...")
-      (%write-line factor)
-      (%write-line x)))
+      (print "Multiplying by captured factor (simulated)...")
+      (print factor)
+      (print x)))
 
   (defun main ()
     (say-hello "TopLevelTest")

@@ -5,13 +5,13 @@
   (let ((loop-fn (lambda (self n)
                    (if n ; Assume simple truthy check against n > 0 for demo purposes. Let's just mock with string vs nil
                        (let ((next-val "continue")) ; dummy check instead of numeric ops
-                          (%write-line "Counting down...")
-                          (%write-line tracker)
+                          (print "Counting down...")
+                          (print tracker)
                           (setq tracker "Mutated in flight!")
                           (if count
                               (progn
                                 (setq count nil) ; simple toggle to terminate
                                 (self self "recurse"))
-                              (%write-line "Done!")))
-                       (%write-line "Error")))))
+                              (print "Done!")))
+                       (print "Error")))))
     (loop-fn loop-fn "start")))

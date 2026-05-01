@@ -110,6 +110,58 @@
     (mapc #'generate-step1 (ast-toplevel-defun-body node))
     (setf (ast-basic-block node) nil)))
 
+(defmethod generate-step1 ((node ast-clr-call))
+  (mapc #'generate-step1 (ast-clr-call-arguments node))
+  (let* ((arg-types (or (ast-clr-call-arg-types node)
+                       (make-list (length (ast-clr-call-arguments node)) :initial-element "object")))
+         (ret-type (ast-clr-call-return-type node))
+         (is-void (string-equal ret-type "void")))
+    (setf (ast-basic-block node)
+          (append (list (il:call :method (ast-clr-call-method-name node)
+                                 :class (ast-clr-call-type-name node)
+                                 :return ret-type
+                                 :args arg-types))
+                  (when is-void (list (il:ldnull)))))))
+
+(defmethod generate-step1 ((node ast-clr-call-virt))
+  (generate-step1 (ast-clr-call-virt-instance node))
+  (mapc #'generate-step1 (ast-clr-call-virt-arguments node))
+  (let* ((arg-types (or (ast-clr-call-virt-arg-types node)
+                       (make-list (length (ast-clr-call-virt-arguments node)) :initial-element "object")))
+         (ret-type (ast-clr-call-virt-return-type node))
+         (is-void (string-equal ret-type "void")))
+    (setf (ast-basic-block node)
+          (append (list (il:callvirt :method (ast-clr-call-virt-method-name node)
+                                     :class (ast-clr-call-virt-type-name node)
+                                     :return ret-type
+                                     :args arg-types))
+                  (when is-void (list (il:ldnull)))))))
+
+
+(defmethod generate-step1 ((node ast-clr-new))
+  (mapc #'generate-step1 (ast-clr-new-arguments node))
+  (let ((arg-types (or (ast-clr-new-arg-types node)
+                      (make-list (length (ast-clr-new-arguments node)) :initial-element "object"))))
+    (setf (ast-basic-block node)
+          (list (il:newobj :method ".ctor"
+                           :class (ast-clr-new-type-name node)
+                           :return "instance void"
+                           :args arg-types)))))
+
+(defmethod generate-step1 ((node ast-clr-field))
+  (if (ast-clr-field-instance node)
+      (progn
+        (generate-step1 (ast-clr-field-instance node))
+        (setf (ast-basic-block node)
+              (list (il:ldfld (format nil "object ~A::'~A'"
+                                      (ast-clr-field-type-name node)
+                                      (ast-clr-field-field-name node))))))
+      (setf (ast-basic-block node)
+            (list (il:ldsfld (format nil "object ~A::'~A'"
+                                     (ast-clr-field-type-name node)
+                                     (ast-clr-field-field-name node)))))))
+
+
 
 (defmethod generate-step1 ((node ast-application))
   (let ((operator (ast-application-operator node)))
@@ -124,14 +176,9 @@
          (setf (ast-basic-block node)
                (list (il:newobj :method ".ctor" :class class-name :return "instance void" :args arg-types)))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%write-line))
-       (progn
-         (mapc #'generate-step1 (ast-application-operands node))
-         (setf (ast-basic-block node)
-               (list (il:call :method "WriteLine" :class "[mscorlib]System.Console" :return "void" :args '("object"))
-                     (il:ldnull)))))
-      ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%write-object))
+            (or (eq (ast-variable-name operator) '%write-line)
+                (eq (ast-variable-name operator) '%write-object)
+                (eq (ast-variable-name operator) 'print)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
@@ -139,6 +186,7 @@
                      (il:ldnull)))))
       ((and (typep operator 'ast-global-variable)
             (eq (ast-variable-name operator) '%write-int))
+
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
@@ -155,7 +203,8 @@
            (setf (ast-basic-block node)
                  (list (il:call :method name :class "Program" :return "object" :args arg-types))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%sub))
+            (or (eq (ast-variable-name operator) '%sub)
+                (eq (ast-variable-name operator) '-)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (register-local "TEMP_B")
@@ -167,7 +216,21 @@
                      (il:sub)
                      (il:box "int32")))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%lessp))
+            (or (eq (ast-variable-name operator) '%add)
+                (eq (ast-variable-name operator) '+)))
+       (progn
+         (mapc #'generate-step1 (ast-application-operands node))
+         (register-local "TEMP_B")
+         (setf (ast-basic-block node)
+               (list (il:stloc "TEMP_B")
+                     (il:unbox.any "int32") ; a
+                     (il:ldloc "TEMP_B")
+                     (il:unbox.any "int32") ; b
+                     (il:add)
+                     (il:box "int32")))))
+      ((and (typep operator 'ast-global-variable)
+            (or (eq (ast-variable-name operator) '%lessp)
+                (eq (ast-variable-name operator) '<)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (register-local "TEMP_B")
@@ -186,7 +249,8 @@
                        (il:ldstr "T")
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%not))
+            (or (eq (ast-variable-name operator) '%not)
+                (eq (ast-variable-name operator) 'not)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (string (gensym "TRUE")))
@@ -207,27 +271,31 @@
          (setf (ast-basic-block node)
                (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.ValueCell" :return "instance void" :args '("object"))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%cons))
+            (or (eq (ast-variable-name operator) '%cons)
+                (eq (ast-variable-name operator) 'cons)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%car))
+            (or (eq (ast-variable-name operator) '%car)
+                (eq (ast-variable-name operator) 'car)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:castclass "[LispBase]Lisp.List/ListCell")
                      (il:ldfld "object [LispBase]Lisp.List/ListCell::first")))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%cdr))
+            (or (eq (ast-variable-name operator) '%cdr)
+                (eq (ast-variable-name operator) 'cdr)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:castclass "[LispBase]Lisp.List/ListCell")
                      (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%eq))
+            (or (eq (ast-variable-name operator) '%eq)
+                (eq (ast-variable-name operator) 'eq)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (string (gensym "TRUE")))
@@ -241,7 +309,8 @@
                        (il:ldstr "T")
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%null))
+            (or (eq (ast-variable-name operator) '%null)
+                (eq (ast-variable-name operator) 'null)))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (string (gensym "TRUE")))
@@ -256,7 +325,9 @@
                        (il:ldstr "T")
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%consp))
+            (or (eq (ast-variable-name operator) '%consp)
+                (eq (ast-variable-name operator) 'consp)))
+
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (string (gensym "TRUE")))
@@ -435,6 +506,29 @@
   (let ((code (ast-basic-block node)))
     (if tail-p (append code (list (il:ret))) code)))
 
+(defmethod generate-step2 ((node ast-clr-call) &optional tail-p)
+  (let* ((operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-clr-call-arguments node))))
+         (code (append operands-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-clr-call-virt) &optional tail-p)
+  (let* ((instance-code (generate-step2 (ast-clr-call-virt-instance node) nil))
+         (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-clr-call-virt-arguments node))))
+         (code (append instance-code operands-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-clr-new) &optional tail-p)
+  (let* ((operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-clr-new-arguments node))))
+         (code (append operands-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-clr-field) &optional tail-p)
+  (let* ((instance-code (if (ast-clr-field-instance node)
+                            (generate-step2 (ast-clr-field-instance node) nil)
+                            nil))
+         (code (append instance-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
 (defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)
   (let* ((*current-lambda-params* (ast-toplevel-defun-params node))
          (forms (ast-toplevel-defun-body node))
@@ -464,19 +558,32 @@
                  (or (eq (ast-variable-name operator) '%write-line)
                      (eq (ast-variable-name operator) '%write-object)
                      (eq (ast-variable-name operator) '%write-int)
+                     (eq (ast-variable-name operator) 'print)
                      (eq (ast-variable-name operator) '%sub)
+                     (eq (ast-variable-name operator) '-)
+                     (eq (ast-variable-name operator) '%add)
+                     (eq (ast-variable-name operator) '+)
                      (eq (ast-variable-name operator) '%lessp)
+                     (eq (ast-variable-name operator) '<)
                      (eq (ast-variable-name operator) '%not)
+                     (eq (ast-variable-name operator) 'not)
                      (eq (ast-variable-name operator) '%cons)
+                     (eq (ast-variable-name operator) 'cons)
                      (eq (ast-variable-name operator) '%car)
+                     (eq (ast-variable-name operator) 'car)
                      (eq (ast-variable-name operator) '%cdr)
+                     (eq (ast-variable-name operator) 'cdr)
                      (eq (ast-variable-name operator) '%eq)
+                     (eq (ast-variable-name operator) 'eq)
                      (eq (ast-variable-name operator) '%null)
+                     (eq (ast-variable-name operator) 'null)
                      (eq (ast-variable-name operator) '%consp)
+                     (eq (ast-variable-name operator) 'consp)
                      (eq (ast-variable-name operator) '%make-cell)
                      (eq (ast-variable-name operator) '%cell-value)
                      (eq (ast-variable-name operator) '%set-cell-value!)
                      (member (ast-variable-name operator) *toplevel-defuns* :test #'eq)))
+
             (let* ((operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-application-operands node))))
                    (code (append operands-code (ast-basic-block node))))
               (if tail-p (append code (list (il:ret))) code))
@@ -525,7 +632,16 @@
                  (ast-method (mapc #'traverse (ast-method-body n)))
                  (ast-application
                   (traverse (ast-application-operator n))
-                  (mapc #'traverse (ast-application-operands n))))))
+                  (mapc #'traverse (ast-application-operands n)))
+                 (ast-clr-call
+                  (mapc #'traverse (ast-clr-call-arguments n)))
+                 (ast-clr-call-virt
+                  (traverse (ast-clr-call-virt-instance n))
+                  (mapc #'traverse (ast-clr-call-virt-arguments n)))
+                 (ast-clr-new
+                  (mapc #'traverse (ast-clr-new-arguments n)))
+                 (ast-clr-field
+                  (when (ast-clr-field-instance n) (traverse (ast-clr-field-instance n)))))))
       (traverse node)
       (nreverse classes))))
 

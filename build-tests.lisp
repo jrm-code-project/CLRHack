@@ -22,8 +22,10 @@
                ("test-tak.lisp" . "TakBenchmark")
                ("test-toplevel.lisp" . "TopLevelTest")
                ("test-complex.lisp" . "ComplexScopingTest")
+               ("test-interop.lisp" . "InteropTest")
                ("bank-test.lisp" . "BankTest")
                ("tail-test.lisp" . "TailTest"))))
+
   (dolist (test tests)
     (let ((file (car test))
           (target (cdr test)))

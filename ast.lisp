@@ -85,6 +85,37 @@
    (operands :initarg :operands :accessor ast-application-operands))
   (:documentation "A function application."))
 
+(defclass ast-clr-call (ast-node)
+  ((type-name :initarg :type-name :accessor ast-clr-call-type-name)
+   (method-name :initarg :method-name :accessor ast-clr-call-method-name)
+   (return-type :initarg :return-type :accessor ast-clr-call-return-type)
+   (arg-types :initarg :arg-types :accessor ast-clr-call-arg-types)
+   (arguments :initarg :arguments :accessor ast-clr-call-arguments))
+  (:documentation "A direct call to a static .NET method."))
+
+(defclass ast-clr-call-virt (ast-node)
+  ((instance :initarg :instance :accessor ast-clr-call-virt-instance)
+   (type-name :initarg :type-name :accessor ast-clr-call-virt-type-name)
+   (method-name :initarg :method-name :accessor ast-clr-call-virt-method-name)
+   (return-type :initarg :return-type :accessor ast-clr-call-virt-return-type)
+   (arg-types :initarg :arg-types :accessor ast-clr-call-virt-arg-types)
+   (arguments :initarg :arguments :accessor ast-clr-call-virt-arguments))
+  (:documentation "A direct virtual call to an instance .NET method."))
+
+(defclass ast-clr-new (ast-node)
+  ((type-name :initarg :type-name :accessor ast-clr-new-type-name)
+   (arg-types :initarg :arg-types :accessor ast-clr-new-arg-types)
+   (arguments :initarg :arguments :accessor ast-clr-new-arguments))
+  (:documentation "An instantiation of a .NET type."))
+
+
+(defclass ast-clr-field (ast-node)
+  ((type-name :initarg :type-name :accessor ast-clr-field-type-name)
+   (field-name :initarg :field-name :accessor ast-clr-field-field-name)
+   (instance :initarg :instance :accessor ast-clr-field-instance))
+  (:documentation "A direct access to a .NET field (static if instance is NIL)."))
+
+
 ;;; Free Variable Analysis
 
 (defgeneric compute-free-vars (node)
@@ -138,6 +169,28 @@
          (reduce (lambda (a b) (union a (compute-free-vars b)))
                  (ast-application-operands node)
                  :initial-value nil)))
+
+(defmethod compute-free-vars ((node ast-clr-call))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-clr-call-arguments node)
+          :initial-value nil))
+
+(defmethod compute-free-vars ((node ast-clr-call-virt))
+  (union (compute-free-vars (ast-clr-call-virt-instance node))
+         (reduce (lambda (a b) (union a (compute-free-vars b)))
+                 (ast-clr-call-virt-arguments node)
+                 :initial-value nil)))
+
+(defmethod compute-free-vars ((node ast-clr-new))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-clr-new-arguments node)
+          :initial-value nil))
+
+(defmethod compute-free-vars ((node ast-clr-field))
+  (if (ast-clr-field-instance node)
+      (compute-free-vars (ast-clr-field-instance node))
+      nil))
+
 
 (defmethod compute-free-vars ((node ast-class))
   nil)
@@ -199,6 +252,38 @@
   (make-instance 'ast-application
                  :operator (closure-convert (ast-application-operator node))
                  :operands (mapcar #'closure-convert (ast-application-operands node))))
+
+(defmethod closure-convert ((node ast-clr-call))
+  (make-instance 'ast-clr-call
+                 :type-name (ast-clr-call-type-name node)
+                 :method-name (ast-clr-call-method-name node)
+                 :return-type (ast-clr-call-return-type node)
+                 :arg-types (ast-clr-call-arg-types node)
+                 :arguments (mapcar #'closure-convert (ast-clr-call-arguments node))))
+
+(defmethod closure-convert ((node ast-clr-call-virt))
+  (make-instance 'ast-clr-call-virt
+                 :instance (closure-convert (ast-clr-call-virt-instance node))
+                 :type-name (ast-clr-call-virt-type-name node)
+                 :method-name (ast-clr-call-virt-method-name node)
+                 :return-type (ast-clr-call-virt-return-type node)
+                 :arg-types (ast-clr-call-virt-arg-types node)
+                 :arguments (mapcar #'closure-convert (ast-clr-call-virt-arguments node))))
+
+
+(defmethod closure-convert ((node ast-clr-new))
+  (make-instance 'ast-clr-new
+                 :type-name (ast-clr-new-type-name node)
+                 :arg-types (ast-clr-new-arg-types node)
+                 :arguments (mapcar #'closure-convert (ast-clr-new-arguments node))))
+
+(defmethod closure-convert ((node ast-clr-field))
+  (make-instance 'ast-clr-field
+                 :type-name (ast-clr-field-type-name node)
+                 :field-name (ast-clr-field-field-name node)
+                 :instance (when (ast-clr-field-instance node)
+                             (closure-convert (ast-clr-field-instance node)))))
+
 
 (defmethod closure-convert ((node ast-class))
   node)
@@ -263,6 +348,38 @@
   (make-instance 'ast-application
                  :operator (lambda-lift (ast-application-operator node))
                  :operands (mapcar #'lambda-lift (ast-application-operands node))))
+
+(defmethod lambda-lift ((node ast-clr-call))
+  (make-instance 'ast-clr-call
+                 :type-name (ast-clr-call-type-name node)
+                 :method-name (ast-clr-call-method-name node)
+                 :return-type (ast-clr-call-return-type node)
+                 :arg-types (ast-clr-call-arg-types node)
+                 :arguments (mapcar #'lambda-lift (ast-clr-call-arguments node))))
+
+(defmethod lambda-lift ((node ast-clr-call-virt))
+  (make-instance 'ast-clr-call-virt
+                 :instance (lambda-lift (ast-clr-call-virt-instance node))
+                 :type-name (ast-clr-call-virt-type-name node)
+                 :method-name (ast-clr-call-virt-method-name node)
+                 :return-type (ast-clr-call-virt-return-type node)
+                 :arg-types (ast-clr-call-virt-arg-types node)
+                 :arguments (mapcar #'lambda-lift (ast-clr-call-virt-arguments node))))
+
+
+(defmethod lambda-lift ((node ast-clr-new))
+  (make-instance 'ast-clr-new
+                 :type-name (ast-clr-new-type-name node)
+                 :arg-types (ast-clr-new-arg-types node)
+                 :arguments (mapcar #'lambda-lift (ast-clr-new-arguments node))))
+
+(defmethod lambda-lift ((node ast-clr-field))
+  (make-instance 'ast-clr-field
+                 :type-name (ast-clr-field-type-name node)
+                 :field-name (ast-clr-field-field-name node)
+                 :instance (when (ast-clr-field-instance node)
+                             (lambda-lift (ast-clr-field-instance node)))))
+
 
 (defmethod lambda-lift ((node ast-class))
   node)
@@ -342,6 +459,38 @@
                  ;; Local DEFUN (converted to setq lambda)
                  (lisp->ast `(setq ,name (lambda ,params (progn ,@body))) env))))
 
+         (clr-call
+          (let ((sig (third args)))
+            (make-instance 'ast-clr-call
+                           :type-name (first args)
+                           :method-name (second args)
+                           :return-type (if (consp sig) (car sig) sig)
+                           :arg-types (if (consp sig) (cdr sig) nil)
+                           :arguments (mapcar (lambda (e) (lisp->ast e env)) (nthcdr 3 args)))))
+
+         (clr-call-virt
+          (let ((sig (fourth args)))
+            (make-instance 'ast-clr-call-virt
+                           :instance (lisp->ast (first args) env)
+                           :type-name (second args)
+                           :method-name (third args)
+                           :return-type (if (consp sig) (car sig) sig)
+                           :arg-types (if (consp sig) (cdr sig) nil)
+                           :arguments (mapcar (lambda (e) (lisp->ast e env)) (nthcdr 4 args)))))
+
+         (clr-new
+          (make-instance 'ast-clr-new
+                         :type-name (first args)
+                         :arg-types (second args)
+                         :arguments (mapcar (lambda (e) (lisp->ast e env)) (cddr args))))
+
+
+         (clr-field
+          (make-instance 'ast-clr-field
+                         :type-name (first args)
+                         :field-name (second args)
+                         :instance (when (third args) (lisp->ast (third args) env))))
+
          (defclass
           (let* ((name (first args))
                  (superclasses (second args))
@@ -352,6 +501,7 @@
                            :superclasses superclasses
                            :slots slots
                            :options options)))
+
          (defmethod
           (let* ((name (first args))
                  (rest-args (rest args))
@@ -375,7 +525,7 @@
                                    (first args))))
             (make-instance 'ast-let
                            :bindings bindings
-                           :body (mapcar (lambda (e) (lisp->ast e new-env)) (rest args)))))
+                           :body (mapcar (lambda (form) (lisp->ast form new-env)) (rest args)))))
          (lambda
           (let* ((new-env env)
                  (params (mapcar (lambda (p)
@@ -452,7 +602,16 @@
                 (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-method-body n))))
                (ast-application
                 (append (traverse (ast-application-operator n) curr-env)
-                        (reduce #'append (mapcar (lambda (op) (traverse op curr-env)) (ast-application-operands n))))))))
+                        (reduce #'append (mapcar (lambda (op) (traverse op curr-env)) (ast-application-operands n)))))
+               (ast-clr-call
+                (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-call-arguments n))))
+               (ast-clr-call-virt
+                (append (traverse (ast-clr-call-virt-instance n) curr-env)
+                        (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-call-virt-arguments n)))))
+               (ast-clr-new
+                (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-new-arguments n))))
+               (ast-clr-field
+                (if (ast-clr-field-instance n) (traverse (ast-clr-field-instance n) curr-env) nil)))))
     (remove-duplicates (traverse node env))))
 
 (defgeneric analyze-environment (node env &optional mutated)
@@ -564,6 +723,40 @@
                  :operands (mapcar (lambda (op) (analyze-environment op env mutated))
                                    (ast-application-operands node))))
 
+(defmethod analyze-environment ((node ast-clr-call) env &optional mutated)
+  (make-instance 'ast-clr-call
+                 :type-name (ast-clr-call-type-name node)
+                 :method-name (ast-clr-call-method-name node)
+                 :return-type (ast-clr-call-return-type node)
+                 :arg-types (ast-clr-call-arg-types node)
+                 :arguments (mapcar (lambda (arg) (analyze-environment arg env mutated))
+                                    (ast-clr-call-arguments node))))
+
+(defmethod analyze-environment ((node ast-clr-call-virt) env &optional mutated)
+  (make-instance 'ast-clr-call-virt
+                 :instance (analyze-environment (ast-clr-call-virt-instance node) env mutated)
+                 :type-name (ast-clr-call-virt-type-name node)
+                 :method-name (ast-clr-call-virt-method-name node)
+                 :return-type (ast-clr-call-virt-return-type node)
+                 :arg-types (ast-clr-call-virt-arg-types node)
+                 :arguments (mapcar (lambda (arg) (analyze-environment arg env mutated))
+                                    (ast-clr-call-virt-arguments node))))
+
+(defmethod analyze-environment ((node ast-clr-new) env &optional mutated)
+  (make-instance 'ast-clr-new
+                 :type-name (ast-clr-new-type-name node)
+                 :arg-types (ast-clr-new-arg-types node)
+                 :arguments (mapcar (lambda (arg) (analyze-environment arg env mutated))
+                                    (ast-clr-new-arguments node))))
+
+(defmethod analyze-environment ((node ast-clr-field) env &optional mutated)
+  (make-instance 'ast-clr-field
+                 :type-name (ast-clr-field-type-name node)
+                 :field-name (ast-clr-field-field-name node)
+                 :instance (when (ast-clr-field-instance node)
+                             (analyze-environment (ast-clr-field-instance node) env mutated))))
+
+
 (defmethod analyze-environment ((node ast-class) env &optional mutated)
   (declare (ignore env mutated))
   node)
@@ -598,5 +791,3 @@
                          :name (ast-toplevel-defun-name node)
                          :params params
                          :body analyzed-body)))))
-
-

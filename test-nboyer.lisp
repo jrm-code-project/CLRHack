@@ -11,36 +11,36 @@
 
   ;; list length
   (defun list-length (lst)
-    (if (%null lst)
+    (if (null lst)
         0
-        (if (%consp lst)
-            (%sub (list-length (%cdr lst)) (%sub 0 1)) ; (+ length 1)
+        (if (consp lst)
+            (+ (list-length (cdr lst)) 1)
             0)))
 
   ;; structural eq
   (defun is-eq (a b)
-    (%eq a b))
+    (eq a b))
 
   (defun rewrite (term)
     ;; dummy rewriter to prove cons manipulation
-    (if (%consp term)
-        (if (is-eq (%car term) "foo")
-            (%cons "bar" (rewrite (%cdr term)))
-            (%cons (%car term) (rewrite (%cdr term))))
+    (if (consp term)
+        (if (is-eq (car term) "foo")
+            (cons "bar" (rewrite (cdr term)))
+            (cons (car term) (rewrite (cdr term))))
         term))
 
   (defun build-tree (n)
-    (if (%lessp n 1)
+    (if (< n 1)
         nil
-        (%cons "foo" (build-tree (%sub n 1)))))
+        (cons "foo" (build-tree (- n 1)))))
 
   (defun main ()
-    (%write-line "Building a deep theorem tree...")
+    (print "Building a deep theorem tree...")
     (let ((tree (build-tree 5)))
-      (%write-line "Tree length before rewrite:")
-      (%write-int (list-length tree))
+      (print "Tree length before rewrite:")
+      (print (list-length tree))
       (let ((new-tree (rewrite tree)))
-        (%write-line "Tree length after rewrite:")
-        (%write-int (list-length new-tree))
-        (%write-line "Success!"))))
+        (print "Tree length after rewrite:")
+        (print (list-length new-tree))
+        (print "Success!"))))
   (main))
