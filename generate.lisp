@@ -13,6 +13,7 @@
 (defvar *current-lambda-free-vars* nil)
 (defvar *global-variables* nil)
 (defvar *quoted-symbols* nil)
+(defvar *toplevel-defuns* nil)
 
 (defun register-local (name)
   (pushnew name *current-locals* :test #'string=))
@@ -37,10 +38,6 @@
          (alpha-str (string alpha))
          (is-local (member alpha-str *current-locals* :test #'string=))
          (pos (position alpha *current-lambda-params*)))
-    (unless (or is-local pos)
-      (typecase node
-        (ast-local-variable (register-local alpha-str))
-        (ast-lexical-variable (register-local alpha-str))))
     (setf (ast-basic-block node)
           (cond
             ((typep node 'ast-global-variable)
@@ -50,10 +47,11 @@
             (is-local
              (list (il:ldloc (substitute #\_ #\- alpha-str))))
             (pos
-             (list (il:ldarg (1+ pos))))
+             (list (il:ldarg (if *current-lambda-class* (1+ pos) pos))))
             (t
-             (register-local alpha-str)
-             (list (il:ldloc (substitute #\_ #\- alpha-str))))))))
+             (let ((gname (substitute #\_ #\- alpha-str)))
+               (register-global gname)
+               (list (il:ldsfld (format nil "object Program::'~A'" gname)))))))))
 
 (defmethod generate-step1 ((node ast-if))
   (generate-step1 (ast-if-test node))
@@ -72,10 +70,6 @@
          (alpha-str (string alpha))
          (is-local (member alpha-str *current-locals* :test #'string=))
          (pos (position alpha *current-lambda-params*)))
-    (unless (or is-local pos)
-      (typecase var
-        (ast-local-variable (register-local alpha-str))
-        (ast-lexical-variable (register-local alpha-str))))
     (setf (ast-basic-block node)
           (cond
             ((typep var 'ast-global-variable)
@@ -85,7 +79,7 @@
             (is-local
              (list (il:stloc (substitute #\_ #\- alpha-str))))
             (pos
-             (list (il:starg (1+ pos))))
+             (list (il:starg (if *current-lambda-class* (1+ pos) pos))))
             (t
              (register-local alpha-str)
              (list (il:stloc (substitute #\_ #\- alpha-str))))))))
@@ -98,9 +92,11 @@
   (setf (ast-basic-block node) nil))
 
 (defmethod generate-step1 ((node ast-lambda))
-  (let ((*current-lambda-params* (ast-lambda-params node)))
+  (let ((*current-lambda-params* (ast-lambda-params node))
+        (*current-lambda-class* (string (ast-lambda-lifted-name node))))
     (mapc #'generate-step1 (ast-lambda-body node))
     (setf (ast-basic-block node) nil)))
+
 
 (defmethod generate-step1 ((node ast-class))
   (setf (ast-basic-block node) (list (il:ldnull))))
@@ -108,6 +104,12 @@
 (defmethod generate-step1 ((node ast-method))
   (mapc #'generate-step1 (ast-method-body node))
   (setf (ast-basic-block node) (list (il:ldnull))))
+
+(defmethod generate-step1 ((node ast-toplevel-defun))
+  (let ((*current-lambda-params* (ast-toplevel-defun-params node)))
+    (mapc #'generate-step1 (ast-toplevel-defun-body node))
+    (setf (ast-basic-block node) nil)))
+
 
 (defmethod generate-step1 ((node ast-application))
   (let ((operator (ast-application-operator node)))
@@ -143,6 +145,15 @@
                (list (il:unbox.any "int32")
                      (il:call :method "WriteLine" :class "[mscorlib]System.Console" :return "void" :args '("int32"))
                      (il:ldnull)))))
+      ((and (typep operator 'ast-global-variable)
+            (member (ast-variable-name operator) *toplevel-defuns* :test #'eq))
+       (progn
+         (mapc #'generate-step1 (ast-application-operands node))
+         (let* ((name (substitute #\_ #\- (string (ast-variable-name operator))))
+                (n-args (length (ast-application-operands node)))
+                (arg-types (make-list n-args :initial-element "object")))
+           (setf (ast-basic-block node)
+                 (list (il:call :method name :class "Program" :return "object" :args arg-types))))))
       ((and (typep operator 'ast-global-variable)
             (eq (ast-variable-name operator) '%sub))
        (progn
@@ -278,7 +289,7 @@
              (setf field-name (format nil "SYM_~A" (gensym)))
              (push (cons sym-name field-name) *quoted-symbols*))
            (setf (ast-basic-block node)
-                 (list (il:ldsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name)))))))
+                 (list (il:ldsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name)))))))     
       ((and (typep operator 'ast-global-variable)
             (eq (ast-variable-name operator) '%set-cell-value!))
        (progn
@@ -355,9 +366,11 @@
         (loop for form in forms
               for i from 1
               for is-last = (= i (length forms))
-              append (generate-step2 form (if is-last tail-p nil))
-              when (not is-last)
+              for code = (generate-step2 form (if is-last tail-p nil))
+              append code
+              when (and (not is-last) code)
                 append (list (il:pop))))))
+
 
 (defmethod generate-step2 ((node ast-setq) &optional tail-p)
   (let* ((var (ast-setq-name node))
@@ -373,7 +386,7 @@
                      (il:ldloc temp)
                      (il:stfld (format nil "object ~A::'~A'" *current-lambda-class* alpha-str))
                      (il:ldloc temp))))
-            (t 
+            (t
              (cons (il:dup) (ast-basic-block node))))))
     (let ((code (append (generate-step2 (ast-setq-value node) nil)
                         store-code)))
@@ -383,7 +396,7 @@
   (let ((bindings-code (reduce #'append
                                (mapcar (lambda (b)
                                          (append (generate-step2 (cadr b) nil)
-                                                 (list (il:stloc (substitute #\_ #\- (string (car b)))))))
+                                                 (list (il:stloc (substitute #\_ #\- (string (car b)))))))      
                                        (ast-let-bindings node))))
         (forms (ast-let-body node)))
     (let ((body-code
@@ -398,6 +411,7 @@
       (append bindings-code body-code))))
 
 (defmethod generate-step2 ((node ast-lambda) &optional tail-p)
+  (declare (ignore tail-p))
   (let* ((*current-lambda-class* (string (ast-lambda-lifted-name node)))
          (*current-lambda-free-vars* (ast-lambda-free-vars node))
          (*current-lambda-params* (ast-lambda-params node))
@@ -421,13 +435,29 @@
   (let ((code (ast-basic-block node)))
     (if tail-p (append code (list (il:ret))) code)))
 
+(defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)
+  (let* ((*current-lambda-params* (ast-toplevel-defun-params node))
+         (forms (ast-toplevel-defun-body node))
+         (body-code (if (null forms)
+                        (list (il:ldnull) (il:ret))
+                        (loop for form in forms
+                              for i from 1
+                              for is-last = (= i (length forms))
+                              append (generate-step2 form is-last)
+                              when (not is-last)
+                                append (list (il:pop))))))
+    (setf (ast-basic-block node) body-code)
+    body-code))
+
+
+
 (defmethod generate-step2 ((node ast-application) &optional tail-p)
   (let ((operator (ast-application-operator node)))
     (if (and (typep operator 'ast-global-variable)
              (eq (ast-variable-name operator) '.ctor))
         ;; constructor call.
         (let* ((free-vars (cdr (ast-application-operands node)))
-               (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) free-vars))))
+               (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) free-vars))))        
           (let ((code (append operands-code (ast-basic-block node))))
             (if tail-p (append code (list (il:ret))) code)))
         (if (and (typep operator 'ast-global-variable)
@@ -445,7 +475,8 @@
                      (eq (ast-variable-name operator) '%consp)
                      (eq (ast-variable-name operator) '%make-cell)
                      (eq (ast-variable-name operator) '%cell-value)
-                     (eq (ast-variable-name operator) '%set-cell-value!)))
+                     (eq (ast-variable-name operator) '%set-cell-value!)
+                     (member (ast-variable-name operator) *toplevel-defuns* :test #'eq)))
             (let* ((operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-application-operands node))))
                    (code (append operands-code (ast-basic-block node))))
               (if tail-p (append code (list (il:ret))) code))
@@ -470,7 +501,7 @@
    Returns the final list of stitched instructions."
   (let ((*current-locals* nil))
     (generate-step1 ast)
-    (let ((entire-body-block (generate-step2 ast (typep ast 'ast-lambda))))
+    (let ((entire-body-block (generate-step2 ast (or (typep ast 'ast-lambda) (typep ast 'ast-toplevel-defun)))))
       (setf (ast-basic-block ast) entire-body-block)
       (values entire-body-block *current-locals* *global-variables*))))
 
@@ -483,6 +514,7 @@
     (labels ((traverse (n)
                (typecase n
                  (ast-class (push n classes))
+                 (ast-toplevel-defun (mapc #'traverse (ast-toplevel-defun-body n)))
                  (ast-if (traverse (ast-if-test n))
                          (traverse (ast-if-consequent n))
                          (traverse (ast-if-alternate n)))
@@ -522,7 +554,7 @@
         (setf property (il:property :name accessor-str :type "object" :getter getter-name :setter setter-name))))
     (values field property methods)))
 
-(defun generate-assembly (ast lambdas assembly-name)
+(defun generate-assembly (ast lambdas assembly-name &key toplevel-defuns)
   "Generates a complete CIL Assembly containing the main program and lifted lambda closures."
   (let ((classes nil)
         (*global-variables* nil)
@@ -580,53 +612,69 @@
              (n-params (length (ast-lambda-params lambda-node)))
              (methods (list ctor)))
         (multiple-value-bind (block locals) (generate lambda-node)
-          (let ((filtered-locals (remove-if (lambda (loc) (find loc *global-variables* :test #'string=)) locals)))
-            (loop for m from 0 to 8 do
-              (let ((invoke-arg-types (make-list m :initial-element "object")))
-                (push (il:method :name "Invoke"
-                                 :return-type "object"
-                                 :arg-types invoke-arg-types
-                                 :locals (if (= m n-params)
-                                             (mapcar (lambda (loc) (format nil "object ~A" (substitute #\_ #\- loc))) filtered-locals)
-                                             nil)
-                                 :virtual-p t
-                                 :instructions (if (= m n-params)
-                                                   block
-                                                   (list (il:ldnull) (il:ret))))
-                      methods))))
-          (let ((cls (il:class :name name :parent "[LispBase]Lisp.Closure" :fields fields :methods (reverse methods))))
-            (push cls classes)))))
+          (loop for m from 0 to 8 do
+            (let ((invoke-arg-types (make-list m :initial-element "object")))
+              (push (il:method :name "Invoke"
+                               :return-type "object"
+                               :arg-types invoke-arg-types
+                               :locals (if (= m n-params)
+                                           (mapcar (lambda (loc) (format nil "object ~A" (substitute #\_ #\- loc))) locals)
+                                           nil)
+                               :virtual-p t
+                               :instructions (if (= m n-params)
+                                                 block
+                                                 (list (il:ldnull) (il:ret))))
+                    methods))))
+        (let ((cls (il:class :name name :parent "[LispBase]Lisp.Closure" :fields fields :methods (reverse methods))))
+          (push cls classes))))
     
-    ;; Main Program Class
-    (multiple-value-bind (main-insts locals) (generate ast)
-      (let* ((main-insts-final (append main-insts (list (il:pop) (il:ret))))
-             (main-locals (remove-if (lambda (loc) (find loc *global-variables* :test #'string=)) locals))
-             (main-method (il:method :name "Main"
-                                     :static-p t
-                                     :locals (mapcar (lambda (loc) (format nil "object ~A" (substitute #\_ #\- loc))) main-locals)
-                                     :entrypoint-p t
-                                     :instructions main-insts-final))
-             (prog-fields (append
-                           (mapcar (lambda (g) (il:field :name g :type "object" :static-p t)) *global-variables*)
-                           (mapcar (lambda (sym) (il:field :name (cdr sym) :type "class [LispBase]Lisp.Symbol" :static-p t)) *quoted-symbols*)))
-             (cctor-insts (loop for (sym-name . field-name) in *quoted-symbols*
-                                append (list
-                                        (il:call :method "get_Current" :class "[LispBase]Lisp.Package" :return "class [LispBase]Lisp.Package" :args nil)
-                                        (il:ldstr sym-name)
-                                        (il:callvirt :method "Intern" :class "[LispBase]Lisp.Package" :return "class [LispBase]Lisp.Symbol" :args '("string"))
-                                        (il:stsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name)))))
-             (cctor-method (when cctor-insts
-                             (il:method :name ".cctor"
-                                        :static-p t
-                                        :specialname-p t
-                                        :rtspecialname-p t
-                                        :return-type "void"
-                                        :arg-types nil
-                                        :instructions (append cctor-insts (list (il:ret))))))
-             (main-cls (il:class :name "Program" 
-                                 :fields prog-fields 
-                                 :methods (if cctor-method (list cctor-method main-method) (list main-method)))))
-        (push main-cls classes)))
+    ;; Top-level static methods for DEFUNs
+    (let ((toplevel-methods nil))
+      (dolist (defun-node toplevel-defuns)
+        (let* ((name (substitute #\_ #\- (string (ast-toplevel-defun-name defun-node))))
+               (params (ast-toplevel-defun-params defun-node)))
+          (multiple-value-bind (block locals) (generate defun-node)
+            (let ((method (il:method :name name
+                                     :return-type "object"
+                                     :arg-types (make-list (length params) :initial-element "object")
+                                     :locals (mapcar (lambda (loc) (format nil "object ~A" (substitute #\_ #\- loc))) locals)
+                                     :instructions block
+                                     :visibility :public
+                                     :static-p t)))
+              (push method toplevel-methods)))))
+
+      ;; Main program method
+      (multiple-value-bind (main-insts locals) (generate ast)
+        (let* ((main-insts-final (append main-insts (list (il:pop) (il:ret))))
+               (main-method (il:method :name "Main"
+                                       :static-p t
+                                       :locals (mapcar (lambda (loc) (format nil "object ~A" (substitute #\_ #\- loc))) locals)
+                                       :entrypoint-p t
+                                       :instructions main-insts-final))
+
+               (prog-fields (append
+                             (mapcar (lambda (g) (il:field :name g :type "object" :static-p t)) *global-variables*)
+                             (mapcar (lambda (sym) (il:field :name (cdr sym) :type "class [LispBase]Lisp.Symbol" :static-p t)) *quoted-symbols*)))
+               (cctor-insts (loop for (sym-name . field-name) in *quoted-symbols*
+                                  append (list
+                                          (il:call :method "get_Current" :class "[LispBase]Lisp.Package" :return "class [LispBase]Lisp.Package" :args nil)
+                                          (il:ldstr sym-name)
+                                          (il:callvirt :method "Intern" :class "[LispBase]Lisp.Package" :return "class [LispBase]Lisp.Symbol" :args '("string"))
+                                          (il:stsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name)))))
+               (cctor-method (when cctor-insts
+                               (il:method :name ".cctor"
+                                          :static-p t
+                                          :specialname-p t
+                                          :rtspecialname-p t
+                                          :return-type "void"
+                                          :arg-types nil
+                                          :instructions (append cctor-insts (list (il:ret))))))
+               (main-cls (il:class :name "Program" 
+                                   :fields prog-fields 
+                                   :methods (append (if cctor-method (list cctor-method) nil)
+                                                    toplevel-methods
+                                                    (list main-method)))))
+          (push main-cls classes))))
       
     (il:assembly :name assembly-name :externs '("mscorlib" "LispBase") :classes classes)))
 
@@ -646,36 +694,57 @@
                             do (eval form)
                           else
                             collect form))))
-         (expr `(progn ,@forms))
-         (ast (lisp->ast expr))
-         (analyzed (analyze-environment ast nil)))
-    (compute-free-vars analyzed)
-    (let ((converted (closure-convert analyzed)))
-      (multiple-value-bind (lifted lambdas) (perform-lambda-lifting converted)
-        (generate lifted)
-        (dolist (l lambdas)
-          (generate (cdr l)))
-        (let ((asm (generate-assembly lifted lambdas assembly-name)))
-          (with-open-file (stream (format nil "~A.il" assembly-name) :direction :output :if-exists :supersede)  
-            (emit-assembly asm stream))
-          (format t "; Generated ~A.il successfully.~%" assembly-name)
-          (il:ilasm asm)
+         (toplevel-defun-forms nil)
+         (other-forms nil))
+    (labels ((extract-defuns (f)
+               (cond ((and (consp f) (string-equal (symbol-name (car f)) "DEFUN"))
+                      (push f toplevel-defun-forms))
+                     ((and (consp f) (string-equal (symbol-name (car f)) "PROGN"))
+                      (mapc #'extract-defuns (cdr f)))
+                     (t (push f other-forms)))))
+      (mapc #'extract-defuns forms))
+    (let* ((*toplevel-defuns* (mapcar #'second toplevel-defun-forms))
+           (toplevel-defun-nodes (mapcar (lambda (f) (lisp->ast f)) (nreverse toplevel-defun-forms)))
+           (main-ast (lisp->ast `(progn ,@(nreverse other-forms))))
+           (analyzed-main (analyze-environment main-ast nil))
+           (analyzed-defuns (mapcar (lambda (n) (analyze-environment n nil)) toplevel-defun-nodes)))
 
-          (format t "Publishing ~A to standalone executable...~%" assembly-name)
-          (with-open-file (stream (format nil "~A.ilproj" assembly-name) :direction :output :if-exists :supersede)
-            (format stream "<Project Sdk=\"Microsoft.NET.Sdk.IL/8.0.0\">~%")
-            (format stream "  <PropertyGroup>~%")
-            (format stream "    <OutputType>Exe</OutputType>~%")
-            (format stream "    <TargetFramework>net8.0</TargetFramework>~%")
-            (format stream "  </PropertyGroup>~%")
-            (format stream "  <ItemGroup>~%")
-            (format stream "    <Compile Remove=\"**/*.il\" />~%")
-            (format stream "    <Compile Include=\"~A.il\" />~%" assembly-name)
-            (format stream "    <ProjectReference Include=\"LispBase\\LispBase.csproj\" />~%")
-            (format stream "  </ItemGroup>~%")
-            (format stream "</Project>~%"))
-
-          (uiop:run-program (list "dotnet.exe" "publish" (format nil "~A.ilproj" assembly-name) "-c" "Release" "-r" "win-x64" "--self-contained" "true" "-p:PublishSingleFile=true" "-nologo")
-                            :output *standard-output*
-                            :error-output *error-output*)
-          (values (probe-file (format nil "bin/Release/net8.0/win-x64/publish/~A.exe" assembly-name)) nil nil))))))
+      (dolist (n (cons analyzed-main analyzed-defuns))
+        (compute-free-vars n))
+      (let* ((converted-main (closure-convert analyzed-main))
+             (converted-defuns (mapcar #'closure-convert analyzed-defuns)))
+        (multiple-value-bind (lifted-main lambdas-main) (perform-lambda-lifting converted-main)
+          (let ((all-lambdas lambdas-main)
+                (final-defuns nil))
+            (dolist (defun converted-defuns)
+              (multiple-value-bind (lifted-defun lambdas-defun) (perform-lambda-lifting defun)
+                (push lifted-defun final-defuns)
+                (setf all-lambdas (append all-lambdas lambdas-defun))))
+            (setf final-defuns (nreverse final-defuns))
+            (generate lifted-main)
+            (dolist (d final-defuns) (generate d))
+            (dolist (l all-lambdas) (generate (cdr l)))
+            (let ((asm (generate-assembly lifted-main all-lambdas assembly-name :toplevel-defuns final-defuns)))
+              (with-open-file (stream (format nil "~A.il" assembly-name) :direction :output :if-exists :supersede)  
+                (emit-assembly asm stream))
+              (format t "; Generated ~A.il successfully.~%" assembly-name)
+              (il:ilasm asm)
+              
+              (format t "Publishing ~A to standalone executable...~%" assembly-name)
+              (with-open-file (stream (format nil "~A.ilproj" assembly-name) :direction :output :if-exists :supersede)
+                (format stream "<Project Sdk=\"Microsoft.NET.Sdk.IL/8.0.0\">~%")
+                (format stream "  <PropertyGroup>~%")
+                (format stream "    <OutputType>Exe</OutputType>~%")
+                (format stream "    <TargetFramework>net8.0</TargetFramework>~%")
+                (format stream "  </PropertyGroup>~%")
+                (format stream "  <ItemGroup>~%")
+                (format stream "    <Compile Remove=\"**/*.il\" />~%")
+                (format stream "    <Compile Include=\"~A.il\" />~%" assembly-name)
+                (format stream "    <ProjectReference Include=\"LispBase\\LispBase.csproj\" />~%")
+                (format stream "  </ItemGroup>~%")
+                (format stream "</Project>~%"))
+              
+              (uiop:run-program (list "dotnet.exe" "publish" (format nil "~A.ilproj" assembly-name) "-c" "Release" "-r" "win-x64" "--self-contained" "true" "-p:PublishSingleFile=true" "-nologo")
+                                :output *standard-output*
+                                :error-output *error-output*)
+              (values (probe-file (format nil "bin/Release/net8.0/win-x64/publish/~A.exe" assembly-name)) nil nil))))))))

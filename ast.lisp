@@ -74,6 +74,12 @@
    (body :initarg :body :accessor ast-method-body))
   (:documentation "A DEFMETHOD definition."))
 
+(defclass ast-toplevel-defun (ast-node)
+  ((name :initarg :name :accessor ast-toplevel-defun-name)
+   (params :initarg :params :accessor ast-toplevel-defun-params)
+   (body :initarg :body :accessor ast-toplevel-defun-body))
+  (:documentation "A top-level DEFUN definition that should be compiled to a static method."))
+
 (defclass ast-application (ast-node)
   ((operator :initarg :operator :accessor ast-application-operator)
    (operands :initarg :operands :accessor ast-application-operands))
@@ -141,6 +147,13 @@
           (ast-method-body node)
           :initial-value nil))
 
+(defmethod compute-free-vars ((node ast-toplevel-defun))
+  (let* ((body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                 (ast-toplevel-defun-body node)
+                                 :initial-value nil))
+         (params (ast-toplevel-defun-params node)))
+    (set-difference body-free-vars params)))
+
 (defgeneric closure-convert (node)
   (:documentation "Walks the AST and transforms LAMBDA expressions into explicit closure instantiations using .ctor."))
 
@@ -196,6 +209,12 @@
                  :qualifiers (ast-method-qualifiers node)
                  :specialized-lambda-list (ast-method-specialized-lambda-list node)
                  :body (mapcar #'closure-convert (ast-method-body node))))
+
+(defmethod closure-convert ((node ast-toplevel-defun))
+  (make-instance 'ast-toplevel-defun
+                 :name (ast-toplevel-defun-name node)
+                 :params (ast-toplevel-defun-params node)
+                 :body (mapcar #'closure-convert (ast-toplevel-defun-body node))))
 
 ;;; Lambda Lifting
 
@@ -255,6 +274,12 @@
                  :specialized-lambda-list (ast-method-specialized-lambda-list node)
                  :body (mapcar #'lambda-lift (ast-method-body node))))
 
+(defmethod lambda-lift ((node ast-toplevel-defun))
+  (make-instance 'ast-toplevel-defun
+                 :name (ast-toplevel-defun-name node)
+                 :params (ast-toplevel-defun-params node)
+                 :body (mapcar #'lambda-lift (ast-toplevel-defun-body node))))
+
 (defun perform-lambda-lifting (ast)
   (let ((*lifted-lambdas* nil))
     (let ((new-ast (lambda-lift ast)))
@@ -275,8 +300,9 @@
     ((or (numberp expr) (stringp expr) (characterp expr) (vectorp expr) (keywordp expr) (eq expr t) (eq expr nil))
      (make-instance 'ast-literal :value expr))
     ((symbolp expr)
-     (let ((alpha (cdr (assoc expr env))))
-       (make-instance 'ast-variable :name expr :alpha-name (or alpha expr))))
+     (let ((alpha (or (cdr (assoc expr env)) expr)))
+       (make-instance 'ast-variable :name expr :alpha-name alpha)))
+
     ((consp expr)
      (let ((op (car expr))
            (args (cdr expr)))
@@ -293,15 +319,29 @@
                          :forms (mapcar (lambda (e) (lisp->ast e env)) args)))
          (setq
           (let* ((var-name (first args))
-                 (alpha (cdr (assoc var-name env))))
+                 (alpha (or (cdr (assoc var-name env)) var-name)))
             (make-instance 'ast-setq
-                           :name (make-instance 'ast-variable :name var-name :alpha-name (or alpha var-name))
+                           :name (make-instance 'ast-variable :name var-name :alpha-name alpha)
                            :value (lisp->ast (second args) env))))
          (defun
           (let* ((name (first args))
                  (params (second args))
                  (body (cddr args)))
-             (lisp->ast `(setq ,name (lambda ,params (progn ,@body))) env)))
+             (if (null env)
+                 ;; Top-level DEFUN
+                 (let* ((new-env env)
+                        (alpha-params (mapcar (lambda (p)
+                                                (let ((alpha (gensym (string p))))
+                                                  (push (cons p alpha) new-env)
+                                                  alpha))
+                                              params)))
+                   (make-instance 'ast-toplevel-defun
+                                  :name name
+                                  :params alpha-params
+                                  :body (mapcar (lambda (e) (lisp->ast e new-env)) body)))
+                 ;; Local DEFUN (converted to setq lambda)
+                 (lisp->ast `(setq ,name (lambda ,params (progn ,@body))) env))))
+
          (defclass
           (let* ((name (first args))
                  (superclasses (second args))
@@ -403,6 +443,10 @@
                 (let* ((params (ast-lambda-params n))
                        (inner-env (cons (cons :lambda params) curr-env)))
                   (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-lambda-body n)))))
+               (ast-toplevel-defun
+                (let* ((params (ast-toplevel-defun-params n))
+                       (inner-env (cons (cons :lambda params) curr-env)))
+                  (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-toplevel-defun-body n)))))
                (ast-class nil)
                (ast-method
                 (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-method-body n))))
@@ -532,3 +576,27 @@
                  :specialized-lambda-list (ast-method-specialized-lambda-list node)
                  :body (mapcar (lambda (form) (analyze-environment form env mutated))
                                (ast-method-body node))))
+
+(defmethod analyze-environment ((node ast-toplevel-defun) env &optional mutated)
+  (let* ((params (ast-toplevel-defun-params node))
+         (inner-env (cons (cons :lambda params) env))
+         (analyzed-body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
+                                (ast-toplevel-defun-body node))))
+    ;; Check for mutated parameters and wrap them in ValueCells at the start of the body.
+    (let ((mutated-params (intersection params mutated :test #'eq)))
+      (if mutated-params
+          (let ((bindings (mapcar (lambda (p)
+                                    (list p (make-instance 'ast-application
+                                                           :operator (make-instance 'ast-global-variable :name '%make-cell :alpha-name '%make-cell)
+                                                           :operands (list (make-instance 'ast-variable :name p :alpha-name p)))))
+                                  mutated-params)))
+            (make-instance 'ast-toplevel-defun
+                           :name (ast-toplevel-defun-name node)
+                           :params params
+                           :body (list (make-instance 'ast-let :bindings bindings :body analyzed-body))))
+          (make-instance 'ast-toplevel-defun
+                         :name (ast-toplevel-defun-name node)
+                         :params params
+                         :body analyzed-body)))))
+
+
