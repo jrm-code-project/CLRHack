@@ -543,8 +543,6 @@
     (setf (ast-basic-block node) body-code)
     body-code))
 
-
-
 (defmethod generate-step2 ((node ast-application) &optional tail-p)
   (let ((operator (ast-application-operator node)))
     (if (and (typep operator 'ast-global-variable)
@@ -583,7 +581,6 @@
                      (eq (ast-variable-name operator) '%cell-value)
                      (eq (ast-variable-name operator) '%set-cell-value!)
                      (member (ast-variable-name operator) *toplevel-defuns* :test #'eq)))
-
             (let* ((operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-application-operands node))))
                    (code (append operands-code (ast-basic-block node))))
               (if tail-p (append code (list (il:ret))) code))

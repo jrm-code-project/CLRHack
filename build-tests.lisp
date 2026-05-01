@@ -23,7 +23,9 @@
                ("test-toplevel.lisp" . "TopLevelTest")
                ("test-complex.lisp" . "ComplexScopingTest")
                ("test-interop.lisp" . "InteropTest")
+               ("test-macro.lisp" . "MacroTest")
                ("bank-test.lisp" . "BankTest")
+
                ("tail-test.lisp" . "TailTest"))))
 
   (dolist (test tests)

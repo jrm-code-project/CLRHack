@@ -116,7 +116,50 @@
   (:documentation "A direct access to a .NET field (static if instance is NIL)."))
 
 
+;;; Macro Environment
+
+(defvar *macro-environment* (make-hash-table :test #'eq))
+
+(defun register-macro (name expander)
+  (setf (gethash name *macro-environment*) expander))
+
+(defun clrhack-macro-function (name)
+  (gethash name *macro-environment*))
+
+(defun clrhack-macroexpand-1 (form)
+  "Host-side macroexpansion for the compiler."
+  (if (and (consp form) (symbolp (car form)))
+      (let ((expander (clrhack-macro-function (car form))))
+        (if expander
+            (values (apply expander (cdr form)) t)
+            (values form nil)))
+      (values form nil)))
+
+(defun setup-macro-environment ()
+  (clrhash *macro-environment*)
+  (register-macro 'when (lambda (test &rest body) `(if ,test (progn ,@body) nil)))
+  (register-macro 'unless (lambda (test &rest body) `(if ,test nil (progn ,@body))))
+  (register-macro 'defvar (lambda (name &optional value) `(setq ,name ,value)))
+  (register-macro 'defparameter (lambda (name value) `(setq ,name ,value)))
+  (register-macro 'funcall (lambda (fn &rest args) `(,fn ,@args)))
+  (register-macro 'let* (lambda (bindings &rest body)
+
+                          (if (null bindings)
+                              `(progn ,@body)
+                              `(let (,(car bindings))
+                                 (let* ,(cdr bindings) ,@body)))))
+  (register-macro 'cond (lambda (&rest clauses)
+                          (if (null clauses)
+                              nil
+                              (let ((clause (car clauses)))
+                                `(if ,(car clause)
+                                     (progn ,@(cdr clause))
+                                     (cond ,@(cdr clauses))))))))
+
+(setup-macro-environment)
+
 ;;; Free Variable Analysis
+
 
 (defgeneric compute-free-vars (node)
   (:documentation "Computes and caches free variables in LAMBDA nodes. Returns a list of alpha-names."))
@@ -412,7 +455,10 @@
 ;;; Translation function
 
 (defun lisp->ast (expr &optional env)
-  "Translates a Lisp s-expression into an AST node, applying alpha renaming."
+  "Translates a Lisp s-expression into an AST node, applying alpha renaming and macroexpansion."
+  (multiple-value-bind (expanded expanded-p) (clrhack-macroexpand-1 expr)
+    (if expanded-p
+        (return-from lisp->ast (lisp->ast expanded env))))
   (cond
     ((or (numberp expr) (stringp expr) (characterp expr) (vectorp expr) (keywordp expr) (eq expr t) (eq expr nil))
      (make-instance 'ast-literal :value expr))
@@ -458,6 +504,16 @@
                                   :body (mapcar (lambda (e) (lisp->ast e new-env)) body)))
                  ;; Local DEFUN (converted to setq lambda)
                  (lisp->ast `(setq ,name (lambda ,params (progn ,@body))) env))))
+
+         (defmacro
+          (let ((name (first args))
+                (params (second args))
+                (body (cddr args)))
+            ;; Register macro at compile-time (host Lisp)
+            (let ((expander (eval `(lambda ,params (progn ,@body)))))
+              (register-macro name expander))
+            ;; Emit nil in AST (macro definition itself doesn't generate IL)
+            (make-instance 'ast-literal :value nil)))
 
          (clr-call
           (let ((sig (third args)))
