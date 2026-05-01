@@ -45,7 +45,24 @@ You need the .NET 8.0 SDK and the Microsoft IL Assembler (`ilasm`) to build the 
     ```
     *Note: A local installation of `ilasm` in your system path is required for the CIL generation steps.*
 
-2.  **Run the REPL**:
+2.  **Compiling to Standalone Executables**:
+    You can use the `clrhack:compile-file` function to translate a `.lisp` file into a self-contained Windows x64 executable. This process involves generating CIL assembly, assembling it with `ilasm`, and then using `dotnet publish` to produce the final EXE.
+
+    **From a Lisp REPL (e.g., SBCL)**:
+    ```lisp
+    (require :asdf)
+    (push (truename ".") asdf:*central-registry*)
+    (asdf:load-system :clrhack)
+    (clrhack:compile-file "hello.lisp")
+    ```
+
+    **From the Command Line**:
+    ```bash
+    sbcl --eval '(require :asdf)' --eval '(push (truename ".") asdf:*central-registry*)' --eval '(asdf:load-system :clrhack)' --eval '(clrhack:compile-file "hello.lisp")' --eval '(quit)'
+    ```
+    The resulting standalone executable will be located in `bin/Release/net8.0/win-x64/publish/hello.exe`.
+
+3.  **Run the REPL**:
     ```bash
     dotnet run --project Repl/Repl.csproj
     ```
