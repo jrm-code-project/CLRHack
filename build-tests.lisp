@@ -11,22 +11,23 @@
 (push (truename ".") asdf:*central-registry*)
 (asdf:load-system :clrhack)
 
-(let ((files '("test-compiler.lisp"
-               "test-advanced.lisp"
-               "test-church.lisp"
-               "test-closure.lisp"
-               "test-fib.lisp"
-               "test-hello.lisp"
-               "test-mutability.lisp"
-               "test-nboyer.lisp"
-               "test-scoping.lisp"
-               "test-tak.lisp"
-               "test-toplevel.lisp"
-               "test-complex.lisp"
-               "bank-test.lisp"
-               "tail-test.lisp")))
-  (dolist (file files)
-    (format t "~%--- Compiling ~A ---~%" file)
-    (load file)))
+(let ((tests '(("test-advanced.lisp" . "AdvancedTest")
+               ("test-church.lisp" . "ChurchTest")
+               ("test-closure.lisp" . "ClosureTest")
+               ("test-fib.lisp" . "FibBenchmark")
+               ("test-hello.lisp" . "HelloWorld")
+               ("test-mutability.lisp" . "MutabilityTest")
+               ("test-nboyer.lisp" . "NBoyerBenchmark")
+               ("test-scoping.lisp" . "ScopingTests")
+               ("test-tak.lisp" . "TakBenchmark")
+               ("test-toplevel.lisp" . "TopLevelTest")
+               ("test-complex.lisp" . "ComplexScopingTest")
+               ("bank-test.lisp" . "BankTest")
+               ("tail-test.lisp" . "TailTest"))))
+  (dolist (test tests)
+    (let ((file (car test))
+          (target (cdr test)))
+      (format t "~%--- Compiling ~A to ~A ---~%" file target)
+      (clrhack:compile-file file :output-file target))))
 
 (sb-ext:exit)
