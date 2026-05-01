@@ -24,7 +24,21 @@
                ("test-complex.lisp" . "ComplexScopingTest")
                ("test-interop.lisp" . "InteropTest")
                ("test-macro.lisp" . "MacroTest")
+               ("test-letrec.lisp" . "LetRecTest")
+               ("test-flet.lisp" . "FletTest")
+               ("test-labels.lisp" . "LabelsTest")
+               ("test-tagbody.lisp" . "TagbodyTest")
+               ("test-uwp.lisp" . "UwpTest")
+               ("test-block.lisp" . "BlockTest")
+               ("test-catch.lisp" . "CatchTest")
                ("bank-test.lisp" . "BankTest")
+
+
+
+
+
+
+
 
                ("tail-test.lisp" . "TailTest"))))
 

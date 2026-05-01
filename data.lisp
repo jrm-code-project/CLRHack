@@ -66,7 +66,10 @@
   and or xor shl shr 
   neg not 
   nop pop dup ret 
-  ceq cgt cgt.un clt ldnull)
+  ceq cgt cgt.un clt ldnull
+  endfinally throw rethrow)
+
+
 
 (define-simple-instruction-makers 
   ;; Arguments
@@ -182,7 +185,8 @@
             (get-operand inst))))
 
 (define-operand-instruction-makers cil-branch-instruction
-  br brtrue brfalse beq bge bgt ble blt bne.un)
+  br brtrue brfalse beq bge bgt ble blt bne.un leave)
+
 
 (defclass cil-call-instruction (cil-operand-instruction)
   ((target-class :initarg :target-class :accessor get-target-class)
@@ -195,12 +199,13 @@
   "The Heavy Lifter. Emits the 'tail.' prefix inline if flagged, followed by the baroque CIL signature."
   (when (get-tail-p inst)
     (format stream "tail. "))
-  (format stream "~A ~A ~A::~A(~{~A~^, ~})"
+  (format stream "~A ~A ~A::'~A'(~{~A~^, ~})"
           (get-opcode inst)
           (get-return-type inst)
           (get-target-class inst)
           (get-operand inst)         
-          (get-arg-types inst)))     
+          (get-arg-types inst)))
+     
 
 (defmethod print-object ((inst cil-call-instruction) stream)
   "Shows the full method signature, prominently featuring the tail prefix if active."
@@ -648,4 +653,26 @@
       (when (probe-file linux-temp-file)
         (delete-file linux-temp-file)))))
 
-(export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst) "IL")
+(defclass cil-block (cil-instruction)
+  ((header       :initarg :header :accessor get-header)
+   (instructions :initarg :instructions :accessor get-instructions))
+  (:documentation "A block of instructions wrapped in braces, preceded by a header like .try or finally."))
+
+(defmethod emit-instruction ((inst cil-block) stream)
+  (format stream "~A~%    {~%" (get-header inst))
+  (dolist (sub-inst (get-instructions inst))
+    (emit-instruction sub-inst stream))
+  (format stream "    }"))
+
+(defun il::try (instructions)
+  (make-instance 'cil-block :header ".try" :instructions instructions))
+
+(defun il::finally (instructions)
+  (make-instance 'cil-block :header "finally" :instructions instructions))
+
+(defun il::catch (type instructions)
+  (make-instance 'cil-block :header (format nil "catch ~A" type) :instructions instructions))
+
+(export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst il::try il::finally il::catch) "IL")
+
+

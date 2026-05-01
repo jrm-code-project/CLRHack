@@ -67,7 +67,7 @@
 (defpackage "IL"
   (:shadow "AND" "OR" "XOR" "NOT" "POP")
   (:export
-   "AND"
+   "ADD"
    "SUB"
    "MUL"
    "DIV"
@@ -95,4 +95,11 @@
    "BOX"
    "UNBOX.ANY"
    "CASTCLASS"
-   "ISINST"))
+   "ISINST"
+   "LEAVE"
+   "ENDFINALLY"
+   "THROW"
+   "RETHROW"
+   "CATCH"))
+
+

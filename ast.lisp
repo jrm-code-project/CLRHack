@@ -116,6 +116,61 @@
   (:documentation "A direct access to a .NET field (static if instance is NIL)."))
 
 
+(defvar *tag-id-counter* 0)
+(defun next-tag-id () (incf *tag-id-counter*))
+
+(defclass ast-tagbody (ast-node)
+  ((statements :initarg :statements :accessor ast-tagbody-statements)
+   (labels     :initarg :labels     :accessor ast-tagbody-labels) ;; List of (tag-name . id)
+   (id         :initarg :id         :initform (next-tag-id) :accessor ast-tagbody-id))
+  (:documentation "A TAGBODY block for unstructured control flow."))
+
+
+(defclass ast-go (ast-node)
+  ((tag-label   :initarg :tag-label   :accessor ast-go-tag-label)
+   (tag-id      :initarg :tag-id      :accessor ast-go-tag-id)
+   (non-local-p :initarg :non-local-p :accessor ast-go-non-local-p))
+  (:documentation "A GO jump to a TAGBODY tag."))
+
+(defclass ast-label (ast-node)
+  ((label :initarg :label :accessor ast-label-label)
+   (id    :initarg :id    :accessor ast-label-id))
+  (:documentation "A jump target (label) within a TAGBODY."))
+
+
+(defclass ast-unwind-protect (ast-node)
+  ((protected-form :initarg :protected-form :accessor ast-unwind-protect-protected-form)
+   (cleanup-forms  :initarg :cleanup-forms  :accessor ast-unwind-protect-cleanup-forms)
+   (result-temp    :initarg :result-temp :initform nil :accessor ast-unwind-protect-result-temp))
+  (:documentation "An UNWIND-PROTECT block."))
+
+(defclass ast-block (ast-node)
+  ((name :initarg :name :accessor ast-block-name)
+   (body :initarg :body :accessor ast-block-body)
+   (end-label :initarg :end-label :accessor ast-block-end-label)
+   (result-temp :initarg :result-temp :initform nil :accessor ast-block-result-temp))
+  (:documentation "A named lexical block."))
+
+(defclass ast-return-from (ast-node)
+  ((name :initarg :name :accessor ast-return-from-name)
+   (value :initarg :value :accessor ast-return-from-value)
+   (target-label :initarg :target-label :accessor ast-return-from-target-label)
+   (result-temp :initarg :result-temp :accessor ast-return-from-result-temp)
+   (non-local-p :initarg :non-local-p :accessor ast-return-from-non-local-p))
+  (:documentation "A return from a named lexical block."))
+
+(defclass ast-catch (ast-node)
+  ((tag :initarg :tag :accessor ast-catch-tag)
+   (body :initarg :body :accessor ast-catch-body)
+   (tag-temp :initarg :tag-temp :initform nil :accessor ast-catch-tag-temp)
+   (result-temp :initarg :result-temp :initform nil :accessor ast-catch-result-temp))
+  (:documentation "A dynamic CATCH block."))
+
+(defclass ast-throw (ast-node)
+  ((tag :initarg :tag :accessor ast-throw-tag)
+   (value :initarg :value :accessor ast-throw-value))
+  (:documentation "A dynamic THROW jump."))
+
 ;;; Macro Environment
 
 (defvar *macro-environment* (make-hash-table :test #'eq))
@@ -137,29 +192,92 @@
 
 (defun setup-macro-environment ()
   (clrhash *macro-environment*)
-  (register-macro 'when (lambda (test &rest body) `(if ,test (progn ,@body) nil)))
-  (register-macro 'unless (lambda (test &rest body) `(if ,test nil (progn ,@body))))
-  (register-macro 'defvar (lambda (name &optional value) `(setq ,name ,value)))
-  (register-macro 'defparameter (lambda (name value) `(setq ,name ,value)))
-  (register-macro 'funcall (lambda (fn &rest args) `(,fn ,@args)))
-  (register-macro 'let* (lambda (bindings &rest body)
-
-                          (if (null bindings)
-                              `(progn ,@body)
-                              `(let (,(car bindings))
-                                 (let* ,(cdr bindings) ,@body)))))
-  (register-macro 'cond (lambda (&rest clauses)
-                          (if (null clauses)
-                              nil
-                              (let ((clause (car clauses)))
-                                `(if ,(car clause)
-                                     (progn ,@(cdr clause))
-                                     (cond ,@(cdr clauses))))))))
+  (register-macro 'when
+    (lambda (test &rest body)
+      `(if ,test (progn ,@body) nil)))
+  (register-macro 'unless
+    (lambda (test &rest body)
+      `(if ,test nil (progn ,@body))))
+  (register-macro 'defvar
+    (lambda (name &optional value)
+      `(setq ,name ,value)))
+  (register-macro 'defparameter
+    (lambda (name value)
+      `(setq ,name ,value)))
+  (register-macro 'funcall
+    (lambda (fn &rest args)
+      `(,fn ,@args)))
+  (register-macro 'let*
+    (lambda (bindings &rest body)
+      (if (null bindings)
+          `(progn ,@body)
+          `(let (,(car bindings))
+             (let* ,(cdr bindings) ,@body)))))
+  (register-macro 'cond
+    (lambda (&rest clauses)
+      (if (null clauses)
+          nil
+          (let ((clause (car clauses)))
+            `(if ,(car clause)
+                 (progn ,@(cdr clause))
+                 (cond ,@(cdr clauses)))))))
+  (register-macro 'or
+    (lambda (&rest args)
+      (if (null args)
+          nil
+          (if (null (cdr args))
+              (car args)
+              (let ((temp (gensym)))
+                `(let ((,temp ,(car args)))
+                   (if ,temp ,temp (or ,@(cdr args)))))))))
+  (register-macro 'and
+    (lambda (&rest args)
+      (if (null args)
+          t
+          (if (null (cdr args))
+              (car args)
+              `(if ,(car args) (and ,@(cdr args)) nil)))))
+  (register-macro 'atom (lambda (x) `(not (consp ,x))))
+  (register-macro 'caar (lambda (x) `(car (car ,x))))
+  (register-macro 'cadr (lambda (x) `(car (cdr ,x))))
+  (register-macro 'cdar (lambda (x) `(cdr (car ,x))))
+  (register-macro 'cddr (lambda (x) `(cdr (cdr ,x))))
+  (register-macro 'cadar (lambda (x) `(car (cdr (car ,x)))))
+  (register-macro 'caddr (lambda (x) `(car (cdr (cdr ,x)))))
+  (register-macro 'cadddr (lambda (x) `(car (cdr (cdr (cdr ,x))))))
+  (register-macro 'second (lambda (x) `(cadr ,x)))
+  (register-macro 'third (lambda (x) `(caddr ,x)))
+  (register-macro 'fourth (lambda (x) `(cadddr ,x)))
+  (register-macro 'letrec
+    (lambda (bindings &rest body)
+      (let ((vars (mapcar (lambda (b) (if (consp b) (car b) b)) bindings))
+            (vals (mapcar (lambda (b) (if (consp b) (cadr b) nil)) bindings)))
+        `(let ,(mapcar (lambda (v) `(,v nil)) vars)
+           ,@(mapcar (lambda (v val) `(setq ,v ,val)) vars vals)
+           ,@body))))
+  (register-macro 'letrec*
+    (lambda (bindings &rest body)
+      (let ((vars (mapcar (lambda (b) (if (consp b) (car b) b)) bindings))
+            (vals (mapcar (lambda (b) (if (consp b) (cadr b) nil)) bindings)))
+        `(let ,(mapcar (lambda (v) `(,v nil)) vars)
+           ,@(mapcar (lambda (v val) `(setq ,v ,val)) vars vals)
+           ,@body))))
+  (register-macro 'flet
+    (lambda (bindings &rest body)
+      `(let ,(mapcar (lambda (b)
+                       `(,(car b) (lambda ,(cadr b) (progn ,@(cddr b)))))
+                     bindings)
+         ,@body)))
+  (register-macro 'labels
+    (lambda (bindings &rest body)
+      `(letrec ,(mapcar (lambda (b)
+                          `(,(car b) (lambda ,(cadr b) (progn ,@(cddr b)))))
+                        bindings)
+         ,@body))))
 
 (setup-macro-environment)
 
 ;;; Free Variable Analysis
-
 
 (defgeneric compute-free-vars (node)
   (:documentation "Computes and caches free variables in LAMBDA nodes. Returns a list of alpha-names."))
@@ -234,6 +352,40 @@
       (compute-free-vars (ast-clr-field-instance node))
       nil))
 
+(defmethod compute-free-vars ((node ast-tagbody))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (remove-if (lambda (s) (typep s 'ast-label)) (ast-tagbody-statements node))
+          :initial-value nil))
+
+(defmethod compute-free-vars ((node ast-go))
+  nil)
+
+(defmethod compute-free-vars ((node ast-label))
+  nil)
+
+(defmethod compute-free-vars ((node ast-unwind-protect))
+  (union (compute-free-vars (ast-unwind-protect-protected-form node))
+         (reduce (lambda (a b) (union a (compute-free-vars b)))
+                 (ast-unwind-protect-cleanup-forms node)
+                 :initial-value nil)))
+
+(defmethod compute-free-vars ((node ast-block))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-block-body node)
+          :initial-value nil))
+
+(defmethod compute-free-vars ((node ast-return-from))
+  (compute-free-vars (ast-return-from-value node)))
+
+(defmethod compute-free-vars ((node ast-catch))
+  (union (compute-free-vars (ast-catch-tag node))
+         (reduce (lambda (a b) (union a (compute-free-vars b)))
+                 (ast-catch-body node)
+                 :initial-value nil)))
+
+(defmethod compute-free-vars ((node ast-throw))
+  (union (compute-free-vars (ast-throw-tag node))
+         (compute-free-vars (ast-throw-value node))))
 
 (defmethod compute-free-vars ((node ast-class))
   nil)
@@ -327,6 +479,50 @@
                  :instance (when (ast-clr-field-instance node)
                              (closure-convert (ast-clr-field-instance node)))))
 
+(defmethod closure-convert ((node ast-tagbody))
+  (make-instance 'ast-tagbody
+                 :statements (mapcar #'closure-convert (ast-tagbody-statements node))
+                 :labels (ast-tagbody-labels node)
+                 :id (ast-tagbody-id node)))
+
+(defmethod closure-convert ((node ast-go))
+  node)
+
+(defmethod closure-convert ((node ast-label))
+  node)
+
+(defmethod closure-convert ((node ast-unwind-protect))
+  (make-instance 'ast-unwind-protect
+                 :protected-form (closure-convert (ast-unwind-protect-protected-form node))
+                 :cleanup-forms (mapcar #'closure-convert (ast-unwind-protect-cleanup-forms node))
+                 :result-temp (ast-unwind-protect-result-temp node)))
+
+(defmethod closure-convert ((node ast-block))
+  (make-instance 'ast-block
+                 :name (ast-block-name node)
+                 :end-label (ast-block-end-label node)
+                 :result-temp (ast-block-result-temp node)
+                 :body (mapcar #'closure-convert (ast-block-body node))))
+
+(defmethod closure-convert ((node ast-return-from))
+  (make-instance 'ast-return-from
+                 :name (ast-return-from-name node)
+                 :target-label (ast-return-from-target-label node)
+                 :result-temp (ast-return-from-result-temp node)
+                 :non-local-p (ast-return-from-non-local-p node)
+                 :value (closure-convert (ast-return-from-value node))))
+
+(defmethod closure-convert ((node ast-catch))
+  (make-instance 'ast-catch
+                 :tag (closure-convert (ast-catch-tag node))
+                 :body (mapcar #'closure-convert (ast-catch-body node))
+                 :tag-temp (ast-catch-tag-temp node)
+                 :result-temp (ast-catch-result-temp node)))
+
+(defmethod closure-convert ((node ast-throw))
+  (make-instance 'ast-throw
+                 :tag (closure-convert (ast-throw-tag node))
+                 :value (closure-convert (ast-throw-value node))))
 
 (defmethod closure-convert ((node ast-class))
   node)
@@ -423,6 +619,50 @@
                  :instance (when (ast-clr-field-instance node)
                              (lambda-lift (ast-clr-field-instance node)))))
 
+(defmethod lambda-lift ((node ast-tagbody))
+  (make-instance 'ast-tagbody
+                 :statements (mapcar #'lambda-lift (ast-tagbody-statements node))
+                 :labels (ast-tagbody-labels node)
+                 :id (ast-tagbody-id node)))
+
+(defmethod lambda-lift ((node ast-go))
+  node)
+
+(defmethod lambda-lift ((node ast-label))
+  node)
+
+(defmethod lambda-lift ((node ast-unwind-protect))
+  (make-instance 'ast-unwind-protect
+                 :protected-form (lambda-lift (ast-unwind-protect-protected-form node))
+                 :cleanup-forms (mapcar #'lambda-lift (ast-unwind-protect-cleanup-forms node))
+                 :result-temp (ast-unwind-protect-result-temp node)))
+
+(defmethod lambda-lift ((node ast-block))
+  (make-instance 'ast-block
+                 :name (ast-block-name node)
+                 :end-label (ast-block-end-label node)
+                 :result-temp (ast-block-result-temp node)
+                 :body (mapcar #'lambda-lift (ast-block-body node))))
+
+(defmethod lambda-lift ((node ast-return-from))
+  (make-instance 'ast-return-from
+                 :name (ast-return-from-name node)
+                 :target-label (ast-return-from-target-label node)
+                 :result-temp (ast-return-from-result-temp node)
+                 :non-local-p (ast-return-from-non-local-p node)
+                 :value (lambda-lift (ast-return-from-value node))))
+
+(defmethod lambda-lift ((node ast-catch))
+  (make-instance 'ast-catch
+                 :tag (lambda-lift (ast-catch-tag node))
+                 :body (mapcar #'lambda-lift (ast-catch-body node))
+                 :tag-temp (ast-catch-tag-temp node)
+                 :result-temp (ast-catch-result-temp node)))
+
+(defmethod lambda-lift ((node ast-throw))
+  (make-instance 'ast-throw
+                 :tag (lambda-lift (ast-throw-tag node))
+                 :value (lambda-lift (ast-throw-value node))))
 
 (defmethod lambda-lift ((node ast-class))
   node)
@@ -445,6 +685,13 @@
     (let ((new-ast (lambda-lift ast)))
       (values new-ast (nreverse *lifted-lambdas*)))))
 
+(defun sanitize-identifier (name)
+  (map 'string (lambda (c)
+                 (if (or (alphanumericp c) (char= c #\_))
+                     c
+                     #\_))
+       name))
+
 (defun expand-quote (expr)
   (cond
     ((null expr) nil)
@@ -454,11 +701,12 @@
 
 ;;; Translation function
 
-(defun lisp->ast (expr &optional env)
+(defun lisp->ast (expr &optional env tags-env blocks-env current-scope)
   "Translates a Lisp s-expression into an AST node, applying alpha renaming and macroexpansion."
+  (unless current-scope (setq current-scope (gensym "TOPLEVEL_SCOPE_")))
   (multiple-value-bind (expanded expanded-p) (clrhack-macroexpand-1 expr)
     (if expanded-p
-        (return-from lisp->ast (lisp->ast expanded env))))
+        (return-from lisp->ast (lisp->ast expanded env tags-env blocks-env current-scope))))
   (cond
     ((or (numberp expr) (stringp expr) (characterp expr) (vectorp expr) (keywordp expr) (eq expr t) (eq expr nil))
      (make-instance 'ast-literal :value expr))
@@ -471,25 +719,26 @@
            (args (cdr expr)))
        (case op
          (quote
-          (lisp->ast (expand-quote (car args)) env))
+          (lisp->ast (expand-quote (car args)) env tags-env blocks-env current-scope))
          (if
           (make-instance 'ast-if
-                         :test (lisp->ast (first args) env)
-                         :consequent (lisp->ast (second args) env)
-                         :alternate (if (cddr args) (lisp->ast (third args) env) (make-instance 'ast-literal :value nil))))
+                         :test (lisp->ast (first args) env tags-env blocks-env current-scope)
+                         :consequent (lisp->ast (second args) env tags-env blocks-env current-scope)
+                         :alternate (if (cddr args) (lisp->ast (third args) env tags-env blocks-env current-scope) (make-instance 'ast-literal :value nil))))
          (progn
           (make-instance 'ast-progn
-                         :forms (mapcar (lambda (e) (lisp->ast e env)) args)))
+                         :forms (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args)))
          (setq
           (let* ((var-name (first args))
                  (alpha (or (cdr (assoc var-name env)) var-name)))
             (make-instance 'ast-setq
                            :name (make-instance 'ast-variable :name var-name :alpha-name alpha)
-                           :value (lisp->ast (second args) env))))
+                           :value (lisp->ast (second args) env tags-env blocks-env current-scope))))
          (defun
           (let* ((name (first args))
                  (params (second args))
-                 (body (cddr args)))
+                 (body (cddr args))
+                 (new-scope (gensym "SCOPE_")))
              (if (null env)
                  ;; Top-level DEFUN
                  (let* ((new-env env)
@@ -501,9 +750,80 @@
                    (make-instance 'ast-toplevel-defun
                                   :name name
                                   :params alpha-params
-                                  :body (mapcar (lambda (e) (lisp->ast e new-env)) body)))
+                                  :body (list (lisp->ast `(block ,name (progn ,@body)) new-env tags-env blocks-env new-scope))))
                  ;; Local DEFUN (converted to setq lambda)
-                 (lisp->ast `(setq ,name (lambda ,params (progn ,@body))) env))))
+                 (lisp->ast `(setq ,name (lambda ,params (block ,name (progn ,@body)))) env tags-env blocks-env current-scope))))
+
+         (tagbody
+          (let* ((new-tags-env tags-env)
+                 (tags (remove-if-not (lambda (x) (or (symbolp x) (integerp x))) args))
+                 (tag-labels (mapcar (lambda (tag)
+                                       (let* ((sanitized (sanitize-identifier (format nil "~A" tag)))
+                                              (label (string (gensym (format nil "TAG_~A_" sanitized))))
+                                              (tag-id (next-tag-id)))
+                                         (push (list tag label tag-id current-scope) new-tags-env)
+                                         (list tag label tag-id)))
+                                     tags)))
+            (make-instance 'ast-tagbody
+                           :statements (mapcar (lambda (form)
+                                                 (if (or (symbolp form) (integerp form))
+                                                     (let ((info (assoc form new-tags-env)))
+                                                       (make-instance 'ast-label :label (second info) :id (third info)))
+                                                     (lisp->ast form env new-tags-env blocks-env current-scope)))
+                                               args)
+                           :labels (mapcar (lambda (tl) (cons (car tl) (third tl))) tag-labels))))
+
+         (go
+          (let* ((tag (first args))
+                 (info (assoc tag tags-env)))
+            (unless info (error "GO: Tag ~A not found in lexical environment." tag))
+            (destructuring-bind (tag-name label tag-id scope) info
+               (declare (ignore tag-name))
+               (make-instance 'ast-go 
+                              :tag-label label 
+                              :tag-id tag-id
+                              :non-local-p (not (eq scope current-scope))))))
+
+         (block
+          (let* ((name (first args))
+                 (sanitized-name (sanitize-identifier (format nil "~A" name)))
+                 (end-label (string (gensym (format nil "BLOCK_END_~A_" sanitized-name))))
+                 (result-temp (string (gensym (format nil "BLOCK_RESULT_~A_" sanitized-name))))
+                 (new-blocks-env (cons (list name end-label result-temp current-scope) blocks-env)))
+            (make-instance 'ast-block
+                           :name name
+                           :end-label end-label
+                           :result-temp result-temp
+                           :body (mapcar (lambda (e) (lisp->ast e env tags-env new-blocks-env current-scope)) (rest args)))))
+
+         (return-from
+          (let* ((name (first args))
+                 (info (assoc name blocks-env)))
+            (unless info (error "RETURN-FROM: Block ~A not found in lexical environment." name))
+            (destructuring-bind (block-name end-label result-temp scope) info
+               (declare (ignore block-name))
+               (make-instance 'ast-return-from
+                              :name name
+                              :target-label end-label
+                              :result-temp result-temp
+                              :non-local-p (not (eq scope current-scope))
+                              :value (lisp->ast (second args) env tags-env blocks-env current-scope)))))
+
+
+         (unwind-protect
+          (make-instance 'ast-unwind-protect
+                         :protected-form (lisp->ast (first args) env tags-env blocks-env current-scope)
+                         :cleanup-forms (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (rest args))))
+
+         (catch
+          (make-instance 'ast-catch
+                         :tag (lisp->ast (first args) env tags-env blocks-env current-scope)
+                         :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (rest args))))
+
+         (throw
+          (make-instance 'ast-throw
+                         :tag (lisp->ast (first args) env tags-env blocks-env current-scope)
+                         :value (lisp->ast (second args) env tags-env blocks-env current-scope)))
 
          (defmacro
           (let ((name (first args))
@@ -522,30 +842,30 @@
                            :method-name (second args)
                            :return-type (if (consp sig) (car sig) sig)
                            :arg-types (if (consp sig) (cdr sig) nil)
-                           :arguments (mapcar (lambda (e) (lisp->ast e env)) (nthcdr 3 args)))))
+                           :arguments (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (nthcdr 3 args)))))
 
          (clr-call-virt
           (let ((sig (fourth args)))
             (make-instance 'ast-clr-call-virt
-                           :instance (lisp->ast (first args) env)
+                           :instance (lisp->ast (first args) env tags-env blocks-env current-scope)
                            :type-name (second args)
                            :method-name (third args)
                            :return-type (if (consp sig) (car sig) sig)
                            :arg-types (if (consp sig) (cdr sig) nil)
-                           :arguments (mapcar (lambda (e) (lisp->ast e env)) (nthcdr 4 args)))))
+                           :arguments (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (nthcdr 4 args)))))
 
          (clr-new
           (make-instance 'ast-clr-new
                          :type-name (first args)
                          :arg-types (second args)
-                         :arguments (mapcar (lambda (e) (lisp->ast e env)) (cddr args))))
+                         :arguments (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (cddr args))))
 
 
          (clr-field
           (make-instance 'ast-clr-field
                          :type-name (first args)
                          :field-name (second args)
-                         :instance (when (third args) (lisp->ast (third args) env))))
+                         :instance (when (third args) (lisp->ast (third args) env tags-env blocks-env current-scope))))
 
          (defclass
           (let* ((name (first args))
@@ -564,26 +884,28 @@
                  (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
                  (after-qualifiers (nthcdr (length qualifiers) rest-args))
                  (lambda-list (first after-qualifiers))
-                 (body (rest after-qualifiers)))
+                 (body (rest after-qualifiers))
+                 (new-scope (gensym "SCOPE_")))
             (make-instance 'ast-method
                            :name name
                            :qualifiers qualifiers
                            :specialized-lambda-list lambda-list
-                           :body (mapcar (lambda (e) (lisp->ast e env)) body))))
+                           :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env new-scope)) body))))
          (let
           (let* ((new-env env)
                  (bindings (mapcar (lambda (b)
                                      (let* ((name (if (consp b) (car b) b))
-                                            (val (if (consp b) (lisp->ast (cadr b) env) (make-instance 'ast-literal :value nil)))
+                                            (val (if (consp b) (lisp->ast (cadr b) env tags-env blocks-env current-scope) (make-instance 'ast-literal :value nil)))
                                             (alpha (gensym (string name))))
                                        (push (cons name alpha) new-env)
                                        (list alpha val)))
                                    (first args))))
             (make-instance 'ast-let
                            :bindings bindings
-                           :body (mapcar (lambda (form) (lisp->ast form new-env)) (rest args)))))
+                           :body (mapcar (lambda (form) (lisp->ast form new-env tags-env blocks-env current-scope)) (rest args)))))
          (lambda
-          (let* ((new-env env)
+          (let* ((new-scope (gensym "SCOPE_"))
+                 (new-env env)
                  (params (mapcar (lambda (p)
                                    (let ((alpha (gensym (string p))))
                                      (push (cons p alpha) new-env)
@@ -591,14 +913,14 @@
                                  (first args))))
             (make-instance 'ast-lambda
                            :params params
-                           :body (mapcar (lambda (e) (lisp->ast e new-env)) (rest args)))))
+                           :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env new-scope)) (rest args)))))
          (t
           (make-instance 'ast-application
                          :operator (if (symbolp op)
                                        (let ((alpha (cdr (assoc op env))))
                                          (make-instance 'ast-variable :name op :alpha-name (or alpha op)))
-                                       (lisp->ast op env))
-                         :operands (mapcar (lambda (e) (lisp->ast e env)) args))))))
+                                       (lisp->ast op env tags-env blocks-env current-scope))
+                         :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args))))))
     (t (error "Unknown expression type: ~A" expr))))
 
 ;;; Scope Analysis
@@ -634,9 +956,6 @@
                (ast-setq
                 (let* ((var-alpha (ast-variable-alpha-name (ast-setq-name n)))
                        (scope (lookup-variable curr-env var-alpha)))
-                  ;; We track scope-aware mutations. Since scoping is tied to the name in the environment,
-                  ;; we only care about mutations to locals/lexicals/arguments.
-                  ;; Since alpha-names are unique, there is no shadowing conflict.
                   (if (not (eq scope :global))
                       (cons var-alpha (traverse (ast-setq-value n) curr-env))
                       (traverse (ast-setq-value n) curr-env))))
@@ -667,8 +986,30 @@
                (ast-clr-new
                 (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-new-arguments n))))
                (ast-clr-field
-                (if (ast-clr-field-instance n) (traverse (ast-clr-field-instance n) curr-env) nil)))))
+                (if (ast-clr-field-instance n) (traverse (ast-clr-field-instance n) curr-env) nil))
+               (ast-tagbody
+                (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
+                                         (remove-if (lambda (s) (typep s 'ast-label)) 
+                                                    (ast-tagbody-statements n)))))
+               (ast-go nil)
+               (ast-label nil)
+               (ast-unwind-protect
+                (append (traverse (ast-unwind-protect-protected-form n) curr-env)
+                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
+                                                 (ast-unwind-protect-cleanup-forms n)))))
+               (ast-block
+                (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-block-body n))))
+               (ast-return-from
+                (traverse (ast-return-from-value n) curr-env))
+               (ast-catch
+                (append (traverse (ast-catch-tag n) curr-env)
+                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-catch-body n)))))
+               (ast-throw
+                (append (traverse (ast-throw-tag n) curr-env)
+                        (traverse (ast-throw-value n) curr-env))))))
     (remove-duplicates (traverse node env))))
+
+
 
 (defgeneric analyze-environment (node env &optional mutated)
   (:documentation "Walks the AST, returning a new tree with variables typed by their scope."))
@@ -812,13 +1153,62 @@
                  :instance (when (ast-clr-field-instance node)
                              (analyze-environment (ast-clr-field-instance node) env mutated))))
 
+(defmethod analyze-environment ((node ast-tagbody) env &optional mutated)
+  (make-instance 'ast-tagbody
+                 :statements (mapcar (lambda (form) (analyze-environment form env mutated))
+                                     (ast-tagbody-statements node))
+                 :labels (ast-tagbody-labels node)
+                 :id (ast-tagbody-id node)))
+
+(defmethod analyze-environment ((node ast-go) env &optional mutated)
+  (declare (ignore env mutated))
+  node)
+
+(defmethod analyze-environment ((node ast-label) env &optional mutated)
+  (declare (ignore env mutated))
+  node)
+
+(defmethod analyze-environment ((node ast-unwind-protect) env &optional mutated)
+  (make-instance 'ast-unwind-protect
+                 :protected-form (analyze-environment (ast-unwind-protect-protected-form node) env mutated)
+                 :cleanup-forms (mapcar (lambda (form) (analyze-environment form env mutated))
+                                        (ast-unwind-protect-cleanup-forms node))
+                 :result-temp (ast-unwind-protect-result-temp node)))
+
+(defmethod analyze-environment ((node ast-block) env &optional mutated)
+  (make-instance 'ast-block
+                 :name (ast-block-name node)
+                 :end-label (ast-block-end-label node)
+                 :result-temp (ast-block-result-temp node)
+                 :body (mapcar (lambda (form) (analyze-environment form env mutated))
+                               (ast-block-body node))))
+
+(defmethod analyze-environment ((node ast-return-from) env &optional mutated)
+  (make-instance 'ast-return-from
+                 :name (ast-return-from-name node)
+                 :target-label (ast-return-from-target-label node)
+                 :result-temp (ast-return-from-result-temp node)
+                 :non-local-p (ast-return-from-non-local-p node)
+                 :value (analyze-environment (ast-return-from-value node) env mutated)))
+
+(defmethod analyze-environment ((node ast-catch) env &optional mutated)
+  (make-instance 'ast-catch
+                 :tag (analyze-environment (ast-catch-tag node) env mutated)
+                 :body (mapcar (lambda (form) (analyze-environment form env mutated))
+                               (ast-catch-body node))
+                 :tag-temp (ast-catch-tag-temp node)
+                 :result-temp (ast-catch-result-temp node)))
+
+(defmethod analyze-environment ((node ast-throw) env &optional mutated)
+  (make-instance 'ast-throw
+                 :tag (analyze-environment (ast-throw-tag node) env mutated)
+                 :value (analyze-environment (ast-throw-value node) env mutated)))
 
 (defmethod analyze-environment ((node ast-class) env &optional mutated)
   (declare (ignore env mutated))
   node)
 
 (defmethod analyze-environment ((node ast-method) env &optional mutated)
-  ;; Simplified environment analysis.
   (make-instance 'ast-method
                  :name (ast-method-name node)
                  :qualifiers (ast-method-qualifiers node)
@@ -831,7 +1221,6 @@
          (inner-env (cons (cons :lambda params) env))
          (analyzed-body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
                                 (ast-toplevel-defun-body node))))
-    ;; Check for mutated parameters and wrap them in ValueCells at the start of the body.
     (let ((mutated-params (intersection params mutated :test #'eq)))
       (if mutated-params
           (let ((bindings (mapcar (lambda (p)
