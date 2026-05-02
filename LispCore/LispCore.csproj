@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <Target Name="CompileIL" BeforeTargets="BeforeBuild">
+  <Target Name="CompileIL" BeforeTargets="BeforeBuild" Condition="Exists('Hello.il')">
     <Exec Command="ilasm /dll /output:HelloLisp.dll Hello.il" Condition="'$(OS)' == 'Windows_NT'" />
     <Exec Command="ilasm /dll /output:HelloLisp.dll Hello.il" Condition="'$(OS)' != 'Windows_NT'" />
   </Target>
