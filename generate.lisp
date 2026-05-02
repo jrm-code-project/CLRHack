@@ -854,7 +854,10 @@
                                :virtual-p t
                                :instructions (if (= m n-params)
                                                  block
-                                                 (list (il:ldnull) (il:ret))))
+                                                 (list (il:ldc.i4 n-params)
+                                                       (il:ldc.i4 m)
+                                                       (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                                       (il:throw))))
                     methods))))
         (let ((cls (il:class :name name :parent "[LispBase]Lisp.Closure" :fields fields :methods (reverse methods))))
           (push cls classes))))
