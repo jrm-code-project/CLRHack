@@ -952,7 +952,7 @@
                (ast-if (append (traverse (ast-if-test n) curr-env)
                                (traverse (ast-if-consequent n) curr-env)
                                (traverse (ast-if-alternate n) curr-env)))
-               (ast-progn (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-progn-forms n))))
+               (ast-progn (mapcan (lambda (form) (traverse form curr-env)) (ast-progn-forms n)))
                (ast-setq
                 (let* ((var-alpha (ast-variable-alpha-name (ast-setq-name n)))
                        (scope (lookup-variable curr-env var-alpha)))
@@ -962,48 +962,48 @@
                (ast-let
                 (let* ((bound-vars (mapcar #'car (ast-let-bindings n)))
                        (inner-env (cons (cons :let bound-vars) curr-env)))
-                  (append (reduce #'append (mapcar (lambda (b) (traverse (cadr b) curr-env)) (ast-let-bindings n)))
-                          (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-let-body n))))))
+                  (nconc (mapcan (lambda (b) (traverse (cadr b) curr-env)) (ast-let-bindings n))
+                         (mapcan (lambda (form) (traverse form inner-env)) (ast-let-body n)))))
                (ast-lambda
                 (let* ((params (ast-lambda-params n))
                        (inner-env (cons (cons :lambda params) curr-env)))
-                  (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-lambda-body n)))))
+                  (mapcan (lambda (form) (traverse form inner-env)) (ast-lambda-body n))))
                (ast-toplevel-defun
                 (let* ((params (ast-toplevel-defun-params n))
                        (inner-env (cons (cons :lambda params) curr-env)))
-                  (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-toplevel-defun-body n)))))
+                  (mapcan (lambda (form) (traverse form inner-env)) (ast-toplevel-defun-body n))))
                (ast-class nil)
                (ast-method
-                (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-method-body n))))
+                (mapcan (lambda (form) (traverse form curr-env)) (ast-method-body n)))
                (ast-application
                 (append (traverse (ast-application-operator n) curr-env)
-                        (reduce #'append (mapcar (lambda (op) (traverse op curr-env)) (ast-application-operands n)))))
+                        (mapcan (lambda (op) (traverse op curr-env)) (ast-application-operands n))))
                (ast-clr-call
-                (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-call-arguments n))))
+                (mapcan (lambda (arg) (traverse arg curr-env)) (ast-clr-call-arguments n)))
                (ast-clr-call-virt
                 (append (traverse (ast-clr-call-virt-instance n) curr-env)
-                        (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-call-virt-arguments n)))))
+                        (mapcan (lambda (arg) (traverse arg curr-env)) (ast-clr-call-virt-arguments n))))
                (ast-clr-new
-                (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-new-arguments n))))
+                (mapcan (lambda (arg) (traverse arg curr-env)) (ast-clr-new-arguments n)))
                (ast-clr-field
                 (if (ast-clr-field-instance n) (traverse (ast-clr-field-instance n) curr-env) nil))
                (ast-tagbody
-                (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
-                                         (remove-if (lambda (s) (typep s 'ast-label)) 
-                                                    (ast-tagbody-statements n)))))
+                (mapcan (lambda (form) (traverse form curr-env))
+                        (remove-if (lambda (s) (typep s 'ast-label))
+                                   (ast-tagbody-statements n))))
                (ast-go nil)
                (ast-label nil)
                (ast-unwind-protect
                 (append (traverse (ast-unwind-protect-protected-form n) curr-env)
-                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
-                                                 (ast-unwind-protect-cleanup-forms n)))))
+                        (mapcan (lambda (form) (traverse form curr-env))
+                                (ast-unwind-protect-cleanup-forms n))))
                (ast-block
-                (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-block-body n))))
+                (mapcan (lambda (form) (traverse form curr-env)) (ast-block-body n)))
                (ast-return-from
                 (traverse (ast-return-from-value n) curr-env))
                (ast-catch
                 (append (traverse (ast-catch-tag n) curr-env)
-                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-catch-body n)))))
+                        (mapcan (lambda (form) (traverse form curr-env)) (ast-catch-body n))))
                (ast-throw
                 (append (traverse (ast-throw-tag n) curr-env)
                         (traverse (ast-throw-value n) curr-env))))))
