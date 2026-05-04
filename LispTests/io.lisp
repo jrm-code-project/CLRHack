@@ -160,7 +160,11 @@ compatible element-types."
   (let ((output-position 0)
         (input-position 0))
     (unless (zerop start)
-      ;; FIXME add platform specific optimization to skip seekable streams
+      ;; Attempt to use file-position to skip seekable streams
+      (let ((file-pos (ignore-errors (file-position input))))
+        (when (and file-pos
+                   (ignore-errors (file-position input (+ file-pos start))))
+          (setf input-position start)))
       (loop while (< input-position start)
             do (let ((n (read-sequence buffer input
                                        :end (min (length buffer)
