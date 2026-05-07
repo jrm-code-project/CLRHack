@@ -115,6 +115,36 @@
    (instance :initarg :instance :accessor ast-clr-field-instance))
   (:documentation "A direct access to a .NET field (static if instance is NIL)."))
 
+(defclass ast-dotnet-static-call (ast-node)
+  ((method-name :initarg :method-name :accessor ast-dotnet-static-call-method-name)
+   (arguments :initarg :arguments :accessor ast-dotnet-static-call-arguments))
+  (:documentation "A Javadot static method call."))
+
+(defclass ast-dotnet-instance-call (ast-node)
+  ((method-name :initarg :method-name :accessor ast-dotnet-instance-call-method-name)
+   (instance :initarg :instance :accessor ast-dotnet-instance-call-instance)
+   (arguments :initarg :arguments :accessor ast-dotnet-instance-call-arguments))
+  (:documentation "A Javadot instance method call."))
+
+(defclass ast-dotnet-property (ast-node)
+  ((property-name :initarg :property-name :accessor ast-dotnet-property-name))
+  (:documentation "A Javadot static property access."))
+
+(defclass ast-dotnet-instance-property (ast-node)
+  ((property-name :initarg :property-name :accessor ast-dotnet-instance-property-name)
+   (instance :initarg :instance :accessor ast-dotnet-instance-property-instance))
+  (:documentation "A Javadot instance property access."))
+
+(defclass ast-dotnet-field (ast-node)
+  ((field-name :initarg :field-name :accessor ast-dotnet-field-name))
+  (:documentation "A Javadot static field access."))
+
+(defclass ast-dotnet-instance-field (ast-node)
+  ((field-name :initarg :field-name :accessor ast-dotnet-instance-field-name)
+   (instance :initarg :instance :accessor ast-dotnet-instance-field-instance))
+  (:documentation "A Javadot instance field access."))
+
+
 
 (defvar *tag-id-counter* 0)
 (defun next-tag-id () (incf *tag-id-counter*))
@@ -262,6 +292,64 @@
         `(let ,(mapcar (lambda (v) `(,v nil)) vars)
            ,@(mapcar (lambda (v val) `(setq ,v ,val)) vars vals)
            ,@body))))
+  (register-macro 'let-dynamic
+    (lambda (bindings &rest body)
+      (let ((temps (mapcar (lambda (b) (gensym "NEW")) bindings))
+            (olds (mapcar (lambda (b) (gensym "OLD")) bindings))
+            (vars (mapcar (lambda (b) (if (consp b) (car b) b)) bindings))
+            (vals (mapcar (lambda (b) (if (consp b) (cadr b) nil)) bindings)))
+        `(let ,(mapcar (lambda (temp val) (list temp val)) temps vals)
+           (let ,(mapcar (lambda (old var) (list old var)) olds vars)
+             (unwind-protect
+                 (progn
+                   ,@(mapcar (lambda (var temp) `(setq ,var ,temp)) vars temps)
+                   ,@body)
+               ,@(mapcar (lambda (var old) `(setq ,var ,old)) vars olds)))))))
+  (register-macro 'let
+    (lambda (bindings &rest body)
+      (let ((lexicals nil)
+            (dynamics nil))
+        (dolist (b bindings)
+          (let* ((name (if (consp b) (car b) b))
+                 (val (if (consp b) (cadr b) nil))
+                 (name-str (string name)))
+            (if (and (> (length name-str) 2)
+                     (char= (char name-str 0) #\*)
+                     (char= (char name-str (1- (length name-str))) #\*))
+                (push (list name val) dynamics)
+                (push (list name val) lexicals))))
+        (setq lexicals (nreverse lexicals))
+        (setq dynamics (nreverse dynamics))
+        (let ((inner-body (if dynamics
+                              `((let-dynamic ,dynamics ,@body))
+                              body)))
+          (if lexicals
+              `(%let ,lexicals ,@inner-body)
+              `(progn ,@inner-body))))))
+  (register-macro 'get
+    (lambda (sym ind)
+      `(clr-call-virt ,sym "[LispBase]Lisp.Symbol" "Get" ("object" "object") ,ind)))
+  (register-macro 'put
+    (lambda (sym ind val)
+      `(clr-call-virt ,sym "[LispBase]Lisp.Symbol" "Put" ("void" "object" "object") ,ind ,val)))
+  (register-macro 'make-array
+    (lambda (size)
+      `(clr-call "[LispBase]Lisp.Vector" "MakeArray" ("object" "object") ,size)))
+  (register-macro 'aref
+    (lambda (arr idx)
+      `(clr-call "[LispBase]Lisp.Vector" "Aref" ("object" "object" "object") ,arr ,idx)))
+  (register-macro 'aset
+    (lambda (arr idx val)
+      `(clr-call "[LispBase]Lisp.Vector" "Aset" ("object" "object" "object" "object") ,arr ,idx ,val)))
+  (register-macro 'time
+    (lambda (form)
+      (let ((sw (gensym "SW"))
+            (result (gensym "RESULT")))
+        `(let ((,sw (clr-call "[LispBase]Lisp.Timing" "Start" "object")))
+           (let ((,result ,form))
+             (print "Elapsed ms:")
+             (print (clr-call "[LispBase]Lisp.Timing" "ElapsedMilliseconds" "object" ,sw))
+             ,result)))))
   (register-macro 'flet
     (lambda (bindings &rest body)
       `(let ,(mapcar (lambda (b)
@@ -351,6 +439,30 @@
   (if (ast-clr-field-instance node)
       (compute-free-vars (ast-clr-field-instance node))
       nil))
+
+(defmethod compute-free-vars ((node ast-dotnet-static-call))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-dotnet-static-call-arguments node)
+          :initial-value nil))
+
+(defmethod compute-free-vars ((node ast-dotnet-instance-call))
+  (union (compute-free-vars (ast-dotnet-instance-call-instance node))
+         (reduce (lambda (a b) (union a (compute-free-vars b)))
+                 (ast-dotnet-instance-call-arguments node)
+                 :initial-value nil)))
+
+(defmethod compute-free-vars ((node ast-dotnet-property))
+  nil)
+
+(defmethod compute-free-vars ((node ast-dotnet-instance-property))
+  (compute-free-vars (ast-dotnet-instance-property-instance node)))
+
+(defmethod compute-free-vars ((node ast-dotnet-field))
+  nil)
+
+(defmethod compute-free-vars ((node ast-dotnet-instance-field))
+  (compute-free-vars (ast-dotnet-instance-field-instance node)))
+
 
 (defmethod compute-free-vars ((node ast-tagbody))
   (reduce (lambda (a b) (union a (compute-free-vars b)))
@@ -478,6 +590,33 @@
                  :field-name (ast-clr-field-field-name node)
                  :instance (when (ast-clr-field-instance node)
                              (closure-convert (ast-clr-field-instance node)))))
+
+(defmethod closure-convert ((node ast-dotnet-static-call))
+  (make-instance 'ast-dotnet-static-call
+                 :method-name (ast-dotnet-static-call-method-name node)
+                 :arguments (mapcar #'closure-convert (ast-dotnet-static-call-arguments node))))
+
+(defmethod closure-convert ((node ast-dotnet-instance-call))
+  (make-instance 'ast-dotnet-instance-call
+                 :method-name (ast-dotnet-instance-call-method-name node)
+                 :instance (closure-convert (ast-dotnet-instance-call-instance node))
+                 :arguments (mapcar #'closure-convert (ast-dotnet-instance-call-arguments node))))
+
+(defmethod closure-convert ((node ast-dotnet-property))
+  node)
+
+(defmethod closure-convert ((node ast-dotnet-instance-property))
+  (make-instance 'ast-dotnet-instance-property
+                 :property-name (ast-dotnet-instance-property-name node)
+                 :instance (closure-convert (ast-dotnet-instance-property-instance node))))
+
+(defmethod closure-convert ((node ast-dotnet-field))
+  node)
+
+(defmethod closure-convert ((node ast-dotnet-instance-field))
+  (make-instance 'ast-dotnet-instance-field
+                 :field-name (ast-dotnet-instance-field-name node)
+                 :instance (closure-convert (ast-dotnet-instance-field-instance node))))
 
 (defmethod closure-convert ((node ast-tagbody))
   (make-instance 'ast-tagbody
@@ -618,6 +757,33 @@
                  :field-name (ast-clr-field-field-name node)
                  :instance (when (ast-clr-field-instance node)
                              (lambda-lift (ast-clr-field-instance node)))))
+
+(defmethod lambda-lift ((node ast-dotnet-static-call))
+  (make-instance 'ast-dotnet-static-call
+                 :method-name (ast-dotnet-static-call-method-name node)
+                 :arguments (mapcar #'lambda-lift (ast-dotnet-static-call-arguments node))))
+
+(defmethod lambda-lift ((node ast-dotnet-instance-call))
+  (make-instance 'ast-dotnet-instance-call
+                 :method-name (ast-dotnet-instance-call-method-name node)
+                 :instance (lambda-lift (ast-dotnet-instance-call-instance node))
+                 :arguments (mapcar #'lambda-lift (ast-dotnet-instance-call-arguments node))))
+
+(defmethod lambda-lift ((node ast-dotnet-property))
+  node)
+
+(defmethod lambda-lift ((node ast-dotnet-instance-property))
+  (make-instance 'ast-dotnet-instance-property
+                 :property-name (ast-dotnet-instance-property-name node)
+                 :instance (lambda-lift (ast-dotnet-instance-property-instance node))))
+
+(defmethod lambda-lift ((node ast-dotnet-field))
+  node)
+
+(defmethod lambda-lift ((node ast-dotnet-instance-field))
+  (make-instance 'ast-dotnet-instance-field
+                 :field-name (ast-dotnet-instance-field-name node)
+                 :instance (lambda-lift (ast-dotnet-instance-field-instance node))))
 
 (defmethod lambda-lift ((node ast-tagbody))
   (make-instance 'ast-tagbody
@@ -867,6 +1033,35 @@
                          :field-name (second args)
                          :instance (when (third args) (lisp->ast (third args) env tags-env blocks-env current-scope))))
 
+         (dotnet-static-call
+          (make-instance 'ast-dotnet-static-call
+                         :method-name (first args)
+                         :arguments (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (rest args))))
+
+         (dotnet-instance-call
+          (make-instance 'ast-dotnet-instance-call
+                         :method-name (first args)
+                         :instance (lisp->ast (second args) env tags-env blocks-env current-scope)
+                         :arguments (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (cddr args))))
+
+         (dotnet-property
+          (make-instance 'ast-dotnet-property
+                         :property-name (first args)))
+
+         (dotnet-instance-property
+          (make-instance 'ast-dotnet-instance-property
+                         :property-name (first args)
+                         :instance (lisp->ast (second args) env tags-env blocks-env current-scope)))
+
+         (dotnet-field
+          (make-instance 'ast-dotnet-field
+                         :field-name (first args)))
+
+         (dotnet-instance-field
+          (make-instance 'ast-dotnet-instance-field
+                         :field-name (first args)
+                         :instance (lisp->ast (second args) env tags-env blocks-env current-scope)))
+
          (defclass
           (let* ((name (first args))
                  (superclasses (second args))
@@ -891,7 +1086,7 @@
                            :qualifiers qualifiers
                            :specialized-lambda-list lambda-list
                            :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env new-scope)) body))))
-         (let
+         (%let
           (let* ((new-env env)
                  (bindings (mapcar (lambda (b)
                                      (let* ((name (if (consp b) (car b) b))
@@ -915,12 +1110,15 @@
                            :params params
                            :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env new-scope)) (rest args)))))
          (t
-          (make-instance 'ast-application
-                         :operator (if (symbolp op)
-                                       (let ((alpha (cdr (assoc op env))))
-                                         (make-instance 'ast-variable :name op :alpha-name (or alpha op)))
-                                       (lisp->ast op env tags-env blocks-env current-scope))
-                         :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args))))))
+          (if (and (consp op)
+                   (member (car op) '(dotnet-static-call dotnet-instance-call dotnet-property dotnet-instance-property dotnet-field dotnet-instance-field)))
+              (lisp->ast (append op args) env tags-env blocks-env current-scope)
+              (make-instance 'ast-application
+                             :operator (if (symbolp op)
+                                           (let ((alpha (cdr (assoc op env))))
+                                             (make-instance 'ast-variable :name op :alpha-name (or alpha op)))
+                                           (lisp->ast op env tags-env blocks-env current-scope))
+                             :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args))))))))
     (t (error "Unknown expression type: ~A" expr))))
 
 ;;; Scope Analysis
@@ -987,6 +1185,17 @@
                 (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-clr-new-arguments n))))
                (ast-clr-field
                 (if (ast-clr-field-instance n) (traverse (ast-clr-field-instance n) curr-env) nil))
+               (ast-dotnet-static-call
+                (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-dotnet-static-call-arguments n))))
+               (ast-dotnet-instance-call
+                (append (traverse (ast-dotnet-instance-call-instance n) curr-env)
+                        (reduce #'append (mapcar (lambda (arg) (traverse arg curr-env)) (ast-dotnet-instance-call-arguments n)))))
+               (ast-dotnet-property nil)
+               (ast-dotnet-instance-property
+                (traverse (ast-dotnet-instance-property-instance n) curr-env))
+               (ast-dotnet-field nil)
+               (ast-dotnet-instance-field
+                (traverse (ast-dotnet-instance-field-instance n) curr-env))
                (ast-tagbody
                 (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
                                          (remove-if (lambda (s) (typep s 'ast-label)) 
@@ -1152,6 +1361,35 @@
                  :field-name (ast-clr-field-field-name node)
                  :instance (when (ast-clr-field-instance node)
                              (analyze-environment (ast-clr-field-instance node) env mutated))))
+
+(defmethod analyze-environment ((node ast-dotnet-static-call) env &optional mutated)
+  (make-instance 'ast-dotnet-static-call
+                 :method-name (ast-dotnet-static-call-method-name node)
+                 :arguments (mapcar (lambda (arg) (analyze-environment arg env mutated))
+                                    (ast-dotnet-static-call-arguments node))))
+
+(defmethod analyze-environment ((node ast-dotnet-instance-call) env &optional mutated)
+  (make-instance 'ast-dotnet-instance-call
+                 :method-name (ast-dotnet-instance-call-method-name node)
+                 :instance (analyze-environment (ast-dotnet-instance-call-instance node) env mutated)
+                 :arguments (mapcar (lambda (arg) (analyze-environment arg env mutated))
+                                    (ast-dotnet-instance-call-arguments node))))
+
+(defmethod analyze-environment ((node ast-dotnet-property) env &optional mutated)
+  node)
+
+(defmethod analyze-environment ((node ast-dotnet-instance-property) env &optional mutated)
+  (make-instance 'ast-dotnet-instance-property
+                 :property-name (ast-dotnet-instance-property-name node)
+                 :instance (analyze-environment (ast-dotnet-instance-property-instance node) env mutated)))
+
+(defmethod analyze-environment ((node ast-dotnet-field) env &optional mutated)
+  node)
+
+(defmethod analyze-environment ((node ast-dotnet-instance-field) env &optional mutated)
+  (make-instance 'ast-dotnet-instance-field
+                 :field-name (ast-dotnet-instance-field-name node)
+                 :instance (analyze-environment (ast-dotnet-instance-field-instance node) env mutated)))
 
 (defmethod analyze-environment ((node ast-tagbody) env &optional mutated)
   (make-instance 'ast-tagbody

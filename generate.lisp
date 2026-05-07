@@ -162,6 +162,89 @@
                                      (ast-clr-field-type-name node)
                                      (ast-clr-field-field-name node)))))))
 
+(defmethod generate-step1 ((node ast-dotnet-static-call))
+  (let* ((method-name (ast-dotnet-static-call-method-name node))
+         (dot-pos (position #\. method-name :from-end t))
+         (type-name (subseq method-name 0 dot-pos))
+         (method (subseq method-name (1+ dot-pos)))
+         (n-args (length (ast-dotnet-static-call-arguments node))))
+    (mapc #'generate-step1 (ast-dotnet-static-call-arguments node))
+    (let ((args-array-temp (register-local "ARGS_TEMP")))
+      (setf (ast-basic-block node)
+            (append
+             (list (il:ldc.i4 n-args)
+                   (il:newarr "[mscorlib]System.Object")
+                   (il:stloc args-array-temp))
+             (loop for i from (1- n-args) downto 0
+                   append (list (il:ldloc args-array-temp)
+                                (il:ldc.i4 i)
+                                (il:stelem.ref)
+                                (il:ldloc args-array-temp)
+                                (il:ldc.i4 i)
+                                (il:ldelem.ref)))
+             ;; Wait, the items are on the stack. Let's do it right.
+             ;; Array is created and in ARGS_TEMP.
+             ;; The arguments are currently on the stack from evaluating them.
+             ;; We pop them into the array in reverse order.
+             (loop for i from (1- n-args) downto 0
+                   append (list (il:stloc "TEMP_ARG") ; Need a temp local to pop the arg
+                                (il:ldloc args-array-temp)
+                                (il:ldc.i4 i)
+                                (il:ldloc "TEMP_ARG")
+                                (il:stelem.ref)))
+             (list (il:ldstr type-name)
+                   (il:ldstr method)
+                   (il:ldloc args-array-temp)
+                   (il:call :method "StaticCall" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "string" "object[]"))))))))
+
+(defmethod generate-step1 ((node ast-dotnet-instance-call))
+  (let* ((method-name (ast-dotnet-instance-call-method-name node))
+         (n-args (length (ast-dotnet-instance-call-arguments node))))
+    (generate-step1 (ast-dotnet-instance-call-instance node))
+    (mapc #'generate-step1 (ast-dotnet-instance-call-arguments node))
+    (let ((args-array-temp (register-local "ARGS_TEMP"))
+          (instance-temp (register-local "INST_TEMP"))
+          (arg-temp (register-local "TEMP_ARG")))
+      (setf (ast-basic-block node)
+            (append
+             (list (il:ldc.i4 n-args)
+                   (il:newarr "[mscorlib]System.Object")
+                   (il:stloc args-array-temp))
+             (loop for i from (1- n-args) downto 0
+                   append (list (il:stloc arg-temp)
+                                (il:ldloc args-array-temp)
+                                (il:ldc.i4 i)
+                                (il:ldloc arg-temp)
+                                (il:stelem.ref)))
+             (list (il:stloc instance-temp)
+                   (il:ldstr method-name)
+                   (il:ldloc instance-temp)
+                   (il:ldloc args-array-temp)
+                   (il:call :method "InstanceCall" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "object" "object[]"))))))))
+
+(defmethod generate-step1 ((node ast-dotnet-property))
+  (setf (ast-basic-block node)
+        (list (il:ldstr (ast-dotnet-property-name node))
+              (il:call :method "GetStaticProperty" :class "[LispBase]Lisp.Interop" :return "object" :args '("string")))))
+
+(defmethod generate-step1 ((node ast-dotnet-instance-property))
+  (generate-step1 (ast-dotnet-instance-property-instance node))
+  (setf (ast-basic-block node)
+        (list (il:ldstr (ast-dotnet-instance-property-name node))
+              (il:call :method "GetInstanceProperty" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "object")))))
+
+(defmethod generate-step1 ((node ast-dotnet-field))
+  (setf (ast-basic-block node)
+        (list (il:ldstr (ast-dotnet-field-name node))
+              (il:call :method "GetStaticField" :class "[LispBase]Lisp.Interop" :return "object" :args '("string")))))
+
+(defmethod generate-step1 ((node ast-dotnet-instance-field))
+  (generate-step1 (ast-dotnet-instance-field-instance node))
+  (setf (ast-basic-block node)
+        (list (il:ldstr (ast-dotnet-instance-field-name node))
+              (il:call :method "GetInstanceField" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "object")))))
+
+
 (defmethod generate-step1 ((node ast-tagbody))
   (mapc #'generate-step1 (ast-tagbody-statements node)))
 
@@ -552,12 +635,35 @@
          (code (append operands-code (ast-basic-block node))))
     (if tail-p (append code (list (il:ret))) code)))
 
-(defmethod generate-step2 ((node ast-clr-field) &optional tail-p)
-  (let* ((instance-code (if (ast-clr-field-instance node)
-                            (generate-step2 (ast-clr-field-instance node) nil)
-                            nil))
+(defmethod generate-step2 ((node ast-dotnet-static-call) &optional tail-p)
+  (let* ((operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-dotnet-static-call-arguments node))))
+         (code (append operands-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-dotnet-instance-call) &optional tail-p)
+  (let* ((instance-code (generate-step2 (ast-dotnet-instance-call-instance node) nil))
+         (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-dotnet-instance-call-arguments node))))
+         (code (append instance-code operands-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-dotnet-property) &optional tail-p)
+  (let ((code (ast-basic-block node)))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-dotnet-instance-property) &optional tail-p)
+  (let* ((instance-code (generate-step2 (ast-dotnet-instance-property-instance node) nil))
          (code (append instance-code (ast-basic-block node))))
     (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-dotnet-field) &optional tail-p)
+  (let ((code (ast-basic-block node)))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-dotnet-instance-field) &optional tail-p)
+  (let* ((instance-code (generate-step2 (ast-dotnet-instance-field-instance node) nil))
+         (code (append instance-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
 
 (defmethod generate-step2 ((node ast-tagbody) &optional tail-p)
   (let ((body-code (loop for form in (ast-tagbody-statements node)
