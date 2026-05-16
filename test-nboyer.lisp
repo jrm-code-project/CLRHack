@@ -97,16 +97,14 @@
 (defun rewrite-with-lemmas (term)
   (if (atom term)
       term
-      (let ((lemmas (getprop (car term) 'lemmas)))
-        (loop-lemmas term lemmas))))
+      (loop-lemmas term (getprop (car term) 'lemmas))))
 
 (defun loop-lemmas (term lemmas)
   (if (null lemmas)
       term
-      (let ((alist (unify term (second (car lemmas)) '((win . win)))))
-        (if alist
-            (rewrite (apply-subst alist (third (car lemmas))))
-            (loop-lemmas term (cdr lemmas))))))
+      (if (unify term (second (car lemmas)) '((win . win)))
+          (rewrite (apply-subst (unify term (second (car lemmas)) '((win . win))) (third (car lemmas))))
+          (loop-lemmas term (cdr lemmas)))))
 
 (defun unify (x y alist)
   (cond ((equal x y) alist)

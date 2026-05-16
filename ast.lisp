@@ -1118,7 +1118,7 @@
                                            (let ((alpha (cdr (assoc op env))))
                                              (make-instance 'ast-variable :name op :alpha-name (or alpha op)))
                                            (lisp->ast op env tags-env blocks-env current-scope))
-                             :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args))))))))
+                             :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args)))))))
     (t (error "Unknown expression type: ~A" expr))))
 
 ;;; Scope Analysis
