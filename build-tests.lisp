@@ -32,14 +32,14 @@
                ("test-block.lisp" . "BlockTest")
                ("test-catch.lisp" . "CatchTest")
                ("bank-test.lisp" . "BankTest")
-
-
-
-
-
-
-
-
+               ("test-ctak.lisp" . "CtakBenchmark")
+               ("test-ltak.lisp" . "LtakBenchmark")
+               ("test-stak.lisp" . "StakBenchmark")
+               ("test-deriv.lisp" . "DerivBenchmark")
+               ("test-dderiv.lisp" . "DderivBenchmark")
+               ("test-div2.lisp" . "Div2Benchmark")
+               ("test-puzzle.lisp" . "PuzzleBenchmark")
+               ("test-triang.lisp" . "TriangBenchmark")
                ("tail-test.lisp" . "TailTest"))))
 
   (dolist (test tests)

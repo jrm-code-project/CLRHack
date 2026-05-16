@@ -366,6 +366,32 @@
                        (il:sub)
                        (il:box "int32"))))))
       ((and (typep operator 'ast-global-variable)
+            (or (eq (ast-variable-name operator) '%mul)
+                (eq (ast-variable-name operator) '*)))
+       (progn
+         (mapc #'generate-step1 (ast-application-operands node))
+         (let ((temp (register-local "TEMP_B")))
+           (setf (ast-basic-block node)
+                 (list (il:stloc temp)
+                       (il:unbox.any "int32") ; a
+                       (il:ldloc temp)
+                       (il:unbox.any "int32") ; b
+                       (il:mul)
+                       (il:box "int32"))))))
+      ((and (typep operator 'ast-global-variable)
+            (or (eq (ast-variable-name operator) '%div)
+                (eq (ast-variable-name operator) '/)))
+       (progn
+         (mapc #'generate-step1 (ast-application-operands node))
+         (let ((temp (register-local "TEMP_B")))
+           (setf (ast-basic-block node)
+                 (list (il:stloc temp)
+                       (il:unbox.any "int32") ; a
+                       (il:ldloc temp)
+                       (il:unbox.any "int32") ; b
+                       (il:div)
+                       (il:box "int32"))))))
+      ((and (typep operator 'ast-global-variable)
             (or (eq (ast-variable-name operator) '%add)
                 (eq (ast-variable-name operator) '+)))
        (progn
@@ -831,6 +857,10 @@
                      (eq (ast-variable-name operator) 'print)
                      (eq (ast-variable-name operator) '%sub)
                      (eq (ast-variable-name operator) '-)
+                     (eq (ast-variable-name operator) '%mul)
+                     (eq (ast-variable-name operator) '*)
+                     (eq (ast-variable-name operator) '%div)
+                     (eq (ast-variable-name operator) '/)
                      (eq (ast-variable-name operator) '%add)
                      (eq (ast-variable-name operator) '+)
                      (eq (ast-variable-name operator) '%lessp)
