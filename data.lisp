@@ -50,36 +50,39 @@
             (get-label inst) 
             (get-opcode inst))))
 
-(defmacro define-simple-instruction-makers (&rest opcodes)
+(defmacro define-simple-instruction-makers (&rest defs)
   `(progn
-     ,@(loop for op in opcodes
+     ,@(loop for def in defs
+             for op = (if (consp def) (car def) def)
+             for effect = (if (consp def) (cadr def) 0)
              for func-name = (intern (symbol-name op) (find-package "IL"))
              collect `(progn
                         (export ',func-name "IL")
                         (defun ,func-name (&key label)
                           (make-instance 'cil-simple-instruction
                                          :opcode ,(string-downcase (string op))
+                                         :stack-effect ,effect
                                          :label label))))))
 
 (define-simple-instruction-makers 
-  add sub mul div rem 
-  and or xor shl shr 
-  neg not 
-  nop pop dup ret 
-  ceq cgt cgt.un clt ldnull
-  endfinally throw rethrow)
+  (add -1) (sub -1) (mul -1) (div -1) (rem -1) 
+  (and -1) (or -1) (xor -1) (shl -1) (shr -1) 
+  (neg 0) (not 0) 
+  (nop 0) (pop -1) (dup 1) (ret 0) 
+  (ceq -1) (cgt -1) (cgt.un -1) (clt -1) (ldnull 1)
+  (endfinally 0) (throw -1) (rethrow 0))
 
 
 
 (define-simple-instruction-makers 
   ;; Arguments
-  ldarg.0 ldarg.1 ldarg.2 ldarg.3
+  (ldarg.0 1) (ldarg.1 1) (ldarg.2 1) (ldarg.3 1)
   ;; Locals
-  ldloc.0 ldloc.1 ldloc.2 ldloc.3
-  stloc.0 stloc.1 stloc.2 stloc.3
+  (ldloc.0 1) (ldloc.1 1) (ldloc.2 1) (ldloc.3 1)
+  (stloc.0 -1) (stloc.1 -1) (stloc.2 -1) (stloc.3 -1)
   ;; Constants
-  ldc.i4.0 ldc.i4.1 ldc.i4.2 ldc.i4.3 ldc.i4.4 
-  ldc.i4.5 ldc.i4.6 ldc.i4.7 ldc.i4.8 ldc.i4.m1)
+  (ldc.i4.0 1) (ldc.i4.1 1) (ldc.i4.2 1) (ldc.i4.3 1) (ldc.i4.4 1) 
+  (ldc.i4.5 1) (ldc.i4.6 1) (ldc.i4.7 1) (ldc.i4.8 1) (ldc.i4.m1 1))
 
 (defclass cil-operand-instruction (cil-instruction)
   ((operand :initarg :operand :accessor get-operand))
@@ -97,9 +100,11 @@
             (get-opcode inst) 
             (get-operand inst))))
 
-(defmacro define-operand-instruction-makers (class-name &rest opcodes)
+(defmacro define-operand-instruction-makers (class-name &rest defs)
   `(progn
-     ,@(loop for op in opcodes
+     ,@(loop for def in defs
+             for op = (if (consp def) (car def) def)
+             for effect = (if (consp def) (cadr def) 0)
              for func-name = (intern (symbol-name op) (find-package "IL"))
              collect `(progn
                         (export ',func-name "IL")
@@ -107,13 +112,14 @@
                           (declare (ignore label))
                           (apply #'make-instance ',class-name
                                  :opcode ,(string-downcase (string op))
+                                 :stack-effect ,effect
                                  :operand operand
                                  kwargs))))))
 
 ;;; --- Specialized Payloads ---
 
 (define-operand-instruction-makers cil-operand-instruction
-  ldfld stfld)
+  (ldfld 0) (stfld -2))
 
 (defclass cil-numeric-instruction (cil-operand-instruction)
   ((num-type :initarg :num-type :initform :int32 :accessor get-num-type))
@@ -133,7 +139,7 @@
             (get-num-type inst))))
 
 (define-operand-instruction-makers cil-numeric-instruction
-  ldc.i4 ldc.i4.s ldc.i8 ldc.r4 ldc.r8)
+  (ldc.i4 1) (ldc.i4.s 1) (ldc.i8 1) (ldc.r4 1) (ldc.r8 1))
 
 (defclass cil-variable-instruction (cil-operand-instruction)
   ((index :initarg :index :initform nil :accessor get-index)
@@ -162,7 +168,7 @@
             (get-var-kind inst))))
 
 (define-operand-instruction-makers cil-variable-instruction
-  ldloc stloc ldarg starg ldloca ldarga ldsfld stsfld)
+  (ldloc 1) (stloc -1) (ldarg 1) (starg -1) (ldloca 1) (ldarga 1) (ldsfld 1) (stsfld -1))
 
 (defclass cil-branch-instruction (cil-operand-instruction)
   ((short-p :initarg :short-p :initform nil :accessor get-short-p))
@@ -185,7 +191,7 @@
             (get-operand inst))))
 
 (define-operand-instruction-makers cil-branch-instruction
-  br brtrue brfalse beq bge bgt ble blt bne.un leave)
+  (br 0) (brtrue -1) (brfalse -1) (beq -2) (bge -2) (bgt -2) (ble -2) (blt -2) (bne.un -2) (leave 0))
 
 
 (defclass cil-call-instruction (cil-operand-instruction)
@@ -226,42 +232,50 @@
 
 (defun il::call (&key method class return args label stack-effect source-form tail-p)
   "Constructs a CIL 'call' instruction object. Now with optional tail recursion."
-  (make-instance 'cil-call-instruction
-                 :opcode "call"
-                 :operand method           
-                 :target-class class
-                 :return-type return
-                 :arg-types args
-                 :label label
-                 :stack-effect (or stack-effect 0) 
-                 :source-form source-form
-                 :tail-p tail-p))
+  (let* ((pops (length args))
+         (pushes (if (string-equal return "void") 0 1))
+         (eff (or stack-effect (- pushes pops))))
+    (make-instance 'cil-call-instruction
+                   :opcode "call"
+                   :operand method           
+                   :target-class class
+                   :return-type return
+                   :arg-types args
+                   :label label
+                   :stack-effect eff 
+                   :source-form source-form
+                   :tail-p tail-p)))
 
 (defun il::callvirt (&key method class return args label stack-effect source-form tail-p)
   "Constructs a CIL 'callvirt' instruction object. Now with optional tail recursion."
-  (make-instance 'cil-call-instruction
-                 :opcode "callvirt"
-                 :operand method
-                 :target-class class
-                 :return-type return
-                 :arg-types args
-                 :label label
-                 :stack-effect (or stack-effect 0)
-                 :source-form source-form
-                 :tail-p tail-p))
+  (let* ((pops (1+ (length args))) ; +1 for 'this'
+         (pushes (if (string-equal return "void") 0 1))
+         (eff (or stack-effect (- pushes pops))))
+    (make-instance 'cil-call-instruction
+                   :opcode "callvirt"
+                   :operand method
+                   :target-class class
+                   :return-type return
+                   :arg-types args
+                   :label label
+                   :stack-effect eff
+                   :source-form source-form
+                   :tail-p tail-p)))
 
 (defun il::newobj (&key method class return args label stack-effect source-form)
   "Constructs a CIL 'newobj' instruction object. Similar to call but for constructors."
-  (make-instance 'cil-call-instruction
-                 :opcode "newobj"
-                 :operand method
-                 :target-class class
-                 :return-type return
-                 :arg-types args
-                 :label label
-                 :stack-effect (or stack-effect 1)
-                 :source-form source-form
-                 :tail-p nil))
+  (let* ((pops (length args))
+         (eff (or stack-effect (- 1 pops))))
+    (make-instance 'cil-call-instruction
+                   :opcode "newobj"
+                   :operand method
+                   :target-class class
+                   :return-type return
+                   :arg-types args
+                   :label label
+                   :stack-effect eff
+                   :source-form source-form
+                   :tail-p nil)))
 
 (defclass cil-type-instruction (cil-operand-instruction)
   ()
@@ -278,7 +292,7 @@
             (get-operand inst))))
 
 (define-operand-instruction-makers cil-type-instruction
-  box unbox.any castclass isinst)
+  (box 0) (unbox.any 0) (castclass 0) (isinst 0))
 
 (defclass cil-string-instruction (cil-operand-instruction)
   ()
@@ -297,7 +311,7 @@
             (get-operand inst))))
 
 (define-operand-instruction-makers cil-string-instruction
-  ldstr)
+  (ldstr 1))
 
 ;;; --- The Method Container ---
 
@@ -319,6 +333,73 @@
                     :initform (make-array 0 :fill-pointer 0 :adjustable t)
                     :accessor get-instructions))
   (:documentation "A CIL method definition. Added entrypoint-p so the CLR knows where to start."))
+
+
+(defun compute-maxstack (instructions)
+  "Calculates the precise maxstack required for a sequence of CIL instructions, tracing through branches."
+  (let* ((flat-insts (make-array 0 :adjustable t :fill-pointer 0))
+         (label-to-index (make-hash-table :test 'equal))
+         (block-entries '()))
+    
+    (labels ((flatten-insts (insts)
+               (loop for inst in insts
+                     do (if (typep inst 'cil-block)
+                            (let ((hdr (get-header inst)))
+                              (cond ((and (> (length hdr) 5) (string-equal (subseq hdr 0 5) "catch"))
+                                     (push (length flat-insts) block-entries)
+                                     (vector-push-extend :catch-entry flat-insts)
+                                     (flatten-insts (get-instructions inst)))
+                                    ((string-equal hdr "finally")
+                                     (push (length flat-insts) block-entries)
+                                     (vector-push-extend :finally-entry flat-insts)
+                                     (flatten-insts (get-instructions inst)))
+                                    (t (flatten-insts (get-instructions inst)))))
+                            (progn
+                              (when (get-label inst)
+                                (setf (gethash (get-label inst) label-to-index) (length flat-insts)))
+                              (vector-push-extend inst flat-insts))))))
+      (flatten-insts instructions))
+      
+    (let ((n (length flat-insts))
+          (max-depth 0)
+          (depths (make-array (length flat-insts) :initial-element nil))
+          (queue (list (cons 0 0))))
+          
+      (dolist (idx block-entries)
+        (let ((marker (aref flat-insts idx)))
+          (if (eq marker :catch-entry)
+              (push (cons (1+ idx) 1) queue)
+              (push (cons (1+ idx) 0) queue))))
+              
+      (loop while queue do
+        (let* ((item (pop queue))
+               (idx (car item))
+               (depth (cdr item)))
+          (when (and (< idx n)
+                     (or (null (aref depths idx))
+                         (> depth (aref depths idx))))
+            (setf (aref depths idx) depth)
+            (let ((inst (aref flat-insts idx)))
+              (cond ((keywordp inst) ; skipped catch/finally entry marker
+                     (push (cons (1+ idx) depth) queue))
+                    (t
+                     (let ((new-depth (+ depth (get-stack-effect inst))))
+                       (setf max-depth (max max-depth new-depth))
+                       (let ((opcode (get-opcode inst)))
+                         (cond ((member opcode '("br" "leave") :test #'string-equal)
+                                (let ((target (gethash (get-operand inst) label-to-index)))
+                                  (when target
+                                    (push (cons target new-depth) queue))))
+                               ((member opcode '("ret" "throw" "rethrow" "endfinally") :test #'string-equal)
+                                nil)
+                               ((typep inst 'cil-branch-instruction)
+                                (let ((target (gethash (get-operand inst) label-to-index)))
+                                  (when target
+                                    (push (cons target new-depth) queue)))
+                                (push (cons (1+ idx) new-depth) queue))
+                               (t
+                                (push (cons (1+ idx) new-depth) queue)))))))))))
+      (max 8 max-depth))))
 
 ;;; --- Helper to push instructions into the vector ---
 
@@ -364,7 +445,7 @@
 (defun il::method (&key name (return-type "void") arg-types
                         (visibility :public) static-p (hidebysig-p t) virtual-p
                         specialname-p rtspecialname-p
-                        entrypoint-p (maxstack 256) locals instructions)
+                        entrypoint-p maxstack locals instructions)
   (let ((meth (make-instance 'cil-method
                              :name name
                              :return-type return-type
@@ -376,7 +457,7 @@
                              :specialname-p specialname-p
                              :rtspecialname-p rtspecialname-p
                              :entrypoint-p entrypoint-p
-                             :maxstack maxstack
+                             :maxstack (or maxstack (compute-maxstack instructions))
                              :locals locals)))
     (dolist (inst instructions)
       (add-instruction meth inst))
