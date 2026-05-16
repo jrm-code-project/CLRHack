@@ -199,12 +199,17 @@
   "The Heavy Lifter. Emits the 'tail.' prefix inline if flagged, followed by the baroque CIL signature."
   (when (get-tail-p inst)
     (format stream "tail. "))
-  (format stream "~A ~A ~A::'~A'(~{~A~^, ~})"
-          (get-opcode inst)
-          (get-return-type inst)
-          (get-target-class inst)
-          (get-operand inst)         
-          (get-arg-types inst)))
+  (let* ((ret (get-return-type inst))
+         (op (get-opcode inst))
+         (is-virt (string-equal op "callvirt"))
+         (has-inst (and (>= (length ret) 9) (string-equal "instance " (subseq ret 0 9))))
+         (print-ret (if (and is-virt (not has-inst)) (concatenate 'string "instance " ret) ret)))
+    (format stream "~A ~A ~A::'~A'(~{~A~^, ~})"
+            op
+            print-ret
+            (get-target-class inst)
+            (get-operand inst)         
+            (get-arg-types inst))))
      
 
 (defmethod print-object ((inst cil-call-instruction) stream)
@@ -339,7 +344,7 @@
     (format stream "    .entrypoint~%"))
   (format stream "    .maxstack ~D~%" (get-maxstack method))
   (when (get-locals method)
-    (format stream "    .locals init (~{~A~^, ~})~%" (get-locals method)))
+    (format stream "    .locals (~{~A~^, ~})~%" (get-locals method)))
   (let ((insts (get-instructions method)))
     (loop for i from 0 below (length insts)
           for inst = (aref insts i)
@@ -616,42 +621,8 @@
     asm))
 
 (defun il::ilasm (assembly)
-  "Dumps the assembly directly to a Windows Temp directory via WSL mount and invokes ilasm.exe."
-  (let* ((mod-name (or (get-module-name assembly)
-                       (format nil "~A.exe" (get-name assembly))))
-         (name-len (length mod-name))
-         (is-dll (and (>= name-len 4)
-                      (string-equal mod-name ".dll" :start1 (- name-len 4))))
-         (target-flag (if is-dll "/dll" "/exe"))
-         
-         ;; The Windows Executable
-         (ilasm-path "/mnt/c/Users/bitdi/.dotnet/tools/ilasm.exe")
-         
-         ;; The Shared Temp Directory
-         (wsl-temp-dir #P"/mnt/c/Windows/Temp/")
-         ;; Mint a unique filename
-         (unique-name (format nil "v-compiler-~A.il" (random 1000000)))
-         (linux-temp-file (merge-pathnames unique-name wsl-temp-dir))
-         
-         ;; The path string ilasm.exe will actually see (Windows format)
-         (win-temp-file (format nil "C:/Windows/Temp/~A" unique-name))
-         (output-flag (format nil "/output:~A" mod-name)))
-    
-    (unwind-protect
-        (progn
-          ;; 1. Write the CIL directly to the Windows Temp directory via the mount
-          (with-open-file (stream linux-temp-file :direction :output :if-exists :supersede)
-            (emit-assembly assembly stream))
-          
-          ;; 2. Invoke the Windows executable using the C:\ formatted path
-          (format t "~%;; [V-Compiler] Invoking ~A ~A ~A...~%" ilasm-path target-flag output-flag)
-          (uiop:run-program (list ilasm-path win-temp-file target-flag output-flag)
-                            :output *standard-output*
-                            :error-output *error-output*))
-      
-      ;; 3. Clean up the crime scene via the WSL path
-      (when (probe-file linux-temp-file)
-        (delete-file linux-temp-file)))))
+  "No-op. Rely on dotnet publish using IL SDK instead."
+  t)
 
 (defclass cil-block (cil-instruction)
   ((header       :initarg :header :accessor get-header)
@@ -673,6 +644,16 @@
 (defun il::catch (type instructions)
   (make-instance 'cil-block :header (format nil "catch ~A" type) :instructions instructions))
 
-(export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst il::try il::finally il::catch) "IL")
+(defun il::newarr (type-name)
+  (make-instance 'cil-instruction :opcode :newarr :label nil :string-arg type-name :stack-effect 0))
+
+(defun il::ldelem.ref ()
+  (make-instance 'cil-instruction :opcode :ldelem.ref :label nil :stack-effect -1))
+(defun il::stelem.ref ()
+  (make-instance 'cil-instruction :opcode :stelem.ref :label nil :stack-effect -3))
+(defun il::ldlen ()
+  (make-instance 'cil-instruction :opcode :ldlen :label nil :stack-effect 0))
+
+(export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst il::try il::finally il::catch il::newarr il::stelem.ref il::ldelem.ref il::ldlen) "IL")
 
 
