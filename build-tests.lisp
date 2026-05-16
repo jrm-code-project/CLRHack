@@ -40,6 +40,7 @@
                ("test-div2.lisp" . "Div2Benchmark")
                ("test-puzzle.lisp" . "PuzzleBenchmark")
                ("test-triang.lisp" . "TriangBenchmark")
+               ("test-javadot.lisp" . "JavadotTest")
                ("tail-test.lisp" . "TailTest"))))
 
   (dolist (test tests)

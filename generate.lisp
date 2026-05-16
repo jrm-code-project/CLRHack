@@ -175,14 +175,6 @@
              (list (il:ldc.i4 n-args)
                    (il:newarr "[mscorlib]System.Object")
                    (il:stloc args-array-temp))
-             (loop for i from (1- n-args) downto 0
-                   append (list (il:ldloc args-array-temp)
-                                (il:ldc.i4 i)
-                                (il:stelem.ref)
-                                (il:ldloc args-array-temp)
-                                (il:ldc.i4 i)
-                                (il:ldelem.ref)))
-             ;; Wait, the items are on the stack. Let's do it right.
              ;; Array is created and in ARGS_TEMP.
              ;; The arguments are currently on the stack from evaluating them.
              ;; We pop them into the array in reverse order.
@@ -229,9 +221,12 @@
 
 (defmethod generate-step1 ((node ast-dotnet-instance-property))
   (generate-step1 (ast-dotnet-instance-property-instance node))
-  (setf (ast-basic-block node)
-        (list (il:ldstr (ast-dotnet-instance-property-name node))
-              (il:call :method "GetInstanceProperty" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "object")))))
+  (let ((inst-temp (register-local "INST_TEMP")))
+    (setf (ast-basic-block node)
+          (list (il:stloc inst-temp)
+                (il:ldstr (ast-dotnet-instance-property-name node))
+                (il:ldloc inst-temp)
+                (il:call :method "GetInstanceProperty" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "object"))))))
 
 (defmethod generate-step1 ((node ast-dotnet-field))
   (setf (ast-basic-block node)
@@ -240,9 +235,12 @@
 
 (defmethod generate-step1 ((node ast-dotnet-instance-field))
   (generate-step1 (ast-dotnet-instance-field-instance node))
-  (setf (ast-basic-block node)
-        (list (il:ldstr (ast-dotnet-instance-field-name node))
-              (il:call :method "GetInstanceField" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "object")))))
+  (let ((inst-temp (register-local "INST_TEMP")))
+    (setf (ast-basic-block node)
+          (list (il:stloc inst-temp)
+                (il:ldstr (ast-dotnet-instance-field-name node))
+                (il:ldloc inst-temp)
+                (il:call :method "GetInstanceField" :class "[LispBase]Lisp.Interop" :return "object" :args '("string" "object"))))))
 
 
 (defmethod generate-step1 ((node ast-tagbody))
@@ -1095,7 +1093,7 @@
          (assembly-name (or output-file (pathname-name input-path)))
          (forms (with-open-file (stream input-path)
                   (let ((*package* *package*))
-                    (loop for form = (read stream nil :eof)
+                    (loop for form = (clr-read stream nil :eof)
                           until (eq form :eof)
                           if (and (consp form) (string-equal (symbol-name (car form)) "IN-PACKAGE"))
                             do (eval form)

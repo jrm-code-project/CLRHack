@@ -645,14 +645,14 @@
   (make-instance 'cil-block :header (format nil "catch ~A" type) :instructions instructions))
 
 (defun il::newarr (type-name)
-  (make-instance 'cil-instruction :opcode :newarr :label nil :string-arg type-name :stack-effect 0))
+  (make-instance 'cil-type-instruction :opcode "newarr" :operand type-name :label nil :stack-effect 0))
 
 (defun il::ldelem.ref ()
-  (make-instance 'cil-instruction :opcode :ldelem.ref :label nil :stack-effect -1))
+  (make-instance 'cil-simple-instruction :opcode "ldelem.ref" :label nil :stack-effect -1))
 (defun il::stelem.ref ()
-  (make-instance 'cil-instruction :opcode :stelem.ref :label nil :stack-effect -3))
+  (make-instance 'cil-simple-instruction :opcode "stelem.ref" :label nil :stack-effect -3))
 (defun il::ldlen ()
-  (make-instance 'cil-instruction :opcode :ldlen :label nil :stack-effect 0))
+  (make-instance 'cil-simple-instruction :opcode "ldlen" :label nil :stack-effect 0))
 
 (export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst il::try il::finally il::catch il::newarr il::stelem.ref il::ldelem.ref il::ldlen) "IL")
 
