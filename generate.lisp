@@ -261,8 +261,39 @@
   (mapc #'generate-step1 (ast-unwind-protect-cleanup-forms node))
   (setf (ast-basic-block node) nil))
 
+
+(defun block-needs-result-temp-p (node)
+  (let ((target-label (ast-block-end-label node)))
+    (labels ((scan (n)
+               (typecase n
+                 (ast-return-from 
+                  (if (string-equal (ast-return-from-target-label n) target-label)
+                      t
+                      (scan (ast-return-from-value n))))
+                 (ast-if (or (scan (ast-if-test n)) (scan (ast-if-consequent n)) (scan (ast-if-alternate n))))
+                 (ast-progn (some #'scan (ast-progn-forms n)))
+                 (ast-let (or (some (lambda (b) (scan (cadr b))) (ast-let-bindings n))
+                              (some #'scan (ast-let-body n))))
+                 (ast-setq (scan (ast-setq-value n)))
+                 (ast-application (or (scan (ast-application-operator n))
+                                      (some #'scan (ast-application-operands n))))
+                 (ast-clr-call (some #'scan (ast-clr-call-arguments n)))
+                 (ast-clr-call-virt (or (scan (ast-clr-call-virt-instance n))
+                                        (some #'scan (ast-clr-call-virt-arguments n))))
+                 (ast-clr-new (some #'scan (ast-clr-new-arguments n)))
+                 (ast-clr-field (when (ast-clr-field-instance n) (scan (ast-clr-field-instance n))))
+                 (ast-tagbody (some #'scan (ast-tagbody-statements n)))
+                 (ast-unwind-protect (or (scan (ast-unwind-protect-protected-form n))
+                                         (some #'scan (ast-unwind-protect-cleanup-forms n))))
+                 (ast-catch (or (scan (ast-catch-tag n))
+                                (some #'scan (ast-catch-body n))))
+                 (ast-throw (or (scan (ast-throw-tag n))
+                                (scan (ast-throw-value n))))
+                 (ast-block (some #'scan (ast-block-body n)))
+                 (t nil))))
+      (some #'scan (ast-block-body node)))))
+
 (defmethod generate-step1 ((node ast-block))
-  (setf (ast-block-result-temp node) (register-local (ast-block-result-temp node)))
   (mapc #'generate-step1 (ast-block-body node))
   (setf (ast-basic-block node) nil))
 
@@ -655,6 +686,11 @@
          (code (append instance-code (ast-basic-block node))))
     (if tail-p (append code (list (il:ret))) code)))
 
+(defmethod generate-step2 ((node ast-clr-field) &optional tail-p)
+  (let* ((instance-code (when (ast-clr-field-instance node) (generate-step2 (ast-clr-field-instance node) nil)))
+         (code (append instance-code (ast-basic-block node))))
+    (if tail-p (append code (list (il:ret))) code)))
+
 (defmethod generate-step2 ((node ast-dotnet-field) &optional tail-p)
   (let ((code (ast-basic-block node)))
     (if tail-p (append code (list (il:ret))) code)))
@@ -698,27 +734,31 @@
 (defmethod generate-step2 ((node ast-block) &optional tail-p)
   (let* ((forms (ast-block-body node))
          (result-temp (ast-block-result-temp node))
+         (needs-temp (block-needs-result-temp-p node))
+         (temp (when needs-temp (register-local result-temp)))
          (body-code
           (if (null forms)
-              (list (il:ldnull) (il:stloc result-temp))
+              (if needs-temp (list (il:ldnull) (il:stloc temp)) (list (il:ldnull)))
               (loop for form in forms
                     for i from 1
                     for is-last = (= i (length forms))
-                    append (generate-step2 form nil)
-                    if is-last
-                      append (list (il:stloc result-temp))
-                    else
-                      append (list (il:pop)))))
-         (code (append body-code 
-                       (list (il:nop :label (sanitize-identifier (ast-block-end-label node)))
-                             (il:ldloc result-temp)))))
-    (if tail-p (append code (list (il:ret))) code)))
+                    append (generate-step2 form (if (and is-last (not needs-temp)) tail-p nil))
+                    if (and is-last needs-temp)
+                      append (list (il:stloc temp))
+                    else if (and (not is-last) (not (typep form 'ast-return-from)))
+                      append (list (il:pop))))))
+    (let ((code (append body-code 
+                        (list (il:nop :label (sanitize-identifier (ast-block-end-label node))))
+                        (when needs-temp (list (il:ldloc temp))))))
+      (if tail-p
+          (append code (list (il:ret)))
+          code))))
 
 (defmethod generate-step2 ((node ast-return-from) &optional tail-p)
   (declare (ignore tail-p))
   (let ((result-temp (ast-return-from-result-temp node)))
     (append (generate-step2 (ast-return-from-value node) nil)
-            (list (il:stloc result-temp)
+            (list (il:stloc (sanitize-identifier result-temp))
                   (il:leave (sanitize-identifier (ast-return-from-target-label node)))))))
 
 (defmethod generate-step2 ((node ast-catch) &optional tail-p)
@@ -1081,7 +1121,7 @@
                 (format stream "  </ItemGroup>~%")
                 (format stream "</Project>~%"))
               
-              (uiop:run-program (list "dotnet.exe" "publish" (format nil "~A.ilproj" assembly-name) "-c" "Release" "-r" "win-x64" "--self-contained" "true" "-p:PublishSingleFile=true" "-nologo")
+              (uiop:run-program (list "dotnet" "build" (format nil "~A.ilproj" assembly-name) "-c" "Release" "-p:UseAppHost=false" "-p:UseCommonOutputDirectory=true" "-nologo")
                                 :output *standard-output*
                                 :error-output *error-output*)
-              (values (probe-file (format nil "bin/Release/net8.0/win-x64/publish/~A.exe" assembly-name)) nil nil))))))))
+              (values (probe-file (format nil "bin/Release/net8.0/~A.dll" assembly-name)) nil nil))))))))
