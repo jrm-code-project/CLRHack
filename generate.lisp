@@ -116,6 +116,9 @@
       (register-local (second key))
       (when (fourth key) (register-local (fourth key)))
       (generate-step1 (third key)))
+    (dolist (aux (ast-lambda-aux-params node))
+      (register-local (first aux))
+      (generate-step1 (second aux)))
     (mapc #'generate-step1 (ast-lambda-body node))
     (setf (ast-basic-block node) nil)))
 
@@ -138,6 +141,9 @@
       (register-local (second key))
       (when (fourth key) (register-local (fourth key)))
       (generate-step1 (third key)))
+    (dolist (aux (ast-toplevel-defun-aux-params node))
+      (register-local (first aux))
+      (generate-step1 (second aux)))
     (mapc #'generate-step1 (ast-toplevel-defun-body node))
     (setf (ast-basic-block node) nil)))
 
@@ -1118,6 +1124,10 @@
                                                  (push (il:ldnull) prologue)
                                                  (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))
                                                (push (il:nop :label end-label) prologue)))))
+                                (loop for (alpha init-ast) in (ast-lambda-aux-params lambda-node)
+                                      do (progn
+                                           (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
+                                           (push (il:stloc (sanitize-identifier (string alpha))) prologue)))
                                 (let ((full-prologue (nreverse prologue)))
                                   (if has-rest
                                       (let ((list-insts (list (il:ldnull))))
@@ -1203,6 +1213,10 @@
                                                        (push (il:ldnull) prologue)
                                                        (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))
                                                      (push (il:nop :label end-label) prologue)))))
+                                      (loop for (alpha init-ast) in (ast-toplevel-defun-aux-params defun-node)
+                                            do (progn
+                                                 (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
+                                                 (push (il:stloc (sanitize-identifier (string alpha))) prologue)))
                                       (let ((full-prologue (nreverse prologue)))
                                         (if has-rest
                                             (let ((list-insts (list (il:ldnull))))

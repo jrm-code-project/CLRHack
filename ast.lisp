@@ -60,6 +60,7 @@
    (rest-param :initarg :rest-param :accessor ast-lambda-rest-param :initform nil)
    (key-params :initarg :key-params :accessor ast-lambda-key-params :initform nil)
    (allow-other-keys :initarg :allow-other-keys :accessor ast-lambda-allow-other-keys :initform nil)
+   (aux-params :initarg :aux-params :accessor ast-lambda-aux-params :initform nil)
    (body :initarg :body :accessor ast-lambda-body)
    (free-vars :initform nil :accessor ast-lambda-free-vars)
    (lifted-name :initform nil :accessor ast-lambda-lifted-name))
@@ -86,6 +87,7 @@
    (rest-param :initarg :rest-param :accessor ast-toplevel-defun-rest-param :initform nil)
    (key-params :initarg :key-params :accessor ast-toplevel-defun-key-params :initform nil)
    (allow-other-keys :initarg :allow-other-keys :accessor ast-toplevel-defun-allow-other-keys :initform nil)
+   (aux-params :initarg :aux-params :accessor ast-toplevel-defun-aux-params :initform nil)
    (body :initarg :body :accessor ast-toplevel-defun-body))
   (:documentation "A top-level DEFUN definition that should be compiled to a static method."))
 
@@ -418,6 +420,7 @@
          (opt-params (ast-lambda-optional-params node))
          (rest-param (ast-lambda-rest-param node))
          (key-params (ast-lambda-key-params node))
+         (aux-params (ast-lambda-aux-params node))
          (all-bound (append params
                             (loop for (alpha init sup) in opt-params
                                   collect alpha
@@ -425,7 +428,9 @@
                             (when rest-param (list rest-param))
                             (loop for (kw alpha init sup) in key-params
                                   collect alpha
-                                  when sup collect sup)))
+                                  when sup collect sup)
+                            (loop for (alpha init) in aux-params
+                                  collect alpha)))
          (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                  (ast-lambda-body node)
                                  :initial-value nil))
@@ -435,7 +440,10 @@
          (key-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                 (mapcar #'third key-params)
                                 :initial-value nil))
-         (free-vars (set-difference (union body-free-vars (union opt-free-vars key-free-vars)) all-bound)))
+         (aux-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (mapcar #'second aux-params)
+                                :initial-value nil))
+         (free-vars (set-difference (union body-free-vars (union opt-free-vars (union key-free-vars aux-free-vars))) all-bound)))
     (setf (ast-lambda-free-vars node) free-vars)
     free-vars))
 
@@ -538,6 +546,7 @@
          (opt-params (ast-toplevel-defun-optional-params node))
          (rest-param (ast-toplevel-defun-rest-param node))
          (key-params (ast-toplevel-defun-key-params node))
+         (aux-params (ast-toplevel-defun-aux-params node))
          (all-bound (append params
                             (loop for (alpha init sup) in opt-params
                                   collect alpha
@@ -545,7 +554,9 @@
                             (when rest-param (list rest-param))
                             (loop for (kw alpha init sup) in key-params
                                   collect alpha
-                                  when sup collect sup)))
+                                  when sup collect sup)
+                            (loop for (alpha init) in aux-params
+                                  collect alpha)))
          (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                  (ast-toplevel-defun-body node)
                                  :initial-value nil))
@@ -554,8 +565,11 @@
                                 :initial-value nil))
          (key-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                 (mapcar #'third key-params)
+                                :initial-value nil))
+         (aux-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (mapcar #'second aux-params)
                                 :initial-value nil)))
-    (set-difference (union body-free-vars (union opt-free-vars key-free-vars)) all-bound)))
+    (set-difference (union body-free-vars (union opt-free-vars (union key-free-vars aux-free-vars))) all-bound)))
 
 (defgeneric closure-convert (node)
   (:documentation "Walks the AST and transforms LAMBDA expressions into explicit closure instantiations using .ctor."))
@@ -593,10 +607,13 @@
                               collect (list alpha (closure-convert init) sup)))
         (new-key-params (loop for (kw alpha init sup) in (ast-lambda-key-params node)
                               collect (list kw alpha (closure-convert init) sup)))
+        (new-aux-params (loop for (alpha init) in (ast-lambda-aux-params node)
+                              collect (list alpha (closure-convert init))))
         (free-vars (ast-lambda-free-vars node)))
     (setf (ast-lambda-body node) new-body)
     (setf (ast-lambda-optional-params node) new-opt-params)
     (setf (ast-lambda-key-params node) new-key-params)
+    (setf (ast-lambda-aux-params node) new-aux-params)
     (make-instance 'ast-application
                    :operator (make-instance 'ast-global-variable :name '.ctor :alpha-name '.ctor)
                    :operands (cons node
@@ -732,6 +749,8 @@
                  :key-params (loop for (kw alpha init sup) in (ast-toplevel-defun-key-params node)
                                    collect (list kw alpha (closure-convert init) sup))
                  :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
+                 :aux-params (loop for (alpha init) in (ast-toplevel-defun-aux-params node)
+                                   collect (list alpha (closure-convert init)))
                  :body (mapcar #'closure-convert (ast-toplevel-defun-body node))))
 
 ;;; Lambda Lifting
@@ -775,10 +794,13 @@
                               collect (list alpha (lambda-lift init) sup)))
         (new-key-params (loop for (kw alpha init sup) in (ast-lambda-key-params node)
                               collect (list kw alpha (lambda-lift init) sup)))
+        (new-aux-params (loop for (alpha init) in (ast-lambda-aux-params node)
+                              collect (list alpha (lambda-lift init))))
         (lifted-name (gensym "L_")))
     (setf (ast-lambda-body node) new-body)
     (setf (ast-lambda-optional-params node) new-opt-params)
     (setf (ast-lambda-key-params node) new-key-params)
+    (setf (ast-lambda-aux-params node) new-aux-params)
     (setf (ast-lambda-lifted-name node) lifted-name)
     (push (cons lifted-name node) *lifted-lambdas*)
     (make-instance 'ast-global-variable :name lifted-name :alpha-name lifted-name)))
@@ -911,6 +933,8 @@
                  :key-params (loop for (kw alpha init sup) in (ast-toplevel-defun-key-params node)
                                    collect (list kw alpha (lambda-lift init) sup))
                  :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
+                 :aux-params (loop for (alpha init) in (ast-toplevel-defun-aux-params node)
+                                   collect (list alpha (lambda-lift init)))
                  :body (mapcar #'lambda-lift (ast-toplevel-defun-body node))))
 
 (defun perform-lambda-lifting (ast)
@@ -941,6 +965,7 @@
         (rest nil)
         (key nil)
         (allow-other-keys nil)
+        (aux nil)
         (state :required))
     (dolist (p raw-params)
       (cond
@@ -993,8 +1018,13 @@
             ;; Handle case where a parameter appears after &rest (should be &key)
             (error "Parameters after &rest must be preceded by &key"))
            (:aux
-            (error "&AUX parameters not yet supported"))))))
-    (values (nreverse required) (nreverse optional) rest (nreverse key) allow-other-keys new-env)))
+            (let* ((name (if (consp p) (car p) p))
+                   (init-form (if (consp p) (second p) nil))
+                   (alpha (gensym (symbol-name name)))
+                   (init-form-ast (lisp->ast init-form new-env tags-env blocks-env current-scope)))
+              (push (cons name alpha) new-env)
+              (push (list alpha init-form-ast) aux)))))))
+    (values (nreverse required) (nreverse optional) rest (nreverse key) allow-other-keys (nreverse aux) new-env)))
 
 (defun lisp->ast (expr &optional env tags-env blocks-env current-scope)
   "Translates a Lisp s-expression into an AST node, applying alpha renaming and macroexpansion."
@@ -1036,7 +1066,7 @@
                  (new-scope (gensym "SCOPE_")))
              (if (null env)
                  ;; Top-level DEFUN
-                 (multiple-value-bind (required optional rest key allow-other-keys new-env)
+                 (multiple-value-bind (required optional rest key allow-other-keys aux new-env)
                      (parse-lambda-list raw-params env tags-env blocks-env new-scope)
                    (make-instance 'ast-toplevel-defun
                                   :name name
@@ -1045,6 +1075,7 @@
                                   :rest-param rest
                                   :key-params key
                                   :allow-other-keys allow-other-keys
+                                  :aux-params aux
                                   :body (list (lisp->ast `(block ,name (progn ,@body)) new-env tags-env blocks-env new-scope))))
                  ;; Local DEFUN (converted to setq lambda)
                  (lisp->ast `(setq ,name (lambda ,raw-params (block ,name (progn ,@body)))) env tags-env blocks-env current-scope))))
@@ -1250,7 +1281,7 @@
                            :body (mapcar (lambda (form) (lisp->ast form new-env tags-env blocks-env current-scope)) (rest args)))))
          (lambda
           (let ((new-scope (gensym "SCOPE_")))
-            (multiple-value-bind (required optional rest key allow-other-keys new-env)
+            (multiple-value-bind (required optional rest key allow-other-keys aux new-env)
                 (parse-lambda-list (first args) env tags-env blocks-env new-scope)
               (make-instance 'ast-lambda
                              :params required
@@ -1258,6 +1289,7 @@
                              :rest-param rest
                              :key-params key
                              :allow-other-keys allow-other-keys
+                             :aux-params aux
                              :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env new-scope)) (rest args))))))
          (t
           (if (and (consp op)
@@ -1317,6 +1349,7 @@
                        (opt-params (ast-lambda-optional-params n))
                        (rest-param (ast-lambda-rest-param n))
                        (key-params (ast-lambda-key-params n))
+                       (aux-params (ast-lambda-aux-params n))
                        (all-bound-vars (append params
                                                (loop for (alpha init sup) in opt-params
                                                      collect alpha
@@ -1324,16 +1357,20 @@
                                                (when rest-param (list rest-param))
                                                (loop for (kw alpha init sup) in key-params
                                                      collect alpha
-                                                     when sup collect sup)))
+                                                     when sup collect sup)
+                                               (loop for (alpha init) in aux-params
+                                                     collect alpha)))
                        (inner-env (cons (cons :lambda all-bound-vars) curr-env)))
                   (append (reduce #'append (mapcar (lambda (opt) (traverse (second opt) inner-env)) opt-params))
                           (reduce #'append (mapcar (lambda (key) (traverse (third key) inner-env)) key-params))
+                          (reduce #'append (mapcar (lambda (aux) (traverse (second aux) inner-env)) aux-params))
                           (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-lambda-body n))))))
                (ast-toplevel-defun
                 (let* ((params (ast-toplevel-defun-params n))
                        (opt-params (ast-toplevel-defun-optional-params n))
                        (rest-param (ast-toplevel-defun-rest-param n))
                        (key-params (ast-toplevel-defun-key-params n))
+                       (aux-params (ast-toplevel-defun-aux-params n))
                        (all-bound-vars (append params
                                                (loop for (alpha init sup) in opt-params
                                                      collect alpha
@@ -1341,10 +1378,13 @@
                                                (when rest-param (list rest-param))
                                                (loop for (kw alpha init sup) in key-params
                                                      collect alpha
-                                                     when sup collect sup)))
+                                                     when sup collect sup)
+                                               (loop for (alpha init) in aux-params
+                                                     collect alpha)))
                        (inner-env (cons (cons :lambda all-bound-vars) curr-env)))
                   (append (reduce #'append (mapcar (lambda (opt) (traverse (second opt) inner-env)) opt-params))
                           (reduce #'append (mapcar (lambda (key) (traverse (third key) inner-env)) key-params))
+                          (reduce #'append (mapcar (lambda (aux) (traverse (second aux) inner-env)) aux-params))
                           (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-toplevel-defun-body n))))))
                (ast-class nil)
                (ast-method
@@ -1480,6 +1520,7 @@
          (opt-params (ast-lambda-optional-params node))
          (rest-param (ast-lambda-rest-param node))
          (key-params (ast-lambda-key-params node))
+         (aux-params (ast-lambda-aux-params node))
          (all-params (append params
                              (loop for (alpha init sup) in opt-params
                                    collect alpha
@@ -1487,7 +1528,9 @@
                              (when rest-param (list rest-param))
                              (loop for (kw alpha init sup) in key-params
                                    collect alpha
-                                   when sup collect sup)))
+                                   when sup collect sup)
+                             (loop for (alpha init) in aux-params
+                                   collect alpha)))
          (inner-env (cons (cons :lambda all-params) env))
          (analyzed-opt-params
           (loop for (alpha init sup) in opt-params
@@ -1495,6 +1538,9 @@
          (analyzed-key-params
           (loop for (kw alpha init sup) in key-params
                 collect (list kw alpha (analyze-environment init inner-env mutated) sup)))
+         (analyzed-aux-params
+          (loop for (alpha init) in aux-params
+                collect (list alpha (analyze-environment init inner-env mutated))))
          (mutated-params (remove-if-not (lambda (p) (member p mutated :test #'eq)) all-params)))
     (if mutated-params
         (let* ((let-env (cons (cons :let mutated-params) inner-env))
@@ -1514,6 +1560,7 @@
                          :rest-param rest-param
                          :key-params analyzed-key-params
                          :allow-other-keys (ast-lambda-allow-other-keys node)
+                         :aux-params analyzed-aux-params
                          :body (list let-node)))
         (make-instance 'ast-lambda
                        :params params
@@ -1521,6 +1568,7 @@
                        :rest-param rest-param
                        :key-params analyzed-key-params
                        :allow-other-keys (ast-lambda-allow-other-keys node)
+                       :aux-params analyzed-aux-params
                        :body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
                                      (ast-lambda-body node))))))
 
@@ -1662,6 +1710,7 @@
          (opt-params (ast-toplevel-defun-optional-params node))
          (rest-param (ast-toplevel-defun-rest-param node))
          (key-params (ast-toplevel-defun-key-params node))
+         (aux-params (ast-toplevel-defun-aux-params node))
          (all-params (append params
                              (loop for (alpha init sup) in opt-params
                                    collect alpha
@@ -1669,7 +1718,9 @@
                              (when rest-param (list rest-param))
                              (loop for (kw alpha init sup) in key-params
                                    collect alpha
-                                   when sup collect sup)))
+                                   when sup collect sup)
+                             (loop for (alpha init) in aux-params
+                                   collect alpha)))
          (inner-env (cons (cons :lambda all-params) env))
          (analyzed-opt-params
           (loop for (alpha init sup) in opt-params
@@ -1677,6 +1728,9 @@
          (analyzed-key-params
           (loop for (kw alpha init sup) in key-params
                 collect (list kw alpha (analyze-environment init inner-env mutated) sup)))
+         (analyzed-aux-params
+          (loop for (alpha init) in aux-params
+                collect (list alpha (analyze-environment init inner-env mutated))))
          (analyzed-body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
                                 (ast-toplevel-defun-body node))))
     (let ((mutated-params (intersection all-params mutated :test #'eq)))
@@ -1693,6 +1747,7 @@
                            :rest-param rest-param
                            :key-params analyzed-key-params
                            :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
+                           :aux-params analyzed-aux-params
                            :body (list (make-instance 'ast-let :bindings bindings :body analyzed-body))))
           (make-instance 'ast-toplevel-defun
                          :name (ast-toplevel-defun-name node)
@@ -1701,4 +1756,5 @@
                          :rest-param rest-param
                          :key-params analyzed-key-params
                          :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
+                         :aux-params analyzed-aux-params
                          :body analyzed-body)))))

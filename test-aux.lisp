@@ -1,0 +1,22 @@
+(defun test-aux (a &optional (b 10) &key (c 20) &aux (d (+ a b c)) (e (* d 2)))
+  (print a)
+  (print b)
+  (print c)
+  (print d)
+  (print e))
+
+(defun main ()
+  (print "--- test-aux 1 ---")
+  (test-aux 1)
+  (print "--- test-aux 1 2 ---")
+  (test-aux 1 2)
+  (print "--- test-aux 1 2 :c 3 ---")
+  (test-aux 1 2 :c 3)
+
+  (print "--- lambda aux test ---")
+  (let ((f (lambda (x &aux (y (+ x 10)))
+             (print x)
+             (print y))))
+    (funcall f 5)))
+
+(main)
