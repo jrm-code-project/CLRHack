@@ -26,6 +26,14 @@
     (pushnew sanitized *global-variables* :test #'string=)
     sanitized))
 
+(defun load-symbol-il (sym-name)
+  (let* ((sym-name-str (string sym-name))
+         (field-name (cdr (assoc sym-name-str *quoted-symbols* :test #'string=))))
+    (unless field-name
+      (setf field-name (sanitize-identifier (format nil "SYM_~A" (gensym))))
+      (push (cons sym-name-str field-name) *quoted-symbols*))
+    (list (il:ldsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name)))))
+
 (defgeneric generate-step1 (node)
   (:documentation "Generates straight-line instructions for the given AST node and assigns it to the node's basic-block."))
 
@@ -36,7 +44,7 @@
             (integer (list (il:ldc.i4 val) (il:box "int32")))
             (string (list (il:ldstr val)))
             (null (list (il:ldnull)))
-            (t (list (il:ldstr (format nil "~A" val))))))))
+            (t (load-symbol-il val))))))
 
 (defmethod generate-step1 ((node ast-variable))
   (let* ((alpha (ast-variable-alpha-name node))
@@ -421,7 +429,7 @@
                        (il:ldnull)
                        (il:br end-label)
                        (il:nop :label true-label)
-                       (il:ldstr "T")
+                       (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
             (or (eq (ast-variable-name operator) '%not)
@@ -437,7 +445,7 @@
                        (il:ldnull)
                        (il:br end-label)
                        (il:nop :label true-label)
-                       (il:ldstr "T")
+                       (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
             (eq (ast-variable-name operator) '%make-cell))
@@ -481,7 +489,7 @@
                        (il:ldnull)
                        (il:br end-label)
                        (il:nop :label true-label)
-                       (il:ldstr "T")
+                       (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
             (or (eq (ast-variable-name operator) '%null)
@@ -497,7 +505,7 @@
                        (il:ldnull)
                        (il:br end-label)
                        (il:nop :label true-label)
-                       (il:ldstr "T")
+                       (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
 
       ((and (typep operator 'ast-global-variable)
@@ -515,7 +523,7 @@
                        (il:ldnull)
                        (il:br end-label)
                        (il:nop :label true-label)
-                       (il:ldstr "T")
+                       (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
             (eq (ast-variable-name operator) '%cell-value))
