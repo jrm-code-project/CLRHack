@@ -118,6 +118,8 @@
 
 (defmethod generate-step1 ((node ast-toplevel-defun))
   (let ((*current-lambda-params* (ast-toplevel-defun-params node)))
+    (when (ast-toplevel-defun-rest-param node)
+      (register-local (sanitize-identifier (string (ast-toplevel-defun-rest-param node)))))
     (mapc #'generate-step1 (ast-toplevel-defun-body node))
     (setf (ast-basic-block node) nil)))
 
@@ -1029,23 +1031,36 @@
                               :arg-types (make-list (length free-vars) :initial-element "object")
                               :instructions ctor-insts))
              (n-params (length (ast-lambda-params lambda-node)))
+             (has-rest (not (null (ast-lambda-rest-param lambda-node))))
+             (rest-alpha (when has-rest (sanitize-identifier (string (ast-lambda-rest-param lambda-node)))))
              (methods (list ctor)))
         (multiple-value-bind (block locals) (generate lambda-node)
           (loop for m from 0 to 8 do
-            (let ((invoke-arg-types (make-list m :initial-element "object")))
+            (let* ((invoke-arg-types (make-list m :initial-element "object"))
+                   (is-valid (if has-rest (>= m n-params) (= m n-params)))
+                   (locals-decl (if is-valid (mapcar (lambda (loc) (format nil "object ~A" loc)) (if has-rest (cons rest-alpha locals) locals)) nil))
+                   (insts (if is-valid
+                              (if has-rest
+                                  (let ((list-insts (list (il:ldnull))))
+                                    ;; build list from back to front (m-1 down to n-params)
+                                    (loop for i from (1- m) downto n-params do
+                                          (setf list-insts
+                                                (append list-insts
+                                                        (list (il:ldarg (1+ i))
+                                                              (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))))))
+                                    ;; store in the rest-param local
+                                    (append list-insts (list (il:stloc rest-alpha)) block))
+                                  block)
+                              (list (il:ldc.i4 n-params)
+                                    (il:ldc.i4 m)
+                                    (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                    (il:throw)))))
               (push (il:method :name "Invoke"
                                :return-type "object"
                                :arg-types invoke-arg-types
-                               :locals (if (= m n-params)
-                                           (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)
-                                           nil)
+                               :locals locals-decl
                                :virtual-p t
-                               :instructions (if (= m n-params)
-                                                 block
-                                                 (list (il:ldc.i4 n-params)
-                                                       (il:ldc.i4 m)
-                                                       (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
-                                                       (il:throw))))
+                               :instructions insts)
                     methods))))
         (let ((cls (il:class :name name :parent "[LispBase]Lisp.Closure" :fields fields :methods (reverse methods))))
           (push cls classes))))
@@ -1053,17 +1068,45 @@
     (let ((toplevel-methods nil))
       (dolist (defun-node toplevel-defuns)
         (let* ((name (sanitize-identifier (string (ast-toplevel-defun-name defun-node))))
-               (params (ast-toplevel-defun-params defun-node)))
+               (params (ast-toplevel-defun-params defun-node))
+               (n-params (length params))
+               (has-rest (not (null (ast-toplevel-defun-rest-param defun-node))))
+               (rest-alpha (when has-rest (sanitize-identifier (string (ast-toplevel-defun-rest-param defun-node))))))
           (multiple-value-bind (block locals) (generate defun-node)
-            (let ((method (il:method :name name
+            (if has-rest
+                (loop for m from 0 to 8 do
+                  (let* ((invoke-arg-types (make-list m :initial-element "object"))
+                         (is-valid (>= m n-params))
+                         (locals-decl (if is-valid (mapcar (lambda (loc) (format nil "object ~A" loc)) (if has-rest (cons rest-alpha locals) locals)) nil))
+                         (insts (if is-valid
+                                    (let ((list-insts (list (il:ldnull))))
+                                      (loop for i from (1- m) downto n-params do
+                                            (setf list-insts
+                                                  (append (list (il:ldarg i))
+                                                          list-insts
+                                                          (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))))))
+                                      (append list-insts (list (il:stloc rest-alpha)) block))
+                                    (list (il:ldc.i4 n-params)
+                                          (il:ldc.i4 m)
+                                          (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                          (il:throw)))))
+                    (push (il:method :name name
                                      :return-type "object"
-                                     :arg-types (make-list (length params) :initial-element "object")
-                                     :locals (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)
-                                     :instructions block
+                                     :arg-types invoke-arg-types
+                                     :locals locals-decl
+                                     :instructions insts
                                      :visibility :public
-                                     :static-p t)))
-              (push method toplevel-methods)))))
-
+                                     :static-p t)
+                          toplevel-methods)))
+                (let ((method (il:method :name name
+                                         :return-type "object"
+                                         :arg-types (make-list n-params :initial-element "object")
+                                         :locals (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)
+                                         :instructions block
+                                         :visibility :public
+                                         :static-p t)))
+                  (push method toplevel-methods))))))
+      (format t "Generated ~D toplevel methods!~%" (length toplevel-methods))
       (multiple-value-bind (main-insts locals) (generate ast)
         (let* ((main-insts-final (append main-insts (list (il:pop) (il:ret))))
                (main-method (il:method :name "Main"

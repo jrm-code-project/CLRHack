@@ -56,6 +56,7 @@
 
 (defclass ast-lambda (ast-node)
   ((params :initarg :params :accessor ast-lambda-params)
+   (rest-param :initarg :rest-param :accessor ast-lambda-rest-param :initform nil)
    (body :initarg :body :accessor ast-lambda-body)
    (free-vars :initform nil :accessor ast-lambda-free-vars)
    (lifted-name :initform nil :accessor ast-lambda-lifted-name))
@@ -78,6 +79,7 @@
 (defclass ast-toplevel-defun (ast-node)
   ((name :initarg :name :accessor ast-toplevel-defun-name)
    (params :initarg :params :accessor ast-toplevel-defun-params)
+   (rest-param :initarg :rest-param :accessor ast-toplevel-defun-rest-param :initform nil)
    (body :initarg :body :accessor ast-toplevel-defun-body))
   (:documentation "A top-level DEFUN definition that should be compiled to a static method."))
 
@@ -678,6 +680,7 @@
   (make-instance 'ast-toplevel-defun
                  :name (ast-toplevel-defun-name node)
                  :params (ast-toplevel-defun-params node)
+                 :rest-param (ast-toplevel-defun-rest-param node)
                  :body (mapcar #'closure-convert (ast-toplevel-defun-body node))))
 
 ;;; Lambda Lifting
@@ -845,6 +848,7 @@
   (make-instance 'ast-toplevel-defun
                  :name (ast-toplevel-defun-name node)
                  :params (ast-toplevel-defun-params node)
+                 :rest-param (ast-toplevel-defun-rest-param node)
                  :body (mapcar #'lambda-lift (ast-toplevel-defun-body node))))
 
 (defun perform-lambda-lifting (ast)
@@ -903,23 +907,30 @@
                            :value (lisp->ast (second args) env tags-env blocks-env current-scope))))
          (defun
           (let* ((name (first args))
-                 (params (second args))
+                 (raw-params (second args))
                  (body (cddr args))
                  (new-scope (gensym "SCOPE_")))
              (if (null env)
                  ;; Top-level DEFUN
                  (let* ((new-env env)
-                        (alpha-params (mapcar (lambda (p)
-                                                (let ((alpha (gensym (string p))))
-                                                  (push (cons p alpha) new-env)
-                                                  alpha))
-                                              params)))
+                        (alpha-params nil)
+                        (rest-param nil))
+                   (let ((in-rest nil))
+                     (dolist (p raw-params)
+                       (if (string-equal (symbol-name p) "&REST")
+                           (setf in-rest t)
+                           (let ((alpha (gensym (string p))))
+                             (push (cons p alpha) new-env)
+                             (if in-rest
+                                 (setf rest-param alpha)
+                                 (push alpha alpha-params))))))
                    (make-instance 'ast-toplevel-defun
                                   :name name
-                                  :params alpha-params
+                                  :params (nreverse alpha-params)
+                                  :rest-param rest-param
                                   :body (list (lisp->ast `(block ,name (progn ,@body)) new-env tags-env blocks-env new-scope))))
                  ;; Local DEFUN (converted to setq lambda)
-                 (lisp->ast `(setq ,name (lambda ,params (block ,name (progn ,@body)))) env tags-env blocks-env current-scope))))
+                 (lisp->ast `(setq ,name (lambda ,raw-params (block ,name (progn ,@body)))) env tags-env blocks-env current-scope))))
 
          (tagbody
           (let* ((new-tags-env tags-env)
@@ -991,6 +1002,27 @@
           (make-instance 'ast-throw
                          :tag (lisp->ast (first args) env tags-env blocks-env current-scope)
                          :value (lisp->ast (second args) env tags-env blocks-env current-scope)))
+         (system:call-static-method
+          (make-instance 'ast-dotnet-static-call
+                         :method-name (first args)
+                         :arguments (mapcar (lambda (a) (lisp->ast a env tags-env blocks-env current-scope)) (rest args))))
+         (system:call-instance-method
+          (make-instance 'ast-dotnet-instance-call
+                         :method-name (first args)
+                         :instance (lisp->ast (second args) env tags-env blocks-env current-scope)
+                         :arguments (mapcar (lambda (a) (lisp->ast a env tags-env blocks-env current-scope)) (cddr args))))
+         (system:get-static-property
+          (make-instance 'ast-dotnet-property :property-name (first args)))
+         (system:get-instance-property
+          (make-instance 'ast-dotnet-instance-property
+                         :property-name (first args)
+                         :instance (lisp->ast (second args) env tags-env blocks-env current-scope)))
+         (system:get-static-field
+          (make-instance 'ast-dotnet-field :field-name (first args)))
+         (system:get-instance-field
+          (make-instance 'ast-dotnet-instance-field
+                         :field-name (first args)
+                         :instance (lisp->ast (second args) env tags-env blocks-env current-scope)))
 
          (defmacro
           (let ((name (first args))
@@ -1459,10 +1491,12 @@
 
 (defmethod analyze-environment ((node ast-toplevel-defun) env &optional mutated)
   (let* ((params (ast-toplevel-defun-params node))
-         (inner-env (cons (cons :lambda params) env))
+         (rest-param (ast-toplevel-defun-rest-param node))
+         (all-params (if rest-param (append params (list rest-param)) params))
+         (inner-env (cons (cons :lambda all-params) env))
          (analyzed-body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
                                 (ast-toplevel-defun-body node))))
-    (let ((mutated-params (intersection params mutated :test #'eq)))
+    (let ((mutated-params (intersection all-params mutated :test #'eq)))
       (if mutated-params
           (let ((bindings (mapcar (lambda (p)
                                     (list p (make-instance 'ast-application
@@ -1472,8 +1506,10 @@
             (make-instance 'ast-toplevel-defun
                            :name (ast-toplevel-defun-name node)
                            :params params
+                           :rest-param rest-param
                            :body (list (make-instance 'ast-let :bindings bindings :body analyzed-body))))
           (make-instance 'ast-toplevel-defun
                          :name (ast-toplevel-defun-name node)
                          :params params
+                         :rest-param rest-param
                          :body analyzed-body)))))
