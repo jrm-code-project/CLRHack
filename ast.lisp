@@ -56,7 +56,10 @@
 
 (defclass ast-lambda (ast-node)
   ((params :initarg :params :accessor ast-lambda-params)
+   (optional-params :initarg :optional-params :accessor ast-lambda-optional-params :initform nil)
    (rest-param :initarg :rest-param :accessor ast-lambda-rest-param :initform nil)
+   (key-params :initarg :key-params :accessor ast-lambda-key-params :initform nil)
+   (allow-other-keys :initarg :allow-other-keys :accessor ast-lambda-allow-other-keys :initform nil)
    (body :initarg :body :accessor ast-lambda-body)
    (free-vars :initform nil :accessor ast-lambda-free-vars)
    (lifted-name :initform nil :accessor ast-lambda-lifted-name))
@@ -79,7 +82,10 @@
 (defclass ast-toplevel-defun (ast-node)
   ((name :initarg :name :accessor ast-toplevel-defun-name)
    (params :initarg :params :accessor ast-toplevel-defun-params)
+   (optional-params :initarg :optional-params :accessor ast-toplevel-defun-optional-params :initform nil)
    (rest-param :initarg :rest-param :accessor ast-toplevel-defun-rest-param :initform nil)
+   (key-params :initarg :key-params :accessor ast-toplevel-defun-key-params :initform nil)
+   (allow-other-keys :initarg :allow-other-keys :accessor ast-toplevel-defun-allow-other-keys :initform nil)
    (body :initarg :body :accessor ast-toplevel-defun-body))
   (:documentation "A top-level DEFUN definition that should be compiled to a static method."))
 
@@ -408,11 +414,28 @@
            (set-difference body-free-vars bound-vars))))
 
 (defmethod compute-free-vars ((node ast-lambda))
-  (let* ((body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+  (let* ((params (ast-lambda-params node))
+         (opt-params (ast-lambda-optional-params node))
+         (rest-param (ast-lambda-rest-param node))
+         (key-params (ast-lambda-key-params node))
+         (all-bound (append params
+                            (loop for (alpha init sup) in opt-params
+                                  collect alpha
+                                  when sup collect sup)
+                            (when rest-param (list rest-param))
+                            (loop for (kw alpha init sup) in key-params
+                                  collect alpha
+                                  when sup collect sup)))
+         (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                  (ast-lambda-body node)
                                  :initial-value nil))
-         (params (ast-lambda-params node))
-         (free-vars (set-difference body-free-vars params)))
+         (opt-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (mapcar #'second opt-params)
+                                :initial-value nil))
+         (key-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (mapcar #'third key-params)
+                                :initial-value nil))
+         (free-vars (set-difference (union body-free-vars (union opt-free-vars key-free-vars)) all-bound)))
     (setf (ast-lambda-free-vars node) free-vars)
     free-vars))
 
@@ -511,11 +534,28 @@
           :initial-value nil))
 
 (defmethod compute-free-vars ((node ast-toplevel-defun))
-  (let* ((body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+  (let* ((params (ast-toplevel-defun-params node))
+         (opt-params (ast-toplevel-defun-optional-params node))
+         (rest-param (ast-toplevel-defun-rest-param node))
+         (key-params (ast-toplevel-defun-key-params node))
+         (all-bound (append params
+                            (loop for (alpha init sup) in opt-params
+                                  collect alpha
+                                  when sup collect sup)
+                            (when rest-param (list rest-param))
+                            (loop for (kw alpha init sup) in key-params
+                                  collect alpha
+                                  when sup collect sup)))
+         (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                  (ast-toplevel-defun-body node)
                                  :initial-value nil))
-         (params (ast-toplevel-defun-params node)))
-    (set-difference body-free-vars params)))
+         (opt-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (mapcar #'second opt-params)
+                                :initial-value nil))
+         (key-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (mapcar #'third key-params)
+                                :initial-value nil)))
+    (set-difference (union body-free-vars (union opt-free-vars key-free-vars)) all-bound)))
 
 (defgeneric closure-convert (node)
   (:documentation "Walks the AST and transforms LAMBDA expressions into explicit closure instantiations using .ctor."))
@@ -549,8 +589,14 @@
 
 (defmethod closure-convert ((node ast-lambda))
   (let ((new-body (mapcar #'closure-convert (ast-lambda-body node)))
+        (new-opt-params (loop for (alpha init sup) in (ast-lambda-optional-params node)
+                              collect (list alpha (closure-convert init) sup)))
+        (new-key-params (loop for (kw alpha init sup) in (ast-lambda-key-params node)
+                              collect (list kw alpha (closure-convert init) sup)))
         (free-vars (ast-lambda-free-vars node)))
     (setf (ast-lambda-body node) new-body)
+    (setf (ast-lambda-optional-params node) new-opt-params)
+    (setf (ast-lambda-key-params node) new-key-params)
     (make-instance 'ast-application
                    :operator (make-instance 'ast-global-variable :name '.ctor :alpha-name '.ctor)
                    :operands (cons node
@@ -680,7 +726,12 @@
   (make-instance 'ast-toplevel-defun
                  :name (ast-toplevel-defun-name node)
                  :params (ast-toplevel-defun-params node)
+                 :optional-params (loop for (alpha init sup) in (ast-toplevel-defun-optional-params node)
+                                        collect (list alpha (closure-convert init) sup))
                  :rest-param (ast-toplevel-defun-rest-param node)
+                 :key-params (loop for (kw alpha init sup) in (ast-toplevel-defun-key-params node)
+                                   collect (list kw alpha (closure-convert init) sup))
+                 :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
                  :body (mapcar #'closure-convert (ast-toplevel-defun-body node))))
 
 ;;; Lambda Lifting
@@ -720,8 +771,14 @@
 
 (defmethod lambda-lift ((node ast-lambda))
   (let ((new-body (mapcar #'lambda-lift (ast-lambda-body node)))
+        (new-opt-params (loop for (alpha init sup) in (ast-lambda-optional-params node)
+                              collect (list alpha (lambda-lift init) sup)))
+        (new-key-params (loop for (kw alpha init sup) in (ast-lambda-key-params node)
+                              collect (list kw alpha (lambda-lift init) sup)))
         (lifted-name (gensym "L_")))
     (setf (ast-lambda-body node) new-body)
+    (setf (ast-lambda-optional-params node) new-opt-params)
+    (setf (ast-lambda-key-params node) new-key-params)
     (setf (ast-lambda-lifted-name node) lifted-name)
     (push (cons lifted-name node) *lifted-lambdas*)
     (make-instance 'ast-global-variable :name lifted-name :alpha-name lifted-name)))
@@ -848,7 +905,12 @@
   (make-instance 'ast-toplevel-defun
                  :name (ast-toplevel-defun-name node)
                  :params (ast-toplevel-defun-params node)
+                 :optional-params (loop for (alpha init sup) in (ast-toplevel-defun-optional-params node)
+                                        collect (list alpha (lambda-lift init) sup))
                  :rest-param (ast-toplevel-defun-rest-param node)
+                 :key-params (loop for (kw alpha init sup) in (ast-toplevel-defun-key-params node)
+                                   collect (list kw alpha (lambda-lift init) sup))
+                 :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
                  :body (mapcar #'lambda-lift (ast-toplevel-defun-body node))))
 
 (defun perform-lambda-lifting (ast)
@@ -871,6 +933,68 @@
     (t expr)))
 
 ;;; Translation function
+
+(defun parse-lambda-list (raw-params env tags-env blocks-env current-scope)
+  (let ((new-env env)
+        (required nil)
+        (optional nil)
+        (rest nil)
+        (key nil)
+        (allow-other-keys nil)
+        (state :required))
+    (dolist (p raw-params)
+      (cond
+        ((and (symbolp p) (string-equal (symbol-name p) "&OPTIONAL"))
+         (setf state :optional))
+        ((and (symbolp p) (string-equal (symbol-name p) "&REST"))
+         (setf state :rest))
+        ((and (symbolp p) (string-equal (symbol-name p) "&KEY"))
+         (setf state :key))
+        ((and (symbolp p) (string-equal (symbol-name p) "&ALLOW-OTHER-KEYS"))
+         (setf allow-other-keys t))
+        ((and (symbolp p) (string-equal (symbol-name p) "&AUX"))
+         (setf state :aux))
+        (t
+         (ecase state
+           (:required
+            (let ((alpha (gensym (symbol-name p))))
+              (push (cons p alpha) new-env)
+              (push alpha required)))
+           (:optional
+            (let* ((name (if (consp p) (car p) p))
+                   (init-form (if (consp p) (second p) nil))
+                   (supplied-p (if (and (consp p) (third p)) (third p) nil))
+                   (alpha (gensym (symbol-name name)))
+                   (supplied-p-alpha (when supplied-p (gensym (symbol-name supplied-p))))
+                   (init-form-ast (lisp->ast init-form new-env tags-env blocks-env current-scope)))
+              (push (cons name alpha) new-env)
+              (when supplied-p
+                (push (cons supplied-p supplied-p-alpha) new-env))
+              (push (list alpha init-form-ast supplied-p-alpha) optional)))
+           (:rest
+            (let ((alpha (gensym (symbol-name p))))
+              (push (cons p alpha) new-env)
+              (setf rest alpha)
+              (setf state :after-rest)))
+           (:key
+            (let* ((spec (if (consp p) (car p) p))
+                   (keyword (if (consp spec) (car spec) (intern (symbol-name spec) "KEYWORD")))
+                   (name (if (consp spec) (cadr spec) spec))
+                   (init-form (if (consp p) (second p) nil))
+                   (supplied-p (if (and (consp p) (third p)) (third p) nil))
+                   (alpha (gensym (symbol-name name)))
+                   (supplied-p-alpha (when supplied-p (gensym (symbol-name supplied-p))))
+                   (init-form-ast (lisp->ast init-form new-env tags-env blocks-env current-scope)))
+              (push (cons name alpha) new-env)
+              (when supplied-p
+                (push (cons supplied-p supplied-p-alpha) new-env))
+              (push (list keyword alpha init-form-ast supplied-p-alpha) key)))
+           (:after-rest
+            ;; Handle case where a parameter appears after &rest (should be &key)
+            (error "Parameters after &rest must be preceded by &key"))
+           (:aux
+            (error "&AUX parameters not yet supported"))))))
+    (values (nreverse required) (nreverse optional) rest (nreverse key) allow-other-keys new-env)))
 
 (defun lisp->ast (expr &optional env tags-env blocks-env current-scope)
   "Translates a Lisp s-expression into an AST node, applying alpha renaming and macroexpansion."
@@ -912,22 +1036,15 @@
                  (new-scope (gensym "SCOPE_")))
              (if (null env)
                  ;; Top-level DEFUN
-                 (let* ((new-env env)
-                        (alpha-params nil)
-                        (rest-param nil))
-                   (let ((in-rest nil))
-                     (dolist (p raw-params)
-                       (if (string-equal (symbol-name p) "&REST")
-                           (setf in-rest t)
-                           (let ((alpha (gensym (string p))))
-                             (push (cons p alpha) new-env)
-                             (if in-rest
-                                 (setf rest-param alpha)
-                                 (push alpha alpha-params))))))
+                 (multiple-value-bind (required optional rest key allow-other-keys new-env)
+                     (parse-lambda-list raw-params env tags-env blocks-env new-scope)
                    (make-instance 'ast-toplevel-defun
                                   :name name
-                                  :params (nreverse alpha-params)
-                                  :rest-param rest-param
+                                  :params required
+                                  :optional-params optional
+                                  :rest-param rest
+                                  :key-params key
+                                  :allow-other-keys allow-other-keys
                                   :body (list (lisp->ast `(block ,name (progn ,@body)) new-env tags-env blocks-env new-scope))))
                  ;; Local DEFUN (converted to setq lambda)
                  (lisp->ast `(setq ,name (lambda ,raw-params (block ,name (progn ,@body)))) env tags-env blocks-env current-scope))))
@@ -1132,16 +1249,16 @@
                            :bindings bindings
                            :body (mapcar (lambda (form) (lisp->ast form new-env tags-env blocks-env current-scope)) (rest args)))))
          (lambda
-          (let* ((new-scope (gensym "SCOPE_"))
-                 (new-env env)
-                 (params (mapcar (lambda (p)
-                                   (let ((alpha (gensym (string p))))
-                                     (push (cons p alpha) new-env)
-                                     alpha))
-                                 (first args))))
-            (make-instance 'ast-lambda
-                           :params params
-                           :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env new-scope)) (rest args)))))
+          (let ((new-scope (gensym "SCOPE_")))
+            (multiple-value-bind (required optional rest key allow-other-keys new-env)
+                (parse-lambda-list (first args) env tags-env blocks-env new-scope)
+              (make-instance 'ast-lambda
+                             :params required
+                             :optional-params optional
+                             :rest-param rest
+                             :key-params key
+                             :allow-other-keys allow-other-keys
+                             :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env new-scope)) (rest args))))))
          (t
           (if (and (consp op)
                    (member (car op) '(dotnet-static-call dotnet-instance-call dotnet-property dotnet-instance-property dotnet-field dotnet-instance-field)))
@@ -1197,12 +1314,38 @@
                           (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-let-body n))))))
                (ast-lambda
                 (let* ((params (ast-lambda-params n))
-                       (inner-env (cons (cons :lambda params) curr-env)))
-                  (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-lambda-body n)))))
+                       (opt-params (ast-lambda-optional-params n))
+                       (rest-param (ast-lambda-rest-param n))
+                       (key-params (ast-lambda-key-params n))
+                       (all-bound-vars (append params
+                                               (loop for (alpha init sup) in opt-params
+                                                     collect alpha
+                                                     when sup collect sup)
+                                               (when rest-param (list rest-param))
+                                               (loop for (kw alpha init sup) in key-params
+                                                     collect alpha
+                                                     when sup collect sup)))
+                       (inner-env (cons (cons :lambda all-bound-vars) curr-env)))
+                  (append (reduce #'append (mapcar (lambda (opt) (traverse (second opt) inner-env)) opt-params))
+                          (reduce #'append (mapcar (lambda (key) (traverse (third key) inner-env)) key-params))
+                          (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-lambda-body n))))))
                (ast-toplevel-defun
                 (let* ((params (ast-toplevel-defun-params n))
-                       (inner-env (cons (cons :lambda params) curr-env)))
-                  (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-toplevel-defun-body n)))))
+                       (opt-params (ast-toplevel-defun-optional-params n))
+                       (rest-param (ast-toplevel-defun-rest-param n))
+                       (key-params (ast-toplevel-defun-key-params n))
+                       (all-bound-vars (append params
+                                               (loop for (alpha init sup) in opt-params
+                                                     collect alpha
+                                                     when sup collect sup)
+                                               (when rest-param (list rest-param))
+                                               (loop for (kw alpha init sup) in key-params
+                                                     collect alpha
+                                                     when sup collect sup)))
+                       (inner-env (cons (cons :lambda all-bound-vars) curr-env)))
+                  (append (reduce #'append (mapcar (lambda (opt) (traverse (second opt) inner-env)) opt-params))
+                          (reduce #'append (mapcar (lambda (key) (traverse (third key) inner-env)) key-params))
+                          (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) (ast-toplevel-defun-body n))))))
                (ast-class nil)
                (ast-method
                 (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-method-body n))))
@@ -1334,10 +1477,27 @@
 (defmethod analyze-environment ((node ast-lambda) env &optional mutated)
   ;; LAMBDA parameters are evaluated in the inner environment.
   (let* ((params (ast-lambda-params node))
-         (mutated-params (remove-if-not (lambda (p) (member p mutated :test #'eq)) params)))
+         (opt-params (ast-lambda-optional-params node))
+         (rest-param (ast-lambda-rest-param node))
+         (key-params (ast-lambda-key-params node))
+         (all-params (append params
+                             (loop for (alpha init sup) in opt-params
+                                   collect alpha
+                                   when sup collect sup)
+                             (when rest-param (list rest-param))
+                             (loop for (kw alpha init sup) in key-params
+                                   collect alpha
+                                   when sup collect sup)))
+         (inner-env (cons (cons :lambda all-params) env))
+         (analyzed-opt-params
+          (loop for (alpha init sup) in opt-params
+                collect (list alpha (analyze-environment init inner-env mutated) sup)))
+         (analyzed-key-params
+          (loop for (kw alpha init sup) in key-params
+                collect (list kw alpha (analyze-environment init inner-env mutated) sup)))
+         (mutated-params (remove-if-not (lambda (p) (member p mutated :test #'eq)) all-params)))
     (if mutated-params
-        (let* ((inner-env (cons (cons :lambda params) env))
-               (let-env (cons (cons :let mutated-params) inner-env))
+        (let* ((let-env (cons (cons :let mutated-params) inner-env))
                (cell-bindings
                 (mapcar (lambda (p)
                           (list p (make-instance 'ast-application
@@ -1350,11 +1510,19 @@
                                                       (ast-lambda-body node)))))
           (make-instance 'ast-lambda
                          :params params
+                         :optional-params analyzed-opt-params
+                         :rest-param rest-param
+                         :key-params analyzed-key-params
+                         :allow-other-keys (ast-lambda-allow-other-keys node)
                          :body (list let-node)))
-        (let* ((inner-env (cons (cons :lambda params) env))
-               (body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
-                             (ast-lambda-body node))))
-          (make-instance 'ast-lambda :params params :body body)))))
+        (make-instance 'ast-lambda
+                       :params params
+                       :optional-params analyzed-opt-params
+                       :rest-param rest-param
+                       :key-params analyzed-key-params
+                       :allow-other-keys (ast-lambda-allow-other-keys node)
+                       :body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
+                                     (ast-lambda-body node))))))
 
 (defmethod analyze-environment ((node ast-application) env &optional mutated)
   (make-instance 'ast-application
@@ -1491,9 +1659,24 @@
 
 (defmethod analyze-environment ((node ast-toplevel-defun) env &optional mutated)
   (let* ((params (ast-toplevel-defun-params node))
+         (opt-params (ast-toplevel-defun-optional-params node))
          (rest-param (ast-toplevel-defun-rest-param node))
-         (all-params (if rest-param (append params (list rest-param)) params))
+         (key-params (ast-toplevel-defun-key-params node))
+         (all-params (append params
+                             (loop for (alpha init sup) in opt-params
+                                   collect alpha
+                                   when sup collect sup)
+                             (when rest-param (list rest-param))
+                             (loop for (kw alpha init sup) in key-params
+                                   collect alpha
+                                   when sup collect sup)))
          (inner-env (cons (cons :lambda all-params) env))
+         (analyzed-opt-params
+          (loop for (alpha init sup) in opt-params
+                collect (list alpha (analyze-environment init inner-env mutated) sup)))
+         (analyzed-key-params
+          (loop for (kw alpha init sup) in key-params
+                collect (list kw alpha (analyze-environment init inner-env mutated) sup)))
          (analyzed-body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
                                 (ast-toplevel-defun-body node))))
     (let ((mutated-params (intersection all-params mutated :test #'eq)))
@@ -1506,10 +1689,16 @@
             (make-instance 'ast-toplevel-defun
                            :name (ast-toplevel-defun-name node)
                            :params params
+                           :optional-params analyzed-opt-params
                            :rest-param rest-param
+                           :key-params analyzed-key-params
+                           :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
                            :body (list (make-instance 'ast-let :bindings bindings :body analyzed-body))))
           (make-instance 'ast-toplevel-defun
                          :name (ast-toplevel-defun-name node)
                          :params params
+                         :optional-params analyzed-opt-params
                          :rest-param rest-param
+                         :key-params analyzed-key-params
+                         :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
                          :body analyzed-body)))))
