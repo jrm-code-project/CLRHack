@@ -1,3 +1,4 @@
+#+sbcl (declaim (sb-ext:muffle-conditions style-warning))
 ;;; -*- Mode: Lisp; coding: utf-8; -*-
 
 (in-package "CLRHACK")
@@ -604,13 +605,17 @@
   (let ((forms (ast-progn-forms node)))
     (if (null forms)
         (if tail-p (list (il:ldnull) (il:ret)) (list (il:ldnull)))
-        (loop for form in forms
-              for i from 1
-              for is-last = (= i (length forms))
-              for code = (generate-step2 form (if is-last tail-p nil))
-              append code
-              when (and (not is-last) code)
-                append (list (il:pop))))))
+        (let ((result nil))
+          (loop for form in forms
+                for i from 1
+                for is-last = (= i (length forms))
+                for code = (generate-step2 form (if is-last tail-p nil))
+                do (setf result (append result code))
+                if (or (typep form 'ast-throw) (typep form 'ast-return-from) (typep form 'ast-go))
+                  do (return result)
+                else if (and (not is-last) code)
+                  do (setf result (append result (list (il:pop)))))
+          result))))
 
 (defmethod generate-step2 ((node ast-setq) &optional tail-p)
   (let* ((var (ast-setq-name node))
@@ -827,6 +832,7 @@
                 (il:throw))))
 
 (defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)
+  (declare (ignore tail-p))
   (let* ((*current-lambda-params* (ast-toplevel-defun-params node))
          (forms (ast-toplevel-defun-body node))
          (body-code (if (null forms)

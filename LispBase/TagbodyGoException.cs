@@ -4,11 +4,13 @@ namespace Lisp
 {
     public class TagbodyGoException : Exception
     {
-        public int TagId { get; }
+        public object TagbodyId { get; private set; }
+        public object Label { get; private set; }
 
-        public TagbodyGoException(int tagId)
+        public TagbodyGoException(object tagbodyId, object label) : base("Non-local go to tagbody label.")
         {
-            TagId = tagId;
+            TagbodyId = tagbodyId;
+            Label = label;
         }
     }
 }

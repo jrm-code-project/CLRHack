@@ -1,3 +1,4 @@
+#+sbcl (declaim (sb-ext:muffle-conditions style-warning))
 ;;; -*- Mode: Lisp; coding: utf-8; -*-
 
 (in-package "CLRHACK")
@@ -1376,6 +1377,7 @@
                                     (ast-dotnet-instance-call-arguments node))))
 
 (defmethod analyze-environment ((node ast-dotnet-property) env &optional mutated)
+  (declare (ignore env mutated))
   node)
 
 (defmethod analyze-environment ((node ast-dotnet-instance-property) env &optional mutated)
@@ -1384,6 +1386,7 @@
                  :instance (analyze-environment (ast-dotnet-instance-property-instance node) env mutated)))
 
 (defmethod analyze-environment ((node ast-dotnet-field) env &optional mutated)
+  (declare (ignore env mutated))
   node)
 
 (defmethod analyze-environment ((node ast-dotnet-instance-field) env &optional mutated)

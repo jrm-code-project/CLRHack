@@ -1,3 +1,4 @@
+#+sbcl (declaim (sb-ext:muffle-conditions style-warning))
 ;;; -*- Mode: Lisp; coding: utf-8; -*-
 
 (in-package "CLRHACK")
@@ -10,6 +11,11 @@
    (stack-effect :initarg :stack-effect :initform 0   :accessor get-stack-effect)
    (source-form  :initarg :source-form  :initform nil :accessor get-source-form))
   (:documentation "The root of all digital sin. Added stack-effect for calculating .maxstack, and source-form so we can trace CIL back to your Lisp code."))
+
+(defclass cil-block (cil-instruction)
+  ((instructions :initarg :instructions :accessor cil-block-instructions)
+   (label :initarg :label :accessor cil-block-label :initform nil))
+  (:documentation "A sequence of instructions treated as a single basic block."))
 
 (defgeneric emit-instruction (instruction stream)
   (:documentation "Emit the textual CIL for this instruction to the given stream."))
@@ -334,6 +340,8 @@
                     :accessor get-instructions))
   (:documentation "A CIL method definition. Added entrypoint-p so the CLR knows where to start."))
 
+
+(declaim (ftype (function (t) t) get-header))
 
 (defun compute-maxstack (instructions)
   "Calculates the precise maxstack required for a sequence of CIL instructions, tracing through branches."
@@ -703,6 +711,7 @@
 
 (defun il::ilasm (assembly)
   "No-op. Rely on dotnet publish using IL SDK instead."
+  (declare (ignore assembly))
   t)
 
 (defclass cil-block (cil-instruction)
