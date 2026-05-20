@@ -81,5 +81,19 @@
     (is (not (null (search "Starting countdown from 1,000,000..." output))))
     (is (not (null (search "Done" output))))))
 
+(test bank-test
+  "Test closures and shared state mutation with a bank account simulation."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/bank-test.lisp"))))
+    (is (not (null (search "Initial Reserve:" output))))
+    (is (not (null (search "1700" output))))
+    (is (not (null (search "Alice deposits 100:" output))))
+    (is (not (null (search "600" output))))
+    (is (not (null (search "Bob withdraws 50:" output))))
+    (is (not (null (search "150" output))))
+    (is (not (null (search "Total accounts:" output))))
+    (is (not (null (search "2" output))))
+    (is (not (null (search "Final Reserve:" output))))
+    (is (not (null (search "1750" output))))))
+
 
 
