@@ -140,5 +140,27 @@
     (is (not (null (search "Reached target" output))))
     (is (not (null (search "SUCCESS: Cleanup run!" output))))))
 
+(test catch-test
+  "Test dynamic catch/throw non-local exits."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-catch.lisp"))))
+    (is (not (null (search "Testing catch basic..." output))))
+    (is (not (null (search "Inside catch" output))))
+    (is (not (null (search "Result (should be thrown value):" output))))
+    (is (not (null (search "thrown value" output))))
+    (is (null (search "Should NOT print this" output)))
+    
+    (is (not (null (search "Testing nested catch..." output))))
+    (is (not (null (search "Outer start" output))))
+    (is (not (null (search "Inner start" output))))
+    (is (not (null (search "Back from outer catch" output))))
+    
+    (is (not (null (search "Testing catch mismatch..." output))))
+    (is (not (null (search "Throwing to bar from inner foo" output))))
+    
+    (is (not (null (search "Testing truly non-local throw..." output))))
+    (is (not (null (search "Inside helper, about to throw..." output))))
+    (is (not (null (search "Result of non-local throw:" output))))
+    (is (not (null (search "final result" output))))))
+
 
 
