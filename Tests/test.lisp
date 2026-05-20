@@ -124,5 +124,21 @@
     (is (not (null (search "Tautology check..." output))))
     (is (not (null (search "SUCCESS: Term is a tautology!" output))))))
 
+(test uwp-test
+  "Test unwind-protect execution flow and value return."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-uwp.lisp"))))
+    (is (not (null (search "Testing unwind-protect basic..." output))))
+    (is (not (null (search "Inside protected" output))))
+    (is (not (null (search "Inside cleanup" output))))
+    (is (not (null (search "Result of uwp (should be result):" output))))
+    (is (not (null (search "result" output))))
+    (is (not (null (search "Value of x (should be cleaned):" output))))
+    (is (not (null (search "cleaned" output))))
+    (is (not (null (search "Testing unwind-protect with GO..." output))))
+    (is (not (null (search "About to go" output))))
+    (is (not (null (search "Running cleanup from go" output))))
+    (is (not (null (search "Reached target" output))))
+    (is (not (null (search "SUCCESS: Cleanup run!" output))))))
+
 
 
