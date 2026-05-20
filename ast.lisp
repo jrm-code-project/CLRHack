@@ -1043,6 +1043,12 @@
      (let ((op (car expr))
            (args (cdr expr)))
        (case op
+         ((+ - * / %ADD %SUB %MUL %DIV)
+          (if (> (length args) 2)
+              (lisp->ast `(,op (,op ,(first args) ,(second args)) ,@(cddr args)) env tags-env blocks-env current-scope)
+              (make-instance 'ast-application
+                             :operator (lisp->ast op env tags-env blocks-env current-scope)
+                             :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args))))
          (quote
           (lisp->ast (expand-quote (car args)) env tags-env blocks-env current-scope))
          (if

@@ -8,4 +8,6 @@
                (:file "data"      :depends-on ("package"))
                (:file "ast"       :depends-on ("package" "clr-read"))
                (:file "generate"  :depends-on ("ast" "data" "clr-read"))
-               (:module "CLSymbols" :components ((:file "write-symbols")))))
+               (:module "CLSymbols" :components ((:file "write-symbols")))
+               (:module "Tests" :depends-on ("package")
+                        :components ((:file "test")))))

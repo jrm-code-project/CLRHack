@@ -5,7 +5,7 @@
   (:shadowing-import-from "NAMED-LET" "LET" "NAMED-LAMBDA")
   (:shadowing-import-from "SERIES" "DEFUN" "FUNCALL" "LET*" "MULTIPLE-VALUE-BIND" "ITERATE")
   (:shadow "COMPILE-FILE")
-  (:use "ALEXANDRIA" "CL" "FOLD" "FUNCTION" "NAMED-LET" "SERIES")
+  (:use "ALEXANDRIA" "CL" "FIVEAM" "FOLD" "FUNCTION" "NAMED-LET" "SERIES")
   (:export
    "COMPILE-FILE"
    "LISP->AST"))

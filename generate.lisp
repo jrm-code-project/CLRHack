@@ -348,46 +348,33 @@
 
 (defmethod generate-step1 ((node ast-application))
   (let ((operator (ast-application-operator node)))
-    (cond
+    (generate-step1 operator)
+    (if (and (typep operator 'ast-global-variable)
+             (eq (ast-variable-name operator) '.ctor))
+        (progn
+          (mapc #'generate-step1 (cdr (ast-application-operands node)))
+          (let ((cls (car (ast-application-operands node))))
+            (setf (ast-basic-block node)
+                  (list (il:newobj :method ".ctor"
+                                   :class (if (typep cls 'ast-literal) (format nil "~A" (ast-literal-value cls)) (string (ast-variable-name cls)))
+                                   :return "instance void"
+                                   :args (make-list (length (cdr (ast-application-operands node))) :initial-element "object"))))))
+        (cond
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '.ctor))
-       (let* ((lifted-var (car (ast-application-operands node)))
-              (free-vars (cdr (ast-application-operands node)))
-              (class-name (sanitize-identifier (string (ast-variable-name lifted-var))))
-              (arg-types (make-list (length free-vars) :initial-element "object")))
-         (mapc #'generate-step1 free-vars)
-         (setf (ast-basic-block node)
-               (list (il:newobj :method ".ctor" :class class-name :return "instance void" :args arg-types)))))
-      ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%write-line)
-                (eq (ast-variable-name operator) '%write-object)
-                (eq (ast-variable-name operator) 'print)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%WRITE-LINE")
+                  (string-equal name "%WRITE-OBJECT")
+                  (string-equal name "%WRITE-INT")
+                  (string-equal name "PRINT"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:call :method "WriteLine" :class "[mscorlib]System.Console" :return "void" :args '("object"))
                      (il:ldnull)))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%write-int))
-       (progn
-         (mapc #'generate-step1 (ast-application-operands node))
-         (setf (ast-basic-block node)
-               (list (il:unbox.any "int32")
-                     (il:call :method "WriteLine" :class "[mscorlib]System.Console" :return "void" :args '("int32"))
-                     (il:ldnull)))))
-      ((and (typep operator 'ast-global-variable)
-            (member (ast-variable-name operator) *toplevel-defuns* :test #'eq))
-       (progn
-         (mapc #'generate-step1 (ast-application-operands node))
-         (let* ((name (sanitize-identifier (string (ast-variable-name operator))))
-                (n-args (length (ast-application-operands node)))
-                (arg-types (make-list n-args :initial-element "object")))
-           (setf (ast-basic-block node)
-                 (list (il:call :method name :class "Program" :return "object" :args arg-types))))))
-
-      ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%sub)
-                (eq (ast-variable-name operator) '-)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%SUB")
+                  (string-equal name "-"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((temp (register-local "TEMP_B")))
@@ -399,8 +386,9 @@
                        (il:sub)
                        (il:box "int32"))))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%mul)
-                (eq (ast-variable-name operator) '*)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%MUL")
+                  (string-equal name "*"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((temp (register-local "TEMP_B")))
@@ -412,8 +400,9 @@
                        (il:mul)
                        (il:box "int32"))))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%div)
-                (eq (ast-variable-name operator) '/)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%DIV")
+                  (string-equal name "/"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((temp (register-local "TEMP_B")))
@@ -425,8 +414,9 @@
                        (il:div)
                        (il:box "int32"))))))
       ((and (typep operator 'ast-global-variable)
-            (or (string-equal (symbol-name (ast-variable-name operator)) "%ADD")
-                (string-equal (symbol-name (ast-variable-name operator)) "+")))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%ADD")
+                  (string-equal name "+"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((temp (register-local "TEMP_B")))
@@ -438,8 +428,9 @@
                        (il:add)
                        (il:box "int32"))))))
       ((and (typep operator 'ast-global-variable)
-            (or (string-equal (symbol-name (ast-variable-name operator)) "1+")
-                (string-equal (symbol-name (ast-variable-name operator)) "1-")))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "1+")
+                  (string-equal name "1-"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
@@ -448,8 +439,9 @@
                      (if (string-equal (symbol-name (ast-variable-name operator)) "1+") (il:add) (il:sub))
                      (il:box "int32")))))
       ((and (typep operator 'ast-global-variable)
-            (or (string-equal (symbol-name (ast-variable-name operator)) "%LESSP")
-                (string-equal (symbol-name (ast-variable-name operator)) "<")))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%LESSP")
+                  (string-equal name "<"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((temp (register-local "TEMP_B"))
@@ -468,8 +460,9 @@
                        (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%not)
-                (eq (ast-variable-name operator) 'not)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%NOT")
+                  (string-equal name "NOT"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (sanitize-identifier (string (gensym "TRUE"))))
@@ -484,37 +477,42 @@
                        (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%make-cell))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (string-equal name "%MAKE-CELL")))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.ValueCell" :return "instance void" :args '("object"))))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%cons)
-                (eq (ast-variable-name operator) 'cons)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%CONS")
+                  (string-equal name "CONS"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%car)
-                (eq (ast-variable-name operator) 'car)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%CAR")
+                  (string-equal name "CAR"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:castclass "[LispBase]Lisp.List/ListCell")
                      (il:ldfld "object [LispBase]Lisp.List/ListCell::first")))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%cdr)
-                (eq (ast-variable-name operator) 'cdr)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%CDR")
+                  (string-equal name "CDR"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:castclass "[LispBase]Lisp.List/ListCell")
                      (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%eq)
-                (eq (ast-variable-name operator) 'eq)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%EQ")
+                  (string-equal name "EQ"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (sanitize-identifier (string (gensym "TRUE"))))
@@ -528,8 +526,9 @@
                        (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%null)
-                (eq (ast-variable-name operator) 'null)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%NULL")
+                  (string-equal name "NULL"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (sanitize-identifier (string (gensym "TRUE"))))
@@ -545,8 +544,9 @@
                        (il:nop :label end-label))))))
 
       ((and (typep operator 'ast-global-variable)
-            (or (eq (ast-variable-name operator) '%consp)
-                (eq (ast-variable-name operator) 'consp)))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (or (string-equal name "%CONSP")
+                  (string-equal name "CONSP"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((true-label (sanitize-identifier (string (gensym "TRUE"))))
@@ -562,14 +562,16 @@
                        (car (load-symbol-il "T"))
                        (il:nop :label end-label))))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%cell-value))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (string-equal name "%CELL-VALUE")))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
                (list (il:castclass "[LispBase]Lisp.ValueCell")
                      (il:ldfld "object [LispBase]Lisp.ValueCell::Value")))))
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%intern))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (string-equal name "%INTERN")))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let* ((sym-name-node (car (ast-application-operands node)))
@@ -581,7 +583,8 @@
            (setf (ast-basic-block node)
                  (list (il:ldsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name)))))))     
       ((and (typep operator 'ast-global-variable)
-            (eq (ast-variable-name operator) '%set-cell-value!))
+            (let ((name (symbol-name (ast-variable-name operator))))
+              (string-equal name "%SET-CELL-VALUE!")))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
          (let ((temp (register-local (string (gensym "TEMP")))))
@@ -591,12 +594,22 @@
                        (il:ldloc temp)
                        (il:stfld "object [LispBase]Lisp.ValueCell::Value")
                        (il:ldloc temp))))))
+      ((and (typep operator 'ast-global-variable)
+            (member (ast-variable-name operator) *toplevel-defuns* :test #'eq))
+       (progn
+         (mapc #'generate-step1 (ast-application-operands node))
+         (setf (ast-basic-block node)
+               (list (il:call :method (sanitize-identifier (string (ast-variable-name operator)))
+                              :class "Program"
+                              :return "object"
+                              :args (make-list (length (ast-application-operands node)) :initial-element "object"))))))
       (t
        (progn
          (generate-step1 operator)
          (mapc #'generate-step1 (ast-application-operands node))
          (setf (ast-basic-block node)
-               (list (il:callvirt :method "Invoke" :class "[LispBase]Lisp.Closure" :return "instance object" :args (make-list (length (ast-application-operands node)) :initial-element "object")))))))))
+               (list (il:callvirt :method "Invoke" :class "[LispBase]Lisp.Closure" :return "instance object" :args (make-list (length (ast-application-operands node)) :initial-element "object"))))))))))
+
 
 ;;; ===========================================================================
 ;;; Step 2: Stitch together the basic blocks with conditional and control flow
@@ -820,13 +833,12 @@
                       append (list (il:stloc temp))
                     else if (and (not is-last) (not (typep form 'ast-return-from)))
                       append (list (il:pop))))))
-    (let ((code (append body-code 
+    (let ((code (append body-code
                         (list (il:nop :label (sanitize-identifier (ast-block-end-label node))))
                         (when needs-temp (list (il:ldloc temp))))))
-      (if tail-p
+      (if (and tail-p (or needs-temp (null forms)))
           (append code (list (il:ret)))
           code))))
-
 (defmethod generate-step2 ((node ast-return-from) &optional tail-p)
   (declare (ignore tail-p))
   (let ((result-temp (ast-return-from-result-temp node)))
@@ -881,12 +893,14 @@
          (forms (ast-toplevel-defun-body node))
          (body-code (if (null forms)
                         (list (il:ldnull) (il:ret))
-                        (loop for form in forms
-                              for i from 1
-                              for is-last = (= i (length forms))
-                              append (generate-step2 form is-last)
-                              when (not is-last)
-                                append (list (il:pop))))))
+                        (let ((res nil))
+                          (loop for form in forms
+                                for i from 1
+                                for is-last = (= i (length forms))
+                                do (setf res (append res (generate-step2 form is-last)))
+                                when (not is-last)
+                                  do (setf res (append res (list (il:pop)))))
+                          res))))
     (setf (ast-basic-block node) body-code)
     body-code))
 
@@ -1056,7 +1070,7 @@
              (fields (mapcar (lambda (v) (il:field :name (sanitize-identifier (string v)) :type "object")) free-vars))
              (ctor-insts (append
                           (list (il:ldarg.0)
-                                (il:call :method ".ctor" :class "[mscorlib]System.Object" :return "instance void" :args nil))
+                                (il:call :method ".ctor" :class "[LispBase]Lisp.Closure" :return "instance void" :args nil))
                           (loop for i from 0 below (length free-vars)
                                 for v in free-vars
                                 append (list (il:ldarg.0)
