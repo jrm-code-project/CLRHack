@@ -193,5 +193,21 @@
     (is (not (null (search "10" output))))
     (is (not (null (search "5" output))))))
 
+(test scoping-test
+  "Test lexical scoping, shadowing, and complex closure captures including Y-Combinator."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-scoping.lisp"))))
+    (is (not (null (search "--- Test 1: Baseline Bindings ---" output))))
+    (is (not (null (search "Straight-line let binding successful." output))))
+    (is (not (null (search "--- Test 2: Basic Closure ---" output))))
+    (is (not (null (search "Basic closure captured successfully." output))))
+    (is (not (null (search "--- Test 3: Lexical Shadowing ---" output))))
+    (is (not (null (search "INNER SCOPE - SUCCESS" output))))
+    (is (null (search "OUTER SCOPE - FAILURE" output)))
+    (is (not (null (search "--- Test 4: Multi-level Captures ---" output))))
+    (is (not (null (search "Prefix Bound." output))))
+    (is (not (null (search "Suffix Bound." output))))
+    (is (not (null (search "--- Test 5: Y-Combinator Compilation ---" output))))
+    (is (not (null (search "Y-Combinator successfully compiled to verifiable IL closures!" output))))))
+
 
 
