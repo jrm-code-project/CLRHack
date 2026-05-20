@@ -6,7 +6,7 @@
         ((and (consp x) (consp y))
          (and (equal (car x) (car y))
               (equal (cdr x) (cdr y))))
-        (t (clr-call "[mscorlib]System.Object" "Equals" "bool" x y))))
+        (t (if (clr-call "[mscorlib]System.Object" "Equals" "bool" x y) t nil))))
 
 (defun member (x lst)
   (cond ((null lst) nil)

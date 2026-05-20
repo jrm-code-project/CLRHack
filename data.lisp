@@ -734,6 +734,6 @@
 (defun il::ldlen ()
   (make-instance 'cil-simple-instruction :opcode "ldlen" :label nil :stack-effect 0))
 
-(export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst il::try il::finally il::catch il::newarr il::stelem.ref il::ldelem.ref il::ldlen) "IL")
+(export '(il::ilasm il::class il::property il::method il::field il::assembly il::call il::callvirt il::newobj il::ldfld il::stfld il::box il::unbox.any il::castclass il::isinst il::try il::finally il::catch il::newarr il::stelem.ref il::ldelem.ref il::ldlen il::get-opcode) "IL")
 
 
