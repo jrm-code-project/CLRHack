@@ -124,6 +124,13 @@
     (is (not (null (search "Tautology check..." output))))
     (is (not (null (search "SUCCESS: Term is a tautology!" output))))))
 
+(test deriv-test
+  "Test the Gabriel benchmark for symbolic differentiation."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-deriv.lisp"))))
+    (is (not (null (search "Differentiating:" output))))
+    (is (not (null (search "Running benchmark 100 times..." output))))
+    (is (not (null (search "Done" output))))))
+
 (test uwp-test
   "Test unwind-protect execution flow and value return."
   (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-uwp.lisp"))))
