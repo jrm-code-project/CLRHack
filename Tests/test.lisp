@@ -167,5 +167,22 @@
   (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-tak.lisp"))))
     (is (not (null (search "7" output))))))
 
+(test tagbody-test
+  "Test tagbody loop semantics and nested scope go branching."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-tagbody.lisp"))))
+    (is (not (null (search "Testing tagbody loop..." output))))
+    (is (not (null (search "Loop finished." output))))
+    (is (not (null (search "Final i (should be 10):" output))))
+    (is (not (null (search "10" output))))
+    
+    (is (not (null (search "Testing nested tagbody..." output))))
+    (is (not (null (search "Outer start" output))))
+    (is (not (null (search "Inner start" output))))
+    (is (null (search "Should NOT print this (inner)" output)))
+    (is (not (null (search "Inner end" output))))
+    (is (not (null (search "Back in outer" output))))
+    (is (null (search "Should NOT print this (outer)" output)))
+    (is (not (null (search "Outer end" output))))))
+
 
 
