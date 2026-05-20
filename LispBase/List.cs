@@ -62,7 +62,7 @@ namespace Lisp
                 return "(" +
                     (first is null ? "null" : first.ToString ()) +
                     " . " +
-                    rest.ToString () +
+                    (rest is null ? "nil" : rest.ToString ()) +
                     ")";
             }
         }
