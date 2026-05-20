@@ -184,5 +184,14 @@
     (is (null (search "Should NOT print this (outer)" output)))
     (is (not (null (search "Outer end" output))))))
 
+(test toplevel-test
+  "Test top-level form evaluation and global function definitions."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-toplevel.lisp"))))
+    (is (not (null (search "Hello from:" output))))
+    (is (not (null (search "TopLevelTest" output))))
+    (is (not (null (search "Multiplying by captured factor (simulated)..." output))))
+    (is (not (null (search "10" output))))
+    (is (not (null (search "5" output))))))
+
 
 
