@@ -57,5 +57,17 @@
     (is (not (null (search "Bonjour" output))))
     (is (not (null (search "Bob" output))))))
 
+(test complex-test
+  "Test complex closures, state mutation, and shared bindings."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-complex.lisp"))))
+    (is (not (null (search "Instance 1 - Call 1:" output))))
+    (is (not (null (search "1126" output))))
+    (is (not (null (search "Instance 1 - Call 2:" output))))
+    (is (not (null (search "1136" output))))
+    (is (not (null (search "Instance 2 - Call 1:" output))))
+    (is (not (null (search "2132" output))))
+    (is (not (null (search "Instance 1 - Call 3:" output))))
+    (is (not (null (search "1149" output))))))
+
 
 

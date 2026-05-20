@@ -828,7 +828,7 @@
               (loop for form in forms
                     for i from 1
                     for is-last = (= i (length forms))
-                    append (generate-step2 form (if (and is-last (not needs-temp)) tail-p nil))
+                    append (generate-step2 form nil)
                     if (and is-last needs-temp)
                       append (list (il:stloc temp))
                     else if (and (not is-last) (not (typep form 'ast-return-from)))
@@ -836,7 +836,7 @@
     (let ((code (append body-code
                         (list (il:nop :label (sanitize-identifier (ast-block-end-label node))))
                         (when needs-temp (list (il:ldloc temp))))))
-      (if (and tail-p (or needs-temp (null forms)))
+      (if tail-p
           (append code (list (il:ret)))
           code))))
 (defmethod generate-step2 ((node ast-return-from) &optional tail-p)

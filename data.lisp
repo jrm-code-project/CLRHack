@@ -433,14 +433,14 @@
     (format stream "    .entrypoint~%"))
   (format stream "    .maxstack ~D~%" (get-maxstack method))
   (when (get-locals method)
-    (format stream "    .locals (~{~A~^, ~})~%" (get-locals method)))
+    (format stream "    .locals init (~{~A~^, ~})~%" (get-locals method)))
   (let ((insts (get-instructions method)))
     (loop for i from 0 below (length insts)
           for inst = (aref insts i)
           do (progn
                ;; When emitting a call or callvirt instruction, if the immediately
                ;; following instruction is a ret, make the call be a tail. call.
-               (when (and (typep inst 'cil-call-instruction)
+               #+nil(when (and (typep inst 'cil-call-instruction)
                           (member (get-opcode inst) '("call" "callvirt") :test #'string-equal)
                           (< (1+ i) (length insts)))
                  (let ((next-inst (aref insts (1+ i))))
