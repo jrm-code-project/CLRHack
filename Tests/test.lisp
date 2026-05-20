@@ -162,5 +162,10 @@
     (is (not (null (search "Result of non-local throw:" output))))
     (is (not (null (search "final result" output))))))
 
+(test tak-test
+  "Test the Takeuchi function benchmark."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-tak.lisp"))))
+    (is (not (null (search "7" output))))))
+
 
 
