@@ -69,5 +69,17 @@
     (is (not (null (search "Instance 1 - Call 3:" output))))
     (is (not (null (search "1149" output))))))
 
+(test fib-test
+  "Test recursive function calls with Fibonacci calculation."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-fib.lisp"))))
+    (is (not (null (search "Fibonacci of 10:" output))))
+    (is (not (null (search "55" output))))))
+
+(test tail-test
+  "Test tail call optimization with a deep recursive countdown."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/tail-test.lisp"))))
+    (is (not (null (search "Starting countdown from 1,000,000..." output))))
+    (is (not (null (search "Done" output))))))
+
 
 

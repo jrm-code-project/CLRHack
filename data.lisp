@@ -437,17 +437,7 @@
   (let ((insts (get-instructions method)))
     (loop for i from 0 below (length insts)
           for inst = (aref insts i)
-          do (progn
-               ;; When emitting a call or callvirt instruction, if the immediately
-               ;; following instruction is a ret, make the call be a tail. call.
-               #+nil(when (and (typep inst 'cil-call-instruction)
-                          (member (get-opcode inst) '("call" "callvirt") :test #'string-equal)
-                          (< (1+ i) (length insts)))
-                 (let ((next-inst (aref insts (1+ i))))
-                   (when (and (typep next-inst 'cil-simple-instruction)
-                              (string-equal (get-opcode next-inst) "ret"))
-                     (setf (get-tail-p inst) t))))
-               (emit-instruction inst stream))))
+          do (emit-instruction inst stream)))
   (format stream "}~%~%"))
 
 (defun il::method (&key name (return-type "void") arg-types

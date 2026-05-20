@@ -377,11 +377,11 @@
                   (string-equal name "-"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
-         (let ((temp (register-local "TEMP_B")))
+         (let ((temp (register-global "TEMP_B")))
            (setf (ast-basic-block node)
-                 (list (il:stloc temp)
+                 (list (il:stsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; a
-                       (il:ldloc temp)
+                       (il:ldsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; b
                        (il:sub)
                        (il:box "int32"))))))
@@ -391,11 +391,11 @@
                   (string-equal name "*"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
-         (let ((temp (register-local "TEMP_B")))
+         (let ((temp (register-global "TEMP_B")))
            (setf (ast-basic-block node)
-                 (list (il:stloc temp)
+                 (list (il:stsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; a
-                       (il:ldloc temp)
+                       (il:ldsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; b
                        (il:mul)
                        (il:box "int32"))))))
@@ -405,11 +405,11 @@
                   (string-equal name "/"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
-         (let ((temp (register-local "TEMP_B")))
+         (let ((temp (register-global "TEMP_B")))
            (setf (ast-basic-block node)
-                 (list (il:stloc temp)
+                 (list (il:stsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; a
-                       (il:ldloc temp)
+                       (il:ldsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; b
                        (il:div)
                        (il:box "int32"))))))
@@ -419,11 +419,11 @@
                   (string-equal name "+"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
-         (let ((temp (register-local "TEMP_B")))
+         (let ((temp (register-global "TEMP_B")))
            (setf (ast-basic-block node)
-                 (list (il:stloc temp)
+                 (list (il:stsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; a
-                       (il:ldloc temp)
+                       (il:ldsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; b
                        (il:add)
                        (il:box "int32"))))))
@@ -444,13 +444,13 @@
                   (string-equal name "<"))))
        (progn
          (mapc #'generate-step1 (ast-application-operands node))
-         (let ((temp (register-local "TEMP_B"))
+         (let ((temp (register-global "TEMP_B"))
                (true-label (sanitize-identifier (string (gensym "TRUE"))))
                (end-label (sanitize-identifier (string (gensym "END")))))
            (setf (ast-basic-block node)
-                 (list (il:stloc temp)
+                 (list (il:stsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; a
-                       (il:ldloc temp)
+                       (il:ldsfld (format nil "object Program::'~A'" temp))
                        (il:unbox.any "int32") ; b
                        (il:clt)
                        (il:brtrue true-label)
@@ -719,12 +719,14 @@
          (forms (ast-lambda-body node))
          (body-code (if (null forms)
                         (list (il:ldnull) (il:ret))
-                        (loop for form in forms
-                              for i from 1
-                              for is-last = (= i (length forms))
-                              append (generate-step2 form is-last)
-                              when (not is-last)
-                                append (list (il:pop))))))
+                        (let ((res nil))
+                          (loop for form in forms
+                                for i from 1
+                                for is-last = (= i (length forms))
+                                do (setf res (append res (generate-step2 form is-last)))
+                                when (not is-last)
+                                  do (setf res (append res (list (il:pop)))))
+                          (append res (list (il:ldnull) (il:ret)))))))
     (setf (ast-basic-block node) body-code)
     body-code))
 
@@ -828,7 +830,7 @@
               (loop for form in forms
                     for i from 1
                     for is-last = (= i (length forms))
-                    append (generate-step2 form nil)
+                    append (generate-step2 form (if (and is-last (not needs-temp)) tail-p nil))
                     if (and is-last needs-temp)
                       append (list (il:stloc temp))
                     else if (and (not is-last) (not (typep form 'ast-return-from)))
@@ -836,7 +838,7 @@
     (let ((code (append body-code
                         (list (il:nop :label (sanitize-identifier (ast-block-end-label node))))
                         (when needs-temp (list (il:ldloc temp))))))
-      (if tail-p
+      (if (and tail-p (or needs-temp (null forms)))
           (append code (list (il:ret)))
           code))))
 (defmethod generate-step2 ((node ast-return-from) &optional tail-p)
@@ -900,7 +902,7 @@
                                 do (setf res (append res (generate-step2 form is-last)))
                                 when (not is-last)
                                   do (setf res (append res (list (il:pop)))))
-                          res))))
+                          (append res (list (il:ldnull) (il:ret)))))))
     (setf (ast-basic-block node) body-code)
     body-code))
 
@@ -949,8 +951,13 @@
                        (string-equal name "%SET-CELL-VALUE!")
                        (member (ast-variable-name operator) *toplevel-defuns* :test #'eq))))
             (let* ((operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-application-operands node))))
-                   (code (append operands-code (ast-basic-block node))))
-              (if tail-p (append code (list (il:ret))) code))
+                   (bb (ast-basic-block node)))
+              (when (and tail-p bb)
+                (let ((last-inst (car (last bb))))
+                  (when (typep last-inst 'cil-call-instruction)
+                    (setf (get-tail-p last-inst) t))))
+              (let ((code (append operands-code bb)))
+                (if tail-p (append code (list (il:ret))) code)))
             (if (and (typep operator 'ast-global-variable)
                      (string-equal (symbol-name (ast-variable-name operator)) "%INTERN"))
                 (let ((code (ast-basic-block node)))
@@ -958,6 +965,10 @@
                 (let ((operator-code (generate-step2 operator nil))
                       (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) (ast-application-operands node))))
                       (bb (ast-basic-block node)))
+                  (when (and tail-p bb)
+                    (let ((last-inst (car (last bb))))
+                      (when (typep last-inst 'cil-call-instruction)
+                        (setf (get-tail-p last-inst) t))))
                   (let ((code (append operator-code (list (il:castclass "[LispBase]Lisp.Closure")) operands-code bb)))
                     (if tail-p (append code (list (il:ret))) code))))))))
 
