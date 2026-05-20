@@ -95,5 +95,34 @@
     (is (not (null (search "Final Reserve:" output))))
     (is (not (null (search "1750" output))))))
 
+(test block-test
+  "Test block, return-from, nested blocks, implicit blocks, and unwind-protect."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-block.lisp"))))
+    (is (not (null (search "Testing block basic..." output))))
+    (is (not (null (search "Inside block" output))))
+    (is (not (null (search "returned value" output))))
+    (is (null (search "Should NOT print this" output)))
+    
+    (is (not (null (search "Testing nested blocks..." output))))
+    (is (not (null (search "Outer start" output))))
+    (is (not (null (search "Inner start" output))))
+    (is (not (null (search "Back from outer block" output))))
+    
+    (is (not (null (search "Testing block with unwind-protect..." output))))
+    (is (not (null (search "Protected code" output))))
+    (is (not (null (search "Cleanup code run" output))))
+    
+    (is (not (null (search "Testing implicit function block..." output))))
+    (is (not (null (search "zero" output))))
+    (is (not (null (search "non-zero" output))))))
+
+(test nboyer-test
+  "Test the classic Gabriel nboyer theorem prover benchmark."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-nboyer.lisp"))))
+    (is (not (null (search "Lemmas loaded." output))))
+    (is (not (null (search "Rewriting term..." output))))
+    (is (not (null (search "Tautology check..." output))))
+    (is (not (null (search "SUCCESS: Term is a tautology!" output))))))
+
 
 
