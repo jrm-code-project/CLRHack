@@ -1124,78 +1124,23 @@
              (rest-alpha (when has-rest (sanitize-identifier (string (ast-lambda-rest-param lambda-node)))))
              (methods (list ctor)))
         (multiple-value-bind (block locals) (generate lambda-node)
-          (loop for m from 0 to 8 do
-            (let* ((invoke-arg-types (make-list m :initial-element "object"))
-                   (is-valid (if (or has-rest has-keys) (>= m n-params) (and (>= m n-params) (<= m (+ n-params n-optional)))))
-                   (locals-decl (if is-valid (mapcar (lambda (loc) (format nil "object ~A" loc)) locals) nil))
-                   (insts (if is-valid
-                              (let ((prologue nil))
-                                (loop for i from 0 below n-optional
-                                      for (alpha init-ast sup-alpha) in opt-params
-                                      do (let ((arg-pos (+ n-params i 1)))
-                                           (if (< (+ n-params i) m)
-                                               (progn
-                                                 (push (il:ldarg arg-pos) prologue)
-                                                 (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                                 (when sup-alpha
-                                                   (dolist (ins (load-symbol-il 'T)) (push ins prologue))
-                                                   (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue)))
-                                               (progn
-                                                 (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
-                                                 (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                                 (when sup-alpha
-                                                   (push (il:ldnull) prologue)
-                                                   (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))))))
-                                (when has-keys
-                                  (let ((n-supplied-args (- m (+ n-params n-optional))))
-                                    (loop for (kw alpha init-ast sup-alpha) in key-params
-                                          do (let ((end-label (sanitize-identifier (string (gensym "END")))))
-                                               (loop for i from 0 below (floor n-supplied-args 2)
-                                                     do (let ((kw-arg-pos (+ n-params n-optional (* i 2) 1))
-                                                              (val-arg-pos (+ n-params n-optional (* i 2) 2))
-                                                              (next-label (sanitize-identifier (string (gensym "NEXT")))))
-                                                          (push (il:ldarg kw-arg-pos) prologue)
-                                                          (dolist (ins (load-symbol-il kw)) (push ins prologue))
-                                                          (push (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object")) prologue)
-                                                          (push (il:brfalse next-label) prologue)
-                                                          (push (il:ldarg val-arg-pos) prologue)
-                                                          (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                                          (when sup-alpha
-                                                            (dolist (ins (load-symbol-il 'T)) (push ins prologue))
-                                                            (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))
-                                                          (push (il:br end-label) prologue)
-                                                          (push (il:nop :label next-label) prologue)))
-                                               (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
-                                               (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                               (when sup-alpha
-                                                 (push (il:ldnull) prologue)
-                                                 (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))
-                                               (push (il:nop :label end-label) prologue)))))
-                                (loop for (alpha init-ast) in (ast-lambda-aux-params lambda-node)
-                                      do (progn
-                                           (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
-                                           (push (il:stloc (sanitize-identifier (string alpha))) prologue)))
-                                (let ((full-prologue (nreverse prologue)))
-                                  (if has-rest
-                                      (let ((list-insts (list (il:ldnull))))
-                                        (loop for i from (1- m) downto (+ n-params n-optional) do
-                                              (setf list-insts
-                                                    (append list-insts
-                                                            (list (il:ldarg (1+ i))
-                                                                  (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))))))
-                                        (append full-prologue list-insts (list (il:stloc rest-alpha)) block))
-                                      (append full-prologue block))))
-                              (list (il:ldc.i4 n-params)
-                                    (il:ldc.i4 m)
-                                    (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
-                                    (il:throw)))))
-              (push (il:method :name "Invoke"
-                               :return-type "object"
-                               :arg-types invoke-arg-types
-                               :locals locals-decl
-                               :virtual-p t
-                               :instructions insts)
-                    methods))))
+          (let ((locals-decl (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)))
+            (loop for m from 0 to 8 do
+              (let* ((invoke-arg-types (make-list m :initial-element "object"))
+                     (is-match (= m n-params))
+                     (insts (if is-match
+                                block
+                                (list (il:ldc.i4 n-params)
+                                      (il:ldc.i4 m)
+                                      (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                      (il:throw)))))
+                (push (il:method :name "Invoke"
+                                 :return-type "object"
+                                 :arg-types invoke-arg-types
+                                 :locals (if is-match locals-decl nil)
+                                 :virtual-p t
+                                 :instructions insts)
+                      methods)))))
         (let ((cls (il:class :name name :parent "[LispBase]Lisp.Closure" :fields fields :methods (reverse methods))))
           (push cls classes))))
     
@@ -1203,97 +1148,17 @@
       (dolist (defun-node toplevel-defuns)
         (let* ((name (sanitize-identifier (string (ast-toplevel-defun-name defun-node))))
                (params (ast-toplevel-defun-params defun-node))
-               (n-params (length params))
-               (opt-params (ast-toplevel-defun-optional-params defun-node))
-               (n-optional (length opt-params))
-               (key-params (ast-toplevel-defun-key-params defun-node))
-               (allow-other-keys (ast-toplevel-defun-allow-other-keys defun-node))
-               (has-keys (not (null key-params)))
-               (has-rest (not (null (ast-toplevel-defun-rest-param defun-node))))
-               (rest-alpha (when has-rest (sanitize-identifier (string (ast-toplevel-defun-rest-param defun-node))))))
+               (n-params (length params)))
           (multiple-value-bind (block locals) (generate defun-node)
-            (if (or has-rest (> n-optional 0) has-keys)
-                (loop for m from 0 to 8 do
-                  (let* ((invoke-arg-types (make-list m :initial-element "object"))
-                         (is-valid (if (or has-rest has-keys) (>= m n-params) (and (>= m n-params) (<= m (+ n-params n-optional)))))
-                         (locals-decl (if is-valid (mapcar (lambda (loc) (format nil "object ~A" loc)) locals) nil))
-                         (insts (if is-valid
-                                    (let ((prologue nil))
-                                      (loop for i from 0 below n-optional
-                                            for (alpha init-ast sup-alpha) in opt-params
-                                            do (let ((arg-pos (+ n-params i)))
-                                                 (if (< (+ n-params i) m)
-                                                     (progn
-                                                       (push (il:ldarg arg-pos) prologue)
-                                                       (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                                       (when sup-alpha
-                                                         (dolist (ins (load-symbol-il 'T)) (push ins prologue))
-                                                         (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue)))
-                                                     (progn
-                                                       (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
-                                                       (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                                       (when sup-alpha
-                                                         (push (il:ldnull) prologue)
-                                                         (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))))))
-                                      (when has-keys
-                                        (let ((n-supplied-args (- m (+ n-params n-optional))))
-                                          (loop for (kw alpha init-ast sup-alpha) in key-params
-                                                do (let ((end-label (sanitize-identifier (string (gensym "END")))))
-                                                     (loop for i from 0 below (floor n-supplied-args 2)
-                                                           do (let ((kw-arg-pos (+ n-params n-optional (* i 2)))
-                                                                    (val-arg-pos (+ n-params n-optional (* i 2) 1))
-                                                                    (next-label (sanitize-identifier (string (gensym "NEXT")))))
-                                                                (push (il:ldarg kw-arg-pos) prologue)
-                                                                (dolist (ins (load-symbol-il kw)) (push ins prologue))
-                                                                (push (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object")) prologue)
-                                                                (push (il:brfalse next-label) prologue)
-                                                                (push (il:ldarg val-arg-pos) prologue)
-                                                                (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                                                (when sup-alpha
-                                                                  (dolist (ins (load-symbol-il 'T)) (push ins prologue))
-                                                                  (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))
-                                                                (push (il:br end-label) prologue)
-                                                                (push (il:nop :label next-label) prologue)))
-                                                     (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
-                                                     (push (il:stloc (sanitize-identifier (string alpha))) prologue)
-                                                     (when sup-alpha
-                                                       (push (il:ldnull) prologue)
-                                                       (push (il:stloc (sanitize-identifier (string sup-alpha))) prologue))
-                                                     (push (il:nop :label end-label) prologue)))))
-                                      (loop for (alpha init-ast) in (ast-toplevel-defun-aux-params defun-node)
-                                            do (progn
-                                                 (dolist (ins (generate-step2 init-ast nil)) (push ins prologue))
-                                                 (push (il:stloc (sanitize-identifier (string alpha))) prologue)))
-                                      (let ((full-prologue (nreverse prologue)))
-                                        (if has-rest
-                                            (let ((list-insts (list (il:ldnull))))
-                                              (loop for i from (1- m) downto (+ n-params n-optional) do
-                                                    (setf list-insts
-                                                          (append (list (il:ldarg i))
-                                                                  list-insts
-                                                                  (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))))))
-                                              (append full-prologue list-insts (list (il:stloc rest-alpha)) block))
-                                            (append full-prologue block))))
-                                    (list (il:ldc.i4 n-params)
-                                          (il:ldc.i4 m)
-                                          (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
-                                          (il:throw)))))
-                    (push (il:method :name name
-                                     :return-type "object"
-                                     :arg-types invoke-arg-types
-                                     :locals locals-decl
-                                     :instructions insts
-                                     :visibility :public
-                                     :static-p t)
-                          toplevel-methods)))
-                (let ((method (il:method :name name
-                                         :return-type "object"
-                                         :arg-types (make-list n-params :initial-element "object")
-                                         :locals (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)
-                                         :instructions block
-                                         :visibility :public
-                                         :static-p t)))
-                  (push method toplevel-methods))))))
+            (let ((locals-decl (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)))
+              (push (il:method :name name
+                               :return-type "object"
+                               :arg-types (make-list n-params :initial-element "object")
+                               :locals locals-decl
+                               :visibility :public
+                               :static-p t
+                               :instructions block)
+                    toplevel-methods)))))
       (format t "Generated ~D toplevel methods!~%" (length toplevel-methods))
       (multiple-value-bind (main-insts locals) (generate ast)
         (let* ((main-insts-final (append main-insts (list (il:pop) (il:ret))))
