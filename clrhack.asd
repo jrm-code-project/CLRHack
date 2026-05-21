@@ -2,7 +2,7 @@
   :author "Joe Marshall"
   :version "0.1"
   :license "MIT"
-  :depends-on ()
+  :depends-on ("alexandria" "series" "fold" "named-let" "function" "fiveam")
   :components ((:file "package")
                (:file "clr-read"  :depends-on ("package"))
                (:file "data"      :depends-on ("package"))
