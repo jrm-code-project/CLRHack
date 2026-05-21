@@ -5,3 +5,4 @@ bin/
 *.dll
 *.runtimeconfig.json
 *.log
+*.il
