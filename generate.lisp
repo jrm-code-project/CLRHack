@@ -162,7 +162,7 @@
                                  :class (ast-clr-call-type-name node)
                                  :return ret-type
                                  :args arg-types))
-                  (if is-primitive (list (il:box ret-type)))
+                  (if is-primitive (list (il:box (if (string-equal ret-type "bool") "[mscorlib]System.Boolean" ret-type))))
                   (when is-void (list (il:ldnull)))))))
 
 (defmethod generate-step1 ((node ast-clr-call-virt))
@@ -191,7 +191,7 @@
                                        :class class-name
                                        :return ret-type
                                        :args arg-types))
-                    (if is-primitive (list (il:box ret-type)))
+                    (if is-primitive (list (il:box (if (string-equal ret-type "bool") "[mscorlib]System.Boolean" ret-type))))
                     (when is-void (list (il:ldnull))))))))
 
 (defmethod generate-step1 ((node ast-clr-new))

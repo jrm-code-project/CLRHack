@@ -124,6 +124,12 @@
     (is (not (null (search "Tautology check..." output))))
     (is (not (null (search "SUCCESS: Term is a tautology!" output))))))
 
+(test puzzle-test
+  "Test Gabriel puzzle benchmark."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/puzzle-test.lisp"))))
+    (is (not (null (search "Kount:" output))))
+    (is (not (null (search "2004" output))))))
+
 (test deriv-test
   "Test the Gabriel benchmark for symbolic differentiation."
   (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-deriv.lisp"))))
