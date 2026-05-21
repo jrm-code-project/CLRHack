@@ -57,6 +57,27 @@
     (is (not (null (search "Bonjour" output))))
     (is (not (null (search "Bob" output))))))
 
+(test labels-test
+  "Test labels macro."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-labels.lisp"))))
+    (is (not (null (search "Testing labels..." output))))
+    (is (not (null (search "even? 10 is T (Correct)" output))))
+    (is (not (null (search "odd? 11 is T (Correct)" output))))))
+
+(test letrec-test
+  "Test letrec and letrec* macros."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-letrec.lisp"))))
+    (is (not (null (search "Testing letrec..." output))))
+    (is (not (null (search "even? 10 is T (Correct)" output))))
+    (is (not (null (search "odd? 11 is T (Correct)" output))))
+    (is (not (null (search "Testing letrec*..." output))))
+    (is (not (null (search "a:" output))))
+    (is (not (null (search "10" output))))
+    (is (not (null (search "b:" output))))
+    (is (not (null (search "15" output))))
+    (is (not (null (search "c():" output))))
+    (is (not (null (search "25" output))))))
+
 (test complex-test
   "Test complex closures, state mutation, and shared bindings."
   (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-complex.lisp"))))
