@@ -139,6 +139,14 @@
     (is (not (null (search "100" output))))
     (is (not (null (search "Done" output))))))
 
+(test triang-test
+  "Test Gabriel triang benchmark."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-triang.lisp"))))
+    (is (not (null (search "Running triang benchmark..." output))))
+    (is (not (null (search "Result:" output))))
+    (is (not (null (search "22" output))))
+    (is (not (null (search "32" output))))))
+
 (test deriv-test
   "Test the Gabriel benchmark for symbolic differentiation."
   (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-deriv.lisp"))))

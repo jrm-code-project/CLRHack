@@ -42,7 +42,7 @@
                ("test-tagbody.lisp" . "TagbodyTest")
                ("test-tak.lisp" . "TakBenchmark")
                ("test-toplevel.lisp" . "TopLevelTest")
-               ;; ("test-triang.lisp" . "TriangBenchmark")
+               ("Tests/test-triang.lisp" . "TriangBenchmark")
                ("test-uwp.lisp" . "UwpTest"))))
 
   (dolist (test tests)
