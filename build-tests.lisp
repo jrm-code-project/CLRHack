@@ -22,7 +22,7 @@
                ("test-complex.lisp" . "ComplexScopingTest")
                ;; ("test-dderiv.lisp" . "DderivBenchmark")
                ;; ("test-deriv.lisp" . "DerivBenchmark")
-               ;; ("test-div2.lisp" . "Div2Benchmark")
+               ("Tests/test-div2.lisp" . "Div2Benchmark")
                ;; ("test-ctak.lisp" . "CtakBenchmark")
                ("test-fib.lisp" . "FibBenchmark")
                ("test-flet.lisp" . "FletTest")

@@ -130,6 +130,15 @@
     (is (not (null (search "Kount:" output))))
     (is (not (null (search "2004" output))))))
 
+(test div2-test
+  "Test Gabriel div2 benchmark."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-div2.lisp"))))
+    (is (not (null (search "Testing iterative-div2..." output))))
+    (is (not (null (search "Testing recursive-div2..." output))))
+    (is (not (null (search "Length of div2 result should be 100:" output))))
+    (is (not (null (search "100" output))))
+    (is (not (null (search "Done" output))))))
+
 (test deriv-test
   "Test the Gabriel benchmark for symbolic differentiation."
   (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-deriv.lisp"))))
