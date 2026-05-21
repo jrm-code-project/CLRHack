@@ -59,11 +59,7 @@ namespace Lisp
 
             public override string ToString ()
             {
-                return "(" +
-                    (first is null ? "null" : first.ToString ()) +
-                    " . " +
-                    (rest is null ? "nil" : rest.ToString ()) +
-                    ")";
+                return new List(this).ToString();
             }
         }
 
@@ -172,8 +168,26 @@ namespace Lisp
             int count = 0;
             object current = this;
 
-            while (current is List list && !list.EndP)
+            while (true)
             {
+                object first;
+                object rest;
+
+                if (current is List list && !list.EndP)
+                {
+                    first = list.First();
+                    rest = list.Rest();
+                }
+                else if (current is ListCell cell)
+                {
+                    first = cell.First;
+                    rest = cell.Rest;
+                }
+                else
+                {
+                    break;
+                }
+
                 if (count > 0) sb.Append(" ");
 
                 if (printLength.HasValue && count >= printLength.Value)
@@ -183,24 +197,27 @@ namespace Lisp
                     break;
                 }
 
-                object first = list.First();
                 if (first is List subList)
                 {
                     sb.Append(subList.ToStringInternal(currentLevel + 1));
                 }
+                else if (first is ListCell subCell)
+                {
+                    sb.Append(new List(subCell).ToStringInternal(currentLevel + 1));
+                }
                 else
                 {
-                    sb.Append(first?.ToString() ?? "null");
+                    sb.Append(first?.ToString() ?? "nil");
                 }
 
                 count++;
-                current = list.Rest();
+                current = rest;
             }
 
-            if (!(current is List l && l.EndP))
+            if (current != null && !(current is List l && l.EndP))
             {
                 sb.Append(" . ");
-                sb.Append(current?.ToString() ?? "null");
+                sb.Append(current?.ToString() ?? "nil");
             }
 
             sb.Append(")");
