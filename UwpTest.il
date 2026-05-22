@@ -15,8 +15,8 @@
     .field public static object '_SET_CELL_VALUE_'
     .field public static object '_MAKE_CELL'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S1951'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T1947'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S2242'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T2238'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -40,11 +40,11 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1951'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2242'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T1947'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T2238'
     ret
 }
 
@@ -135,7 +135,7 @@
     pop
     tail. call object Program::'TEST_UWP_NESTED_GO'()
     ret
-BLOCK_END_MAIN_1928:
+BLOCK_END_MAIN_2219:
     nop
     ldnull
     ret
@@ -224,23 +224,23 @@ BLOCK_END_MAIN_1928:
 .method private static hidebysig object 'TEST_UWP_NESTED_GO_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object TEMP1948, object UWP_RESULT1946, object CLEANUP_RUN1924)
+    .locals init (object TEMP2239, object UWP_RESULT2237, object CLEANUP_RUN2215)
     ldstr "Testing unwind-protect with GO..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CLEANUP_RUN1924
+    stloc CLEANUP_RUN2215
     .try
     {
     ldstr "About to go"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    leave TAG_TARGET_1925
-    stloc UWP_RESULT1946
-    leave DONE1952
+    leave TAG_TARGET_2216
+    stloc UWP_RESULT2237
+    leave DONE2243
     }
     finally
     {
@@ -248,56 +248,56 @@ BLOCK_END_MAIN_1928:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc CLEANUP_RUN1924
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1947'
-    stloc TEMP1948
+    ldloc CLEANUP_RUN2215
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T2238'
+    stloc TEMP2239
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1948
+    ldloc TEMP2239
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1948
+    ldloc TEMP2239
     pop
     endfinally
     }
-DONE1952:
-    ldloc UWP_RESULT1946
+DONE2243:
+    ldloc UWP_RESULT2237
     pop
-TAG_TARGET_1925:
+TAG_TARGET_2216:
     nop
     ldstr "Reached target"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc CLEANUP_RUN1924
+    ldloc CLEANUP_RUN2215
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1947'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T2238'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1949
+    brtrue TRUE2240
     ldnull
-    br END1950
-TRUE1949:
+    br END2241
+TRUE2240:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1951'
-END1950:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2242'
+END2241:
     nop
     ldnull
     ceq
-    brtrue ELSE1953
+    brtrue ELSE2244
     ldstr "SUCCESS: Cleanup run!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END1954
-ELSE1953:
+    br END2245
+ELSE2244:
     nop
     ldstr "FAILURE: Cleanup NOT run!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END1954:
+END2245:
     nop
     pop
     ldnull
     ret
-BLOCK_END_TEST_UWP_NESTED_GO_1922:
+BLOCK_END_TEST_UWP_NESTED_GO_2213:
     nop
     ldnull
     ret
@@ -386,31 +386,31 @@ BLOCK_END_TEST_UWP_NESTED_GO_1922:
 .method private static hidebysig object 'TEST_UWP_BASIC_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RES1919, object TEMP1944, object TEMP1943, object UWP_RESULT1942, object X1918)
+    .locals init (object RES2210, object TEMP2235, object TEMP2234, object UWP_RESULT2233, object X2209)
     ldstr "Testing unwind-protect basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldstr "initial"
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc X1918
+    stloc X2209
     .try
     {
     ldstr "Inside protected"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc X1918
+    ldloc X2209
     ldstr "mutated"
-    stloc TEMP1943
+    stloc TEMP2234
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1943
+    ldloc TEMP2234
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1943
+    ldloc TEMP2234
     pop
     ldstr "result"
-    stloc UWP_RESULT1942
-    leave DONE1945
+    stloc UWP_RESULT2233
+    leave DONE2236
     }
     finally
     {
@@ -418,24 +418,24 @@ BLOCK_END_TEST_UWP_NESTED_GO_1922:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc X1918
+    ldloc X2209
     ldstr "cleaned"
-    stloc TEMP1944
+    stloc TEMP2235
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1944
+    ldloc TEMP2235
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1944
+    ldloc TEMP2235
     pop
     endfinally
     }
-DONE1945:
-    ldloc UWP_RESULT1942
-    stloc RES1919
+DONE2236:
+    ldloc UWP_RESULT2233
+    stloc RES2210
     ldstr "Result of uwp (should be result):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RES1919
+    ldloc RES2210
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -443,13 +443,13 @@ DONE1945:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc X1918
+    ldloc X2209
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_UWP_BASIC_1916:
+BLOCK_END_TEST_UWP_BASIC_2207:
     nop
     ldnull
     ret

@@ -10,9 +10,9 @@
     .field public static object '_CTOR'
     .field public static object '_MAKE_CELL'
     .field public static object '_SET_CELL_VALUE_'
-    .field public static object 'C764'
-    .field public static object 'B763'
-    .field public static object 'A761'
+    .field public static object 'C772'
+    .field public static object 'B771'
+    .field public static object 'A769'
     .field public static object '_CELL_VALUE'
     .field public static object 'PRINT'
 
@@ -26,11 +26,11 @@
     ldnull
     stsfld object Program::'_SET_CELL_VALUE_'
     ldnull
-    stsfld object Program::'C764'
+    stsfld object Program::'C772'
     ldnull
-    stsfld object Program::'B763'
+    stsfld object Program::'B771'
     ldnull
-    stsfld object Program::'A761'
+    stsfld object Program::'A769'
     ldnull
     stsfld object Program::'_CELL_VALUE'
     ldnull
@@ -42,24 +42,24 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object F768, object A761)
+    .locals init (object F776, object A769)
     ldstr "outer-a"
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc A761
-    ldloc A761
-    newobj instance void L_770::'.ctor'(object)
-    stloc F768
+    stloc A769
+    ldloc A769
+    newobj instance void L_778::'.ctor'(object)
+    stloc F776
     ldstr "Before calling f:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc A761
+    ldloc A769
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F768
+    ldloc F776
     castclass [LispBase]Lisp.Closure
     ldstr "param-b"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
@@ -68,7 +68,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc A761
+    ldloc A769
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -79,12 +79,12 @@
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_769
+.class public auto ansi beforefieldinit L_777
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'C764'
-    .field public object 'A761'
-    .field public object 'B763'
+    .field public object 'C772'
+    .field public object 'A769'
+    .field public object 'B771'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -93,40 +93,40 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_769::'C764'
+    stfld object L_777::'C772'
     ldarg.0
     ldarg 2
-    stfld object L_769::'A761'
+    stfld object L_777::'A769'
     ldarg.0
     ldarg 3
-    stfld object L_769::'B763'
+    stfld object L_777::'B771'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP776, object TEMP775, object TEMP774)
+    .locals init (object TEMP784, object TEMP783, object TEMP782)
     ldstr "Inside g:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_769::'A761'
+    ldfld object L_777::'A769'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_769::'B763'
+    ldfld object L_777::'B771'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_769::'C764'
+    ldfld object L_777::'C772'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -137,31 +137,31 @@
     ldnull
     pop
     ldarg.0
-    ldfld object L_769::'A761'
+    ldfld object L_777::'A769'
     ldstr "a-mutated-by-g"
-    stloc TEMP774
+    stloc TEMP782
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP774
+    ldloc TEMP782
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP774
+    ldloc TEMP782
     pop
     ldarg.0
-    ldfld object L_769::'B763'
+    ldfld object L_777::'B771'
     ldstr "b-mutated-by-g"
-    stloc TEMP775
+    stloc TEMP783
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP775
+    ldloc TEMP783
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP775
+    ldloc TEMP783
     pop
     ldarg.0
-    ldfld object L_769::'C764'
+    ldfld object L_777::'C772'
     ldstr "c-mutated-by-g"
-    stloc TEMP776
+    stloc TEMP784
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP776
+    ldloc TEMP784
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP776
+    ldloc TEMP784
     pop
     ldnull
     ret
@@ -184,7 +184,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_769::'InvokeBody'(object)
+    callvirt instance object L_777::'InvokeBody'(object)
     ret
 }
 
@@ -251,12 +251,12 @@
     throw
 }
 
-} // end of class L_769
+} // end of class L_777
 
-.class public auto ansi beforefieldinit L_770
+.class public auto ansi beforefieldinit L_778
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'A761'
+    .field public object 'A769'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -265,50 +265,50 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_770::'A761'
+    stfld object L_778::'A769'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object G767, object C764, object B763)
+    .locals init (object G775, object C772, object B771)
     ldarg 1
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc B763
+    stloc B771
     ldstr "inner-c"
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc C764
-    ldloc C764
+    stloc C772
+    ldloc C772
     ldarg.0
-    ldfld object L_770::'A761'
-    ldloc B763
-    newobj instance void L_769::'.ctor'(object, object, object)
-    stloc G767
+    ldfld object L_778::'A769'
+    ldloc B771
+    newobj instance void L_777::'.ctor'(object, object, object)
+    stloc G775
     ldstr "Before calling g:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_770::'A761'
+    ldfld object L_778::'A769'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B763
+    ldloc B771
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc C764
+    ldloc C772
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc G767
+    ldloc G775
     castclass [LispBase]Lisp.Closure
     ldstr "param-d"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
@@ -318,19 +318,19 @@
     ldnull
     pop
     ldarg.0
-    ldfld object L_770::'A761'
+    ldfld object L_778::'A769'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B763
+    ldloc B771
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc C764
+    ldloc C772
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -357,7 +357,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_770::'InvokeBody'(object)
+    callvirt instance object L_778::'InvokeBody'(object)
     ret
 }
 
@@ -424,5 +424,5 @@
     throw
 }
 
-} // end of class L_770
+} // end of class L_778
 

@@ -212,6 +212,26 @@
    (value :initarg :value :accessor ast-throw-value))
   (:documentation "A dynamic THROW jump."))
 
+(defclass ast-values (ast-node)
+  ((values :initarg :values :accessor ast-values-values))
+  (:documentation "A VALUES form for multiple return values."))
+
+(defclass ast-multiple-value-bind (ast-node)
+  ((vars :initarg :vars :accessor ast-multiple-value-bind-vars)
+   (values-form :initarg :values-form :accessor ast-multiple-value-bind-values-form)
+   (body :initarg :body :accessor ast-multiple-value-bind-body))
+  (:documentation "A MULTIPLE-VALUE-BIND block."))
+
+(defclass ast-multiple-value-call (ast-node)
+  ((function-form :initarg :function-form :accessor ast-multiple-value-call-function-form)
+   (arguments-forms :initarg :arguments-forms :accessor ast-multiple-value-call-arguments-forms))
+  (:documentation "A MULTIPLE-VALUE-CALL form."))
+
+(defclass ast-multiple-value-prog1 (ast-node)
+  ((first-form :initarg :first-form :accessor ast-multiple-value-prog1-first-form)
+   (other-forms :initarg :other-forms :accessor ast-multiple-value-prog1-other-forms))
+  (:documentation "A MULTIPLE-VALUE-PROG1 form."))
+
 ;;; Macro Environment
 
 (defvar *macro-environment* (make-hash-table :test #'eq))
@@ -289,6 +309,38 @@
   (register-macro 'second (lambda (x) `(cadr ,x)))
   (register-macro 'third (lambda (x) `(caddr ,x)))
   (register-macro 'fourth (lambda (x) `(cadddr ,x)))
+  (register-macro 'dolist
+    (lambda (spec &rest body)
+      (let ((var (car spec))
+            (list-form (second spec))
+            (result-form (third spec))
+            (list-var (gensym "LIST")))
+        `(let ((,list-var ,list-form))
+           (tagbody
+            LOOP
+              (if (null ,list-var) (go END))
+              (let ((,var (car ,list-var)))
+                (setq ,list-var (cdr ,list-var))
+                ,@body
+                (go LOOP))
+            END)
+           ,result-form))))
+  (register-macro 'dotimes
+    (lambda (spec &rest body)
+      (let ((var (car spec))
+            (count-form (second spec))
+            (result-form (third spec))
+            (count-var (gensym "COUNT")))
+        `(let ((,count-var ,count-form)
+               (,var 0))
+           (tagbody
+            LOOP
+              (if (= ,var ,count-var) (go END))
+              ,@body
+              (setq ,var (1+ ,var))
+              (go LOOP)
+            END)
+           ,result-form))))
   (register-macro 'letrec
     (lambda (bindings &rest body)
       (let ((vars (mapcar (lambda (b) (if (consp b) (car b) b)) bindings))
@@ -533,6 +585,32 @@
   (union (compute-free-vars (ast-throw-tag node))
          (compute-free-vars (ast-throw-value node))))
 
+(defmethod compute-free-vars ((node ast-values))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-values-values node)
+          :initial-value nil))
+
+(defmethod compute-free-vars ((node ast-multiple-value-bind))
+  (let ((values-free-vars (compute-free-vars (ast-multiple-value-bind-values-form node)))
+        (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (ast-multiple-value-bind-body node)
+                                :initial-value nil))
+        (bound-vars (ast-multiple-value-bind-vars node)))
+    (union values-free-vars
+           (set-difference body-free-vars bound-vars))))
+
+(defmethod compute-free-vars ((node ast-multiple-value-call))
+  (union (compute-free-vars (ast-multiple-value-call-function-form node))
+         (reduce (lambda (a b) (union a (compute-free-vars b)))
+                 (ast-multiple-value-call-arguments-forms node)
+                 :initial-value nil)))
+
+(defmethod compute-free-vars ((node ast-multiple-value-prog1))
+  (union (compute-free-vars (ast-multiple-value-prog1-first-form node))
+         (reduce (lambda (a b) (union a (compute-free-vars b)))
+                 (ast-multiple-value-prog1-other-forms node)
+                 :initial-value nil)))
+
 (defmethod compute-free-vars ((node ast-class))
   nil)
 
@@ -729,6 +807,26 @@
                  :tag (closure-convert (ast-throw-tag node))
                  :value (closure-convert (ast-throw-value node))))
 
+(defmethod closure-convert ((node ast-values))
+  (make-instance 'ast-values
+                 :values (mapcar #'closure-convert (ast-values-values node))))
+
+(defmethod closure-convert ((node ast-multiple-value-bind))
+  (make-instance 'ast-multiple-value-bind
+                 :vars (ast-multiple-value-bind-vars node)
+                 :values-form (closure-convert (ast-multiple-value-bind-values-form node))
+                 :body (mapcar #'closure-convert (ast-multiple-value-bind-body node))))
+
+(defmethod closure-convert ((node ast-multiple-value-call))
+  (make-instance 'ast-multiple-value-call
+                 :function-form (closure-convert (ast-multiple-value-call-function-form node))
+                 :arguments-forms (mapcar #'closure-convert (ast-multiple-value-call-arguments-forms node))))
+
+(defmethod closure-convert ((node ast-multiple-value-prog1))
+  (make-instance 'ast-multiple-value-prog1
+                 :first-form (closure-convert (ast-multiple-value-prog1-first-form node))
+                 :other-forms (mapcar #'closure-convert (ast-multiple-value-prog1-other-forms node))))
+
 (defmethod closure-convert ((node ast-class))
   node)
 
@@ -912,6 +1010,26 @@
   (make-instance 'ast-throw
                  :tag (lambda-lift (ast-throw-tag node))
                  :value (lambda-lift (ast-throw-value node))))
+
+(defmethod lambda-lift ((node ast-values))
+  (make-instance 'ast-values
+                 :values (mapcar #'lambda-lift (ast-values-values node))))
+
+(defmethod lambda-lift ((node ast-multiple-value-bind))
+  (make-instance 'ast-multiple-value-bind
+                 :vars (ast-multiple-value-bind-vars node)
+                 :values-form (lambda-lift (ast-multiple-value-bind-values-form node))
+                 :body (mapcar #'lambda-lift (ast-multiple-value-bind-body node))))
+
+(defmethod lambda-lift ((node ast-multiple-value-call))
+  (make-instance 'ast-multiple-value-call
+                 :function-form (lambda-lift (ast-multiple-value-call-function-form node))
+                 :arguments-forms (mapcar #'lambda-lift (ast-multiple-value-call-arguments-forms node))))
+
+(defmethod lambda-lift ((node ast-multiple-value-prog1))
+  (make-instance 'ast-multiple-value-prog1
+                 :first-form (lambda-lift (ast-multiple-value-prog1-first-form node))
+                 :other-forms (mapcar #'lambda-lift (ast-multiple-value-prog1-other-forms node))))
 
 (defmethod lambda-lift ((node ast-class))
   node)
@@ -1149,6 +1267,12 @@
                               :value (lisp->ast (second args) env tags-env blocks-env current-scope)))))
 
 
+         (function
+          (let ((thing (first args)))
+            (if (and (consp thing) (eq (car thing) 'lambda))
+                (lisp->ast thing env tags-env blocks-env current-scope)
+                (make-instance 'ast-literal :value thing))))
+
          (unwind-protect
           (make-instance 'ast-unwind-protect
                          :protected-form (lisp->ast (first args) env tags-env blocks-env current-scope)
@@ -1163,6 +1287,36 @@
           (make-instance 'ast-throw
                          :tag (lisp->ast (first args) env tags-env blocks-env current-scope)
                          :value (lisp->ast (second args) env tags-env blocks-env current-scope)))
+
+         (values
+          (make-instance 'ast-values
+                         :values (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args)))
+
+         (multiple-value-bind
+          (let* ((vars (first args))
+                 (values-form (lisp->ast (second args) env tags-env blocks-env current-scope))
+                 (body-forms (cddr args))
+                 (new-env env)
+                 (alpha-vars (mapcar (lambda (v)
+                                       (let ((alpha (gensym (symbol-name v))))
+                                         (push (cons v alpha) new-env)
+                                         alpha))
+                                     vars)))
+            (make-instance 'ast-multiple-value-bind
+                           :vars alpha-vars
+                           :values-form values-form
+                           :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env current-scope)) body-forms))))
+
+         (multiple-value-call
+          (make-instance 'ast-multiple-value-call
+                         :function-form (lisp->ast (first args) env tags-env blocks-env current-scope)
+                         :arguments-forms (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (rest args))))
+
+         (multiple-value-prog1
+          (make-instance 'ast-multiple-value-prog1
+                         :first-form (lisp->ast (first args) env tags-env blocks-env current-scope)
+                         :other-forms (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (rest args))))
+
          (system:call-static-method
           (make-instance 'ast-dotnet-static-call
                          :method-name (first args)
@@ -1444,7 +1598,23 @@
                         (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) (ast-catch-body n)))))
                (ast-throw
                 (append (traverse (ast-throw-tag n) curr-env)
-                        (traverse (ast-throw-value n) curr-env))))))
+                        (traverse (ast-throw-value n) curr-env)))
+               (ast-values
+                (reduce #'append (mapcar (lambda (v) (traverse v curr-env)) (ast-values-values n))))
+               (ast-multiple-value-bind
+                (let* ((bound-vars (ast-multiple-value-bind-vars n))
+                       (inner-env (cons (cons :let bound-vars) curr-env)))
+                  (append (traverse (ast-multiple-value-bind-values-form n) curr-env)
+                          (reduce #'append (mapcar (lambda (form) (traverse form inner-env)) 
+                                                   (ast-multiple-value-bind-body n))))))
+               (ast-multiple-value-call
+                (append (traverse (ast-multiple-value-call-function-form n) curr-env)
+                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
+                                                 (ast-multiple-value-call-arguments-forms n)))))
+               (ast-multiple-value-prog1
+                (append (traverse (ast-multiple-value-prog1-first-form n) curr-env)
+                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
+                                                 (ast-multiple-value-prog1-other-forms n))))))))
     (remove-duplicates (traverse node env))))
 
 
@@ -1705,6 +1875,46 @@
   (make-instance 'ast-throw
                  :tag (analyze-environment (ast-throw-tag node) env mutated)
                  :value (analyze-environment (ast-throw-value node) env mutated)))
+
+(defmethod analyze-environment ((node ast-values) env &optional mutated)
+  (make-instance 'ast-values
+                 :values (mapcar (lambda (v) (analyze-environment v env mutated))
+                                 (ast-values-values node))))
+
+(defmethod analyze-environment ((node ast-multiple-value-bind) env &optional mutated)
+  (let* ((vars (ast-multiple-value-bind-vars node))
+         (values-form (analyze-environment (ast-multiple-value-bind-values-form node) env mutated))
+         (inner-env (cons (cons :let vars) env))
+         (mutated-vars (remove-if-not (lambda (v) (member v mutated :test #'eq)) vars))
+         (analyzed-body (mapcar (lambda (form) (analyze-environment form (if mutated-vars (cons (cons :let mutated-vars) inner-env) inner-env) mutated))
+                                (ast-multiple-value-bind-body node))))
+    (if mutated-vars
+        (let ((cell-bindings
+               (mapcar (lambda (v)
+                         (list v (make-instance 'ast-application
+                                                :operator (make-instance 'ast-global-variable :name '%make-cell :alpha-name '%make-cell)
+                                                :operands (list (make-instance 'ast-local-variable :name v :alpha-name v)))))
+                       mutated-vars)))
+          (make-instance 'ast-multiple-value-bind
+                         :vars vars
+                         :values-form values-form
+                         :body (list (make-instance 'ast-let :bindings cell-bindings :body analyzed-body))))
+        (make-instance 'ast-multiple-value-bind
+                       :vars vars
+                       :values-form values-form
+                       :body analyzed-body))))
+
+(defmethod analyze-environment ((node ast-multiple-value-call) env &optional mutated)
+  (make-instance 'ast-multiple-value-call
+                 :function-form (analyze-environment (ast-multiple-value-call-function-form node) env mutated)
+                 :arguments-forms (mapcar (lambda (e) (analyze-environment e env mutated))
+                                          (ast-multiple-value-call-arguments-forms node))))
+
+(defmethod analyze-environment ((node ast-multiple-value-prog1) env &optional mutated)
+  (make-instance 'ast-multiple-value-prog1
+                 :first-form (analyze-environment (ast-multiple-value-prog1-first-form node) env mutated)
+                 :other-forms (mapcar (lambda (e) (analyze-environment e env mutated))
+                                      (ast-multiple-value-prog1-other-forms node))))
 
 (defmethod analyze-environment ((node ast-class) env &optional mutated)
   (declare (ignore env mutated))

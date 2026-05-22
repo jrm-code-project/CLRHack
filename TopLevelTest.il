@@ -11,7 +11,7 @@
     .field public static object 'MAKE_MULTIPLIER'
     .field public static object 'SAY_HELLO'
     .field public static object '_CTOR'
-    .field public static object 'FACTOR1687'
+    .field public static object 'FACTOR1978'
     .field public static object 'PRINT'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
@@ -26,7 +26,7 @@
     ldnull
     stsfld object Program::'_CTOR'
     ldnull
-    stsfld object Program::'FACTOR1687'
+    stsfld object Program::'FACTOR1978'
     ldnull
     stsfld object Program::'PRINT'
     ret
@@ -115,19 +115,19 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object MUL_BY_101696)
+    .locals init (object MUL_BY_101987)
     ldstr "TopLevelTest"
     call object Program::'SAY_HELLO'(object)
     pop
     ldstr "10"
     call object Program::'MAKE_MULTIPLIER'(object)
-    stloc MUL_BY_101696
-    ldloc MUL_BY_101696
+    stloc MUL_BY_101987
+    ldloc MUL_BY_101987
     castclass [LispBase]Lisp.Closure
     ldstr "5"
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-BLOCK_END_MAIN_1694:
+BLOCK_END_MAIN_1985:
     nop
     ldnull
     ret
@@ -218,9 +218,9 @@ BLOCK_END_MAIN_1694:
 {
     .maxstack 8
     ldarg 0
-    newobj instance void L_1698::'.ctor'(object)
+    newobj instance void L_1989::'.ctor'(object)
     ret
-BLOCK_END_MAKE_MULTIPLIER_1688:
+BLOCK_END_MAKE_MULTIPLIER_1979:
     nop
     ldnull
     ret
@@ -318,7 +318,7 @@ BLOCK_END_MAKE_MULTIPLIER_1688:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_SAY_HELLO_1683:
+BLOCK_END_SAY_HELLO_1974:
     nop
     ldnull
     ret
@@ -335,10 +335,10 @@ BLOCK_END_SAY_HELLO_1683:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_1698
+.class public auto ansi beforefieldinit L_1989
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'FACTOR1687'
+    .field public object 'FACTOR1978'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -347,7 +347,7 @@ BLOCK_END_SAY_HELLO_1683:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_1698::'FACTOR1687'
+    stfld object L_1989::'FACTOR1978'
     ret
 }
 
@@ -359,7 +359,7 @@ BLOCK_END_SAY_HELLO_1683:
     ldnull
     pop
     ldarg.0
-    ldfld object L_1698::'FACTOR1687'
+    ldfld object L_1989::'FACTOR1978'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -386,7 +386,7 @@ BLOCK_END_SAY_HELLO_1683:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1698::'InvokeBody'(object)
+    callvirt instance object L_1989::'InvokeBody'(object)
     ret
 }
 
@@ -453,5 +453,5 @@ BLOCK_END_SAY_HELLO_1683:
     throw
 }
 
-} // end of class L_1698
+} // end of class L_1989
 

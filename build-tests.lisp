@@ -35,6 +35,7 @@
                ;; ("test-ltak.lisp" . "LtakBenchmark")
                ("test-macro.lisp" . "MacroTest")
                ("test-mutability.lisp" . "MutabilityTest")
+               ("Tests/test-mv.lisp" . "MultipleValuesTest")
                ("Tests/test-nboyer.lisp" . "NBoyerBenchmark")
                ("Tests/puzzle-test.lisp" . "PuzzleBenchmark")
                ("Tests/test-scoping.lisp" . "ScopingTests")

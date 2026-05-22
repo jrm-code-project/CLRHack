@@ -23,8 +23,8 @@
       (if tail-p (append code (list (il:ret))) code))))
 
 (register-primitive-step2 
- '("%WRITE-LINE" "%WRITE-OBJECT" "%WRITE-INT" "PRINT" "%SUB" "-" "%MUL" "*" "%DIV" "/" "%ADD" "+" "1+" "1-"
-   "%LESSP" "<" "%NOT" "NOT" "%CONS" "CONS" "%CAR" "CAR" "%CDR" "CDR" "%EQ" "EQ" "%NULL" "NULL"
+ '("%WRITE-LINE" "%WRITE-OBJECT" "%WRITE-INT" "PRINT" "%SUB" "-" "%MUL" "*" "%DIV" "/" "%ADD" "+" "=" "1+" "1-"
+   "%LESSP" "<" "%NOT" "NOT" "%CONS" "CONS" "LIST" "%CAR" "CAR" "%CDR" "CDR" "%EQ" "EQ" "%NULL" "NULL"
    "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!")
  #'standard-step2-handler)
 
@@ -440,6 +440,134 @@
           (generate-step2 (ast-throw-value node) nil)
           (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.CatchThrowException" :return "instance void" :args '("object" "object"))
                 (il:throw))))
+
+(defmethod generate-step2 ((node ast-values) &optional tail-p)
+  (let* ((values (ast-values-values node))
+         (n (length values))
+         (code nil))
+    (cond
+      ((= n 0)
+       (setf code (list (il:ldc.i4.0)
+                        (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount")
+                        (il:ldnull))))
+      ((= n 1)
+       (setf code (generate-step2 (first values) nil)))
+      (t
+       ;; Put primary value on stack, store others in Value1, Value2...
+       (setf code (generate-step2 (first values) nil))
+       (loop for i from 1 below (min n 64)
+             for v in (rest values)
+             do (setf code (append code (generate-step2 v nil)))
+                (setf code (append code (list (il:stsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))))))
+       (setf code (append code (list (il:ldc.i4 n)
+                                     (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount"))))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-multiple-value-bind) &optional tail-p)
+  (let* ((vars (ast-multiple-value-bind-vars node))
+         (n-vars (length vars))
+         (values-form (ast-multiple-value-bind-values-form node))
+         (body (ast-multiple-value-bind-body node))
+         (code nil))
+    ;; 1. Preset ReturnCount = 1
+    (setf code (list (il:ldc.i4.1)
+                     (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount")))
+    ;; 2. Evaluate producer
+    (setf code (append code (generate-step2 values-form nil)))
+    ;; 3. Store primary value
+    (setf code (append code (list (il:stloc (sanitize-identifier (string (first vars)))))))
+    ;; 4. Extract extra values
+    (loop for i from 1 below n-vars
+          for var in (rest vars)
+          do (let ((skip-label (sanitize-identifier (string (gensym "SKIP_VAL"))))
+                   (done-label (sanitize-identifier (string (gensym "DONE_VAL")))))
+               (setf code (append code
+                 (list (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
+                       (il:ldc.i4 i)
+                       (il:ble skip-label)
+                       (il:ldsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))
+                       (il:stloc (sanitize-identifier (string var)))
+                       (il:br done-label)
+                       (il:nop :label skip-label)
+                       (il:ldnull)
+                       (il:stloc (sanitize-identifier (string var)))
+                       (il:nop :label done-label))))))
+    ;; 5. Evaluate body
+    (let ((body-code
+           (if (null body)
+               (if tail-p (list (il:ldnull) (il:ret)) (list (il:ldnull)))
+               (loop for form in body
+                     for i from 1
+                     for is-last = (= i (length body))
+                     append (generate-step2 form (if is-last tail-p nil))
+                     when (not is-last)
+                       append (list (il:pop))))))
+      (append code body-code))))
+
+(defmethod generate-step2 ((node ast-multiple-value-prog1) &optional tail-p)
+  (let* ((first-form (ast-multiple-value-prog1-first-form node))
+         (other-forms (ast-multiple-value-prog1-other-forms node))
+         (result-temp (register-local (gensym "MV_PROG1_RES")))
+         (count-temp (register-local (gensym "MV_PROG1_COUNT")))
+         (extra-temps (loop for i from 1 below 64 collect (register-local (gensym (format nil "MV_PROG1_V~D" i)))))
+         (code nil))
+    ;; 1. Preset ReturnCount = 1
+    (setf code (list (il:ldc.i4.1)
+                     (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount")))
+    ;; 2. Evaluate first form
+    (setf code (append code (generate-step2 first-form nil)))
+    ;; 3. Save primary value and ReturnCount
+    (setf code (append code (list (il:stloc result-temp)
+                                  (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
+                                  (il:stloc count-temp))))
+    ;; 4. Save extra values
+    (loop for i from 1 below 64
+          for temp in extra-temps
+          do (setf code (append code (list (il:ldsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))
+                                           (il:stloc temp)))))
+    ;; 5. Evaluate other forms (ignore their return values)
+    (dolist (form other-forms)
+      (setf code (append code (generate-step2 form nil) (list (il:pop)))))
+    ;; 6. Restore ReturnCount and extra values
+    (setf code (append code (list (il:ldloc count-temp)
+                                  (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount"))))
+    (loop for i from 1 below 64
+          for temp in extra-temps
+          do (setf code (append code (list (il:ldloc temp)
+                                           (il:stsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))))))
+    ;; 7. Put saved result back on stack
+    (setf code (append code (list (il:ldloc result-temp))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-multiple-value-call) &optional tail-p)
+  (let* ((fn-form (ast-multiple-value-call-function-form node))
+         (arg-forms (ast-multiple-value-call-arguments-forms node))
+         (fn-temp (register-local (gensym "MVC_FN")))
+         (list-temp (register-local (gensym "MVC_LIST")))
+         (code nil))
+    ;; 1. Evaluate function and store in temp
+    (setf code (append (generate-step2 fn-form nil)
+                       (list (il:stloc fn-temp))))
+    ;; 2. Create the argument list (returns object)
+    (setf code (append code
+                       (list (il:call :method "CreateGatheringList" :class "[LispBase]Lisp.Values" :return "object" :args nil)
+                             (il:stloc list-temp))))
+    ;; 3. For each form, accumulate its values
+    (dolist (form arg-forms)
+      (setf code (append code
+                         (list (il:ldloc list-temp)
+                               (il:ldc.i4.1)
+                               (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount"))
+                         (generate-step2 form nil)
+                         (list (il:call :method "Accumulate" :class "[LispBase]Lisp.Values" :return "void" :args '("object" "object"))))))
+    
+    ;; 4. Call InvokeWithList(fn, list)
+    (setf code (append code
+                       (list (il:ldloc fn-temp)
+                             (il:ldloc list-temp)
+                             (il:call :method "InvokeWithList" :class "[LispBase]Lisp.Values" :return "object" :args '("object" "object")))))
+    
+    (if tail-p (append code (list (il:ret))) code)))
 
 (defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)
   (declare (ignore tail-p))

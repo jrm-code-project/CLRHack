@@ -10,5 +10,21 @@ namespace Lisp
         public abstract object Invoke (object arg0, object arg1, object arg2, object arg3, object arg4, object arg5);
         public abstract object Invoke (object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6);
         public abstract object Invoke (object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7);
+
+        public virtual object Invoke (params object[] args) {
+            switch (args.Length) {
+                case 0: return Invoke();
+                case 1: return Invoke(args[0]);
+                case 2: return Invoke(args[0], args[1]);
+                case 3: return Invoke(args[0], args[1], args[2]);
+                case 4: return Invoke(args[0], args[1], args[2], args[3]);
+                case 5: return Invoke(args[0], args[1], args[2], args[3], args[4]);
+                case 6: return Invoke(args[0], args[1], args[2], args[3], args[4], args[5]);
+                case 7: return Invoke(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+                case 8: return Invoke(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+                default:
+                    throw new System.NotImplementedException("Closures with more than 8 arguments not fully supported via array Invoke yet.");
+            }
+        }
     }
 }

@@ -141,6 +141,25 @@
             (car (load-symbol-il "T"))
             (il:nop :label end-label)))))
 
+(register-primitive-step1 "="
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (let ((temp (register-global "TEMP_B"))
+          (true-label (sanitize-identifier (string (gensym "TRUE"))))
+          (end-label (sanitize-identifier (string (gensym "END")))))
+      (list (il:stsfld (format nil "object Program::'~A'" temp))
+            (il:unbox.any "int32") ; a
+            (il:ldsfld (format nil "object Program::'~A'" temp))
+            (il:unbox.any "int32") ; b
+            (il:ceq)
+            (il:brtrue true-label)
+            (il:ldnull)
+            (il:br end-label)
+            (il:nop :label true-label)
+            (car (load-symbol-il "T"))
+            (il:nop :label end-label)))))
+
 (register-primitive-step1 '("%NOT" "NOT")
   (lambda (node operands)
     (declare (ignore node))
@@ -167,6 +186,16 @@
     (declare (ignore node))
     (mapc #'generate-step1 operands)
     (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")))))
+
+(register-primitive-step1 "LIST"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (let ((n (length operands)))
+      (append
+       (list (il:ldnull))
+       (loop repeat n
+             append (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))))))))
 
 (register-primitive-step1 '("%CAR" "CAR")
   (lambda (node operands)
@@ -589,6 +618,27 @@
 (defmethod generate-step1 ((node ast-throw))
   (generate-step1 (ast-throw-tag node))
   (generate-step1 (ast-throw-value node))
+  (setf (ast-basic-block node) nil))
+
+(defmethod generate-step1 ((node ast-values))
+  (mapc #'generate-step1 (ast-values-values node))
+  (setf (ast-basic-block node) nil))
+
+(defmethod generate-step1 ((node ast-multiple-value-bind))
+  (dolist (v (ast-multiple-value-bind-vars node))
+    (register-local (string v)))
+  (generate-step1 (ast-multiple-value-bind-values-form node))
+  (mapc #'generate-step1 (ast-multiple-value-bind-body node))
+  (setf (ast-basic-block node) nil))
+
+(defmethod generate-step1 ((node ast-multiple-value-call))
+  (generate-step1 (ast-multiple-value-call-function-form node))
+  (mapc #'generate-step1 (ast-multiple-value-call-arguments-forms node))
+  (setf (ast-basic-block node) nil))
+
+(defmethod generate-step1 ((node ast-multiple-value-prog1))
+  (generate-step1 (ast-multiple-value-prog1-first-form node))
+  (mapc #'generate-step1 (ast-multiple-value-prog1-other-forms node))
   (setf (ast-basic-block node) nil))
 
 (defmethod generate-step1 ((node ast-application))
