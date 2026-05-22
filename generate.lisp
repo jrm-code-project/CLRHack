@@ -139,7 +139,7 @@
         (setf prologue (append prologue (generate-step2 init-ast nil)))
         (setf prologue (append prologue (list (il:stloc (sanitize-identifier (string alpha))))))
         (when sup-alpha
-          (setf prologue (append prologue (load-symbol-il "NIL")))
+          (setf prologue (append prologue (list (il:ldnull))))
           (setf prologue (append prologue (list (il:stloc (sanitize-identifier (string sup-alpha)))))))))
 
     ;; 2. Start loop over rest-param
@@ -243,10 +243,10 @@
                  ;; NOT SUPPLIED: Eval init-form and starg
                  (generate-step2 init-ast nil)
                  (list (il:starg arg-idx))))
-               ;; Set sup-p to NIL
+               ;; Set sup-p to null
                (when sup-name
                  (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
-                   (setf prologue (append prologue (load-symbol-il "NIL")
+                   (setf prologue (append prologue (list (il:ldnull))
                                           (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
                (setf prologue (append prologue
                  (list (il:br done-label)
@@ -620,10 +620,10 @@
                  ;; NOT SUPPLIED: Eval init-form and starg
                  (generate-step2 init-ast nil)
                  (list (il:starg arg-idx))))
-               ;; Set sup-p to NIL
+               ;; Set sup-p to null
                (when sup-name
                  (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
-                   (setf prologue (append prologue (load-symbol-il "NIL")
+                   (setf prologue (append prologue (list (il:ldnull))
                                           (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
                (setf prologue (append prologue
                  (list (il:br done-label)
