@@ -637,6 +637,8 @@
   (setf (ast-basic-block node) nil))
 
 (defmethod generate-step1 ((node ast-multiple-value-call))
+  (setf (ast-multiple-value-call-fn-temp node) (register-local (string (gensym "MVC_FN"))))
+  (setf (ast-multiple-value-call-list-temp node) (register-local (string (gensym "MVC_LIST"))))
   (generate-step1 (ast-multiple-value-call-function-form node))
   (mapc #'generate-step1 (ast-multiple-value-call-arguments-forms node))
   (setf (ast-basic-block node) nil))

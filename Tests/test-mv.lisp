@@ -58,6 +58,24 @@
           (values 7 8)))
     (list a b)))
 
+(defun test-catch-throw-mv ()
+  (multiple-value-bind (a b)
+      (catch 'foo
+        (throw 'foo (values 9 10)))
+    (list a b)))
+
+(defun test-catch-throw-0-mv ()
+  (multiple-value-bind (a b)
+      (catch 'bar
+        (throw 'bar (values)))
+    (list a b)))
+
+(defun test-catch-throw-1-mv ()
+  (multiple-value-bind (a b)
+      (catch 'baz
+        (throw 'baz 42))
+    (list a b)))
+
 (defun run-mv-tests ()
   (let ((results (list 
                   (test-mv-bind-2)
@@ -70,7 +88,10 @@
                   (test-mv-call)
                   (test-mv-call-rest)
                   (test-uwp-mv)
-                  (test-uwp-return-from-mv))))
+                  (test-uwp-return-from-mv)
+                  (test-catch-throw-mv)
+                  (test-catch-throw-0-mv)
+                  (test-catch-throw-1-mv))))
     (dolist (res results)
       (print res))))
 

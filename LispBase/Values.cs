@@ -152,5 +152,148 @@ namespace Lisp
             var l = (System.Collections.Generic.List<object>)list;
             return closure.Invoke(l.ToArray());
         }
+
+        public static object[] CaptureValues()
+        {
+            if (ReturnCount == 1) return null;
+            var result = new object[ReturnCount];
+            if (ReturnCount > 1) result[1] = Value1;
+            if (ReturnCount > 2) result[2] = Value2;
+            if (ReturnCount > 3) result[3] = Value3;
+            if (ReturnCount > 4) result[4] = Value4;
+            if (ReturnCount > 5) result[5] = Value5;
+            if (ReturnCount > 6) result[6] = Value6;
+            if (ReturnCount > 7) result[7] = Value7;
+            if (ReturnCount > 8) result[8] = Value8;
+            if (ReturnCount > 9) result[9] = Value9;
+            if (ReturnCount > 10) result[10] = Value10;
+            if (ReturnCount > 11) result[11] = Value11;
+            if (ReturnCount > 12) result[12] = Value12;
+            if (ReturnCount > 13) result[13] = Value13;
+            if (ReturnCount > 14) result[14] = Value14;
+            if (ReturnCount > 15) result[15] = Value15;
+            if (ReturnCount > 16) result[16] = Value16;
+            if (ReturnCount > 17) result[17] = Value17;
+            if (ReturnCount > 18) result[18] = Value18;
+            if (ReturnCount > 19) result[19] = Value19;
+            if (ReturnCount > 20) result[20] = Value20;
+            if (ReturnCount > 21) result[21] = Value21;
+            if (ReturnCount > 22) result[22] = Value22;
+            if (ReturnCount > 23) result[23] = Value23;
+            if (ReturnCount > 24) result[24] = Value24;
+            if (ReturnCount > 25) result[25] = Value25;
+            if (ReturnCount > 26) result[26] = Value26;
+            if (ReturnCount > 27) result[27] = Value27;
+            if (ReturnCount > 28) result[28] = Value28;
+            if (ReturnCount > 29) result[29] = Value29;
+            if (ReturnCount > 30) result[30] = Value30;
+            if (ReturnCount > 31) result[31] = Value31;
+            if (ReturnCount > 32) result[32] = Value32;
+            if (ReturnCount > 33) result[33] = Value33;
+            if (ReturnCount > 34) result[34] = Value34;
+            if (ReturnCount > 35) result[35] = Value35;
+            if (ReturnCount > 36) result[36] = Value36;
+            if (ReturnCount > 37) result[37] = Value37;
+            if (ReturnCount > 38) result[38] = Value38;
+            if (ReturnCount > 39) result[39] = Value39;
+            if (ReturnCount > 40) result[40] = Value40;
+            if (ReturnCount > 41) result[41] = Value41;
+            if (ReturnCount > 42) result[42] = Value42;
+            if (ReturnCount > 43) result[43] = Value43;
+            if (ReturnCount > 44) result[44] = Value44;
+            if (ReturnCount > 45) result[45] = Value45;
+            if (ReturnCount > 46) result[46] = Value46;
+            if (ReturnCount > 47) result[47] = Value47;
+            if (ReturnCount > 48) result[48] = Value48;
+            if (ReturnCount > 49) result[49] = Value49;
+            if (ReturnCount > 50) result[50] = Value50;
+            if (ReturnCount > 51) result[51] = Value51;
+            if (ReturnCount > 52) result[52] = Value52;
+            if (ReturnCount > 53) result[53] = Value53;
+            if (ReturnCount > 54) result[54] = Value54;
+            if (ReturnCount > 55) result[55] = Value55;
+            if (ReturnCount > 56) result[56] = Value56;
+            if (ReturnCount > 57) result[57] = Value57;
+            if (ReturnCount > 58) result[58] = Value58;
+            if (ReturnCount > 59) result[59] = Value59;
+            if (ReturnCount > 60) result[60] = Value60;
+            if (ReturnCount > 61) result[61] = Value61;
+            if (ReturnCount > 62) result[62] = Value62;
+            if (ReturnCount > 63) result[63] = Value63;
+            return result;
+        }
+
+        public static void RestoreValues(object[] captured)
+        {
+            if (captured == null)
+            {
+                ReturnCount = 1;
+                return;
+            }
+            ReturnCount = captured.Length;
+            if (ReturnCount > 1) Value1 = captured[1];
+            if (ReturnCount > 2) Value2 = captured[2];
+            if (ReturnCount > 3) Value3 = captured[3];
+            if (ReturnCount > 4) Value4 = captured[4];
+            if (ReturnCount > 5) Value5 = captured[5];
+            if (ReturnCount > 6) Value6 = captured[6];
+            if (ReturnCount > 7) Value7 = captured[7];
+            if (ReturnCount > 8) Value8 = captured[8];
+            if (ReturnCount > 9) Value9 = captured[9];
+            if (ReturnCount > 10) Value10 = captured[10];
+            if (ReturnCount > 11) Value11 = captured[11];
+            if (ReturnCount > 12) Value12 = captured[12];
+            if (ReturnCount > 13) Value13 = captured[13];
+            if (ReturnCount > 14) Value14 = captured[14];
+            if (ReturnCount > 15) Value15 = captured[15];
+            if (ReturnCount > 16) Value16 = captured[16];
+            if (ReturnCount > 17) Value17 = captured[17];
+            if (ReturnCount > 18) Value18 = captured[18];
+            if (ReturnCount > 19) Value19 = captured[19];
+            if (ReturnCount > 20) Value20 = captured[20];
+            if (ReturnCount > 21) Value21 = captured[21];
+            if (ReturnCount > 22) Value22 = captured[22];
+            if (ReturnCount > 23) Value23 = captured[23];
+            if (ReturnCount > 24) Value24 = captured[24];
+            if (ReturnCount > 25) Value25 = captured[25];
+            if (ReturnCount > 26) Value26 = captured[26];
+            if (ReturnCount > 27) Value27 = captured[27];
+            if (ReturnCount > 28) Value28 = captured[28];
+            if (ReturnCount > 29) Value29 = captured[29];
+            if (ReturnCount > 30) Value30 = captured[30];
+            if (ReturnCount > 31) Value31 = captured[31];
+            if (ReturnCount > 32) Value32 = captured[32];
+            if (ReturnCount > 33) Value33 = captured[33];
+            if (ReturnCount > 34) Value34 = captured[34];
+            if (ReturnCount > 35) Value35 = captured[35];
+            if (ReturnCount > 36) Value36 = captured[36];
+            if (ReturnCount > 37) Value37 = captured[37];
+            if (ReturnCount > 38) Value38 = captured[38];
+            if (ReturnCount > 39) Value39 = captured[39];
+            if (ReturnCount > 40) Value40 = captured[40];
+            if (ReturnCount > 41) Value41 = captured[41];
+            if (ReturnCount > 42) Value42 = captured[42];
+            if (ReturnCount > 43) Value43 = captured[43];
+            if (ReturnCount > 44) Value44 = captured[44];
+            if (ReturnCount > 45) Value45 = captured[45];
+            if (ReturnCount > 46) Value46 = captured[46];
+            if (ReturnCount > 47) Value47 = captured[47];
+            if (ReturnCount > 48) Value48 = captured[48];
+            if (ReturnCount > 49) Value49 = captured[49];
+            if (ReturnCount > 50) Value50 = captured[50];
+            if (ReturnCount > 51) Value51 = captured[51];
+            if (ReturnCount > 52) Value52 = captured[52];
+            if (ReturnCount > 53) Value53 = captured[53];
+            if (ReturnCount > 54) Value54 = captured[54];
+            if (ReturnCount > 55) Value55 = captured[55];
+            if (ReturnCount > 56) Value56 = captured[56];
+            if (ReturnCount > 57) Value57 = captured[57];
+            if (ReturnCount > 58) Value58 = captured[58];
+            if (ReturnCount > 59) Value59 = captured[59];
+            if (ReturnCount > 60) Value60 = captured[60];
+            if (ReturnCount > 61) Value61 = captured[61];
+            if (ReturnCount > 62) Value62 = captured[62];
+            if (ReturnCount > 63) Value63 = captured[63];
+        }
     }
 }

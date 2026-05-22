@@ -226,7 +226,9 @@
 
 (defclass ast-multiple-value-call (ast-node)
   ((function-form :initarg :function-form :accessor ast-multiple-value-call-function-form)
-   (arguments-forms :initarg :arguments-forms :accessor ast-multiple-value-call-arguments-forms))
+   (arguments-forms :initarg :arguments-forms :accessor ast-multiple-value-call-arguments-forms)
+   (fn-temp :initarg :fn-temp :initform nil :accessor ast-multiple-value-call-fn-temp)
+   (list-temp :initarg :list-temp :initform nil :accessor ast-multiple-value-call-list-temp))
   (:documentation "A MULTIPLE-VALUE-CALL form."))
 
 (defclass ast-multiple-value-prog1 (ast-node)
@@ -830,7 +832,9 @@
 (defmethod closure-convert ((node ast-multiple-value-call))
   (make-instance 'ast-multiple-value-call
                  :function-form (closure-convert (ast-multiple-value-call-function-form node))
-                 :arguments-forms (mapcar #'closure-convert (ast-multiple-value-call-arguments-forms node))))
+                 :arguments-forms (mapcar #'closure-convert (ast-multiple-value-call-arguments-forms node))
+                 :fn-temp (ast-multiple-value-call-fn-temp node)
+                 :list-temp (ast-multiple-value-call-list-temp node)))
 
 (defmethod closure-convert ((node ast-multiple-value-prog1))
   (make-instance 'ast-multiple-value-prog1
@@ -1039,7 +1043,9 @@
 (defmethod lambda-lift ((node ast-multiple-value-call))
   (make-instance 'ast-multiple-value-call
                  :function-form (lambda-lift (ast-multiple-value-call-function-form node))
-                 :arguments-forms (mapcar #'lambda-lift (ast-multiple-value-call-arguments-forms node))))
+                 :arguments-forms (mapcar #'lambda-lift (ast-multiple-value-call-arguments-forms node))
+                 :fn-temp (ast-multiple-value-call-fn-temp node)
+                 :list-temp (ast-multiple-value-call-list-temp node)))
 
 (defmethod lambda-lift ((node ast-multiple-value-prog1))
   (make-instance 'ast-multiple-value-prog1
@@ -1928,7 +1934,9 @@
   (make-instance 'ast-multiple-value-call
                  :function-form (analyze-environment (ast-multiple-value-call-function-form node) env mutated)
                  :arguments-forms (mapcar (lambda (e) (analyze-environment e env mutated))
-                                          (ast-multiple-value-call-arguments-forms node))))
+                                          (ast-multiple-value-call-arguments-forms node))
+                 :fn-temp (ast-multiple-value-call-fn-temp node)
+                 :list-temp (ast-multiple-value-call-list-temp node)))
 
 (defmethod analyze-environment ((node ast-multiple-value-prog1) env &optional mutated)
   (make-instance 'ast-multiple-value-prog1

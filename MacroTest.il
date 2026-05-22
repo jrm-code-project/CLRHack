@@ -12,8 +12,8 @@
     .field public static object 'PRINT'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T757'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S750'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T885'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S878'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -31,11 +31,11 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T757'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T885'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S750'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
     ret
 }
 
@@ -43,11 +43,11 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object F728, object B725, object A724, object Y723, object X722)
+    .locals init (object F856, object B853, object A852, object Y851, object X850)
     ldc.i4 10
     box int32
-    stloc X722
-    ldloc X722
+    stloc X850
+    ldloc X850
     ldc.i4 20
     box int32
     stsfld object Program::'TEMP_B'
@@ -55,31 +55,31 @@
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE748
+    brtrue TRUE876
     ldnull
-    br END749
-TRUE748:
+    br END877
+TRUE876:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S750'
-END749:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
+END877:
     nop
     ldnull
     ceq
-    brtrue ELSE758
+    brtrue ELSE886
     ldstr "X is less than 20 (via built-in WHEN)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END759
-ELSE758:
+    br END887
+ELSE886:
     nop
     ldnull
-END759:
+END887:
     nop
     pop
     ldc.i4 30
     box int32
-    stloc Y723
-    ldloc Y723
+    stloc Y851
+    ldloc Y851
     ldc.i4 20
     box int32
     stsfld object Program::'TEMP_B'
@@ -87,31 +87,31 @@ END759:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE751
+    brtrue TRUE879
     ldnull
-    br END752
-TRUE751:
+    br END880
+TRUE879:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S750'
-END752:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
+END880:
     nop
     ldnull
     ceq
-    brtrue ELSE760
+    brtrue ELSE888
     ldnull
-    br END761
-ELSE760:
+    br END889
+ELSE888:
     nop
     ldstr "Y is NOT less than 20 (via built-in UNLESS)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END761:
+END889:
     nop
     pop
     ldc.i4 5
     box int32
-    stloc A724
-    ldloc A724
+    stloc A852
+    ldloc A852
     ldc.i4 10
     box int32
     stsfld object Program::'TEMP_B'
@@ -120,12 +120,12 @@ END761:
     unbox.any int32
     add
     box int32
-    stloc B725
+    stloc B853
     ldstr "A + 10 is (via LET*):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B725
+    ldloc B853
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -146,22 +146,22 @@ END761:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE753
+    brtrue TRUE881
     ldnull
-    br END754
-TRUE753:
+    br END882
+TRUE881:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S750'
-END754:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
+END882:
     nop
     ldnull
     ceq
-    brtrue ELSE766
+    brtrue ELSE894
     ldstr "Failure"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END767
-ELSE766:
+    br END895
+ELSE894:
     nop
     ldc.i4 5
     box int32
@@ -172,48 +172,48 @@ ELSE766:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE755
+    brtrue TRUE883
     ldnull
-    br END756
-TRUE755:
+    br END884
+TRUE883:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S750'
-END756:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
+END884:
     nop
     ldnull
     ceq
-    brtrue ELSE764
+    brtrue ELSE892
     ldstr "Success (via COND)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END765
-ELSE764:
+    br END893
+ELSE892:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T757'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T885'
     ldnull
     ceq
-    brtrue ELSE762
+    brtrue ELSE890
     ldstr "Fallthrough"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END763
-ELSE762:
+    br END891
+ELSE890:
     nop
     ldnull
-END763:
+END891:
     nop
-END765:
+END893:
     nop
-END767:
+END895:
     nop
     pop
-    newobj instance void L_729::'.ctor'()
-    stloc F728
+    newobj instance void L_857::'.ctor'()
+    stloc F856
     ldstr "Funcall result (10 + 1):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F728
+    ldloc F856
     castclass [LispBase]Lisp.Closure
     ldc.i4 10
     box int32
@@ -226,7 +226,7 @@ END767:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_729
+.class public auto ansi beforefieldinit L_857
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -269,7 +269,7 @@ END767:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_729::'InvokeBody'(object)
+    callvirt instance object L_857::'InvokeBody'(object)
     ret
 }
 
@@ -336,5 +336,5 @@ END767:
     throw
 }
 
-} // end of class L_729
+} // end of class L_857
 
