@@ -43,6 +43,21 @@
 (defun test-mv-call-rest ()
   (multiple-value-call (lambda (&rest args) args) (values 1 2) (values 3 4 5) 6))
 
+(defun test-uwp-mv ()
+  (multiple-value-bind (a b)
+      (unwind-protect
+           (values 1 2)
+        (values 3 4))
+    (list a b)))
+
+(defun test-uwp-return-from-mv ()
+  (multiple-value-bind (a b)
+      (block nil
+        (unwind-protect
+             (return (values 5 6))
+          (values 7 8)))
+    (list a b)))
+
 (defun run-mv-tests ()
   (let ((results (list 
                   (test-mv-bind-2)
@@ -53,7 +68,9 @@
                   (test-mv-bind-normal)
                   (test-mv-prog1)
                   (test-mv-call)
-                  (test-mv-call-rest))))
+                  (test-mv-call-rest)
+                  (test-uwp-mv)
+                  (test-uwp-return-from-mv))))
     (dolist (res results)
       (print res))))
 

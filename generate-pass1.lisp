@@ -565,6 +565,11 @@
 (defmethod generate-step1 ((node ast-unwind-protect))
   (let ((temp (register-local (string (gensym "UWP_RESULT")))))
     (setf (ast-unwind-protect-result-temp node) temp))
+  ;; Side-channel save/restore locals
+  (setf (ast-unwind-protect-count-temp node) (register-local (string (gensym "UWP_COUNT"))))
+  (setf (ast-unwind-protect-extra-temps node)
+        (loop for i from 1 below 64
+              collect (register-local (string (gensym (format nil "UWP_V~D" i))))))
   (generate-step1 (ast-unwind-protect-protected-form node))
   (mapc #'generate-step1 (ast-unwind-protect-cleanup-forms node))
   (setf (ast-basic-block node) nil))
@@ -637,6 +642,11 @@
   (setf (ast-basic-block node) nil))
 
 (defmethod generate-step1 ((node ast-multiple-value-prog1))
+  (setf (ast-multiple-value-prog1-result-temp node) (register-local (string (gensym "MV_PROG1_RES"))))
+  (setf (ast-multiple-value-prog1-count-temp node) (register-local (string (gensym "MV_PROG1_COUNT"))))
+  (setf (ast-multiple-value-prog1-extra-temps node)
+        (loop for i from 1 below 64
+              collect (register-local (string (gensym (format nil "MV_PROG1_V~D" i))))))
   (generate-step1 (ast-multiple-value-prog1-first-form node))
   (mapc #'generate-step1 (ast-multiple-value-prog1-other-forms node))
   (setf (ast-basic-block node) nil))

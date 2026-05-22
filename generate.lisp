@@ -359,13 +359,31 @@
 
 (defmethod generate-step2 ((node ast-unwind-protect) &optional tail-p)
   (let* ((done-label (sanitize-identifier (string (gensym "DONE"))))
-         (result-temp (ast-unwind-protect-result-temp node))
+         (result-temp (sanitize-identifier (ast-unwind-protect-result-temp node)))
+         (count-temp (sanitize-identifier (ast-unwind-protect-count-temp node)))
+         (extra-temps (mapcar (lambda (x) (sanitize-identifier (string x))) (ast-unwind-protect-extra-temps node)))
          (protected-code (append (generate-step2 (ast-unwind-protect-protected-form node) nil)
                                  (list (il:stloc result-temp)
                                        (il:leave done-label))))
-         (cleanup-code (append (loop for f in (ast-unwind-protect-cleanup-forms node)
-                                     append (append (generate-step2 f nil) (list (il:pop))))
-                               (list (il:endfinally))))
+         (cleanup-code (append 
+                        ;; Save side-channel at start of finally
+                        (list (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
+                              (il:stloc count-temp))
+                        (loop for i from 1 below 64
+                              for temp in extra-temps
+                              append (list (il:ldsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))
+                                           (il:stloc temp)))
+                        ;; Cleanup forms
+                        (loop for f in (ast-unwind-protect-cleanup-forms node)
+                              append (append (generate-step2 f nil) (list (il:pop))))
+                        ;; Restore side-channel at end of finally
+                        (list (il:ldloc count-temp)
+                              (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount"))
+                        (loop for i from 1 below 64
+                              for temp in extra-temps
+                              append (list (il:ldloc temp)
+                                           (il:stsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))))
+                        (list (il:endfinally))))
          (code (list (il:try protected-code)
                      (il:finally cleanup-code)
                      (il:ldloc result-temp :label done-label))))
@@ -507,9 +525,9 @@
 (defmethod generate-step2 ((node ast-multiple-value-prog1) &optional tail-p)
   (let* ((first-form (ast-multiple-value-prog1-first-form node))
          (other-forms (ast-multiple-value-prog1-other-forms node))
-         (result-temp (register-local (gensym "MV_PROG1_RES")))
-         (count-temp (register-local (gensym "MV_PROG1_COUNT")))
-         (extra-temps (loop for i from 1 below 64 collect (register-local (gensym (format nil "MV_PROG1_V~D" i)))))
+         (result-temp (sanitize-identifier (ast-multiple-value-prog1-result-temp node)))
+         (count-temp (sanitize-identifier (ast-multiple-value-prog1-count-temp node)))
+         (extra-temps (mapcar (lambda (x) (sanitize-identifier (string x))) (ast-multiple-value-prog1-extra-temps node)))
          (code nil))
     ;; 1. Preset ReturnCount = 1
     (setf code (list (il:ldc.i4.1)

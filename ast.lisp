@@ -182,7 +182,9 @@
 (defclass ast-unwind-protect (ast-node)
   ((protected-form :initarg :protected-form :accessor ast-unwind-protect-protected-form)
    (cleanup-forms  :initarg :cleanup-forms  :accessor ast-unwind-protect-cleanup-forms)
-   (result-temp    :initarg :result-temp :initform nil :accessor ast-unwind-protect-result-temp))
+   (result-temp    :initarg :result-temp :initform nil :accessor ast-unwind-protect-result-temp)
+   (count-temp     :initarg :count-temp :initform nil :accessor ast-unwind-protect-count-temp)
+   (extra-temps     :initarg :extra-temps :initform nil :accessor ast-unwind-protect-extra-temps))
   (:documentation "An UNWIND-PROTECT block."))
 
 (defclass ast-block (ast-node)
@@ -229,7 +231,10 @@
 
 (defclass ast-multiple-value-prog1 (ast-node)
   ((first-form :initarg :first-form :accessor ast-multiple-value-prog1-first-form)
-   (other-forms :initarg :other-forms :accessor ast-multiple-value-prog1-other-forms))
+   (other-forms :initarg :other-forms :accessor ast-multiple-value-prog1-other-forms)
+   (result-temp :initarg :result-temp :initform nil :accessor ast-multiple-value-prog1-result-temp)
+   (count-temp  :initarg :count-temp :initform nil :accessor ast-multiple-value-prog1-count-temp)
+   (extra-temps :initarg :extra-temps :initform nil :accessor ast-multiple-value-prog1-extra-temps))
   (:documentation "A MULTIPLE-VALUE-PROG1 form."))
 
 ;;; Macro Environment
@@ -298,6 +303,9 @@
           (if (null (cdr args))
               (car args)
               `(if ,(car args) (and ,@(cdr args)) nil)))))
+  (register-macro 'return
+    (lambda (&optional value)
+      `(return-from nil ,value)))
   (register-macro 'atom (lambda (x) `(not (consp ,x))))
   (register-macro 'caar (lambda (x) `(car (car ,x))))
   (register-macro 'cadr (lambda (x) `(car (cdr ,x))))
@@ -778,7 +786,9 @@
   (make-instance 'ast-unwind-protect
                  :protected-form (closure-convert (ast-unwind-protect-protected-form node))
                  :cleanup-forms (mapcar #'closure-convert (ast-unwind-protect-cleanup-forms node))
-                 :result-temp (ast-unwind-protect-result-temp node)))
+                 :result-temp (ast-unwind-protect-result-temp node)
+                 :count-temp (ast-unwind-protect-count-temp node)
+                 :extra-temps (ast-unwind-protect-extra-temps node)))
 
 (defmethod closure-convert ((node ast-block))
   (make-instance 'ast-block
@@ -825,7 +835,10 @@
 (defmethod closure-convert ((node ast-multiple-value-prog1))
   (make-instance 'ast-multiple-value-prog1
                  :first-form (closure-convert (ast-multiple-value-prog1-first-form node))
-                 :other-forms (mapcar #'closure-convert (ast-multiple-value-prog1-other-forms node))))
+                 :other-forms (mapcar #'closure-convert (ast-multiple-value-prog1-other-forms node))
+                 :result-temp (ast-multiple-value-prog1-result-temp node)
+                 :count-temp (ast-multiple-value-prog1-count-temp node)
+                 :extra-temps (ast-multiple-value-prog1-extra-temps node)))
 
 (defmethod closure-convert ((node ast-class))
   node)
@@ -982,7 +995,9 @@
   (make-instance 'ast-unwind-protect
                  :protected-form (lambda-lift (ast-unwind-protect-protected-form node))
                  :cleanup-forms (mapcar #'lambda-lift (ast-unwind-protect-cleanup-forms node))
-                 :result-temp (ast-unwind-protect-result-temp node)))
+                 :result-temp (ast-unwind-protect-result-temp node)
+                 :count-temp (ast-unwind-protect-count-temp node)
+                 :extra-temps (ast-unwind-protect-extra-temps node)))
 
 (defmethod lambda-lift ((node ast-block))
   (make-instance 'ast-block
@@ -1029,7 +1044,10 @@
 (defmethod lambda-lift ((node ast-multiple-value-prog1))
   (make-instance 'ast-multiple-value-prog1
                  :first-form (lambda-lift (ast-multiple-value-prog1-first-form node))
-                 :other-forms (mapcar #'lambda-lift (ast-multiple-value-prog1-other-forms node))))
+                 :other-forms (mapcar #'lambda-lift (ast-multiple-value-prog1-other-forms node))
+                 :result-temp (ast-multiple-value-prog1-result-temp node)
+                 :count-temp (ast-multiple-value-prog1-count-temp node)
+                 :extra-temps (ast-multiple-value-prog1-extra-temps node)))
 
 (defmethod lambda-lift ((node ast-class))
   node)
@@ -1845,7 +1863,9 @@
                  :protected-form (analyze-environment (ast-unwind-protect-protected-form node) env mutated)
                  :cleanup-forms (mapcar (lambda (form) (analyze-environment form env mutated))
                                         (ast-unwind-protect-cleanup-forms node))
-                 :result-temp (ast-unwind-protect-result-temp node)))
+                 :result-temp (ast-unwind-protect-result-temp node)
+                 :count-temp (ast-unwind-protect-count-temp node)
+                 :extra-temps (ast-unwind-protect-extra-temps node)))
 
 (defmethod analyze-environment ((node ast-block) env &optional mutated)
   (make-instance 'ast-block
@@ -1914,7 +1934,10 @@
   (make-instance 'ast-multiple-value-prog1
                  :first-form (analyze-environment (ast-multiple-value-prog1-first-form node) env mutated)
                  :other-forms (mapcar (lambda (e) (analyze-environment e env mutated))
-                                      (ast-multiple-value-prog1-other-forms node))))
+                                      (ast-multiple-value-prog1-other-forms node))
+                 :result-temp (ast-multiple-value-prog1-result-temp node)
+                 :count-temp (ast-multiple-value-prog1-count-temp node)
+                 :extra-temps (ast-multiple-value-prog1-extra-temps node)))
 
 (defmethod analyze-environment ((node ast-class) env &optional mutated)
   (declare (ignore env mutated))

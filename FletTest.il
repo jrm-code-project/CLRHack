@@ -125,7 +125,7 @@
     pop
     tail. call object Program::'TEST_FLET_NON_RECURSIVE'()
     ret
-BLOCK_END_MAIN_611:
+BLOCK_END_MAIN_733:
     nop
     ldnull
     ret
@@ -214,18 +214,18 @@ BLOCK_END_MAIN_611:
 .method private static hidebysig object 'TEST_FLET_NON_RECURSIVE_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object OUTER_HELPER608)
+    .locals init (object OUTER_HELPER730)
     ldstr "Testing flet non-recursivity..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_617::'.ctor'()
-    stloc OUTER_HELPER608
+    newobj instance void L_739::'.ctor'()
+    stloc OUTER_HELPER730
     ldstr "outer-helper 5 (should be 16):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc OUTER_HELPER608
+    ldloc OUTER_HELPER730
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -233,7 +233,7 @@ BLOCK_END_MAIN_611:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_NON_RECURSIVE_604:
+BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     nop
     ldnull
     ret
@@ -322,20 +322,20 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_604:
 .method private static hidebysig object 'TEST_FLET_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object DOUBLE601, object ADD_10598, object DOUBLE595)
+    .locals init (object DOUBLE723, object ADD_10720, object DOUBLE717)
     ldstr "Testing flet..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_614::'.ctor'()
-    stloc DOUBLE595
-    newobj instance void L_615::'.ctor'()
-    stloc ADD_10598
+    newobj instance void L_736::'.ctor'()
+    stloc DOUBLE717
+    newobj instance void L_737::'.ctor'()
+    stloc ADD_10720
     ldstr "double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE595
+    ldloc DOUBLE717
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -347,7 +347,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_604:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ADD_10598
+    ldloc ADD_10720
     castclass [LispBase]Lisp.Closure
     ldc.i4 4
     box int32
@@ -355,13 +355,13 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_604:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_616::'.ctor'()
-    stloc DOUBLE601
+    newobj instance void L_738::'.ctor'()
+    stloc DOUBLE723
     ldstr "shadowed double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE601
+    ldloc DOUBLE723
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -369,7 +369,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_604:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_591:
+BLOCK_END_TEST_FLET_713:
     nop
     ldnull
     ret
@@ -469,7 +469,7 @@ BLOCK_END_TEST_FLET_591:
     add
     box int32
     ret
-BLOCK_END_OUTER_HELPER_587:
+BLOCK_END_OUTER_HELPER_709:
     nop
     ldnull
     ret
@@ -486,7 +486,7 @@ BLOCK_END_OUTER_HELPER_587:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_614
+.class public auto ansi beforefieldinit L_736
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -528,7 +528,7 @@ BLOCK_END_OUTER_HELPER_587:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_614::'InvokeBody'(object)
+    callvirt instance object L_736::'InvokeBody'(object)
     ret
 }
 
@@ -595,9 +595,9 @@ BLOCK_END_OUTER_HELPER_587:
     throw
 }
 
-} // end of class L_614
+} // end of class L_736
 
-.class public auto ansi beforefieldinit L_615
+.class public auto ansi beforefieldinit L_737
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -640,7 +640,7 @@ BLOCK_END_OUTER_HELPER_587:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_615::'InvokeBody'(object)
+    callvirt instance object L_737::'InvokeBody'(object)
     ret
 }
 
@@ -707,9 +707,9 @@ BLOCK_END_OUTER_HELPER_587:
     throw
 }
 
-} // end of class L_615
+} // end of class L_737
 
-.class public auto ansi beforefieldinit L_616
+.class public auto ansi beforefieldinit L_738
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -752,7 +752,7 @@ BLOCK_END_OUTER_HELPER_587:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_616::'InvokeBody'(object)
+    callvirt instance object L_738::'InvokeBody'(object)
     ret
 }
 
@@ -819,9 +819,9 @@ BLOCK_END_OUTER_HELPER_587:
     throw
 }
 
-} // end of class L_616
+} // end of class L_738
 
-.class public auto ansi beforefieldinit L_617
+.class public auto ansi beforefieldinit L_739
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -865,7 +865,7 @@ BLOCK_END_OUTER_HELPER_587:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_617::'InvokeBody'(object)
+    callvirt instance object L_739::'InvokeBody'(object)
     ret
 }
 
@@ -932,5 +932,5 @@ BLOCK_END_OUTER_HELPER_587:
     throw
 }
 
-} // end of class L_617
+} // end of class L_739
 
