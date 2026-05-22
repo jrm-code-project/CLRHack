@@ -12,7 +12,7 @@
     .field public static object 'FIB'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G586'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G574'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -30,11 +30,91 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G586'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G574'
     ret
 }
 
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'MAIN'() cil managed
+{
+    .maxstack 8
+    tail.
+    call object Program::'MAIN_Body'()
+    ret
+}
+
+.method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
     ldstr "Fibonacci of 10:"
@@ -47,13 +127,94 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_578:
+BLOCK_END_MAIN_566:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'FIB'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'FIB'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'FIB'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'FIB'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'FIB'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'FIB'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'FIB'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'FIB'(object) cil managed
+{
+    .maxstack 8
+    ldarg 0
+    tail.
+    call object Program::'FIB_Body'(object)
+    ret
+}
+
+.method public static hidebysig object 'FIB'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method private static hidebysig object 'FIB_Body'(object) cil managed
 {
     .maxstack 8
     ldarg 0
@@ -64,20 +225,20 @@ BLOCK_END_MAIN_578:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE584
+    brtrue TRUE572
     ldnull
-    br END585
-TRUE584:
+    br END573
+TRUE572:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G586'
-END585:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G574'
+END573:
     nop
     ldnull
     ceq
-    brtrue ELSE587
+    brtrue ELSE575
     ldarg 0
     ret
-ELSE587:
+ELSE575:
     nop
     ldarg 0
     ldc.i4 1
@@ -106,7 +267,7 @@ ELSE587:
     add
     box int32
     ret
-BLOCK_END_FIB_574:
+BLOCK_END_FIB_562:
     nop
     ldnull
     ret

@@ -38,34 +38,194 @@
     ret
 }
 
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'MAIN'() cil managed
+{
+    .maxstack 8
+    tail.
+    call object Program::'MAIN_Body'()
+    ret
+}
+
+.method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
     call object Program::'TEST_FLET'()
     pop
     tail. call object Program::'TEST_FLET_NON_RECURSIVE'()
     ret
-BLOCK_END_MAIN_615:
+BLOCK_END_MAIN_603:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_FLET_NON_RECURSIVE'() cil managed
 {
     .maxstack 8
-    .locals init (object OUTER_HELPER612)
+    tail.
+    call object Program::'TEST_FLET_NON_RECURSIVE_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_FLET_NON_RECURSIVE_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object OUTER_HELPER600)
     ldstr "Testing flet non-recursivity..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_621::'.ctor'()
-    stloc OUTER_HELPER612
+    newobj instance void L_609::'.ctor'()
+    stloc OUTER_HELPER600
     ldstr "outer-helper 5 (should be 16):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc OUTER_HELPER612
+    ldloc OUTER_HELPER600
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -73,29 +233,109 @@ BLOCK_END_MAIN_615:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_NON_RECURSIVE_608:
+BLOCK_END_TEST_FLET_NON_RECURSIVE_596:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_FLET'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_FLET'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_FLET'() cil managed
 {
     .maxstack 8
-    .locals init (object DOUBLE605, object ADD_10602, object DOUBLE599)
+    tail.
+    call object Program::'TEST_FLET_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_FLET_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object DOUBLE593, object ADD_10590, object DOUBLE587)
     ldstr "Testing flet..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_618::'.ctor'()
-    stloc DOUBLE599
-    newobj instance void L_619::'.ctor'()
-    stloc ADD_10602
+    newobj instance void L_606::'.ctor'()
+    stloc DOUBLE587
+    newobj instance void L_607::'.ctor'()
+    stloc ADD_10590
     ldstr "double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE599
+    ldloc DOUBLE587
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -107,7 +347,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_608:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ADD_10602
+    ldloc ADD_10590
     castclass [LispBase]Lisp.Closure
     ldc.i4 4
     box int32
@@ -115,13 +355,13 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_608:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_620::'.ctor'()
-    stloc DOUBLE605
+    newobj instance void L_608::'.ctor'()
+    stloc DOUBLE593
     ldstr "shadowed double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE605
+    ldloc DOUBLE593
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -129,13 +369,94 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_608:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_595:
+BLOCK_END_TEST_FLET_583:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'OUTER_HELPER'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'OUTER_HELPER'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'OUTER_HELPER'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'OUTER_HELPER'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'OUTER_HELPER'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'OUTER_HELPER'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'OUTER_HELPER'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'OUTER_HELPER'(object) cil managed
+{
+    .maxstack 8
+    ldarg 0
+    tail.
+    call object Program::'OUTER_HELPER_Body'(object)
+    ret
+}
+
+.method public static hidebysig object 'OUTER_HELPER'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method private static hidebysig object 'OUTER_HELPER_Body'(object) cil managed
 {
     .maxstack 8
     ldarg 0
@@ -148,7 +469,7 @@ BLOCK_END_TEST_FLET_595:
     add
     box int32
     ret
-BLOCK_END_OUTER_HELPER_591:
+BLOCK_END_OUTER_HELPER_579:
     nop
     ldnull
     ret
@@ -165,7 +486,7 @@ BLOCK_END_OUTER_HELPER_591:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_618
+.class public auto ansi beforefieldinit L_606
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -207,7 +528,7 @@ BLOCK_END_OUTER_HELPER_591:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_618::'InvokeBody'(object)
+    callvirt instance object L_606::'InvokeBody'(object)
     ret
 }
 
@@ -274,9 +595,9 @@ BLOCK_END_OUTER_HELPER_591:
     throw
 }
 
-} // end of class L_618
+} // end of class L_606
 
-.class public auto ansi beforefieldinit L_619
+.class public auto ansi beforefieldinit L_607
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -319,7 +640,7 @@ BLOCK_END_OUTER_HELPER_591:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_619::'InvokeBody'(object)
+    callvirt instance object L_607::'InvokeBody'(object)
     ret
 }
 
@@ -386,9 +707,9 @@ BLOCK_END_OUTER_HELPER_591:
     throw
 }
 
-} // end of class L_619
+} // end of class L_607
 
-.class public auto ansi beforefieldinit L_620
+.class public auto ansi beforefieldinit L_608
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -431,7 +752,7 @@ BLOCK_END_OUTER_HELPER_591:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_620::'InvokeBody'(object)
+    callvirt instance object L_608::'InvokeBody'(object)
     ret
 }
 
@@ -498,9 +819,9 @@ BLOCK_END_OUTER_HELPER_591:
     throw
 }
 
-} // end of class L_620
+} // end of class L_608
 
-.class public auto ansi beforefieldinit L_621
+.class public auto ansi beforefieldinit L_609
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -544,7 +865,7 @@ BLOCK_END_OUTER_HELPER_591:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_621::'InvokeBody'(object)
+    callvirt instance object L_609::'InvokeBody'(object)
     ret
 }
 
@@ -611,5 +932,5 @@ BLOCK_END_OUTER_HELPER_591:
     throw
 }
 
-} // end of class L_621
+} // end of class L_609
 

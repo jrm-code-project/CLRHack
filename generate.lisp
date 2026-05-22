@@ -130,11 +130,16 @@
 
 (defmethod generate-step2 ((node ast-lambda) &optional tail-p)
   (declare (ignore tail-p))
-  (let* ((*current-lambda-class* (sanitize-identifier (string (ast-lambda-lifted-name node))))
-         (*current-lambda-free-vars* (ast-lambda-free-vars node))
-         (*current-lambda-params* (ast-lambda-params node)) ;; This must match InvokeBody's flat param list
+  (let* ((req-params (ast-lambda-params node))
          (optionals (ast-lambda-optional-params node))
+         (rest-param (ast-lambda-rest-param node))
          (aux-params (ast-lambda-aux-params node))
+         (opt-names (mapcar #'car optionals))
+         (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
+         (body-params (append req-params opt-names opt-supplied-names (when rest-param (list rest-param))))
+         (*current-lambda-class* (sanitize-identifier (string (ast-lambda-lifted-name node))))
+         (*current-lambda-free-vars* (ast-lambda-free-vars node))
+         (*current-lambda-params* body-params)
          (forms (ast-lambda-body node))
          (prologue nil))
 
@@ -142,25 +147,29 @@
     (loop for (name init-ast sup-name) in optionals
           for opt-idx = (position name *current-lambda-params* :test #'eq)
           do (let ((supplied-label (sanitize-identifier (string (gensym "SUP"))))
-                   (done-label (sanitize-identifier (string (gensym "DONE")))))
+                   (done-label (sanitize-identifier (string (gensym "DONE"))))
+                   (arg-idx (if *current-lambda-class* (1+ opt-idx) opt-idx)))
                (setf prologue (append prologue
-                 (list (il:ldarg (1+ opt-idx)) ;; +1 because ldarg.0 is 'this'
-                       (il:ldsfld "[LispBase]Lisp.Unsupplied::Value")
+                 (list (il:ldarg arg-idx)
+                       (il:ldsfld "object [LispBase]Lisp.Undefined::Value")
                        (il:bne.un supplied-label))
                  ;; NOT SUPPLIED: Eval init-form and starg
                  (generate-step2 init-ast nil)
-                 (list (il:starg (1+ opt-idx)))
-                 ;; Set sup-p to NIL
-                 (when sup-name
-                   (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
-                     (append (load-symbol-il "NIL") (list (il:starg (1+ sup-idx))))))
+                 (list (il:starg arg-idx))))
+               ;; Set sup-p to NIL
+               (when sup-name
+                 (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
+                   (setf prologue (append prologue (load-symbol-il "NIL")
+                                          (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
+               (setf prologue (append prologue
                  (list (il:br done-label)
-                       (il:nop :label supplied-label))
-                 ;; SUPPLIED: Set sup-p to T
-                 (when sup-name
-                   (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
-                     (append (load-symbol-il "T") (list (il:starg (1+ sup-idx))))))
-                 (list (il:nop :label done-label))))))
+                       (il:nop :label supplied-label))))
+               ;; SUPPLIED: Set sup-p to T
+               (when sup-name
+                 (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
+                   (setf prologue (append prologue (load-symbol-il "T")
+                                          (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
+               (setf prologue (append prologue (list (il:nop :label done-label))))))
 
     ;; B. Handle &aux (treated like a sequential let*)
     (loop for (name init-ast) in aux-params
@@ -343,11 +352,56 @@
 
 (defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)
   (declare (ignore tail-p))
-  (let* ((*current-lambda-params* (ast-toplevel-defun-params node))
+  (let* ((req-params (ast-toplevel-defun-params node))
+         (optionals (ast-toplevel-defun-optional-params node))
+         (rest-param (ast-toplevel-defun-rest-param node))
+         (aux-params (ast-toplevel-defun-aux-params node))
+         (opt-names (mapcar #'car optionals))
+         (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
+         ;; Use already bound params if present (from pass1), otherwise construct them.
+         (*current-lambda-params* (or *current-lambda-params*
+                                     (append req-params opt-names opt-supplied-names (when rest-param (list rest-param)))))
          (forms (ast-toplevel-defun-body node))
-         (body-code (if (null forms)
+         (prologue nil))
+
+    ;; A. Handle Optionals & Supplied-P
+    (loop for (name init-ast sup-name) in optionals
+          for opt-idx = (position name *current-lambda-params* :test #'eq)
+          do (let ((supplied-label (sanitize-identifier (string (gensym "SUP"))))
+                   (done-label (sanitize-identifier (string (gensym "DONE"))))
+                   (arg-idx (if *current-lambda-class* (1+ opt-idx) opt-idx)))
+               (setf prologue (append prologue
+                 (list (il:ldarg arg-idx)
+                       (il:ldsfld "object [LispBase]Lisp.Undefined::Value")
+                       (il:bne.un supplied-label))
+                 ;; NOT SUPPLIED: Eval init-form and starg
+                 (generate-step2 init-ast nil)
+                 (list (il:starg arg-idx))))
+               ;; Set sup-p to NIL
+               (when sup-name
+                 (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
+                   (setf prologue (append prologue (load-symbol-il "NIL")
+                                          (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
+               (setf prologue (append prologue
+                 (list (il:br done-label)
+                       (il:nop :label supplied-label))))
+               ;; SUPPLIED: Set sup-p to T
+               (when sup-name
+                 (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
+                   (setf prologue (append prologue (load-symbol-il "T")
+                                          (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
+               (setf prologue (append prologue (list (il:nop :label done-label))))))
+
+    ;; B. Handle &aux (treated like a sequential let*)
+    (loop for (name init-ast) in aux-params
+          do (setf prologue (append prologue 
+                                    (generate-step2 init-ast nil)
+                                    (list (il:stloc (sanitize-identifier (string name)))))))
+
+    ;; C. Generate Body
+    (let ((body-code (if (and (null forms) (null prologue))
                         (list (il:ldnull) (il:ret))
-                        (let ((res nil))
+                        (let ((res prologue))
                           (loop for form in forms
                                 for i from 1
                                 for is-last = (= i (length forms))
@@ -355,8 +409,8 @@
                                 when (not is-last)
                                   do (setf res (append res (list (il:pop)))))
                           (append res (list (il:ldnull) (il:ret)))))))
-    (setf (ast-basic-block node) body-code)
-    body-code))
+      (setf (ast-basic-block node) body-code)
+      body-code)))
 
 (defmethod generate-step2 ((node ast-application) &optional tail-p)
   (let ((operator (ast-application-operator node))
@@ -554,14 +608,15 @@
                                          for arg-idx = (+ (length req-params) i 1)
                                          do (if (<= arg-idx m)
                                                 (push (il:ldarg arg-idx) prep-code)
-                                                (push (il:ldsfld "[LispBase]Lisp.Unsupplied::Value") prep-code)))
+                                                (push (il:ldsfld "object [LispBase]Lisp.Undefined::Value") prep-code)))
                                    ;; Pass nulls for supplied-p (Body will overwrite)
                                    (loop repeat (length opt-supplied-names) do (push (il:ldnull) prep-code))
                                    ;; Handle &rest
                                    (when has-rest
-                                     (push (il:ldnull) prep-code) ;; Start with NIL
-                                     (loop for i from m downto (+ (length req-params) (length optionals) 1) do
-                                       (push (il:ldarg i) prep-code)
+                                     (loop for i from (+ (length req-params) (length optionals) 1) to m do
+                                       (push (il:ldarg i) prep-code))
+                                     (push (il:ldnull) prep-code)
+                                     (loop repeat (- m (+ (length req-params) (length optionals))) do
                                        (push (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")) prep-code)))
                                    
                                    (append (reverse prep-code)
@@ -573,20 +628,77 @@
           lambdas))
 
 (defun generate-toplevel-methods (toplevel-defuns)
-  (mapcar (lambda (defun-node)
-            (let* ((name (sanitize-identifier (string (ast-toplevel-defun-name defun-node))))
-                   (params (ast-toplevel-defun-params defun-node))
-                   (n-params (length params)))
-              (multiple-value-bind (block locals) (generate defun-node)
-                (let ((locals-decl (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)))
-                  (il:method :name name
-                             :return-type "object"
-                             :arg-types (make-list n-params :initial-element "object")
-                             :locals locals-decl
-                             :visibility :public
-                             :static-p t
-                             :instructions block)))))
-          toplevel-defuns))
+  (reduce #'append
+    (mapcar (lambda (defun-node)
+              (let* ((name (sanitize-identifier (string (ast-toplevel-defun-name defun-node))))
+                     (body-name (format nil "~A_Body" name))
+                     (req-params (ast-toplevel-defun-params defun-node))
+                     (optionals (ast-toplevel-defun-optional-params defun-node))
+                     (rest-param (ast-toplevel-defun-rest-param defun-node))
+                     (has-rest (not (null rest-param)))
+                     (opt-names (mapcar #'car optionals))
+                     (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
+                     (body-params (append req-params
+                                          opt-names
+                                          opt-supplied-names
+                                          (when has-rest (list rest-param))))
+                     (n-body-params (length body-params))
+                     (methods nil))
+                
+                ;; 1. Generate Body
+                (multiple-value-bind (block locals) 
+                    (let ((*current-lambda-params* body-params)
+                          (*current-locals* nil))
+                      (generate-step1 defun-node)
+                      (values (generate-step2 defun-node t) *current-locals*))
+                  (let ((locals-decl (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)))
+                    (push (il:method :name body-name
+                                     :return-type "object"
+                                     :arg-types (make-list n-body-params :initial-element "object")
+                                     :locals locals-decl
+                                     :visibility :private
+                                     :static-p t
+                                     :instructions block)
+                          methods)))
+
+                ;; 2. Generate Overloads (0 to 8)
+                (loop for m from 0 to 8 do
+                  (let* ((invoke-arg-types (make-list m :initial-element "object"))
+                         (too-few (< m (length req-params)))
+                         (too-many (and (not has-rest) (> m (+ (length req-params) (length optionals)))))
+                         (insts (cond
+                                  ((or too-few too-many)
+                                   (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
+                                         (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                         (il:throw)))
+                                  (t
+                                   (let ((prep-code nil))
+                                     ;; Pass Requireds
+                                     (loop for i from 0 below (length req-params) do
+                                       (push (il:ldarg i) prep-code))
+                                     ;; Pass Optionals or Sentinel
+                                     (loop for i from 0 below (length optionals)
+                                           for arg-idx = (+ (length req-params) i)
+                                           do (if (< arg-idx m)
+                                                  (push (il:ldarg arg-idx) prep-code)
+                                                  (push (il:ldsfld "object [LispBase]Lisp.Undefined::Value") prep-code)))
+                                     ;; Pass nulls for supplied-p (Body will overwrite)
+                                     (loop repeat (length opt-supplied-names) do (push (il:ldnull) prep-code))
+                                     ;; Handle &rest
+                                     (when has-rest
+                                       (loop for i from (+ (length req-params) (length optionals)) below m do
+                                         (push (il:ldarg i) prep-code))
+                                       (push (il:ldnull) prep-code)
+                                       (loop repeat (- m (+ (length req-params) (length optionals))) do
+                                         (push (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")) prep-code)))
+                                     
+                                     (append (reverse prep-code)
+                                             (list (il:tail.)
+                                                   (il:call :method body-name :class "Program" :return "object" :args (make-list n-body-params :initial-element "object"))
+                                                   (il:ret))))))))
+                    (push (il:method :name name :return-type "object" :arg-types invoke-arg-types :visibility :public :static-p t :instructions insts) methods)))
+                (nreverse methods)))
+            toplevel-defuns)))
 
 (defun generate-program-class (ast toplevel-methods)
   (multiple-value-bind (main-insts locals) (generate ast)

@@ -13,7 +13,7 @@
     .field public static object 'TEMP_B'
     .field public static object '_'
     .field public static object 'NOT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1682'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G1670'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -33,11 +33,91 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1682'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1670'
     ret
 }
 
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'MAIN'() cil managed
+{
+    .maxstack 8
+    tail.
+    call object Program::'MAIN_Body'()
+    ret
+}
+
+.method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
     ldc.i4 18
@@ -50,13 +130,96 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_1672:
+BLOCK_END_MAIN_1660:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TAK'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TAK'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TAK'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TAK'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TAK'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TAK'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldarg 0
+    ldarg 1
+    ldarg 2
+    tail.
+    call object Program::'TAK_Body'(object, object, object)
+    ret
+}
+
+.method public static hidebysig object 'TAK'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TAK'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TAK'() cil managed
+{
+    .maxstack 8
+    ldc.i4 3
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method private static hidebysig object 'TAK_Body'(object, object, object) cil managed
 {
     .maxstack 8
     ldarg 1
@@ -66,30 +229,30 @@ BLOCK_END_MAIN_1672:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1680
+    brtrue TRUE1668
     ldnull
-    br END1681
-TRUE1680:
+    br END1669
+TRUE1668:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1682'
-END1681:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1683
-    ldnull
-    br END1684
-TRUE1683:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1682'
-END1684:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1670'
+END1669:
     nop
     ldnull
     ceq
-    brtrue ELSE1685
+    brtrue TRUE1671
+    ldnull
+    br END1672
+TRUE1671:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1670'
+END1672:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1673
     ldarg 2
     ret
-ELSE1685:
+ELSE1673:
     nop
     ldarg 0
     ldc.i4 1
@@ -129,7 +292,7 @@ ELSE1685:
     call object Program::'TAK'(object, object, object)
     tail. call object Program::'TAK'(object, object, object)
     ret
-BLOCK_END_TAK_1668:
+BLOCK_END_TAK_1656:
     nop
     ldnull
     ret

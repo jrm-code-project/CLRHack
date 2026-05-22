@@ -15,11 +15,11 @@
     .field public static object 'NON_LOCAL_THROW_HELPER'
     .field public static object '_INTERN'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G362'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G353'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G346'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G343'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G338'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G350'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G341'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G334'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G331'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G326'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -43,27 +43,107 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "MY-TAG"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G362'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G350'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "BAR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G353'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G341'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "INNER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G346'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G334'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "OUTER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G343'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G331'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "FOO"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G338'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G326'
     ret
 }
 
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'MAIN'() cil managed
+{
+    .maxstack 8
+    tail.
+    call object Program::'MAIN_Body'()
+    ret
+}
+
+.method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
     call object Program::'TEST_CATCH_BASIC'()
@@ -74,62 +154,224 @@
     pop
     tail. call object Program::'TEST_CATCH_NON_LOCAL'()
     ret
-BLOCK_END_MAIN_304:
+BLOCK_END_MAIN_292:
     nop
     ldnull
     ret
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NON_LOCAL'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
 }
 
 .method public static hidebysig object 'TEST_CATCH_NON_LOCAL'() cil managed
 {
     .maxstack 8
-    .locals init (object RES301, object CATCH_RESULT361, object CATCH_TAG360)
+    tail.
+    call object Program::'TEST_CATCH_NON_LOCAL_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_CATCH_NON_LOCAL_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object RES289, object CATCH_RESULT349, object CATCH_TAG348)
     ldstr "Testing truly non-local throw..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G362'
-    stloc CATCH_TAG360
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G350'
+    stloc CATCH_TAG348
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G362'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G350'
     ldstr "final result"
     call object Program::'NON_LOCAL_THROW_HELPER'(object, object)
-    stloc CATCH_RESULT361
-    leave CATCH_DONE363
+    stloc CATCH_RESULT349
+    leave CATCH_DONE351
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG360
+    ldloc CATCH_TAG348
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW364
+    brfalse CATCH_RETHROW352
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT361
-    leave CATCH_DONE363
-CATCH_RETHROW364:
+    stloc CATCH_RESULT349
+    leave CATCH_DONE351
+CATCH_RETHROW352:
     pop
     rethrow
     }
-CATCH_DONE363:
-    ldloc CATCH_RESULT361
-    stloc RES301
+CATCH_DONE351:
+    ldloc CATCH_RESULT349
+    stloc RES289
     ldstr "Result of non-local throw:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RES301
+    ldloc RES289
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_NON_LOCAL_299:
+BLOCK_END_TEST_CATCH_NON_LOCAL_287:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object, object) cil managed
+{
+    .maxstack 8
+    ldarg 0
+    ldarg 1
+    tail.
+    call object Program::'NON_LOCAL_THROW_HELPER_Body'(object, object)
+    ret
+}
+
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'NON_LOCAL_THROW_HELPER'() cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method private static hidebysig object 'NON_LOCAL_THROW_HELPER_Body'(object, object) cil managed
 {
     .maxstack 8
     ldstr "Inside helper, about to throw..."
@@ -140,33 +382,113 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_299:
     ldarg 1
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object)
     throw
-BLOCK_END_NON_LOCAL_THROW_HELPER_295:
+BLOCK_END_NON_LOCAL_THROW_HELPER_283:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_MISMATCH'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_CATCH_MISMATCH'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT355, object CATCH_TAG354, object CATCH_RESULT352, object CATCH_TAG351)
+    tail.
+    call object Program::'TEST_CATCH_MISMATCH_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_CATCH_MISMATCH_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object CATCH_RESULT343, object CATCH_TAG342, object CATCH_RESULT340, object CATCH_TAG339)
     ldstr "Testing catch mismatch..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G353'
-    stloc CATCH_TAG351
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G341'
+    stloc CATCH_TAG339
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G338'
-    stloc CATCH_TAG354
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G326'
+    stloc CATCH_TAG342
     .try
     {
     ldstr "Throwing to bar from inner foo"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G353'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G341'
     ldstr "reached bar"
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object)
     throw
@@ -174,76 +496,156 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_295:
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT355
-    leave CATCH_DONE358
+    stloc CATCH_RESULT343
+    leave CATCH_DONE346
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG354
+    ldloc CATCH_TAG342
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW359
+    brfalse CATCH_RETHROW347
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT355
-    leave CATCH_DONE358
-CATCH_RETHROW359:
+    stloc CATCH_RESULT343
+    leave CATCH_DONE346
+CATCH_RETHROW347:
     pop
     rethrow
     }
-CATCH_DONE358:
-    ldloc CATCH_RESULT355
-    stloc CATCH_RESULT352
-    leave CATCH_DONE356
+CATCH_DONE346:
+    ldloc CATCH_RESULT343
+    stloc CATCH_RESULT340
+    leave CATCH_DONE344
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG351
+    ldloc CATCH_TAG339
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW357
+    brfalse CATCH_RETHROW345
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT352
-    leave CATCH_DONE356
-CATCH_RETHROW357:
+    stloc CATCH_RESULT340
+    leave CATCH_DONE344
+CATCH_RETHROW345:
     pop
     rethrow
     }
-CATCH_DONE356:
-    ldloc CATCH_RESULT352
+CATCH_DONE344:
+    ldloc CATCH_RESULT340
     ret
-BLOCK_END_TEST_CATCH_MISMATCH_289:
+BLOCK_END_TEST_CATCH_MISMATCH_277:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_NESTED'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_CATCH_NESTED'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT345, object CATCH_TAG344, object CATCH_RESULT342, object CATCH_TAG341)
+    tail.
+    call object Program::'TEST_CATCH_NESTED_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_CATCH_NESTED_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object CATCH_RESULT333, object CATCH_TAG332, object CATCH_RESULT330, object CATCH_TAG329)
     ldstr "Testing nested catch..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G343'
-    stloc CATCH_TAG341
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G331'
+    stloc CATCH_TAG329
     .try
     {
     ldstr "Outer start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G346'
-    stloc CATCH_TAG344
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G334'
+    stloc CATCH_TAG332
     .try
     {
     ldstr "Inner start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G343'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G331'
     ldstr "thrown to outer"
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object)
     throw
@@ -251,76 +653,156 @@ BLOCK_END_TEST_CATCH_MISMATCH_289:
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT345
-    leave CATCH_DONE349
+    stloc CATCH_RESULT333
+    leave CATCH_DONE337
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG344
+    ldloc CATCH_TAG332
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW350
+    brfalse CATCH_RETHROW338
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT345
-    leave CATCH_DONE349
-CATCH_RETHROW350:
+    stloc CATCH_RESULT333
+    leave CATCH_DONE337
+CATCH_RETHROW338:
     pop
     rethrow
     }
-CATCH_DONE349:
-    ldloc CATCH_RESULT345
+CATCH_DONE337:
+    ldloc CATCH_RESULT333
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT342
-    leave CATCH_DONE347
+    stloc CATCH_RESULT330
+    leave CATCH_DONE335
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG341
+    ldloc CATCH_TAG329
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW348
+    brfalse CATCH_RETHROW336
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT342
-    leave CATCH_DONE347
-CATCH_RETHROW348:
+    stloc CATCH_RESULT330
+    leave CATCH_DONE335
+CATCH_RETHROW336:
     pop
     rethrow
     }
-CATCH_DONE347:
-    ldloc CATCH_RESULT342
+CATCH_DONE335:
+    ldloc CATCH_RESULT330
     pop
     ldstr "Back from outer catch"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_NESTED_285:
+BLOCK_END_TEST_CATCH_NESTED_273:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_CATCH_BASIC'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_CATCH_BASIC'() cil managed
 {
     .maxstack 8
-    .locals init (object VAL282, object CATCH_RESULT337, object CATCH_TAG336)
+    tail.
+    call object Program::'TEST_CATCH_BASIC_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_CATCH_BASIC_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object VAL270, object CATCH_RESULT325, object CATCH_TAG324)
     ldstr "Testing catch basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G338'
-    stloc CATCH_TAG336
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G326'
+    stloc CATCH_TAG324
     .try
     {
     ldstr "Inside catch"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G338'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G326'
     ldstr "thrown value"
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object)
     throw
@@ -328,35 +810,35 @@ BLOCK_END_TEST_CATCH_NESTED_285:
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT337
-    leave CATCH_DONE339
+    stloc CATCH_RESULT325
+    leave CATCH_DONE327
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG336
+    ldloc CATCH_TAG324
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW340
+    brfalse CATCH_RETHROW328
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT337
-    leave CATCH_DONE339
-CATCH_RETHROW340:
+    stloc CATCH_RESULT325
+    leave CATCH_DONE327
+CATCH_RETHROW328:
     pop
     rethrow
     }
-CATCH_DONE339:
-    ldloc CATCH_RESULT337
-    stloc VAL282
+CATCH_DONE327:
+    ldloc CATCH_RESULT325
+    stloc VAL270
     ldstr "Result (should be thrown value):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc VAL282
+    ldloc VAL270
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_BASIC_280:
+BLOCK_END_TEST_CATCH_BASIC_268:
     nop
     ldnull
     ret

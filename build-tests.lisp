@@ -42,6 +42,7 @@
                ("Tests/test-tagbody.lisp" . "TagbodyTest")
                ("Tests/test-tak.lisp" . "TakBenchmark")
                ("Tests/test-toplevel.lisp" . "TopLevelTest")
+               ("Tests/test-toplevel-args.lisp" . "ToplevelArgs")
                ("Tests/test-triang.lisp" . "TriangBenchmark")
                ("Tests/test-uwp.lisp" . "UwpTest"))))
 

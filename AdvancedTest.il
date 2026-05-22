@@ -9,9 +9,9 @@
 {
     .field public static object '_CTOR'
     .field public static object '_MAKE_CELL'
-    .field public static object 'COUNT138'
+    .field public static object 'COUNT126'
     .field public static object '_SET_CELL_VALUE_'
-    .field public static object 'TRACKER139'
+    .field public static object 'TRACKER127'
     .field public static object '_CELL_VALUE'
     .field public static object 'PRINT'
 
@@ -23,11 +23,11 @@
     ldnull
     stsfld object Program::'_MAKE_CELL'
     ldnull
-    stsfld object Program::'COUNT138'
+    stsfld object Program::'COUNT126'
     ldnull
     stsfld object Program::'_SET_CELL_VALUE_'
     ldnull
-    stsfld object Program::'TRACKER139'
+    stsfld object Program::'TRACKER127'
     ldnull
     stsfld object Program::'_CELL_VALUE'
     ldnull
@@ -39,21 +39,21 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object LOOP_FN144, object TRACKER139, object COUNT138)
+    .locals init (object LOOP_FN132, object TRACKER127, object COUNT126)
     ldc.i4 5
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc COUNT138
+    stloc COUNT126
     ldstr "Start"
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc TRACKER139
-    ldloc TRACKER139
-    ldloc COUNT138
-    newobj instance void L_146::'.ctor'(object, object)
-    stloc LOOP_FN144
-    ldloc LOOP_FN144
+    stloc TRACKER127
+    ldloc TRACKER127
+    ldloc COUNT126
+    newobj instance void L_134::'.ctor'(object, object)
+    stloc LOOP_FN132
+    ldloc LOOP_FN132
     castclass [LispBase]Lisp.Closure
-    ldloc LOOP_FN144
+    ldloc LOOP_FN132
     ldstr "start"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
     pop
@@ -62,11 +62,11 @@
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_146
+.class public auto ansi beforefieldinit L_134
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TRACKER139'
-    .field public object 'COUNT138'
+    .field public object 'TRACKER127'
+    .field public object 'COUNT126'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -75,58 +75,58 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_146::'TRACKER139'
+    stfld object L_134::'TRACKER127'
     ldarg.0
     ldarg 2
-    stfld object L_146::'COUNT138'
+    stfld object L_134::'COUNT126'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP152, object TEMP151, object NEXT_VAL143)
+    .locals init (object TEMP140, object TEMP139, object NEXT_VAL131)
     ldarg 2
     ldnull
     ceq
-    brtrue ELSE154
+    brtrue ELSE142
     ldstr "continue"
-    stloc NEXT_VAL143
+    stloc NEXT_VAL131
     ldstr "Counting down..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_146::'TRACKER139'
+    ldfld object L_134::'TRACKER127'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_146::'TRACKER139'
+    ldfld object L_134::'TRACKER127'
     ldstr "Mutated in flight!"
-    stloc TEMP151
+    stloc TEMP139
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP151
+    ldloc TEMP139
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP151
+    ldloc TEMP139
     pop
     ldarg.0
-    ldfld object L_146::'COUNT138'
+    ldfld object L_134::'COUNT126'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldnull
     ceq
-    brtrue ELSE153
+    brtrue ELSE141
     ldarg.0
-    ldfld object L_146::'COUNT138'
+    ldfld object L_134::'COUNT126'
     ldnull
-    stloc TEMP152
+    stloc TEMP140
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP152
+    ldloc TEMP140
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP152
+    ldloc TEMP140
     pop
     ldarg 1
     castclass [LispBase]Lisp.Closure
@@ -134,13 +134,13 @@
     ldstr "recurse"
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
     ret
-ELSE153:
+ELSE141:
     nop
     ldstr "Done!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE154:
+ELSE142:
     nop
     ldstr "Error"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -175,7 +175,7 @@ ELSE154:
     ldarg 1
     ldarg 2
     tail.
-    callvirt instance object L_146::'InvokeBody'(object, object)
+    callvirt instance object L_134::'InvokeBody'(object, object)
     ret
 }
 
@@ -233,5 +233,5 @@ ELSE154:
     throw
 }
 
-} // end of class L_146
+} // end of class L_134
 

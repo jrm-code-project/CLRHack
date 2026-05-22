@@ -1,0 +1,58 @@
+(in-package "CLRHACK")
+
+(progn
+  (defun test-optional (a &optional (b "default-b") (c "default-c" c-p))
+    (print "test-optional")
+    (print a)
+    (print b)
+    (print c)
+    (print c-p))
+
+  (defun test-rest (a &rest args)
+    (print "test-rest")
+    (print a)
+    (print args))
+
+  (defun test-mixed (a &optional (b 10) &rest args)
+    (print "test-mixed")
+    (print a)
+    (print b)
+    (print args))
+
+  (defun main ()
+    (print "--- optional 1 ---")
+    (test-optional "A")
+    (print "--- optional 2 ---")
+    (test-optional "A" "B")
+    (print "--- optional 3 ---")
+    (test-optional "A" "B" "C")
+
+    (print "--- rest 0 ---")
+    (test-rest "A")
+    (print "--- rest 1 ---")
+    (test-rest "A" "B")
+    (print "--- rest 2 ---")
+    (test-rest "A" "B" "C")
+
+    (print "--- mixed 1 ---")
+    (test-mixed 1)
+    (print "--- mixed 2 ---")
+    (test-mixed 1 2)
+    (print "--- mixed 3 ---")
+    (test-mixed 1 2 3 4))
+
+  (main)
+
+  (print "--- lambda test ---")
+  (let ((f (lambda (x &optional (y "default-y") &rest z)
+             (print "lambda")
+             (print x)
+             (print y)
+             (print z))))
+    (print "lambda 1")
+    (funcall f 1)
+    (print "lambda 2")
+    (funcall f 1 2)
+    (print "lambda 3")
+    (funcall f 1 2 3 4)))
+

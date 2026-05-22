@@ -15,7 +15,7 @@
     .field public static object 'IMPLICIT_BLOCK_TEST'
     .field public static object 'EQ'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G275'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G263'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -39,11 +39,91 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G275'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G263'
     ret
 }
 
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'MAIN'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'MAIN'() cil managed
+{
+    .maxstack 8
+    tail.
+    call object Program::'MAIN_Body'()
+    ret
+}
+
+.method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
     call object Program::'TEST_BLOCK_BASIC'()
@@ -54,13 +134,93 @@
     pop
     tail. call object Program::'TEST_IMPLICIT_BLOCK'()
     ret
-BLOCK_END_MAIN_262:
+BLOCK_END_MAIN_250:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_IMPLICIT_BLOCK'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_IMPLICIT_BLOCK'() cil managed
+{
+    .maxstack 8
+    tail.
+    call object Program::'TEST_IMPLICIT_BLOCK_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_IMPLICIT_BLOCK_Body'() cil managed
 {
     .maxstack 8
     ldstr "Testing implicit function block..."
@@ -87,55 +247,216 @@ BLOCK_END_MAIN_262:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_IMPLICIT_BLOCK_258:
+BLOCK_END_TEST_IMPLICIT_BLOCK_246:
     nop
     ldnull
     ret
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
 }
 
 .method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object) cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255)
+    ldarg 0
+    tail.
+    call object Program::'IMPLICIT_BLOCK_TEST_Body'(object)
+    ret
+}
+
+.method public static hidebysig object 'IMPLICIT_BLOCK_TEST'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method private static hidebysig object 'IMPLICIT_BLOCK_TEST_Body'(object) cil managed
+{
+    .maxstack 8
+    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243)
     ldarg 0
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE273
+    brtrue TRUE261
     ldnull
-    br END274
-TRUE273:
+    br END262
+TRUE261:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G275'
-END274:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G263'
+END262:
     nop
     ldnull
     ceq
-    brtrue ELSE276
+    brtrue ELSE264
     ldstr "zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255
-    leave BLOCK_END_IMPLICIT_BLOCK_TEST_254
-    br END277
-ELSE276:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243
+    leave BLOCK_END_IMPLICIT_BLOCK_TEST_242
+    br END265
+ELSE264:
     nop
     ldnull
-END277:
+END265:
     nop
     pop
     ldstr "non-zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255
-BLOCK_END_IMPLICIT_BLOCK_TEST_254:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243
+BLOCK_END_IMPLICIT_BLOCK_TEST_242:
     nop
-    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255
+    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243
     ret
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_UWP'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_BLOCK_UWP'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_EXIT_250, object UWP_RESULT271)
+    tail.
+    call object Program::'TEST_BLOCK_UWP_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_BLOCK_UWP_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object BLOCK_RESULT_EXIT_238, object UWP_RESULT259)
     ldstr "Testing block with unwind-protect..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -147,10 +468,10 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_254:
     ldnull
     pop
     ldstr "value from return-from"
-    stloc BLOCK_RESULT_EXIT_250
-    leave BLOCK_END_EXIT_249
-    stloc UWP_RESULT271
-    leave DONE272
+    stloc BLOCK_RESULT_EXIT_238
+    leave BLOCK_END_EXIT_237
+    stloc UWP_RESULT259
+    leave DONE260
     }
     finally
     {
@@ -160,23 +481,103 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_254:
     pop
     endfinally
     }
-DONE272:
-    ldloc UWP_RESULT271
-    stloc BLOCK_RESULT_EXIT_250
-BLOCK_END_EXIT_249:
+DONE260:
+    ldloc UWP_RESULT259
+    stloc BLOCK_RESULT_EXIT_238
+BLOCK_END_EXIT_237:
     nop
-    ldloc BLOCK_RESULT_EXIT_250
+    ldloc BLOCK_RESULT_EXIT_238
     ret
-BLOCK_END_TEST_BLOCK_UWP_247:
+BLOCK_END_TEST_BLOCK_UWP_235:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NESTED'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_BLOCK_NESTED'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_OUTER_242)
+    tail.
+    call object Program::'TEST_BLOCK_NESTED_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_BLOCK_NESTED_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object BLOCK_RESULT_OUTER_230)
     ldstr "Testing nested blocks..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -190,36 +591,116 @@ BLOCK_END_TEST_BLOCK_UWP_247:
     ldnull
     pop
     ldstr "exited from inner to outer"
-    stloc BLOCK_RESULT_OUTER_242
-    leave BLOCK_END_OUTER_241
+    stloc BLOCK_RESULT_OUTER_230
+    leave BLOCK_END_OUTER_229
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-BLOCK_END_INNER_243:
+BLOCK_END_INNER_231:
     nop
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_OUTER_242
-BLOCK_END_OUTER_241:
+    stloc BLOCK_RESULT_OUTER_230
+BLOCK_END_OUTER_229:
     nop
-    ldloc BLOCK_RESULT_OUTER_242
+    ldloc BLOCK_RESULT_OUTER_230
     pop
     ldstr "Back from outer block"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_NESTED_239:
+BLOCK_END_TEST_BLOCK_NESTED_227:
     nop
     ldnull
     ret
 }
 
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public static hidebysig object 'TEST_BLOCK_BASIC'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
 .method public static hidebysig object 'TEST_BLOCK_BASIC'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_FOO_235, object VAL236)
+    tail.
+    call object Program::'TEST_BLOCK_BASIC_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_BLOCK_BASIC_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object BLOCK_RESULT_FOO_223, object VAL224)
     ldstr "Testing block basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -229,25 +710,25 @@ BLOCK_END_TEST_BLOCK_NESTED_239:
     ldnull
     pop
     ldstr "returned value"
-    stloc BLOCK_RESULT_FOO_235
-    leave BLOCK_END_FOO_234
+    stloc BLOCK_RESULT_FOO_223
+    leave BLOCK_END_FOO_222
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_FOO_235
-BLOCK_END_FOO_234:
+    stloc BLOCK_RESULT_FOO_223
+BLOCK_END_FOO_222:
     nop
-    ldloc BLOCK_RESULT_FOO_235
-    stloc VAL236
+    ldloc BLOCK_RESULT_FOO_223
+    stloc VAL224
     ldstr "Result (should be returned value):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc VAL236
+    ldloc VAL224
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_BASIC_232:
+BLOCK_END_TEST_BLOCK_BASIC_220:
     nop
     ldnull
     ret
