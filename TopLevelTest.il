@@ -11,7 +11,7 @@
     .field public static object 'MAKE_MULTIPLIER'
     .field public static object 'SAY_HELLO'
     .field public static object '_CTOR'
-    .field public static object 'FACTOR1681'
+    .field public static object 'FACTOR1693'
     .field public static object 'PRINT'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
@@ -26,7 +26,7 @@
     ldnull
     stsfld object Program::'_CTOR'
     ldnull
-    stsfld object Program::'FACTOR1681'
+    stsfld object Program::'FACTOR1693'
     ldnull
     stsfld object Program::'PRINT'
     ret
@@ -35,19 +35,19 @@
 .method public static hidebysig object 'MAIN'() cil managed
 {
     .maxstack 8
-    .locals init (object MUL_BY_101690)
+    .locals init (object MUL_BY_101702)
     ldstr "TopLevelTest"
     call object Program::'SAY_HELLO'(object)
     pop
     ldstr "10"
     call object Program::'MAKE_MULTIPLIER'(object)
-    stloc MUL_BY_101690
-    ldloc MUL_BY_101690
+    stloc MUL_BY_101702
+    ldloc MUL_BY_101702
     castclass [LispBase]Lisp.Closure
     ldstr "5"
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-BLOCK_END_MAIN_1688:
+BLOCK_END_MAIN_1700:
     nop
     ldnull
     ret
@@ -57,9 +57,9 @@ BLOCK_END_MAIN_1688:
 {
     .maxstack 8
     ldarg 0
-    newobj instance void L_1692::'.ctor'(object)
+    newobj instance void L_1704::'.ctor'(object)
     ret
-BLOCK_END_MAKE_MULTIPLIER_1682:
+BLOCK_END_MAKE_MULTIPLIER_1694:
     nop
     ldnull
     ret
@@ -76,7 +76,7 @@ BLOCK_END_MAKE_MULTIPLIER_1682:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_SAY_HELLO_1677:
+BLOCK_END_SAY_HELLO_1689:
     nop
     ldnull
     ret
@@ -93,10 +93,10 @@ BLOCK_END_SAY_HELLO_1677:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_1692
+.class public auto ansi beforefieldinit L_1704
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'FACTOR1681'
+    .field public object 'FACTOR1693'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -105,7 +105,27 @@ BLOCK_END_SAY_HELLO_1677:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_1692::'FACTOR1681'
+    stfld object L_1704::'FACTOR1693'
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    ldstr "Multiplying by captured factor (simulated)..."
+    call void [mscorlib]System.Console::'WriteLine'(object)
+    ldnull
+    pop
+    ldarg.0
+    ldfld object L_1704::'FACTOR1693'
+    call void [mscorlib]System.Console::'WriteLine'(object)
+    ldnull
+    pop
+    ldarg 1
+    call void [mscorlib]System.Console::'WriteLine'(object)
+    ldnull
+    ret
+    ldnull
     ret
 }
 
@@ -121,20 +141,10 @@ BLOCK_END_SAY_HELLO_1677:
 .method public virtual hidebysig object 'Invoke'(object) cil managed
 {
     .maxstack 8
-    ldstr "Multiplying by captured factor (simulated)..."
-    call void [mscorlib]System.Console::'WriteLine'(object)
-    ldnull
-    pop
     ldarg.0
-    ldfld object L_1692::'FACTOR1681'
-    call void [mscorlib]System.Console::'WriteLine'(object)
-    ldnull
-    pop
     ldarg 1
-    call void [mscorlib]System.Console::'WriteLine'(object)
-    ldnull
-    ret
-    ldnull
+    tail.
+    callvirt instance object L_1704::'InvokeBody'(object)
     ret
 }
 
@@ -201,5 +211,5 @@ BLOCK_END_SAY_HELLO_1677:
     throw
 }
 
-} // end of class L_1692
+} // end of class L_1704
 

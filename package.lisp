@@ -24,6 +24,7 @@
    "BR"
    "BRFALSE"
    "BRTRUE"
+   "TAIL."
    "CALL"
    "CALLVIRT"
    "RET"

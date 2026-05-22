@@ -132,11 +132,46 @@
   (declare (ignore tail-p))
   (let* ((*current-lambda-class* (sanitize-identifier (string (ast-lambda-lifted-name node))))
          (*current-lambda-free-vars* (ast-lambda-free-vars node))
-         (*current-lambda-params* (ast-lambda-params node))
+         (*current-lambda-params* (ast-lambda-params node)) ;; This must match InvokeBody's flat param list
+         (optionals (ast-lambda-optional-params node))
+         (aux-params (ast-lambda-aux-params node))
          (forms (ast-lambda-body node))
-         (body-code (if (null forms)
+         (prologue nil))
+
+    ;; A. Handle Optionals & Supplied-P
+    (loop for (name init-ast sup-name) in optionals
+          for opt-idx = (position name *current-lambda-params* :test #'eq)
+          do (let ((supplied-label (sanitize-identifier (string (gensym "SUP"))))
+                   (done-label (sanitize-identifier (string (gensym "DONE")))))
+               (setf prologue (append prologue
+                 (list (il:ldarg (1+ opt-idx)) ;; +1 because ldarg.0 is 'this'
+                       (il:ldsfld "[LispBase]Lisp.Unsupplied::Value")
+                       (il:bne.un supplied-label))
+                 ;; NOT SUPPLIED: Eval init-form and starg
+                 (generate-step2 init-ast nil)
+                 (list (il:starg (1+ opt-idx)))
+                 ;; Set sup-p to NIL
+                 (when sup-name
+                   (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
+                     (append (load-symbol-il "NIL") (list (il:starg (1+ sup-idx))))))
+                 (list (il:br done-label)
+                       (il:nop :label supplied-label))
+                 ;; SUPPLIED: Set sup-p to T
+                 (when sup-name
+                   (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
+                     (append (load-symbol-il "T") (list (il:starg (1+ sup-idx))))))
+                 (list (il:nop :label done-label))))))
+
+    ;; B. Handle &aux (treated like a sequential let*)
+    (loop for (name init-ast) in aux-params
+          do (setf prologue (append prologue 
+                                    (generate-step2 init-ast nil)
+                                    (list (il:stloc (sanitize-identifier (string name)))))))
+
+    ;; C. Generate Body
+    (let ((body-code (if (and (null forms) (null prologue))
                         (list (il:ldnull) (il:ret))
-                        (let ((res nil))
+                        (let ((res prologue))
                           (loop for form in forms
                                 for i from 1
                                 for is-last = (= i (length forms))
@@ -144,8 +179,8 @@
                                 when (not is-last)
                                   do (setf res (append res (list (il:pop)))))
                           (append res (list (il:ldnull) (il:ret)))))))
-    (setf (ast-basic-block node) body-code)
-    body-code))
+      (setf (ast-basic-block node) body-code)
+      body-code)))
 
 (defmethod generate-step2 ((node ast-class) &optional tail-p)
   (let ((code (ast-basic-block node)))
@@ -454,6 +489,20 @@
   (mapcar (lambda (lifted)
             (let* ((name (sanitize-identifier (string (car lifted))))
                    (lambda-node (cdr lifted))
+                   (req-params (ast-lambda-params lambda-node))
+                   (optionals (ast-lambda-optional-params lambda-node))
+                   (rest-param (ast-lambda-rest-param lambda-node))
+                   (has-rest (not (null rest-param)))
+                   
+                   (opt-names (mapcar #'car optionals))
+                   (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
+                   (body-params (append req-params
+                                        opt-names
+                                        opt-supplied-names
+                                        (when has-rest (list rest-param))))
+                   (n-body-params (length body-params))
+
+                   ;; 2. Fields and Constructor (Capturing Free Variables)
                    (free-vars (ast-lambda-free-vars lambda-node))
                    (fields (mapcar (lambda (v) (il:field :name (sanitize-identifier (string v)) :type "object")) free-vars))
                    (ctor-insts (append
@@ -469,27 +518,58 @@
                                     :return-type "void"
                                     :arg-types (make-list (length free-vars) :initial-element "object")
                                     :instructions ctor-insts))
-                   (n-params (length (ast-lambda-params lambda-node)))
+                   
                    (methods (list ctor)))
-              (multiple-value-bind (block locals) (generate lambda-node)
-                (let ((locals-decl (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)))
-                  (loop for m from 0 to 8 do
-                    (let* ((invoke-arg-types (make-list m :initial-element "object"))
-                           (is-match (= m n-params))
-                           (insts (if is-match
-                                      block
-                                      (list (il:ldc.i4 n-params)
-                                            (il:ldc.i4 m)
-                                            (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
-                                            (il:throw)))))
-                      (push (il:method :name "Invoke"
-                                       :return-type "object"
-                                       :arg-types invoke-arg-types
-                                       :locals (if is-match locals-decl nil)
-                                       :virtual-p t
-                                       :instructions insts)
-                            methods))))
-              (il:class :name name :parent "[LispBase]Lisp.Closure" :fields fields :methods (reverse methods)))))
+
+              ;; 3. Generate InvokeBody
+              (multiple-value-bind (body-block body-locals)
+                  (let ((*current-lambda-params* body-params)
+                        (*current-lambda-class* name)
+                        (*current-locals* nil))
+                    (generate-step1 lambda-node)
+                    (values (generate-step2 lambda-node t) *current-locals*))
+                (push (il:method :name "InvokeBody" :return-type "object"
+                                 :arg-types (make-list n-body-params :initial-element "object")
+                                 :locals (mapcar (lambda (loc) (format nil "object ~A" loc)) body-locals)
+                                 :instructions body-block :visibility :private)
+                      methods))
+
+              ;; 4. Generate Overloads (0 to 8)
+              (loop for m from 0 to 8 do
+                (let* ((invoke-arg-types (make-list m :initial-element "object"))
+                       (too-few (< m (length req-params)))
+                       (too-many (and (not has-rest) (> m (+ (length req-params) (length optionals)))))
+                       (insts (cond
+                                ((or too-few too-many)
+                                 (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
+                                       (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                       (il:throw)))
+                                (t
+                                 (let ((prep-code (list (il:ldarg.0)))) ;; 'this'
+                                   ;; Pass Requireds
+                                   (loop for i from 1 to (length req-params) do
+                                     (push (il:ldarg i) prep-code))
+                                   ;; Pass Optionals or Sentinel
+                                   (loop for i from 0 below (length optionals)
+                                         for arg-idx = (+ (length req-params) i 1)
+                                         do (if (<= arg-idx m)
+                                                (push (il:ldarg arg-idx) prep-code)
+                                                (push (il:ldsfld "[LispBase]Lisp.Unsupplied::Value") prep-code)))
+                                   ;; Pass nulls for supplied-p (Body will overwrite)
+                                   (loop repeat (length opt-supplied-names) do (push (il:ldnull) prep-code))
+                                   ;; Handle &rest
+                                   (when has-rest
+                                     (push (il:ldnull) prep-code) ;; Start with NIL
+                                     (loop for i from m downto (+ (length req-params) (length optionals) 1) do
+                                       (push (il:ldarg i) prep-code)
+                                       (push (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")) prep-code)))
+                                   
+                                   (append (reverse prep-code)
+                                           (list (il:tail.) ;; $O(1) Soul
+                                                 (il:callvirt :method "InvokeBody" :class name :return "object" :args (make-list n-body-params :initial-element "object"))
+                                                 (il:ret))))))))
+                  (push (il:method :name "Invoke" :return-type "object" :arg-types invoke-arg-types :virtual-p t :instructions insts) methods)))
+              (il:class :name name :parent "[LispBase]Lisp.Closure" :fields fields :methods (reverse methods))))
           lambdas))
 
 (defun generate-toplevel-methods (toplevel-defuns)

@@ -1,8 +1,8 @@
 .assembly extern mscorlib {}
 .assembly extern LispBase {}
 
-.assembly 'InteropTest' {}
-.module 'InteropTest.exe'
+.assembly 'HelloWorld-new' {}
+.module 'HelloWorld-new.exe'
 
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
@@ -21,23 +21,14 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object LIST626, object CLR_VIRT_INST_TEMP, object SYM625)
-    ldstr "FOO"
-    ldnull
-    newobj instance void [LispBase]Lisp.Symbol::'.ctor'(string, class [LispBase]Lisp.Package)
-    stloc SYM625
-    ldloc SYM625
-    castclass [LispBase]Lisp.Symbol
-    callvirt instance string [LispBase]Lisp.Symbol::'get_Name'()
+    .locals init (object MSG454)
+    ldstr "Hello world from CLR-CALL"
+    stloc MSG454
+    ldloc MSG454
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldstr "head"
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc LIST626
-    ldloc LIST626
-    ldfld object [LispBase]Lisp.List/ListCell::'first'
+    ldstr "Hello from PRINT"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop

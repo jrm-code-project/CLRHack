@@ -8,14 +8,14 @@
        extends [mscorlib]System.Object
 {
     .field public static object 'PRINT'
-    .field public static object 'F378'
-    .field public static object 'N376'
-    .field public static object 'M375'
-    .field public static object 'N368'
-    .field public static object 'F370'
-    .field public static object 'M367'
-    .field public static object 'N360'
-    .field public static object 'F362'
+    .field public static object 'F390'
+    .field public static object 'N388'
+    .field public static object 'M387'
+    .field public static object 'N380'
+    .field public static object 'F382'
+    .field public static object 'M379'
+    .field public static object 'N372'
+    .field public static object 'F374'
     .field public static object '_CTOR'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
@@ -24,21 +24,21 @@
     ldnull
     stsfld object Program::'PRINT'
     ldnull
-    stsfld object Program::'F378'
+    stsfld object Program::'F390'
     ldnull
-    stsfld object Program::'N376'
+    stsfld object Program::'N388'
     ldnull
-    stsfld object Program::'M375'
+    stsfld object Program::'M387'
     ldnull
-    stsfld object Program::'N368'
+    stsfld object Program::'N380'
     ldnull
-    stsfld object Program::'F370'
+    stsfld object Program::'F382'
     ldnull
-    stsfld object Program::'M367'
+    stsfld object Program::'M379'
     ldnull
-    stsfld object Program::'N360'
+    stsfld object Program::'N372'
     ldnull
-    stsfld object Program::'F362'
+    stsfld object Program::'F374'
     ldnull
     stsfld object Program::'_CTOR'
     ret
@@ -48,54 +48,54 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object TICK389, object SIX386, object FIVE385, object THREE384, object TWO383, object ONE382, object MUL381, object ADD373, object SUCC365, object ZERO358)
-    newobj instance void L_391::'.ctor'()
-    stloc ZERO358
-    newobj instance void L_394::'.ctor'()
-    stloc SUCC365
-    newobj instance void L_397::'.ctor'()
-    stloc ADD373
-    newobj instance void L_400::'.ctor'()
-    stloc MUL381
-    ldloc SUCC365
+    .locals init (object TICK401, object SIX398, object FIVE397, object THREE396, object TWO395, object ONE394, object MUL393, object ADD385, object SUCC377, object ZERO370)
+    newobj instance void L_403::'.ctor'()
+    stloc ZERO370
+    newobj instance void L_406::'.ctor'()
+    stloc SUCC377
+    newobj instance void L_409::'.ctor'()
+    stloc ADD385
+    newobj instance void L_412::'.ctor'()
+    stloc MUL393
+    ldloc SUCC377
     castclass [LispBase]Lisp.Closure
-    ldloc ZERO358
+    ldloc ZERO370
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc ONE382
-    ldloc SUCC365
+    stloc ONE394
+    ldloc SUCC377
     castclass [LispBase]Lisp.Closure
-    ldloc ONE382
+    ldloc ONE394
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc TWO383
-    ldloc SUCC365
+    stloc TWO395
+    ldloc SUCC377
     castclass [LispBase]Lisp.Closure
-    ldloc SUCC365
+    ldloc SUCC377
     castclass [LispBase]Lisp.Closure
-    ldloc ONE382
+    ldloc ONE394
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc THREE384
-    ldloc ADD373
+    stloc THREE396
+    ldloc ADD385
     castclass [LispBase]Lisp.Closure
-    ldloc TWO383
-    ldloc THREE384
+    ldloc TWO395
+    ldloc THREE396
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
-    stloc FIVE385
-    ldloc MUL381
+    stloc FIVE397
+    ldloc MUL393
     castclass [LispBase]Lisp.Closure
-    ldloc TWO383
-    ldloc THREE384
+    ldloc TWO395
+    ldloc THREE396
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
-    stloc SIX386
-    newobj instance void L_401::'.ctor'()
-    stloc TICK389
+    stloc SIX398
+    newobj instance void L_413::'.ctor'()
+    stloc TICK401
     ldstr "Computing 2 + 3 ticks:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc FIVE385
+    ldloc FIVE397
     castclass [LispBase]Lisp.Closure
-    ldloc TICK389
+    ldloc TICK401
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
     ldnull
@@ -105,9 +105,9 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc SIX386
+    ldloc SIX398
     castclass [LispBase]Lisp.Closure
-    ldloc TICK389
+    ldloc TICK401
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
     ldnull
@@ -118,7 +118,7 @@
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_390
+.class public auto ansi beforefieldinit L_402
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -129,16 +129,7 @@
     ret
 }
 
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
+.method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
     ldarg 1
@@ -147,6 +138,25 @@
     ret
 }
 
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_402::'InvokeBody'(object)
+    ret
+}
+
 .method public virtual hidebysig object 'Invoke'(object, object) cil managed
 {
     .maxstack 8
@@ -210,9 +220,9 @@
     throw
 }
 
-} // end of class L_390
+} // end of class L_402
 
-.class public auto ansi beforefieldinit L_391
+.class public auto ansi beforefieldinit L_403
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -220,6 +230,15 @@
     .maxstack 8
     ldarg.0
     call instance void [LispBase]Lisp.Closure::'.ctor'()
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    newobj instance void L_402::'.ctor'()
+    ret
+    ldnull
     ret
 }
 
@@ -235,9 +254,10 @@
 .method public virtual hidebysig object 'Invoke'(object) cil managed
 {
     .maxstack 8
-    newobj instance void L_390::'.ctor'()
-    ret
-    ldnull
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_403::'InvokeBody'(object)
     ret
 }
 
@@ -304,13 +324,13 @@
     throw
 }
 
-} // end of class L_391
+} // end of class L_403
 
-.class public auto ansi beforefieldinit L_392
+.class public auto ansi beforefieldinit L_404
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'F362'
-    .field public object 'N360'
+    .field public object 'F374'
+    .field public object 'N372'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -319,33 +339,24 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_392::'F362'
+    stfld object L_404::'F374'
     ldarg.0
     ldarg 2
-    stfld object L_392::'N360'
+    stfld object L_404::'N372'
     ret
 }
 
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
+.method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_392::'F362'
+    ldfld object L_404::'F374'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_392::'N360'
+    ldfld object L_404::'N372'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_392::'F362'
+    ldfld object L_404::'F374'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
     ldarg 1
@@ -356,6 +367,25 @@
     ret
 }
 
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_404::'InvokeBody'(object)
+    ret
+}
+
 .method public virtual hidebysig object 'Invoke'(object, object) cil managed
 {
     .maxstack 8
@@ -419,12 +449,12 @@
     throw
 }
 
-} // end of class L_392
+} // end of class L_404
 
-.class public auto ansi beforefieldinit L_393
+.class public auto ansi beforefieldinit L_405
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'N360'
+    .field public object 'N372'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -433,7 +463,19 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_393::'N360'
+    stfld object L_405::'N372'
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    ldarg 1
+    ldarg.0
+    ldfld object L_405::'N372'
+    newobj instance void L_404::'.ctor'(object, object)
+    ret
+    ldnull
     ret
 }
 
@@ -449,12 +491,10 @@
 .method public virtual hidebysig object 'Invoke'(object) cil managed
 {
     .maxstack 8
-    ldarg 1
     ldarg.0
-    ldfld object L_393::'N360'
-    newobj instance void L_392::'.ctor'(object, object)
-    ret
-    ldnull
+    ldarg 1
+    tail.
+    callvirt instance object L_405::'InvokeBody'(object)
     ret
 }
 
@@ -521,9 +561,9 @@
     throw
 }
 
-} // end of class L_393
+} // end of class L_405
 
-.class public auto ansi beforefieldinit L_394
+.class public auto ansi beforefieldinit L_406
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -534,6 +574,16 @@
     ret
 }
 
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    ldarg 1
+    newobj instance void L_405::'.ctor'(object)
+    ret
+    ldnull
+    ret
+}
+
 .method public virtual hidebysig object 'Invoke'() cil managed
 {
     .maxstack 8
@@ -546,10 +596,10 @@
 .method public virtual hidebysig object 'Invoke'(object) cil managed
 {
     .maxstack 8
+    ldarg.0
     ldarg 1
-    newobj instance void L_393::'.ctor'(object)
-    ret
-    ldnull
+    tail.
+    callvirt instance object L_406::'InvokeBody'(object)
     ret
 }
 
@@ -616,14 +666,14 @@
     throw
 }
 
-} // end of class L_394
+} // end of class L_406
 
-.class public auto ansi beforefieldinit L_395
+.class public auto ansi beforefieldinit L_407
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'F370'
-    .field public object 'M367'
-    .field public object 'N368'
+    .field public object 'F382'
+    .field public object 'M379'
+    .field public object 'N380'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -632,40 +682,31 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_395::'F370'
+    stfld object L_407::'F382'
     ldarg.0
     ldarg 2
-    stfld object L_395::'M367'
+    stfld object L_407::'M379'
     ldarg.0
     ldarg 3
-    stfld object L_395::'N368'
+    stfld object L_407::'N380'
     ret
 }
 
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
+.method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_395::'M367'
+    ldfld object L_407::'M379'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_395::'F370'
+    ldfld object L_407::'F382'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_395::'N368'
+    ldfld object L_407::'N380'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_395::'F370'
+    ldfld object L_407::'F382'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
     ldarg 1
@@ -676,6 +717,25 @@
     ret
 }
 
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_407::'InvokeBody'(object)
+    ret
+}
+
 .method public virtual hidebysig object 'Invoke'(object, object) cil managed
 {
     .maxstack 8
@@ -739,13 +799,13 @@
     throw
 }
 
-} // end of class L_395
+} // end of class L_407
 
-.class public auto ansi beforefieldinit L_396
+.class public auto ansi beforefieldinit L_408
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'N368'
-    .field public object 'M367'
+    .field public object 'N380'
+    .field public object 'M379'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -754,10 +814,24 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_396::'N368'
+    stfld object L_408::'N380'
     ldarg.0
     ldarg 2
-    stfld object L_396::'M367'
+    stfld object L_408::'M379'
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    ldarg 1
+    ldarg.0
+    ldfld object L_408::'M379'
+    ldarg.0
+    ldfld object L_408::'N380'
+    newobj instance void L_407::'.ctor'(object, object, object)
+    ret
+    ldnull
     ret
 }
 
@@ -773,14 +847,10 @@
 .method public virtual hidebysig object 'Invoke'(object) cil managed
 {
     .maxstack 8
+    ldarg.0
     ldarg 1
-    ldarg.0
-    ldfld object L_396::'M367'
-    ldarg.0
-    ldfld object L_396::'N368'
-    newobj instance void L_395::'.ctor'(object, object, object)
-    ret
-    ldnull
+    tail.
+    callvirt instance object L_408::'InvokeBody'(object)
     ret
 }
 
@@ -847,9 +917,9 @@
     throw
 }
 
-} // end of class L_396
+} // end of class L_408
 
-.class public auto ansi beforefieldinit L_397
+.class public auto ansi beforefieldinit L_409
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -860,6 +930,17 @@
     ret
 }
 
+.method private hidebysig object 'InvokeBody'(object, object) cil managed
+{
+    .maxstack 8
+    ldarg 2
+    ldarg 1
+    newobj instance void L_408::'.ctor'(object, object)
+    ret
+    ldnull
+    ret
+}
+
 .method public virtual hidebysig object 'Invoke'() cil managed
 {
     .maxstack 8
@@ -881,11 +962,11 @@
 .method public virtual hidebysig object 'Invoke'(object, object) cil managed
 {
     .maxstack 8
-    ldarg 2
+    ldarg.0
     ldarg 1
-    newobj instance void L_396::'.ctor'(object, object)
-    ret
-    ldnull
+    ldarg 2
+    tail.
+    callvirt instance object L_409::'InvokeBody'(object, object)
     ret
 }
 
@@ -943,14 +1024,14 @@
     throw
 }
 
-} // end of class L_397
+} // end of class L_409
 
-.class public auto ansi beforefieldinit L_398
+.class public auto ansi beforefieldinit L_410
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'F378'
-    .field public object 'N376'
-    .field public object 'M375'
+    .field public object 'F390'
+    .field public object 'N388'
+    .field public object 'M387'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -959,36 +1040,27 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_398::'F378'
+    stfld object L_410::'F390'
     ldarg.0
     ldarg 2
-    stfld object L_398::'N376'
+    stfld object L_410::'N388'
     ldarg.0
     ldarg 3
-    stfld object L_398::'M375'
+    stfld object L_410::'M387'
     ret
 }
 
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
+.method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_398::'M375'
+    ldfld object L_410::'M387'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_398::'N376'
+    ldfld object L_410::'N388'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_398::'F378'
+    ldfld object L_410::'F390'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
@@ -999,6 +1071,25 @@
     ret
 }
 
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_410::'InvokeBody'(object)
+    ret
+}
+
 .method public virtual hidebysig object 'Invoke'(object, object) cil managed
 {
     .maxstack 8
@@ -1062,13 +1153,13 @@
     throw
 }
 
-} // end of class L_398
+} // end of class L_410
 
-.class public auto ansi beforefieldinit L_399
+.class public auto ansi beforefieldinit L_411
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'M375'
-    .field public object 'N376'
+    .field public object 'M387'
+    .field public object 'N388'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -1077,10 +1168,24 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_399::'M375'
+    stfld object L_411::'M387'
     ldarg.0
     ldarg 2
-    stfld object L_399::'N376'
+    stfld object L_411::'N388'
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    ldarg 1
+    ldarg.0
+    ldfld object L_411::'N388'
+    ldarg.0
+    ldfld object L_411::'M387'
+    newobj instance void L_410::'.ctor'(object, object, object)
+    ret
+    ldnull
     ret
 }
 
@@ -1096,14 +1201,10 @@
 .method public virtual hidebysig object 'Invoke'(object) cil managed
 {
     .maxstack 8
+    ldarg.0
     ldarg 1
-    ldarg.0
-    ldfld object L_399::'N376'
-    ldarg.0
-    ldfld object L_399::'M375'
-    newobj instance void L_398::'.ctor'(object, object, object)
-    ret
-    ldnull
+    tail.
+    callvirt instance object L_411::'InvokeBody'(object)
     ret
 }
 
@@ -1170,9 +1271,9 @@
     throw
 }
 
-} // end of class L_399
+} // end of class L_411
 
-.class public auto ansi beforefieldinit L_400
+.class public auto ansi beforefieldinit L_412
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1180,6 +1281,17 @@
     .maxstack 8
     ldarg.0
     call instance void [LispBase]Lisp.Closure::'.ctor'()
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object, object) cil managed
+{
+    .maxstack 8
+    ldarg 1
+    ldarg 2
+    newobj instance void L_411::'.ctor'(object, object)
+    ret
+    ldnull
     ret
 }
 
@@ -1204,11 +1316,11 @@
 .method public virtual hidebysig object 'Invoke'(object, object) cil managed
 {
     .maxstack 8
+    ldarg.0
     ldarg 1
     ldarg 2
-    newobj instance void L_399::'.ctor'(object, object)
-    ret
-    ldnull
+    tail.
+    callvirt instance object L_412::'InvokeBody'(object, object)
     ret
 }
 
@@ -1266,9 +1378,9 @@
     throw
 }
 
-} // end of class L_400
+} // end of class L_412
 
-.class public auto ansi beforefieldinit L_401
+.class public auto ansi beforefieldinit L_413
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1279,16 +1391,7 @@
     ret
 }
 
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
+.method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
     ldstr "tick"
@@ -1299,6 +1402,25 @@
     ret
 }
 
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_413::'InvokeBody'(object)
+    ret
+}
+
 .method public virtual hidebysig object 'Invoke'(object, object) cil managed
 {
     .maxstack 8
@@ -1362,5 +1484,5 @@
     throw
 }
 
-} // end of class L_401
+} // end of class L_413
 

@@ -13,13 +13,13 @@
     .field public static object '_SET_CELL_VALUE_'
     .field public static object '_MAKE_CELL'
     .field public static object 'PRINT'
-    .field public static object 'EVEN_619'
+    .field public static object 'EVEN_631'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static object 'ODD_620'
+    .field public static object 'ODD_632'
     .field public static object '_CELL_VALUE'
     .field public static object 'EQ'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G645'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G657'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -37,13 +37,13 @@
     ldnull
     stsfld object Program::'PRINT'
     ldnull
-    stsfld object Program::'EVEN_619'
+    stsfld object Program::'EVEN_631'
     ldnull
     stsfld object Program::'TEMP_B'
     ldnull
     stsfld object Program::'_'
     ldnull
-    stsfld object Program::'ODD_620'
+    stsfld object Program::'ODD_632'
     ldnull
     stsfld object Program::'_CELL_VALUE'
     ldnull
@@ -51,7 +51,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G657'
     ret
 }
 
@@ -60,7 +60,7 @@
     .maxstack 8
     tail. call object Program::'TEST_LABELS'()
     ret
-BLOCK_END_MAIN_627:
+BLOCK_END_MAIN_639:
     nop
     ldnull
     ret
@@ -69,36 +69,36 @@ BLOCK_END_MAIN_627:
 .method public static hidebysig object 'TEST_LABELS'() cil managed
 {
     .maxstack 8
-    .locals init (object TEMP651, object TEMP650, object ODD_620, object EVEN_619)
+    .locals init (object TEMP663, object TEMP662, object ODD_632, object EVEN_631)
     ldstr "Testing labels..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc EVEN_619
+    stloc EVEN_631
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ODD_620
-    ldloc EVEN_619
-    ldloc ODD_620
-    newobj instance void L_630::'.ctor'(object)
-    stloc TEMP650
+    stloc ODD_632
+    ldloc EVEN_631
+    ldloc ODD_632
+    newobj instance void L_642::'.ctor'(object)
+    stloc TEMP662
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP650
+    ldloc TEMP662
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP650
+    ldloc TEMP662
     pop
-    ldloc ODD_620
-    ldloc EVEN_619
-    newobj instance void L_631::'.ctor'(object)
-    stloc TEMP651
+    ldloc ODD_632
+    ldloc EVEN_631
+    newobj instance void L_643::'.ctor'(object)
+    stloc TEMP663
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP651
+    ldloc TEMP663
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP651
+    ldloc TEMP663
     pop
-    ldloc EVEN_619
+    ldloc EVEN_631
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -107,20 +107,20 @@ BLOCK_END_MAIN_627:
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE652
+    brtrue ELSE664
     ldstr "even? 10 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END653
-ELSE652:
+    br END665
+ELSE664:
     nop
     ldstr "even? 10 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END653:
+END665:
     nop
     pop
-    ldloc ODD_620
+    ldloc ODD_632
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -129,18 +129,18 @@ END653:
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE654
+    brtrue ELSE666
     ldstr "odd? 11 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE654:
+ELSE666:
     nop
     ldstr "odd? 11 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_LABELS_617:
+BLOCK_END_TEST_LABELS_629:
     nop
     ldnull
     ret
@@ -157,10 +157,10 @@ BLOCK_END_TEST_LABELS_617:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_630
+.class public auto ansi beforefieldinit L_642
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'ODD_620'
+    .field public object 'ODD_632'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -169,43 +169,34 @@ BLOCK_END_TEST_LABELS_617:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_630::'ODD_620'
+    stfld object L_642::'ODD_632'
     ret
 }
 
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
+.method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
     ldarg 1
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE643
+    brtrue TRUE655
     ldnull
-    br END644
-TRUE643:
+    br END656
+TRUE655:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
-END644:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G657'
+END656:
     nop
     ldnull
     ceq
-    brtrue ELSE646
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
+    brtrue ELSE658
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G657'
     ret
-ELSE646:
+ELSE658:
     nop
     ldarg.0
-    ldfld object L_630::'ODD_620'
+    ldfld object L_642::'ODD_632'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -221,6 +212,25 @@ ELSE646:
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_642::'InvokeBody'(object)
     ret
 }
 
@@ -287,12 +297,12 @@ ELSE646:
     throw
 }
 
-} // end of class L_630
+} // end of class L_642
 
-.class public auto ansi beforefieldinit L_631
+.class public auto ansi beforefieldinit L_643
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'EVEN_619'
+    .field public object 'EVEN_631'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -301,43 +311,34 @@ ELSE646:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_631::'EVEN_619'
+    stfld object L_643::'EVEN_631'
     ret
 }
 
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
+.method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
     ldarg 1
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE647
+    brtrue TRUE659
     ldnull
-    br END648
-TRUE647:
+    br END660
+TRUE659:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
-END648:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G657'
+END660:
     nop
     ldnull
     ceq
-    brtrue ELSE649
+    brtrue ELSE661
     ldnull
     ret
-ELSE649:
+ELSE661:
     nop
     ldarg.0
-    ldfld object L_631::'EVEN_619'
+    ldfld object L_643::'EVEN_631'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -353,6 +354,25 @@ ELSE649:
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    throw
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_643::'InvokeBody'(object)
     ret
 }
 
@@ -419,5 +439,5 @@ ELSE649:
     throw
 }
 
-} // end of class L_631
+} // end of class L_643
 

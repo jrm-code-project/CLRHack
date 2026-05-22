@@ -74,7 +74,7 @@
   (add -1) (sub -1) (mul -1) (div -1) (rem -1) 
   (and -1) (or -1) (xor -1) (shl -1) (shr -1) 
   (neg 0) (not 0) 
-  (nop 0) (pop -1) (dup 1) (ret 0) 
+  (nop 0) (pop -1) (dup 1) (ret 0) (tail. 0)
   (ceq -1) (cgt -1) (cgt.un -1) (clt -1) (ldnull 1)
   (endfinally 0) (throw -1) (rethrow 0))
 

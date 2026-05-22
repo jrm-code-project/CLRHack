@@ -15,7 +15,7 @@
     .field public static object 'IMPLICIT_BLOCK_TEST'
     .field public static object 'EQ'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G263'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_G275'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -39,7 +39,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G263'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G275'
     ret
 }
 
@@ -54,7 +54,7 @@
     pop
     tail. call object Program::'TEST_IMPLICIT_BLOCK'()
     ret
-BLOCK_END_MAIN_250:
+BLOCK_END_MAIN_262:
     nop
     ldnull
     ret
@@ -87,7 +87,7 @@ BLOCK_END_MAIN_250:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_IMPLICIT_BLOCK_246:
+BLOCK_END_TEST_IMPLICIT_BLOCK_258:
     nop
     ldnull
     ret
@@ -96,37 +96,37 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_246:
 .method public static hidebysig object 'IMPLICIT_BLOCK_TEST'(object) cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243)
+    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255)
     ldarg 0
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE261
+    brtrue TRUE273
     ldnull
-    br END262
-TRUE261:
+    br END274
+TRUE273:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G263'
-END262:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G275'
+END274:
     nop
     ldnull
     ceq
-    brtrue ELSE264
+    brtrue ELSE276
     ldstr "zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243
-    leave BLOCK_END_IMPLICIT_BLOCK_TEST_242
-    br END265
-ELSE264:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255
+    leave BLOCK_END_IMPLICIT_BLOCK_TEST_254
+    br END277
+ELSE276:
     nop
     ldnull
-END265:
+END277:
     nop
     pop
     ldstr "non-zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243
-BLOCK_END_IMPLICIT_BLOCK_TEST_242:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255
+BLOCK_END_IMPLICIT_BLOCK_TEST_254:
     nop
-    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_243
+    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_255
     ret
     ldnull
     ret
@@ -135,7 +135,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_242:
 .method public static hidebysig object 'TEST_BLOCK_UWP'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_EXIT_238, object UWP_RESULT259)
+    .locals init (object BLOCK_RESULT_EXIT_250, object UWP_RESULT271)
     ldstr "Testing block with unwind-protect..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -147,10 +147,10 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_242:
     ldnull
     pop
     ldstr "value from return-from"
-    stloc BLOCK_RESULT_EXIT_238
-    leave BLOCK_END_EXIT_237
-    stloc UWP_RESULT259
-    leave DONE260
+    stloc BLOCK_RESULT_EXIT_250
+    leave BLOCK_END_EXIT_249
+    stloc UWP_RESULT271
+    leave DONE272
     }
     finally
     {
@@ -160,14 +160,14 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_242:
     pop
     endfinally
     }
-DONE260:
-    ldloc UWP_RESULT259
-    stloc BLOCK_RESULT_EXIT_238
-BLOCK_END_EXIT_237:
+DONE272:
+    ldloc UWP_RESULT271
+    stloc BLOCK_RESULT_EXIT_250
+BLOCK_END_EXIT_249:
     nop
-    ldloc BLOCK_RESULT_EXIT_238
+    ldloc BLOCK_RESULT_EXIT_250
     ret
-BLOCK_END_TEST_BLOCK_UWP_235:
+BLOCK_END_TEST_BLOCK_UWP_247:
     nop
     ldnull
     ret
@@ -176,7 +176,7 @@ BLOCK_END_TEST_BLOCK_UWP_235:
 .method public static hidebysig object 'TEST_BLOCK_NESTED'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_OUTER_230)
+    .locals init (object BLOCK_RESULT_OUTER_242)
     ldstr "Testing nested blocks..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -190,27 +190,27 @@ BLOCK_END_TEST_BLOCK_UWP_235:
     ldnull
     pop
     ldstr "exited from inner to outer"
-    stloc BLOCK_RESULT_OUTER_230
-    leave BLOCK_END_OUTER_229
+    stloc BLOCK_RESULT_OUTER_242
+    leave BLOCK_END_OUTER_241
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-BLOCK_END_INNER_231:
+BLOCK_END_INNER_243:
     nop
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_OUTER_230
-BLOCK_END_OUTER_229:
+    stloc BLOCK_RESULT_OUTER_242
+BLOCK_END_OUTER_241:
     nop
-    ldloc BLOCK_RESULT_OUTER_230
+    ldloc BLOCK_RESULT_OUTER_242
     pop
     ldstr "Back from outer block"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_NESTED_227:
+BLOCK_END_TEST_BLOCK_NESTED_239:
     nop
     ldnull
     ret
@@ -219,7 +219,7 @@ BLOCK_END_TEST_BLOCK_NESTED_227:
 .method public static hidebysig object 'TEST_BLOCK_BASIC'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_FOO_223, object VAL224)
+    .locals init (object BLOCK_RESULT_FOO_235, object VAL236)
     ldstr "Testing block basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -229,25 +229,25 @@ BLOCK_END_TEST_BLOCK_NESTED_227:
     ldnull
     pop
     ldstr "returned value"
-    stloc BLOCK_RESULT_FOO_223
-    leave BLOCK_END_FOO_222
+    stloc BLOCK_RESULT_FOO_235
+    leave BLOCK_END_FOO_234
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_FOO_223
-BLOCK_END_FOO_222:
+    stloc BLOCK_RESULT_FOO_235
+BLOCK_END_FOO_234:
     nop
-    ldloc BLOCK_RESULT_FOO_223
-    stloc VAL224
+    ldloc BLOCK_RESULT_FOO_235
+    stloc VAL236
     ldstr "Result (should be returned value):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc VAL224
+    ldloc VAL236
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_BASIC_220:
+BLOCK_END_TEST_BLOCK_BASIC_232:
     nop
     ldnull
     ret
