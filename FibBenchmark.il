@@ -12,7 +12,7 @@
     .field public static object 'FIB'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G574'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S574'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -30,7 +30,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G574'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S574'
     ret
 }
 
@@ -230,7 +230,7 @@ BLOCK_END_MAIN_566:
     br END573
 TRUE572:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G574'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S574'
 END573:
     nop
     ldnull

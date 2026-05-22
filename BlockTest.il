@@ -15,7 +15,7 @@
     .field public static object 'IMPLICIT_BLOCK_TEST'
     .field public static object 'EQ'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G263'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S263'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -39,7 +39,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G263'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S263'
     ret
 }
 
@@ -347,7 +347,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_246:
     br END262
 TRUE261:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G263'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S263'
 END262:
     nop
     ldnull

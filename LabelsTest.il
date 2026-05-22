@@ -19,7 +19,8 @@
     .field public static object 'ODD_620'
     .field public static object '_CELL_VALUE'
     .field public static object 'EQ'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G645'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T647'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S646'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -51,7 +52,11 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T647'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "T"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S646'
     ret
 }
 
@@ -229,7 +234,7 @@ BLOCK_END_MAIN_627:
 .method private static hidebysig object 'TEST_LABELS_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object TEMP651, object TEMP650, object ODD_620, object EVEN_619)
+    .locals init (object TEMP653, object TEMP652, object ODD_620, object EVEN_619)
     ldstr "Testing labels..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -243,20 +248,20 @@ BLOCK_END_MAIN_627:
     ldloc EVEN_619
     ldloc ODD_620
     newobj instance void L_630::'.ctor'(object)
-    stloc TEMP650
+    stloc TEMP652
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP650
+    ldloc TEMP652
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP650
+    ldloc TEMP652
     pop
     ldloc ODD_620
     ldloc EVEN_619
     newobj instance void L_631::'.ctor'(object)
-    stloc TEMP651
+    stloc TEMP653
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP651
+    ldloc TEMP653
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP651
+    ldloc TEMP653
     pop
     ldloc EVEN_619
     castclass [LispBase]Lisp.ValueCell
@@ -267,17 +272,17 @@ BLOCK_END_MAIN_627:
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE652
+    brtrue ELSE654
     ldstr "even? 10 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END653
-ELSE652:
+    br END655
+ELSE654:
     nop
     ldstr "even? 10 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END653:
+END655:
     nop
     pop
     ldloc ODD_620
@@ -289,12 +294,12 @@ END653:
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE654
+    brtrue ELSE656
     ldstr "odd? 11 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE654:
+ELSE656:
     nop
     ldstr "odd? 11 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -340,20 +345,20 @@ BLOCK_END_TEST_LABELS_617:
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE643
+    brtrue TRUE644
     ldnull
-    br END644
-TRUE643:
+    br END645
+TRUE644:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
-END644:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S646'
+END645:
     nop
     ldnull
     ceq
-    brtrue ELSE646
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
+    brtrue ELSE648
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T647'
     ret
-ELSE646:
+ELSE648:
     nop
     ldarg.0
     ldfld object L_630::'ODD_620'
@@ -482,20 +487,20 @@ ELSE646:
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE647
+    brtrue TRUE649
     ldnull
-    br END648
-TRUE647:
+    br END650
+TRUE649:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G645'
-END648:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S646'
+END650:
     nop
     ldnull
     ceq
-    brtrue ELSE649
+    brtrue ELSE651
     ldnull
     ret
-ELSE649:
+ELSE651:
     nop
     ldarg.0
     ldfld object L_631::'EVEN_619'

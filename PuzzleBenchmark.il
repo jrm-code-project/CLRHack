@@ -34,7 +34,8 @@
     .field public static object '_'
     .field public static object '_MAKE_CELL'
     .field public static object '_P_PIECEMAX_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1461'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T1467'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1466'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -96,7 +97,11 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T1467'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "T"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
     ret
 }
 
@@ -185,7 +190,7 @@
     .maxstack 8
     tail. call object Program::'PUZZLE_START'()
     ret
-BLOCK_END_MAIN_1334:
+BLOCK_END_MAIN_1339:
     nop
     ldnull
     ret
@@ -274,7 +279,7 @@ BLOCK_END_MAIN_1334:
 .method private static hidebysig object 'PUZZLE_START_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object N1331, object M1330, object TEMP1567, object TEMP1566, object J1327, object I1324, object TEMP1561, object TEMP1560, object TEMP1559, object IDX1323, object K1320, object J1317, object I1314, object TEMP1552, object I1311)
+    .locals init (object N1336, object M1335, object TEMP1573, object TEMP1572, object J1332, object I1329, object TEMP1567, object TEMP1566, object TEMP1565, object IDX1328, object K1325, object J1322, object I1319, object TEMP1558, object I1316)
     ldc.i4 0
     box int32
     dup
@@ -283,11 +288,11 @@ BLOCK_END_MAIN_1334:
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I1311
-TAG_LOOP_1312:
+    stloc I1316
+TAG_LOOP_1317:
     nop
     ldsfld object Program::'_PUZZLE_SIZE_'
-    ldloc I1311
+    ldloc I1316
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -295,154 +300,18 @@ TAG_LOOP_1312:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1550
+    brtrue TRUE1556
     ldnull
-    br END1551
-TRUE1550:
+    br END1557
+TRUE1556:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1551:
-    nop
-    ldnull
-    ceq
-    brtrue ELSE1568
-    leave TAG_DONE_1313
-    br END1569
-ELSE1568:
-    nop
-    ldnull
-END1569:
-    nop
-    pop
-    ldsfld object Program::'_P_PUZZL_'
-    ldloc I1311
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-    call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
-    pop
-    ldloc I1311
-    ldloc I1311
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldc.i4 1
-    box int32
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    add
-    box int32
-    stloc TEMP1552
-    castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1552
-    stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1552
-    pop
-    leave TAG_LOOP_1312
-    pop
-TAG_DONE_1313:
-    nop
-    ldnull
-    pop
-    ldc.i4 1
-    box int32
-    newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I1314
-TAG_LOOP_I_1315:
-    nop
-    ldc.i4 5
-    box int32
-    ldloc I1314
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    clt
-    brtrue TRUE1553
-    ldnull
-    br END1554
-TRUE1553:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1554:
-    nop
-    ldnull
-    ceq
-    brtrue ELSE1570
-    leave TAG_DONE_I_1316
-    br END1571
-ELSE1570:
-    nop
-    ldnull
-END1571:
-    nop
-    pop
-    ldc.i4 1
-    box int32
-    newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc J1317
-TAG_LOOP_J_1318:
-    nop
-    ldc.i4 5
-    box int32
-    ldloc J1317
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    clt
-    brtrue TRUE1555
-    ldnull
-    br END1556
-TRUE1555:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1556:
-    nop
-    ldnull
-    ceq
-    brtrue ELSE1572
-    leave TAG_DONE_J_1319
-    br END1573
-ELSE1572:
-    nop
-    ldnull
-END1573:
-    nop
-    pop
-    ldc.i4 1
-    box int32
-    newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc K1320
-TAG_LOOP_K_1321:
-    nop
-    ldc.i4 5
-    box int32
-    ldloc K1320
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    clt
-    brtrue TRUE1557
-    ldnull
-    br END1558
-TRUE1557:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1558:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1557:
     nop
     ldnull
     ceq
     brtrue ELSE1574
-    leave TAG_DONE_K_1322
+    leave TAG_DONE_1318
     br END1575
 ELSE1574:
     nop
@@ -450,51 +319,187 @@ ELSE1574:
 END1575:
     nop
     pop
-    ldloc K1320
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldc.i4 8
-    box int32
-    ldloc J1317
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldc.i4 8
-    box int32
-    ldloc I1314
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    mul
-    box int32
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    add
-    box int32
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    mul
-    box int32
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    add
-    box int32
-    stloc IDX1323
     ldsfld object Program::'_P_PUZZL_'
-    ldloc IDX1323
+    ldloc I1316
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1467'
+    call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
+    pop
+    ldloc I1316
+    ldloc I1316
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldc.i4 1
+    box int32
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    add
+    box int32
+    stloc TEMP1558
+    castclass [LispBase]Lisp.ValueCell
+    ldloc TEMP1558
+    stfld object [LispBase]Lisp.ValueCell::Value
+    ldloc TEMP1558
+    pop
+    leave TAG_LOOP_1317
+    pop
+TAG_DONE_1318:
+    nop
+    ldnull
+    pop
+    ldc.i4 1
+    box int32
+    newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
+    stloc I1319
+TAG_LOOP_I_1320:
+    nop
+    ldc.i4 5
+    box int32
+    ldloc I1319
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    clt
+    brtrue TRUE1559
+    ldnull
+    br END1560
+TRUE1559:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1560:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1576
+    leave TAG_DONE_I_1321
+    br END1577
+ELSE1576:
+    nop
+    ldnull
+END1577:
+    nop
+    pop
+    ldc.i4 1
+    box int32
+    newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
+    stloc J1322
+TAG_LOOP_J_1323:
+    nop
+    ldc.i4 5
+    box int32
+    ldloc J1322
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    clt
+    brtrue TRUE1561
+    ldnull
+    br END1562
+TRUE1561:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1562:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1578
+    leave TAG_DONE_J_1324
+    br END1579
+ELSE1578:
+    nop
+    ldnull
+END1579:
+    nop
+    pop
+    ldc.i4 1
+    box int32
+    newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
+    stloc K1325
+TAG_LOOP_K_1326:
+    nop
+    ldc.i4 5
+    box int32
+    ldloc K1325
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    clt
+    brtrue TRUE1563
+    ldnull
+    br END1564
+TRUE1563:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1564:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1580
+    leave TAG_DONE_K_1327
+    br END1581
+ELSE1580:
+    nop
+    ldnull
+END1581:
+    nop
+    pop
+    ldloc K1325
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldc.i4 8
+    box int32
+    ldloc J1322
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldc.i4 8
+    box int32
+    ldloc I1319
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    mul
+    box int32
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    add
+    box int32
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    mul
+    box int32
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    add
+    box int32
+    stloc IDX1328
+    ldsfld object Program::'_P_PUZZL_'
+    ldloc IDX1328
     ldnull
     call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
     pop
-    ldloc K1320
-    ldloc K1320
+    ldloc K1325
+    ldloc K1325
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -505,20 +510,20 @@ END1575:
     unbox.any int32
     add
     box int32
-    stloc TEMP1559
+    stloc TEMP1565
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1559
+    ldloc TEMP1565
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1559
+    ldloc TEMP1565
     pop
-    leave TAG_LOOP_K_1321
+    leave TAG_LOOP_K_1326
     pop
-TAG_DONE_K_1322:
+TAG_DONE_K_1327:
     nop
     ldnull
     pop
-    ldloc J1317
-    ldloc J1317
+    ldloc J1322
+    ldloc J1322
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -529,20 +534,20 @@ TAG_DONE_K_1322:
     unbox.any int32
     add
     box int32
-    stloc TEMP1560
+    stloc TEMP1566
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1560
+    ldloc TEMP1566
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1560
+    ldloc TEMP1566
     pop
-    leave TAG_LOOP_J_1318
+    leave TAG_LOOP_J_1323
     pop
-TAG_DONE_J_1319:
+TAG_DONE_J_1324:
     nop
     ldnull
     pop
-    ldloc I1314
-    ldloc I1314
+    ldloc I1319
+    ldloc I1319
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -553,15 +558,15 @@ TAG_DONE_J_1319:
     unbox.any int32
     add
     box int32
-    stloc TEMP1561
+    stloc TEMP1567
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1561
+    ldloc TEMP1567
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1561
+    ldloc TEMP1567
     pop
-    leave TAG_LOOP_I_1315
+    leave TAG_LOOP_I_1320
     pop
-TAG_DONE_I_1316:
+TAG_DONE_I_1321:
     nop
     ldnull
     pop
@@ -596,11 +601,11 @@ TAG_DONE_I_1316:
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I1324
-TAG_LOOP_I2_1325:
+    stloc I1329
+TAG_LOOP_I2_1330:
     nop
     ldsfld object Program::'_PUZZLE_SIZE_'
-    ldloc I1324
+    ldloc I1329
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -608,33 +613,33 @@ TAG_LOOP_I2_1325:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1562
+    brtrue TRUE1568
     ldnull
-    br END1563
-TRUE1562:
+    br END1569
+TRUE1568:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1563:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1569:
     nop
     ldnull
     ceq
-    brtrue ELSE1576
-    leave TAG_DONE_I2_1326
-    br END1577
-ELSE1576:
+    brtrue ELSE1582
+    leave TAG_DONE_I2_1331
+    br END1583
+ELSE1582:
     nop
     ldnull
-END1577:
+END1583:
     nop
     pop
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc J1327
-TAG_LOOP_J2_1328:
+    stloc J1332
+TAG_LOOP_J2_1333:
     nop
     ldsfld object Program::'_PUZZLE_TYPEMAX_'
-    ldloc J1327
+    ldloc J1332
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -642,27 +647,27 @@ TAG_LOOP_J2_1328:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1564
+    brtrue TRUE1570
     ldnull
-    br END1565
-TRUE1564:
+    br END1571
+TRUE1570:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1565:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1571:
     nop
     ldnull
     ceq
-    brtrue ELSE1578
-    leave TAG_DONE_J2_1329
-    br END1579
-ELSE1578:
+    brtrue ELSE1584
+    leave TAG_DONE_J2_1334
+    br END1585
+ELSE1584:
     nop
     ldnull
-END1579:
+END1585:
     nop
     pop
     ldsfld object Program::'_P_P_'
-    ldloc J1327
+    ldloc J1332
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 512
@@ -673,7 +678,7 @@ END1579:
     unbox.any int32
     mul
     box int32
-    ldloc I1324
+    ldloc I1329
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -685,8 +690,8 @@ END1579:
     ldnull
     call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
     pop
-    ldloc J1327
-    ldloc J1327
+    ldloc J1332
+    ldloc J1332
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -697,20 +702,20 @@ END1579:
     unbox.any int32
     add
     box int32
-    stloc TEMP1566
+    stloc TEMP1572
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1566
+    ldloc TEMP1572
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1566
+    ldloc TEMP1572
     pop
-    leave TAG_LOOP_J2_1328
+    leave TAG_LOOP_J2_1333
     pop
-TAG_DONE_J2_1329:
+TAG_DONE_J2_1334:
     nop
     ldnull
     pop
-    ldloc I1324
-    ldloc I1324
+    ldloc I1329
+    ldloc I1329
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -721,15 +726,15 @@ TAG_DONE_J2_1329:
     unbox.any int32
     add
     box int32
-    stloc TEMP1567
+    stloc TEMP1573
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1567
+    ldloc TEMP1573
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1567
+    ldloc TEMP1573
     pop
-    leave TAG_LOOP_I2_1325
+    leave TAG_LOOP_I2_1330
     pop
-TAG_DONE_I2_1326:
+TAG_DONE_I2_1331:
     nop
     ldnull
     pop
@@ -918,24 +923,24 @@ TAG_DONE_I2_1326:
     unbox.any int32
     add
     box int32
-    stloc M1330
+    stloc M1335
     ldc.i4 0
     box int32
-    ldloc M1330
+    ldloc M1335
     call object Program::'P_FIT'(object, object)
     ldnull
     ceq
-    brtrue ELSE1581
+    brtrue ELSE1587
     ldc.i4 0
     box int32
-    ldloc M1330
+    ldloc M1335
     call object Program::'P_PLACE'(object, object)
-    stloc N1331
-    ldloc N1331
+    stloc N1336
+    ldloc N1336
     call object Program::'P_TRIAL'(object)
     ldnull
     ceq
-    brtrue ELSE1580
+    brtrue ELSE1586
     ldstr "Kount:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -946,19 +951,19 @@ TAG_DONE_I2_1326:
     pop
     ldsfld object Program::'_KOUNT_'
     ret
-ELSE1580:
+ELSE1586:
     nop
     ldstr "Puzzle failed"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE1581:
+ELSE1587:
     nop
     ldstr "Puzzle setup failed"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_PUZZLE_START_1309:
+BLOCK_END_PUZZLE_START_1314:
     nop
     ldnull
     ret
@@ -1052,15 +1057,15 @@ BLOCK_END_PUZZLE_START_1309:
 .method private static hidebysig object 'P_DEFINE_PIECE_Body'(object, object, object, object, object) cil managed
 {
     .maxstack 8
-    .locals init (object INDEX1306, object TEMP1540, object TEMP1539, object TEMP1538, object INDEX1305, object K1302, object J1299, object I1296)
+    .locals init (object INDEX1311, object TEMP1546, object TEMP1545, object TEMP1544, object INDEX1310, object K1307, object J1304, object I1301)
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I1296
-TAG_LOOP_I_1297:
+    stloc I1301
+TAG_LOOP_I_1302:
     nop
     ldarg 2
-    ldloc I1296
+    ldloc I1301
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1068,33 +1073,33 @@ TAG_LOOP_I_1297:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1532
+    brtrue TRUE1538
     ldnull
-    br END1533
-TRUE1532:
+    br END1539
+TRUE1538:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1533:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1539:
     nop
     ldnull
     ceq
-    brtrue ELSE1543
-    leave TAG_DONE_I_1298
-    br END1544
-ELSE1543:
+    brtrue ELSE1549
+    leave TAG_DONE_I_1303
+    br END1550
+ELSE1549:
     nop
     ldnull
-END1544:
+END1550:
     nop
     pop
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc J1299
-TAG_LOOP_J_1300:
+    stloc J1304
+TAG_LOOP_J_1305:
     nop
     ldarg 3
-    ldloc J1299
+    ldloc J1304
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1102,33 +1107,33 @@ TAG_LOOP_J_1300:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1534
+    brtrue TRUE1540
     ldnull
-    br END1535
-TRUE1534:
+    br END1541
+TRUE1540:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1535:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1541:
     nop
     ldnull
     ceq
-    brtrue ELSE1545
-    leave TAG_DONE_J_1301
-    br END1546
-ELSE1545:
+    brtrue ELSE1551
+    leave TAG_DONE_J_1306
+    br END1552
+ELSE1551:
     nop
     ldnull
-END1546:
+END1552:
     nop
     pop
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc K1302
-TAG_LOOP_K_1303:
+    stloc K1307
+TAG_LOOP_K_1308:
     nop
     ldarg 4
-    ldloc K1302
+    ldloc K1307
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1136,34 +1141,34 @@ TAG_LOOP_K_1303:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1536
+    brtrue TRUE1542
     ldnull
-    br END1537
-TRUE1536:
+    br END1543
+TRUE1542:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1537:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1543:
     nop
     ldnull
     ceq
-    brtrue ELSE1547
-    leave TAG_DONE_K_1304
-    br END1548
-ELSE1547:
+    brtrue ELSE1553
+    leave TAG_DONE_K_1309
+    br END1554
+ELSE1553:
     nop
     ldnull
-END1548:
+END1554:
     nop
     pop
-    ldloc I1296
+    ldloc I1301
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldsfld object Program::'_PUZZLE_DEE_'
-    ldloc J1299
+    ldloc J1304
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldsfld object Program::'_PUZZLE_DEE_'
-    ldloc K1302
+    ldloc K1307
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1190,7 +1195,7 @@ END1548:
     unbox.any int32
     add
     box int32
-    stloc INDEX1305
+    stloc INDEX1310
     ldsfld object Program::'_P_P_'
     ldarg 0
     ldc.i4 512
@@ -1201,18 +1206,18 @@ END1548:
     unbox.any int32
     mul
     box int32
-    ldloc INDEX1305
+    ldloc INDEX1310
     stsfld object Program::'TEMP_B'
     unbox.any int32
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     add
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1467'
     call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
     pop
-    ldloc K1302
-    ldloc K1302
+    ldloc K1307
+    ldloc K1307
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1223,20 +1228,20 @@ END1548:
     unbox.any int32
     add
     box int32
-    stloc TEMP1538
+    stloc TEMP1544
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1538
+    ldloc TEMP1544
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1538
+    ldloc TEMP1544
     pop
-    leave TAG_LOOP_K_1303
+    leave TAG_LOOP_K_1308
     pop
-TAG_DONE_K_1304:
+TAG_DONE_K_1309:
     nop
     ldnull
     pop
-    ldloc J1299
-    ldloc J1299
+    ldloc J1304
+    ldloc J1304
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1247,20 +1252,20 @@ TAG_DONE_K_1304:
     unbox.any int32
     add
     box int32
-    stloc TEMP1539
+    stloc TEMP1545
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1539
+    ldloc TEMP1545
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1539
+    ldloc TEMP1545
     pop
-    leave TAG_LOOP_J_1300
+    leave TAG_LOOP_J_1305
     pop
-TAG_DONE_J_1301:
+TAG_DONE_J_1306:
     nop
     ldnull
     pop
-    ldloc I1296
-    ldloc I1296
+    ldloc I1301
+    ldloc I1301
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1271,15 +1276,15 @@ TAG_DONE_J_1301:
     unbox.any int32
     add
     box int32
-    stloc TEMP1540
+    stloc TEMP1546
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1540
+    ldloc TEMP1546
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1540
+    ldloc TEMP1546
     pop
-    leave TAG_LOOP_I_1297
+    leave TAG_LOOP_I_1302
     pop
-TAG_DONE_I_1298:
+TAG_DONE_I_1303:
     nop
     ldnull
     pop
@@ -1317,10 +1322,10 @@ TAG_DONE_I_1298:
     unbox.any int32
     add
     box int32
-    stloc INDEX1306
+    stloc INDEX1311
     ldsfld object Program::'_P_PIECEMAX_'
     ldarg 0
-    ldloc INDEX1306
+    ldloc INDEX1311
     call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
     pop
     ldsfld object Program::'_III_'
@@ -1330,17 +1335,17 @@ TAG_DONE_I_1298:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1541
+    brtrue TRUE1547
     ldnull
-    br END1542
-TRUE1541:
+    br END1548
+TRUE1547:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1542:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1548:
     nop
     ldnull
     ceq
-    brtrue ELSE1549
+    brtrue ELSE1555
     ldsfld object Program::'_III_'
     ldc.i4 1
     box int32
@@ -1353,12 +1358,12 @@ END1542:
     dup
     stsfld object Program::'_III_'
     ret
-ELSE1549:
+ELSE1555:
     nop
     ldc.i4 0
     box int32
     ret
-BLOCK_END_P_DEFINE_PIECE_1294:
+BLOCK_END_P_DEFINE_PIECE_1299:
     nop
     ldnull
     ret
@@ -1448,18 +1453,18 @@ BLOCK_END_P_DEFINE_PIECE_1294:
 .method private static hidebysig object 'P_TRIAL_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP1521, object TEMP1520, object TEMP1519, object TEMP1518, object G12851286, object N1284, object COUNT1283, object CLASS1282, object TEMP1511, object RESULT1279, object I1278)
+    .locals init (object TEMP1527, object TEMP1526, object TEMP1525, object TEMP1524, object G12901291, object N1289, object COUNT1288, object CLASS1287, object TEMP1517, object RESULT1284, object I1283)
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I1278
+    stloc I1283
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc RESULT1279
-TAG_LOOP_1280:
+    stloc RESULT1284
+TAG_LOOP_1285:
     nop
     ldsfld object Program::'_PUZZLE_TYPEMAX_'
-    ldloc I1278
+    ldloc I1283
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1467,13 +1472,113 @@ TAG_LOOP_1280:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1509
+    brtrue TRUE1515
     ldnull
-    br END1510
-TRUE1509:
+    br END1516
+TRUE1515:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1510:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1516:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1536
+    ldsfld object Program::'_KOUNT_'
+    ldc.i4 1
+    box int32
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    add
+    box int32
+    dup
+    stsfld object Program::'_KOUNT_'
+    pop
+    ldloc RESULT1284
+    ldnull
+    stloc TEMP1517
+    castclass [LispBase]Lisp.ValueCell
+    ldloc TEMP1517
+    stfld object [LispBase]Lisp.ValueCell::Value
+    ldloc TEMP1517
+    pop
+    leave TAG_DONE_1286
+    br END1537
+ELSE1536:
+    nop
+    ldsfld object Program::'_P_CLASS_'
+    ldloc I1283
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    call object [LispBase]Lisp.Vector::'Aref'(object, object)
+    stloc CLASS1287
+    ldsfld object Program::'_P_PIECECOUNT_'
+    ldloc CLASS1287
+    call object [LispBase]Lisp.Vector::'Aref'(object, object)
+    stloc COUNT1288
+    ldloc COUNT1288
+    ldc.i4 0
+    box int32
+    call bool [mscorlib]System.Object::'Equals'(object, object)
+    brtrue TRUE1518
+    ldnull
+    br END1519
+TRUE1518:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1519:
+    nop
+    ldnull
+    ceq
+    brtrue TRUE1520
+    ldnull
+    br END1521
+TRUE1520:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1521:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1534
+    ldloc I1283
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldarg 0
+    call object Program::'P_FIT'(object, object)
+    ldnull
+    ceq
+    brtrue ELSE1532
+    ldloc I1283
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldarg 0
+    call object Program::'P_PLACE'(object, object)
+    stloc N1289
+    ldloc N1289
+    ldnull
+    call bool [mscorlib]System.Object::'Equals'(object, object)
+    brtrue TRUE1522
+    ldnull
+    br END1523
+TRUE1522:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1523:
+    nop
+    stloc G12901291
+    ldloc G12901291
+    ldnull
+    ceq
+    brtrue ELSE1528
+    ldloc G12901291
+    br END1529
+ELSE1528:
+    nop
+    ldloc N1289
+    call object Program::'P_TRIAL'(object)
+END1529:
     nop
     ldnull
     ceq
@@ -1490,126 +1595,26 @@ END1510:
     dup
     stsfld object Program::'_KOUNT_'
     pop
-    ldloc RESULT1279
-    ldnull
-    stloc TEMP1511
+    ldloc RESULT1284
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1467'
+    stloc TEMP1524
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1511
+    ldloc TEMP1524
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1511
+    ldloc TEMP1524
     pop
-    leave TAG_DONE_1281
+    leave TAG_DONE_1286
     br END1531
 ELSE1530:
     nop
-    ldsfld object Program::'_P_CLASS_'
-    ldloc I1278
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc CLASS1282
-    ldsfld object Program::'_P_PIECECOUNT_'
-    ldloc CLASS1282
-    call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc COUNT1283
-    ldloc COUNT1283
-    ldc.i4 0
-    box int32
-    call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1512
-    ldnull
-    br END1513
-TRUE1512:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1513:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1514
-    ldnull
-    br END1515
-TRUE1514:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1515:
-    nop
-    ldnull
-    ceq
-    brtrue ELSE1528
-    ldloc I1278
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldarg 0
-    call object Program::'P_FIT'(object, object)
-    ldnull
-    ceq
-    brtrue ELSE1526
-    ldloc I1278
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldarg 0
-    call object Program::'P_PLACE'(object, object)
-    stloc N1284
-    ldloc N1284
-    ldnull
-    call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1516
-    ldnull
-    br END1517
-TRUE1516:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1517:
-    nop
-    stloc G12851286
-    ldloc G12851286
-    ldnull
-    ceq
-    brtrue ELSE1522
-    ldloc G12851286
-    br END1523
-ELSE1522:
-    nop
-    ldloc N1284
-    call object Program::'P_TRIAL'(object)
-END1523:
-    nop
-    ldnull
-    ceq
-    brtrue ELSE1524
-    ldsfld object Program::'_KOUNT_'
-    ldc.i4 1
-    box int32
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    add
-    box int32
-    dup
-    stsfld object Program::'_KOUNT_'
-    pop
-    ldloc RESULT1279
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-    stloc TEMP1518
-    castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1518
-    stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1518
-    pop
-    leave TAG_DONE_1281
-    br END1525
-ELSE1524:
-    nop
-    ldloc I1278
+    ldloc I1283
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg 0
     call object Program::'P_REMOVE'(object, object)
     pop
-    ldloc I1278
-    ldloc I1278
+    ldloc I1283
+    ldloc I1283
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1620,75 +1625,75 @@ ELSE1524:
     unbox.any int32
     add
     box int32
-    stloc TEMP1519
+    stloc TEMP1525
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1519
+    ldloc TEMP1525
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1519
+    ldloc TEMP1525
     pop
-    leave TAG_LOOP_1280
-END1525:
-    nop
-    br END1527
-ELSE1526:
-    nop
-    ldloc I1278
-    ldloc I1278
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldc.i4 1
-    box int32
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    add
-    box int32
-    stloc TEMP1520
-    castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1520
-    stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1520
-    pop
-    leave TAG_LOOP_1280
-END1527:
-    nop
-    br END1529
-ELSE1528:
-    nop
-    ldloc I1278
-    ldloc I1278
-    castclass [LispBase]Lisp.ValueCell
-    ldfld object [LispBase]Lisp.ValueCell::Value
-    ldc.i4 1
-    box int32
-    stsfld object Program::'TEMP_B'
-    unbox.any int32
-    ldsfld object Program::'TEMP_B'
-    unbox.any int32
-    add
-    box int32
-    stloc TEMP1521
-    castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1521
-    stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1521
-    pop
-    leave TAG_LOOP_1280
-END1529:
-    nop
+    leave TAG_LOOP_1285
 END1531:
     nop
+    br END1533
+ELSE1532:
+    nop
+    ldloc I1283
+    ldloc I1283
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldc.i4 1
+    box int32
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    add
+    box int32
+    stloc TEMP1526
+    castclass [LispBase]Lisp.ValueCell
+    ldloc TEMP1526
+    stfld object [LispBase]Lisp.ValueCell::Value
+    ldloc TEMP1526
     pop
-TAG_DONE_1281:
+    leave TAG_LOOP_1285
+END1533:
+    nop
+    br END1535
+ELSE1534:
+    nop
+    ldloc I1283
+    ldloc I1283
+    castclass [LispBase]Lisp.ValueCell
+    ldfld object [LispBase]Lisp.ValueCell::Value
+    ldc.i4 1
+    box int32
+    stsfld object Program::'TEMP_B'
+    unbox.any int32
+    ldsfld object Program::'TEMP_B'
+    unbox.any int32
+    add
+    box int32
+    stloc TEMP1527
+    castclass [LispBase]Lisp.ValueCell
+    ldloc TEMP1527
+    stfld object [LispBase]Lisp.ValueCell::Value
+    ldloc TEMP1527
+    pop
+    leave TAG_LOOP_1285
+END1535:
+    nop
+END1537:
+    nop
+    pop
+TAG_DONE_1286:
     nop
     ldnull
     pop
-    ldloc RESULT1279
+    ldloc RESULT1284
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-BLOCK_END_P_TRIAL_1276:
+BLOCK_END_P_TRIAL_1281:
     nop
     ldnull
     ret
@@ -1779,19 +1784,19 @@ BLOCK_END_P_TRIAL_1276:
 .method private static hidebysig object 'P_REMOVE_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object COUNT1272, object CLASS1271, object TEMP1502, object IDX1270, object K1267, object END1266)
+    .locals init (object COUNT1277, object CLASS1276, object TEMP1508, object IDX1275, object K1272, object END1271)
     ldsfld object Program::'_P_PIECEMAX_'
     ldarg 0
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc END1266
+    stloc END1271
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc K1267
-TAG_LOOP_1268:
+    stloc K1272
+TAG_LOOP_1273:
     nop
-    ldloc END1266
-    ldloc K1267
+    ldloc END1271
+    ldloc K1272
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1799,23 +1804,23 @@ TAG_LOOP_1268:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1498
+    brtrue TRUE1504
     ldnull
-    br END1499
-TRUE1498:
+    br END1505
+TRUE1504:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1499:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1505:
     nop
     ldnull
     ceq
-    brtrue ELSE1503
-    leave TAG_DONE_1269
-    br END1504
-ELSE1503:
+    brtrue ELSE1509
+    leave TAG_DONE_1274
+    br END1510
+ELSE1509:
     nop
     ldnull
-END1504:
+END1510:
     nop
     pop
     ldsfld object Program::'_P_P_'
@@ -1828,7 +1833,7 @@ END1504:
     unbox.any int32
     mul
     box int32
-    ldloc K1267
+    ldloc K1272
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1840,9 +1845,9 @@ END1504:
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     ldnull
     ceq
-    brtrue ELSE1507
+    brtrue ELSE1513
     ldarg 1
-    ldloc K1267
+    ldloc K1272
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -1851,44 +1856,44 @@ END1504:
     unbox.any int32
     add
     box int32
-    stloc IDX1270
+    stloc IDX1275
     ldsfld object Program::'_PUZZLE_SIZE_'
-    ldloc IDX1270
+    ldloc IDX1275
     stsfld object Program::'TEMP_B'
     unbox.any int32
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1500
+    brtrue TRUE1506
     ldnull
-    br END1501
-TRUE1500:
+    br END1507
+TRUE1506:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1501:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1507:
     nop
     ldnull
     ceq
-    brtrue ELSE1505
+    brtrue ELSE1511
     ldnull
-    br END1506
-ELSE1505:
+    br END1512
+ELSE1511:
     nop
     ldsfld object Program::'_P_PUZZL_'
-    ldloc IDX1270
+    ldloc IDX1275
     ldnull
     call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
-END1506:
+END1512:
     nop
-    br END1508
-ELSE1507:
+    br END1514
+ELSE1513:
     nop
     ldnull
-END1508:
+END1514:
     nop
     pop
-    ldloc K1267
-    ldloc K1267
+    ldloc K1272
+    ldloc K1272
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1899,29 +1904,29 @@ END1508:
     unbox.any int32
     add
     box int32
-    stloc TEMP1502
+    stloc TEMP1508
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1502
+    ldloc TEMP1508
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1502
+    ldloc TEMP1508
     pop
-    leave TAG_LOOP_1268
+    leave TAG_LOOP_1273
     pop
-TAG_DONE_1269:
+TAG_DONE_1274:
     nop
     ldnull
     pop
     ldsfld object Program::'_P_CLASS_'
     ldarg 0
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc CLASS1271
+    stloc CLASS1276
     ldsfld object Program::'_P_PIECECOUNT_'
-    ldloc CLASS1271
+    ldloc CLASS1276
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc COUNT1272
+    stloc COUNT1277
     ldsfld object Program::'_P_PIECECOUNT_'
-    ldloc CLASS1271
-    ldloc COUNT1272
+    ldloc CLASS1276
+    ldloc COUNT1277
     ldc.i4 1
     box int32
     stsfld object Program::'TEMP_B'
@@ -1932,7 +1937,7 @@ TAG_DONE_1269:
     box int32
     call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
     ret
-BLOCK_END_P_REMOVE_1264:
+BLOCK_END_P_REMOVE_1269:
     nop
     ldnull
     ret
@@ -2023,19 +2028,19 @@ BLOCK_END_P_REMOVE_1264:
 .method private static hidebysig object 'P_PLACE_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP1487, object TEMP1486, object TEMP1483, object RESULT1257, object K21256, object COUNT1255, object CLASS1254, object TEMP1480, object IDX1253, object K1250, object END1249)
+    .locals init (object TEMP1493, object TEMP1492, object TEMP1489, object RESULT1262, object K21261, object COUNT1260, object CLASS1259, object TEMP1486, object IDX1258, object K1255, object END1254)
     ldsfld object Program::'_P_PIECEMAX_'
     ldarg 0
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc END1249
+    stloc END1254
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc K1250
-TAG_LOOP_1251:
+    stloc K1255
+TAG_LOOP_1256:
     nop
-    ldloc END1249
-    ldloc K1250
+    ldloc END1254
+    ldloc K1255
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -2043,23 +2048,23 @@ TAG_LOOP_1251:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1476
+    brtrue TRUE1482
     ldnull
-    br END1477
-TRUE1476:
+    br END1483
+TRUE1482:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1477:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1483:
     nop
     ldnull
     ceq
-    brtrue ELSE1488
-    leave TAG_DONE_1252
-    br END1489
-ELSE1488:
+    brtrue ELSE1494
+    leave TAG_DONE_1257
+    br END1495
+ELSE1494:
     nop
     ldnull
-END1489:
+END1495:
     nop
     pop
     ldsfld object Program::'_P_P_'
@@ -2072,7 +2077,7 @@ END1489:
     unbox.any int32
     mul
     box int32
-    ldloc K1250
+    ldloc K1255
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -2084,9 +2089,9 @@ END1489:
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     ldnull
     ceq
-    brtrue ELSE1492
+    brtrue ELSE1498
     ldarg 1
-    ldloc K1250
+    ldloc K1255
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -2095,44 +2100,44 @@ END1489:
     unbox.any int32
     add
     box int32
-    stloc IDX1253
+    stloc IDX1258
     ldsfld object Program::'_PUZZLE_SIZE_'
-    ldloc IDX1253
+    ldloc IDX1258
     stsfld object Program::'TEMP_B'
     unbox.any int32
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1478
+    brtrue TRUE1484
     ldnull
-    br END1479
-TRUE1478:
+    br END1485
+TRUE1484:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1479:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1485:
     nop
     ldnull
     ceq
-    brtrue ELSE1490
+    brtrue ELSE1496
     ldnull
-    br END1491
-ELSE1490:
+    br END1497
+ELSE1496:
     nop
     ldsfld object Program::'_P_PUZZL_'
-    ldloc IDX1253
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
+    ldloc IDX1258
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1467'
     call object [LispBase]Lisp.Vector::'Aset'(object, object, object)
-END1491:
+END1497:
     nop
-    br END1493
-ELSE1492:
+    br END1499
+ELSE1498:
     nop
     ldnull
-END1493:
+END1499:
     nop
     pop
-    ldloc K1250
-    ldloc K1250
+    ldloc K1255
+    ldloc K1255
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -2143,29 +2148,29 @@ END1493:
     unbox.any int32
     add
     box int32
-    stloc TEMP1480
+    stloc TEMP1486
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1480
+    ldloc TEMP1486
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1480
+    ldloc TEMP1486
     pop
-    leave TAG_LOOP_1251
+    leave TAG_LOOP_1256
     pop
-TAG_DONE_1252:
+TAG_DONE_1257:
     nop
     ldnull
     pop
     ldsfld object Program::'_P_CLASS_'
     ldarg 0
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc CLASS1254
+    stloc CLASS1259
     ldsfld object Program::'_P_PIECECOUNT_'
-    ldloc CLASS1254
+    ldloc CLASS1259
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc COUNT1255
+    stloc COUNT1260
     ldsfld object Program::'_P_PIECECOUNT_'
-    ldloc CLASS1254
-    ldloc COUNT1255
+    ldloc CLASS1259
+    ldloc COUNT1260
     ldc.i4 1
     box int32
     stsfld object Program::'TEMP_B'
@@ -2178,14 +2183,14 @@ TAG_DONE_1252:
     pop
     ldarg 1
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc K21256
+    stloc K21261
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc RESULT1257
-TAG_LOOP2_1258:
+    stloc RESULT1262
+TAG_LOOP2_1263:
     nop
     ldsfld object Program::'_PUZZLE_SIZE_'
-    ldloc K21256
+    ldloc K21261
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -2193,69 +2198,69 @@ TAG_LOOP2_1258:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1481
+    brtrue TRUE1487
     ldnull
-    br END1482
-TRUE1481:
+    br END1488
+TRUE1487:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1482:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1488:
     nop
     ldnull
     ceq
-    brtrue ELSE1496
-    ldloc RESULT1257
+    brtrue ELSE1502
+    ldloc RESULT1262
     ldnull
-    stloc TEMP1483
+    stloc TEMP1489
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1483
+    ldloc TEMP1489
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1483
+    ldloc TEMP1489
     pop
-    leave TAG_DONE2_1259
-    br END1497
-ELSE1496:
+    leave TAG_DONE2_1264
+    br END1503
+ELSE1502:
     nop
     ldsfld object Program::'_P_PUZZL_'
-    ldloc K21256
+    ldloc K21261
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     ldnull
     ceq
-    brtrue TRUE1484
+    brtrue TRUE1490
     ldnull
-    br END1485
-TRUE1484:
+    br END1491
+TRUE1490:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1485:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1491:
     nop
     ldnull
     ceq
-    brtrue ELSE1494
-    ldloc RESULT1257
-    ldloc K21256
+    brtrue ELSE1500
+    ldloc RESULT1262
+    ldloc K21261
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc TEMP1486
+    stloc TEMP1492
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1486
+    ldloc TEMP1492
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1486
+    ldloc TEMP1492
     pop
-    leave TAG_DONE2_1259
-    br END1495
-ELSE1494:
+    leave TAG_DONE2_1264
+    br END1501
+ELSE1500:
     nop
     ldnull
-END1495:
+END1501:
     nop
-END1497:
+END1503:
     nop
     pop
-    ldloc K21256
-    ldloc K21256
+    ldloc K21261
+    ldloc K21261
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -2266,23 +2271,23 @@ END1497:
     unbox.any int32
     add
     box int32
-    stloc TEMP1487
+    stloc TEMP1493
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1487
+    ldloc TEMP1493
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1487
+    ldloc TEMP1493
     pop
-    leave TAG_LOOP2_1258
+    leave TAG_LOOP2_1263
     pop
-TAG_DONE2_1259:
+TAG_DONE2_1264:
     nop
     ldnull
     pop
-    ldloc RESULT1257
+    ldloc RESULT1262
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-BLOCK_END_P_PLACE_1247:
+BLOCK_END_P_PLACE_1252:
     nop
     ldnull
     ret
@@ -2373,22 +2378,22 @@ BLOCK_END_P_PLACE_1247:
 .method private static hidebysig object 'P_FIT_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP1467, object TEMP1466, object TEMP1465, object IDX1242, object TEMP1462, object RESULT1239, object K1238, object END1237)
+    .locals init (object TEMP1473, object TEMP1472, object TEMP1471, object IDX1247, object TEMP1468, object RESULT1244, object K1243, object END1242)
     ldsfld object Program::'_P_PIECEMAX_'
     ldarg 0
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
-    stloc END1237
+    stloc END1242
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc K1238
+    stloc K1243
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc RESULT1239
-TAG_LOOP_1240:
+    stloc RESULT1244
+TAG_LOOP_1245:
     nop
-    ldloc END1237
-    ldloc K1238
+    ldloc END1242
+    ldloc K1243
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -2396,31 +2401,31 @@ TAG_LOOP_1240:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1459
+    brtrue TRUE1464
     ldnull
-    br END1460
-TRUE1459:
+    br END1465
+TRUE1464:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1460:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1465:
     nop
     ldnull
     ceq
-    brtrue ELSE1468
-    ldloc RESULT1239
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-    stloc TEMP1462
+    brtrue ELSE1474
+    ldloc RESULT1244
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1467'
+    stloc TEMP1468
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1462
+    ldloc TEMP1468
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1462
+    ldloc TEMP1468
     pop
-    leave TAG_DONE_1241
-    br END1469
-ELSE1468:
+    leave TAG_DONE_1246
+    br END1475
+ELSE1474:
     nop
     ldnull
-END1469:
+END1475:
     nop
     pop
     ldsfld object Program::'_P_P_'
@@ -2433,7 +2438,7 @@ END1469:
     unbox.any int32
     mul
     box int32
-    ldloc K1238
+    ldloc K1243
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -2445,9 +2450,9 @@ END1469:
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     ldnull
     ceq
-    brtrue ELSE1474
+    brtrue ELSE1480
     ldarg 1
-    ldloc K1238
+    ldloc K1243
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     stsfld object Program::'TEMP_B'
@@ -2456,69 +2461,69 @@ END1469:
     unbox.any int32
     add
     box int32
-    stloc IDX1242
+    stloc IDX1247
     ldsfld object Program::'_PUZZLE_SIZE_'
-    ldloc IDX1242
+    ldloc IDX1247
     stsfld object Program::'TEMP_B'
     unbox.any int32
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1463
+    brtrue TRUE1469
     ldnull
-    br END1464
-TRUE1463:
+    br END1470
+TRUE1469:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1461'
-END1464:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1466'
+END1470:
     nop
     ldnull
     ceq
-    brtrue ELSE1472
-    ldloc RESULT1239
+    brtrue ELSE1478
+    ldloc RESULT1244
     ldnull
-    stloc TEMP1465
+    stloc TEMP1471
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1465
+    ldloc TEMP1471
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1465
+    ldloc TEMP1471
     pop
-    leave TAG_DONE_1241
-    br END1473
-ELSE1472:
+    leave TAG_DONE_1246
+    br END1479
+ELSE1478:
     nop
     ldsfld object Program::'_P_PUZZL_'
-    ldloc IDX1242
+    ldloc IDX1247
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     ldnull
     ceq
-    brtrue ELSE1470
-    ldloc RESULT1239
+    brtrue ELSE1476
+    ldloc RESULT1244
     ldnull
-    stloc TEMP1466
+    stloc TEMP1472
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1466
+    ldloc TEMP1472
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1466
+    ldloc TEMP1472
     pop
-    leave TAG_DONE_1241
-    br END1471
-ELSE1470:
+    leave TAG_DONE_1246
+    br END1477
+ELSE1476:
     nop
     ldnull
-END1471:
+END1477:
     nop
-END1473:
+END1479:
     nop
-    br END1475
-ELSE1474:
+    br END1481
+ELSE1480:
     nop
     ldnull
-END1475:
+END1481:
     nop
     pop
-    ldloc K1238
-    ldloc K1238
+    ldloc K1243
+    ldloc K1243
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -2529,23 +2534,23 @@ END1475:
     unbox.any int32
     add
     box int32
-    stloc TEMP1467
+    stloc TEMP1473
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1467
+    ldloc TEMP1473
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1467
+    ldloc TEMP1473
     pop
-    leave TAG_LOOP_1240
+    leave TAG_LOOP_1245
     pop
-TAG_DONE_1241:
+TAG_DONE_1246:
     nop
     ldnull
     pop
-    ldloc RESULT1239
+    ldloc RESULT1244
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-BLOCK_END_P_FIT_1235:
+BLOCK_END_P_FIT_1240:
     nop
     ldnull
     ret

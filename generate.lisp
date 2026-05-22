@@ -128,6 +128,91 @@
                        append (list (il:pop))))))
       (append bindings-code body-code))))
 
+(defun generate-keyword-prologue (key-params rest-param allow-other-keys current-params is-closure)
+  (let ((prologue nil)
+        (loop-label (sanitize-identifier (string (gensym "KEY_LOOP"))))
+        (done-label (sanitize-identifier (string (gensym "KEY_DONE"))))
+        (rest-idx (position rest-param current-params :test #'eq)))
+    ;; 1. Initialize keyword variables and supplied-p variables
+    (dolist (key key-params)
+      (destructuring-bind (kw alpha init-ast sup-alpha) key
+        (setf prologue (append prologue (generate-step2 init-ast nil)))
+        (setf prologue (append prologue (list (il:stloc (sanitize-identifier (string alpha))))))
+        (when sup-alpha
+          (setf prologue (append prologue (load-symbol-il "NIL")))
+          (setf prologue (append prologue (list (il:stloc (sanitize-identifier (string sup-alpha)))))))))
+
+    ;; 2. Start loop over rest-param
+    (let ((rest-local (register-local (gensym "REST_TEMP")))
+          (key-local (register-local (gensym "KEY_TEMP")))
+          (val-local (register-local (gensym "VAL_TEMP"))))
+      (setf prologue (append prologue
+        (list (il:ldarg (if is-closure (1+ rest-idx) rest-idx))
+              (il:stloc rest-local)
+              (il:nop :label loop-label)
+              (il:ldloc rest-local)
+              (il:ldnull)
+              (il:ceq)
+              (il:brtrue done-label))))
+
+      ;; Inside loop: get key and value from ListCell
+      (setf prologue (append prologue
+        (list (il:ldloc rest-local)
+              (il:castclass "[LispBase]Lisp.List/ListCell")
+              (il:ldfld "object [LispBase]Lisp.List/ListCell::first") ;; the key
+              (il:stloc key-local)
+              (il:ldloc rest-local)
+              (il:castclass "[LispBase]Lisp.List/ListCell")
+              (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
+              (il:castclass "[LispBase]Lisp.List/ListCell")
+              (il:ldfld "object [LispBase]Lisp.List/ListCell::first") ;; the value
+              (il:stloc val-local)
+              ;; Advance rest-param: rest = rest.rest.rest
+              (il:ldloc rest-local)
+              (il:castclass "[LispBase]Lisp.List/ListCell")
+              (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
+              (il:castclass "[LispBase]Lisp.List/ListCell")
+              (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
+              (il:stloc rest-local))))
+
+      ;; Match the key against each defined keyword
+      (dolist (key key-params)
+        (let ((next-kw (sanitize-identifier (string (gensym "NEXT_KW")))))
+          (destructuring-bind (kw alpha init-ast sup-alpha) key
+            (declare (ignore init-ast))
+            (setf prologue (append prologue (list (il:ldloc key-local))))
+            (setf prologue (append prologue (load-symbol-il kw)))
+            (setf prologue (append prologue
+              (list (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object"))
+                    (il:brfalse next-kw)
+                    ;; MATCHED: store value
+                    (il:ldloc val-local)
+                    (il:stloc (sanitize-identifier (string alpha))))))
+            (when sup-alpha
+              (setf prologue (append prologue (load-symbol-il "T")))
+              (setf prologue (append prologue (list (il:stloc (sanitize-identifier (string sup-alpha)))))))
+            (setf prologue (append prologue
+              (list (il:br loop-label)
+                    (il:nop :label next-kw)))))))
+
+      ;; Handle :allow-other-keys or end of loop
+      (let ((allow-ok (sanitize-identifier (string (gensym "ALLOW_OK")))))
+        (setf prologue (append prologue (list (il:ldloc key-local))))
+        (setf prologue (append prologue (load-symbol-il :allow-other-keys)))
+        (setf prologue (append prologue
+          (list (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object"))
+                (il:brfalse allow-ok)
+                ;; MATCHED :allow-other-keys.
+                (il:br loop-label)
+                (il:nop :label allow-ok)))))
+
+      ;; If not matched and not &allow-other-keys, we should ideally signal an error.
+      ;; For now, just continue.
+      (setf prologue (append prologue
+        (list (il:br loop-label)
+              (il:nop :label done-label)))))
+    prologue))
+
 (defmethod generate-step2 ((node ast-lambda) &optional tail-p)
   (declare (ignore tail-p))
   (let* ((req-params (ast-lambda-params node))
@@ -141,6 +226,8 @@
          (*current-lambda-free-vars* (ast-lambda-free-vars node))
          (*current-lambda-params* body-params)
          (forms (ast-lambda-body node))
+         (key-params (ast-lambda-key-params node))
+         (allow-other-keys (ast-lambda-allow-other-keys node))
          (prologue nil))
 
     ;; A. Handle Optionals & Supplied-P
@@ -176,6 +263,10 @@
           do (setf prologue (append prologue 
                                     (generate-step2 init-ast nil)
                                     (list (il:stloc (sanitize-identifier (string name)))))))
+
+    ;; D. Handle Keywords
+    (when key-params
+      (setf prologue (append prologue (generate-keyword-prologue key-params rest-param allow-other-keys *current-lambda-params* t))))
 
     ;; C. Generate Body
     (let ((body-code (if (and (null forms) (null prologue))
@@ -355,6 +446,8 @@
   (let* ((req-params (ast-toplevel-defun-params node))
          (optionals (ast-toplevel-defun-optional-params node))
          (rest-param (ast-toplevel-defun-rest-param node))
+         (key-params (ast-toplevel-defun-key-params node))
+         (allow-other-keys (ast-toplevel-defun-allow-other-keys node))
          (aux-params (ast-toplevel-defun-aux-params node))
          (opt-names (mapcar #'car optionals))
          (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
@@ -397,6 +490,10 @@
           do (setf prologue (append prologue 
                                     (generate-step2 init-ast nil)
                                     (list (il:stloc (sanitize-identifier (string name)))))))
+
+    ;; D. Handle Keywords
+    (when key-params
+      (setf prologue (append prologue (generate-keyword-prologue key-params rest-param allow-other-keys *current-lambda-params* nil))))
 
     ;; C. Generate Body
     (let ((body-code (if (and (null forms) (null prologue))
@@ -592,11 +689,17 @@
               (loop for m from 0 to 8 do
                 (let* ((invoke-arg-types (make-list m :initial-element "object"))
                        (too-few (< m (length req-params)))
-                       (too-many (and (not has-rest) (> m (+ (length req-params) (length optionals)))))
+                       (has-keys (not (null (ast-lambda-key-params lambda-node))))
+                       (too-many (and (not has-rest) (not has-keys) (> m (+ (length req-params) (length optionals)))))
+                       (n-extra (- m (+ (length req-params) (length optionals))))
                        (insts (cond
                                 ((or too-few too-many)
                                  (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
                                        (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                       (il:throw)))
+                                ((and has-keys (oddp n-extra))
+                                 (list (il:ldstr "Odd number of keyword arguments")
+                                       (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
                                        (il:throw)))
                                 (t
                                  (let ((prep-code (list (il:ldarg.0)))) ;; 'this'
@@ -611,12 +714,12 @@
                                                 (push (il:ldsfld "object [LispBase]Lisp.Undefined::Value") prep-code)))
                                    ;; Pass nulls for supplied-p (Body will overwrite)
                                    (loop repeat (length opt-supplied-names) do (push (il:ldnull) prep-code))
-                                   ;; Handle &rest
+                                   ;; Handle &rest (and keywords)
                                    (when has-rest
                                      (loop for i from (+ (length req-params) (length optionals) 1) to m do
                                        (push (il:ldarg i) prep-code))
                                      (push (il:ldnull) prep-code)
-                                     (loop repeat (- m (+ (length req-params) (length optionals))) do
+                                     (loop repeat (max 0 n-extra) do
                                        (push (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")) prep-code)))
                                    
                                    (append (reverse prep-code)
@@ -665,11 +768,17 @@
                 (loop for m from 0 to 8 do
                   (let* ((invoke-arg-types (make-list m :initial-element "object"))
                          (too-few (< m (length req-params)))
-                         (too-many (and (not has-rest) (> m (+ (length req-params) (length optionals)))))
+                         (has-keys (not (null (ast-toplevel-defun-key-params defun-node))))
+                         (too-many (and (not has-rest) (not has-keys) (> m (+ (length req-params) (length optionals)))))
+                         (n-extra (- m (+ (length req-params) (length optionals))))
                          (insts (cond
                                   ((or too-few too-many)
                                    (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
                                          (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                         (il:throw)))
+                                  ((and has-keys (oddp n-extra))
+                                   (list (il:ldstr "Odd number of keyword arguments")
+                                         (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
                                          (il:throw)))
                                   (t
                                    (let ((prep-code nil))
@@ -684,12 +793,12 @@
                                                   (push (il:ldsfld "object [LispBase]Lisp.Undefined::Value") prep-code)))
                                      ;; Pass nulls for supplied-p (Body will overwrite)
                                      (loop repeat (length opt-supplied-names) do (push (il:ldnull) prep-code))
-                                     ;; Handle &rest
+                                     ;; Handle &rest (and keywords)
                                      (when has-rest
                                        (loop for i from (+ (length req-params) (length optionals)) below m do
                                          (push (il:ldarg i) prep-code))
                                        (push (il:ldnull) prep-code)
-                                       (loop repeat (- m (+ (length req-params) (length optionals))) do
+                                       (loop repeat (max 0 n-extra) do
                                          (push (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")) prep-code)))
                                      
                                      (append (reverse prep-code)
@@ -716,10 +825,12 @@
                          (loop for g in *global-variables*
                                append (list (il:ldnull)
                                             (il:stsfld (format nil "object Program::'~A'" g))))
-                         (loop for (sym-name . field-name) in *quoted-symbols*
+                         (loop for (symbol-or-name . field-name) in *quoted-symbols*
                                append (list
-                                       (il:call :method "get_Current" :class "[LispBase]Lisp.Package" :return "class [LispBase]Lisp.Package" :args nil)
-                                       (il:ldstr sym-name)
+                                       (if (and (symbolp symbol-or-name) (keywordp symbol-or-name))
+                                           (il:ldsfld "class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword")
+                                           (il:call :method "get_Current" :class "[LispBase]Lisp.Package" :return "class [LispBase]Lisp.Package" :args nil))
+                                       (il:ldstr (if (symbolp symbol-or-name) (symbol-name symbol-or-name) symbol-or-name))
                                        (il:callvirt :method "Intern" :class "[LispBase]Lisp.Package" :return "class [LispBase]Lisp.Symbol" :args '("string"))
                                        (il:stsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name))))))
            (cctor-method (when cctor-insts

@@ -31,7 +31,7 @@
     .field public static object 'TEMP_B'
     .field public static object 'N451'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G531'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S531'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -87,7 +87,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G531'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S531'
     ret
 }
 
@@ -338,7 +338,7 @@ TAG_LOOP_486:
     br END554
 TRUE553:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G531'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S531'
 END554:
     nop
     ldnull
@@ -496,7 +496,7 @@ TAG_LOOP_478:
     br END549
 TRUE548:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G531'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S531'
 END549:
     nop
     ldnull
@@ -644,7 +644,7 @@ BLOCK_END_TEST_1_475:
     br END546
 TRUE545:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G531'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S531'
 END546:
     nop
     ldnull
@@ -774,7 +774,7 @@ TAG_LOOP_465:
     br END540
 TRUE539:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G531'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S531'
 END540:
     nop
     ldnull
@@ -1008,7 +1008,7 @@ BLOCK_END_CREATE_N_452:
     br END530
 TRUE529:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G531'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S531'
 END530:
     nop
     ldnull
@@ -1171,7 +1171,7 @@ ELSE533:
     br END535
 TRUE534:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G531'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S531'
 END535:
     nop
     ldnull

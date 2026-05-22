@@ -19,6 +19,14 @@
     (print b)
     (print args))
 
+  (defun test-key (a &key b (c 10) (d 20 d-p))
+    (print "test-key")
+    (print a)
+    (print b)
+    (print c)
+    (print d)
+    (print d-p))
+
   (defun main ()
     (print "--- optional 1 ---")
     (test-optional "A")
@@ -39,7 +47,21 @@
     (print "--- mixed 2 ---")
     (test-mixed 1 2)
     (print "--- mixed 3 ---")
-    (test-mixed 1 2 3 4))
+    (test-mixed 1 2 3 4)
+
+    (print "--- key 1 ---")
+    (test-key 1)
+    (print "--- key 2 ---")
+    (test-key 1 :b 2)
+    (print "--- key 3 ---")
+    (test-key 1 :c 3 :b 4)
+    (print "--- key 4 ---")
+    (test-key 1 :d 40)
+
+    (print "--- key odd error test ---")
+    ;; This should crash with "Odd number of keyword arguments"
+    ;; (test-key 1 :b)
+    )
 
   (main)
 
@@ -54,5 +76,18 @@
     (print "lambda 2")
     (funcall f 1 2)
     (print "lambda 3")
-    (funcall f 1 2 3 4)))
+    (funcall f 1 2 3 4))
 
+  (print "--- lambda key test ---")
+  (let ((f (lambda (x &key (y 100) (z 200 z-p))
+             (print "lambda-key")
+             (print x)
+             (print y)
+             (print z)
+             (print z-p))))
+    (print "lambda-key 1")
+    (funcall f 1)
+    (print "lambda-key 2")
+    (funcall f 1 :y 2)
+    (print "lambda-key 3")
+    (funcall f 1 :z 3 :y 4)))

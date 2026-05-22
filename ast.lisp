@@ -1024,7 +1024,14 @@
                    (init-form-ast (lisp->ast init-form new-env tags-env blocks-env current-scope)))
               (push (cons name alpha) new-env)
               (push (list alpha init-form-ast) aux)))))))
-    (values (nreverse required) (nreverse optional) rest (nreverse key) allow-other-keys (nreverse aux) new-env)))
+    (let ((required-final (nreverse required))
+          (optional-final (nreverse optional))
+          (key-final (nreverse key))
+          (aux-final (nreverse aux)))
+      ;; If &key is present but no &rest, synthesize one.
+      (when (and (not rest) key-final)
+        (setf rest (gensym "REST_")))
+      (values required-final optional-final rest key-final allow-other-keys aux-final new-env))))
 
 (defun lisp->ast (expr &optional env tags-env blocks-env current-scope)
   "Translates a Lisp s-expression into an AST node, applying alpha renaming and macroexpansion."

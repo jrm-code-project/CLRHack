@@ -25,7 +25,7 @@
     .field public static class [LispBase]Lisp.Symbol 'SYM_G212'
     .field public static class [LispBase]Lisp.Symbol 'SYM_G209'
     .field public static class [LispBase]Lisp.Symbol 'SYM_G200'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G197'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S197'
     .field public static class [LispBase]Lisp.Symbol 'SYM_G194'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
@@ -78,7 +78,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G197'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "DEPOSIT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
@@ -403,7 +403,7 @@ BLOCK_END_MAKE_BANK_146:
     br END196
 TRUE195:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G197'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
 END196:
     nop
     ldnull
@@ -462,7 +462,7 @@ ELSE206:
     br END202
 TRUE201:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G197'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
 END202:
     nop
     ldnull
@@ -797,7 +797,7 @@ ELSE205:
     br END211
 TRUE210:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G197'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
 END211:
     nop
     ldnull
@@ -819,7 +819,7 @@ ELSE216:
     br END214
 TRUE213:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G197'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
 END214:
     nop
     ldnull
