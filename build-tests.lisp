@@ -40,6 +40,7 @@
                ("Tests/test-restart.lisp" . "RestartTest")
                ("Tests/test-handler.lisp" . "HandlerTest")
                ("Tests/test-handler-case.lisp" . "HandlerCaseTest")
+               ("Tests/test-reflection.lisp" . "ReflectionTest")
                ("Tests/puzzle-test.lisp" . "PuzzleBenchmark")
                ("Tests/test-scoping.lisp" . "ScopingTests")
                ;; ("test-stak.lisp" . "StakBenchmark")

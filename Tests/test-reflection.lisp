@@ -1,0 +1,28 @@
+(in-package "CLRHACK")
+
+(defun test-math ()
+  (print "--- test-math ---")
+  (print "Sqrt(16):")
+  (print (dotnet-call-static "System.Math" "Sqrt" 16)))
+
+(defun test-list ()
+  (print "--- test-list ---")
+  (let ((l (dotnet-new "System.Collections.Generic.List`1[System.String]")))
+    (dotnet-call l "Add" "Hello")
+    (dotnet-call l "Add" "Reflection")
+    (print "List count:")
+    (print (dotnet-get l "Count"))
+    (print "List items:")
+    (print (dotnet-call l "get_Item" 0))
+    (print (dotnet-call l "get_Item" 1))))
+
+(defun test-env ()
+  (print "--- test-env ---")
+  (print "Machine name:")
+  (print (dotnet-get-static "System.Environment" "MachineName"))
+  (print "OS Version:")
+  (print (dotnet-get-static "System.Environment" "OSVersion")))
+
+(test-math)
+(test-list)
+(test-env)

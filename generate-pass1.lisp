@@ -729,6 +729,10 @@
   (mapc #'generate-step1 (ast-handler-bind-body node))
   (setf (ast-basic-block node) nil))
 
+(defmethod generate-step1 ((node ast-reflection))
+  (mapc #'generate-step1 (ast-reflection-arguments node))
+  (setf (ast-basic-block node) nil))
+
 (defmethod generate-step1 ((node ast-application))
   (let ((operator (ast-application-operator node))
         (operands (ast-application-operands node)))

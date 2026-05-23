@@ -255,6 +255,11 @@
    (result-temp :initarg :result-temp :initform nil :accessor ast-handler-bind-result-temp))
   (:documentation "A HANDLER-BIND form."))
 
+(defclass ast-reflection (ast-node)
+  ((operation :initarg :operation :accessor ast-reflection-operation)
+   (arguments :initarg :arguments :accessor ast-reflection-arguments))
+  (:documentation "A reflection-based .NET interop call."))
+
 ;;; Macro Environment
 
 (defvar *macro-environment* (make-hash-table :test #'eq))
@@ -411,6 +416,14 @@
                                  `((eq ,id-var ',id)
                                    (let ((,var ,condition-var))
                                      ,@body))))))))))
+
+  (register-macro 'dotnet-new (lambda (type &rest args) `(reflect :new ,type ,@args)))
+  (register-macro 'dotnet-call (lambda (obj method &rest args) `(reflect :call-instance ,obj ,method ,@args)))
+  (register-macro 'dotnet-call-static (lambda (type method &rest args) `(reflect :call-static ,type ,method ,@args)))
+  (register-macro 'dotnet-get (lambda (obj prop) `(reflect :get-property ,obj ,prop)))
+  (register-macro 'dotnet-set (lambda (obj prop val) `(reflect :set-property ,obj ,prop ,val)))
+  (register-macro 'dotnet-get-static (lambda (type prop) `(reflect :get-static-property ,type ,prop)))
+  (register-macro 'dotnet-set-static (lambda (type prop val) `(reflect :set-static-property ,type ,prop ,val)))
 
   (register-macro 'dolist
     (lambda (spec &rest body)
@@ -739,6 +752,11 @@
                                 :initial-value nil)))
     (union binding-free-vars body-free-vars)))
 
+(defmethod compute-free-vars ((node ast-reflection))
+  (reduce (lambda (a b) (union a (compute-free-vars b)))
+          (ast-reflection-arguments node)
+          :initial-value nil))
+
 (defmethod compute-free-vars ((node ast-class))
   nil)
 
@@ -987,6 +1005,11 @@
                  :handlers-list-temp (ast-handler-bind-handlers-list-temp node)
                  :result-temp (ast-handler-bind-result-temp node)))
 
+(defmethod closure-convert ((node ast-reflection))
+  (make-instance 'ast-reflection
+                 :operation (ast-reflection-operation node)
+                 :arguments (mapcar #'closure-convert (ast-reflection-arguments node))))
+
 (defmethod closure-convert ((node ast-class))
   node)
 
@@ -1222,6 +1245,11 @@
                  :saved-handlers-temp (ast-handler-bind-saved-handlers-temp node)
                  :handlers-list-temp (ast-handler-bind-handlers-list-temp node)
                  :result-temp (ast-handler-bind-result-temp node)))
+
+(defmethod lambda-lift ((node ast-reflection))
+  (make-instance 'ast-reflection
+                 :operation (ast-reflection-operation node)
+                 :arguments (mapcar #'lambda-lift (ast-reflection-arguments node))))
 
 (defmethod lambda-lift ((node ast-class))
   node)
@@ -1538,6 +1566,11 @@
                            :bindings analyzed-bindings
                            :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) body-forms))))
 
+         (reflect
+          (make-instance 'ast-reflection
+                         :operation (first args)
+                         :arguments (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (rest args))))
+
          (system:call-static-method
           (make-instance 'ast-dotnet-static-call
                          :method-name (first args)
@@ -1849,7 +1882,10 @@
                 (append (reduce #'append (mapcar (lambda (b) (traverse (second b) curr-env))
                                                  (ast-handler-bind-bindings n)))
                         (reduce #'append (mapcar (lambda (form) (traverse form curr-env))
-                                                 (ast-handler-bind-body n))))))))
+                                                 (ast-handler-bind-body n)))))
+               (ast-reflection
+                (reduce #'append (mapcar (lambda (e) (traverse e curr-env))
+                                         (ast-reflection-arguments n)))))))
     (remove-duplicates (traverse node env))))
 
 
@@ -2184,6 +2220,12 @@
                  :saved-handlers-temp (ast-handler-bind-saved-handlers-temp node)
                  :handlers-list-temp (ast-handler-bind-handlers-list-temp node)
                  :result-temp (ast-handler-bind-result-temp node)))
+
+(defmethod analyze-environment ((node ast-reflection) env &optional mutated)
+  (make-instance 'ast-reflection
+                 :operation (ast-reflection-operation node)
+                 :arguments (mapcar (lambda (e) (analyze-environment e env mutated))
+                                    (ast-reflection-arguments node))))
 
 (defmethod analyze-environment ((node ast-class) env &optional mutated)
   (declare (ignore env mutated))

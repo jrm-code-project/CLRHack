@@ -693,6 +693,95 @@
                                     (il:ldloc result-temp :label done-label)))))
     (if tail-p (append code (list (il:ret))) code)))
 
+(defmethod generate-step2 ((node ast-reflection) &optional tail-p)
+  (let* ((op (ast-reflection-operation node))
+         (args (ast-reflection-arguments node))
+         (n (length args))
+         (code nil))
+    (ecase op
+      (:get-type
+       (setf code (generate-step2 (first args) nil))
+       (setf code (append code (list (il:call :method "GetType" :class "[LispBase]Lisp.Reflection" :return "class [mscorlib]System.Type" :args '("object"))))))
+      
+      (:new
+       (setf code (generate-step2 (first args) nil)) ;; type
+       (let ((args-array-temp (register-local (gensym "REFLECT_ARGS"))))
+         (setf code (append code 
+                            (list (il:ldc.i4 (1- n))
+                                  (il:newarr "[mscorlib]System.Object")
+                                  (il:stloc args-array-temp))))
+         (loop for i from 0 below (1- n)
+               for arg in (rest args)
+               do (setf code (append code
+                                     (list (il:ldloc args-array-temp)
+                                           (il:ldc.i4 i))))
+                  (setf code (append code (generate-step2 arg nil)))
+                  (setf code (append code (list (il:stelem.ref)))))
+         (setf code (append code (list (il:ldloc args-array-temp)
+                                       (il:call :method "New" :class "[LispBase]Lisp.Reflection" :return "object" :args '("object" "object[]")))))))
+      
+      (:call-static
+       (setf code (generate-step2 (first args) nil)) ;; type
+       (setf code (append code (generate-step2 (second args) nil))) ;; method name
+       (let ((args-array-temp (register-local (gensym "REFLECT_ARGS"))))
+         (setf code (append code 
+                            (list (il:ldc.i4 (- n 2))
+                                  (il:newarr "[mscorlib]System.Object")
+                                  (il:stloc args-array-temp))))
+         (loop for i from 0 below (- n 2)
+               for arg in (cddr args)
+               do (setf code (append code
+                                     (list (il:ldloc args-array-temp)
+                                           (il:ldc.i4 i))))
+                  (setf code (append code (generate-step2 arg nil)))
+                  (setf code (append code (list (il:stelem.ref)))))
+         (setf code (append code (list (il:ldloc args-array-temp)
+                                       (il:call :method "InvokeStatic" :class "[LispBase]Lisp.Reflection" :return "object" :args '("object" "string" "object[]")))))))
+
+      (:call-instance
+       (setf code (generate-step2 (first args) nil)) ;; instance
+       (setf code (append code (generate-step2 (second args) nil))) ;; method name
+       (let ((args-array-temp (register-local (gensym "REFLECT_ARGS"))))
+         (setf code (append code 
+                            (list (il:ldc.i4 (- n 2))
+                                  (il:newarr "[mscorlib]System.Object")
+                                  (il:stloc args-array-temp))))
+         (loop for i from 0 below (- n 2)
+               for arg in (cddr args)
+               do (setf code (append code
+                                     (list (il:ldloc args-array-temp)
+                                           (il:ldc.i4 i))))
+                  (setf code (append code (generate-step2 arg nil)))
+                  (setf code (append code (list (il:stelem.ref)))))
+         (setf code (append code (list (il:ldloc args-array-temp)
+                                       (il:call :method "InvokeInstance" :class "[LispBase]Lisp.Reflection" :return "object" :args '("object" "string" "object[]")))))))
+
+      (:get-property
+       (setf code (generate-step2 (first args) nil)) ;; instance
+       (setf code (append code (generate-step2 (second args) nil))) ;; name
+       (setf code (append code (list (il:call :method "GetProperty" :class "[LispBase]Lisp.Reflection" :return "object" :args '("object" "string"))))))
+      
+      (:set-property
+       (setf code (generate-step2 (first args) nil)) ;; instance
+       (setf code (append code (generate-step2 (second args) nil))) ;; name
+       (setf code (append code (generate-step2 (third args) nil))) ;; value
+       (setf code (append code (list (il:call :method "SetProperty" :class "[LispBase]Lisp.Reflection" :return "void" :args '("object" "string" "object"))
+                                     (il:ldnull)))))
+
+      (:get-static-property
+       (setf code (generate-step2 (first args) nil)) ;; type
+       (setf code (append code (generate-step2 (second args) nil))) ;; name
+       (setf code (append code (list (il:call :method "GetStaticProperty" :class "[LispBase]Lisp.Reflection" :return "object" :args '("object" "string"))))))
+
+      (:set-static-property
+       (setf code (generate-step2 (first args) nil)) ;; type
+       (setf code (append code (generate-step2 (second args) nil))) ;; name
+       (setf code (append code (generate-step2 (third args) nil))) ;; value
+       (setf code (append code (list (il:call :method "SetStaticProperty" :class "[LispBase]Lisp.Reflection" :return "void" :args '("object" "string" "object"))
+                                     (il:ldnull))))))
+
+    (if tail-p (append code (list (il:ret))) code)))
+
 (defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)
   (declare (ignore tail-p))
   (let* ((req-params (ast-toplevel-defun-params node))

@@ -120,3 +120,6 @@
   (dolist (b (ast-handler-bind-bindings node))
     (funcall function (second b)))
   (mapc function (ast-handler-bind-body node)))
+
+(defmethod map-ast-children (function (node ast-reflection))
+  (mapc function (ast-reflection-arguments node)))
