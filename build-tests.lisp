@@ -37,6 +37,7 @@
                ("test-mutability.lisp" . "MutabilityTest")
                ("Tests/test-mv.lisp" . "MultipleValuesTest")
                ("Tests/test-nboyer.lisp" . "NBoyerBenchmark")
+               ("Tests/test-restart.lisp" . "RestartTest")
                ("Tests/puzzle-test.lisp" . "PuzzleBenchmark")
                ("Tests/test-scoping.lisp" . "ScopingTests")
                ;; ("test-stak.lisp" . "StakBenchmark")

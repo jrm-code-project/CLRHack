@@ -7,32 +7,32 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'X2369'
-    .field public static object 'F2363'
-    .field public static object 'X2365'
-    .field public static object 'PREFIX2357'
+    .field public static object 'X2331'
+    .field public static object 'F2325'
+    .field public static object 'X2327'
+    .field public static object 'PREFIX2319'
     .field public static object '_CTOR'
-    .field public static object 'X2352'
-    .field public static object 'MSG2347'
+    .field public static object 'X2314'
+    .field public static object 'MSG2309'
     .field public static object 'PRINT'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'X2369'
+    stsfld object Program::'X2331'
     ldnull
-    stsfld object Program::'F2363'
+    stsfld object Program::'F2325'
     ldnull
-    stsfld object Program::'X2365'
+    stsfld object Program::'X2327'
     ldnull
-    stsfld object Program::'PREFIX2357'
+    stsfld object Program::'PREFIX2319'
     ldnull
     stsfld object Program::'_CTOR'
     ldnull
-    stsfld object Program::'X2352'
+    stsfld object Program::'X2314'
     ldnull
-    stsfld object Program::'MSG2347'
+    stsfld object Program::'MSG2309'
     ldnull
     stsfld object Program::'PRINT'
     ret
@@ -42,14 +42,14 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object Y2372, object FORMAT_TEST2361, object MAKE_FORMATTER2360, object F2355, object X2350, object F2349, object MSG2347, object MSG2346)
+    .locals init (object Y2334, object FORMAT_TEST2323, object MAKE_FORMATTER2322, object F2317, object X2312, object F2311, object MSG2309, object MSG2308)
     ldstr "--- Test 1: Baseline Bindings ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldstr "Straight-line let binding successful."
-    stloc MSG2346
-    ldloc MSG2346
+    stloc MSG2308
+    ldloc MSG2308
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -58,11 +58,11 @@
     ldnull
     pop
     ldstr "Basic closure captured successfully."
-    stloc MSG2347
-    ldloc MSG2347
-    newobj instance void L_2373::'.ctor'(object)
-    stloc F2349
-    ldloc F2349
+    stloc MSG2309
+    ldloc MSG2309
+    newobj instance void L_2335::'.ctor'(object)
+    stloc F2311
+    ldloc F2311
     castclass [LispBase]Lisp.Closure
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     pop
@@ -71,10 +71,10 @@
     ldnull
     pop
     ldstr "OUTER SCOPE - FAILURE"
-    stloc X2350
-    newobj instance void L_2375::'.ctor'()
-    stloc F2355
-    ldloc F2355
+    stloc X2312
+    newobj instance void L_2337::'.ctor'()
+    stloc F2317
+    ldloc F2317
     castclass [LispBase]Lisp.Closure
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     pop
@@ -82,14 +82,14 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_2377::'.ctor'()
-    stloc MAKE_FORMATTER2360
-    ldloc MAKE_FORMATTER2360
+    newobj instance void L_2339::'.ctor'()
+    stloc MAKE_FORMATTER2322
+    ldloc MAKE_FORMATTER2322
     castclass [LispBase]Lisp.Closure
     ldstr "Prefix Bound."
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc FORMAT_TEST2361
-    ldloc FORMAT_TEST2361
+    stloc FORMAT_TEST2323
+    ldloc FORMAT_TEST2323
     castclass [LispBase]Lisp.Closure
     ldstr "Suffix Bound."
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
@@ -98,8 +98,8 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_2382::'.ctor'()
-    stloc Y2372
+    newobj instance void L_2344::'.ctor'()
+    stloc Y2334
     ldstr "Y-Combinator successfully compiled to verifiable IL closures!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -109,10 +109,10 @@
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_2373
+.class public auto ansi beforefieldinit L_2335
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'MSG2347'
+    .field public object 'MSG2309'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -121,7 +121,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_2373::'MSG2347'
+    stfld object L_2335::'MSG2309'
     ret
 }
 
@@ -129,7 +129,7 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_2373::'MSG2347'
+    ldfld object L_2335::'MSG2309'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
@@ -142,7 +142,7 @@
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_2373::'InvokeBody'()
+    callvirt instance object L_2335::'InvokeBody'()
     ret
 }
 
@@ -218,12 +218,12 @@
     throw
 }
 
-} // end of class L_2373
+} // end of class L_2335
 
-.class public auto ansi beforefieldinit L_2374
+.class public auto ansi beforefieldinit L_2336
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'X2352'
+    .field public object 'X2314'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -232,7 +232,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_2374::'X2352'
+    stfld object L_2336::'X2314'
     ret
 }
 
@@ -240,7 +240,7 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_2374::'X2352'
+    ldfld object L_2336::'X2314'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
@@ -253,7 +253,7 @@
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_2374::'InvokeBody'()
+    callvirt instance object L_2336::'InvokeBody'()
     ret
 }
 
@@ -329,9 +329,9 @@
     throw
 }
 
-} // end of class L_2374
+} // end of class L_2336
 
-.class public auto ansi beforefieldinit L_2375
+.class public auto ansi beforefieldinit L_2337
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -345,13 +345,13 @@
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object G2354, object X2352)
+    .locals init (object G2316, object X2314)
     ldstr "INNER SCOPE - SUCCESS"
-    stloc X2352
-    ldloc X2352
-    newobj instance void L_2374::'.ctor'(object)
-    stloc G2354
-    ldloc G2354
+    stloc X2314
+    ldloc X2314
+    newobj instance void L_2336::'.ctor'(object)
+    stloc G2316
+    ldloc G2316
     castclass [LispBase]Lisp.Closure
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     ret
@@ -364,7 +364,7 @@
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_2375::'InvokeBody'()
+    callvirt instance object L_2337::'InvokeBody'()
     ret
 }
 
@@ -440,12 +440,12 @@
     throw
 }
 
-} // end of class L_2375
+} // end of class L_2337
 
-.class public auto ansi beforefieldinit L_2376
+.class public auto ansi beforefieldinit L_2338
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'PREFIX2357'
+    .field public object 'PREFIX2319'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -454,7 +454,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_2376::'PREFIX2357'
+    stfld object L_2338::'PREFIX2319'
     ret
 }
 
@@ -462,7 +462,7 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_2376::'PREFIX2357'
+    ldfld object L_2338::'PREFIX2319'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -489,7 +489,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2376::'InvokeBody'(object)
+    callvirt instance object L_2338::'InvokeBody'(object)
     ret
 }
 
@@ -556,9 +556,9 @@
     throw
 }
 
-} // end of class L_2376
+} // end of class L_2338
 
-.class public auto ansi beforefieldinit L_2377
+.class public auto ansi beforefieldinit L_2339
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -573,7 +573,7 @@
 {
     .maxstack 8
     ldarg 1
-    newobj instance void L_2376::'.ctor'(object)
+    newobj instance void L_2338::'.ctor'(object)
     ret
     ldnull
     ret
@@ -594,7 +594,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2377::'InvokeBody'(object)
+    callvirt instance object L_2339::'InvokeBody'(object)
     ret
 }
 
@@ -661,12 +661,12 @@
     throw
 }
 
-} // end of class L_2377
+} // end of class L_2339
 
-.class public auto ansi beforefieldinit L_2378
+.class public auto ansi beforefieldinit L_2340
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'X2365'
+    .field public object 'X2327'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -675,7 +675,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_2378::'X2365'
+    stfld object L_2340::'X2327'
     ret
 }
 
@@ -683,10 +683,10 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_2378::'X2365'
+    ldfld object L_2340::'X2327'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_2378::'X2365'
+    ldfld object L_2340::'X2327'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
     ldarg 1
@@ -711,7 +711,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2378::'InvokeBody'(object)
+    callvirt instance object L_2340::'InvokeBody'(object)
     ret
 }
 
@@ -778,12 +778,12 @@
     throw
 }
 
-} // end of class L_2378
+} // end of class L_2340
 
-.class public auto ansi beforefieldinit L_2379
+.class public auto ansi beforefieldinit L_2341
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'F2363'
+    .field public object 'F2325'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -792,7 +792,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_2379::'F2363'
+    stfld object L_2341::'F2325'
     ret
 }
 
@@ -800,10 +800,10 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_2379::'F2363'
+    ldfld object L_2341::'F2325'
     castclass [LispBase]Lisp.Closure
     ldarg 1
-    newobj instance void L_2378::'.ctor'(object)
+    newobj instance void L_2340::'.ctor'(object)
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -825,7 +825,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2379::'InvokeBody'(object)
+    callvirt instance object L_2341::'InvokeBody'(object)
     ret
 }
 
@@ -892,12 +892,12 @@
     throw
 }
 
-} // end of class L_2379
+} // end of class L_2341
 
-.class public auto ansi beforefieldinit L_2380
+.class public auto ansi beforefieldinit L_2342
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'X2369'
+    .field public object 'X2331'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -906,7 +906,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_2380::'X2369'
+    stfld object L_2342::'X2331'
     ret
 }
 
@@ -914,10 +914,10 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_2380::'X2369'
+    ldfld object L_2342::'X2331'
     castclass [LispBase]Lisp.Closure
     ldarg.0
-    ldfld object L_2380::'X2369'
+    ldfld object L_2342::'X2331'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     castclass [LispBase]Lisp.Closure
     ldarg 1
@@ -942,7 +942,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2380::'InvokeBody'(object)
+    callvirt instance object L_2342::'InvokeBody'(object)
     ret
 }
 
@@ -1009,12 +1009,12 @@
     throw
 }
 
-} // end of class L_2380
+} // end of class L_2342
 
-.class public auto ansi beforefieldinit L_2381
+.class public auto ansi beforefieldinit L_2343
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'F2363'
+    .field public object 'F2325'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -1023,7 +1023,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_2381::'F2363'
+    stfld object L_2343::'F2325'
     ret
 }
 
@@ -1031,10 +1031,10 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_2381::'F2363'
+    ldfld object L_2343::'F2325'
     castclass [LispBase]Lisp.Closure
     ldarg 1
-    newobj instance void L_2380::'.ctor'(object)
+    newobj instance void L_2342::'.ctor'(object)
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -1056,7 +1056,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2381::'InvokeBody'(object)
+    callvirt instance object L_2343::'InvokeBody'(object)
     ret
 }
 
@@ -1123,9 +1123,9 @@
     throw
 }
 
-} // end of class L_2381
+} // end of class L_2343
 
-.class public auto ansi beforefieldinit L_2382
+.class public auto ansi beforefieldinit L_2344
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1140,10 +1140,10 @@
 {
     .maxstack 8
     ldarg 1
-    newobj instance void L_2379::'.ctor'(object)
+    newobj instance void L_2341::'.ctor'(object)
     castclass [LispBase]Lisp.Closure
     ldarg 1
-    newobj instance void L_2381::'.ctor'(object)
+    newobj instance void L_2343::'.ctor'(object)
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -1165,7 +1165,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2382::'InvokeBody'(object)
+    callvirt instance object L_2344::'InvokeBody'(object)
     ret
 }
 
@@ -1232,5 +1232,5 @@
     throw
 }
 
-} // end of class L_2382
+} // end of class L_2344
 

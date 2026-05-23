@@ -239,6 +239,14 @@
    (extra-temps :initarg :extra-temps :initform nil :accessor ast-multiple-value-prog1-extra-temps))
   (:documentation "A MULTIPLE-VALUE-PROG1 form."))
 
+(defclass ast-restart-bind (ast-node)
+  ((bindings :initarg :bindings :accessor ast-restart-bind-bindings)
+   (body :initarg :body :accessor ast-restart-bind-body)
+   (saved-restarts-temp :initarg :saved-restarts-temp :initform nil :accessor ast-restart-bind-saved-restarts-temp)
+   (restarts-list-temp :initarg :restarts-list-temp :initform nil :accessor ast-restart-bind-restarts-list-temp)
+   (result-temp :initarg :result-temp :initform nil :accessor ast-restart-bind-result-temp))
+  (:documentation "A RESTART-BIND form."))
+
 ;;; Macro Environment
 
 (defvar *macro-environment* (make-hash-table :test #'eq))
@@ -621,6 +629,21 @@
                  (ast-multiple-value-prog1-other-forms node)
                  :initial-value nil)))
 
+(defmethod compute-free-vars ((node ast-restart-bind))
+  (let ((binding-free-vars
+         (reduce (lambda (a b)
+                   (union a
+                          (union (compute-free-vars (second b))
+                                 (union (compute-free-vars (third b))
+                                        (union (compute-free-vars (fourth b))
+                                               (compute-free-vars (fifth b)))))))
+                 (ast-restart-bind-bindings node)
+                 :initial-value nil))
+        (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (ast-restart-bind-body node)
+                                :initial-value nil)))
+    (union binding-free-vars body-free-vars)))
+
 (defmethod compute-free-vars ((node ast-class))
   nil)
 
@@ -844,6 +867,20 @@
                  :count-temp (ast-multiple-value-prog1-count-temp node)
                  :extra-temps (ast-multiple-value-prog1-extra-temps node)))
 
+(defmethod closure-convert ((node ast-restart-bind))
+  (make-instance 'ast-restart-bind
+                 :bindings (mapcar (lambda (b)
+                                     (list (first b)
+                                           (closure-convert (second b))
+                                           (closure-convert (third b))
+                                           (closure-convert (fourth b))
+                                           (closure-convert (fifth b))))
+                                   (ast-restart-bind-bindings node))
+                 :body (mapcar #'closure-convert (ast-restart-bind-body node))
+                 :saved-restarts-temp (ast-restart-bind-saved-restarts-temp node)
+                 :restarts-list-temp (ast-restart-bind-restarts-list-temp node)
+                 :result-temp (ast-restart-bind-result-temp node)))
+
 (defmethod closure-convert ((node ast-class))
   node)
 
@@ -1054,6 +1091,20 @@
                  :result-temp (ast-multiple-value-prog1-result-temp node)
                  :count-temp (ast-multiple-value-prog1-count-temp node)
                  :extra-temps (ast-multiple-value-prog1-extra-temps node)))
+
+(defmethod lambda-lift ((node ast-restart-bind))
+  (make-instance 'ast-restart-bind
+                 :bindings (mapcar (lambda (b)
+                                     (list (first b)
+                                           (lambda-lift (second b))
+                                           (lambda-lift (third b))
+                                           (lambda-lift (fourth b))
+                                           (lambda-lift (fifth b))))
+                                   (ast-restart-bind-bindings node))
+                 :body (mapcar #'lambda-lift (ast-restart-bind-body node))
+                 :saved-restarts-temp (ast-restart-bind-saved-restarts-temp node)
+                 :restarts-list-temp (ast-restart-bind-restarts-list-temp node)
+                 :result-temp (ast-restart-bind-result-temp node)))
 
 (defmethod lambda-lift ((node ast-class))
   node)
@@ -1340,6 +1391,23 @@
           (make-instance 'ast-multiple-value-prog1
                          :first-form (lisp->ast (first args) env tags-env blocks-env current-scope)
                          :other-forms (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) (rest args))))
+
+         (restart-bind
+          (let* ((bindings (first args))
+                 (body-forms (rest args))
+                 (analyzed-bindings
+                  (mapcar (lambda (b)
+                            (let ((name (first b))
+                                  (fn (lisp->ast (second b) env tags-env blocks-env current-scope))
+                                  (keys (cddr b)))
+                              (list name fn
+                                    (lisp->ast (getf keys :report-function) env tags-env blocks-env current-scope)
+                                    (lisp->ast (getf keys :interactive-function) env tags-env blocks-env current-scope)
+                                    (lisp->ast (getf keys :test-function) env tags-env blocks-env current-scope))))
+                          bindings)))
+            (make-instance 'ast-restart-bind
+                           :bindings analyzed-bindings
+                           :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) body-forms))))
 
          (system:call-static-method
           (make-instance 'ast-dotnet-static-call
@@ -1946,6 +2014,21 @@
                  :result-temp (ast-multiple-value-prog1-result-temp node)
                  :count-temp (ast-multiple-value-prog1-count-temp node)
                  :extra-temps (ast-multiple-value-prog1-extra-temps node)))
+
+(defmethod analyze-environment ((node ast-restart-bind) env &optional mutated)
+  (make-instance 'ast-restart-bind
+                 :bindings (mapcar (lambda (b)
+                                     (list (first b)
+                                           (analyze-environment (second b) env mutated)
+                                           (analyze-environment (third b) env mutated)
+                                           (analyze-environment (fourth b) env mutated)
+                                           (analyze-environment (fifth b) env mutated)))
+                                   (ast-restart-bind-bindings node))
+                 :body (mapcar (lambda (form) (analyze-environment form env mutated))
+                               (ast-restart-bind-body node))
+                 :saved-restarts-temp (ast-restart-bind-saved-restarts-temp node)
+                 :restarts-list-temp (ast-restart-bind-restarts-list-temp node)
+                 :result-temp (ast-restart-bind-result-temp node)))
 
 (defmethod analyze-environment ((node ast-class) env &optional mutated)
   (declare (ignore env mutated))

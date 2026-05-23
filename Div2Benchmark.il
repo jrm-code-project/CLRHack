@@ -20,18 +20,18 @@
     .field public static object '_CTOR'
     .field public static object '_MAKE_CELL'
     .field public static object 'CDR'
-    .field public static object 'COUNT_LEN624'
-    .field public static object 'COUNT623'
+    .field public static object 'COUNT_LEN602'
+    .field public static object 'COUNT601'
     .field public static object 'NULL'
-    .field public static object 'LOOP_K585'
+    .field public static object 'LOOP_K563'
     .field public static object '_CELL_VALUE'
     .field public static object 'CONS'
-    .field public static object 'L584'
+    .field public static object 'L562'
     .field public static object '_SET_CELL_VALUE_'
     .field public static object 'TEMP_B'
-    .field public static object 'N581'
+    .field public static object 'N559'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S661'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S639'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -63,31 +63,31 @@
     ldnull
     stsfld object Program::'CDR'
     ldnull
-    stsfld object Program::'COUNT_LEN624'
+    stsfld object Program::'COUNT_LEN602'
     ldnull
-    stsfld object Program::'COUNT623'
+    stsfld object Program::'COUNT601'
     ldnull
     stsfld object Program::'NULL'
     ldnull
-    stsfld object Program::'LOOP_K585'
+    stsfld object Program::'LOOP_K563'
     ldnull
     stsfld object Program::'_CELL_VALUE'
     ldnull
     stsfld object Program::'CONS'
     ldnull
-    stsfld object Program::'L584'
+    stsfld object Program::'L562'
     ldnull
     stsfld object Program::'_SET_CELL_VALUE_'
     ldnull
     stsfld object Program::'TEMP_B'
     ldnull
-    stsfld object Program::'N581'
+    stsfld object Program::'N559'
     ldnull
     stsfld object Program::'_'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S661'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S639'
     ret
 }
 
@@ -174,7 +174,7 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object TEMP688, object COUNT_LEN624, object COUNT623, object RES622)
+    .locals init (object TEMP666, object COUNT_LEN602, object COUNT601, object RES600)
     ldstr "Testing iterative-div2..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -191,7 +191,7 @@
     pop
     ldsfld object Program::'_L_'
     call object Program::'ITERATIVE_DIV2'(object)
-    stloc RES622
+    stloc RES600
     ldstr "Length of div2 result should be 100:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -199,28 +199,28 @@
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc COUNT623
+    stloc COUNT601
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc COUNT_LEN624
-    ldloc COUNT_LEN624
-    ldloc COUNT_LEN624
-    ldloc COUNT623
-    newobj instance void L_629::'.ctor'(object, object)
-    stloc TEMP688
+    stloc COUNT_LEN602
+    ldloc COUNT_LEN602
+    ldloc COUNT_LEN602
+    ldloc COUNT601
+    newobj instance void L_607::'.ctor'(object, object)
+    stloc TEMP666
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP688
+    ldloc TEMP666
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP688
+    ldloc TEMP666
     pop
-    ldloc COUNT_LEN624
+    ldloc COUNT_LEN602
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
-    ldloc RES622
+    ldloc RES600
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     pop
-    ldloc COUNT623
+    ldloc COUNT601
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -230,7 +230,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_620:
+BLOCK_END_MAIN_598:
     nop
     ldnull
     ret
@@ -320,36 +320,36 @@ BLOCK_END_MAIN_620:
 .method private static hidebysig object 'TEST_2_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP685, object I615)
+    .locals init (object TEMP663, object I593)
     ldc.i4 300
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I615
-TAG_LOOP_616:
+    stloc I593
+TAG_LOOP_594:
     nop
-    ldloc I615
+    ldloc I593
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE683
+    brtrue TRUE661
     ldnull
-    br END684
-TRUE683:
+    br END662
+TRUE661:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S661'
-END684:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S639'
+END662:
     nop
     ldnull
     ceq
-    brtrue ELSE686
-    leave TAG_DONE_617
-    br END687
-ELSE686:
+    brtrue ELSE664
+    leave TAG_DONE_595
+    br END665
+ELSE664:
     nop
     ldnull
-END687:
+END665:
     nop
     pop
     ldarg 0
@@ -364,8 +364,8 @@ END687:
     ldarg 0
     call object Program::'RECURSIVE_DIV2'(object)
     pop
-    ldloc I615
-    ldloc I615
+    ldloc I593
+    ldloc I593
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -376,19 +376,19 @@ END687:
     unbox.any int32
     sub
     box int32
-    stloc TEMP685
+    stloc TEMP663
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP685
+    ldloc TEMP663
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP685
+    ldloc TEMP663
     pop
-    leave TAG_LOOP_616
+    leave TAG_LOOP_594
     pop
-TAG_DONE_617:
+TAG_DONE_595:
     nop
     ldnull
     ret
-BLOCK_END_TEST_2_613:
+BLOCK_END_TEST_2_591:
     nop
     ldnull
     ret
@@ -478,36 +478,36 @@ BLOCK_END_TEST_2_613:
 .method private static hidebysig object 'TEST_1_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP680, object I607)
+    .locals init (object TEMP658, object I585)
     ldc.i4 300
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I607
-TAG_LOOP_608:
+    stloc I585
+TAG_LOOP_586:
     nop
-    ldloc I607
+    ldloc I585
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE678
+    brtrue TRUE656
     ldnull
-    br END679
-TRUE678:
+    br END657
+TRUE656:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S661'
-END679:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S639'
+END657:
     nop
     ldnull
     ceq
-    brtrue ELSE681
-    leave TAG_DONE_609
-    br END682
-ELSE681:
+    brtrue ELSE659
+    leave TAG_DONE_587
+    br END660
+ELSE659:
     nop
     ldnull
-END682:
+END660:
     nop
     pop
     ldarg 0
@@ -522,8 +522,8 @@ END682:
     ldarg 0
     call object Program::'ITERATIVE_DIV2'(object)
     pop
-    ldloc I607
-    ldloc I607
+    ldloc I585
+    ldloc I585
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -534,19 +534,19 @@ END682:
     unbox.any int32
     sub
     box int32
-    stloc TEMP680
+    stloc TEMP658
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP680
+    ldloc TEMP658
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP680
+    ldloc TEMP658
     pop
-    leave TAG_LOOP_608
+    leave TAG_LOOP_586
     pop
-TAG_DONE_609:
+TAG_DONE_587:
     nop
     ldnull
     ret
-BLOCK_END_TEST_1_605:
+BLOCK_END_TEST_1_583:
     nop
     ldnull
     ret
@@ -639,20 +639,20 @@ BLOCK_END_TEST_1_605:
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE675
+    brtrue TRUE653
     ldnull
-    br END676
-TRUE675:
+    br END654
+TRUE653:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S661'
-END676:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S639'
+END654:
     nop
     ldnull
     ceq
-    brtrue ELSE677
+    brtrue ELSE655
     ldnull
     ret
-ELSE677:
+ELSE655:
     nop
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
@@ -665,7 +665,7 @@ ELSE677:
     call object Program::'RECURSIVE_DIV2'(object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_RECURSIVE_DIV2_600:
+BLOCK_END_RECURSIVE_DIV2_578:
     nop
     ldnull
     ret
@@ -755,80 +755,80 @@ BLOCK_END_RECURSIVE_DIV2_600:
 .method private static hidebysig object 'ITERATIVE_DIV2_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP672, object TEMP671, object A594, object L_PTR593)
+    .locals init (object TEMP650, object TEMP649, object A572, object L_PTR571)
     ldarg 0
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc L_PTR593
+    stloc L_PTR571
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc A594
-TAG_LOOP_595:
+    stloc A572
+TAG_LOOP_573:
     nop
-    ldloc L_PTR593
+    ldloc L_PTR571
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE669
+    brtrue TRUE647
     ldnull
-    br END670
-TRUE669:
+    br END648
+TRUE647:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S661'
-END670:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S639'
+END648:
     nop
     ldnull
     ceq
-    brtrue ELSE673
-    leave TAG_DONE_596
-    br END674
-ELSE673:
+    brtrue ELSE651
+    leave TAG_DONE_574
+    br END652
+ELSE651:
     nop
     ldnull
-END674:
+END652:
     nop
     pop
-    ldloc A594
-    ldloc L_PTR593
+    ldloc A572
+    ldloc L_PTR571
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldloc A594
+    ldloc A572
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TEMP671
+    stloc TEMP649
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP671
+    ldloc TEMP649
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP671
+    ldloc TEMP649
     pop
-    ldloc L_PTR593
-    ldloc L_PTR593
+    ldloc L_PTR571
+    ldloc L_PTR571
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc TEMP672
+    stloc TEMP650
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP672
+    ldloc TEMP650
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP672
+    ldloc TEMP650
     pop
-    leave TAG_LOOP_595
+    leave TAG_LOOP_573
     pop
-TAG_DONE_596:
+TAG_DONE_574:
     nop
     ldnull
     pop
-    ldloc A594
+    ldloc A572
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-BLOCK_END_ITERATIVE_DIV2_591:
+BLOCK_END_ITERATIVE_DIV2_569:
     nop
     ldnull
     ret
@@ -918,25 +918,25 @@ BLOCK_END_ITERATIVE_DIV2_591:
 .method private static hidebysig object 'CREATE_N_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP668, object LOOP_K585, object L584)
+    .locals init (object TEMP646, object LOOP_K563, object L562)
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc L584
+    stloc L562
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc LOOP_K585
-    ldloc LOOP_K585
+    stloc LOOP_K563
+    ldloc LOOP_K563
     ldarg 0
-    ldloc LOOP_K585
-    ldloc L584
-    newobj instance void L_628::'.ctor'(object, object, object)
-    stloc TEMP668
+    ldloc LOOP_K563
+    ldloc L562
+    newobj instance void L_606::'.ctor'(object, object, object)
+    stloc TEMP646
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP668
+    ldloc TEMP646
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP668
+    ldloc TEMP646
     pop
-    ldloc LOOP_K585
+    ldloc LOOP_K563
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -944,7 +944,7 @@ BLOCK_END_ITERATIVE_DIV2_591:
     box int32
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-BLOCK_END_CREATE_N_582:
+BLOCK_END_CREATE_N_560:
     nop
     ldnull
     ret
@@ -967,12 +967,12 @@ BLOCK_END_CREATE_N_582:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_628
+.class public auto ansi beforefieldinit L_606
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'N581'
-    .field public object 'LOOP_K585'
-    .field public object 'L584'
+    .field public object 'N559'
+    .field public object 'LOOP_K563'
+    .field public object 'L562'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -981,55 +981,55 @@ BLOCK_END_CREATE_N_582:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_628::'N581'
+    stfld object L_606::'N559'
     ldarg.0
     ldarg 2
-    stfld object L_628::'LOOP_K585'
+    stfld object L_606::'LOOP_K563'
     ldarg.0
     ldarg 3
-    stfld object L_628::'L584'
+    stfld object L_606::'L562'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP662)
+    .locals init (object TEMP640)
     ldarg 1
     ldarg.0
-    ldfld object L_628::'N581'
+    ldfld object L_606::'N559'
     stsfld object Program::'TEMP_B'
     unbox.any int32
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE659
+    brtrue TRUE637
     ldnull
-    br END660
-TRUE659:
+    br END638
+TRUE637:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S661'
-END660:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S639'
+END638:
     nop
     ldnull
     ceq
-    brtrue ELSE663
+    brtrue ELSE641
     ldarg.0
-    ldfld object L_628::'L584'
+    ldfld object L_606::'L562'
     ldnull
     ldarg.0
-    ldfld object L_628::'L584'
+    ldfld object L_606::'L562'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TEMP662
+    stloc TEMP640
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP662
+    ldloc TEMP640
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP662
+    ldloc TEMP640
     pop
     ldarg.0
-    ldfld object L_628::'LOOP_K585'
+    ldfld object L_606::'LOOP_K563'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -1044,10 +1044,10 @@ END660:
     box int32
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-ELSE663:
+ELSE641:
     nop
     ldarg.0
-    ldfld object L_628::'L584'
+    ldfld object L_606::'L562'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
@@ -1070,7 +1070,7 @@ ELSE663:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_628::'InvokeBody'(object)
+    callvirt instance object L_606::'InvokeBody'(object)
     ret
 }
 
@@ -1137,13 +1137,13 @@ ELSE663:
     throw
 }
 
-} // end of class L_628
+} // end of class L_606
 
-.class public auto ansi beforefieldinit L_629
+.class public auto ansi beforefieldinit L_607
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'COUNT_LEN624'
-    .field public object 'COUNT623'
+    .field public object 'COUNT_LEN602'
+    .field public object 'COUNT601'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -1152,39 +1152,39 @@ ELSE663:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_629::'COUNT_LEN624'
+    stfld object L_607::'COUNT_LEN602'
     ldarg.0
     ldarg 2
-    stfld object L_629::'COUNT623'
+    stfld object L_607::'COUNT601'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP666)
+    .locals init (object TEMP644)
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE664
+    brtrue TRUE642
     ldnull
-    br END665
-TRUE664:
+    br END643
+TRUE642:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S661'
-END665:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S639'
+END643:
     nop
     ldnull
     ceq
-    brtrue ELSE667
+    brtrue ELSE645
     ldnull
     ret
-ELSE667:
+ELSE645:
     nop
     ldarg.0
-    ldfld object L_629::'COUNT623'
+    ldfld object L_607::'COUNT601'
     ldarg.0
-    ldfld object L_629::'COUNT623'
+    ldfld object L_607::'COUNT601'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1195,14 +1195,14 @@ ELSE667:
     unbox.any int32
     add
     box int32
-    stloc TEMP666
+    stloc TEMP644
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP666
+    ldloc TEMP644
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP666
+    ldloc TEMP644
     pop
     ldarg.0
-    ldfld object L_629::'COUNT_LEN624'
+    ldfld object L_607::'COUNT_LEN602'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -1230,7 +1230,7 @@ ELSE667:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_629::'InvokeBody'(object)
+    callvirt instance object L_607::'InvokeBody'(object)
     ret
 }
 
@@ -1297,5 +1297,5 @@ ELSE667:
     throw
 }
 
-} // end of class L_629
+} // end of class L_607
 

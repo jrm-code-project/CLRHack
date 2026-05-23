@@ -92,3 +92,26 @@
 (defmethod map-ast-children (function (node ast-throw))
   (funcall function (ast-throw-tag node))
   (funcall function (ast-throw-value node)))
+
+(defmethod map-ast-children (function (node ast-values))
+  (mapc function (ast-values-values node)))
+
+(defmethod map-ast-children (function (node ast-multiple-value-bind))
+  (funcall function (ast-multiple-value-bind-values-form node))
+  (mapc function (ast-multiple-value-bind-body node)))
+
+(defmethod map-ast-children (function (node ast-multiple-value-call))
+  (funcall function (ast-multiple-value-call-function-form node))
+  (mapc function (ast-multiple-value-call-arguments-forms node)))
+
+(defmethod map-ast-children (function (node ast-multiple-value-prog1))
+  (funcall function (ast-multiple-value-prog1-first-form node))
+  (mapc function (ast-multiple-value-prog1-other-forms node)))
+
+(defmethod map-ast-children (function (node ast-restart-bind))
+  (dolist (b (ast-restart-bind-bindings node))
+    (funcall function (second b))
+    (funcall function (third b))
+    (funcall function (fourth b))
+    (funcall function (fifth b)))
+  (mapc function (ast-restart-bind-body node)))

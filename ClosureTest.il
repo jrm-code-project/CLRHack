@@ -8,7 +8,7 @@
        extends [mscorlib]System.Object
 {
     .field public static object '_CTOR'
-    .field public static object 'G535'
+    .field public static object 'G513'
     .field public static object 'PRINT'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
@@ -17,7 +17,7 @@
     ldnull
     stsfld object Program::'_CTOR'
     ldnull
-    stsfld object Program::'G535'
+    stsfld object Program::'G513'
     ldnull
     stsfld object Program::'PRINT'
     ret
@@ -27,25 +27,25 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object GREET_BONJOUR540, object GREET_HELLO539, object MAKE_GREETER538)
-    newobj instance void L_542::'.ctor'()
-    stloc MAKE_GREETER538
-    ldloc MAKE_GREETER538
+    .locals init (object GREET_BONJOUR518, object GREET_HELLO517, object MAKE_GREETER516)
+    newobj instance void L_520::'.ctor'()
+    stloc MAKE_GREETER516
+    ldloc MAKE_GREETER516
     castclass [LispBase]Lisp.Closure
     ldstr "Hello"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc GREET_HELLO539
-    ldloc MAKE_GREETER538
+    stloc GREET_HELLO517
+    ldloc MAKE_GREETER516
     castclass [LispBase]Lisp.Closure
     ldstr "Bonjour"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc GREET_BONJOUR540
-    ldloc GREET_HELLO539
+    stloc GREET_BONJOUR518
+    ldloc GREET_HELLO517
     castclass [LispBase]Lisp.Closure
     ldstr "Alice"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     pop
-    ldloc GREET_BONJOUR540
+    ldloc GREET_BONJOUR518
     castclass [LispBase]Lisp.Closure
     ldstr "Bob"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
@@ -55,10 +55,10 @@
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_541
+.class public auto ansi beforefieldinit L_519
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'G535'
+    .field public object 'G513'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -67,7 +67,7 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_541::'G535'
+    stfld object L_519::'G513'
     ret
 }
 
@@ -75,7 +75,7 @@
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_541::'G535'
+    ldfld object L_519::'G513'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -102,7 +102,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_541::'InvokeBody'(object)
+    callvirt instance object L_519::'InvokeBody'(object)
     ret
 }
 
@@ -169,9 +169,9 @@
     throw
 }
 
-} // end of class L_541
+} // end of class L_519
 
-.class public auto ansi beforefieldinit L_542
+.class public auto ansi beforefieldinit L_520
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -185,11 +185,11 @@
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object G535)
+    .locals init (object G513)
     ldarg 1
-    stloc G535
-    ldloc G535
-    newobj instance void L_541::'.ctor'(object)
+    stloc G513
+    ldloc G513
+    newobj instance void L_519::'.ctor'(object)
     ret
     ldnull
     ret
@@ -210,7 +210,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_542::'InvokeBody'(object)
+    callvirt instance object L_520::'InvokeBody'(object)
     ret
 }
 
@@ -277,5 +277,5 @@
     throw
 }
 
-} // end of class L_542
+} // end of class L_520
 

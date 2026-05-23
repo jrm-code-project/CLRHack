@@ -38,31 +38,8 @@
     .field public static object 'EQUAL'
     .field public static object 'CONSP'
     .field public static object 'EQ'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1991'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1990'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1989'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1988'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1987'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1986'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1985'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1984'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1983'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1982'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1981'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1980'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1979'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1978'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1977'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1976'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1975'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1974'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1943'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1897'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1883'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1869'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_G1864'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T1831'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S1830'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T1782'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1781'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -130,105 +107,13 @@
     ldnull
     stsfld object Program::'EQ'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "R"
+    ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1991'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "S"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1990'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "U"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1989'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "V"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1988'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "D"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1987'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "C"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1986'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "B"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1985'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "A"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1984'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "W"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1983'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "PLUS"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "OR"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1981'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "MEMBER"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1980'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "LENGTH"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1979'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "REVERSE"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "Z"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "Y"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "X"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "APPEND"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "WIN"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1943'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "IF"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1897'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "QUOTE"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1883'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "LEMMAS"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1869'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "EQUAL"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "T"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
     ret
 }
 
@@ -315,7 +200,7 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object REWRITTEN1663, object TERM1662)
+    .locals init (object REWRITTEN1637, object TERM1636)
     call object Program::'SETUP'()
     pop
     ldstr "Lemmas loaded."
@@ -323,36 +208,36 @@
     ldnull
     pop
     call object Program::'TEST_TERM'()
-    stloc TERM1662
+    stloc TERM1636
     ldstr "Rewriting term..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc TERM1662
+    ldloc TERM1636
     call object Program::'REWRITE'(object)
-    stloc REWRITTEN1663
+    stloc REWRITTEN1637
     ldstr "Tautology check..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc REWRITTEN1663
+    ldloc REWRITTEN1637
     ldnull
     ldnull
     call object Program::'TAUTOLOGYP'(object, object, object)
     ldnull
     ceq
-    brtrue ELSE1992
+    brtrue ELSE1920
     ldstr "SUCCESS: Term is a tautology!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE1992:
+ELSE1920:
     nop
     ldstr "FAILURE: Term is NOT a tautology!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_1660:
+BLOCK_END_MAIN_1634:
     nop
     ldnull
     ret
@@ -440,35 +325,20 @@ BLOCK_END_MAIN_1660:
 
 .method private static hidebysig object 'TEST_TERM_Body'() cil managed
 {
-    .maxstack 14
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1897'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
+    .maxstack 8
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1983'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1983'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -477,41 +347,13 @@ BLOCK_END_MAIN_1660:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1984'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1985'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1986'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1987'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1984'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1985'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1986'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1987'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -528,23 +370,18 @@ BLOCK_END_MAIN_1660:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1988'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1989'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1990'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1991'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -552,26 +389,74 @@ BLOCK_END_MAIN_1660:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1991'
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1990'
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1989'
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1988'
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -597,7 +482,7 @@ BLOCK_END_MAIN_1660:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_TERM_1656:
+BLOCK_END_TEST_TERM_1630:
     nop
     ldnull
     ret
@@ -685,128 +570,26 @@ BLOCK_END_TEST_TERM_1656:
 
 .method private static hidebysig object 'SETUP_Body'() cil managed
 {
-    .maxstack 15
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
+    .maxstack 8
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1979'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1979'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1980'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1981'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1980'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1980'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -819,21 +602,11 @@ BLOCK_END_TEST_TERM_1656:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1980'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1978'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1980'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -841,27 +614,14 @@ BLOCK_END_TEST_TERM_1656:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1979'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1974'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1979'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1979'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -873,25 +633,150 @@ BLOCK_END_TEST_TERM_1656:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1975'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1982'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1976'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1977'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -915,7 +800,7 @@ BLOCK_END_TEST_TERM_1656:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail. call object Program::'ADD_LEMMAS'(object)
     ret
-BLOCK_END_SETUP_1652:
+BLOCK_END_SETUP_1626:
     nop
     ldnull
     ret
@@ -1007,65 +892,65 @@ BLOCK_END_SETUP_1652:
 .method private static hidebysig object 'UNIFY_LST_Body'(object, object, object) cil managed
 {
     .maxstack 8
-    .locals init (object NEW_ALIST1649)
+    .locals init (object NEW_ALIST1623)
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1963
+    brtrue TRUE1909
     ldnull
-    br END1964
-TRUE1963:
+    br END1910
+TRUE1909:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1964:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1910:
     nop
     ldnull
     ceq
-    brtrue ELSE1973
+    brtrue ELSE1919
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1965
+    brtrue TRUE1911
     ldnull
-    br END1966
-TRUE1965:
+    br END1912
+TRUE1911:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1966:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1912:
     nop
     ldnull
     ceq
-    brtrue ELSE1969
+    brtrue ELSE1915
     ldarg 2
     ret
-ELSE1969:
+ELSE1915:
     nop
     ldnull
     ret
-ELSE1973:
+ELSE1919:
     nop
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1967
+    brtrue TRUE1913
     ldnull
-    br END1968
-TRUE1967:
+    br END1914
+TRUE1913:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1968:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1914:
     nop
     ldnull
     ceq
-    brtrue ELSE1972
+    brtrue ELSE1918
     ldnull
     ret
-ELSE1972:
+ELSE1918:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1971
+    brtrue ELSE1917
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
@@ -1074,29 +959,29 @@ ELSE1972:
     ldfld object [LispBase]Lisp.List/ListCell::first
     ldarg 2
     call object Program::'UNIFY'(object, object, object)
-    stloc NEW_ALIST1649
-    ldloc NEW_ALIST1649
+    stloc NEW_ALIST1623
+    ldloc NEW_ALIST1623
     ldnull
     ceq
-    brtrue ELSE1970
+    brtrue ELSE1916
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     ldarg 1
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    ldloc NEW_ALIST1649
+    ldloc NEW_ALIST1623
     tail. call object Program::'UNIFY_LST'(object, object, object)
     ret
-ELSE1970:
+ELSE1916:
     nop
     ldnull
     ret
-ELSE1971:
+ELSE1917:
     nop
     ldnull
     ret
-BLOCK_END_UNIFY_LST_1647:
+BLOCK_END_UNIFY_LST_1621:
     nop
     ldnull
     ret
@@ -1188,65 +1073,65 @@ BLOCK_END_UNIFY_LST_1647:
 .method private static hidebysig object 'UNIFY_Body'(object, object, object) cil managed
 {
     .maxstack 8
-    .locals init (object PAIR1641)
+    .locals init (object PAIR1615)
     ldarg 0
     ldarg 1
     call object Program::'EQUAL'(object, object)
     ldnull
     ceq
-    brtrue ELSE1962
+    brtrue ELSE1908
     ldarg 2
     ret
-ELSE1962:
+ELSE1908:
     nop
     ldarg 1
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1946
+    brtrue TRUE1892
     ldnull
-    br END1947
-TRUE1946:
+    br END1893
+TRUE1892:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1947:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1948
-    ldnull
-    br END1949
-TRUE1948:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1949:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1893:
     nop
     ldnull
     ceq
-    brtrue ELSE1961
+    brtrue TRUE1894
+    ldnull
+    br END1895
+TRUE1894:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1895:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1907
     ldarg 1
     ldarg 2
     call object Program::'ASSOC'(object, object)
-    stloc PAIR1641
-    ldloc PAIR1641
+    stloc PAIR1615
+    ldloc PAIR1615
     ldnull
     ceq
-    brtrue ELSE1957
-    ldloc PAIR1641
+    brtrue ELSE1903
+    ldloc PAIR1615
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     ldarg 0
     call object Program::'EQUAL'(object, object)
     ldnull
     ceq
-    brtrue ELSE1956
+    brtrue ELSE1902
     ldarg 2
     ret
-ELSE1956:
+ELSE1902:
     nop
     ldnull
     ret
-ELSE1957:
+ELSE1903:
     nop
     ldarg 1
     ldarg 0
@@ -1254,36 +1139,36 @@ ELSE1957:
     ldarg 2
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-ELSE1961:
+ELSE1907:
     nop
     ldarg 0
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1950
+    brtrue TRUE1896
     ldnull
-    br END1951
-TRUE1950:
+    br END1897
+TRUE1896:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1951:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1952
-    ldnull
-    br END1953
-TRUE1952:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1953:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1897:
     nop
     ldnull
     ceq
-    brtrue ELSE1960
+    brtrue TRUE1898
+    ldnull
+    br END1899
+TRUE1898:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1899:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1906
     ldnull
     ret
-ELSE1960:
+ELSE1906:
     nop
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
@@ -1292,17 +1177,17 @@ ELSE1960:
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1954
+    brtrue TRUE1900
     ldnull
-    br END1955
-TRUE1954:
+    br END1901
+TRUE1900:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1955:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1901:
     nop
     ldnull
     ceq
-    brtrue ELSE1959
+    brtrue ELSE1905
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -1312,19 +1197,19 @@ END1955:
     ldarg 2
     tail. call object Program::'UNIFY_LST'(object, object, object)
     ret
-ELSE1959:
+ELSE1905:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1958
+    brtrue ELSE1904
     ldnull
     ret
-ELSE1958:
+ELSE1904:
     nop
     ldnull
     ret
-BLOCK_END_UNIFY_1639:
+BLOCK_END_UNIFY_1613:
     nop
     ldnull
     ret
@@ -1418,20 +1303,20 @@ BLOCK_END_UNIFY_1639:
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1941
+    brtrue TRUE1888
     ldnull
-    br END1942
-TRUE1941:
+    br END1889
+TRUE1888:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1942:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1889:
     nop
     ldnull
     ceq
-    brtrue ELSE1945
+    brtrue ELSE1891
     ldarg 0
     ret
-ELSE1945:
+ELSE1891:
     nop
     ldarg 0
     ldarg 1
@@ -1441,15 +1326,15 @@ ELSE1945:
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1943'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1943'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     call object Program::'UNIFY'(object, object, object)
     ldnull
     ceq
-    brtrue ELSE1944
+    brtrue ELSE1890
     ldarg 0
     ldarg 1
     castclass [LispBase]Lisp.List/ListCell
@@ -1458,8 +1343,8 @@ ELSE1945:
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1943'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1943'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -1476,7 +1361,7 @@ ELSE1945:
     call object Program::'APPLY_SUBST'(object, object)
     tail. call object Program::'REWRITE'(object)
     ret
-ELSE1944:
+ELSE1890:
     nop
     ldarg 0
     ldarg 1
@@ -1484,7 +1369,7 @@ ELSE1944:
     ldfld object [LispBase]Lisp.List/ListCell::rest
     tail. call object Program::'LOOP_LEMMAS'(object, object)
     ret
-BLOCK_END_LOOP_LEMMAS_1632:
+BLOCK_END_LOOP_LEMMAS_1606:
     nop
     ldnull
     ret
@@ -1578,40 +1463,40 @@ BLOCK_END_LOOP_LEMMAS_1632:
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1936
+    brtrue TRUE1883
     ldnull
-    br END1937
-TRUE1936:
+    br END1884
+TRUE1883:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1937:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1938
-    ldnull
-    br END1939
-TRUE1938:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1939:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1884:
     nop
     ldnull
     ceq
-    brtrue ELSE1940
+    brtrue TRUE1885
+    ldnull
+    br END1886
+TRUE1885:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1886:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1887
     ldarg 0
     ret
-ELSE1940:
+ELSE1887:
     nop
     ldarg 0
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1869'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call object Program::'GETPROP'(object, object)
     tail. call object Program::'LOOP_LEMMAS'(object, object)
     ret
-BLOCK_END_REWRITE_WITH_LEMMAS_1626:
+BLOCK_END_REWRITE_WITH_LEMMAS_1600:
     nop
     ldnull
     ret
@@ -1704,20 +1589,20 @@ BLOCK_END_REWRITE_WITH_LEMMAS_1626:
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1933
+    brtrue TRUE1880
     ldnull
-    br END1934
-TRUE1933:
+    br END1881
+TRUE1880:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1934:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1881:
     nop
     ldnull
     ceq
-    brtrue ELSE1935
+    brtrue ELSE1882
     ldnull
     ret
-ELSE1935:
+ELSE1882:
     nop
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
@@ -1729,7 +1614,7 @@ ELSE1935:
     call object Program::'REWRITE_ARGS'(object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_REWRITE_ARGS_1621:
+BLOCK_END_REWRITE_ARGS_1595:
     nop
     ldnull
     ret
@@ -1819,60 +1704,60 @@ BLOCK_END_REWRITE_ARGS_1621:
 .method private static hidebysig object 'REWRITE_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REWRITTEN1617)
+    .locals init (object REWRITTEN1591)
     ldarg 0
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1915
+    brtrue TRUE1862
     ldnull
-    br END1916
-TRUE1915:
+    br END1863
+TRUE1862:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1916:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1917
-    ldnull
-    br END1918
-TRUE1917:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1918:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1863:
     nop
     ldnull
     ceq
-    brtrue ELSE1932
+    brtrue TRUE1864
+    ldnull
+    br END1865
+TRUE1864:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1865:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1879
     ldarg 0
     ret
-ELSE1932:
+ELSE1879:
     nop
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1883'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1919
+    brtrue TRUE1866
     ldnull
-    br END1920
-TRUE1919:
+    br END1867
+TRUE1866:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1920:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1867:
     nop
     ldnull
     ceq
-    brtrue ELSE1931
+    brtrue ELSE1878
     ldarg 0
     ret
-ELSE1931:
+ELSE1878:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1930
+    brtrue ELSE1877
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
@@ -1882,44 +1767,44 @@ ELSE1931:
     call object Program::'REWRITE_ARGS'(object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     call object Program::'REWRITE_WITH_LEMMAS'(object)
-    stloc REWRITTEN1617
-    ldloc REWRITTEN1617
+    stloc REWRITTEN1591
+    ldloc REWRITTEN1591
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1921
+    brtrue TRUE1868
     ldnull
-    br END1922
-TRUE1921:
+    br END1869
+TRUE1868:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1922:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1869:
     nop
     ldnull
     ceq
-    brtrue ELSE1927
-    ldloc REWRITTEN1617
+    brtrue ELSE1874
+    ldloc REWRITTEN1591
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1923
+    brtrue TRUE1870
     ldnull
-    br END1924
-TRUE1923:
+    br END1871
+TRUE1870:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1924:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1871:
     nop
     ldnull
     ceq
-    brtrue ELSE1925
-    ldloc REWRITTEN1617
+    brtrue ELSE1872
+    ldloc REWRITTEN1591
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldloc REWRITTEN1617
+    ldloc REWRITTEN1591
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
@@ -1927,32 +1812,32 @@ END1924:
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
     call object Program::'EQUAL'(object, object)
-    br END1926
-ELSE1925:
+    br END1873
+ELSE1872:
     nop
     ldnull
-END1926:
+END1873:
     nop
-    br END1928
-ELSE1927:
+    br END1875
+ELSE1874:
     nop
     ldnull
-END1928:
+END1875:
     nop
     ldnull
     ceq
-    brtrue ELSE1929
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    brtrue ELSE1876
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ret
-ELSE1929:
+ELSE1876:
     nop
-    ldloc REWRITTEN1617
+    ldloc REWRITTEN1591
     ret
-ELSE1930:
+ELSE1877:
     nop
     ldnull
     ret
-BLOCK_END_REWRITE_1615:
+BLOCK_END_REWRITE_1589:
     nop
     ldnull
     ret
@@ -2043,32 +1928,32 @@ BLOCK_END_REWRITE_1615:
 .method private static hidebysig object 'FALSEP_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object G16101611)
+    .locals init (object G15841585)
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1912
+    brtrue TRUE1859
     ldnull
-    br END1913
-TRUE1912:
+    br END1860
+TRUE1859:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1913:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1860:
     nop
-    stloc G16101611
-    ldloc G16101611
+    stloc G15841585
+    ldloc G15841585
     ldnull
     ceq
-    brtrue ELSE1914
-    ldloc G16101611
+    brtrue ELSE1861
+    ldloc G15841585
     ret
-ELSE1914:
+ELSE1861:
     nop
     ldarg 0
     ldarg 1
     tail. call object Program::'MEMBER'(object, object)
     ret
-BLOCK_END_FALSEP_1608:
+BLOCK_END_FALSEP_1582:
     nop
     ldnull
     ret
@@ -2159,32 +2044,32 @@ BLOCK_END_FALSEP_1608:
 .method private static hidebysig object 'TRUEP_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object G16021603)
+    .locals init (object G15761577)
     ldarg 0
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1909
+    brtrue TRUE1856
     ldnull
-    br END1910
-TRUE1909:
+    br END1857
+TRUE1856:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1910:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1857:
     nop
-    stloc G16021603
-    ldloc G16021603
+    stloc G15761577
+    ldloc G15761577
     ldnull
     ceq
-    brtrue ELSE1911
-    ldloc G16021603
+    brtrue ELSE1858
+    ldloc G15761577
     ret
-ELSE1911:
+ELSE1858:
     nop
     ldarg 0
     ldarg 1
     tail. call object Program::'MEMBER'(object, object)
     ret
-BLOCK_END_TRUEP_1600:
+BLOCK_END_TRUEP_1574:
     nop
     ldnull
     ret
@@ -2281,66 +2166,66 @@ BLOCK_END_TRUEP_1600:
     call object Program::'TRUEP'(object, object)
     ldnull
     ceq
-    brtrue ELSE1908
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    brtrue ELSE1855
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ret
-ELSE1908:
+ELSE1855:
     nop
     ldarg 0
     ldarg 2
     call object Program::'FALSEP'(object, object)
     ldnull
     ceq
-    brtrue ELSE1907
+    brtrue ELSE1854
     ldnull
     ret
-ELSE1907:
+ELSE1854:
     nop
     ldarg 0
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1893
+    brtrue TRUE1841
     ldnull
-    br END1894
-TRUE1893:
+    br END1842
+TRUE1841:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1894:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1895
-    ldnull
-    br END1896
-TRUE1895:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1896:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1842:
     nop
     ldnull
     ceq
-    brtrue ELSE1906
+    brtrue TRUE1843
+    ldnull
+    br END1844
+TRUE1843:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1844:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1853
     ldnull
     ret
-ELSE1906:
+ELSE1853:
     nop
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1897'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1898
+    brtrue TRUE1845
     ldnull
-    br END1899
-TRUE1898:
+    br END1846
+TRUE1845:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1899:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1846:
     nop
     ldnull
     ceq
-    brtrue ELSE1905
+    brtrue ELSE1852
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -2350,7 +2235,7 @@ END1899:
     call object Program::'TRUEP'(object, object)
     ldnull
     ceq
-    brtrue ELSE1903
+    brtrue ELSE1850
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -2362,7 +2247,7 @@ END1899:
     ldarg 2
     tail. call object Program::'TAUTOLOGYP'(object, object, object)
     ret
-ELSE1903:
+ELSE1850:
     nop
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
@@ -2373,7 +2258,7 @@ ELSE1903:
     call object Program::'FALSEP'(object, object)
     ldnull
     ceq
-    brtrue ELSE1902
+    brtrue ELSE1849
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -2387,12 +2272,12 @@ ELSE1903:
     ldarg 2
     tail. call object Program::'TAUTOLOGYP'(object, object, object)
     ret
-ELSE1902:
+ELSE1849:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1901
+    brtrue ELSE1848
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -2411,7 +2296,7 @@ ELSE1902:
     call object Program::'TAUTOLOGYP'(object, object, object)
     ldnull
     ceq
-    brtrue ELSE1900
+    brtrue ELSE1847
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -2431,27 +2316,27 @@ ELSE1902:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail. call object Program::'TAUTOLOGYP'(object, object, object)
     ret
-ELSE1900:
+ELSE1847:
     nop
     ldnull
     ret
-ELSE1901:
+ELSE1848:
     nop
     ldnull
     ret
-ELSE1905:
+ELSE1852:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1904
+    brtrue ELSE1851
     ldnull
     ret
-ELSE1904:
+ELSE1851:
     nop
     ldnull
     ret
-BLOCK_END_TAUTOLOGYP_1594:
+BLOCK_END_TAUTOLOGYP_1568:
     nop
     ldnull
     ret
@@ -2545,20 +2430,20 @@ BLOCK_END_TAUTOLOGYP_1594:
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1890
+    brtrue TRUE1838
     ldnull
-    br END1891
-TRUE1890:
+    br END1839
+TRUE1838:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1891:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1839:
     nop
     ldnull
     ceq
-    brtrue ELSE1892
+    brtrue ELSE1840
     ldnull
     ret
-ELSE1892:
+ELSE1840:
     nop
     ldarg 0
     ldarg 1
@@ -2572,7 +2457,7 @@ ELSE1892:
     call object Program::'APPLY_SUBST_LST'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_APPLY_SUBST_LST_1587:
+BLOCK_END_APPLY_SUBST_LST_1561:
     nop
     ldnull
     ret
@@ -2663,74 +2548,74 @@ BLOCK_END_APPLY_SUBST_LST_1587:
 .method private static hidebysig object 'APPLY_SUBST_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object PAIR1582)
+    .locals init (object PAIR1556)
     ldarg 1
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1879
+    brtrue TRUE1828
     ldnull
-    br END1880
-TRUE1879:
+    br END1829
+TRUE1828:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1880:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE1881
-    ldnull
-    br END1882
-TRUE1881:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1882:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1829:
     nop
     ldnull
     ceq
-    brtrue ELSE1889
+    brtrue TRUE1830
+    ldnull
+    br END1831
+TRUE1830:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1831:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1837
     ldarg 1
     ldarg 0
     call object Program::'ASSOC'(object, object)
-    stloc PAIR1582
-    ldloc PAIR1582
+    stloc PAIR1556
+    ldloc PAIR1556
     ldnull
     ceq
-    brtrue ELSE1886
-    ldloc PAIR1582
+    brtrue ELSE1834
+    ldloc PAIR1556
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     ret
-ELSE1886:
+ELSE1834:
     nop
     ldarg 1
     ret
-ELSE1889:
+ELSE1837:
     nop
     ldarg 1
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1883'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1884
+    brtrue TRUE1832
     ldnull
-    br END1885
-TRUE1884:
+    br END1833
+TRUE1832:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1885:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1833:
     nop
     ldnull
     ceq
-    brtrue ELSE1888
+    brtrue ELSE1836
     ldarg 1
     ret
-ELSE1888:
+ELSE1836:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1887
+    brtrue ELSE1835
     ldarg 1
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
@@ -2741,11 +2626,11 @@ ELSE1888:
     call object Program::'APPLY_SUBST_LST'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-ELSE1887:
+ELSE1835:
     nop
     ldnull
     ret
-BLOCK_END_APPLY_SUBST_1580:
+BLOCK_END_APPLY_SUBST_1554:
     nop
     ldnull
     ret
@@ -2838,20 +2723,20 @@ BLOCK_END_APPLY_SUBST_1580:
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1876
+    brtrue TRUE1825
     ldnull
-    br END1877
-TRUE1876:
+    br END1826
+TRUE1825:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1877:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1826:
     nop
     ldnull
     ceq
-    brtrue ELSE1878
+    brtrue ELSE1827
     ldnull
     ret
-ELSE1878:
+ELSE1827:
     nop
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
@@ -2863,7 +2748,7 @@ ELSE1878:
     ldfld object [LispBase]Lisp.List/ListCell::rest
     tail. call object Program::'ADD_LEMMAS'(object)
     ret
-BLOCK_END_ADD_LEMMAS_1574:
+BLOCK_END_ADD_LEMMAS_1548:
     nop
     ldnull
     ret
@@ -2953,38 +2838,38 @@ BLOCK_END_ADD_LEMMAS_1574:
 .method private static hidebysig object 'ADD_LEMMA_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object SYM1570)
+    .locals init (object SYM1544)
     ldarg 0
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1862
+    brtrue TRUE1813
     ldnull
-    br END1863
-TRUE1862:
+    br END1814
+TRUE1813:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1863:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1814:
     nop
     ldnull
     ceq
-    brtrue ELSE1872
+    brtrue ELSE1821
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1864'
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1865
+    brtrue TRUE1815
     ldnull
-    br END1866
-TRUE1865:
+    br END1816
+TRUE1815:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1866:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1816:
     nop
     ldnull
     ceq
-    brtrue ELSE1870
+    brtrue ELSE1819
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -2993,29 +2878,29 @@ END1866:
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1867
+    brtrue TRUE1817
     ldnull
-    br END1868
-TRUE1867:
+    br END1818
+TRUE1817:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1868:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1818:
     nop
-    br END1871
-ELSE1870:
-    nop
-    ldnull
-END1871:
-    nop
-    br END1873
-ELSE1872:
+    br END1820
+ELSE1819:
     nop
     ldnull
-END1873:
+END1820:
+    nop
+    br END1822
+ELSE1821:
+    nop
+    ldnull
+END1822:
     nop
     ldnull
     ceq
-    brtrue ELSE1875
+    brtrue ELSE1824
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -3023,22 +2908,22 @@ END1873:
     ldfld object [LispBase]Lisp.List/ListCell::first
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc SYM1570
-    ldloc SYM1570
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1869'
+    stloc SYM1544
+    ldloc SYM1544
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldarg 0
-    ldloc SYM1570
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_G1869'
+    ldloc SYM1544
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call object Program::'GETPROP'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail. call object Program::'PUTPROP'(object, object, object)
     ret
-ELSE1875:
+ELSE1824:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1874
+    brtrue ELSE1823
     ldstr "Invalid lemma:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -3047,11 +2932,11 @@ ELSE1875:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE1874:
+ELSE1823:
     nop
     ldnull
     ret
-BLOCK_END_ADD_LEMMA_1568:
+BLOCK_END_ADD_LEMMA_1542:
     nop
     ldnull
     ret
@@ -3143,39 +3028,39 @@ BLOCK_END_ADD_LEMMA_1568:
 .method private static hidebysig object 'PUTPROP_Body'(object, object, object) cil managed
 {
     .maxstack 8
-    .locals init (object CLR_VIRT_ARG1860, object CLR_VIRT_ARG1859, object CLR_VIRT_INST_TEMP)
+    .locals init (object CLR_VIRT_ARG1811, object CLR_VIRT_ARG1810, object CLR_VIRT_INST_TEMP)
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1857
+    brtrue TRUE1808
     ldnull
-    br END1858
-TRUE1857:
+    br END1809
+TRUE1808:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1858:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1809:
     nop
     ldnull
     ceq
-    brtrue ELSE1861
+    brtrue ELSE1812
     ldnull
     ret
-ELSE1861:
+ELSE1812:
     nop
     ldarg 0
     ldarg 1
     ldarg 2
-    stloc CLR_VIRT_ARG1859
-    stloc CLR_VIRT_ARG1860
+    stloc CLR_VIRT_ARG1810
+    stloc CLR_VIRT_ARG1811
     castclass [LispBase]Lisp.Symbol
-    ldloc CLR_VIRT_ARG1859
-    ldloc CLR_VIRT_ARG1860
+    ldloc CLR_VIRT_ARG1810
+    ldloc CLR_VIRT_ARG1811
     callvirt instance void [LispBase]Lisp.Symbol::'Put'(object, object)
     ldnull
     pop
     ldarg 2
     ret
-BLOCK_END_PUTPROP_1563:
+BLOCK_END_PUTPROP_1537:
     nop
     ldnull
     ret
@@ -3266,33 +3151,33 @@ BLOCK_END_PUTPROP_1563:
 .method private static hidebysig object 'GETPROP_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object CLR_VIRT_ARG1855, object CLR_VIRT_INST_TEMP)
+    .locals init (object CLR_VIRT_ARG1806, object CLR_VIRT_INST_TEMP)
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1853
+    brtrue TRUE1804
     ldnull
-    br END1854
-TRUE1853:
+    br END1805
+TRUE1804:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1854:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1805:
     nop
     ldnull
     ceq
-    brtrue ELSE1856
+    brtrue ELSE1807
     ldnull
     ret
-ELSE1856:
+ELSE1807:
     nop
     ldarg 0
     ldarg 1
-    stloc CLR_VIRT_ARG1855
+    stloc CLR_VIRT_ARG1806
     castclass [LispBase]Lisp.Symbol
-    ldloc CLR_VIRT_ARG1855
+    ldloc CLR_VIRT_ARG1806
     callvirt instance object [LispBase]Lisp.Symbol::'Get'(object)
     ret
-BLOCK_END_GETPROP_1556:
+BLOCK_END_GETPROP_1530:
     nop
     ldnull
     ret
@@ -3386,20 +3271,20 @@ BLOCK_END_GETPROP_1556:
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1848
+    brtrue TRUE1799
     ldnull
-    br END1849
-TRUE1848:
+    br END1800
+TRUE1799:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1849:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1800:
     nop
     ldnull
     ceq
-    brtrue ELSE1852
+    brtrue ELSE1803
     ldnull
     ret
-ELSE1852:
+ELSE1803:
     nop
     ldarg 0
     ldarg 1
@@ -3410,28 +3295,28 @@ ELSE1852:
     call object Program::'EQUAL'(object, object)
     ldnull
     ceq
-    brtrue ELSE1851
+    brtrue ELSE1802
     ldarg 1
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
     ret
-ELSE1851:
+ELSE1802:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1850
+    brtrue ELSE1801
     ldarg 0
     ldarg 1
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     tail. call object Program::'ASSOC'(object, object)
     ret
-ELSE1850:
+ELSE1801:
     nop
     ldnull
     ret
-BLOCK_END_ASSOC_1550:
+BLOCK_END_ASSOC_1524:
     nop
     ldnull
     ret
@@ -3525,20 +3410,20 @@ BLOCK_END_ASSOC_1550:
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1843
+    brtrue TRUE1794
     ldnull
-    br END1844
-TRUE1843:
+    br END1795
+TRUE1794:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1844:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1795:
     nop
     ldnull
     ceq
-    brtrue ELSE1847
+    brtrue ELSE1798
     ldnull
     ret
-ELSE1847:
+ELSE1798:
     nop
     ldarg 0
     ldarg 1
@@ -3547,26 +3432,26 @@ ELSE1847:
     call object Program::'EQUAL'(object, object)
     ldnull
     ceq
-    brtrue ELSE1846
+    brtrue ELSE1797
     ldarg 1
     ret
-ELSE1846:
+ELSE1797:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1845
+    brtrue ELSE1796
     ldarg 0
     ldarg 1
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     tail. call object Program::'MEMBER'(object, object)
     ret
-ELSE1845:
+ELSE1796:
     nop
     ldnull
     ret
-BLOCK_END_MEMBER_1544:
+BLOCK_END_MEMBER_1518:
     nop
     ldnull
     ret
@@ -3660,57 +3545,57 @@ BLOCK_END_MEMBER_1544:
     ldarg 0
     ldarg 1
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1828
+    brtrue TRUE1779
     ldnull
-    br END1829
-TRUE1828:
+    br END1780
+TRUE1779:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1829:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1780:
     nop
     ldnull
     ceq
-    brtrue ELSE1842
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    brtrue ELSE1793
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ret
-ELSE1842:
+ELSE1793:
     nop
     ldarg 0
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1832
+    brtrue TRUE1783
     ldnull
-    br END1833
-TRUE1832:
+    br END1784
+TRUE1783:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1833:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1784:
     nop
     ldnull
     ceq
-    brtrue ELSE1836
+    brtrue ELSE1787
     ldarg 1
     isinst [LispBase]Lisp.List/ListCell
     ldnull
     cgt.un
-    brtrue TRUE1834
+    brtrue TRUE1785
     ldnull
-    br END1835
-TRUE1834:
+    br END1786
+TRUE1785:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1830'
-END1835:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1781'
+END1786:
     nop
-    br END1837
-ELSE1836:
+    br END1788
+ELSE1787:
     nop
     ldnull
-END1837:
+END1788:
     nop
     ldnull
     ceq
-    brtrue ELSE1841
+    brtrue ELSE1792
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
@@ -3720,7 +3605,7 @@ END1837:
     call object Program::'EQUAL'(object, object)
     ldnull
     ceq
-    brtrue ELSE1838
+    brtrue ELSE1789
     ldarg 0
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
@@ -3729,34 +3614,34 @@ END1837:
     ldfld object [LispBase]Lisp.List/ListCell::rest
     tail. call object Program::'EQUAL'(object, object)
     ret
-ELSE1838:
+ELSE1789:
     nop
     ldnull
     ret
-ELSE1841:
+ELSE1792:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ldnull
     ceq
-    brtrue ELSE1840
+    brtrue ELSE1791
     ldarg 0
     ldarg 1
     call bool [mscorlib]System.Object::'Equals'(object, object)
     box [mscorlib]System.Boolean
     ldnull
     ceq
-    brtrue ELSE1839
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1831'
+    brtrue ELSE1790
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1782'
     ret
-ELSE1839:
+ELSE1790:
     nop
     ldnull
     ret
-ELSE1840:
+ELSE1791:
     nop
     ldnull
     ret
-BLOCK_END_EQUAL_1538:
+BLOCK_END_EQUAL_1512:
     nop
     ldnull
     ret

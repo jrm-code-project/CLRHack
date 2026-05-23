@@ -263,7 +263,12 @@
     (list (il:castclass "[LispBase]Lisp.ValueCell")
           (il:ldfld "object [LispBase]Lisp.ValueCell::Value"))))
 
-(register-primitive-step1 "%INTERN"
+(register-primitive-step1 "%GET-ACTIVE-RESTARTS"
+  (lambda (node operands)
+    (declare (ignore node operands))
+    (list (il:call :method "GetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "object" :args nil))))
+
+(register-primitive-step1 "%SET-CELL-VALUE!"
   (lambda (node operands)
     (declare (ignore node))
     (mapc #'generate-step1 operands)
@@ -651,6 +656,18 @@
               collect (register-local (string (gensym (format nil "MV_PROG1_V~D" i))))))
   (generate-step1 (ast-multiple-value-prog1-first-form node))
   (mapc #'generate-step1 (ast-multiple-value-prog1-other-forms node))
+  (setf (ast-basic-block node) nil))
+
+(defmethod generate-step1 ((node ast-restart-bind))
+  (setf (ast-restart-bind-saved-restarts-temp node) (register-local (string (gensym "SAVED_RESTARTS"))))
+  (setf (ast-restart-bind-restarts-list-temp node) (register-local (string (gensym "RESTARTS_LIST"))))
+  (setf (ast-restart-bind-result-temp node) (register-local (string (gensym "RESTART_BIND_RESULT"))))
+  (dolist (b (ast-restart-bind-bindings node))
+    (generate-step1 (second b))
+    (generate-step1 (third b))
+    (generate-step1 (fourth b))
+    (generate-step1 (fifth b)))
+  (mapc #'generate-step1 (ast-restart-bind-body node))
   (setf (ast-basic-block node) nil))
 
 (defmethod generate-step1 ((node ast-application))

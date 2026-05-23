@@ -25,7 +25,7 @@
 (register-primitive-step2 
  '("%WRITE-LINE" "%WRITE-OBJECT" "%WRITE-INT" "PRINT" "%SUB" "-" "%MUL" "*" "%DIV" "/" "%ADD" "+" "=" "1+" "1-"
    "%LESSP" "<" "%NOT" "NOT" "%CONS" "CONS" "LIST" "%CAR" "CAR" "%CDR" "CDR" "%EQ" "EQ" "%NULL" "NULL"
-   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!")
+   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!" "%GET-ACTIVE-RESTARTS")
  #'standard-step2-handler)
 
 (register-primitive-step2 "%INTERN"
@@ -589,6 +589,61 @@
                              (il:ldloc list-temp)
                              (il:call :method "InvokeWithList" :class "[LispBase]Lisp.Values" :return "object" :args '("object" "object")))))
     
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-restart-bind) &optional tail-p)
+  (let* ((done-label (sanitize-identifier (string (gensym "DONE"))))
+         (saved-restarts-temp (sanitize-identifier (ast-restart-bind-saved-restarts-temp node)))
+         (bindings (ast-restart-bind-bindings node))
+         (body (ast-restart-bind-body node))
+         (restarts-list-temp (sanitize-identifier (ast-restart-bind-restarts-list-temp node)))
+         (result-temp (sanitize-identifier (ast-restart-bind-result-temp node)))
+         (code nil))
+    ;; 1. Get current active restarts
+    (setf code (append code 
+                       (list (il:call :method "GetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "object" :args nil)
+                             (il:stloc saved-restarts-temp))))
+    ;; 2. Construct new restarts list
+    (setf code (append code (list (il:ldloc saved-restarts-temp) (il:stloc restarts-list-temp))))
+    (dolist (b bindings)
+      (destructuring-bind (name fn report-fn interactive-fn test-fn) b
+        ;; Create Restart object
+        (setf code (append code (load-symbol-il name)))
+        (setf code (append code (generate-step2 fn nil)))
+        (setf code (append code (generate-step2 report-fn nil)))
+        (setf code (append code (generate-step2 interactive-fn nil)))
+        (setf code (append code (generate-step2 test-fn nil)))
+        (setf code (append code (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.Restart" :return "instance void" :args '("object" "object" "object" "object" "object")))))
+        ;; Cons onto restarts-list-temp
+        (setf code (append code (list (il:ldloc restarts-list-temp)
+                                      (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))
+                                      (il:stloc restarts-list-temp))))))
+    
+    ;; 3. Set new active restarts
+    (setf code (append code (list (il:ldloc restarts-list-temp)
+                                  (il:call :method "SetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "void" :args '("object")))))
+    
+    ;; 4. Try/Finally to restore
+    (let ((try-code (append (if (null body)
+                                (list (il:ldnull))
+                                (loop for f in body
+                                      for i from 1
+                                      for is-last = (= i (length body))
+                                      append (generate-step2 f (if is-last tail-p nil))
+                                      when (not is-last)
+                                        append (list (il:pop))))
+                            (if tail-p
+                                nil
+                                (list (il:stloc result-temp)))
+                            (list (il:leave done-label))))
+          (finally-code (list (il:ldloc saved-restarts-temp)
+                              (il:call :method "SetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "void" :args '("object"))
+                              (il:endfinally))))
+      (setf code (append code (list (il:try try-code)
+                                    (il:finally finally-code)
+                                    (if tail-p
+                                        (il:nop :label done-label)
+                                        (il:ldloc result-temp :label done-label))))))
     (if tail-p (append code (list (il:ret))) code)))
 
 (defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)

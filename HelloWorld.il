@@ -21,10 +21,10 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object MSG741)
+    .locals init (object MSG719)
     ldstr "Hello world from CLR-CALL"
-    stloc MSG741
-    ldloc MSG741
+    stloc MSG719
+    ldloc MSG719
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
