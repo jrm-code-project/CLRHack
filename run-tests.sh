@@ -3,6 +3,7 @@ dotnet run --project BlockTest.ilproj
 dotnet run --project ChurchTest.ilproj
 dotnet run --project ClosureTest.ilproj
 dotnet run --project ConditionsTest.ilproj
+echo "0" | dotnet run --project DebuggerTest.ilproj
 dotnet run --project ComplexScopingTest.ilproj
 dotnet run --project FibBenchmark.ilproj
 dotnet run --project FletTest.ilproj

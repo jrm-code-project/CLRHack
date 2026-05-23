@@ -85,8 +85,64 @@ namespace Lisp
         {
             Signal(condition);
             // If Signal returns, it means no handler performed a non-local exit.
+            EnterDebugger(condition);
             if (condition is Exception ex) throw ex;
             throw new Exception($"Unhandled error: {condition}");
+        }
+
+        public static void EnterDebugger(object condition)
+        {
+            Console.WriteLine($"\n--- Debugger ---");
+            Console.WriteLine($"Condition: {condition}");
+            
+            while (true)
+            {
+                object restarts = RestartControl.GetActiveRestarts();
+                var restartList = new System.Collections.Generic.List<Restart>();
+                object current = restarts;
+                int i = 0;
+                Console.WriteLine("\nAvailable restarts:");
+                while (current is List.ListCell cell)
+                {
+                    if (cell.first is Restart r)
+                    {
+                        restartList.Add(r);
+                        Console.Write($"{i}: [{r.Name}] ");
+                        if (r.ReportFunction != null)
+                        {
+                            try { r.ReportFunction.Invoke((object)null); } catch { Console.WriteLine(r.ToString()); }
+                        }
+                        else
+                        {
+                            Console.WriteLine(r.ToString());
+                        }
+                        i++;
+                    }
+                    current = cell.rest;
+                }
+
+                if (restartList.Count == 0)
+                {
+                    Console.WriteLine("(No restarts available)");
+                    return;
+                }
+
+                Console.Write("\nSelect a restart (0-{0}, or 'q' to abort): ", restartList.Count - 1);
+                string input = Console.ReadLine();
+                if (input == "q") return;
+
+                if (int.TryParse(input, out int choice) && choice >= 0 && choice < restartList.Count)
+                {
+                    Restart selected = restartList[choice];
+                    Console.WriteLine($"Invoking restart: {selected.Name}");
+                    RestartControl.InvokeRestartInteractively(selected);
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice.");
+                }
+            }
         }
 
         private static bool IsType(object obj, object type)
