@@ -13,7 +13,7 @@
     .field public static object 'TEMP_B'
     .field public static object '_'
     .field public static object 'NOT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S2593'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S2799'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -33,7 +33,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2593'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2799'
     ret
 }
 
@@ -130,7 +130,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_2583:
+BLOCK_END_MAIN_2789:
     nop
     ldnull
     ret
@@ -229,30 +229,30 @@ BLOCK_END_MAIN_2583:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE2591
+    brtrue TRUE2797
     ldnull
-    br END2592
-TRUE2591:
+    br END2798
+TRUE2797:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2593'
-END2592:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE2594
-    ldnull
-    br END2595
-TRUE2594:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2593'
-END2595:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2799'
+END2798:
     nop
     ldnull
     ceq
-    brtrue ELSE2596
+    brtrue TRUE2800
+    ldnull
+    br END2801
+TRUE2800:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2799'
+END2801:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE2802
     ldarg 2
     ret
-ELSE2596:
+ELSE2802:
     nop
     ldarg 0
     ldc.i4 1
@@ -292,7 +292,7 @@ ELSE2596:
     call object Program::'TAK'(object, object, object)
     tail. call object Program::'TAK'(object, object, object)
     ret
-BLOCK_END_TAK_2579:
+BLOCK_END_TAK_2785:
     nop
     ldnull
     ret

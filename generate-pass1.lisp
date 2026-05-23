@@ -314,6 +314,18 @@
     (mapc #'generate-step1 operands)
     (list (il:call :method "InvokeRestartInteractively" :class "[LispBase]Lisp.RestartControl" :return "object" :args '("object")))))
 
+(register-primitive-step1 "SIGNAL"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (list (il:call :method "Signal" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object")))))
+
+(register-primitive-step1 "ERROR"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (list (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object")))))
+
 (register-primitive-step1 "APPLY"
   (lambda (node operands)
     (declare (ignore node))

@@ -39,6 +39,7 @@
                ("Tests/test-nboyer.lisp" . "NBoyerBenchmark")
                ("Tests/test-restart.lisp" . "RestartTest")
                ("Tests/test-handler.lisp" . "HandlerTest")
+               ("Tests/test-handler-case.lisp" . "HandlerCaseTest")
                ("Tests/puzzle-test.lisp" . "PuzzleBenchmark")
                ("Tests/test-scoping.lisp" . "ScopingTests")
                ;; ("test-stak.lisp" . "StakBenchmark")

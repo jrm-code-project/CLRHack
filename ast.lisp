@@ -382,6 +382,36 @@
                                  `((eq ,id-var ',id)
                                    (apply (lambda ,lambda-list ,@forms) ,args-var))))))))))
 
+  (register-macro 'handler-case
+    (lambda (expression &rest clauses)
+      (let* ((exit-tag (gensym "EXIT"))
+             (condition-var (gensym "CONDITION"))
+             (id-var (gensym "ID"))
+             (tag-var (gensym "TAG"))
+             (clause-ids (mapcar (lambda (c) (gensym (symbol-name (car c)))) clauses)))
+        `(block ,exit-tag
+           (let ((,tag-var (list nil))
+                 (,condition-var nil)
+                 (,id-var nil))
+             (catch ,tag-var
+               (handler-bind
+                   ,(loop for clause in clauses
+                          for id in clause-ids
+                          collect (let ((type (car clause)))
+                                    `(,type (lambda (c)
+                                              (setq ,condition-var c)
+                                              (setq ,id-var ',id)
+                                              (throw ,tag-var nil)))))
+                 (return-from ,exit-tag ,expression)))
+             (cond
+               ,@(loop for clause in clauses
+                       for id in clause-ids
+                       collect (let ((var (car (second clause)))
+                                     (body (cddr clause)))
+                                 `((eq ,id-var ',id)
+                                   (let ((,var ,condition-var))
+                                     ,@body))))))))))
+
   (register-macro 'dolist
     (lambda (spec &rest body)
       (let ((var (car spec))
