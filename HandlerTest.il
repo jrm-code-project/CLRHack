@@ -12,7 +12,7 @@
     .field public static object '_CTOR'
     .field public static object '_GET_ACTIVE_HANDLERS'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ERROR2152'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ERROR2483'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -30,7 +30,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR2152'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR2483'
     ret
 }
 
@@ -40,7 +40,8 @@
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'(object, object, object, object, object, object, object) cil managed
@@ -49,7 +50,8 @@
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'(object, object, object, object, object, object) cil managed
@@ -58,7 +60,8 @@
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'(object, object, object, object, object) cil managed
@@ -67,7 +70,8 @@
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'(object, object, object, object) cil managed
@@ -76,7 +80,8 @@
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'(object, object, object) cil managed
@@ -85,7 +90,8 @@
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'(object, object) cil managed
@@ -94,7 +100,8 @@
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'(object) cil managed
@@ -103,7 +110,8 @@
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_HANDLER_BIND'() cil managed
@@ -117,50 +125,50 @@
 .method private static hidebysig object 'TEST_HANDLER_BIND_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object HANDLERS2140, object TEMP_ARG, object INST_TEMP, object ARGS_TEMP, object H2139, object HANDLERS2138, object HANDLER_BIND_RESULT2150, object HANDLERS_LIST2149, object SAVED_HANDLERS2148, object HANDLERS2135)
+    .locals init (object HANDLERS2472, object TEMP_ARG, object INST_TEMP, object ARGS_TEMP, object H2471, object HANDLERS2470, object HANDLER_BIND_RESULT2482, object HANDLERS_LIST2481, object SAVED_HANDLERS2480, object HANDLERS2467)
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc HANDLERS2135
+    stloc HANDLERS2467
     ldstr "Initial handlers:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS2135
+    ldloc HANDLERS2467
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS2148
-    ldloc SAVED_HANDLERS2148
-    stloc HANDLERS_LIST2149
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR2152'
-    newobj instance void L_2142::'.ctor'()
+    stloc SAVED_HANDLERS2480
+    ldloc SAVED_HANDLERS2480
+    stloc HANDLERS_LIST2481
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR2483'
+    newobj instance void L_2474::'.ctor'()
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST2149
+    ldloc HANDLERS_LIST2481
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST2149
-    ldloc HANDLERS_LIST2149
+    stloc HANDLERS_LIST2481
+    ldloc HANDLERS_LIST2481
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc HANDLERS2138
+    stloc HANDLERS2470
     ldstr "Inside handler-bind:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS2138
+    ldloc HANDLERS2470
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS2138
+    ldloc HANDLERS2470
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc H2139
+    stloc H2471
     ldstr "Handler condition type:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc H2139
+    ldloc H2471
     ldc.i4 0
     newarr [mscorlib]System.Object
     stloc ARGS_TEMP
@@ -171,29 +179,29 @@
     call object [LispBase]Lisp.Interop::'InstanceCall'(string, object, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc HANDLER_BIND_RESULT2150
-    leave DONE2151
+    stloc HANDLER_BIND_RESULT2482
+    leave DONE2484
     }
     finally
     {
-    ldloc SAVED_HANDLERS2148
+    ldloc SAVED_HANDLERS2480
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE2151:
-    ldloc HANDLER_BIND_RESULT2150
+DONE2484:
+    ldloc HANDLER_BIND_RESULT2482
     pop
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc HANDLERS2140
+    stloc HANDLERS2472
     ldstr "After handler-bind:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS2140
+    ldloc HANDLERS2472
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_HANDLER_BIND_2133:
+BLOCK_END_TEST_HANDLER_BIND_2465:
     nop
     ldnull
     ret
@@ -210,7 +218,7 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_2142
+.class public auto ansi beforefieldinit L_2474
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -238,7 +246,8 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object) cil managed
@@ -247,7 +256,7 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2142::'InvokeBody'(object)
+    callvirt instance object L_2474::'InvokeBody'(object)
     ret
 }
 
@@ -257,7 +266,8 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
@@ -266,7 +276,8 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
@@ -275,7 +286,8 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
@@ -284,7 +296,8 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
@@ -293,7 +306,8 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
@@ -302,7 +316,8 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
@@ -311,8 +326,9 @@ BLOCK_END_TEST_HANDLER_BIND_2133:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
-} // end of class L_2142
+} // end of class L_2474
 

@@ -393,7 +393,7 @@
              (condition-var (gensym "CONDITION"))
              (id-var (gensym "ID"))
              (tag-var (gensym "TAG"))
-             (clause-ids (mapcar (lambda (c) (gensym (symbol-name (car c)))) clauses)))
+             (clause-ids (mapcar (lambda (c) (gensym (if (symbolp (car c)) (symbol-name (car c)) (string (car c))))) clauses)))
         `(block ,exit-tag
            (let ((,tag-var (list nil))
                  (,condition-var nil)
@@ -983,7 +983,7 @@
 (defmethod closure-convert ((node ast-restart-bind))
   (make-instance 'ast-restart-bind
                  :bindings (mapcar (lambda (b)
-                                     (list (first b)
+                                     (list (closure-convert (first b))
                                            (closure-convert (second b))
                                            (closure-convert (third b))
                                            (closure-convert (fourth b))
@@ -997,7 +997,7 @@
 (defmethod closure-convert ((node ast-handler-bind))
   (make-instance 'ast-handler-bind
                  :bindings (mapcar (lambda (b)
-                                     (list (first b)
+                                     (list (closure-convert (first b))
                                            (closure-convert (second b))))
                                    (ast-handler-bind-bindings node))
                  :body (mapcar #'closure-convert (ast-handler-bind-body node))
@@ -1224,7 +1224,7 @@
 (defmethod lambda-lift ((node ast-restart-bind))
   (make-instance 'ast-restart-bind
                  :bindings (mapcar (lambda (b)
-                                     (list (first b)
+                                     (list (lambda-lift (first b))
                                            (lambda-lift (second b))
                                            (lambda-lift (third b))
                                            (lambda-lift (fourth b))
@@ -1238,7 +1238,7 @@
 (defmethod lambda-lift ((node ast-handler-bind))
   (make-instance 'ast-handler-bind
                  :bindings (mapcar (lambda (b)
-                                     (list (first b)
+                                     (list (lambda-lift (first b))
                                            (lambda-lift (second b))))
                                    (ast-handler-bind-bindings node))
                  :body (mapcar #'lambda-lift (ast-handler-bind-body node))
@@ -1542,7 +1542,7 @@
                  (body-forms (rest args))
                  (analyzed-bindings
                   (mapcar (lambda (b)
-                            (let ((name (first b))
+                            (let ((name (make-instance 'ast-literal :value (first b)))
                                   (fn (lisp->ast (second b) env tags-env blocks-env current-scope))
                                   (keys (cddr b)))
                               (list name fn
@@ -1559,7 +1559,7 @@
                  (body-forms (rest args))
                  (analyzed-bindings
                   (mapcar (lambda (b)
-                            (list (first b)
+                            (list (make-instance 'ast-literal :value (first b))
                                   (lisp->ast (second b) env tags-env blocks-env current-scope)))
                           bindings)))
             (make-instance 'ast-handler-bind
@@ -2197,7 +2197,7 @@
 (defmethod analyze-environment ((node ast-restart-bind) env &optional mutated)
   (make-instance 'ast-restart-bind
                  :bindings (mapcar (lambda (b)
-                                     (list (first b)
+                                     (list (analyze-environment (first b) env mutated)
                                            (analyze-environment (second b) env mutated)
                                            (analyze-environment (third b) env mutated)
                                            (analyze-environment (fourth b) env mutated)
@@ -2212,7 +2212,7 @@
 (defmethod analyze-environment ((node ast-handler-bind) env &optional mutated)
   (make-instance 'ast-handler-bind
                  :bindings (mapcar (lambda (b)
-                                     (list (first b)
+                                     (list (analyze-environment (first b) env mutated)
                                            (analyze-environment (second b) env mutated)))
                                    (ast-handler-bind-bindings node))
                  :body (mapcar (lambda (form) (analyze-environment form env mutated))

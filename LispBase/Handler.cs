@@ -85,6 +85,7 @@ namespace Lisp
         {
             Signal(condition);
             // If Signal returns, it means no handler performed a non-local exit.
+            if (condition is Exception ex) throw ex;
             throw new Exception($"Unhandled error: {condition}");
         }
 
@@ -93,14 +94,42 @@ namespace Lisp
             if (type == null) return false;
             if (Equals(type, obj)) return true; // exact match (e.g. symbols)
             
+            if (obj != null)
+            {
+                Type objType = obj.GetType();
+                
+                // If type is a Type object
+                if (type is Type t) return t.IsAssignableFrom(objType);
+
+                // If type is a string, try to resolve it as a .NET type
+                if (type is string typeName)
+                {
+                    Type t2 = ResolveType(typeName);
+                    if (t2 != null) return t2.IsAssignableFrom(objType);
+                }
+            }
+
             // For now, if condition is a symbol, just check equality
             if (obj is Symbol && type is Symbol) return Equals(obj, type);
             
             // Handle 'T' as catch-all
-            if (type is Symbol s && s.Name == "T") return true;
+            if (type is Symbol s && (s.Name == "T" || s.Name == "EXCEPTION")) return true;
 
             // TODO: Implement full Common Lisp TYPEP logic
             return false;
+        }
+
+        private static Type ResolveType(string typeName)
+        {
+            Type t = Type.GetType(typeName);
+            if (t != null) return t;
+
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                t = assembly.GetType(typeName);
+                if (t != null) return t;
+            }
+            return null;
         }
     }
 }

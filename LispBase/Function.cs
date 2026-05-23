@@ -26,5 +26,18 @@ namespace Lisp
                     throw new System.NotImplementedException("Closures with more than 8 arguments not fully supported via array Invoke yet.");
             }
         }
+
+        public static object Apply(object fn, object args)
+        {
+            var closure = (Closure)fn;
+            var list = new System.Collections.Generic.List<object>();
+            object current = args;
+            while (current is List.ListCell cell)
+            {
+                list.Add(cell.first);
+                current = cell.rest;
+            }
+            return closure.Invoke(list.ToArray());
+        }
     }
 }

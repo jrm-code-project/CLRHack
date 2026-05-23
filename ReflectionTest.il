@@ -32,7 +32,8 @@
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'(object, object, object, object, object, object, object) cil managed
@@ -41,7 +42,8 @@
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'(object, object, object, object, object, object) cil managed
@@ -50,7 +52,8 @@
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'(object, object, object, object, object) cil managed
@@ -59,7 +62,8 @@
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'(object, object, object, object) cil managed
@@ -68,7 +72,8 @@
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'(object, object, object) cil managed
@@ -77,7 +82,8 @@
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'(object, object) cil managed
@@ -86,7 +92,8 @@
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'(object) cil managed
@@ -95,7 +102,8 @@
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_ENV'() cil managed
@@ -133,7 +141,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_ENV_2370:
+BLOCK_END_TEST_ENV_2987:
     nop
     ldnull
     ret
@@ -145,7 +153,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'(object, object, object, object, object, object, object) cil managed
@@ -154,7 +163,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'(object, object, object, object, object, object) cil managed
@@ -163,7 +173,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'(object, object, object, object, object) cil managed
@@ -172,7 +183,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'(object, object, object, object) cil managed
@@ -181,7 +193,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'(object, object, object) cil managed
@@ -190,7 +203,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'(object, object) cil managed
@@ -199,7 +213,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'(object) cil managed
@@ -208,7 +223,8 @@ BLOCK_END_TEST_ENV_2370:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_LIST'() cil managed
@@ -222,7 +238,7 @@ BLOCK_END_TEST_ENV_2370:
 .method private static hidebysig object 'TEST_LIST_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS2384, object REFLECT_ARGS2383, object REFLECT_ARGS2382, object REFLECT_ARGS2381, object REFLECT_ARGS2380, object L2367)
+    .locals init (object REFLECT_ARGS3001, object REFLECT_ARGS3000, object REFLECT_ARGS2999, object REFLECT_ARGS2998, object REFLECT_ARGS2997, object L2984)
     ldstr "--- test-list ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -230,39 +246,39 @@ BLOCK_END_TEST_ENV_2370:
     ldstr "System.Collections.Generic.List`1[System.String]"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS2380
-    ldloc REFLECT_ARGS2380
+    stloc REFLECT_ARGS2997
+    ldloc REFLECT_ARGS2997
     call object [LispBase]Lisp.Reflection::'New'(object, object[])
-    stloc L2367
-    ldloc L2367
+    stloc L2984
+    ldloc L2984
     ldstr "Add"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS2381
-    ldloc REFLECT_ARGS2381
+    stloc REFLECT_ARGS2998
+    ldloc REFLECT_ARGS2998
     ldc.i4 0
     ldstr "Hello"
     stelem.ref
-    ldloc REFLECT_ARGS2381
+    ldloc REFLECT_ARGS2998
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     pop
-    ldloc L2367
+    ldloc L2984
     ldstr "Add"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS2382
-    ldloc REFLECT_ARGS2382
+    stloc REFLECT_ARGS2999
+    ldloc REFLECT_ARGS2999
     ldc.i4 0
     ldstr "Reflection"
     stelem.ref
-    ldloc REFLECT_ARGS2382
+    ldloc REFLECT_ARGS2999
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     pop
     ldstr "List count:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc L2367
+    ldloc L2984
     ldstr "Count"
     call object [LispBase]Lisp.Reflection::'GetProperty'(object, string)
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -272,37 +288,37 @@ BLOCK_END_TEST_ENV_2370:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc L2367
+    ldloc L2984
     ldstr "get_Item"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS2383
-    ldloc REFLECT_ARGS2383
+    stloc REFLECT_ARGS3000
+    ldloc REFLECT_ARGS3000
     ldc.i4 0
     ldc.i4 0
     box int32
     stelem.ref
-    ldloc REFLECT_ARGS2383
+    ldloc REFLECT_ARGS3000
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc L2367
+    ldloc L2984
     ldstr "get_Item"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS2384
-    ldloc REFLECT_ARGS2384
+    stloc REFLECT_ARGS3001
+    ldloc REFLECT_ARGS3001
     ldc.i4 0
     ldc.i4 1
     box int32
     stelem.ref
-    ldloc REFLECT_ARGS2384
+    ldloc REFLECT_ARGS3001
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_LIST_2365:
+BLOCK_END_TEST_LIST_2982:
     nop
     ldnull
     ret
@@ -314,7 +330,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'(object, object, object, object, object, object, object) cil managed
@@ -323,7 +340,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'(object, object, object, object, object, object) cil managed
@@ -332,7 +350,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'(object, object, object, object, object) cil managed
@@ -341,7 +360,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'(object, object, object, object) cil managed
@@ -350,7 +370,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'(object, object, object) cil managed
@@ -359,7 +380,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'(object, object) cil managed
@@ -368,7 +390,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'(object) cil managed
@@ -377,7 +400,8 @@ BLOCK_END_TEST_LIST_2365:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_MATH'() cil managed
@@ -391,7 +415,7 @@ BLOCK_END_TEST_LIST_2365:
 .method private static hidebysig object 'TEST_MATH_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS2379)
+    .locals init (object REFLECT_ARGS2996)
     ldstr "--- test-math ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -404,18 +428,18 @@ BLOCK_END_TEST_LIST_2365:
     ldstr "Sqrt"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS2379
-    ldloc REFLECT_ARGS2379
+    stloc REFLECT_ARGS2996
+    ldloc REFLECT_ARGS2996
     ldc.i4 0
     ldc.i4 16
     box int32
     stelem.ref
-    ldloc REFLECT_ARGS2379
+    ldloc REFLECT_ARGS2996
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_MATH_2361:
+BLOCK_END_TEST_MATH_2978:
     nop
     ldnull
     ret

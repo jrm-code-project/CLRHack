@@ -336,18 +336,6 @@
   (lambda (node operands)
     (declare (ignore node))
     (mapc #'generate-step1 operands)
-    (let* ((sym-name-node (car operands))
-           (sym-name (ast-literal-value sym-name-node))
-           (field-name (cdr (assoc sym-name *quoted-symbols* :test #'string=))))
-      (unless field-name
-        (setf field-name (sanitize-identifier (format nil "SYM_~A" (gensym))))
-        (push (cons sym-name field-name) *quoted-symbols*))
-      (list (il:ldsfld (format nil "class [LispBase]Lisp.Symbol Program::'~A'" field-name))))))
-
-(register-primitive-step1 "%SET-CELL-VALUE!"
-  (lambda (node operands)
-    (declare (ignore node))
-    (mapc #'generate-step1 operands)
     (let ((temp (register-local (string (gensym "TEMP")))))
       (list (il:stloc temp)
             (il:castclass "[LispBase]Lisp.ValueCell")
@@ -713,10 +701,11 @@
   (setf (ast-restart-bind-restarts-list-temp node) (register-local (string (gensym "RESTARTS_LIST"))))
   (setf (ast-restart-bind-result-temp node) (register-local (string (gensym "RESTART_BIND_RESULT"))))
   (dolist (b (ast-restart-bind-bindings node))
-    (generate-step1 (second b))
-    (generate-step1 (third b))
-    (generate-step1 (fourth b))
-    (generate-step1 (fifth b)))
+    (generate-step1 (first b)) ; restart name
+    (generate-step1 (second b)) ; function
+    (generate-step1 (third b)) ; report
+    (generate-step1 (fourth b)) ; interactive
+    (generate-step1 (fifth b))) ; test
   (mapc #'generate-step1 (ast-restart-bind-body node))
   (setf (ast-basic-block node) nil))
 
@@ -725,7 +714,8 @@
   (setf (ast-handler-bind-handlers-list-temp node) (register-local (string (gensym "HANDLERS_LIST"))))
   (setf (ast-handler-bind-result-temp node) (register-local (string (gensym "HANDLER_BIND_RESULT"))))
   (dolist (b (ast-handler-bind-bindings node))
-    (generate-step1 (second b)))
+    (generate-step1 (car b))    ; type
+    (generate-step1 (second b))) ; function
   (mapc #'generate-step1 (ast-handler-bind-body node))
   (setf (ast-basic-block node) nil))
 

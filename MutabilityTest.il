@@ -10,9 +10,9 @@
     .field public static object '_CTOR'
     .field public static object '_MAKE_CELL'
     .field public static object '_SET_CELL_VALUE_'
-    .field public static object 'C900'
-    .field public static object 'B899'
-    .field public static object 'A897'
+    .field public static object 'C894'
+    .field public static object 'B893'
+    .field public static object 'A891'
     .field public static object '_CELL_VALUE'
     .field public static object 'PRINT'
 
@@ -26,11 +26,11 @@
     ldnull
     stsfld object Program::'_SET_CELL_VALUE_'
     ldnull
-    stsfld object Program::'C900'
+    stsfld object Program::'C894'
     ldnull
-    stsfld object Program::'B899'
+    stsfld object Program::'B893'
     ldnull
-    stsfld object Program::'A897'
+    stsfld object Program::'A891'
     ldnull
     stsfld object Program::'_CELL_VALUE'
     ldnull
@@ -42,24 +42,24 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object F904, object A897)
+    .locals init (object F898, object A891)
     ldstr "outer-a"
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc A897
-    ldloc A897
-    newobj instance void L_906::'.ctor'(object)
-    stloc F904
+    stloc A891
+    ldloc A891
+    newobj instance void L_900::'.ctor'(object)
+    stloc F898
     ldstr "Before calling f:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc A897
+    ldloc A891
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F904
+    ldloc F898
     castclass [LispBase]Lisp.Closure
     ldstr "param-b"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
@@ -68,7 +68,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc A897
+    ldloc A891
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -79,12 +79,12 @@
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_905
+.class public auto ansi beforefieldinit L_899
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'C900'
-    .field public object 'A897'
-    .field public object 'B899'
+    .field public object 'C894'
+    .field public object 'A891'
+    .field public object 'B893'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -93,40 +93,40 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_905::'C900'
+    stfld object L_899::'C894'
     ldarg.0
     ldarg 2
-    stfld object L_905::'A897'
+    stfld object L_899::'A891'
     ldarg.0
     ldarg 3
-    stfld object L_905::'B899'
+    stfld object L_899::'B893'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP912, object TEMP911, object TEMP910)
+    .locals init (object TEMP906, object TEMP905, object TEMP904)
     ldstr "Inside g:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_905::'A897'
+    ldfld object L_899::'A891'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_905::'B899'
+    ldfld object L_899::'B893'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_905::'C900'
+    ldfld object L_899::'C894'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -137,31 +137,31 @@
     ldnull
     pop
     ldarg.0
-    ldfld object L_905::'A897'
+    ldfld object L_899::'A891'
     ldstr "a-mutated-by-g"
-    stloc TEMP910
+    stloc TEMP904
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP910
+    ldloc TEMP904
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP910
+    ldloc TEMP904
     pop
     ldarg.0
-    ldfld object L_905::'B899'
+    ldfld object L_899::'B893'
     ldstr "b-mutated-by-g"
-    stloc TEMP911
+    stloc TEMP905
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP911
+    ldloc TEMP905
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP911
+    ldloc TEMP905
     pop
     ldarg.0
-    ldfld object L_905::'C900'
+    ldfld object L_899::'C894'
     ldstr "c-mutated-by-g"
-    stloc TEMP912
+    stloc TEMP906
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP912
+    ldloc TEMP906
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP912
+    ldloc TEMP906
     pop
     ldnull
     ret
@@ -175,7 +175,8 @@
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object) cil managed
@@ -184,7 +185,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_905::'InvokeBody'(object)
+    callvirt instance object L_899::'InvokeBody'(object)
     ret
 }
 
@@ -194,7 +195,8 @@
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
@@ -203,7 +205,8 @@
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
@@ -212,7 +215,8 @@
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
@@ -221,7 +225,8 @@
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
@@ -230,7 +235,8 @@
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
@@ -239,7 +245,8 @@
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
@@ -248,15 +255,16 @@
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
-} // end of class L_905
+} // end of class L_899
 
-.class public auto ansi beforefieldinit L_906
+.class public auto ansi beforefieldinit L_900
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'A897'
+    .field public object 'A891'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -265,50 +273,50 @@
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_906::'A897'
+    stfld object L_900::'A891'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object G903, object C900, object B899)
+    .locals init (object G897, object C894, object B893)
     ldarg 1
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc B899
+    stloc B893
     ldstr "inner-c"
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc C900
-    ldloc C900
+    stloc C894
+    ldloc C894
     ldarg.0
-    ldfld object L_906::'A897'
-    ldloc B899
-    newobj instance void L_905::'.ctor'(object, object, object)
-    stloc G903
+    ldfld object L_900::'A891'
+    ldloc B893
+    newobj instance void L_899::'.ctor'(object, object, object)
+    stloc G897
     ldstr "Before calling g:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_906::'A897'
+    ldfld object L_900::'A891'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B899
+    ldloc B893
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc C900
+    ldloc C894
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc G903
+    ldloc G897
     castclass [LispBase]Lisp.Closure
     ldstr "param-d"
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
@@ -318,19 +326,19 @@
     ldnull
     pop
     ldarg.0
-    ldfld object L_906::'A897'
+    ldfld object L_900::'A891'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B899
+    ldloc B893
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc C900
+    ldloc C894
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -348,7 +356,8 @@
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object) cil managed
@@ -357,7 +366,7 @@
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_906::'InvokeBody'(object)
+    callvirt instance object L_900::'InvokeBody'(object)
     ret
 }
 
@@ -367,7 +376,8 @@
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
@@ -376,7 +386,8 @@
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
@@ -385,7 +396,8 @@
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
@@ -394,7 +406,8 @@
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
@@ -403,7 +416,8 @@
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
@@ -412,7 +426,8 @@
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
@@ -421,8 +436,9 @@
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
-} // end of class L_906
+} // end of class L_900
 

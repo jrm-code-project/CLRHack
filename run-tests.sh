@@ -2,6 +2,7 @@ dotnet run --project BankTest.ilproj
 dotnet run --project BlockTest.ilproj
 dotnet run --project ChurchTest.ilproj
 dotnet run --project ClosureTest.ilproj
+dotnet run --project ConditionsTest.ilproj
 dotnet run --project ComplexScopingTest.ilproj
 dotnet run --project FibBenchmark.ilproj
 dotnet run --project FletTest.ilproj
@@ -12,6 +13,7 @@ dotnet run --project LetRecTest.ilproj
 dotnet run --project MacroTest.ilproj
 dotnet run --project MutabilityTest.ilproj
 dotnet run --project NBoyerBenchmark.ilproj
+dotnet run --project RestartsTest.ilproj
 dotnet run --project ScopingTests.ilproj
 dotnet run --project TagbodyTest.ilproj
 dotnet run --project TakBenchmark.ilproj

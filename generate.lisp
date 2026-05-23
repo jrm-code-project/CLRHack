@@ -609,7 +609,7 @@
     (dolist (b bindings)
       (destructuring-bind (name fn report-fn interactive-fn test-fn) b
         ;; Create Restart object
-        (setf code (append code (load-symbol-il name)))
+        (setf code (append code (generate-step2 name nil)))
         (setf code (append code (generate-step2 fn nil)))
         (setf code (append code (generate-step2 report-fn nil)))
         (setf code (append code (generate-step2 interactive-fn nil)))
@@ -661,7 +661,7 @@
     (dolist (b bindings)
       (destructuring-bind (type fn) b
         ;; Create Handler object
-        (setf code (append code (load-symbol-il type)))
+        (setf code (append code (generate-step2 type nil)))
         (setf code (append code (generate-step2 fn nil)))
         (setf code (append code (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.Handler" :return "instance void" :args '("object" "object")))))
         ;; Cons onto handlers-list-temp
@@ -1037,11 +1037,14 @@
                                 ((or too-few too-many)
                                  (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
                                        (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
-                                       (il:throw)))
+                                       (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                       (il:ret)))
                                 ((and has-keys (oddp n-extra))
                                  (list (il:ldstr "Odd number of keyword arguments")
                                        (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
-                                       (il:throw)))
+                                       (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                       (il:ret)))
+
                                 (t
                                  (let ((prep-code (list (il:ldarg.0)))) ;; 'this'
                                    ;; Pass Requireds
@@ -1116,11 +1119,14 @@
                                   ((or too-few too-many)
                                    (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
                                          (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
-                                         (il:throw)))
+                                         (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                         (il:ret)))
                                   ((and has-keys (oddp n-extra))
                                    (list (il:ldstr "Odd number of keyword arguments")
                                          (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
-                                         (il:throw)))
+                                         (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                         (il:ret)))
+
                                   (t
                                    (let ((prep-code nil))
                                      ;; Pass Requireds

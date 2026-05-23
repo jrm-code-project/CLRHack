@@ -14,13 +14,13 @@
     .field public static object 'TEST_REST'
     .field public static object 'TEST_OPTIONAL'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_D2960'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_C2958'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_B2956'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ALLOW_OTHER_KEYS2943'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S2941'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_Z2940'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_Y2938'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_D3577'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_C3575'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_B3573'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ALLOW_OTHER_KEYS3560'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S3558'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_Z3557'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_Y3555'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -42,31 +42,31 @@
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "D"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_D2960'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_D3577'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "C"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_C2958'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_C3575'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "B"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_B2956'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_B3573'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "ALLOW-OTHER-KEYS"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2943'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS3560'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2941'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S3558'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "Z"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2940'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Z3557'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "Y"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2938'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Y3555'
     ret
 }
 
@@ -76,7 +76,8 @@
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'(object, object, object, object, object, object, object) cil managed
@@ -85,7 +86,8 @@
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'(object, object, object, object, object, object) cil managed
@@ -94,7 +96,8 @@
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'(object, object, object, object, object) cil managed
@@ -103,7 +106,8 @@
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'(object, object, object, object) cil managed
@@ -112,7 +116,8 @@
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'(object, object, object) cil managed
@@ -121,7 +126,8 @@
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'(object, object) cil managed
@@ -130,7 +136,8 @@
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'(object) cil managed
@@ -139,7 +146,8 @@
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'MAIN'() cil managed
@@ -247,7 +255,7 @@
     pop
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2956'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B3573'
     ldc.i4 2
     box int32
     call object Program::'TEST_KEY'(object, object, object)
@@ -258,10 +266,10 @@
     pop
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C2958'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C3575'
     ldc.i4 3
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2956'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B3573'
     ldc.i4 4
     box int32
     call object Program::'TEST_KEY'(object, object, object, object, object)
@@ -272,7 +280,7 @@
     pop
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D2960'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D3577'
     ldc.i4 40
     box int32
     call object Program::'TEST_KEY'(object, object, object)
@@ -281,7 +289,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_2881:
+BLOCK_END_MAIN_3498:
     nop
     ldnull
     ret
@@ -292,7 +300,8 @@ BLOCK_END_MAIN_2881:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_KEY'(object, object, object, object, object, object, object) cil managed
@@ -322,7 +331,8 @@ BLOCK_END_MAIN_2881:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_KEY'(object, object, object, object, object) cil managed
@@ -348,7 +358,8 @@ BLOCK_END_MAIN_2881:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_KEY'(object, object, object) cil managed
@@ -370,7 +381,8 @@ BLOCK_END_MAIN_2881:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_KEY'(object) cil managed
@@ -389,85 +401,86 @@ BLOCK_END_MAIN_2881:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method private static hidebysig object 'TEST_KEY_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object VAL_TEMP2954, object KEY_TEMP2953, object REST_TEMP2952, object D_P2875, object D2874, object C2873, object B2872)
+    .locals init (object VAL_TEMP3571, object KEY_TEMP3570, object REST_TEMP3569, object D_P3492, object D3491, object C3490, object B3489)
     ldnull
-    stloc B2872
+    stloc B3489
     ldc.i4 10
     box int32
-    stloc C2873
+    stloc C3490
     ldc.i4 20
     box int32
-    stloc D2874
+    stloc D3491
     ldnull
-    stloc D_P2875
+    stloc D_P3492
     ldarg 1
-    stloc REST_TEMP2952
-KEY_LOOP2950:
+    stloc REST_TEMP3569
+KEY_LOOP3567:
     nop
-    ldloc REST_TEMP2952
+    ldloc REST_TEMP3569
     ldnull
     ceq
-    brtrue KEY_DONE2951
-    ldloc REST_TEMP2952
+    brtrue KEY_DONE3568
+    ldloc REST_TEMP3569
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc KEY_TEMP2953
-    ldloc REST_TEMP2952
+    stloc KEY_TEMP3570
+    ldloc REST_TEMP3569
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc VAL_TEMP2954
-    ldloc REST_TEMP2952
+    stloc VAL_TEMP3571
+    ldloc REST_TEMP3569
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc REST_TEMP2952
-    ldloc KEY_TEMP2953
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2956'
+    stloc REST_TEMP3569
+    ldloc KEY_TEMP3570
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B3573'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2955
-    ldloc VAL_TEMP2954
-    stloc B2872
-    br KEY_LOOP2950
-NEXT_KW2955:
+    brfalse NEXT_KW3572
+    ldloc VAL_TEMP3571
+    stloc B3489
+    br KEY_LOOP3567
+NEXT_KW3572:
     nop
-    ldloc KEY_TEMP2953
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C2958'
+    ldloc KEY_TEMP3570
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C3575'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2957
-    ldloc VAL_TEMP2954
-    stloc C2873
-    br KEY_LOOP2950
-NEXT_KW2957:
+    brfalse NEXT_KW3574
+    ldloc VAL_TEMP3571
+    stloc C3490
+    br KEY_LOOP3567
+NEXT_KW3574:
     nop
-    ldloc KEY_TEMP2953
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D2960'
+    ldloc KEY_TEMP3570
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D3577'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2959
-    ldloc VAL_TEMP2954
-    stloc D2874
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2941'
-    stloc D_P2875
-    br KEY_LOOP2950
-NEXT_KW2959:
+    brfalse NEXT_KW3576
+    ldloc VAL_TEMP3571
+    stloc D3491
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3558'
+    stloc D_P3492
+    br KEY_LOOP3567
+NEXT_KW3576:
     nop
-    ldloc KEY_TEMP2953
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2943'
+    ldloc KEY_TEMP3570
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS3560'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse ALLOW_OK2961
-    br KEY_LOOP2950
-ALLOW_OK2961:
+    brfalse ALLOW_OK3578
+    br KEY_LOOP3567
+ALLOW_OK3578:
     nop
-    br KEY_LOOP2950
-KEY_DONE2951:
+    br KEY_LOOP3567
+KEY_DONE3568:
     nop
     ldstr "test-key"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -477,23 +490,23 @@ KEY_DONE2951:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B2872
+    ldloc B3489
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc C2873
+    ldloc C3490
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc D2874
+    ldloc D3491
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc D_P2875
+    ldloc D_P3492
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_KEY_2877:
+BLOCK_END_TEST_KEY_3494:
     nop
     ldnull
     ret
@@ -635,7 +648,8 @@ BLOCK_END_TEST_KEY_2877:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method private static hidebysig object 'TEST_MIXED_Body'(object, object, object) cil managed
@@ -643,14 +657,14 @@ BLOCK_END_TEST_KEY_2877:
     .maxstack 8
     ldarg 1
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2948
+    bne.un SUP3565
     ldc.i4 10
     box int32
     starg 1
-    br DONE2949
-SUP2948:
+    br DONE3566
+SUP3565:
     nop
-DONE2949:
+DONE3566:
     nop
     ldstr "test-mixed"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -668,7 +682,7 @@ DONE2949:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_MIXED_2867:
+BLOCK_END_TEST_MIXED_3484:
     nop
     ldnull
     ret
@@ -816,7 +830,8 @@ BLOCK_END_TEST_MIXED_2867:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method private static hidebysig object 'TEST_REST_Body'(object, object) cil managed
@@ -834,7 +849,7 @@ BLOCK_END_TEST_MIXED_2867:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_REST_2860:
+BLOCK_END_TEST_REST_3477:
     nop
     ldnull
     ret
@@ -846,7 +861,8 @@ BLOCK_END_TEST_REST_2860:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_OPTIONAL'(object, object, object, object, object, object, object) cil managed
@@ -855,7 +871,8 @@ BLOCK_END_TEST_REST_2860:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_OPTIONAL'(object, object, object, object, object, object) cil managed
@@ -864,7 +881,8 @@ BLOCK_END_TEST_REST_2860:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_OPTIONAL'(object, object, object, object, object) cil managed
@@ -873,7 +891,8 @@ BLOCK_END_TEST_REST_2860:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_OPTIONAL'(object, object, object, object) cil managed
@@ -882,7 +901,8 @@ BLOCK_END_TEST_REST_2860:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public static hidebysig object 'TEST_OPTIONAL'(object, object, object) cil managed
@@ -927,7 +947,8 @@ BLOCK_END_TEST_REST_2860:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method private static hidebysig object 'TEST_OPTIONAL_Body'(object, object, object, object) cil managed
@@ -935,27 +956,27 @@ BLOCK_END_TEST_REST_2860:
     .maxstack 8
     ldarg 1
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2944
+    bne.un SUP3561
     ldstr "default-b"
     starg 1
-    br DONE2945
-SUP2944:
+    br DONE3562
+SUP3561:
     nop
-DONE2945:
+DONE3562:
     nop
     ldarg 2
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2946
+    bne.un SUP3563
     ldstr "default-c"
     starg 2
     ldnull
     starg 3
-    br DONE2947
-SUP2946:
+    br DONE3564
+SUP3563:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2941'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3558'
     starg 3
-DONE2947:
+DONE3564:
     nop
     ldstr "test-optional"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -977,7 +998,7 @@ DONE2947:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_OPTIONAL_2854:
+BLOCK_END_TEST_OPTIONAL_3471:
     nop
     ldnull
     ret
@@ -987,20 +1008,20 @@ BLOCK_END_TEST_OPTIONAL_2854:
 {
     .entrypoint
     .maxstack 8
-    .locals init (object F2895, object F2888)
+    .locals init (object F3512, object F3505)
     call object Program::'MAIN'()
     pop
     ldstr "--- lambda test ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_2896::'.ctor'()
-    stloc F2888
+    newobj instance void L_3513::'.ctor'()
+    stloc F3505
     ldstr "lambda 1"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2888
+    ldloc F3505
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1010,7 +1031,7 @@ BLOCK_END_TEST_OPTIONAL_2854:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2888
+    ldloc F3505
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1022,7 +1043,7 @@ BLOCK_END_TEST_OPTIONAL_2854:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2888
+    ldloc F3505
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1038,13 +1059,13 @@ BLOCK_END_TEST_OPTIONAL_2854:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_2897::'.ctor'()
-    stloc F2895
+    newobj instance void L_3514::'.ctor'()
+    stloc F3512
     ldstr "lambda-key 1"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2895
+    ldloc F3512
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1054,11 +1075,11 @@ BLOCK_END_TEST_OPTIONAL_2854:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2895
+    ldloc F3512
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2938'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y3555'
     ldc.i4 2
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object)
@@ -1067,14 +1088,14 @@ BLOCK_END_TEST_OPTIONAL_2854:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2895
+    ldloc F3512
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2940'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z3557'
     ldc.i4 3
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2938'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y3555'
     ldc.i4 4
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object, object, object)
@@ -1084,7 +1105,7 @@ BLOCK_END_TEST_OPTIONAL_2854:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_2896
+.class public auto ansi beforefieldinit L_3513
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1100,13 +1121,13 @@ BLOCK_END_TEST_OPTIONAL_2854:
     .maxstack 8
     ldarg 2
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2930
+    bne.un SUP3547
     ldstr "default-y"
     starg 2
-    br DONE2931
-SUP2930:
+    br DONE3548
+SUP3547:
     nop
-DONE2931:
+DONE3548:
     nop
     ldstr "lambda"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -1134,7 +1155,8 @@ DONE2931:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object) cil managed
@@ -1145,7 +1167,7 @@ DONE2931:
     ldsfld object [LispBase]Lisp.Undefined::Value
     ldnull
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1157,7 +1179,7 @@ DONE2931:
     ldarg 2
     ldnull
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1171,7 +1193,7 @@ DONE2931:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1187,7 +1209,7 @@ DONE2931:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1205,7 +1227,7 @@ DONE2931:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1225,7 +1247,7 @@ DONE2931:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1247,7 +1269,7 @@ DONE2931:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1271,13 +1293,13 @@ DONE2931:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2896::'InvokeBody'(object, object, object)
+    callvirt instance object L_3513::'InvokeBody'(object, object, object)
     ret
 }
 
-} // end of class L_2896
+} // end of class L_3513
 
-.class public auto ansi beforefieldinit L_2897
+.class public auto ansi beforefieldinit L_3514
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1291,68 +1313,68 @@ DONE2931:
 .method private hidebysig object 'InvokeBody'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object VAL_TEMP2936, object KEY_TEMP2935, object REST_TEMP2934, object Z_P2893, object Z2892, object Y2891)
+    .locals init (object VAL_TEMP3553, object KEY_TEMP3552, object REST_TEMP3551, object Z_P3510, object Z3509, object Y3508)
     ldc.i4 100
     box int32
-    stloc Y2891
+    stloc Y3508
     ldc.i4 200
     box int32
-    stloc Z2892
+    stloc Z3509
     ldnull
-    stloc Z_P2893
+    stloc Z_P3510
     ldarg 2
-    stloc REST_TEMP2934
-KEY_LOOP2932:
+    stloc REST_TEMP3551
+KEY_LOOP3549:
     nop
-    ldloc REST_TEMP2934
+    ldloc REST_TEMP3551
     ldnull
     ceq
-    brtrue KEY_DONE2933
-    ldloc REST_TEMP2934
+    brtrue KEY_DONE3550
+    ldloc REST_TEMP3551
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc KEY_TEMP2935
-    ldloc REST_TEMP2934
+    stloc KEY_TEMP3552
+    ldloc REST_TEMP3551
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc VAL_TEMP2936
-    ldloc REST_TEMP2934
+    stloc VAL_TEMP3553
+    ldloc REST_TEMP3551
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc REST_TEMP2934
-    ldloc KEY_TEMP2935
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2938'
+    stloc REST_TEMP3551
+    ldloc KEY_TEMP3552
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y3555'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2937
-    ldloc VAL_TEMP2936
-    stloc Y2891
-    br KEY_LOOP2932
-NEXT_KW2937:
+    brfalse NEXT_KW3554
+    ldloc VAL_TEMP3553
+    stloc Y3508
+    br KEY_LOOP3549
+NEXT_KW3554:
     nop
-    ldloc KEY_TEMP2935
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2940'
+    ldloc KEY_TEMP3552
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z3557'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2939
-    ldloc VAL_TEMP2936
-    stloc Z2892
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2941'
-    stloc Z_P2893
-    br KEY_LOOP2932
-NEXT_KW2939:
+    brfalse NEXT_KW3556
+    ldloc VAL_TEMP3553
+    stloc Z3509
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3558'
+    stloc Z_P3510
+    br KEY_LOOP3549
+NEXT_KW3556:
     nop
-    ldloc KEY_TEMP2935
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2943'
+    ldloc KEY_TEMP3552
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS3560'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse ALLOW_OK2942
-    br KEY_LOOP2932
-ALLOW_OK2942:
+    brfalse ALLOW_OK3559
+    br KEY_LOOP3549
+ALLOW_OK3559:
     nop
-    br KEY_LOOP2932
-KEY_DONE2933:
+    br KEY_LOOP3549
+KEY_DONE3550:
     nop
     ldstr "lambda-key"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -1362,15 +1384,15 @@ KEY_DONE2933:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc Y2891
+    ldloc Y3508
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc Z2892
+    ldloc Z3509
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc Z_P2893
+    ldloc Z_P3510
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
@@ -1384,7 +1406,8 @@ KEY_DONE2933:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object) cil managed
@@ -1394,7 +1417,7 @@ KEY_DONE2933:
     ldarg 1
     ldnull
     tail.
-    callvirt instance object L_2897::'InvokeBody'(object, object)
+    callvirt instance object L_3514::'InvokeBody'(object, object)
     ret
 }
 
@@ -1403,7 +1426,8 @@ KEY_DONE2933:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
@@ -1417,7 +1441,7 @@ KEY_DONE2933:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2897::'InvokeBody'(object, object)
+    callvirt instance object L_3514::'InvokeBody'(object, object)
     ret
 }
 
@@ -1426,7 +1450,8 @@ KEY_DONE2933:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
@@ -1444,7 +1469,7 @@ KEY_DONE2933:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2897::'InvokeBody'(object, object)
+    callvirt instance object L_3514::'InvokeBody'(object, object)
     ret
 }
 
@@ -1453,7 +1478,8 @@ KEY_DONE2933:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
@@ -1475,7 +1501,7 @@ KEY_DONE2933:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2897::'InvokeBody'(object, object)
+    callvirt instance object L_3514::'InvokeBody'(object, object)
     ret
 }
 
@@ -1484,8 +1510,9 @@ KEY_DONE2933:
     .maxstack 8
     ldstr "Odd number of keyword arguments"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
-} // end of class L_2897
+} // end of class L_3514
 

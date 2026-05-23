@@ -12,8 +12,8 @@
     .field public static object 'PRINT'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T885'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S878'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T879'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S872'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -31,11 +31,11 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T885'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T879'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S872'
     ret
 }
 
@@ -43,11 +43,11 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object F856, object B853, object A852, object Y851, object X850)
+    .locals init (object F850, object B847, object A846, object Y845, object X844)
     ldc.i4 10
     box int32
-    stloc X850
-    ldloc X850
+    stloc X844
+    ldloc X844
     ldc.i4 20
     box int32
     stsfld object Program::'TEMP_B'
@@ -55,31 +55,31 @@
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE876
+    brtrue TRUE870
     ldnull
-    br END877
-TRUE876:
+    br END871
+TRUE870:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
-END877:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S872'
+END871:
     nop
     ldnull
     ceq
-    brtrue ELSE886
+    brtrue ELSE880
     ldstr "X is less than 20 (via built-in WHEN)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END887
-ELSE886:
+    br END881
+ELSE880:
     nop
     ldnull
-END887:
+END881:
     nop
     pop
     ldc.i4 30
     box int32
-    stloc Y851
-    ldloc Y851
+    stloc Y845
+    ldloc Y845
     ldc.i4 20
     box int32
     stsfld object Program::'TEMP_B'
@@ -87,31 +87,31 @@ END887:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE879
+    brtrue TRUE873
     ldnull
-    br END880
-TRUE879:
+    br END874
+TRUE873:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
-END880:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S872'
+END874:
     nop
     ldnull
     ceq
-    brtrue ELSE888
+    brtrue ELSE882
     ldnull
-    br END889
-ELSE888:
+    br END883
+ELSE882:
     nop
     ldstr "Y is NOT less than 20 (via built-in UNLESS)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END889:
+END883:
     nop
     pop
     ldc.i4 5
     box int32
-    stloc A852
-    ldloc A852
+    stloc A846
+    ldloc A846
     ldc.i4 10
     box int32
     stsfld object Program::'TEMP_B'
@@ -120,12 +120,12 @@ END889:
     unbox.any int32
     add
     box int32
-    stloc B853
+    stloc B847
     ldstr "A + 10 is (via LET*):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B853
+    ldloc B847
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -146,22 +146,22 @@ END889:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE881
+    brtrue TRUE875
     ldnull
-    br END882
-TRUE881:
+    br END876
+TRUE875:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
-END882:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S872'
+END876:
     nop
     ldnull
     ceq
-    brtrue ELSE894
+    brtrue ELSE888
     ldstr "Failure"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END895
-ELSE894:
+    br END889
+ELSE888:
     nop
     ldc.i4 5
     box int32
@@ -172,48 +172,48 @@ ELSE894:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE883
+    brtrue TRUE877
     ldnull
-    br END884
-TRUE883:
+    br END878
+TRUE877:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S878'
-END884:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S872'
+END878:
     nop
     ldnull
     ceq
-    brtrue ELSE892
+    brtrue ELSE886
     ldstr "Success (via COND)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END893
-ELSE892:
+    br END887
+ELSE886:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T885'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T879'
     ldnull
     ceq
-    brtrue ELSE890
+    brtrue ELSE884
     ldstr "Fallthrough"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END891
-ELSE890:
+    br END885
+ELSE884:
     nop
     ldnull
-END891:
+END885:
     nop
-END893:
+END887:
     nop
-END895:
+END889:
     nop
     pop
-    newobj instance void L_857::'.ctor'()
-    stloc F856
+    newobj instance void L_851::'.ctor'()
+    stloc F850
     ldstr "Funcall result (10 + 1):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F856
+    ldloc F850
     castclass [LispBase]Lisp.Closure
     ldc.i4 10
     box int32
@@ -226,7 +226,7 @@ END895:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_857
+.class public auto ansi beforefieldinit L_851
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -260,7 +260,8 @@ END895:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object) cil managed
@@ -269,7 +270,7 @@ END895:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_857::'InvokeBody'(object)
+    callvirt instance object L_851::'InvokeBody'(object)
     ret
 }
 
@@ -279,7 +280,8 @@ END895:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
@@ -288,7 +290,8 @@ END895:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
@@ -297,7 +300,8 @@ END895:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
@@ -306,7 +310,8 @@ END895:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
@@ -315,7 +320,8 @@ END895:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
@@ -324,7 +330,8 @@ END895:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
 .method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
@@ -333,8 +340,9 @@ END895:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    throw
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
 }
 
-} // end of class L_857
+} // end of class L_851
 
