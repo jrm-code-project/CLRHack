@@ -35,8 +35,11 @@
     .field public static object 'MV_PRODUCER'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T1259'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S1252'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1522'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1515'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1508'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T1280'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1273'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -98,13 +101,25 @@
     ldnull
     stsfld object Program::'_'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "T"
+    ldstr "BAZ"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T1259'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1522'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "BAR"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1515'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "FOO"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1508'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1252'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T1280'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "T"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1273'
     ret
 }
 
@@ -191,7 +206,7 @@
 .method private static hidebysig object 'RUN_MV_TESTS_Body'() cil managed
 {
     .maxstack 15
-    .locals init (object TEMP1505, object RES990, object LIST986987, object RESULTS985)
+    .locals init (object TEMP1529, object RES1010, object LIST10061007, object RESULTS1005)
     call object Program::'TEST_MV_BIND_2'()
     call object Program::'TEST_MV_BIND_3'()
     call object Program::'TEST_MV_BIND_1_FROM_2'()
@@ -221,67 +236,67 @@
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc RESULTS985
-    ldloc RESULTS985
+    stloc RESULTS1005
+    ldloc RESULTS1005
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc LIST986987
-TAG_LOOP_988:
+    stloc LIST10061007
+TAG_LOOP_1008:
     nop
-    ldloc LIST986987
+    ldloc LIST10061007
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1503
+    brtrue TRUE1527
     ldnull
-    br END1504
-TRUE1503:
+    br END1528
+TRUE1527:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1252'
-END1504:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1273'
+END1528:
     nop
     ldnull
     ceq
-    brtrue ELSE1506
-    leave TAG_END_989
-    br END1507
-ELSE1506:
+    brtrue ELSE1530
+    leave TAG_END_1009
+    br END1531
+ELSE1530:
     nop
     ldnull
-END1507:
+END1531:
     nop
     pop
-    ldloc LIST986987
+    ldloc LIST10061007
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc RES990
-    ldloc LIST986987
-    ldloc LIST986987
+    stloc RES1010
+    ldloc LIST10061007
+    ldloc LIST10061007
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc TEMP1505
+    stloc TEMP1529
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1505
+    ldloc TEMP1529
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1505
+    ldloc TEMP1529
     pop
-    ldloc RES990
+    ldloc RES1010
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    leave TAG_LOOP_988
+    leave TAG_LOOP_1008
     pop
-TAG_END_989:
+TAG_END_1009:
     nop
     ldnull
     pop
     ldnull
     ret
-BLOCK_END_RUN_MV_TESTS_983:
+BLOCK_END_RUN_MV_TESTS_1003:
     nop
     ldnull
     ret
@@ -370,61 +385,61 @@ BLOCK_END_RUN_MV_TESTS_983:
 .method private static hidebysig object 'TEST_CATCH_THROW_1_MV_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT1498, object CATCH_TAG1497, object B980, object A979)
+    .locals init (object CATCH_RESULT1521, object CATCH_TAG1520, object B1000, object A999)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc CATCH_TAG1497
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1522'
+    stloc CATCH_TAG1520
     .try
     {
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1522'
     ldc.i4 42
     box int32
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
     throw
-    stloc CATCH_RESULT1498
-    leave CATCH_DONE1499
+    stloc CATCH_RESULT1521
+    leave CATCH_DONE1523
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG1497
+    ldloc CATCH_TAG1520
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW1500
+    brfalse CATCH_RETHROW1524
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT1498
-    leave CATCH_DONE1499
-CATCH_RETHROW1500:
+    stloc CATCH_RESULT1521
+    leave CATCH_DONE1523
+CATCH_RETHROW1524:
     pop
     rethrow
     }
-CATCH_DONE1499:
-    ldloc CATCH_RESULT1498
-    stloc A979
+CATCH_DONE1523:
+    ldloc CATCH_RESULT1521
+    stloc A999
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1501
+    ble SKIP_VAL1525
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B980
-    br DONE_VAL1502
-SKIP_VAL1501:
+    stloc B1000
+    br DONE_VAL1526
+SKIP_VAL1525:
     nop
     ldnull
-    stloc B980
-DONE_VAL1502:
+    stloc B1000
+DONE_VAL1526:
     nop
-    ldloc A979
-    ldloc B980
+    ldloc A999
+    ldloc B1000
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_CATCH_THROW_1_MV_977:
+BLOCK_END_TEST_CATCH_THROW_1_MV_997:
     nop
     ldnull
     ret
@@ -513,62 +528,62 @@ BLOCK_END_TEST_CATCH_THROW_1_MV_977:
 .method private static hidebysig object 'TEST_CATCH_THROW_0_MV_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT1492, object CATCH_TAG1491, object B974, object A973)
+    .locals init (object CATCH_RESULT1514, object CATCH_TAG1513, object B994, object A993)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc CATCH_TAG1491
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1515'
+    stloc CATCH_TAG1513
     .try
     {
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1515'
     ldc.i4.0
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
     throw
-    stloc CATCH_RESULT1492
-    leave CATCH_DONE1493
+    stloc CATCH_RESULT1514
+    leave CATCH_DONE1516
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG1491
+    ldloc CATCH_TAG1513
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW1494
+    brfalse CATCH_RETHROW1517
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT1492
-    leave CATCH_DONE1493
-CATCH_RETHROW1494:
+    stloc CATCH_RESULT1514
+    leave CATCH_DONE1516
+CATCH_RETHROW1517:
     pop
     rethrow
     }
-CATCH_DONE1493:
-    ldloc CATCH_RESULT1492
-    stloc A973
+CATCH_DONE1516:
+    ldloc CATCH_RESULT1514
+    stloc A993
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1495
+    ble SKIP_VAL1518
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B974
-    br DONE_VAL1496
-SKIP_VAL1495:
+    stloc B994
+    br DONE_VAL1519
+SKIP_VAL1518:
     nop
     ldnull
-    stloc B974
-DONE_VAL1496:
+    stloc B994
+DONE_VAL1519:
     nop
-    ldloc A973
-    ldloc B974
+    ldloc A993
+    ldloc B994
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_CATCH_THROW_0_MV_971:
+BLOCK_END_TEST_CATCH_THROW_0_MV_991:
     nop
     ldnull
     ret
@@ -657,14 +672,14 @@ BLOCK_END_TEST_CATCH_THROW_0_MV_971:
 .method private static hidebysig object 'TEST_CATCH_THROW_MV_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT1486, object CATCH_TAG1485, object B968, object A967)
+    .locals init (object CATCH_RESULT1507, object CATCH_TAG1506, object B988, object A987)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc CATCH_TAG1485
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1508'
+    stloc CATCH_TAG1506
     .try
     {
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1508'
     ldc.i4 9
     box int32
     ldc.i4 10
@@ -675,48 +690,48 @@ BLOCK_END_TEST_CATCH_THROW_0_MV_971:
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
     throw
-    stloc CATCH_RESULT1486
-    leave CATCH_DONE1487
+    stloc CATCH_RESULT1507
+    leave CATCH_DONE1509
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG1485
+    ldloc CATCH_TAG1506
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW1488
+    brfalse CATCH_RETHROW1510
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT1486
-    leave CATCH_DONE1487
-CATCH_RETHROW1488:
+    stloc CATCH_RESULT1507
+    leave CATCH_DONE1509
+CATCH_RETHROW1510:
     pop
     rethrow
     }
-CATCH_DONE1487:
-    ldloc CATCH_RESULT1486
-    stloc A967
+CATCH_DONE1509:
+    ldloc CATCH_RESULT1507
+    stloc A987
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1489
+    ble SKIP_VAL1511
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B968
-    br DONE_VAL1490
-SKIP_VAL1489:
+    stloc B988
+    br DONE_VAL1512
+SKIP_VAL1511:
     nop
     ldnull
-    stloc B968
-DONE_VAL1490:
+    stloc B988
+DONE_VAL1512:
     nop
-    ldloc A967
-    ldloc B968
+    ldloc A987
+    ldloc B988
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_CATCH_THROW_MV_965:
+BLOCK_END_TEST_CATCH_THROW_MV_985:
     nop
     ldnull
     ret
@@ -805,7 +820,7 @@ BLOCK_END_TEST_CATCH_THROW_MV_965:
 .method private static hidebysig object 'TEST_UWP_RETURN_FROM_MV_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_NIL_960, object UWP_V631481, object UWP_V621480, object UWP_V611479, object UWP_V601478, object UWP_V591477, object UWP_V581476, object UWP_V571475, object UWP_V561474, object UWP_V551473, object UWP_V541472, object UWP_V531471, object UWP_V521470, object UWP_V511469, object UWP_V501468, object UWP_V491467, object UWP_V481466, object UWP_V471465, object UWP_V461464, object UWP_V451463, object UWP_V441462, object UWP_V431461, object UWP_V421460, object UWP_V411459, object UWP_V401458, object UWP_V391457, object UWP_V381456, object UWP_V371455, object UWP_V361454, object UWP_V351453, object UWP_V341452, object UWP_V331451, object UWP_V321450, object UWP_V311449, object UWP_V301448, object UWP_V291447, object UWP_V281446, object UWP_V271445, object UWP_V261444, object UWP_V251443, object UWP_V241442, object UWP_V231441, object UWP_V221440, object UWP_V211439, object UWP_V201438, object UWP_V191437, object UWP_V181436, object UWP_V171435, object UWP_V161434, object UWP_V151433, object UWP_V141432, object UWP_V131431, object UWP_V121430, object UWP_V111429, object UWP_V101428, object UWP_V91427, object UWP_V81426, object UWP_V71425, object UWP_V61424, object UWP_V51423, object UWP_V41422, object UWP_V31421, object UWP_V21420, object UWP_V11419, object UWP_COUNT1418, object UWP_RESULT1417, object B962, object A961)
+    .locals init (object BLOCK_RESULT_NIL_980, object UWP_V631502, object UWP_V621501, object UWP_V611500, object UWP_V601499, object UWP_V591498, object UWP_V581497, object UWP_V571496, object UWP_V561495, object UWP_V551494, object UWP_V541493, object UWP_V531492, object UWP_V521491, object UWP_V511490, object UWP_V501489, object UWP_V491488, object UWP_V481487, object UWP_V471486, object UWP_V461485, object UWP_V451484, object UWP_V441483, object UWP_V431482, object UWP_V421481, object UWP_V411480, object UWP_V401479, object UWP_V391478, object UWP_V381477, object UWP_V371476, object UWP_V361475, object UWP_V351474, object UWP_V341473, object UWP_V331472, object UWP_V321471, object UWP_V311470, object UWP_V301469, object UWP_V291468, object UWP_V281467, object UWP_V271466, object UWP_V261465, object UWP_V251464, object UWP_V241463, object UWP_V231462, object UWP_V221461, object UWP_V211460, object UWP_V201459, object UWP_V191458, object UWP_V181457, object UWP_V171456, object UWP_V161455, object UWP_V151454, object UWP_V141453, object UWP_V131452, object UWP_V121451, object UWP_V111450, object UWP_V101449, object UWP_V91448, object UWP_V81447, object UWP_V71446, object UWP_V61445, object UWP_V51444, object UWP_V41443, object UWP_V31442, object UWP_V21441, object UWP_V11440, object UWP_COUNT1439, object UWP_RESULT1438, object B982, object A981)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     .try
@@ -817,141 +832,141 @@ BLOCK_END_TEST_CATCH_THROW_MV_965:
     stsfld object [LispBase]Lisp.Values::Value1
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc BLOCK_RESULT_NIL_960
-    leave BLOCK_END_NIL_959
-    stloc UWP_RESULT1417
-    leave DONE1482
+    stloc BLOCK_RESULT_NIL_980
+    leave BLOCK_END_NIL_979
+    stloc UWP_RESULT1438
+    leave DONE1503
     }
     finally
     {
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc UWP_COUNT1418
+    stloc UWP_COUNT1439
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc UWP_V11419
+    stloc UWP_V11440
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc UWP_V21420
+    stloc UWP_V21441
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc UWP_V31421
+    stloc UWP_V31442
     ldsfld object [LispBase]Lisp.Values::Value4
-    stloc UWP_V41422
+    stloc UWP_V41443
     ldsfld object [LispBase]Lisp.Values::Value5
-    stloc UWP_V51423
+    stloc UWP_V51444
     ldsfld object [LispBase]Lisp.Values::Value6
-    stloc UWP_V61424
+    stloc UWP_V61445
     ldsfld object [LispBase]Lisp.Values::Value7
-    stloc UWP_V71425
+    stloc UWP_V71446
     ldsfld object [LispBase]Lisp.Values::Value8
-    stloc UWP_V81426
+    stloc UWP_V81447
     ldsfld object [LispBase]Lisp.Values::Value9
-    stloc UWP_V91427
+    stloc UWP_V91448
     ldsfld object [LispBase]Lisp.Values::Value10
-    stloc UWP_V101428
+    stloc UWP_V101449
     ldsfld object [LispBase]Lisp.Values::Value11
-    stloc UWP_V111429
+    stloc UWP_V111450
     ldsfld object [LispBase]Lisp.Values::Value12
-    stloc UWP_V121430
+    stloc UWP_V121451
     ldsfld object [LispBase]Lisp.Values::Value13
-    stloc UWP_V131431
+    stloc UWP_V131452
     ldsfld object [LispBase]Lisp.Values::Value14
-    stloc UWP_V141432
+    stloc UWP_V141453
     ldsfld object [LispBase]Lisp.Values::Value15
-    stloc UWP_V151433
+    stloc UWP_V151454
     ldsfld object [LispBase]Lisp.Values::Value16
-    stloc UWP_V161434
+    stloc UWP_V161455
     ldsfld object [LispBase]Lisp.Values::Value17
-    stloc UWP_V171435
+    stloc UWP_V171456
     ldsfld object [LispBase]Lisp.Values::Value18
-    stloc UWP_V181436
+    stloc UWP_V181457
     ldsfld object [LispBase]Lisp.Values::Value19
-    stloc UWP_V191437
+    stloc UWP_V191458
     ldsfld object [LispBase]Lisp.Values::Value20
-    stloc UWP_V201438
+    stloc UWP_V201459
     ldsfld object [LispBase]Lisp.Values::Value21
-    stloc UWP_V211439
+    stloc UWP_V211460
     ldsfld object [LispBase]Lisp.Values::Value22
-    stloc UWP_V221440
+    stloc UWP_V221461
     ldsfld object [LispBase]Lisp.Values::Value23
-    stloc UWP_V231441
+    stloc UWP_V231462
     ldsfld object [LispBase]Lisp.Values::Value24
-    stloc UWP_V241442
+    stloc UWP_V241463
     ldsfld object [LispBase]Lisp.Values::Value25
-    stloc UWP_V251443
+    stloc UWP_V251464
     ldsfld object [LispBase]Lisp.Values::Value26
-    stloc UWP_V261444
+    stloc UWP_V261465
     ldsfld object [LispBase]Lisp.Values::Value27
-    stloc UWP_V271445
+    stloc UWP_V271466
     ldsfld object [LispBase]Lisp.Values::Value28
-    stloc UWP_V281446
+    stloc UWP_V281467
     ldsfld object [LispBase]Lisp.Values::Value29
-    stloc UWP_V291447
+    stloc UWP_V291468
     ldsfld object [LispBase]Lisp.Values::Value30
-    stloc UWP_V301448
+    stloc UWP_V301469
     ldsfld object [LispBase]Lisp.Values::Value31
-    stloc UWP_V311449
+    stloc UWP_V311470
     ldsfld object [LispBase]Lisp.Values::Value32
-    stloc UWP_V321450
+    stloc UWP_V321471
     ldsfld object [LispBase]Lisp.Values::Value33
-    stloc UWP_V331451
+    stloc UWP_V331472
     ldsfld object [LispBase]Lisp.Values::Value34
-    stloc UWP_V341452
+    stloc UWP_V341473
     ldsfld object [LispBase]Lisp.Values::Value35
-    stloc UWP_V351453
+    stloc UWP_V351474
     ldsfld object [LispBase]Lisp.Values::Value36
-    stloc UWP_V361454
+    stloc UWP_V361475
     ldsfld object [LispBase]Lisp.Values::Value37
-    stloc UWP_V371455
+    stloc UWP_V371476
     ldsfld object [LispBase]Lisp.Values::Value38
-    stloc UWP_V381456
+    stloc UWP_V381477
     ldsfld object [LispBase]Lisp.Values::Value39
-    stloc UWP_V391457
+    stloc UWP_V391478
     ldsfld object [LispBase]Lisp.Values::Value40
-    stloc UWP_V401458
+    stloc UWP_V401479
     ldsfld object [LispBase]Lisp.Values::Value41
-    stloc UWP_V411459
+    stloc UWP_V411480
     ldsfld object [LispBase]Lisp.Values::Value42
-    stloc UWP_V421460
+    stloc UWP_V421481
     ldsfld object [LispBase]Lisp.Values::Value43
-    stloc UWP_V431461
+    stloc UWP_V431482
     ldsfld object [LispBase]Lisp.Values::Value44
-    stloc UWP_V441462
+    stloc UWP_V441483
     ldsfld object [LispBase]Lisp.Values::Value45
-    stloc UWP_V451463
+    stloc UWP_V451484
     ldsfld object [LispBase]Lisp.Values::Value46
-    stloc UWP_V461464
+    stloc UWP_V461485
     ldsfld object [LispBase]Lisp.Values::Value47
-    stloc UWP_V471465
+    stloc UWP_V471486
     ldsfld object [LispBase]Lisp.Values::Value48
-    stloc UWP_V481466
+    stloc UWP_V481487
     ldsfld object [LispBase]Lisp.Values::Value49
-    stloc UWP_V491467
+    stloc UWP_V491488
     ldsfld object [LispBase]Lisp.Values::Value50
-    stloc UWP_V501468
+    stloc UWP_V501489
     ldsfld object [LispBase]Lisp.Values::Value51
-    stloc UWP_V511469
+    stloc UWP_V511490
     ldsfld object [LispBase]Lisp.Values::Value52
-    stloc UWP_V521470
+    stloc UWP_V521491
     ldsfld object [LispBase]Lisp.Values::Value53
-    stloc UWP_V531471
+    stloc UWP_V531492
     ldsfld object [LispBase]Lisp.Values::Value54
-    stloc UWP_V541472
+    stloc UWP_V541493
     ldsfld object [LispBase]Lisp.Values::Value55
-    stloc UWP_V551473
+    stloc UWP_V551494
     ldsfld object [LispBase]Lisp.Values::Value56
-    stloc UWP_V561474
+    stloc UWP_V561495
     ldsfld object [LispBase]Lisp.Values::Value57
-    stloc UWP_V571475
+    stloc UWP_V571496
     ldsfld object [LispBase]Lisp.Values::Value58
-    stloc UWP_V581476
+    stloc UWP_V581497
     ldsfld object [LispBase]Lisp.Values::Value59
-    stloc UWP_V591477
+    stloc UWP_V591498
     ldsfld object [LispBase]Lisp.Values::Value60
-    stloc UWP_V601478
+    stloc UWP_V601499
     ldsfld object [LispBase]Lisp.Values::Value61
-    stloc UWP_V611479
+    stloc UWP_V611500
     ldsfld object [LispBase]Lisp.Values::Value62
-    stloc UWP_V621480
+    stloc UWP_V621501
     ldsfld object [LispBase]Lisp.Values::Value63
-    stloc UWP_V631481
+    stloc UWP_V631502
     ldc.i4 7
     box int32
     ldc.i4 8
@@ -960,162 +975,162 @@ BLOCK_END_TEST_CATCH_THROW_MV_965:
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     pop
-    ldloc UWP_COUNT1418
+    ldloc UWP_COUNT1439
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    ldloc UWP_V11419
+    ldloc UWP_V11440
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc UWP_V21420
+    ldloc UWP_V21441
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc UWP_V31421
+    ldloc UWP_V31442
     stsfld object [LispBase]Lisp.Values::Value3
-    ldloc UWP_V41422
+    ldloc UWP_V41443
     stsfld object [LispBase]Lisp.Values::Value4
-    ldloc UWP_V51423
+    ldloc UWP_V51444
     stsfld object [LispBase]Lisp.Values::Value5
-    ldloc UWP_V61424
+    ldloc UWP_V61445
     stsfld object [LispBase]Lisp.Values::Value6
-    ldloc UWP_V71425
+    ldloc UWP_V71446
     stsfld object [LispBase]Lisp.Values::Value7
-    ldloc UWP_V81426
+    ldloc UWP_V81447
     stsfld object [LispBase]Lisp.Values::Value8
-    ldloc UWP_V91427
+    ldloc UWP_V91448
     stsfld object [LispBase]Lisp.Values::Value9
-    ldloc UWP_V101428
+    ldloc UWP_V101449
     stsfld object [LispBase]Lisp.Values::Value10
-    ldloc UWP_V111429
+    ldloc UWP_V111450
     stsfld object [LispBase]Lisp.Values::Value11
-    ldloc UWP_V121430
+    ldloc UWP_V121451
     stsfld object [LispBase]Lisp.Values::Value12
-    ldloc UWP_V131431
+    ldloc UWP_V131452
     stsfld object [LispBase]Lisp.Values::Value13
-    ldloc UWP_V141432
+    ldloc UWP_V141453
     stsfld object [LispBase]Lisp.Values::Value14
-    ldloc UWP_V151433
+    ldloc UWP_V151454
     stsfld object [LispBase]Lisp.Values::Value15
-    ldloc UWP_V161434
+    ldloc UWP_V161455
     stsfld object [LispBase]Lisp.Values::Value16
-    ldloc UWP_V171435
+    ldloc UWP_V171456
     stsfld object [LispBase]Lisp.Values::Value17
-    ldloc UWP_V181436
+    ldloc UWP_V181457
     stsfld object [LispBase]Lisp.Values::Value18
-    ldloc UWP_V191437
+    ldloc UWP_V191458
     stsfld object [LispBase]Lisp.Values::Value19
-    ldloc UWP_V201438
+    ldloc UWP_V201459
     stsfld object [LispBase]Lisp.Values::Value20
-    ldloc UWP_V211439
+    ldloc UWP_V211460
     stsfld object [LispBase]Lisp.Values::Value21
-    ldloc UWP_V221440
+    ldloc UWP_V221461
     stsfld object [LispBase]Lisp.Values::Value22
-    ldloc UWP_V231441
+    ldloc UWP_V231462
     stsfld object [LispBase]Lisp.Values::Value23
-    ldloc UWP_V241442
+    ldloc UWP_V241463
     stsfld object [LispBase]Lisp.Values::Value24
-    ldloc UWP_V251443
+    ldloc UWP_V251464
     stsfld object [LispBase]Lisp.Values::Value25
-    ldloc UWP_V261444
+    ldloc UWP_V261465
     stsfld object [LispBase]Lisp.Values::Value26
-    ldloc UWP_V271445
+    ldloc UWP_V271466
     stsfld object [LispBase]Lisp.Values::Value27
-    ldloc UWP_V281446
+    ldloc UWP_V281467
     stsfld object [LispBase]Lisp.Values::Value28
-    ldloc UWP_V291447
+    ldloc UWP_V291468
     stsfld object [LispBase]Lisp.Values::Value29
-    ldloc UWP_V301448
+    ldloc UWP_V301469
     stsfld object [LispBase]Lisp.Values::Value30
-    ldloc UWP_V311449
+    ldloc UWP_V311470
     stsfld object [LispBase]Lisp.Values::Value31
-    ldloc UWP_V321450
+    ldloc UWP_V321471
     stsfld object [LispBase]Lisp.Values::Value32
-    ldloc UWP_V331451
+    ldloc UWP_V331472
     stsfld object [LispBase]Lisp.Values::Value33
-    ldloc UWP_V341452
+    ldloc UWP_V341473
     stsfld object [LispBase]Lisp.Values::Value34
-    ldloc UWP_V351453
+    ldloc UWP_V351474
     stsfld object [LispBase]Lisp.Values::Value35
-    ldloc UWP_V361454
+    ldloc UWP_V361475
     stsfld object [LispBase]Lisp.Values::Value36
-    ldloc UWP_V371455
+    ldloc UWP_V371476
     stsfld object [LispBase]Lisp.Values::Value37
-    ldloc UWP_V381456
+    ldloc UWP_V381477
     stsfld object [LispBase]Lisp.Values::Value38
-    ldloc UWP_V391457
+    ldloc UWP_V391478
     stsfld object [LispBase]Lisp.Values::Value39
-    ldloc UWP_V401458
+    ldloc UWP_V401479
     stsfld object [LispBase]Lisp.Values::Value40
-    ldloc UWP_V411459
+    ldloc UWP_V411480
     stsfld object [LispBase]Lisp.Values::Value41
-    ldloc UWP_V421460
+    ldloc UWP_V421481
     stsfld object [LispBase]Lisp.Values::Value42
-    ldloc UWP_V431461
+    ldloc UWP_V431482
     stsfld object [LispBase]Lisp.Values::Value43
-    ldloc UWP_V441462
+    ldloc UWP_V441483
     stsfld object [LispBase]Lisp.Values::Value44
-    ldloc UWP_V451463
+    ldloc UWP_V451484
     stsfld object [LispBase]Lisp.Values::Value45
-    ldloc UWP_V461464
+    ldloc UWP_V461485
     stsfld object [LispBase]Lisp.Values::Value46
-    ldloc UWP_V471465
+    ldloc UWP_V471486
     stsfld object [LispBase]Lisp.Values::Value47
-    ldloc UWP_V481466
+    ldloc UWP_V481487
     stsfld object [LispBase]Lisp.Values::Value48
-    ldloc UWP_V491467
+    ldloc UWP_V491488
     stsfld object [LispBase]Lisp.Values::Value49
-    ldloc UWP_V501468
+    ldloc UWP_V501489
     stsfld object [LispBase]Lisp.Values::Value50
-    ldloc UWP_V511469
+    ldloc UWP_V511490
     stsfld object [LispBase]Lisp.Values::Value51
-    ldloc UWP_V521470
+    ldloc UWP_V521491
     stsfld object [LispBase]Lisp.Values::Value52
-    ldloc UWP_V531471
+    ldloc UWP_V531492
     stsfld object [LispBase]Lisp.Values::Value53
-    ldloc UWP_V541472
+    ldloc UWP_V541493
     stsfld object [LispBase]Lisp.Values::Value54
-    ldloc UWP_V551473
+    ldloc UWP_V551494
     stsfld object [LispBase]Lisp.Values::Value55
-    ldloc UWP_V561474
+    ldloc UWP_V561495
     stsfld object [LispBase]Lisp.Values::Value56
-    ldloc UWP_V571475
+    ldloc UWP_V571496
     stsfld object [LispBase]Lisp.Values::Value57
-    ldloc UWP_V581476
+    ldloc UWP_V581497
     stsfld object [LispBase]Lisp.Values::Value58
-    ldloc UWP_V591477
+    ldloc UWP_V591498
     stsfld object [LispBase]Lisp.Values::Value59
-    ldloc UWP_V601478
+    ldloc UWP_V601499
     stsfld object [LispBase]Lisp.Values::Value60
-    ldloc UWP_V611479
+    ldloc UWP_V611500
     stsfld object [LispBase]Lisp.Values::Value61
-    ldloc UWP_V621480
+    ldloc UWP_V621501
     stsfld object [LispBase]Lisp.Values::Value62
-    ldloc UWP_V631481
+    ldloc UWP_V631502
     stsfld object [LispBase]Lisp.Values::Value63
     endfinally
     }
-DONE1482:
-    ldloc UWP_RESULT1417
-    stloc BLOCK_RESULT_NIL_960
-BLOCK_END_NIL_959:
+DONE1503:
+    ldloc UWP_RESULT1438
+    stloc BLOCK_RESULT_NIL_980
+BLOCK_END_NIL_979:
     nop
-    ldloc BLOCK_RESULT_NIL_960
-    stloc A961
+    ldloc BLOCK_RESULT_NIL_980
+    stloc A981
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1483
+    ble SKIP_VAL1504
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B962
-    br DONE_VAL1484
-SKIP_VAL1483:
+    stloc B982
+    br DONE_VAL1505
+SKIP_VAL1504:
     nop
     ldnull
-    stloc B962
-DONE_VAL1484:
+    stloc B982
+DONE_VAL1505:
     nop
-    ldloc A961
-    ldloc B962
+    ldloc A981
+    ldloc B982
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_UWP_RETURN_FROM_MV_957:
+BLOCK_END_TEST_UWP_RETURN_FROM_MV_977:
     nop
     ldnull
     ret
@@ -1204,7 +1219,7 @@ BLOCK_END_TEST_UWP_RETURN_FROM_MV_957:
 .method private static hidebysig object 'TEST_UWP_MV_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object UWP_V631413, object UWP_V621412, object UWP_V611411, object UWP_V601410, object UWP_V591409, object UWP_V581408, object UWP_V571407, object UWP_V561406, object UWP_V551405, object UWP_V541404, object UWP_V531403, object UWP_V521402, object UWP_V511401, object UWP_V501400, object UWP_V491399, object UWP_V481398, object UWP_V471397, object UWP_V461396, object UWP_V451395, object UWP_V441394, object UWP_V431393, object UWP_V421392, object UWP_V411391, object UWP_V401390, object UWP_V391389, object UWP_V381388, object UWP_V371387, object UWP_V361386, object UWP_V351385, object UWP_V341384, object UWP_V331383, object UWP_V321382, object UWP_V311381, object UWP_V301380, object UWP_V291379, object UWP_V281378, object UWP_V271377, object UWP_V261376, object UWP_V251375, object UWP_V241374, object UWP_V231373, object UWP_V221372, object UWP_V211371, object UWP_V201370, object UWP_V191369, object UWP_V181368, object UWP_V171367, object UWP_V161366, object UWP_V151365, object UWP_V141364, object UWP_V131363, object UWP_V121362, object UWP_V111361, object UWP_V101360, object UWP_V91359, object UWP_V81358, object UWP_V71357, object UWP_V61356, object UWP_V51355, object UWP_V41354, object UWP_V31353, object UWP_V21352, object UWP_V11351, object UWP_COUNT1350, object UWP_RESULT1349, object B954, object A953)
+    .locals init (object UWP_V631434, object UWP_V621433, object UWP_V611432, object UWP_V601431, object UWP_V591430, object UWP_V581429, object UWP_V571428, object UWP_V561427, object UWP_V551426, object UWP_V541425, object UWP_V531424, object UWP_V521423, object UWP_V511422, object UWP_V501421, object UWP_V491420, object UWP_V481419, object UWP_V471418, object UWP_V461417, object UWP_V451416, object UWP_V441415, object UWP_V431414, object UWP_V421413, object UWP_V411412, object UWP_V401411, object UWP_V391410, object UWP_V381409, object UWP_V371408, object UWP_V361407, object UWP_V351406, object UWP_V341405, object UWP_V331404, object UWP_V321403, object UWP_V311402, object UWP_V301401, object UWP_V291400, object UWP_V281399, object UWP_V271398, object UWP_V261397, object UWP_V251396, object UWP_V241395, object UWP_V231394, object UWP_V221393, object UWP_V211392, object UWP_V201391, object UWP_V191390, object UWP_V181389, object UWP_V171388, object UWP_V161387, object UWP_V151386, object UWP_V141385, object UWP_V131384, object UWP_V121383, object UWP_V111382, object UWP_V101381, object UWP_V91380, object UWP_V81379, object UWP_V71378, object UWP_V61377, object UWP_V51376, object UWP_V41375, object UWP_V31374, object UWP_V21373, object UWP_V11372, object UWP_COUNT1371, object UWP_RESULT1370, object B974, object A973)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     .try
@@ -1216,139 +1231,139 @@ BLOCK_END_TEST_UWP_RETURN_FROM_MV_957:
     stsfld object [LispBase]Lisp.Values::Value1
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc UWP_RESULT1349
-    leave DONE1414
+    stloc UWP_RESULT1370
+    leave DONE1435
     }
     finally
     {
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc UWP_COUNT1350
+    stloc UWP_COUNT1371
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc UWP_V11351
+    stloc UWP_V11372
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc UWP_V21352
+    stloc UWP_V21373
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc UWP_V31353
+    stloc UWP_V31374
     ldsfld object [LispBase]Lisp.Values::Value4
-    stloc UWP_V41354
+    stloc UWP_V41375
     ldsfld object [LispBase]Lisp.Values::Value5
-    stloc UWP_V51355
+    stloc UWP_V51376
     ldsfld object [LispBase]Lisp.Values::Value6
-    stloc UWP_V61356
+    stloc UWP_V61377
     ldsfld object [LispBase]Lisp.Values::Value7
-    stloc UWP_V71357
+    stloc UWP_V71378
     ldsfld object [LispBase]Lisp.Values::Value8
-    stloc UWP_V81358
+    stloc UWP_V81379
     ldsfld object [LispBase]Lisp.Values::Value9
-    stloc UWP_V91359
+    stloc UWP_V91380
     ldsfld object [LispBase]Lisp.Values::Value10
-    stloc UWP_V101360
+    stloc UWP_V101381
     ldsfld object [LispBase]Lisp.Values::Value11
-    stloc UWP_V111361
+    stloc UWP_V111382
     ldsfld object [LispBase]Lisp.Values::Value12
-    stloc UWP_V121362
+    stloc UWP_V121383
     ldsfld object [LispBase]Lisp.Values::Value13
-    stloc UWP_V131363
+    stloc UWP_V131384
     ldsfld object [LispBase]Lisp.Values::Value14
-    stloc UWP_V141364
+    stloc UWP_V141385
     ldsfld object [LispBase]Lisp.Values::Value15
-    stloc UWP_V151365
+    stloc UWP_V151386
     ldsfld object [LispBase]Lisp.Values::Value16
-    stloc UWP_V161366
+    stloc UWP_V161387
     ldsfld object [LispBase]Lisp.Values::Value17
-    stloc UWP_V171367
+    stloc UWP_V171388
     ldsfld object [LispBase]Lisp.Values::Value18
-    stloc UWP_V181368
+    stloc UWP_V181389
     ldsfld object [LispBase]Lisp.Values::Value19
-    stloc UWP_V191369
+    stloc UWP_V191390
     ldsfld object [LispBase]Lisp.Values::Value20
-    stloc UWP_V201370
+    stloc UWP_V201391
     ldsfld object [LispBase]Lisp.Values::Value21
-    stloc UWP_V211371
+    stloc UWP_V211392
     ldsfld object [LispBase]Lisp.Values::Value22
-    stloc UWP_V221372
+    stloc UWP_V221393
     ldsfld object [LispBase]Lisp.Values::Value23
-    stloc UWP_V231373
+    stloc UWP_V231394
     ldsfld object [LispBase]Lisp.Values::Value24
-    stloc UWP_V241374
+    stloc UWP_V241395
     ldsfld object [LispBase]Lisp.Values::Value25
-    stloc UWP_V251375
+    stloc UWP_V251396
     ldsfld object [LispBase]Lisp.Values::Value26
-    stloc UWP_V261376
+    stloc UWP_V261397
     ldsfld object [LispBase]Lisp.Values::Value27
-    stloc UWP_V271377
+    stloc UWP_V271398
     ldsfld object [LispBase]Lisp.Values::Value28
-    stloc UWP_V281378
+    stloc UWP_V281399
     ldsfld object [LispBase]Lisp.Values::Value29
-    stloc UWP_V291379
+    stloc UWP_V291400
     ldsfld object [LispBase]Lisp.Values::Value30
-    stloc UWP_V301380
+    stloc UWP_V301401
     ldsfld object [LispBase]Lisp.Values::Value31
-    stloc UWP_V311381
+    stloc UWP_V311402
     ldsfld object [LispBase]Lisp.Values::Value32
-    stloc UWP_V321382
+    stloc UWP_V321403
     ldsfld object [LispBase]Lisp.Values::Value33
-    stloc UWP_V331383
+    stloc UWP_V331404
     ldsfld object [LispBase]Lisp.Values::Value34
-    stloc UWP_V341384
+    stloc UWP_V341405
     ldsfld object [LispBase]Lisp.Values::Value35
-    stloc UWP_V351385
+    stloc UWP_V351406
     ldsfld object [LispBase]Lisp.Values::Value36
-    stloc UWP_V361386
+    stloc UWP_V361407
     ldsfld object [LispBase]Lisp.Values::Value37
-    stloc UWP_V371387
+    stloc UWP_V371408
     ldsfld object [LispBase]Lisp.Values::Value38
-    stloc UWP_V381388
+    stloc UWP_V381409
     ldsfld object [LispBase]Lisp.Values::Value39
-    stloc UWP_V391389
+    stloc UWP_V391410
     ldsfld object [LispBase]Lisp.Values::Value40
-    stloc UWP_V401390
+    stloc UWP_V401411
     ldsfld object [LispBase]Lisp.Values::Value41
-    stloc UWP_V411391
+    stloc UWP_V411412
     ldsfld object [LispBase]Lisp.Values::Value42
-    stloc UWP_V421392
+    stloc UWP_V421413
     ldsfld object [LispBase]Lisp.Values::Value43
-    stloc UWP_V431393
+    stloc UWP_V431414
     ldsfld object [LispBase]Lisp.Values::Value44
-    stloc UWP_V441394
+    stloc UWP_V441415
     ldsfld object [LispBase]Lisp.Values::Value45
-    stloc UWP_V451395
+    stloc UWP_V451416
     ldsfld object [LispBase]Lisp.Values::Value46
-    stloc UWP_V461396
+    stloc UWP_V461417
     ldsfld object [LispBase]Lisp.Values::Value47
-    stloc UWP_V471397
+    stloc UWP_V471418
     ldsfld object [LispBase]Lisp.Values::Value48
-    stloc UWP_V481398
+    stloc UWP_V481419
     ldsfld object [LispBase]Lisp.Values::Value49
-    stloc UWP_V491399
+    stloc UWP_V491420
     ldsfld object [LispBase]Lisp.Values::Value50
-    stloc UWP_V501400
+    stloc UWP_V501421
     ldsfld object [LispBase]Lisp.Values::Value51
-    stloc UWP_V511401
+    stloc UWP_V511422
     ldsfld object [LispBase]Lisp.Values::Value52
-    stloc UWP_V521402
+    stloc UWP_V521423
     ldsfld object [LispBase]Lisp.Values::Value53
-    stloc UWP_V531403
+    stloc UWP_V531424
     ldsfld object [LispBase]Lisp.Values::Value54
-    stloc UWP_V541404
+    stloc UWP_V541425
     ldsfld object [LispBase]Lisp.Values::Value55
-    stloc UWP_V551405
+    stloc UWP_V551426
     ldsfld object [LispBase]Lisp.Values::Value56
-    stloc UWP_V561406
+    stloc UWP_V561427
     ldsfld object [LispBase]Lisp.Values::Value57
-    stloc UWP_V571407
+    stloc UWP_V571428
     ldsfld object [LispBase]Lisp.Values::Value58
-    stloc UWP_V581408
+    stloc UWP_V581429
     ldsfld object [LispBase]Lisp.Values::Value59
-    stloc UWP_V591409
+    stloc UWP_V591430
     ldsfld object [LispBase]Lisp.Values::Value60
-    stloc UWP_V601410
+    stloc UWP_V601431
     ldsfld object [LispBase]Lisp.Values::Value61
-    stloc UWP_V611411
+    stloc UWP_V611432
     ldsfld object [LispBase]Lisp.Values::Value62
-    stloc UWP_V621412
+    stloc UWP_V621433
     ldsfld object [LispBase]Lisp.Values::Value63
-    stloc UWP_V631413
+    stloc UWP_V631434
     ldc.i4 3
     box int32
     ldc.i4 4
@@ -1357,158 +1372,158 @@ BLOCK_END_TEST_UWP_RETURN_FROM_MV_957:
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     pop
-    ldloc UWP_COUNT1350
+    ldloc UWP_COUNT1371
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    ldloc UWP_V11351
+    ldloc UWP_V11372
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc UWP_V21352
+    ldloc UWP_V21373
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc UWP_V31353
+    ldloc UWP_V31374
     stsfld object [LispBase]Lisp.Values::Value3
-    ldloc UWP_V41354
+    ldloc UWP_V41375
     stsfld object [LispBase]Lisp.Values::Value4
-    ldloc UWP_V51355
+    ldloc UWP_V51376
     stsfld object [LispBase]Lisp.Values::Value5
-    ldloc UWP_V61356
+    ldloc UWP_V61377
     stsfld object [LispBase]Lisp.Values::Value6
-    ldloc UWP_V71357
+    ldloc UWP_V71378
     stsfld object [LispBase]Lisp.Values::Value7
-    ldloc UWP_V81358
+    ldloc UWP_V81379
     stsfld object [LispBase]Lisp.Values::Value8
-    ldloc UWP_V91359
+    ldloc UWP_V91380
     stsfld object [LispBase]Lisp.Values::Value9
-    ldloc UWP_V101360
+    ldloc UWP_V101381
     stsfld object [LispBase]Lisp.Values::Value10
-    ldloc UWP_V111361
+    ldloc UWP_V111382
     stsfld object [LispBase]Lisp.Values::Value11
-    ldloc UWP_V121362
+    ldloc UWP_V121383
     stsfld object [LispBase]Lisp.Values::Value12
-    ldloc UWP_V131363
+    ldloc UWP_V131384
     stsfld object [LispBase]Lisp.Values::Value13
-    ldloc UWP_V141364
+    ldloc UWP_V141385
     stsfld object [LispBase]Lisp.Values::Value14
-    ldloc UWP_V151365
+    ldloc UWP_V151386
     stsfld object [LispBase]Lisp.Values::Value15
-    ldloc UWP_V161366
+    ldloc UWP_V161387
     stsfld object [LispBase]Lisp.Values::Value16
-    ldloc UWP_V171367
+    ldloc UWP_V171388
     stsfld object [LispBase]Lisp.Values::Value17
-    ldloc UWP_V181368
+    ldloc UWP_V181389
     stsfld object [LispBase]Lisp.Values::Value18
-    ldloc UWP_V191369
+    ldloc UWP_V191390
     stsfld object [LispBase]Lisp.Values::Value19
-    ldloc UWP_V201370
+    ldloc UWP_V201391
     stsfld object [LispBase]Lisp.Values::Value20
-    ldloc UWP_V211371
+    ldloc UWP_V211392
     stsfld object [LispBase]Lisp.Values::Value21
-    ldloc UWP_V221372
+    ldloc UWP_V221393
     stsfld object [LispBase]Lisp.Values::Value22
-    ldloc UWP_V231373
+    ldloc UWP_V231394
     stsfld object [LispBase]Lisp.Values::Value23
-    ldloc UWP_V241374
+    ldloc UWP_V241395
     stsfld object [LispBase]Lisp.Values::Value24
-    ldloc UWP_V251375
+    ldloc UWP_V251396
     stsfld object [LispBase]Lisp.Values::Value25
-    ldloc UWP_V261376
+    ldloc UWP_V261397
     stsfld object [LispBase]Lisp.Values::Value26
-    ldloc UWP_V271377
+    ldloc UWP_V271398
     stsfld object [LispBase]Lisp.Values::Value27
-    ldloc UWP_V281378
+    ldloc UWP_V281399
     stsfld object [LispBase]Lisp.Values::Value28
-    ldloc UWP_V291379
+    ldloc UWP_V291400
     stsfld object [LispBase]Lisp.Values::Value29
-    ldloc UWP_V301380
+    ldloc UWP_V301401
     stsfld object [LispBase]Lisp.Values::Value30
-    ldloc UWP_V311381
+    ldloc UWP_V311402
     stsfld object [LispBase]Lisp.Values::Value31
-    ldloc UWP_V321382
+    ldloc UWP_V321403
     stsfld object [LispBase]Lisp.Values::Value32
-    ldloc UWP_V331383
+    ldloc UWP_V331404
     stsfld object [LispBase]Lisp.Values::Value33
-    ldloc UWP_V341384
+    ldloc UWP_V341405
     stsfld object [LispBase]Lisp.Values::Value34
-    ldloc UWP_V351385
+    ldloc UWP_V351406
     stsfld object [LispBase]Lisp.Values::Value35
-    ldloc UWP_V361386
+    ldloc UWP_V361407
     stsfld object [LispBase]Lisp.Values::Value36
-    ldloc UWP_V371387
+    ldloc UWP_V371408
     stsfld object [LispBase]Lisp.Values::Value37
-    ldloc UWP_V381388
+    ldloc UWP_V381409
     stsfld object [LispBase]Lisp.Values::Value38
-    ldloc UWP_V391389
+    ldloc UWP_V391410
     stsfld object [LispBase]Lisp.Values::Value39
-    ldloc UWP_V401390
+    ldloc UWP_V401411
     stsfld object [LispBase]Lisp.Values::Value40
-    ldloc UWP_V411391
+    ldloc UWP_V411412
     stsfld object [LispBase]Lisp.Values::Value41
-    ldloc UWP_V421392
+    ldloc UWP_V421413
     stsfld object [LispBase]Lisp.Values::Value42
-    ldloc UWP_V431393
+    ldloc UWP_V431414
     stsfld object [LispBase]Lisp.Values::Value43
-    ldloc UWP_V441394
+    ldloc UWP_V441415
     stsfld object [LispBase]Lisp.Values::Value44
-    ldloc UWP_V451395
+    ldloc UWP_V451416
     stsfld object [LispBase]Lisp.Values::Value45
-    ldloc UWP_V461396
+    ldloc UWP_V461417
     stsfld object [LispBase]Lisp.Values::Value46
-    ldloc UWP_V471397
+    ldloc UWP_V471418
     stsfld object [LispBase]Lisp.Values::Value47
-    ldloc UWP_V481398
+    ldloc UWP_V481419
     stsfld object [LispBase]Lisp.Values::Value48
-    ldloc UWP_V491399
+    ldloc UWP_V491420
     stsfld object [LispBase]Lisp.Values::Value49
-    ldloc UWP_V501400
+    ldloc UWP_V501421
     stsfld object [LispBase]Lisp.Values::Value50
-    ldloc UWP_V511401
+    ldloc UWP_V511422
     stsfld object [LispBase]Lisp.Values::Value51
-    ldloc UWP_V521402
+    ldloc UWP_V521423
     stsfld object [LispBase]Lisp.Values::Value52
-    ldloc UWP_V531403
+    ldloc UWP_V531424
     stsfld object [LispBase]Lisp.Values::Value53
-    ldloc UWP_V541404
+    ldloc UWP_V541425
     stsfld object [LispBase]Lisp.Values::Value54
-    ldloc UWP_V551405
+    ldloc UWP_V551426
     stsfld object [LispBase]Lisp.Values::Value55
-    ldloc UWP_V561406
+    ldloc UWP_V561427
     stsfld object [LispBase]Lisp.Values::Value56
-    ldloc UWP_V571407
+    ldloc UWP_V571428
     stsfld object [LispBase]Lisp.Values::Value57
-    ldloc UWP_V581408
+    ldloc UWP_V581429
     stsfld object [LispBase]Lisp.Values::Value58
-    ldloc UWP_V591409
+    ldloc UWP_V591430
     stsfld object [LispBase]Lisp.Values::Value59
-    ldloc UWP_V601410
+    ldloc UWP_V601431
     stsfld object [LispBase]Lisp.Values::Value60
-    ldloc UWP_V611411
+    ldloc UWP_V611432
     stsfld object [LispBase]Lisp.Values::Value61
-    ldloc UWP_V621412
+    ldloc UWP_V621433
     stsfld object [LispBase]Lisp.Values::Value62
-    ldloc UWP_V631413
+    ldloc UWP_V631434
     stsfld object [LispBase]Lisp.Values::Value63
     endfinally
     }
-DONE1414:
-    ldloc UWP_RESULT1349
-    stloc A953
+DONE1435:
+    ldloc UWP_RESULT1370
+    stloc A973
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1415
+    ble SKIP_VAL1436
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B954
-    br DONE_VAL1416
-SKIP_VAL1415:
+    stloc B974
+    br DONE_VAL1437
+SKIP_VAL1436:
     nop
     ldnull
-    stloc B954
-DONE_VAL1416:
+    stloc B974
+DONE_VAL1437:
     nop
-    ldloc A953
-    ldloc B954
+    ldloc A973
+    ldloc B974
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_UWP_MV_951:
+BLOCK_END_TEST_UWP_MV_971:
     nop
     ldnull
     ret
@@ -1597,12 +1612,12 @@ BLOCK_END_TEST_UWP_MV_951:
 .method private static hidebysig object 'TEST_MV_CALL_REST_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object MVC_LIST1348, object MVC_FN1347)
-    newobj instance void L_993::'.ctor'()
-    stloc MVC_FN1347
+    .locals init (object MVC_LIST1369, object MVC_FN1368)
+    newobj instance void L_1013::'.ctor'()
+    stloc MVC_FN1368
     call object [LispBase]Lisp.Values::'CreateGatheringList'()
-    stloc MVC_LIST1348
-    ldloc MVC_LIST1348
+    stloc MVC_LIST1369
+    ldloc MVC_LIST1369
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
@@ -1613,7 +1628,7 @@ BLOCK_END_TEST_UWP_MV_951:
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     call void [LispBase]Lisp.Values::'Accumulate'(object, object)
-    ldloc MVC_LIST1348
+    ldloc MVC_LIST1369
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 3
@@ -1627,17 +1642,17 @@ BLOCK_END_TEST_UWP_MV_951:
     ldc.i4 3
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     call void [LispBase]Lisp.Values::'Accumulate'(object, object)
-    ldloc MVC_LIST1348
+    ldloc MVC_LIST1369
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 6
     box int32
     call void [LispBase]Lisp.Values::'Accumulate'(object, object)
-    ldloc MVC_FN1347
-    ldloc MVC_LIST1348
+    ldloc MVC_FN1368
+    ldloc MVC_LIST1369
     call object [LispBase]Lisp.Values::'InvokeWithList'(object, object)
     ret
-BLOCK_END_TEST_MV_CALL_REST_945:
+BLOCK_END_TEST_MV_CALL_REST_965:
     nop
     ldnull
     ret
@@ -1726,12 +1741,12 @@ BLOCK_END_TEST_MV_CALL_REST_945:
 .method private static hidebysig object 'TEST_MV_CALL_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object MVC_LIST1346, object MVC_FN1345)
-    newobj instance void L_992::'.ctor'()
-    stloc MVC_FN1345
+    .locals init (object MVC_LIST1367, object MVC_FN1366)
+    newobj instance void L_1012::'.ctor'()
+    stloc MVC_FN1366
     call object [LispBase]Lisp.Values::'CreateGatheringList'()
-    stloc MVC_LIST1346
-    ldloc MVC_LIST1346
+    stloc MVC_LIST1367
+    ldloc MVC_LIST1367
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
@@ -1742,7 +1757,7 @@ BLOCK_END_TEST_MV_CALL_REST_945:
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     call void [LispBase]Lisp.Values::'Accumulate'(object, object)
-    ldloc MVC_LIST1346
+    ldloc MVC_LIST1367
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 3
@@ -1756,17 +1771,17 @@ BLOCK_END_TEST_MV_CALL_REST_945:
     ldc.i4 3
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     call void [LispBase]Lisp.Values::'Accumulate'(object, object)
-    ldloc MVC_LIST1346
+    ldloc MVC_LIST1367
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 6
     box int32
     call void [LispBase]Lisp.Values::'Accumulate'(object, object)
-    ldloc MVC_FN1345
-    ldloc MVC_LIST1346
+    ldloc MVC_FN1366
+    ldloc MVC_LIST1367
     call object [LispBase]Lisp.Values::'InvokeWithList'(object, object)
     ret
-BLOCK_END_TEST_MV_CALL_934:
+BLOCK_END_TEST_MV_CALL_954:
     nop
     ldnull
     ret
@@ -1855,11 +1870,11 @@ BLOCK_END_TEST_MV_CALL_934:
 .method private static hidebysig object 'TEST_MV_PROG1_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object TEMP1344, object MV_PROG1_V631343, object MV_PROG1_V621342, object MV_PROG1_V611341, object MV_PROG1_V601340, object MV_PROG1_V591339, object MV_PROG1_V581338, object MV_PROG1_V571337, object MV_PROG1_V561336, object MV_PROG1_V551335, object MV_PROG1_V541334, object MV_PROG1_V531333, object MV_PROG1_V521332, object MV_PROG1_V511331, object MV_PROG1_V501330, object MV_PROG1_V491329, object MV_PROG1_V481328, object MV_PROG1_V471327, object MV_PROG1_V461326, object MV_PROG1_V451325, object MV_PROG1_V441324, object MV_PROG1_V431323, object MV_PROG1_V421322, object MV_PROG1_V411321, object MV_PROG1_V401320, object MV_PROG1_V391319, object MV_PROG1_V381318, object MV_PROG1_V371317, object MV_PROG1_V361316, object MV_PROG1_V351315, object MV_PROG1_V341314, object MV_PROG1_V331313, object MV_PROG1_V321312, object MV_PROG1_V311311, object MV_PROG1_V301310, object MV_PROG1_V291309, object MV_PROG1_V281308, object MV_PROG1_V271307, object MV_PROG1_V261306, object MV_PROG1_V251305, object MV_PROG1_V241304, object MV_PROG1_V231303, object MV_PROG1_V221302, object MV_PROG1_V211301, object MV_PROG1_V201300, object MV_PROG1_V191299, object MV_PROG1_V181298, object MV_PROG1_V171297, object MV_PROG1_V161296, object MV_PROG1_V151295, object MV_PROG1_V141294, object MV_PROG1_V131293, object MV_PROG1_V121292, object MV_PROG1_V111291, object MV_PROG1_V101290, object MV_PROG1_V91289, object MV_PROG1_V81288, object MV_PROG1_V71287, object MV_PROG1_V61286, object MV_PROG1_V51285, object MV_PROG1_V41284, object MV_PROG1_V31283, object MV_PROG1_V21282, object MV_PROG1_V11281, object MV_PROG1_COUNT1280, object MV_PROG1_RES1279, object X931)
+    .locals init (object TEMP1365, object MV_PROG1_V631364, object MV_PROG1_V621363, object MV_PROG1_V611362, object MV_PROG1_V601361, object MV_PROG1_V591360, object MV_PROG1_V581359, object MV_PROG1_V571358, object MV_PROG1_V561357, object MV_PROG1_V551356, object MV_PROG1_V541355, object MV_PROG1_V531354, object MV_PROG1_V521353, object MV_PROG1_V511352, object MV_PROG1_V501351, object MV_PROG1_V491350, object MV_PROG1_V481349, object MV_PROG1_V471348, object MV_PROG1_V461347, object MV_PROG1_V451346, object MV_PROG1_V441345, object MV_PROG1_V431344, object MV_PROG1_V421343, object MV_PROG1_V411342, object MV_PROG1_V401341, object MV_PROG1_V391340, object MV_PROG1_V381339, object MV_PROG1_V371338, object MV_PROG1_V361337, object MV_PROG1_V351336, object MV_PROG1_V341335, object MV_PROG1_V331334, object MV_PROG1_V321333, object MV_PROG1_V311332, object MV_PROG1_V301331, object MV_PROG1_V291330, object MV_PROG1_V281329, object MV_PROG1_V271328, object MV_PROG1_V261327, object MV_PROG1_V251326, object MV_PROG1_V241325, object MV_PROG1_V231324, object MV_PROG1_V221323, object MV_PROG1_V211322, object MV_PROG1_V201321, object MV_PROG1_V191320, object MV_PROG1_V181319, object MV_PROG1_V171318, object MV_PROG1_V161317, object MV_PROG1_V151316, object MV_PROG1_V141315, object MV_PROG1_V131314, object MV_PROG1_V121313, object MV_PROG1_V111312, object MV_PROG1_V101311, object MV_PROG1_V91310, object MV_PROG1_V81309, object MV_PROG1_V71308, object MV_PROG1_V61307, object MV_PROG1_V51306, object MV_PROG1_V41305, object MV_PROG1_V31304, object MV_PROG1_V21303, object MV_PROG1_V11302, object MV_PROG1_COUNT1301, object MV_PROG1_RES1300, object X951)
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc X931
+    stloc X951
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
@@ -1869,281 +1884,281 @@ BLOCK_END_TEST_MV_CALL_934:
     stsfld object [LispBase]Lisp.Values::Value1
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc MV_PROG1_RES1279
+    stloc MV_PROG1_RES1300
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc MV_PROG1_COUNT1280
+    stloc MV_PROG1_COUNT1301
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc MV_PROG1_V11281
+    stloc MV_PROG1_V11302
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc MV_PROG1_V21282
+    stloc MV_PROG1_V21303
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc MV_PROG1_V31283
+    stloc MV_PROG1_V31304
     ldsfld object [LispBase]Lisp.Values::Value4
-    stloc MV_PROG1_V41284
+    stloc MV_PROG1_V41305
     ldsfld object [LispBase]Lisp.Values::Value5
-    stloc MV_PROG1_V51285
+    stloc MV_PROG1_V51306
     ldsfld object [LispBase]Lisp.Values::Value6
-    stloc MV_PROG1_V61286
+    stloc MV_PROG1_V61307
     ldsfld object [LispBase]Lisp.Values::Value7
-    stloc MV_PROG1_V71287
+    stloc MV_PROG1_V71308
     ldsfld object [LispBase]Lisp.Values::Value8
-    stloc MV_PROG1_V81288
+    stloc MV_PROG1_V81309
     ldsfld object [LispBase]Lisp.Values::Value9
-    stloc MV_PROG1_V91289
+    stloc MV_PROG1_V91310
     ldsfld object [LispBase]Lisp.Values::Value10
-    stloc MV_PROG1_V101290
+    stloc MV_PROG1_V101311
     ldsfld object [LispBase]Lisp.Values::Value11
-    stloc MV_PROG1_V111291
+    stloc MV_PROG1_V111312
     ldsfld object [LispBase]Lisp.Values::Value12
-    stloc MV_PROG1_V121292
+    stloc MV_PROG1_V121313
     ldsfld object [LispBase]Lisp.Values::Value13
-    stloc MV_PROG1_V131293
+    stloc MV_PROG1_V131314
     ldsfld object [LispBase]Lisp.Values::Value14
-    stloc MV_PROG1_V141294
+    stloc MV_PROG1_V141315
     ldsfld object [LispBase]Lisp.Values::Value15
-    stloc MV_PROG1_V151295
+    stloc MV_PROG1_V151316
     ldsfld object [LispBase]Lisp.Values::Value16
-    stloc MV_PROG1_V161296
+    stloc MV_PROG1_V161317
     ldsfld object [LispBase]Lisp.Values::Value17
-    stloc MV_PROG1_V171297
+    stloc MV_PROG1_V171318
     ldsfld object [LispBase]Lisp.Values::Value18
-    stloc MV_PROG1_V181298
+    stloc MV_PROG1_V181319
     ldsfld object [LispBase]Lisp.Values::Value19
-    stloc MV_PROG1_V191299
+    stloc MV_PROG1_V191320
     ldsfld object [LispBase]Lisp.Values::Value20
-    stloc MV_PROG1_V201300
+    stloc MV_PROG1_V201321
     ldsfld object [LispBase]Lisp.Values::Value21
-    stloc MV_PROG1_V211301
+    stloc MV_PROG1_V211322
     ldsfld object [LispBase]Lisp.Values::Value22
-    stloc MV_PROG1_V221302
+    stloc MV_PROG1_V221323
     ldsfld object [LispBase]Lisp.Values::Value23
-    stloc MV_PROG1_V231303
+    stloc MV_PROG1_V231324
     ldsfld object [LispBase]Lisp.Values::Value24
-    stloc MV_PROG1_V241304
+    stloc MV_PROG1_V241325
     ldsfld object [LispBase]Lisp.Values::Value25
-    stloc MV_PROG1_V251305
+    stloc MV_PROG1_V251326
     ldsfld object [LispBase]Lisp.Values::Value26
-    stloc MV_PROG1_V261306
+    stloc MV_PROG1_V261327
     ldsfld object [LispBase]Lisp.Values::Value27
-    stloc MV_PROG1_V271307
+    stloc MV_PROG1_V271328
     ldsfld object [LispBase]Lisp.Values::Value28
-    stloc MV_PROG1_V281308
+    stloc MV_PROG1_V281329
     ldsfld object [LispBase]Lisp.Values::Value29
-    stloc MV_PROG1_V291309
+    stloc MV_PROG1_V291330
     ldsfld object [LispBase]Lisp.Values::Value30
-    stloc MV_PROG1_V301310
+    stloc MV_PROG1_V301331
     ldsfld object [LispBase]Lisp.Values::Value31
-    stloc MV_PROG1_V311311
+    stloc MV_PROG1_V311332
     ldsfld object [LispBase]Lisp.Values::Value32
-    stloc MV_PROG1_V321312
+    stloc MV_PROG1_V321333
     ldsfld object [LispBase]Lisp.Values::Value33
-    stloc MV_PROG1_V331313
+    stloc MV_PROG1_V331334
     ldsfld object [LispBase]Lisp.Values::Value34
-    stloc MV_PROG1_V341314
+    stloc MV_PROG1_V341335
     ldsfld object [LispBase]Lisp.Values::Value35
-    stloc MV_PROG1_V351315
+    stloc MV_PROG1_V351336
     ldsfld object [LispBase]Lisp.Values::Value36
-    stloc MV_PROG1_V361316
+    stloc MV_PROG1_V361337
     ldsfld object [LispBase]Lisp.Values::Value37
-    stloc MV_PROG1_V371317
+    stloc MV_PROG1_V371338
     ldsfld object [LispBase]Lisp.Values::Value38
-    stloc MV_PROG1_V381318
+    stloc MV_PROG1_V381339
     ldsfld object [LispBase]Lisp.Values::Value39
-    stloc MV_PROG1_V391319
+    stloc MV_PROG1_V391340
     ldsfld object [LispBase]Lisp.Values::Value40
-    stloc MV_PROG1_V401320
+    stloc MV_PROG1_V401341
     ldsfld object [LispBase]Lisp.Values::Value41
-    stloc MV_PROG1_V411321
+    stloc MV_PROG1_V411342
     ldsfld object [LispBase]Lisp.Values::Value42
-    stloc MV_PROG1_V421322
+    stloc MV_PROG1_V421343
     ldsfld object [LispBase]Lisp.Values::Value43
-    stloc MV_PROG1_V431323
+    stloc MV_PROG1_V431344
     ldsfld object [LispBase]Lisp.Values::Value44
-    stloc MV_PROG1_V441324
+    stloc MV_PROG1_V441345
     ldsfld object [LispBase]Lisp.Values::Value45
-    stloc MV_PROG1_V451325
+    stloc MV_PROG1_V451346
     ldsfld object [LispBase]Lisp.Values::Value46
-    stloc MV_PROG1_V461326
+    stloc MV_PROG1_V461347
     ldsfld object [LispBase]Lisp.Values::Value47
-    stloc MV_PROG1_V471327
+    stloc MV_PROG1_V471348
     ldsfld object [LispBase]Lisp.Values::Value48
-    stloc MV_PROG1_V481328
+    stloc MV_PROG1_V481349
     ldsfld object [LispBase]Lisp.Values::Value49
-    stloc MV_PROG1_V491329
+    stloc MV_PROG1_V491350
     ldsfld object [LispBase]Lisp.Values::Value50
-    stloc MV_PROG1_V501330
+    stloc MV_PROG1_V501351
     ldsfld object [LispBase]Lisp.Values::Value51
-    stloc MV_PROG1_V511331
+    stloc MV_PROG1_V511352
     ldsfld object [LispBase]Lisp.Values::Value52
-    stloc MV_PROG1_V521332
+    stloc MV_PROG1_V521353
     ldsfld object [LispBase]Lisp.Values::Value53
-    stloc MV_PROG1_V531333
+    stloc MV_PROG1_V531354
     ldsfld object [LispBase]Lisp.Values::Value54
-    stloc MV_PROG1_V541334
+    stloc MV_PROG1_V541355
     ldsfld object [LispBase]Lisp.Values::Value55
-    stloc MV_PROG1_V551335
+    stloc MV_PROG1_V551356
     ldsfld object [LispBase]Lisp.Values::Value56
-    stloc MV_PROG1_V561336
+    stloc MV_PROG1_V561357
     ldsfld object [LispBase]Lisp.Values::Value57
-    stloc MV_PROG1_V571337
+    stloc MV_PROG1_V571358
     ldsfld object [LispBase]Lisp.Values::Value58
-    stloc MV_PROG1_V581338
+    stloc MV_PROG1_V581359
     ldsfld object [LispBase]Lisp.Values::Value59
-    stloc MV_PROG1_V591339
+    stloc MV_PROG1_V591360
     ldsfld object [LispBase]Lisp.Values::Value60
-    stloc MV_PROG1_V601340
+    stloc MV_PROG1_V601361
     ldsfld object [LispBase]Lisp.Values::Value61
-    stloc MV_PROG1_V611341
+    stloc MV_PROG1_V611362
     ldsfld object [LispBase]Lisp.Values::Value62
-    stloc MV_PROG1_V621342
+    stloc MV_PROG1_V621363
     ldsfld object [LispBase]Lisp.Values::Value63
-    stloc MV_PROG1_V631343
-    ldloc X931
+    stloc MV_PROG1_V631364
+    ldloc X951
     ldc.i4 10
     box int32
-    stloc TEMP1344
+    stloc TEMP1365
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP1344
+    ldloc TEMP1365
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP1344
+    ldloc TEMP1365
     pop
-    ldloc MV_PROG1_COUNT1280
+    ldloc MV_PROG1_COUNT1301
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    ldloc MV_PROG1_V11281
+    ldloc MV_PROG1_V11302
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc MV_PROG1_V21282
+    ldloc MV_PROG1_V21303
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc MV_PROG1_V31283
+    ldloc MV_PROG1_V31304
     stsfld object [LispBase]Lisp.Values::Value3
-    ldloc MV_PROG1_V41284
+    ldloc MV_PROG1_V41305
     stsfld object [LispBase]Lisp.Values::Value4
-    ldloc MV_PROG1_V51285
+    ldloc MV_PROG1_V51306
     stsfld object [LispBase]Lisp.Values::Value5
-    ldloc MV_PROG1_V61286
+    ldloc MV_PROG1_V61307
     stsfld object [LispBase]Lisp.Values::Value6
-    ldloc MV_PROG1_V71287
+    ldloc MV_PROG1_V71308
     stsfld object [LispBase]Lisp.Values::Value7
-    ldloc MV_PROG1_V81288
+    ldloc MV_PROG1_V81309
     stsfld object [LispBase]Lisp.Values::Value8
-    ldloc MV_PROG1_V91289
+    ldloc MV_PROG1_V91310
     stsfld object [LispBase]Lisp.Values::Value9
-    ldloc MV_PROG1_V101290
+    ldloc MV_PROG1_V101311
     stsfld object [LispBase]Lisp.Values::Value10
-    ldloc MV_PROG1_V111291
+    ldloc MV_PROG1_V111312
     stsfld object [LispBase]Lisp.Values::Value11
-    ldloc MV_PROG1_V121292
+    ldloc MV_PROG1_V121313
     stsfld object [LispBase]Lisp.Values::Value12
-    ldloc MV_PROG1_V131293
+    ldloc MV_PROG1_V131314
     stsfld object [LispBase]Lisp.Values::Value13
-    ldloc MV_PROG1_V141294
+    ldloc MV_PROG1_V141315
     stsfld object [LispBase]Lisp.Values::Value14
-    ldloc MV_PROG1_V151295
+    ldloc MV_PROG1_V151316
     stsfld object [LispBase]Lisp.Values::Value15
-    ldloc MV_PROG1_V161296
+    ldloc MV_PROG1_V161317
     stsfld object [LispBase]Lisp.Values::Value16
-    ldloc MV_PROG1_V171297
+    ldloc MV_PROG1_V171318
     stsfld object [LispBase]Lisp.Values::Value17
-    ldloc MV_PROG1_V181298
+    ldloc MV_PROG1_V181319
     stsfld object [LispBase]Lisp.Values::Value18
-    ldloc MV_PROG1_V191299
+    ldloc MV_PROG1_V191320
     stsfld object [LispBase]Lisp.Values::Value19
-    ldloc MV_PROG1_V201300
+    ldloc MV_PROG1_V201321
     stsfld object [LispBase]Lisp.Values::Value20
-    ldloc MV_PROG1_V211301
+    ldloc MV_PROG1_V211322
     stsfld object [LispBase]Lisp.Values::Value21
-    ldloc MV_PROG1_V221302
+    ldloc MV_PROG1_V221323
     stsfld object [LispBase]Lisp.Values::Value22
-    ldloc MV_PROG1_V231303
+    ldloc MV_PROG1_V231324
     stsfld object [LispBase]Lisp.Values::Value23
-    ldloc MV_PROG1_V241304
+    ldloc MV_PROG1_V241325
     stsfld object [LispBase]Lisp.Values::Value24
-    ldloc MV_PROG1_V251305
+    ldloc MV_PROG1_V251326
     stsfld object [LispBase]Lisp.Values::Value25
-    ldloc MV_PROG1_V261306
+    ldloc MV_PROG1_V261327
     stsfld object [LispBase]Lisp.Values::Value26
-    ldloc MV_PROG1_V271307
+    ldloc MV_PROG1_V271328
     stsfld object [LispBase]Lisp.Values::Value27
-    ldloc MV_PROG1_V281308
+    ldloc MV_PROG1_V281329
     stsfld object [LispBase]Lisp.Values::Value28
-    ldloc MV_PROG1_V291309
+    ldloc MV_PROG1_V291330
     stsfld object [LispBase]Lisp.Values::Value29
-    ldloc MV_PROG1_V301310
+    ldloc MV_PROG1_V301331
     stsfld object [LispBase]Lisp.Values::Value30
-    ldloc MV_PROG1_V311311
+    ldloc MV_PROG1_V311332
     stsfld object [LispBase]Lisp.Values::Value31
-    ldloc MV_PROG1_V321312
+    ldloc MV_PROG1_V321333
     stsfld object [LispBase]Lisp.Values::Value32
-    ldloc MV_PROG1_V331313
+    ldloc MV_PROG1_V331334
     stsfld object [LispBase]Lisp.Values::Value33
-    ldloc MV_PROG1_V341314
+    ldloc MV_PROG1_V341335
     stsfld object [LispBase]Lisp.Values::Value34
-    ldloc MV_PROG1_V351315
+    ldloc MV_PROG1_V351336
     stsfld object [LispBase]Lisp.Values::Value35
-    ldloc MV_PROG1_V361316
+    ldloc MV_PROG1_V361337
     stsfld object [LispBase]Lisp.Values::Value36
-    ldloc MV_PROG1_V371317
+    ldloc MV_PROG1_V371338
     stsfld object [LispBase]Lisp.Values::Value37
-    ldloc MV_PROG1_V381318
+    ldloc MV_PROG1_V381339
     stsfld object [LispBase]Lisp.Values::Value38
-    ldloc MV_PROG1_V391319
+    ldloc MV_PROG1_V391340
     stsfld object [LispBase]Lisp.Values::Value39
-    ldloc MV_PROG1_V401320
+    ldloc MV_PROG1_V401341
     stsfld object [LispBase]Lisp.Values::Value40
-    ldloc MV_PROG1_V411321
+    ldloc MV_PROG1_V411342
     stsfld object [LispBase]Lisp.Values::Value41
-    ldloc MV_PROG1_V421322
+    ldloc MV_PROG1_V421343
     stsfld object [LispBase]Lisp.Values::Value42
-    ldloc MV_PROG1_V431323
+    ldloc MV_PROG1_V431344
     stsfld object [LispBase]Lisp.Values::Value43
-    ldloc MV_PROG1_V441324
+    ldloc MV_PROG1_V441345
     stsfld object [LispBase]Lisp.Values::Value44
-    ldloc MV_PROG1_V451325
+    ldloc MV_PROG1_V451346
     stsfld object [LispBase]Lisp.Values::Value45
-    ldloc MV_PROG1_V461326
+    ldloc MV_PROG1_V461347
     stsfld object [LispBase]Lisp.Values::Value46
-    ldloc MV_PROG1_V471327
+    ldloc MV_PROG1_V471348
     stsfld object [LispBase]Lisp.Values::Value47
-    ldloc MV_PROG1_V481328
+    ldloc MV_PROG1_V481349
     stsfld object [LispBase]Lisp.Values::Value48
-    ldloc MV_PROG1_V491329
+    ldloc MV_PROG1_V491350
     stsfld object [LispBase]Lisp.Values::Value49
-    ldloc MV_PROG1_V501330
+    ldloc MV_PROG1_V501351
     stsfld object [LispBase]Lisp.Values::Value50
-    ldloc MV_PROG1_V511331
+    ldloc MV_PROG1_V511352
     stsfld object [LispBase]Lisp.Values::Value51
-    ldloc MV_PROG1_V521332
+    ldloc MV_PROG1_V521353
     stsfld object [LispBase]Lisp.Values::Value52
-    ldloc MV_PROG1_V531333
+    ldloc MV_PROG1_V531354
     stsfld object [LispBase]Lisp.Values::Value53
-    ldloc MV_PROG1_V541334
+    ldloc MV_PROG1_V541355
     stsfld object [LispBase]Lisp.Values::Value54
-    ldloc MV_PROG1_V551335
+    ldloc MV_PROG1_V551356
     stsfld object [LispBase]Lisp.Values::Value55
-    ldloc MV_PROG1_V561336
+    ldloc MV_PROG1_V561357
     stsfld object [LispBase]Lisp.Values::Value56
-    ldloc MV_PROG1_V571337
+    ldloc MV_PROG1_V571358
     stsfld object [LispBase]Lisp.Values::Value57
-    ldloc MV_PROG1_V581338
+    ldloc MV_PROG1_V581359
     stsfld object [LispBase]Lisp.Values::Value58
-    ldloc MV_PROG1_V591339
+    ldloc MV_PROG1_V591360
     stsfld object [LispBase]Lisp.Values::Value59
-    ldloc MV_PROG1_V601340
+    ldloc MV_PROG1_V601361
     stsfld object [LispBase]Lisp.Values::Value60
-    ldloc MV_PROG1_V611341
+    ldloc MV_PROG1_V611362
     stsfld object [LispBase]Lisp.Values::Value61
-    ldloc MV_PROG1_V621342
+    ldloc MV_PROG1_V621363
     stsfld object [LispBase]Lisp.Values::Value62
-    ldloc MV_PROG1_V631343
+    ldloc MV_PROG1_V631364
     stsfld object [LispBase]Lisp.Values::Value63
-    ldloc MV_PROG1_RES1279
-    ldloc X931
+    ldloc MV_PROG1_RES1300
+    ldloc X951
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_MV_PROG1_929:
+BLOCK_END_TEST_MV_PROG1_949:
     nop
     ldnull
     ret
@@ -2232,7 +2247,7 @@ BLOCK_END_TEST_MV_PROG1_929:
 .method private static hidebysig object 'TEST_MV_BIND_NORMAL_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object B926, object A925)
+    .locals init (object B946, object A945)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
@@ -2245,26 +2260,26 @@ BLOCK_END_TEST_MV_PROG1_929:
     unbox.any int32
     add
     box int32
-    stloc A925
+    stloc A945
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1277
+    ble SKIP_VAL1298
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B926
-    br DONE_VAL1278
-SKIP_VAL1277:
+    stloc B946
+    br DONE_VAL1299
+SKIP_VAL1298:
     nop
     ldnull
-    stloc B926
-DONE_VAL1278:
+    stloc B946
+DONE_VAL1299:
     nop
-    ldloc A925
-    ldloc B926
+    ldloc A945
+    ldloc B946
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_MV_BIND_NORMAL_923:
+BLOCK_END_TEST_MV_BIND_NORMAL_943:
     nop
     ldnull
     ret
@@ -2353,32 +2368,32 @@ BLOCK_END_TEST_MV_BIND_NORMAL_923:
 .method private static hidebysig object 'TEST_MV_BIND_0_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object B920, object A919)
+    .locals init (object B940, object A939)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 0
     box int32
     call object Program::'MV_PRODUCER'(object)
-    stloc A919
+    stloc A939
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1275
+    ble SKIP_VAL1296
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B920
-    br DONE_VAL1276
-SKIP_VAL1275:
+    stloc B940
+    br DONE_VAL1297
+SKIP_VAL1296:
     nop
     ldnull
-    stloc B920
-DONE_VAL1276:
+    stloc B940
+DONE_VAL1297:
     nop
-    ldloc A919
-    ldloc B920
+    ldloc A939
+    ldloc B940
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_MV_BIND_0_917:
+BLOCK_END_TEST_MV_BIND_0_937:
     nop
     ldnull
     ret
@@ -2467,46 +2482,46 @@ BLOCK_END_TEST_MV_BIND_0_917:
 .method private static hidebysig object 'TEST_MV_BIND_3_FROM_2_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object C914, object B913, object A912)
+    .locals init (object C934, object B933, object A932)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 2
     box int32
     call object Program::'MV_PRODUCER'(object)
-    stloc A912
+    stloc A932
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1271
+    ble SKIP_VAL1292
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B913
-    br DONE_VAL1272
-SKIP_VAL1271:
+    stloc B933
+    br DONE_VAL1293
+SKIP_VAL1292:
     nop
     ldnull
-    stloc B913
-DONE_VAL1272:
+    stloc B933
+DONE_VAL1293:
     nop
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 2
-    ble SKIP_VAL1273
+    ble SKIP_VAL1294
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc C914
-    br DONE_VAL1274
-SKIP_VAL1273:
+    stloc C934
+    br DONE_VAL1295
+SKIP_VAL1294:
     nop
     ldnull
-    stloc C914
-DONE_VAL1274:
+    stloc C934
+DONE_VAL1295:
     nop
-    ldloc A912
-    ldloc B913
-    ldloc C914
+    ldloc A932
+    ldloc B933
+    ldloc C934
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_MV_BIND_3_FROM_2_910:
+BLOCK_END_TEST_MV_BIND_3_FROM_2_930:
     nop
     ldnull
     ret
@@ -2595,16 +2610,16 @@ BLOCK_END_TEST_MV_BIND_3_FROM_2_910:
 .method private static hidebysig object 'TEST_MV_BIND_1_FROM_2_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object A907)
+    .locals init (object A927)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 2
     box int32
     call object Program::'MV_PRODUCER'(object)
-    stloc A907
-    ldloc A907
+    stloc A927
+    ldloc A927
     ret
-BLOCK_END_TEST_MV_BIND_1_FROM_2_905:
+BLOCK_END_TEST_MV_BIND_1_FROM_2_925:
     nop
     ldnull
     ret
@@ -2693,46 +2708,46 @@ BLOCK_END_TEST_MV_BIND_1_FROM_2_905:
 .method private static hidebysig object 'TEST_MV_BIND_3_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object C902, object B901, object A900)
+    .locals init (object C922, object B921, object A920)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 3
     box int32
     call object Program::'MV_PRODUCER'(object)
-    stloc A900
+    stloc A920
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1267
+    ble SKIP_VAL1288
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B901
-    br DONE_VAL1268
-SKIP_VAL1267:
+    stloc B921
+    br DONE_VAL1289
+SKIP_VAL1288:
     nop
     ldnull
-    stloc B901
-DONE_VAL1268:
+    stloc B921
+DONE_VAL1289:
     nop
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 2
-    ble SKIP_VAL1269
+    ble SKIP_VAL1290
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc C902
-    br DONE_VAL1270
-SKIP_VAL1269:
+    stloc C922
+    br DONE_VAL1291
+SKIP_VAL1290:
     nop
     ldnull
-    stloc C902
-DONE_VAL1270:
+    stloc C922
+DONE_VAL1291:
     nop
-    ldloc A900
-    ldloc B901
-    ldloc C902
+    ldloc A920
+    ldloc B921
+    ldloc C922
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_MV_BIND_3_898:
+BLOCK_END_TEST_MV_BIND_3_918:
     nop
     ldnull
     ret
@@ -2821,32 +2836,32 @@ BLOCK_END_TEST_MV_BIND_3_898:
 .method private static hidebysig object 'TEST_MV_BIND_2_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object B895, object A894)
+    .locals init (object B915, object A914)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 2
     box int32
     call object Program::'MV_PRODUCER'(object)
-    stloc A894
+    stloc A914
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL1265
+    ble SKIP_VAL1286
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc B895
-    br DONE_VAL1266
-SKIP_VAL1265:
+    stloc B915
+    br DONE_VAL1287
+SKIP_VAL1286:
     nop
     ldnull
-    stloc B895
-DONE_VAL1266:
+    stloc B915
+DONE_VAL1287:
     nop
-    ldloc A894
-    ldloc B895
+    ldloc A914
+    ldloc B915
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_TEST_MV_BIND_2_892:
+BLOCK_END_TEST_MV_BIND_2_912:
     nop
     ldnull
     ret
@@ -2944,22 +2959,22 @@ BLOCK_END_TEST_MV_BIND_2_892:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     ceq
-    brtrue TRUE1250
+    brtrue TRUE1271
     ldnull
-    br END1251
-TRUE1250:
+    br END1272
+TRUE1271:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1252'
-END1251:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1273'
+END1272:
     nop
     ldnull
     ceq
-    brtrue ELSE1264
+    brtrue ELSE1285
     ldc.i4.0
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldnull
     ret
-ELSE1264:
+ELSE1285:
     nop
     ldarg 0
     ldc.i4 1
@@ -2969,21 +2984,21 @@ ELSE1264:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     ceq
-    brtrue TRUE1253
+    brtrue TRUE1274
     ldnull
-    br END1254
-TRUE1253:
+    br END1275
+TRUE1274:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1252'
-END1254:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1273'
+END1275:
     nop
     ldnull
     ceq
-    brtrue ELSE1263
+    brtrue ELSE1284
     ldc.i4 10
     box int32
     ret
-ELSE1263:
+ELSE1284:
     nop
     ldarg 0
     ldc.i4 2
@@ -2993,17 +3008,17 @@ ELSE1263:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     ceq
-    brtrue TRUE1255
+    brtrue TRUE1276
     ldnull
-    br END1256
-TRUE1255:
+    br END1277
+TRUE1276:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1252'
-END1256:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1273'
+END1277:
     nop
     ldnull
     ceq
-    brtrue ELSE1262
+    brtrue ELSE1283
     ldc.i4 10
     box int32
     ldc.i4 20
@@ -3012,7 +3027,7 @@ END1256:
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ret
-ELSE1262:
+ELSE1283:
     nop
     ldarg 0
     ldc.i4 3
@@ -3022,17 +3037,17 @@ ELSE1262:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     ceq
-    brtrue TRUE1257
+    brtrue TRUE1278
     ldnull
-    br END1258
-TRUE1257:
+    br END1279
+TRUE1278:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1252'
-END1258:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1273'
+END1279:
     nop
     ldnull
     ceq
-    brtrue ELSE1261
+    brtrue ELSE1282
     ldc.i4 10
     box int32
     ldc.i4 20
@@ -3044,12 +3059,12 @@ END1258:
     ldc.i4 3
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ret
-ELSE1261:
+ELSE1282:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1259'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1280'
     ldnull
     ceq
-    brtrue ELSE1260
+    brtrue ELSE1281
     ldc.i4 1
     box int32
     ldc.i4 2
@@ -3067,11 +3082,11 @@ ELSE1261:
     ldc.i4 5
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ret
-ELSE1260:
+ELSE1281:
     nop
     ldnull
     ret
-BLOCK_END_MV_PRODUCER_888:
+BLOCK_END_MV_PRODUCER_908:
     nop
     ldnull
     ret
@@ -3088,7 +3103,7 @@ BLOCK_END_MV_PRODUCER_888:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_992
+.class public auto ansi beforefieldinit L_1012
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -3208,7 +3223,7 @@ BLOCK_END_MV_PRODUCER_888:
     ldarg 5
     ldarg 6
     tail.
-    callvirt instance object L_992::'InvokeBody'(object, object, object, object, object, object)
+    callvirt instance object L_1012::'InvokeBody'(object, object, object, object, object, object)
     ret
 }
 
@@ -3230,9 +3245,9 @@ BLOCK_END_MV_PRODUCER_888:
     throw
 }
 
-} // end of class L_992
+} // end of class L_1012
 
-.class public auto ansi beforefieldinit L_993
+.class public auto ansi beforefieldinit L_1013
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -3258,7 +3273,7 @@ BLOCK_END_MV_PRODUCER_888:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3270,7 +3285,7 @@ BLOCK_END_MV_PRODUCER_888:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3284,7 +3299,7 @@ BLOCK_END_MV_PRODUCER_888:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3300,7 +3315,7 @@ BLOCK_END_MV_PRODUCER_888:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3318,7 +3333,7 @@ BLOCK_END_MV_PRODUCER_888:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3338,7 +3353,7 @@ BLOCK_END_MV_PRODUCER_888:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3360,7 +3375,7 @@ BLOCK_END_MV_PRODUCER_888:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3384,7 +3399,7 @@ BLOCK_END_MV_PRODUCER_888:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
@@ -3410,9 +3425,9 @@ BLOCK_END_MV_PRODUCER_888:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_993::'InvokeBody'(object)
+    callvirt instance object L_1013::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_993
+} // end of class L_1013
 

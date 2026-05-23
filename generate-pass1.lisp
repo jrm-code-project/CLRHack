@@ -14,6 +14,7 @@
 (defvar *global-variables* nil)
 (defvar *quoted-symbols* nil)
 (defvar *toplevel-defuns* nil)
+(defvar *in-try-block* nil)
 
 (defvar *primitive-handlers-step1* (make-hash-table :test #'equalp))
 
@@ -263,10 +264,50 @@
     (list (il:castclass "[LispBase]Lisp.ValueCell")
           (il:ldfld "object [LispBase]Lisp.ValueCell::Value"))))
 
+(register-primitive-step1 "%INTERN"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (let* ((sym-name-node (car operands))
+           (sym-name (ast-literal-value sym-name-node)))
+      (load-symbol-il sym-name))))
+
 (register-primitive-step1 "%GET-ACTIVE-RESTARTS"
   (lambda (node operands)
     (declare (ignore node operands))
     (list (il:call :method "GetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "object" :args nil))))
+
+(register-primitive-step1 "FIND-RESTART"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (list (il:call :method "FindRestart" :class "[LispBase]Lisp.RestartControl" :return "class [LispBase]Lisp.Restart" :args '("object")))))
+
+(register-primitive-step1 "INVOKE-RESTART"
+  (lambda (node operands)
+    (declare (ignore node))
+    (let ((n (length operands)))
+      (mapc #'generate-step1 operands)
+      (let ((args-array-temp (register-local "RESTART_ARGS_TEMP"))
+            (arg-temp (register-local "RESTART_ARG_TEMP")))
+        (append
+         (list (il:ldc.i4 (1- n)) ;; exclude restart name
+               (il:newarr "[mscorlib]System.Object")
+               (il:stloc args-array-temp))
+         (loop for i from (- n 2) downto 0
+               append (list (il:stloc arg-temp)
+                            (il:ldloc args-array-temp)
+                            (il:ldc.i4 i)
+                            (il:ldloc arg-temp)
+                            (il:stelem.ref)))
+         (list (il:ldloc args-array-temp)
+               (il:call :method "InvokeRestart" :class "[LispBase]Lisp.RestartControl" :return "object" :args '("object" "object[]"))))))))
+
+(register-primitive-step1 "INVOKE-RESTART-INTERACTIVELY"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (list (il:call :method "InvokeRestartInteractively" :class "[LispBase]Lisp.RestartControl" :return "object" :args '("object")))))
 
 (register-primitive-step1 "%SET-CELL-VALUE!"
   (lambda (node operands)

@@ -14,12 +14,12 @@
     .field public static object '_CTOR'
     .field public static object '_MAKE_CELL'
     .field public static object 'PRINT'
-    .field public static object 'D535'
-    .field public static object 'C534'
-    .field public static object 'B532'
+    .field public static object 'D555'
+    .field public static object 'C554'
+    .field public static object 'B552'
     .field public static object '_CELL_VALUE'
     .field public static object 'ADD'
-    .field public static object 'A529'
+    .field public static object 'A549'
     .field public static object '_SET_CELL_VALUE_'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
@@ -40,17 +40,17 @@
     ldnull
     stsfld object Program::'PRINT'
     ldnull
-    stsfld object Program::'D535'
+    stsfld object Program::'D555'
     ldnull
-    stsfld object Program::'C534'
+    stsfld object Program::'C554'
     ldnull
-    stsfld object Program::'B532'
+    stsfld object Program::'B552'
     ldnull
     stsfld object Program::'_CELL_VALUE'
     ldnull
     stsfld object Program::'ADD'
     ldnull
-    stsfld object Program::'A529'
+    stsfld object Program::'A549'
     ldnull
     stsfld object Program::'_SET_CELL_VALUE_'
     ret
@@ -139,28 +139,28 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ACC_INSTANCE2545, object ACC_INSTANCE1544, object ACC_BUILDER543)
+    .locals init (object ACC_INSTANCE2565, object ACC_INSTANCE1564, object ACC_BUILDER563)
     ldc.i4 1
     box int32
     call object Program::'MAKE_ACCUMULATOR'(object)
-    stloc ACC_BUILDER543
-    ldloc ACC_BUILDER543
+    stloc ACC_BUILDER563
+    ldloc ACC_BUILDER563
     castclass [LispBase]Lisp.Closure
     ldc.i4 1000
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc ACC_INSTANCE1544
-    ldloc ACC_BUILDER543
+    stloc ACC_INSTANCE1564
+    ldloc ACC_BUILDER563
     castclass [LispBase]Lisp.Closure
     ldc.i4 2000
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc ACC_INSTANCE2545
+    stloc ACC_INSTANCE2565
     ldstr "Instance 1 - Call 1:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ACC_INSTANCE1544
+    ldloc ACC_INSTANCE1564
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -170,7 +170,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ACC_INSTANCE1544
+    ldloc ACC_INSTANCE1564
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -180,7 +180,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ACC_INSTANCE2545
+    ldloc ACC_INSTANCE2565
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
@@ -190,13 +190,13 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ACC_INSTANCE1544
+    ldloc ACC_INSTANCE1564
     castclass [LispBase]Lisp.Closure
     ldc.i4 5
     box int32
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-BLOCK_END_MAIN_541:
+BLOCK_END_MAIN_561:
     nop
     ldnull
     ret
@@ -286,19 +286,19 @@ BLOCK_END_MAIN_541:
 .method private static hidebysig object 'MAKE_ACCUMULATOR_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object B532, object A529)
+    .locals init (object B552, object A549)
     ldarg 0
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc A529
+    stloc A549
     ldc.i4 10
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc B532
-    ldloc B532
-    ldloc A529
-    newobj instance void L_548::'.ctor'(object, object)
+    stloc B552
+    ldloc B552
+    ldloc A549
+    newobj instance void L_568::'.ctor'(object, object)
     ret
-BLOCK_END_MAKE_ACCUMULATOR_530:
+BLOCK_END_MAKE_ACCUMULATOR_550:
     nop
     ldnull
     ret
@@ -406,7 +406,7 @@ BLOCK_END_MAKE_ACCUMULATOR_530:
     sub
     box int32
     ret
-BLOCK_END_ADD_525:
+BLOCK_END_ADD_545:
     nop
     ldnull
     ret
@@ -423,13 +423,13 @@ BLOCK_END_ADD_525:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_547
+.class public auto ansi beforefieldinit L_567
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'D535'
-    .field public object 'B532'
-    .field public object 'A529'
-    .field public object 'C534'
+    .field public object 'D555'
+    .field public object 'B552'
+    .field public object 'A549'
+    .field public object 'C554'
 
 .method public hidebysig void '.ctor'(object, object, object, object) cil managed
 {
@@ -438,97 +438,97 @@ BLOCK_END_ADD_525:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_547::'D535'
+    stfld object L_567::'D555'
     ldarg.0
     ldarg 2
-    stfld object L_547::'B532'
+    stfld object L_567::'B552'
     ldarg.0
     ldarg 3
-    stfld object L_547::'A529'
+    stfld object L_567::'A549'
     ldarg.0
     ldarg 4
-    stfld object L_547::'C534'
+    stfld object L_567::'C554'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object RES538, object TEMP556, object TEMP555, object TEMP554, object TEMP553)
+    .locals init (object RES558, object TEMP576, object TEMP575, object TEMP574, object TEMP573)
     ldarg.0
-    ldfld object L_547::'A529'
+    ldfld object L_567::'A549'
     ldarg.0
-    ldfld object L_547::'A529'
+    ldfld object L_567::'A549'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
     box int32
     call object Program::'ADD'(object, object)
-    stloc TEMP553
+    stloc TEMP573
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP553
+    ldloc TEMP573
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP553
+    ldloc TEMP573
     pop
     ldarg.0
-    ldfld object L_547::'B532'
+    ldfld object L_567::'B552'
     ldarg.0
-    ldfld object L_547::'B532'
+    ldfld object L_567::'B552'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 2
     box int32
     call object Program::'ADD'(object, object)
-    stloc TEMP554
+    stloc TEMP574
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP554
+    ldloc TEMP574
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP554
+    ldloc TEMP574
     pop
     ldarg.0
-    ldfld object L_547::'C534'
+    ldfld object L_567::'C554'
     ldarg.0
-    ldfld object L_547::'C534'
+    ldfld object L_567::'C554'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 3
     box int32
     call object Program::'ADD'(object, object)
-    stloc TEMP555
+    stloc TEMP575
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP555
+    ldloc TEMP575
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP555
+    ldloc TEMP575
     pop
     ldarg.0
-    ldfld object L_547::'D535'
+    ldfld object L_567::'D555'
     ldarg.0
-    ldfld object L_547::'D535'
+    ldfld object L_567::'D555'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 4
     box int32
     call object Program::'ADD'(object, object)
-    stloc TEMP556
+    stloc TEMP576
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP556
+    ldloc TEMP576
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP556
+    ldloc TEMP576
     pop
     ldarg.0
-    ldfld object L_547::'A529'
+    ldfld object L_567::'A549'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg.0
-    ldfld object L_547::'B532'
+    ldfld object L_567::'B552'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg.0
-    ldfld object L_547::'C534'
+    ldfld object L_567::'C554'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg.0
-    ldfld object L_547::'D535'
+    ldfld object L_567::'D555'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg 1
@@ -536,12 +536,12 @@ BLOCK_END_ADD_525:
     call object Program::'ADD'(object, object)
     call object Program::'ADD'(object, object)
     call object Program::'ADD'(object, object)
-    stloc RES538
-    ldloc RES538
+    stloc RES558
+    ldloc RES558
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RES538
+    ldloc RES558
     ret
     ldnull
     ret
@@ -562,7 +562,7 @@ BLOCK_END_ADD_525:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_547::'InvokeBody'(object)
+    callvirt instance object L_567::'InvokeBody'(object)
     ret
 }
 
@@ -629,13 +629,13 @@ BLOCK_END_ADD_525:
     throw
 }
 
-} // end of class L_547
+} // end of class L_567
 
-.class public auto ansi beforefieldinit L_548
+.class public auto ansi beforefieldinit L_568
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'B532'
-    .field public object 'A529'
+    .field public object 'B552'
+    .field public object 'A549'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -644,31 +644,31 @@ BLOCK_END_ADD_525:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_548::'B532'
+    stfld object L_568::'B552'
     ldarg.0
     ldarg 2
-    stfld object L_548::'A529'
+    stfld object L_568::'A549'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object D535, object C534)
+    .locals init (object D555, object C554)
     ldarg 1
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc C534
+    stloc C554
     ldc.i4 100
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc D535
-    ldloc D535
+    stloc D555
+    ldloc D555
     ldarg.0
-    ldfld object L_548::'B532'
+    ldfld object L_568::'B552'
     ldarg.0
-    ldfld object L_548::'A529'
-    ldloc C534
-    newobj instance void L_547::'.ctor'(object, object, object, object)
+    ldfld object L_568::'A549'
+    ldloc C554
+    newobj instance void L_567::'.ctor'(object, object, object, object)
     ret
     ldnull
     ret
@@ -689,7 +689,7 @@ BLOCK_END_ADD_525:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_548::'InvokeBody'(object)
+    callvirt instance object L_568::'InvokeBody'(object)
     ret
 }
 
@@ -756,5 +756,5 @@ BLOCK_END_ADD_525:
     throw
 }
 
-} // end of class L_548
+} // end of class L_568
 

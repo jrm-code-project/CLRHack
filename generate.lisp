@@ -14,18 +14,19 @@
   (let* ((operands (ast-application-operands node))
          (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) operands)))
          (bb (ast-basic-block node)))
-    (when (and tail-p bb)
+    (when (and tail-p (not *in-try-block*) bb)
       (let ((last-inst (car (last bb))))
         (when (and (typep last-inst 'cil-call-instruction)
                    (member (get-opcode last-inst) '("call" "callvirt") :test #'string-equal))
           (setf (get-tail-p last-inst) t))))
     (let ((code (append operands-code bb)))
-      (if tail-p (append code (list (il:ret))) code))))
+      (if (and tail-p (not *in-try-block*)) (append code (list (il:ret))) code))))
 
 (register-primitive-step2 
  '("%WRITE-LINE" "%WRITE-OBJECT" "%WRITE-INT" "PRINT" "%SUB" "-" "%MUL" "*" "%DIV" "/" "%ADD" "+" "=" "1+" "1-"
    "%LESSP" "<" "%NOT" "NOT" "%CONS" "CONS" "LIST" "%CAR" "CAR" "%CDR" "CDR" "%EQ" "EQ" "%NULL" "NULL"
-   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!" "%GET-ACTIVE-RESTARTS")
+   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!" "%GET-ACTIVE-RESTARTS"
+   "FIND-RESTART" "INVOKE-RESTART" "INVOKE-RESTART-INTERACTIVELY")
  #'standard-step2-handler)
 
 (register-primitive-step2 "%INTERN"
@@ -362,10 +363,9 @@
          (result-temp (sanitize-identifier (ast-unwind-protect-result-temp node)))
          (count-temp (sanitize-identifier (ast-unwind-protect-count-temp node)))
          (extra-temps (mapcar (lambda (x) (sanitize-identifier (string x))) (ast-unwind-protect-extra-temps node)))
-         (protected-code (append (generate-step2 (ast-unwind-protect-protected-form node) nil)
+         (protected-code (append (let ((*in-try-block* t)) (generate-step2 (ast-unwind-protect-protected-form node) nil))
                                  (list (il:stloc result-temp)
-                                       (il:leave done-label))))
-         (cleanup-code (append 
+                                       (il:leave done-label))))         (cleanup-code (append 
                         ;; Save side-channel at start of finally
                         (list (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
                               (il:stloc count-temp))
@@ -428,12 +428,13 @@
                            (list (il:stloc tag-temp))))
          (try-code (append (if (null (ast-catch-body node))
                                (list (il:ldnull))
-                               (loop for f in (ast-catch-body node)
-                                     for i from 1
-                                     for is-last = (= i (length (ast-catch-body node)))
-                                     append (generate-step2 f nil)
-                                     when (not is-last)
-                                       append (list (il:pop))))
+                               (let ((*in-try-block* t))
+                                 (loop for f in (ast-catch-body node)
+                                       for i from 1
+                                       for is-last = (= i (length (ast-catch-body node)))
+                                       append (generate-step2 f nil)
+                                       when (not is-last)
+                                         append (list (il:pop)))))
                            (list (il:stloc result-temp)
                                  (il:leave done-label))))
          (catch-code (list (il:dup) ;; exception object
@@ -626,24 +627,21 @@
     ;; 4. Try/Finally to restore
     (let ((try-code (append (if (null body)
                                 (list (il:ldnull))
-                                (loop for f in body
-                                      for i from 1
-                                      for is-last = (= i (length body))
-                                      append (generate-step2 f (if is-last tail-p nil))
-                                      when (not is-last)
-                                        append (list (il:pop))))
-                            (if tail-p
-                                nil
-                                (list (il:stloc result-temp)))
-                            (list (il:leave done-label))))
+                                (let ((*in-try-block* t))
+                                  (loop for f in body
+                                        for i from 1
+                                        for is-last = (= i (length body))
+                                        append (generate-step2 f nil)
+                                        when (not is-last)
+                                          append (list (il:pop)))))
+                            (list (il:stloc result-temp)
+                                  (il:leave done-label))))
           (finally-code (list (il:ldloc saved-restarts-temp)
                               (il:call :method "SetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "void" :args '("object"))
                               (il:endfinally))))
       (setf code (append code (list (il:try try-code)
                                     (il:finally finally-code)
-                                    (if tail-p
-                                        (il:nop :label done-label)
-                                        (il:ldloc result-temp :label done-label))))))
+                                    (il:ldloc result-temp :label done-label)))))
     (if tail-p (append code (list (il:ret))) code)))
 
 (defmethod generate-step2 ((node ast-toplevel-defun) &optional tail-p)
@@ -733,13 +731,13 @@
                     (let ((operator-code (generate-step2 operator nil))
                           (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) operands)))
                           (bb (ast-basic-block node)))
-                      (when (and tail-p bb)
+                      (when (and tail-p (not *in-try-block*) bb)
                         (let ((last-inst (car (last bb))))
                           (when (and (typep last-inst 'cil-call-instruction)
                                      (member (get-opcode last-inst) '("call" "callvirt") :test #'string-equal))
                             (setf (get-tail-p last-inst) t))))
                       (let ((code (append operator-code (list (il:castclass "[LispBase]Lisp.Closure")) operands-code bb)))
-                        (if tail-p (append code (list (il:ret))) code))))))))))
+                        (if (and tail-p (not *in-try-block*)) (append code (list (il:ret))) code))))))))))
 
 ;;; ===========================================================================
 ;;; Main Entry Point

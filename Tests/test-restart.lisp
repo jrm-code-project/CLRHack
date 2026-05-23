@@ -26,4 +26,22 @@
     (print "After all restart-binds:")
     (print restarts)))
 
+(defun test-restart-invocation ()
+  (print "--- test-restart-invocation ---")
+  (restart-bind ((my-restart (lambda (x) (print "Restart called with:") (print x) (* x 2))))
+    (print "Result of invoke-restart:")
+    (print (invoke-restart 'my-restart 21))))
+
+(defun test-restart-interactive ()
+  (print "--- test-restart-interactive ---")
+  (restart-bind ((my-interactive-restart 
+                  (lambda (x y) (print "Interactive restart called with:") (print x) (print y) (+ x y))
+                  :interactive-function (lambda () (list 10 20))))
+    (print "Result of invoke-restart-interactively:")
+    (print (invoke-restart-interactively 'my-interactive-restart))))
+
 (test-restart-bind)
+(test-restart-invocation)
+(test-restart-interactive)
+
+

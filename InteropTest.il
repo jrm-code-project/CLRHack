@@ -21,12 +21,12 @@
 {
     .entrypoint
     .maxstack 8
-    .locals init (object LIST722, object CLR_VIRT_INST_TEMP, object SYM721)
+    .locals init (object LIST742, object CLR_VIRT_INST_TEMP, object SYM741)
     ldstr "FOO"
     ldnull
     newobj instance void [LispBase]Lisp.Symbol::'.ctor'(string, class [LispBase]Lisp.Package)
-    stloc SYM721
-    ldloc SYM721
+    stloc SYM741
+    ldloc SYM741
     castclass [LispBase]Lisp.Symbol
     callvirt instance string [LispBase]Lisp.Symbol::'get_Name'()
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -35,8 +35,8 @@
     ldstr "head"
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc LIST722
-    ldloc LIST722
+    stloc LIST742
+    ldloc LIST742
     ldfld object [LispBase]Lisp.List/ListCell::'first'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull

@@ -21,7 +21,12 @@
     .field public static object '_SET_CELL_VALUE_'
     .field public static object '_INTERN'
     .field public static object 'EQ'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S191'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S217'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S212'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S209'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S200'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S197'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S194'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -55,9 +60,29 @@
     ldnull
     stsfld object Program::'EQ'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "GET-ACCOUNTS"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S217'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "GET-RESERVE"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S212'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "CREATE-ACCOUNT"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S209'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "WITHDRAW"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S200'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S191'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "DEPOSIT"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S194'
     ret
 }
 
@@ -151,7 +176,7 @@
     stloc BANK162
     ldloc BANK162
     castclass [LispBase]Lisp.Closure
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S209'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     stloc CREATE_ACC163
     ldloc CREATE_ACC163
@@ -172,7 +197,7 @@
     pop
     ldloc BANK162
     castclass [LispBase]Lisp.Closure
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S212'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -183,7 +208,7 @@
     pop
     ldloc ALICE164
     castclass [LispBase]Lisp.Closure
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S194'
     ldc.i4 100
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
@@ -196,7 +221,7 @@
     pop
     ldloc BOB165
     castclass [LispBase]Lisp.Closure
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S200'
     ldc.i4 50
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
@@ -209,7 +234,7 @@
     pop
     ldloc BANK162
     castclass [LispBase]Lisp.Closure
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S217'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -220,7 +245,7 @@
     pop
     ldloc BANK162
     castclass [LispBase]Lisp.Closure
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S212'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -369,21 +394,21 @@ BLOCK_END_MAKE_BANK_146:
 .method private hidebysig object 'InvokeBody'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP197, object TEMP196, object TEMP193, object TEMP192)
+    .locals init (object TEMP204, object TEMP203, object TEMP199, object TEMP198)
     ldarg 1
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S194'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE189
+    brtrue TRUE195
     ldnull
-    br END190
-TRUE189:
+    br END196
+TRUE195:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S191'
-END190:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
+END196:
     nop
     ldnull
     ceq
-    brtrue ELSE199
+    brtrue ELSE206
     ldarg.0
     ldfld object L_167::'BALANCE154'
     ldarg.0
@@ -397,11 +422,11 @@ END190:
     unbox.any int32
     add
     box int32
-    stloc TEMP192
+    stloc TEMP198
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP192
+    ldloc TEMP198
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP192
+    ldloc TEMP198
     pop
     ldarg.0
     ldfld object L_167::'RESERVE148'
@@ -416,33 +441,33 @@ END190:
     unbox.any int32
     add
     box int32
-    stloc TEMP193
+    stloc TEMP199
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP193
+    ldloc TEMP199
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP193
+    ldloc TEMP199
     pop
     ldarg.0
     ldfld object L_167::'BALANCE154'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-ELSE199:
+ELSE206:
     nop
     ldarg 1
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S200'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE194
+    brtrue TRUE201
     ldnull
-    br END195
-TRUE194:
+    br END202
+TRUE201:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S191'
-END195:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
+END202:
     nop
     ldnull
     ceq
-    brtrue ELSE198
+    brtrue ELSE205
     ldarg.0
     ldfld object L_167::'BALANCE154'
     ldarg.0
@@ -456,11 +481,11 @@ END195:
     unbox.any int32
     sub
     box int32
-    stloc TEMP196
+    stloc TEMP203
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP196
+    ldloc TEMP203
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP196
+    ldloc TEMP203
     pop
     ldarg.0
     ldfld object L_167::'RESERVE148'
@@ -475,18 +500,18 @@ END195:
     unbox.any int32
     sub
     box int32
-    stloc TEMP197
+    stloc TEMP204
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP197
+    ldloc TEMP204
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP197
+    ldloc TEMP204
     pop
     ldarg.0
     ldfld object L_167::'BALANCE154'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-ELSE198:
+ELSE205:
     nop
     ldarg.0
     ldfld object L_167::'BALANCE154'
@@ -605,7 +630,7 @@ ELSE198:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object BALANCE154, object TEMP201, object TEMP200)
+    .locals init (object BALANCE154, object TEMP208, object TEMP207)
     ldarg.0
     ldfld object L_168::'RESERVE148'
     ldarg.0
@@ -619,11 +644,11 @@ ELSE198:
     unbox.any int32
     add
     box int32
-    stloc TEMP200
+    stloc TEMP207
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP200
+    ldloc TEMP207
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP200
+    ldloc TEMP207
     pop
     ldarg.0
     ldfld object L_168::'TOTAL_ACCOUNTS149'
@@ -639,11 +664,11 @@ ELSE198:
     unbox.any int32
     add
     box int32
-    stloc TEMP201
+    stloc TEMP208
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP201
+    ldloc TEMP208
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP201
+    ldloc TEMP208
     pop
     ldarg 1
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
@@ -765,47 +790,47 @@ ELSE198:
 {
     .maxstack 8
     ldarg 1
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S209'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE202
+    brtrue TRUE210
     ldnull
-    br END203
-TRUE202:
+    br END211
+TRUE210:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S191'
-END203:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
+END211:
     nop
     ldnull
     ceq
-    brtrue ELSE207
+    brtrue ELSE216
     ldarg.0
     ldfld object L_169::'RESERVE148'
     ldarg.0
     ldfld object L_169::'TOTAL_ACCOUNTS149'
     newobj instance void L_168::'.ctor'(object, object)
     ret
-ELSE207:
+ELSE216:
     nop
     ldarg 1
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S212'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE204
+    brtrue TRUE213
     ldnull
-    br END205
-TRUE204:
+    br END214
+TRUE213:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S191'
-END205:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S197'
+END214:
     nop
     ldnull
     ceq
-    brtrue ELSE206
+    brtrue ELSE215
     ldarg.0
     ldfld object L_169::'RESERVE148'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-ELSE206:
+ELSE215:
     nop
     ldarg.0
     ldfld object L_169::'TOTAL_ACCOUNTS149'

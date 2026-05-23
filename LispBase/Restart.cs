@@ -78,5 +78,58 @@ namespace Lisp
         {
             activeRestarts = restarts;
         }
+
+        public static Restart FindRestart(object restartOrName)
+        {
+            if (restartOrName is Restart r) return r;
+            
+            object current = activeRestarts;
+            while (current is List.ListCell cell)
+            {
+                if (cell.first is Restart restart && Equals(restart.Name, restartOrName))
+                {
+                    return restart;
+                }
+                current = cell.rest;
+            }
+            return null;
+        }
+
+        public static object InvokeRestart(object restartOrName, params object[] args)
+        {
+            Restart r = FindRestart(restartOrName);
+            if (r == null) throw new Exception($"Restart {restartOrName} not found.");
+            return r.Invoke(args);
+        }
+
+        public static object InvokeRestartInteractively(object restartOrName)
+        {
+            Restart r = FindRestart(restartOrName);
+            if (r == null) throw new Exception($"Restart {restartOrName} not found.");
+            
+            object[] args = null;
+            if (r.InteractiveFunction != null)
+            {
+                object result = r.InteractiveFunction.Invoke();
+                // Common Lisp interactive functions return a list of arguments.
+                if (result is List.ListCell cell)
+                {
+                    // Convert list to array
+                    var list = new System.Collections.Generic.List<object>();
+                    object curr = result;
+                    while (curr is List.ListCell c)
+                    {
+                        list.Add(c.first);
+                        curr = c.rest;
+                    }
+                    args = list.ToArray();
+                }
+                else if (result != null)
+                {
+                    args = new object[] { result };
+                }
+            }
+            return r.Invoke(args ?? Array.Empty<object>());
+        }
     }
 }
