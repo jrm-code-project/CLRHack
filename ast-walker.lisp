@@ -115,3 +115,8 @@
     (funcall function (fourth b))
     (funcall function (fifth b)))
   (mapc function (ast-restart-bind-body node)))
+
+(defmethod map-ast-children (function (node ast-handler-bind))
+  (dolist (b (ast-handler-bind-bindings node))
+    (funcall function (second b)))
+  (mapc function (ast-handler-bind-body node)))

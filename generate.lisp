@@ -25,7 +25,7 @@
 (register-primitive-step2 
  '("%WRITE-LINE" "%WRITE-OBJECT" "%WRITE-INT" "PRINT" "%SUB" "-" "%MUL" "*" "%DIV" "/" "%ADD" "+" "=" "1+" "1-"
    "%LESSP" "<" "%NOT" "NOT" "%CONS" "CONS" "LIST" "%CAR" "CAR" "%CDR" "CDR" "%EQ" "EQ" "%NULL" "NULL"
-   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!" "%GET-ACTIVE-RESTARTS"
+   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!" "%GET-ACTIVE-RESTARTS" "%GET-ACTIVE-HANDLERS"
    "FIND-RESTART" "INVOKE-RESTART" "INVOKE-RESTART-INTERACTIVELY" "APPLY")
  #'standard-step2-handler)
 
@@ -638,6 +638,55 @@
                                   (il:leave done-label))))
           (finally-code (list (il:ldloc saved-restarts-temp)
                               (il:call :method "SetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "void" :args '("object"))
+                              (il:endfinally))))
+      (setf code (append code (list (il:try try-code)
+                                    (il:finally finally-code)
+                                    (il:ldloc result-temp :label done-label)))))
+    (if tail-p (append code (list (il:ret))) code)))
+
+(defmethod generate-step2 ((node ast-handler-bind) &optional tail-p)
+  (let* ((done-label (sanitize-identifier (string (gensym "DONE"))))
+         (saved-handlers-temp (sanitize-identifier (ast-handler-bind-saved-handlers-temp node)))
+         (bindings (ast-handler-bind-bindings node))
+         (body (ast-handler-bind-body node))
+         (handlers-list-temp (sanitize-identifier (ast-handler-bind-handlers-list-temp node)))
+         (result-temp (sanitize-identifier (ast-handler-bind-result-temp node)))
+         (code nil))
+    ;; 1. Get current active handlers
+    (setf code (append code 
+                       (list (il:call :method "GetActiveHandlers" :class "[LispBase]Lisp.HandlerControl" :return "object" :args nil)
+                             (il:stloc saved-handlers-temp))))
+    ;; 2. Construct new handlers list
+    (setf code (append code (list (il:ldloc saved-handlers-temp) (il:stloc handlers-list-temp))))
+    (dolist (b bindings)
+      (destructuring-bind (type fn) b
+        ;; Create Handler object
+        (setf code (append code (load-symbol-il type)))
+        (setf code (append code (generate-step2 fn nil)))
+        (setf code (append code (list (il:newobj :method ".ctor" :class "[LispBase]Lisp.Handler" :return "instance void" :args '("object" "object")))))
+        ;; Cons onto handlers-list-temp
+        (setf code (append code (list (il:ldloc handlers-list-temp)
+                                      (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object"))
+                                      (il:stloc handlers-list-temp))))))
+    
+    ;; 3. Set new active handlers
+    (setf code (append code (list (il:ldloc handlers-list-temp)
+                                  (il:call :method "SetActiveHandlers" :class "[LispBase]Lisp.HandlerControl" :return "void" :args '("object")))))
+    
+    ;; 4. Try/Finally to restore
+    (let ((try-code (append (if (null body)
+                                (list (il:ldnull))
+                                (let ((*in-try-block* t))
+                                  (loop for f in body
+                                        for i from 1
+                                        for is-last = (= i (length body))
+                                        append (generate-step2 f nil)
+                                        when (not is-last)
+                                          append (list (il:pop)))))
+                            (list (il:stloc result-temp)
+                                  (il:leave done-label))))
+          (finally-code (list (il:ldloc saved-handlers-temp)
+                              (il:call :method "SetActiveHandlers" :class "[LispBase]Lisp.HandlerControl" :return "void" :args '("object"))
                               (il:endfinally))))
       (setf code (append code (list (il:try try-code)
                                     (il:finally finally-code)

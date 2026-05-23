@@ -277,6 +277,11 @@
     (declare (ignore node operands))
     (list (il:call :method "GetActiveRestarts" :class "[LispBase]Lisp.RestartControl" :return "object" :args nil))))
 
+(register-primitive-step1 "%GET-ACTIVE-HANDLERS"
+  (lambda (node operands)
+    (declare (ignore node operands))
+    (list (il:call :method "GetActiveHandlers" :class "[LispBase]Lisp.HandlerControl" :return "object" :args nil))))
+
 (register-primitive-step1 "FIND-RESTART"
   (lambda (node operands)
     (declare (ignore node))
@@ -701,6 +706,15 @@
     (generate-step1 (fourth b))
     (generate-step1 (fifth b)))
   (mapc #'generate-step1 (ast-restart-bind-body node))
+  (setf (ast-basic-block node) nil))
+
+(defmethod generate-step1 ((node ast-handler-bind))
+  (setf (ast-handler-bind-saved-handlers-temp node) (register-local (string (gensym "SAVED_HANDLERS"))))
+  (setf (ast-handler-bind-handlers-list-temp node) (register-local (string (gensym "HANDLERS_LIST"))))
+  (setf (ast-handler-bind-result-temp node) (register-local (string (gensym "HANDLER_BIND_RESULT"))))
+  (dolist (b (ast-handler-bind-bindings node))
+    (generate-step1 (second b)))
+  (mapc #'generate-step1 (ast-handler-bind-body node))
   (setf (ast-basic-block node) nil))
 
 (defmethod generate-step1 ((node ast-application))

@@ -247,6 +247,14 @@
    (result-temp :initarg :result-temp :initform nil :accessor ast-restart-bind-result-temp))
   (:documentation "A RESTART-BIND form."))
 
+(defclass ast-handler-bind (ast-node)
+  ((bindings :initarg :bindings :accessor ast-handler-bind-bindings)
+   (body :initarg :body :accessor ast-handler-bind-body)
+   (saved-handlers-temp :initarg :saved-handlers-temp :initform nil :accessor ast-handler-bind-saved-handlers-temp)
+   (handlers-list-temp :initarg :handlers-list-temp :initform nil :accessor ast-handler-bind-handlers-list-temp)
+   (result-temp :initarg :result-temp :initform nil :accessor ast-handler-bind-result-temp))
+  (:documentation "A HANDLER-BIND form."))
+
 ;;; Macro Environment
 
 (defvar *macro-environment* (make-hash-table :test #'eq))
@@ -691,6 +699,16 @@
                                 :initial-value nil)))
     (union binding-free-vars body-free-vars)))
 
+(defmethod compute-free-vars ((node ast-handler-bind))
+  (let ((binding-free-vars
+         (reduce (lambda (a b) (union a (compute-free-vars (second b))))
+                 (ast-handler-bind-bindings node)
+                 :initial-value nil))
+        (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
+                                (ast-handler-bind-body node)
+                                :initial-value nil)))
+    (union binding-free-vars body-free-vars)))
+
 (defmethod compute-free-vars ((node ast-class))
   nil)
 
@@ -928,6 +946,17 @@
                  :restarts-list-temp (ast-restart-bind-restarts-list-temp node)
                  :result-temp (ast-restart-bind-result-temp node)))
 
+(defmethod closure-convert ((node ast-handler-bind))
+  (make-instance 'ast-handler-bind
+                 :bindings (mapcar (lambda (b)
+                                     (list (first b)
+                                           (closure-convert (second b))))
+                                   (ast-handler-bind-bindings node))
+                 :body (mapcar #'closure-convert (ast-handler-bind-body node))
+                 :saved-handlers-temp (ast-handler-bind-saved-handlers-temp node)
+                 :handlers-list-temp (ast-handler-bind-handlers-list-temp node)
+                 :result-temp (ast-handler-bind-result-temp node)))
+
 (defmethod closure-convert ((node ast-class))
   node)
 
@@ -1152,6 +1181,17 @@
                  :saved-restarts-temp (ast-restart-bind-saved-restarts-temp node)
                  :restarts-list-temp (ast-restart-bind-restarts-list-temp node)
                  :result-temp (ast-restart-bind-result-temp node)))
+
+(defmethod lambda-lift ((node ast-handler-bind))
+  (make-instance 'ast-handler-bind
+                 :bindings (mapcar (lambda (b)
+                                     (list (first b)
+                                           (lambda-lift (second b))))
+                                   (ast-handler-bind-bindings node))
+                 :body (mapcar #'lambda-lift (ast-handler-bind-body node))
+                 :saved-handlers-temp (ast-handler-bind-saved-handlers-temp node)
+                 :handlers-list-temp (ast-handler-bind-handlers-list-temp node)
+                 :result-temp (ast-handler-bind-result-temp node)))
 
 (defmethod lambda-lift ((node ast-class))
   node)
@@ -1453,6 +1493,18 @@
                                     (lisp->ast (getf keys :test-function) env tags-env blocks-env current-scope))))
                           bindings)))
             (make-instance 'ast-restart-bind
+                           :bindings analyzed-bindings
+                           :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) body-forms))))
+
+         (handler-bind
+          (let* ((bindings (first args))
+                 (body-forms (rest args))
+                 (analyzed-bindings
+                  (mapcar (lambda (b)
+                            (list (first b)
+                                  (lisp->ast (second b) env tags-env blocks-env current-scope)))
+                          bindings)))
+            (make-instance 'ast-handler-bind
                            :bindings analyzed-bindings
                            :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) body-forms))))
 
@@ -1762,7 +1814,12 @@
                                                            (traverse (fifth b) curr-env)))
                                                  (ast-restart-bind-bindings n)))
                         (reduce #'append (mapcar (lambda (form) (traverse form curr-env))
-                                                 (ast-restart-bind-body n))))))))
+                                                 (ast-restart-bind-body n)))))
+               (ast-handler-bind
+                (append (reduce #'append (mapcar (lambda (b) (traverse (second b) curr-env))
+                                                 (ast-handler-bind-bindings n)))
+                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env))
+                                                 (ast-handler-bind-body n))))))))
     (remove-duplicates (traverse node env))))
 
 
@@ -2085,6 +2142,18 @@
                  :saved-restarts-temp (ast-restart-bind-saved-restarts-temp node)
                  :restarts-list-temp (ast-restart-bind-restarts-list-temp node)
                  :result-temp (ast-restart-bind-result-temp node)))
+
+(defmethod analyze-environment ((node ast-handler-bind) env &optional mutated)
+  (make-instance 'ast-handler-bind
+                 :bindings (mapcar (lambda (b)
+                                     (list (first b)
+                                           (analyze-environment (second b) env mutated)))
+                                   (ast-handler-bind-bindings node))
+                 :body (mapcar (lambda (form) (analyze-environment form env mutated))
+                               (ast-handler-bind-body node))
+                 :saved-handlers-temp (ast-handler-bind-saved-handlers-temp node)
+                 :handlers-list-temp (ast-handler-bind-handlers-list-temp node)
+                 :result-temp (ast-handler-bind-result-temp node)))
 
 (defmethod analyze-environment ((node ast-class) env &optional mutated)
   (declare (ignore env mutated))
