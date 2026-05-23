@@ -40,8 +40,22 @@
     (print "Result of invoke-restart-interactively:")
     (print (invoke-restart-interactively 'my-interactive-restart))))
 
+(defun test-restart-case ()
+  (print "--- test-restart-case ---")
+  (let ((result
+         (restart-case (invoke-restart 'give-up 42)
+           (give-up (val)
+             :report "Give up and return VAL"
+             (print "Give up clause called with:")
+             (print val)
+             (+ val 100)))))
+    (print "Result of restart-case:")
+    (print result)))
+
 (test-restart-bind)
 (test-restart-invocation)
 (test-restart-interactive)
+(test-restart-case)
+
 
 

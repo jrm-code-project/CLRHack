@@ -13,14 +13,14 @@
     .field public static object '_SET_CELL_VALUE_'
     .field public static object '_MAKE_CELL'
     .field public static object 'PRINT'
-    .field public static object 'EVEN_747'
+    .field public static object 'EVEN_755'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static object 'ODD_748'
+    .field public static object 'ODD_756'
     .field public static object '_CELL_VALUE'
     .field public static object 'EQ'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T775'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S774'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T783'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S782'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -38,13 +38,13 @@
     ldnull
     stsfld object Program::'PRINT'
     ldnull
-    stsfld object Program::'EVEN_747'
+    stsfld object Program::'EVEN_755'
     ldnull
     stsfld object Program::'TEMP_B'
     ldnull
     stsfld object Program::'_'
     ldnull
-    stsfld object Program::'ODD_748'
+    stsfld object Program::'ODD_756'
     ldnull
     stsfld object Program::'_CELL_VALUE'
     ldnull
@@ -52,11 +52,11 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T775'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T783'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S774'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S782'
     ret
 }
 
@@ -145,7 +145,7 @@
     .maxstack 8
     tail. call object Program::'TEST_LABELS'()
     ret
-BLOCK_END_MAIN_755:
+BLOCK_END_MAIN_763:
     nop
     ldnull
     ret
@@ -234,36 +234,36 @@ BLOCK_END_MAIN_755:
 .method private static hidebysig object 'TEST_LABELS_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object TEMP781, object TEMP780, object ODD_748, object EVEN_747)
+    .locals init (object TEMP789, object TEMP788, object ODD_756, object EVEN_755)
     ldstr "Testing labels..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc EVEN_747
+    stloc EVEN_755
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ODD_748
-    ldloc EVEN_747
-    ldloc ODD_748
-    newobj instance void L_758::'.ctor'(object)
-    stloc TEMP780
+    stloc ODD_756
+    ldloc EVEN_755
+    ldloc ODD_756
+    newobj instance void L_766::'.ctor'(object)
+    stloc TEMP788
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP780
+    ldloc TEMP788
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP780
+    ldloc TEMP788
     pop
-    ldloc ODD_748
-    ldloc EVEN_747
-    newobj instance void L_759::'.ctor'(object)
-    stloc TEMP781
+    ldloc ODD_756
+    ldloc EVEN_755
+    newobj instance void L_767::'.ctor'(object)
+    stloc TEMP789
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP781
+    ldloc TEMP789
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP781
+    ldloc TEMP789
     pop
-    ldloc EVEN_747
+    ldloc EVEN_755
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -272,20 +272,20 @@ BLOCK_END_MAIN_755:
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE782
+    brtrue ELSE790
     ldstr "even? 10 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END783
-ELSE782:
+    br END791
+ELSE790:
     nop
     ldstr "even? 10 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END783:
+END791:
     nop
     pop
-    ldloc ODD_748
+    ldloc ODD_756
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -294,18 +294,18 @@ END783:
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE784
+    brtrue ELSE792
     ldstr "odd? 11 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE784:
+ELSE792:
     nop
     ldstr "odd? 11 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_LABELS_745:
+BLOCK_END_TEST_LABELS_753:
     nop
     ldnull
     ret
@@ -322,10 +322,10 @@ BLOCK_END_TEST_LABELS_745:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_758
+.class public auto ansi beforefieldinit L_766
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'ODD_748'
+    .field public object 'ODD_756'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -334,7 +334,7 @@ BLOCK_END_TEST_LABELS_745:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_758::'ODD_748'
+    stfld object L_766::'ODD_756'
     ret
 }
 
@@ -345,23 +345,23 @@ BLOCK_END_TEST_LABELS_745:
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE772
+    brtrue TRUE780
     ldnull
-    br END773
-TRUE772:
+    br END781
+TRUE780:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S774'
-END773:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S782'
+END781:
     nop
     ldnull
     ceq
-    brtrue ELSE776
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T775'
+    brtrue ELSE784
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T783'
     ret
-ELSE776:
+ELSE784:
     nop
     ldarg.0
-    ldfld object L_758::'ODD_748'
+    ldfld object L_766::'ODD_756'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -395,7 +395,7 @@ ELSE776:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_758::'InvokeBody'(object)
+    callvirt instance object L_766::'InvokeBody'(object)
     ret
 }
 
@@ -462,12 +462,12 @@ ELSE776:
     throw
 }
 
-} // end of class L_758
+} // end of class L_766
 
-.class public auto ansi beforefieldinit L_759
+.class public auto ansi beforefieldinit L_767
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'EVEN_747'
+    .field public object 'EVEN_755'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -476,7 +476,7 @@ ELSE776:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_759::'EVEN_747'
+    stfld object L_767::'EVEN_755'
     ret
 }
 
@@ -487,23 +487,23 @@ ELSE776:
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE777
+    brtrue TRUE785
     ldnull
-    br END778
-TRUE777:
+    br END786
+TRUE785:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S774'
-END778:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S782'
+END786:
     nop
     ldnull
     ceq
-    brtrue ELSE779
+    brtrue ELSE787
     ldnull
     ret
-ELSE779:
+ELSE787:
     nop
     ldarg.0
-    ldfld object L_759::'EVEN_747'
+    ldfld object L_767::'EVEN_755'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.Closure
@@ -537,7 +537,7 @@ ELSE779:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_759::'InvokeBody'(object)
+    callvirt instance object L_767::'InvokeBody'(object)
     ret
 }
 
@@ -604,5 +604,5 @@ ELSE779:
     throw
 }
 
-} // end of class L_759
+} // end of class L_767
 

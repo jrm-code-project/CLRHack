@@ -14,13 +14,13 @@
     .field public static object 'TEST_REST'
     .field public static object 'TEST_OPTIONAL'
     .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_D2639'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_C2637'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_B2635'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ALLOW_OTHER_KEYS2622'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S2620'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_Z2619'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_Y2617'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_D2706'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_C2704'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_B2702'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ALLOW_OTHER_KEYS2689'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S2687'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_Z2686'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_Y2684'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -42,31 +42,31 @@
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "D"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_D2639'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_D2706'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "C"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_C2637'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_C2704'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "B"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_B2635'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_B2702'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "ALLOW-OTHER-KEYS"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2622'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2689'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2620'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2687'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "Z"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2619'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2686'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "Y"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2617'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2684'
     ret
 }
 
@@ -247,7 +247,7 @@
     pop
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2635'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2702'
     ldc.i4 2
     box int32
     call object Program::'TEST_KEY'(object, object, object)
@@ -258,10 +258,10 @@
     pop
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C2637'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C2704'
     ldc.i4 3
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2635'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2702'
     ldc.i4 4
     box int32
     call object Program::'TEST_KEY'(object, object, object, object, object)
@@ -272,7 +272,7 @@
     pop
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D2639'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D2706'
     ldc.i4 40
     box int32
     call object Program::'TEST_KEY'(object, object, object)
@@ -281,7 +281,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_2560:
+BLOCK_END_MAIN_2627:
     nop
     ldnull
     ret
@@ -395,79 +395,79 @@ BLOCK_END_MAIN_2560:
 .method private static hidebysig object 'TEST_KEY_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object VAL_TEMP2633, object KEY_TEMP2632, object REST_TEMP2631, object D_P2554, object D2553, object C2552, object B2551)
+    .locals init (object VAL_TEMP2700, object KEY_TEMP2699, object REST_TEMP2698, object D_P2621, object D2620, object C2619, object B2618)
     ldnull
-    stloc B2551
+    stloc B2618
     ldc.i4 10
     box int32
-    stloc C2552
+    stloc C2619
     ldc.i4 20
     box int32
-    stloc D2553
+    stloc D2620
     ldnull
-    stloc D_P2554
+    stloc D_P2621
     ldarg 1
-    stloc REST_TEMP2631
-KEY_LOOP2629:
+    stloc REST_TEMP2698
+KEY_LOOP2696:
     nop
-    ldloc REST_TEMP2631
+    ldloc REST_TEMP2698
     ldnull
     ceq
-    brtrue KEY_DONE2630
-    ldloc REST_TEMP2631
+    brtrue KEY_DONE2697
+    ldloc REST_TEMP2698
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc KEY_TEMP2632
-    ldloc REST_TEMP2631
+    stloc KEY_TEMP2699
+    ldloc REST_TEMP2698
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc VAL_TEMP2633
-    ldloc REST_TEMP2631
+    stloc VAL_TEMP2700
+    ldloc REST_TEMP2698
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc REST_TEMP2631
-    ldloc KEY_TEMP2632
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2635'
+    stloc REST_TEMP2698
+    ldloc KEY_TEMP2699
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_B2702'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2634
-    ldloc VAL_TEMP2633
-    stloc B2551
-    br KEY_LOOP2629
-NEXT_KW2634:
+    brfalse NEXT_KW2701
+    ldloc VAL_TEMP2700
+    stloc B2618
+    br KEY_LOOP2696
+NEXT_KW2701:
     nop
-    ldloc KEY_TEMP2632
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C2637'
+    ldloc KEY_TEMP2699
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_C2704'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2636
-    ldloc VAL_TEMP2633
-    stloc C2552
-    br KEY_LOOP2629
-NEXT_KW2636:
+    brfalse NEXT_KW2703
+    ldloc VAL_TEMP2700
+    stloc C2619
+    br KEY_LOOP2696
+NEXT_KW2703:
     nop
-    ldloc KEY_TEMP2632
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D2639'
+    ldloc KEY_TEMP2699
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_D2706'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2638
-    ldloc VAL_TEMP2633
-    stloc D2553
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2620'
-    stloc D_P2554
-    br KEY_LOOP2629
-NEXT_KW2638:
+    brfalse NEXT_KW2705
+    ldloc VAL_TEMP2700
+    stloc D2620
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2687'
+    stloc D_P2621
+    br KEY_LOOP2696
+NEXT_KW2705:
     nop
-    ldloc KEY_TEMP2632
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2622'
+    ldloc KEY_TEMP2699
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2689'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse ALLOW_OK2640
-    br KEY_LOOP2629
-ALLOW_OK2640:
+    brfalse ALLOW_OK2707
+    br KEY_LOOP2696
+ALLOW_OK2707:
     nop
-    br KEY_LOOP2629
-KEY_DONE2630:
+    br KEY_LOOP2696
+KEY_DONE2697:
     nop
     ldstr "test-key"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -477,23 +477,23 @@ KEY_DONE2630:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B2551
+    ldloc B2618
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc C2552
+    ldloc C2619
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc D2553
+    ldloc D2620
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc D_P2554
+    ldloc D_P2621
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_KEY_2556:
+BLOCK_END_TEST_KEY_2623:
     nop
     ldnull
     ret
@@ -643,14 +643,14 @@ BLOCK_END_TEST_KEY_2556:
     .maxstack 8
     ldarg 1
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2627
+    bne.un SUP2694
     ldc.i4 10
     box int32
     starg 1
-    br DONE2628
-SUP2627:
+    br DONE2695
+SUP2694:
     nop
-DONE2628:
+DONE2695:
     nop
     ldstr "test-mixed"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -668,7 +668,7 @@ DONE2628:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_MIXED_2546:
+BLOCK_END_TEST_MIXED_2613:
     nop
     ldnull
     ret
@@ -834,7 +834,7 @@ BLOCK_END_TEST_MIXED_2546:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_REST_2539:
+BLOCK_END_TEST_REST_2606:
     nop
     ldnull
     ret
@@ -935,27 +935,27 @@ BLOCK_END_TEST_REST_2539:
     .maxstack 8
     ldarg 1
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2623
+    bne.un SUP2690
     ldstr "default-b"
     starg 1
-    br DONE2624
-SUP2623:
+    br DONE2691
+SUP2690:
     nop
-DONE2624:
+DONE2691:
     nop
     ldarg 2
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2625
+    bne.un SUP2692
     ldstr "default-c"
     starg 2
     ldnull
     starg 3
-    br DONE2626
-SUP2625:
+    br DONE2693
+SUP2692:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2620'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2687'
     starg 3
-DONE2626:
+DONE2693:
     nop
     ldstr "test-optional"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -977,7 +977,7 @@ DONE2626:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_OPTIONAL_2533:
+BLOCK_END_TEST_OPTIONAL_2600:
     nop
     ldnull
     ret
@@ -987,20 +987,20 @@ BLOCK_END_TEST_OPTIONAL_2533:
 {
     .entrypoint
     .maxstack 8
-    .locals init (object F2574, object F2567)
+    .locals init (object F2641, object F2634)
     call object Program::'MAIN'()
     pop
     ldstr "--- lambda test ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_2575::'.ctor'()
-    stloc F2567
+    newobj instance void L_2642::'.ctor'()
+    stloc F2634
     ldstr "lambda 1"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2567
+    ldloc F2634
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1010,7 +1010,7 @@ BLOCK_END_TEST_OPTIONAL_2533:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2567
+    ldloc F2634
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1022,7 +1022,7 @@ BLOCK_END_TEST_OPTIONAL_2533:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2567
+    ldloc F2634
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1038,13 +1038,13 @@ BLOCK_END_TEST_OPTIONAL_2533:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_2576::'.ctor'()
-    stloc F2574
+    newobj instance void L_2643::'.ctor'()
+    stloc F2641
     ldstr "lambda-key 1"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2574
+    ldloc F2641
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
@@ -1054,11 +1054,11 @@ BLOCK_END_TEST_OPTIONAL_2533:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2574
+    ldloc F2641
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2617'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2684'
     ldc.i4 2
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object)
@@ -1067,14 +1067,14 @@ BLOCK_END_TEST_OPTIONAL_2533:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2574
+    ldloc F2641
     castclass [LispBase]Lisp.Closure
     ldc.i4 1
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2619'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2686'
     ldc.i4 3
     box int32
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2617'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2684'
     ldc.i4 4
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object, object, object)
@@ -1084,7 +1084,7 @@ BLOCK_END_TEST_OPTIONAL_2533:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_2575
+.class public auto ansi beforefieldinit L_2642
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1100,13 +1100,13 @@ BLOCK_END_TEST_OPTIONAL_2533:
     .maxstack 8
     ldarg 2
     ldsfld object [LispBase]Lisp.Undefined::Value
-    bne.un SUP2609
+    bne.un SUP2676
     ldstr "default-y"
     starg 2
-    br DONE2610
-SUP2609:
+    br DONE2677
+SUP2676:
     nop
-DONE2610:
+DONE2677:
     nop
     ldstr "lambda"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -1145,7 +1145,7 @@ DONE2610:
     ldsfld object [LispBase]Lisp.Undefined::Value
     ldnull
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1157,7 +1157,7 @@ DONE2610:
     ldarg 2
     ldnull
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1171,7 +1171,7 @@ DONE2610:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1187,7 +1187,7 @@ DONE2610:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1205,7 +1205,7 @@ DONE2610:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1225,7 +1225,7 @@ DONE2610:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1247,7 +1247,7 @@ DONE2610:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
@@ -1271,13 +1271,13 @@ DONE2610:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2575::'InvokeBody'(object, object, object)
+    callvirt instance object L_2642::'InvokeBody'(object, object, object)
     ret
 }
 
-} // end of class L_2575
+} // end of class L_2642
 
-.class public auto ansi beforefieldinit L_2576
+.class public auto ansi beforefieldinit L_2643
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1291,68 +1291,68 @@ DONE2610:
 .method private hidebysig object 'InvokeBody'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object VAL_TEMP2615, object KEY_TEMP2614, object REST_TEMP2613, object Z_P2572, object Z2571, object Y2570)
+    .locals init (object VAL_TEMP2682, object KEY_TEMP2681, object REST_TEMP2680, object Z_P2639, object Z2638, object Y2637)
     ldc.i4 100
     box int32
-    stloc Y2570
+    stloc Y2637
     ldc.i4 200
     box int32
-    stloc Z2571
+    stloc Z2638
     ldnull
-    stloc Z_P2572
+    stloc Z_P2639
     ldarg 2
-    stloc REST_TEMP2613
-KEY_LOOP2611:
+    stloc REST_TEMP2680
+KEY_LOOP2678:
     nop
-    ldloc REST_TEMP2613
+    ldloc REST_TEMP2680
     ldnull
     ceq
-    brtrue KEY_DONE2612
-    ldloc REST_TEMP2613
+    brtrue KEY_DONE2679
+    ldloc REST_TEMP2680
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc KEY_TEMP2614
-    ldloc REST_TEMP2613
+    stloc KEY_TEMP2681
+    ldloc REST_TEMP2680
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc VAL_TEMP2615
-    ldloc REST_TEMP2613
+    stloc VAL_TEMP2682
+    ldloc REST_TEMP2680
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc REST_TEMP2613
-    ldloc KEY_TEMP2614
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2617'
+    stloc REST_TEMP2680
+    ldloc KEY_TEMP2681
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Y2684'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2616
-    ldloc VAL_TEMP2615
-    stloc Y2570
-    br KEY_LOOP2611
-NEXT_KW2616:
+    brfalse NEXT_KW2683
+    ldloc VAL_TEMP2682
+    stloc Y2637
+    br KEY_LOOP2678
+NEXT_KW2683:
     nop
-    ldloc KEY_TEMP2614
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2619'
+    ldloc KEY_TEMP2681
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_Z2686'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse NEXT_KW2618
-    ldloc VAL_TEMP2615
-    stloc Z2571
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2620'
-    stloc Z_P2572
-    br KEY_LOOP2611
-NEXT_KW2618:
+    brfalse NEXT_KW2685
+    ldloc VAL_TEMP2682
+    stloc Z2638
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2687'
+    stloc Z_P2639
+    br KEY_LOOP2678
+NEXT_KW2685:
     nop
-    ldloc KEY_TEMP2614
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2622'
+    ldloc KEY_TEMP2681
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ALLOW_OTHER_KEYS2689'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse ALLOW_OK2621
-    br KEY_LOOP2611
-ALLOW_OK2621:
+    brfalse ALLOW_OK2688
+    br KEY_LOOP2678
+ALLOW_OK2688:
     nop
-    br KEY_LOOP2611
-KEY_DONE2612:
+    br KEY_LOOP2678
+KEY_DONE2679:
     nop
     ldstr "lambda-key"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -1362,15 +1362,15 @@ KEY_DONE2612:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc Y2570
+    ldloc Y2637
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc Z2571
+    ldloc Z2638
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc Z_P2572
+    ldloc Z_P2639
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
@@ -1394,7 +1394,7 @@ KEY_DONE2612:
     ldarg 1
     ldnull
     tail.
-    callvirt instance object L_2576::'InvokeBody'(object, object)
+    callvirt instance object L_2643::'InvokeBody'(object, object)
     ret
 }
 
@@ -1417,7 +1417,7 @@ KEY_DONE2612:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2576::'InvokeBody'(object, object)
+    callvirt instance object L_2643::'InvokeBody'(object, object)
     ret
 }
 
@@ -1444,7 +1444,7 @@ KEY_DONE2612:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2576::'InvokeBody'(object, object)
+    callvirt instance object L_2643::'InvokeBody'(object, object)
     ret
 }
 
@@ -1475,7 +1475,7 @@ KEY_DONE2612:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_2576::'InvokeBody'(object, object)
+    callvirt instance object L_2643::'InvokeBody'(object, object)
     ret
 }
 
@@ -1487,5 +1487,5 @@ KEY_DONE2612:
     throw
 }
 
-} // end of class L_2576
+} // end of class L_2643
 

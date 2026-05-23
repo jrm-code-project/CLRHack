@@ -309,6 +309,12 @@
     (mapc #'generate-step1 operands)
     (list (il:call :method "InvokeRestartInteractively" :class "[LispBase]Lisp.RestartControl" :return "object" :args '("object")))))
 
+(register-primitive-step1 "APPLY"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (list (il:call :method "Apply" :class "[LispBase]Lisp.Closure" :return "object" :args '("object" "object")))))
+
 (register-primitive-step1 "%SET-CELL-VALUE!"
   (lambda (node operands)
     (declare (ignore node))
@@ -621,37 +627,23 @@
   (setf (ast-basic-block node) nil))
 
 (defun block-needs-result-temp-p (node)
-  (let ((target-label (ast-block-end-label node)))
+  (let ((target-label (ast-block-end-label node))
+        (found nil))
     (labels ((scan (n)
+               (when found (return-from scan))
                (typecase n
                  (ast-return-from 
                   (if (string-equal (ast-return-from-target-label n) target-label)
-                      t
+                      (setf found t)
                       (scan (ast-return-from-value n))))
-                 (ast-if (or (scan (ast-if-test n)) (scan (ast-if-consequent n)) (scan (ast-if-alternate n))))
-                 (ast-progn (some #'scan (ast-progn-forms n)))
-                 (ast-let (or (some (lambda (b) (scan (cadr b))) (ast-let-bindings n))
-                              (some #'scan (ast-let-body n))))
-                 (ast-setq (scan (ast-setq-value n)))
-                 (ast-application (or (scan (ast-application-operator n))
-                                      (some #'scan (ast-application-operands n))))
-                 (ast-clr-call (some #'scan (ast-clr-call-arguments n)))
-                 (ast-clr-call-virt (or (scan (ast-clr-call-virt-instance n))
-                                        (some #'scan (ast-clr-call-virt-arguments n))))
-                 (ast-clr-new (some #'scan (ast-clr-new-arguments n)))
-                 (ast-clr-field (when (ast-clr-field-instance n) (scan (ast-clr-field-instance n))))
-                 (ast-tagbody (some #'scan (ast-tagbody-statements n)))
-                 (ast-unwind-protect (or (scan (ast-unwind-protect-protected-form n))
-                                         (some #'scan (ast-unwind-protect-cleanup-forms n))))
-                 (ast-catch (or (scan (ast-catch-tag n))
-                                (some #'scan (ast-catch-body n))))
-                 (ast-throw (or (scan (ast-throw-tag n))
-                                (scan (ast-throw-value n))))
-                 (ast-block (some #'scan (ast-block-body n)))
-                 (t nil))))
-      (some #'scan (ast-block-body node)))))
+                 (t (map-ast-children #'scan n)))))
+      (mapc #'scan (ast-block-body node))
+      found)))
 
 (defmethod generate-step1 ((node ast-block))
+  (let ((needs-temp (block-needs-result-temp-p node)))
+    (when needs-temp
+      (register-local (ast-block-result-temp node))))
   (mapc #'generate-step1 (ast-block-body node))
   (setf (ast-basic-block node) nil))
 

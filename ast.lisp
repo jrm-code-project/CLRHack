@@ -327,6 +327,53 @@
   (register-macro 'second (lambda (x) `(cadr ,x)))
   (register-macro 'third (lambda (x) `(caddr ,x)))
   (register-macro 'fourth (lambda (x) `(cadddr ,x)))
+
+  (register-macro 'restart-case
+    (lambda (expression &rest clauses)
+      (let* ((exit-tag (gensym "EXIT"))
+             (args-var (gensym "ARGS"))
+             (id-var (gensym "ID"))
+             (tag-var (gensym "TAG"))
+             (clause-ids (mapcar (lambda (c) (gensym (symbol-name (car c)))) clauses)))
+        `(block ,exit-tag
+           (let ((,tag-var (list nil))
+                 (,args-var nil)
+                 (,id-var nil))
+             (catch ,tag-var
+               (restart-bind
+                   ,(loop for clause in clauses
+                          for id in clause-ids
+                          collect (let ((name (car clause))
+                                        (report nil)
+                                        (interactive nil)
+                                        (test nil)
+                                        (curr (cddr clause)))
+                                    (loop while (and curr (keywordp (car curr)))
+                                          do (case (car curr)
+                                               (:report (setf report (second curr) curr (cddr curr)))
+                                               (:interactive (setf interactive (second curr) curr (cddr curr)))
+                                               (:test (setf test (second curr) curr (cddr curr)))
+                                               (t (return))))
+                                    `(,name (lambda (&rest args)
+                                              (setq ,args-var args)
+                                              (setq ,id-var ',id)
+                                              (throw ,tag-var nil))
+                                            ,@(when report `(:report-function ,(if (stringp report) `(lambda (s) (print ,report)) report)))
+                                            ,@(when interactive `(:interactive-function ,interactive))
+                                            ,@(when test `(:test-function ,test)))))
+                 (return-from ,exit-tag ,expression)))
+             (cond
+               ,@(loop for clause in clauses
+                       for id in clause-ids
+                       collect (let ((lambda-list (second clause))
+                                     (forms nil)
+                                     (curr (cddr clause)))
+                                 (loop while (and curr (keywordp (car curr)))
+                                       do (setf curr (cddr curr)))
+                                 (setf forms curr)
+                                 `((eq ,id-var ',id)
+                                   (apply (lambda ,lambda-list ,@forms) ,args-var))))))))))
+
   (register-macro 'dolist
     (lambda (spec &rest body)
       (let ((var (car spec))
@@ -1706,7 +1753,16 @@
                (ast-multiple-value-prog1
                 (append (traverse (ast-multiple-value-prog1-first-form n) curr-env)
                         (reduce #'append (mapcar (lambda (form) (traverse form curr-env)) 
-                                                 (ast-multiple-value-prog1-other-forms n))))))))
+                                                 (ast-multiple-value-prog1-other-forms n)))))
+               (ast-restart-bind
+                (append (reduce #'append (mapcar (lambda (b)
+                                                   (append (traverse (second b) curr-env)
+                                                           (traverse (third b) curr-env)
+                                                           (traverse (fourth b) curr-env)
+                                                           (traverse (fifth b) curr-env)))
+                                                 (ast-restart-bind-bindings n)))
+                        (reduce #'append (mapcar (lambda (form) (traverse form curr-env))
+                                                 (ast-restart-bind-body n))))))))
     (remove-duplicates (traverse node env))))
 
 

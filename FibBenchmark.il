@@ -12,7 +12,7 @@
     .field public static object 'FIB'
     .field public static object 'TEMP_B'
     .field public static object '_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S702'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S710'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -30,7 +30,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S702'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S710'
     ret
 }
 
@@ -127,7 +127,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_694:
+BLOCK_END_MAIN_702:
     nop
     ldnull
     ret
@@ -225,20 +225,20 @@ BLOCK_END_MAIN_694:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE700
+    brtrue TRUE708
     ldnull
-    br END701
-TRUE700:
+    br END709
+TRUE708:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S702'
-END701:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S710'
+END709:
     nop
     ldnull
     ceq
-    brtrue ELSE703
+    brtrue ELSE711
     ldarg 0
     ret
-ELSE703:
+ELSE711:
     nop
     ldarg 0
     ldc.i4 1
@@ -267,7 +267,7 @@ ELSE703:
     add
     box int32
     ret
-BLOCK_END_FIB_690:
+BLOCK_END_FIB_698:
     nop
     ldnull
     ret
