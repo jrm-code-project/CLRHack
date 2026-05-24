@@ -215,7 +215,8 @@
   (:documentation "A dynamic THROW jump."))
 
 (defclass ast-values (ast-node)
-  ((values :initarg :values :accessor ast-values-values))
+  ((values :initarg :values :accessor ast-values-values)
+   (temps  :initarg :temps  :initform nil :accessor ast-values-temps))
   (:documentation "A VALUES form for multiple return values."))
 
 (defclass ast-multiple-value-bind (ast-node)
@@ -387,7 +388,13 @@
                                  `((eq ,id-var ',id)
                                    (apply (lambda ,lambda-list ,@forms) ,args-var))))))))))
 
+  (register-macro 'break
+    (lambda (&optional format-string &rest args)
+      (if format-string
+          `(progn (print ,format-string) (print (list ,@args)) (%break))
+          `(%break))))
   (register-macro 'handler-case
+
     (lambda (expression &rest clauses)
       (let* ((exit-tag (gensym "EXIT"))
              (condition-var (gensym "CONDITION"))
@@ -957,7 +964,8 @@
 
 (defmethod closure-convert ((node ast-values))
   (make-instance 'ast-values
-                 :values (mapcar #'closure-convert (ast-values-values node))))
+                 :values (mapcar #'closure-convert (ast-values-values node))
+                 :temps (ast-values-temps node)))
 
 (defmethod closure-convert ((node ast-multiple-value-bind))
   (make-instance 'ast-multiple-value-bind
@@ -1198,7 +1206,8 @@
 
 (defmethod lambda-lift ((node ast-values))
   (make-instance 'ast-values
-                 :values (mapcar #'lambda-lift (ast-values-values node))))
+                 :values (mapcar #'lambda-lift (ast-values-values node))
+                 :temps (ast-values-temps node)))
 
 (defmethod lambda-lift ((node ast-multiple-value-bind))
   (make-instance 'ast-multiple-value-bind

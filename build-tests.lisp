@@ -6,6 +6,7 @@
 (ql:quickload "fold")
 (ql:quickload "named-let")
 (ql:quickload "function")
+(ql:quickload "fiveam")
 
 (require :asdf)
 (push (truename ".") asdf:*central-registry*)
@@ -36,6 +37,7 @@
                ("test-macro.lisp" . "MacroTest")
                ("test-mutability.lisp" . "MutabilityTest")
                ("Tests/test-mv.lisp" . "MultipleValuesTest")
+               ("Tests/test-mrv-corruption.lisp" . "ValuesCorruptionTest")
                ("Tests/test-nboyer.lisp" . "NBoyerBenchmark")
                ("Tests/test-restart.lisp" . "RestartTest")
                ("Tests/test-restarts.lisp" . "RestartsTest")

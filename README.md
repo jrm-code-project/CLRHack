@@ -77,6 +77,14 @@ You need the .NET 8.0 SDK and the Microsoft IL Assembler (`ilasm`) to build the 
     dotnet test CLRHack.sln
     ```
 
+    To run the generated standalone binaries, use:
+    ```bash
+    ./run-standalone-tests.sh
+    ```
+    The standalone suite reports `ConditionsTest` and `DebuggerTest` as expected
+    code 134 exits because those binaries intentionally exercise unhandled
+    exception paths.
+
 ## License
 
 This project is licensed under the MIT License.

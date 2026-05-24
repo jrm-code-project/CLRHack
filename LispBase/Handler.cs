@@ -92,6 +92,11 @@ namespace Lisp
 
         public static void EnterDebugger(object condition)
         {
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                System.Diagnostics.Debugger.Break();
+            }
+
             Console.WriteLine($"\n--- Debugger ---");
             Console.WriteLine($"Condition: {condition}");
             
@@ -102,6 +107,7 @@ namespace Lisp
                 object current = restarts;
                 int i = 0;
                 Console.WriteLine("\nAvailable restarts:");
+                Console.WriteLine("s: [SYSTEM-DEBUGGER] Launch or attach the system-level debugger");
                 while (current is List.ListCell cell)
                 {
                     if (cell.first is Restart r)
@@ -127,9 +133,15 @@ namespace Lisp
                     return;
                 }
 
-                Console.Write("\nSelect a restart (0-{0}, or 'q' to abort): ", restartList.Count - 1);
+                Console.Write("\nSelect a restart (0-{0}, or 'q' to abort, 's' for system debugger): ", restartList.Count - 1);
                 string input = Console.ReadLine();
                 if (input == "q") return;
+                if (input == "s")
+                {
+                    System.Diagnostics.Debugger.Launch();
+                    System.Diagnostics.Debugger.Break();
+                    continue;
+                }
 
                 if (int.TryParse(input, out int choice) && choice >= 0 && choice < restartList.Count)
                 {

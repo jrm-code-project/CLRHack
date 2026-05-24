@@ -26,7 +26,7 @@
  '("%WRITE-LINE" "%WRITE-OBJECT" "%WRITE-INT" "PRINT" "%SUB" "-" "%MUL" "*" "%DIV" "/" "%ADD" "+" "=" "1+" "1-"
    "%LESSP" "<" "%NOT" "NOT" "%CONS" "CONS" "LIST" "%CAR" "CAR" "%CDR" "CDR" "%EQ" "EQ" "%NULL" "NULL"
    "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!" "%GET-ACTIVE-RESTARTS" "%GET-ACTIVE-HANDLERS"
-   "FIND-RESTART" "INVOKE-RESTART" "INVOKE-RESTART-INTERACTIVELY" "APPLY" "SIGNAL" "ERROR")
+   "FIND-RESTART" "INVOKE-RESTART" "INVOKE-RESTART-INTERACTIVELY" "APPLY" "SIGNAL" "ERROR" "%BREAK")
  #'standard-step2-handler)
 
 (register-primitive-step2 "%INTERN"
@@ -466,6 +466,7 @@
 
 (defmethod generate-step2 ((node ast-values) &optional tail-p)
   (let* ((values (ast-values-values node))
+         (temps (ast-values-temps node))
          (n (length values))
          (code nil))
     (cond
@@ -476,12 +477,18 @@
       ((= n 1)
        (setf code (generate-step2 (first values) nil)))
       (t
-       ;; Put primary value on stack, store others in Value1, Value2...
+       ;; 1. Evaluate all forms and store in temps (except the primary one)
        (setf code (generate-step2 (first values) nil))
-       (loop for i from 1 below (min n 64)
-             for v in (rest values)
+       (loop for v in (rest values)
+             for temp in temps
              do (setf code (append code (generate-step2 v nil)))
-                (setf code (append code (list (il:stsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))))))
+                (setf code (append code (list (il:stloc temp)))))
+       ;; 2. Move from temps to global ValueN fields
+       (loop for i from 1 below (min n 64)
+             for temp in temps
+             do (setf code (append code (list (il:ldloc temp)
+                                              (il:stsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))))))
+       ;; 3. Set ReturnCount
        (setf code (append code (list (il:ldc.i4 n)
                                      (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount"))))))
     (if tail-p (append code (list (il:ret))) code)))
@@ -1037,11 +1044,13 @@
                                 ((or too-few too-many)
                                  (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
                                        (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                       (il:tail.)
                                        (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
                                        (il:ret)))
                                 ((and has-keys (oddp n-extra))
                                  (list (il:ldstr "Odd number of keyword arguments")
                                        (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
+                                       (il:tail.)
                                        (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
                                        (il:ret)))
 
@@ -1119,11 +1128,13 @@
                                   ((or too-few too-many)
                                    (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
                                          (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                         (il:tail.)
                                          (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
                                          (il:ret)))
                                   ((and has-keys (oddp n-extra))
                                    (list (il:ldstr "Odd number of keyword arguments")
                                          (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
+                                         (il:tail.)
                                          (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
                                          (il:ret)))
 

@@ -332,6 +332,12 @@
     (mapc #'generate-step1 operands)
     (list (il:call :method "Apply" :class "[LispBase]Lisp.Closure" :return "object" :args '("object" "object")))))
 
+(register-primitive-step1 "%BREAK"
+  (lambda (node operands)
+    (declare (ignore node operands))
+    (list (il:call :method "Break" :class "[mscorlib]System.Diagnostics.Debugger" :return "void" :args nil)
+          (il:ldnull))))
+
 (register-primitive-step1 "%SET-CELL-VALUE!"
   (lambda (node operands)
     (declare (ignore node))
@@ -669,8 +675,14 @@
   (setf (ast-basic-block node) nil))
 
 (defmethod generate-step1 ((node ast-values))
-  (mapc #'generate-step1 (ast-values-values node))
-  (setf (ast-basic-block node) nil))
+  (let* ((values (ast-values-values node))
+         (n (length values)))
+    (when (> n 1)
+      (setf (ast-values-temps node)
+            (loop for i from 1 below (min n 64)
+                  collect (register-local (gensym (format nil "VALUES_TEMP_~D" i))))))
+    (mapc #'generate-step1 values)
+    (setf (ast-basic-block node) nil)))
 
 (defmethod generate-step1 ((node ast-multiple-value-bind))
   (dolist (v (ast-multiple-value-bind-vars node))
@@ -726,7 +738,6 @@
 (defmethod generate-step1 ((node ast-application))
   (let ((operator (ast-application-operator node))
         (operands (ast-application-operands node)))
-    (generate-step1 operator)
     (if (and (typep operator 'ast-global-variable)
              (eq (ast-variable-name operator) '.ctor))
         (progn
