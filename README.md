@@ -35,6 +35,12 @@ The project encompasses a C# implementation representing the runtime and tooling
 ### Lisp Components
 - Files such as `data.lisp`, `s-code.lisp`, and `write-symbols.lisp` act as part of the meta-compilation and semantic archeology suite, representing the "Lisp Orchestrator" that feeds into the assembly process.
 
+## MOP Transition Note
+
+CLRHack is adopting a CLOS Metaobject Protocol roadmap. As part of that migration, `defclass` and `defmethod` are reserved for CLOS/MOP semantics. Direct CLR type and method emission will be kept available through explicit CLR-oriented forms during the transition.
+
+The explicit forms are `clr-defclass` and `clr-defmethod` for direct CLR emission workflows.
+
 ## Building and Running
 
 You need the .NET 8.0 SDK and the Microsoft IL Assembler (`ilasm`) to build the project successfully.

@@ -332,6 +332,18 @@
     (mapc #'generate-step1 operands)
     (list (il:call :method "Apply" :class "[LispBase]Lisp.Closure" :return "object" :args '("object" "object")))))
 
+(register-primitive-step1 "SLOT-VALUE"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (list (il:call :method "SlotValueFromLisp" :class "[LispBase]Lisp.MopRuntime" :return "object" :args '("object" "object")))))
+
+(register-primitive-step1 "SET-SLOT-VALUE"
+  (lambda (node operands)
+    (declare (ignore node))
+    (mapc #'generate-step1 operands)
+    (list (il:call :method "SetSlotValueFromLisp" :class "[LispBase]Lisp.MopRuntime" :return "object" :args '("object" "object" "object")))))
+
 (register-primitive-step1 "%BREAK"
   (lambda (node operands)
     (declare (ignore node operands))

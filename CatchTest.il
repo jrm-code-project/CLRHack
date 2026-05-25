@@ -7,59 +7,35 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'MAIN'
-    .field public static object 'TEST_CATCH_NON_LOCAL'
-    .field public static object 'TEST_CATCH_MISMATCH'
-    .field public static object 'TEST_CATCH_NESTED'
-    .field public static object 'TEST_CATCH_BASIC'
-    .field public static object 'NON_LOCAL_THROW_HELPER'
-    .field public static object '_INTERN'
-    .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S480'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S471'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S464'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S461'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S456'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S928'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S919'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S912'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S909'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S904'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
-    ldnull
-    stsfld object Program::'MAIN'
-    ldnull
-    stsfld object Program::'TEST_CATCH_NON_LOCAL'
-    ldnull
-    stsfld object Program::'TEST_CATCH_MISMATCH'
-    ldnull
-    stsfld object Program::'TEST_CATCH_NESTED'
-    ldnull
-    stsfld object Program::'TEST_CATCH_BASIC'
-    ldnull
-    stsfld object Program::'NON_LOCAL_THROW_HELPER'
-    ldnull
-    stsfld object Program::'_INTERN'
-    ldnull
-    stsfld object Program::'PRINT'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "MY-TAG"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S480'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S928'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "BAR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S471'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S919'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "INNER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S464'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S912'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "OUTER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S461'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S909'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "FOO"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S456'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S904'
     ret
 }
 
@@ -69,6 +45,7 @@
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -79,6 +56,7 @@
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -89,6 +67,7 @@
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -99,6 +78,7 @@
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -109,6 +89,7 @@
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -119,6 +100,7 @@
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -129,6 +111,7 @@
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -139,6 +122,7 @@
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -162,7 +146,7 @@
     pop
     tail. call object Program::'TEST_CATCH_NON_LOCAL'()
     ret
-BLOCK_END_MAIN_422:
+BLOCK_END_MAIN_870:
     nop
     ldnull
     ret
@@ -174,6 +158,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -184,6 +169,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -194,6 +180,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -204,6 +191,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -214,6 +202,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -224,6 +213,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -234,6 +224,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -244,6 +235,7 @@ BLOCK_END_MAIN_422:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -259,50 +251,50 @@ BLOCK_END_MAIN_422:
 .method private static hidebysig object 'TEST_CATCH_NON_LOCAL_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RES419, object CATCH_RESULT479, object CATCH_TAG478)
+    .locals init (object RES866, object CATCH_RESULT927, object CATCH_TAG926)
     ldstr "Testing truly non-local throw..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S480'
-    stloc CATCH_TAG478
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S928'
+    stloc CATCH_TAG926
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S480'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S928'
     ldstr "final result"
     call object Program::'NON_LOCAL_THROW_HELPER'(object, object)
-    stloc CATCH_RESULT479
-    leave CATCH_DONE481
+    stloc CATCH_RESULT927
+    leave CATCH_DONE929
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG478
+    ldloc CATCH_TAG926
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW482
+    brfalse CATCH_RETHROW930
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT479
-    leave CATCH_DONE481
-CATCH_RETHROW482:
+    stloc CATCH_RESULT927
+    leave CATCH_DONE929
+CATCH_RETHROW930:
     pop
     rethrow
     }
-CATCH_DONE481:
-    ldloc CATCH_RESULT479
-    stloc RES419
+CATCH_DONE929:
+    ldloc CATCH_RESULT927
+    stloc RES866
     ldstr "Result of non-local throw:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RES419
+    ldloc RES866
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_NON_LOCAL_417:
+BLOCK_END_TEST_CATCH_NON_LOCAL_864:
     nop
     ldnull
     ret
@@ -314,6 +306,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -324,6 +317,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -334,6 +328,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -344,6 +339,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -354,6 +350,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -364,6 +361,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -384,6 +382,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -394,6 +393,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     ldc.i4 2
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -410,7 +410,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_417:
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
     throw
-BLOCK_END_NON_LOCAL_THROW_HELPER_413:
+BLOCK_END_NON_LOCAL_THROW_HELPER_859:
     nop
     ldnull
     ret
@@ -422,6 +422,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -432,6 +433,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -442,6 +444,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -452,6 +455,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -462,6 +466,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -472,6 +477,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -482,6 +488,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -492,6 +499,7 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -507,24 +515,24 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
 .method private static hidebysig object 'TEST_CATCH_MISMATCH_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT473, object CATCH_TAG472, object CATCH_RESULT470, object CATCH_TAG469)
+    .locals init (object CATCH_RESULT921, object CATCH_TAG920, object CATCH_RESULT918, object CATCH_TAG917)
     ldstr "Testing catch mismatch..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S471'
-    stloc CATCH_TAG469
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S919'
+    stloc CATCH_TAG917
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S456'
-    stloc CATCH_TAG472
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S904'
+    stloc CATCH_TAG920
     .try
     {
     ldstr "Throwing to bar from inner foo"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S471'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S919'
     ldstr "reached bar"
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -533,52 +541,52 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_413:
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT473
-    leave CATCH_DONE476
+    stloc CATCH_RESULT921
+    leave CATCH_DONE924
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG472
+    ldloc CATCH_TAG920
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW477
+    brfalse CATCH_RETHROW925
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT473
-    leave CATCH_DONE476
-CATCH_RETHROW477:
+    stloc CATCH_RESULT921
+    leave CATCH_DONE924
+CATCH_RETHROW925:
     pop
     rethrow
     }
-CATCH_DONE476:
-    ldloc CATCH_RESULT473
-    stloc CATCH_RESULT470
-    leave CATCH_DONE474
+CATCH_DONE924:
+    ldloc CATCH_RESULT921
+    stloc CATCH_RESULT918
+    leave CATCH_DONE922
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG469
+    ldloc CATCH_TAG917
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW475
+    brfalse CATCH_RETHROW923
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT470
-    leave CATCH_DONE474
-CATCH_RETHROW475:
+    stloc CATCH_RESULT918
+    leave CATCH_DONE922
+CATCH_RETHROW923:
     pop
     rethrow
     }
-CATCH_DONE474:
-    ldloc CATCH_RESULT470
+CATCH_DONE922:
+    ldloc CATCH_RESULT918
     ret
-BLOCK_END_TEST_CATCH_MISMATCH_407:
+BLOCK_END_TEST_CATCH_MISMATCH_852:
     nop
     ldnull
     ret
@@ -590,6 +598,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -600,6 +609,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -610,6 +620,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -620,6 +631,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -630,6 +642,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -640,6 +653,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -650,6 +664,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -660,6 +675,7 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -675,28 +691,28 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
 .method private static hidebysig object 'TEST_CATCH_NESTED_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT463, object CATCH_TAG462, object CATCH_RESULT460, object CATCH_TAG459)
+    .locals init (object CATCH_RESULT911, object CATCH_TAG910, object CATCH_RESULT908, object CATCH_TAG907)
     ldstr "Testing nested catch..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S461'
-    stloc CATCH_TAG459
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S909'
+    stloc CATCH_TAG907
     .try
     {
     ldstr "Outer start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S464'
-    stloc CATCH_TAG462
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S912'
+    stloc CATCH_TAG910
     .try
     {
     ldstr "Inner start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S461'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S909'
     ldstr "thrown to outer"
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -705,60 +721,60 @@ BLOCK_END_TEST_CATCH_MISMATCH_407:
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT463
-    leave CATCH_DONE467
+    stloc CATCH_RESULT911
+    leave CATCH_DONE915
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG462
+    ldloc CATCH_TAG910
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW468
+    brfalse CATCH_RETHROW916
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT463
-    leave CATCH_DONE467
-CATCH_RETHROW468:
+    stloc CATCH_RESULT911
+    leave CATCH_DONE915
+CATCH_RETHROW916:
     pop
     rethrow
     }
-CATCH_DONE467:
-    ldloc CATCH_RESULT463
+CATCH_DONE915:
+    ldloc CATCH_RESULT911
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT460
-    leave CATCH_DONE465
+    stloc CATCH_RESULT908
+    leave CATCH_DONE913
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG459
+    ldloc CATCH_TAG907
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW466
+    brfalse CATCH_RETHROW914
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT460
-    leave CATCH_DONE465
-CATCH_RETHROW466:
+    stloc CATCH_RESULT908
+    leave CATCH_DONE913
+CATCH_RETHROW914:
     pop
     rethrow
     }
-CATCH_DONE465:
-    ldloc CATCH_RESULT460
+CATCH_DONE913:
+    ldloc CATCH_RESULT908
     pop
     ldstr "Back from outer catch"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_NESTED_403:
+BLOCK_END_TEST_CATCH_NESTED_847:
     nop
     ldnull
     ret
@@ -770,6 +786,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -780,6 +797,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -790,6 +808,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -800,6 +819,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -810,6 +830,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -820,6 +841,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -830,6 +852,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -840,6 +863,7 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -855,20 +879,20 @@ BLOCK_END_TEST_CATCH_NESTED_403:
 .method private static hidebysig object 'TEST_CATCH_BASIC_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object VAL400, object CATCH_RESULT455, object CATCH_TAG454)
+    .locals init (object VAL843, object CATCH_RESULT903, object CATCH_TAG902)
     ldstr "Testing catch basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S456'
-    stloc CATCH_TAG454
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S904'
+    stloc CATCH_TAG902
     .try
     {
     ldstr "Inside catch"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S456'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S904'
     ldstr "thrown value"
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -877,38 +901,38 @@ BLOCK_END_TEST_CATCH_NESTED_403:
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT455
-    leave CATCH_DONE457
+    stloc CATCH_RESULT903
+    leave CATCH_DONE905
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG454
+    ldloc CATCH_TAG902
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW458
+    brfalse CATCH_RETHROW906
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT455
-    leave CATCH_DONE457
-CATCH_RETHROW458:
+    stloc CATCH_RESULT903
+    leave CATCH_DONE905
+CATCH_RETHROW906:
     pop
     rethrow
     }
-CATCH_DONE457:
-    ldloc CATCH_RESULT455
-    stloc VAL400
+CATCH_DONE905:
+    ldloc CATCH_RESULT903
+    stloc VAL843
     ldstr "Result (should be thrown value):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc VAL400
+    ldloc VAL843
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_BASIC_398:
+BLOCK_END_TEST_CATCH_BASIC_841:
     nop
     ldnull
     ret
@@ -918,6 +942,7 @@ BLOCK_END_TEST_CATCH_BASIC_398:
 {
     .entrypoint
     .maxstack 8
+    call void [LispBase]Lisp.MopRuntime::'Initialize'()
     call object Program::'MAIN'()
     pop
     ret

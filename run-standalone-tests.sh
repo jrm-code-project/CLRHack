@@ -10,6 +10,7 @@ tests=(
   BankTest
   BlockTest
   CatchTest
+  CallableHardeningTest
   ChurchTest
   ClosureTest
   ComplexScopingTest
@@ -19,6 +20,7 @@ tests=(
   HelloWorld
   InteropTest
   LabelsTest
+  LexicalExitsTest
   LetRecTest
   MacroTest
   MutabilityTest
@@ -26,10 +28,13 @@ tests=(
   ValuesCorruptionTest
   NBoyerBenchmark
   RestartTest
+  RestartBindEdgeCasesTest
   RestartsTest
   HandlerTest
+  HandlerBindEdgeCasesTest
   HandlerCaseTest
   ConditionsTest
+  SignalErrorEdgeCasesTest
   DebuggerTest
   ReflectionTest
   PuzzleBenchmark
@@ -39,6 +44,8 @@ tests=(
   TopLevelTest
   ToplevelArgs
   TriangBenchmark
+  MopCombinationsTest
+  MopBenchmark
   UwpTest
 )
 
@@ -53,10 +60,10 @@ for test in "${tests[@]}"; do
     exit_code=$?
     set -e
 
-    if [[ $exit_code -eq 134 ]]; then
-      echo "ConditionsTest exited with code 134 as expected (intentional .NET exception path)."
+    if [[ $exit_code -eq 0 ]]; then
+      echo "ConditionsTest exited with code 0 as expected."
     else
-      echo "ConditionsTest exited with code ${exit_code} (expected 134)."
+      echo "ConditionsTest exited with code ${exit_code} (expected 0)."
       status=1
     fi
     continue
@@ -68,10 +75,10 @@ for test in "${tests[@]}"; do
     exit_code=$?
     set -e
 
-    if [[ $exit_code -eq 134 ]]; then
-      echo "DebuggerTest exited with code 134 as expected (intentional .NET exception path)."
+    if [[ $exit_code -eq 0 ]]; then
+      echo "DebuggerTest exited with code 0 as expected."
     else
-      echo "DebuggerTest exited with code ${exit_code} (expected 134)."
+      echo "DebuggerTest exited with code ${exit_code} (expected 0)."
       status=1
     fi
     continue

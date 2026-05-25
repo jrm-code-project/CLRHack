@@ -7,82 +7,52 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'MAIN'
-    .field public static object 'PRINT'
-    .field public static object 'MAKE_BANK'
-    .field public static object '_CTOR'
-    .field public static object '_MAKE_CELL'
-    .field public static object 'TOTAL_ACCOUNTS151'
-    .field public static object 'RESERVE150'
+    .field public static object 'TOTAL_ACCOUNTS472'
+    .field public static object 'RESERVE471'
     .field public static object 'TEMP_B'
-    .field public static object '_CELL_VALUE'
-    .field public static object '_'
-    .field public static object 'BALANCE156'
-    .field public static object '_SET_CELL_VALUE_'
-    .field public static object '_INTERN'
-    .field public static object 'EQ'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S219'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S214'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S211'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S202'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S199'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S196'
+    .field public static object 'BALANCE477'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S597'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S592'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S589'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S568'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S565'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S562'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'MAIN'
+    stsfld object Program::'TOTAL_ACCOUNTS472'
     ldnull
-    stsfld object Program::'PRINT'
-    ldnull
-    stsfld object Program::'MAKE_BANK'
-    ldnull
-    stsfld object Program::'_CTOR'
-    ldnull
-    stsfld object Program::'_MAKE_CELL'
-    ldnull
-    stsfld object Program::'TOTAL_ACCOUNTS151'
-    ldnull
-    stsfld object Program::'RESERVE150'
+    stsfld object Program::'RESERVE471'
     ldnull
     stsfld object Program::'TEMP_B'
     ldnull
-    stsfld object Program::'_CELL_VALUE'
-    ldnull
-    stsfld object Program::'_'
-    ldnull
-    stsfld object Program::'BALANCE156'
-    ldnull
-    stsfld object Program::'_SET_CELL_VALUE_'
-    ldnull
-    stsfld object Program::'_INTERN'
-    ldnull
-    stsfld object Program::'EQ'
+    stsfld object Program::'BALANCE477'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "GET-ACCOUNTS"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S219'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S597'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "GET-RESERVE"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S214'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S592'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "CREATE-ACCOUNT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S211'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S589'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "WITHDRAW"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S202'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S568'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S199'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S565'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "DEPOSIT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S196'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S562'
     ret
 }
 
@@ -92,6 +62,7 @@
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -102,6 +73,7 @@
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -112,6 +84,7 @@
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -122,6 +95,7 @@
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -132,6 +106,7 @@
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -142,6 +117,7 @@
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -152,6 +128,7 @@
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -162,6 +139,7 @@
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -177,35 +155,119 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object BOB167, object ALICE166, object CREATE_ACC165, object BANK164)
+    .locals init (object FN_TMP626, object FN_TMP622, object FN_TMP618, object FN_TMP614, object FN_TMP610, object FN_TMP606, object FN_TMP602, object FN_TMP598, object BOB489, object ALICE488, object CREATE_ACC487, object BANK486)
     ldc.i4 1000
     box int32
     call object Program::'MAKE_BANK'(object)
-    stloc BANK164
-    ldloc BANK164
-    castclass [LispBase]Lisp.Closure
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S211'
+    stloc BANK486
+    ldloc BANK486
+    stloc FN_TMP598
+    ldloc FN_TMP598
+    brtrue FN_NULL599
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP598
+FN_NULL599:
+    nop
+    ldloc FN_TMP598
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK600
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK600:
+    nop
+FN_AFTER601:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S589'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc CREATE_ACC165
-    ldloc CREATE_ACC165
-    castclass [LispBase]Lisp.Closure
+    stloc CREATE_ACC487
+    ldloc CREATE_ACC487
+    stloc FN_TMP602
+    ldloc FN_TMP602
+    brtrue FN_NULL603
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP602
+FN_NULL603:
+    nop
+    ldloc FN_TMP602
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK604
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK604:
+    nop
+FN_AFTER605:
+    nop
     ldc.i4 500
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc ALICE166
-    ldloc CREATE_ACC165
-    castclass [LispBase]Lisp.Closure
+    stloc ALICE488
+    ldloc CREATE_ACC487
+    stloc FN_TMP606
+    ldloc FN_TMP606
+    brtrue FN_NULL607
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP606
+FN_NULL607:
+    nop
+    ldloc FN_TMP606
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK608
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK608:
+    nop
+FN_AFTER609:
+    nop
     ldc.i4 200
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc BOB167
+    stloc BOB489
     ldstr "Initial Reserve:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc BANK164
-    castclass [LispBase]Lisp.Closure
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S214'
+    ldloc BANK486
+    stloc FN_TMP610
+    ldloc FN_TMP610
+    brtrue FN_NULL611
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP610
+FN_NULL611:
+    nop
+    ldloc FN_TMP610
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK612
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK612:
+    nop
+FN_AFTER613:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S592'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -214,9 +276,30 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ALICE166
-    castclass [LispBase]Lisp.Closure
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S196'
+    ldloc ALICE488
+    stloc FN_TMP614
+    ldloc FN_TMP614
+    brtrue FN_NULL615
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP614
+FN_NULL615:
+    nop
+    ldloc FN_TMP614
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK616
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK616:
+    nop
+FN_AFTER617:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S562'
     ldc.i4 100
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
@@ -227,9 +310,30 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc BOB167
-    castclass [LispBase]Lisp.Closure
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S202'
+    ldloc BOB489
+    stloc FN_TMP618
+    ldloc FN_TMP618
+    brtrue FN_NULL619
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP618
+FN_NULL619:
+    nop
+    ldloc FN_TMP618
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK620
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK620:
+    nop
+FN_AFTER621:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S568'
     ldc.i4 50
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
@@ -240,9 +344,30 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc BANK164
-    castclass [LispBase]Lisp.Closure
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S219'
+    ldloc BANK486
+    stloc FN_TMP622
+    ldloc FN_TMP622
+    brtrue FN_NULL623
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP622
+FN_NULL623:
+    nop
+    ldloc FN_TMP622
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK624
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK624:
+    nop
+FN_AFTER625:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S597'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -251,16 +376,37 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc BANK164
-    castclass [LispBase]Lisp.Closure
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S214'
+    ldloc BANK486
+    stloc FN_TMP626
+    ldloc FN_TMP626
+    brtrue FN_NULL627
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP626
+FN_NULL627:
+    nop
+    ldloc FN_TMP626
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK628
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK628:
+    nop
+FN_AFTER629:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S592'
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldnull
     ret
-BLOCK_END_MAIN_162:
+BLOCK_END_MAIN_484:
     nop
     ldnull
     ret
@@ -272,6 +418,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -282,6 +429,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -292,6 +440,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -302,6 +451,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -312,6 +462,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -322,6 +473,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -332,6 +484,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -351,6 +504,7 @@ BLOCK_END_MAIN_162:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -358,19 +512,19 @@ BLOCK_END_MAIN_162:
 .method private static hidebysig object 'MAKE_BANK_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object TOTAL_ACCOUNTS151, object RESERVE150)
+    .locals init (object TOTAL_ACCOUNTS472, object RESERVE471)
     ldarg 0
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc RESERVE150
+    stloc RESERVE471
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc TOTAL_ACCOUNTS151
-    ldloc RESERVE150
-    ldloc TOTAL_ACCOUNTS151
-    newobj instance void L_171::'.ctor'(object, object)
+    stloc TOTAL_ACCOUNTS472
+    ldloc RESERVE471
+    ldloc TOTAL_ACCOUNTS472
+    newobj instance void L_493::'.ctor'(object, object)
     ret
-BLOCK_END_MAKE_BANK_148:
+BLOCK_END_MAKE_BANK_469:
     nop
     ldnull
     ret
@@ -380,6 +534,7 @@ BLOCK_END_MAKE_BANK_148:
 {
     .entrypoint
     .maxstack 8
+    call void [LispBase]Lisp.MopRuntime::'Initialize'()
     call object Program::'MAIN'()
     pop
     ret
@@ -387,11 +542,11 @@ BLOCK_END_MAKE_BANK_148:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_169
+.class public auto ansi beforefieldinit L_491
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'RESERVE150'
-    .field public object 'BALANCE156'
+    .field public object 'RESERVE471'
+    .field public object 'BALANCE477'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -400,35 +555,36 @@ BLOCK_END_MAKE_BANK_148:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_169::'RESERVE150'
+    stfld object L_491::'RESERVE471'
     ldarg.0
     ldarg 2
-    stfld object L_169::'BALANCE156'
+    stfld object L_491::'BALANCE477'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object TEMP206, object TEMP205, object TEMP201, object TEMP200)
+    .locals init (object CELL_VAL_TMP580, object CELL_TMP579, object CELL_VAL_TMP578, object CELL_TMP577, object CELL_VAL_TMP576, object CELL_TMP575, object CELL_VAL_TMP574, object CELL_TMP573, object TEMP572, object TEMP571, object TEMP567, object TEMP566)
     ldarg 1
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S196'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S562'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE197
+    brtrue TRUE563
     ldnull
-    br END198
-TRUE197:
+    br END564
+TRUE563:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S199'
-END198:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S565'
+END564:
     nop
     ldnull
     ceq
-    brtrue ELSE208
+    brtrue ELSE582
     ldarg.0
-    ldfld object L_169::'BALANCE156'
+    ldfld object L_491::'BALANCE477'
+    stloc CELL_TMP573
     ldarg.0
-    ldfld object L_169::'BALANCE156'
+    ldfld object L_491::'BALANCE477'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg 2
@@ -438,16 +594,18 @@ END198:
     unbox.any int32
     add
     box int32
-    stloc TEMP200
+    stloc CELL_VAL_TMP574
+    ldloc CELL_TMP573
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP200
+    ldloc CELL_VAL_TMP574
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP200
+    ldloc CELL_VAL_TMP574
     pop
     ldarg.0
-    ldfld object L_169::'RESERVE150'
+    ldfld object L_491::'RESERVE471'
+    stloc CELL_TMP575
     ldarg.0
-    ldfld object L_169::'RESERVE150'
+    ldfld object L_491::'RESERVE471'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg 2
@@ -457,37 +615,39 @@ END198:
     unbox.any int32
     add
     box int32
-    stloc TEMP201
+    stloc CELL_VAL_TMP576
+    ldloc CELL_TMP575
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP201
+    ldloc CELL_VAL_TMP576
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP201
+    ldloc CELL_VAL_TMP576
     pop
     ldarg.0
-    ldfld object L_169::'BALANCE156'
+    ldfld object L_491::'BALANCE477'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-ELSE208:
+ELSE582:
     nop
     ldarg 1
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S202'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S568'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE203
+    brtrue TRUE569
     ldnull
-    br END204
-TRUE203:
+    br END570
+TRUE569:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S199'
-END204:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S565'
+END570:
     nop
     ldnull
     ceq
-    brtrue ELSE207
+    brtrue ELSE581
     ldarg.0
-    ldfld object L_169::'BALANCE156'
+    ldfld object L_491::'BALANCE477'
+    stloc CELL_TMP577
     ldarg.0
-    ldfld object L_169::'BALANCE156'
+    ldfld object L_491::'BALANCE477'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg 2
@@ -497,16 +657,18 @@ END204:
     unbox.any int32
     sub
     box int32
-    stloc TEMP205
+    stloc CELL_VAL_TMP578
+    ldloc CELL_TMP577
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP205
+    ldloc CELL_VAL_TMP578
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP205
+    ldloc CELL_VAL_TMP578
     pop
     ldarg.0
-    ldfld object L_169::'RESERVE150'
+    ldfld object L_491::'RESERVE471'
+    stloc CELL_TMP579
     ldarg.0
-    ldfld object L_169::'RESERVE150'
+    ldfld object L_491::'RESERVE471'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg 2
@@ -516,21 +678,22 @@ END204:
     unbox.any int32
     sub
     box int32
-    stloc TEMP206
+    stloc CELL_VAL_TMP580
+    ldloc CELL_TMP579
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP206
+    ldloc CELL_VAL_TMP580
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP206
+    ldloc CELL_VAL_TMP580
     pop
     ldarg.0
-    ldfld object L_169::'BALANCE156'
+    ldfld object L_491::'BALANCE477'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-ELSE207:
+ELSE581:
     nop
     ldarg.0
-    ldfld object L_169::'BALANCE156'
+    ldfld object L_491::'BALANCE477'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
@@ -544,6 +707,7 @@ ELSE207:
     ldc.i4 2
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -554,6 +718,7 @@ ELSE207:
     ldc.i4 2
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -565,7 +730,7 @@ ELSE207:
     ldarg 1
     ldarg 2
     tail.
-    callvirt instance object L_169::'InvokeBody'(object, object)
+    callvirt instance object L_491::'InvokeBody'(object, object)
     ret
 }
 
@@ -575,6 +740,7 @@ ELSE207:
     ldc.i4 2
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -585,6 +751,7 @@ ELSE207:
     ldc.i4 2
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -595,6 +762,7 @@ ELSE207:
     ldc.i4 2
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -605,6 +773,7 @@ ELSE207:
     ldc.i4 2
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -615,6 +784,7 @@ ELSE207:
     ldc.i4 2
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -625,17 +795,18 @@ ELSE207:
     ldc.i4 2
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
-} // end of class L_169
+} // end of class L_491
 
-.class public auto ansi beforefieldinit L_170
+.class public auto ansi beforefieldinit L_492
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'RESERVE150'
-    .field public object 'TOTAL_ACCOUNTS151'
+    .field public object 'RESERVE471'
+    .field public object 'TOTAL_ACCOUNTS472'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -644,21 +815,22 @@ ELSE207:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_170::'RESERVE150'
+    stfld object L_492::'RESERVE471'
     ldarg.0
     ldarg 2
-    stfld object L_170::'TOTAL_ACCOUNTS151'
+    stfld object L_492::'TOTAL_ACCOUNTS472'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object BALANCE156, object TEMP210, object TEMP209)
+    .locals init (object CELL_VAL_TMP588, object CELL_TMP587, object CELL_VAL_TMP586, object CELL_TMP585, object BALANCE477, object TEMP584, object TEMP583)
     ldarg.0
-    ldfld object L_170::'RESERVE150'
+    ldfld object L_492::'RESERVE471'
+    stloc CELL_TMP585
     ldarg.0
-    ldfld object L_170::'RESERVE150'
+    ldfld object L_492::'RESERVE471'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldarg 1
@@ -668,16 +840,18 @@ ELSE207:
     unbox.any int32
     add
     box int32
-    stloc TEMP209
+    stloc CELL_VAL_TMP586
+    ldloc CELL_TMP585
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP209
+    ldloc CELL_VAL_TMP586
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP209
+    ldloc CELL_VAL_TMP586
     pop
     ldarg.0
-    ldfld object L_170::'TOTAL_ACCOUNTS151'
+    ldfld object L_492::'TOTAL_ACCOUNTS472'
+    stloc CELL_TMP587
     ldarg.0
-    ldfld object L_170::'TOTAL_ACCOUNTS151'
+    ldfld object L_492::'TOTAL_ACCOUNTS472'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -688,19 +862,20 @@ ELSE207:
     unbox.any int32
     add
     box int32
-    stloc TEMP210
+    stloc CELL_VAL_TMP588
+    ldloc CELL_TMP587
     castclass [LispBase]Lisp.ValueCell
-    ldloc TEMP210
+    ldloc CELL_VAL_TMP588
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc TEMP210
+    ldloc CELL_VAL_TMP588
     pop
     ldarg 1
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc BALANCE156
+    stloc BALANCE477
     ldarg.0
-    ldfld object L_170::'RESERVE150'
-    ldloc BALANCE156
-    newobj instance void L_169::'.ctor'(object, object)
+    ldfld object L_492::'RESERVE471'
+    ldloc BALANCE477
+    newobj instance void L_491::'.ctor'(object, object)
     ret
     ldnull
     ret
@@ -712,6 +887,7 @@ ELSE207:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -722,7 +898,7 @@ ELSE207:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_170::'InvokeBody'(object)
+    callvirt instance object L_492::'InvokeBody'(object)
     ret
 }
 
@@ -732,6 +908,7 @@ ELSE207:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -742,6 +919,7 @@ ELSE207:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -752,6 +930,7 @@ ELSE207:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -762,6 +941,7 @@ ELSE207:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -772,6 +952,7 @@ ELSE207:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -782,6 +963,7 @@ ELSE207:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -792,17 +974,18 @@ ELSE207:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
-} // end of class L_170
+} // end of class L_492
 
-.class public auto ansi beforefieldinit L_171
+.class public auto ansi beforefieldinit L_493
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'RESERVE150'
-    .field public object 'TOTAL_ACCOUNTS151'
+    .field public object 'RESERVE471'
+    .field public object 'TOTAL_ACCOUNTS472'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -811,10 +994,10 @@ ELSE207:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_171::'RESERVE150'
+    stfld object L_493::'RESERVE471'
     ldarg.0
     ldarg 2
-    stfld object L_171::'TOTAL_ACCOUNTS151'
+    stfld object L_493::'TOTAL_ACCOUNTS472'
     ret
 }
 
@@ -822,50 +1005,50 @@ ELSE207:
 {
     .maxstack 8
     ldarg 1
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S211'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S589'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE212
+    brtrue TRUE590
     ldnull
-    br END213
-TRUE212:
+    br END591
+TRUE590:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S199'
-END213:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S565'
+END591:
     nop
     ldnull
     ceq
-    brtrue ELSE218
+    brtrue ELSE596
     ldarg.0
-    ldfld object L_171::'RESERVE150'
+    ldfld object L_493::'RESERVE471'
     ldarg.0
-    ldfld object L_171::'TOTAL_ACCOUNTS151'
-    newobj instance void L_170::'.ctor'(object, object)
+    ldfld object L_493::'TOTAL_ACCOUNTS472'
+    newobj instance void L_492::'.ctor'(object, object)
     ret
-ELSE218:
+ELSE596:
     nop
     ldarg 1
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S214'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S592'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE215
+    brtrue TRUE593
     ldnull
-    br END216
-TRUE215:
+    br END594
+TRUE593:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S199'
-END216:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S565'
+END594:
     nop
     ldnull
     ceq
-    brtrue ELSE217
+    brtrue ELSE595
     ldarg.0
-    ldfld object L_171::'RESERVE150'
+    ldfld object L_493::'RESERVE471'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-ELSE217:
+ELSE595:
     nop
     ldarg.0
-    ldfld object L_171::'TOTAL_ACCOUNTS151'
+    ldfld object L_493::'TOTAL_ACCOUNTS472'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
@@ -879,6 +1062,7 @@ ELSE217:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -889,7 +1073,7 @@ ELSE217:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_171::'InvokeBody'(object)
+    callvirt instance object L_493::'InvokeBody'(object)
     ret
 }
 
@@ -899,6 +1083,7 @@ ELSE217:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -909,6 +1094,7 @@ ELSE217:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -919,6 +1105,7 @@ ELSE217:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -929,6 +1116,7 @@ ELSE217:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -939,6 +1127,7 @@ ELSE217:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -949,6 +1138,7 @@ ELSE217:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -959,9 +1149,10 @@ ELSE217:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
-} // end of class L_171
+} // end of class L_493
 

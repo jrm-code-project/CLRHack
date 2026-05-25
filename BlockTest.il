@@ -7,39 +7,15 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'MAIN'
-    .field public static object 'TEST_IMPLICIT_BLOCK'
-    .field public static object 'TEST_BLOCK_UWP'
-    .field public static object 'TEST_BLOCK_NESTED'
-    .field public static object 'TEST_BLOCK_BASIC'
-    .field public static object 'IMPLICIT_BLOCK_TEST'
-    .field public static object 'EQ'
-    .field public static object 'PRINT'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S393'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S830'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
-    ldnull
-    stsfld object Program::'MAIN'
-    ldnull
-    stsfld object Program::'TEST_IMPLICIT_BLOCK'
-    ldnull
-    stsfld object Program::'TEST_BLOCK_UWP'
-    ldnull
-    stsfld object Program::'TEST_BLOCK_NESTED'
-    ldnull
-    stsfld object Program::'TEST_BLOCK_BASIC'
-    ldnull
-    stsfld object Program::'IMPLICIT_BLOCK_TEST'
-    ldnull
-    stsfld object Program::'EQ'
-    ldnull
-    stsfld object Program::'PRINT'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S393'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S830'
     ret
 }
 
@@ -49,6 +25,7 @@
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -59,6 +36,7 @@
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -69,6 +47,7 @@
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -79,6 +58,7 @@
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -89,6 +69,7 @@
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -99,6 +80,7 @@
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -109,6 +91,7 @@
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -119,6 +102,7 @@
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -140,9 +124,183 @@
     pop
     call object Program::'TEST_BLOCK_UWP'()
     pop
-    tail. call object Program::'TEST_IMPLICIT_BLOCK'()
+    call object Program::'TEST_IMPLICIT_BLOCK'()
+    pop
+    tail. call object Program::'TEST_BLOCK_NON_LOCAL_CLOSURE'()
     ret
-BLOCK_END_MAIN_252:
+BLOCK_END_MAIN_683:
+    nop
+    ldnull
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE'() cil managed
+{
+    .maxstack 8
+    tail.
+    call object Program::'TEST_BLOCK_NON_LOCAL_CLOSURE_Body'()
+    ret
+}
+
+.method private static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE_Body'() cil managed
+{
+    .maxstack 8
+    .locals init (object FN_TMP834, object BLOCK_RESULT_ESCAPE_676, object RESULT679, object K678)
+    ldstr "Testing non-local return-from through closure..."
+    call void [mscorlib]System.Console::'WriteLine'(object)
+    ldnull
+    pop
+    .try
+    {
+    newobj instance void L_686::'.ctor'()
+    stloc K678
+    ldloc K678
+    stloc FN_TMP834
+    ldloc FN_TMP834
+    brtrue FN_NULL835
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP834
+FN_NULL835:
+    nop
+    ldloc FN_TMP834
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK836
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK836:
+    nop
+FN_AFTER837:
+    nop
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
+    pop
+    ldstr "Should NOT print this closure path"
+    stloc BLOCK_RESULT_ESCAPE_676
+    leave BLOCK_END_ESCAPE_675
+    }
+    catch [LispBase]Lisp.BlockExitException
+    {
+    dup
+    callvirt instance object [LispBase]Lisp.BlockExitException::'get_BlockId'()
+    ldstr "BLOCK_ID_ESCAPE_674"
+    call bool [mscorlib]System.Object::'Equals'(object, object)
+    brfalse BLOCK_RETHROW833
+    dup
+    callvirt instance object[] [LispBase]Lisp.BlockExitException::'get_CapturedValues'()
+    call void [LispBase]Lisp.Values::'RestoreValues'(object[])
+    callvirt instance object [LispBase]Lisp.BlockExitException::'get_Value'()
+    stloc BLOCK_RESULT_ESCAPE_676
+    leave BLOCK_END_ESCAPE_675
+BLOCK_RETHROW833:
+    pop
+    rethrow
+    }
+BLOCK_END_ESCAPE_675:
+    nop
+    ldloc BLOCK_RESULT_ESCAPE_676
+    stloc RESULT679
+    ldstr "Closure result (should be closure escaped):"
+    call void [mscorlib]System.Console::'WriteLine'(object)
+    ldnull
+    pop
+    ldloc RESULT679
+    call void [mscorlib]System.Console::'WriteLine'(object)
+    ldnull
+    ret
+BLOCK_END_TEST_BLOCK_NON_LOCAL_CLOSURE_672:
     nop
     ldnull
     ret
@@ -154,6 +312,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -164,6 +323,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -174,6 +334,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -184,6 +345,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -194,6 +356,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -204,6 +367,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -214,6 +378,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -224,6 +389,7 @@ BLOCK_END_MAIN_252:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -263,7 +429,7 @@ BLOCK_END_MAIN_252:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_IMPLICIT_BLOCK_248:
+BLOCK_END_TEST_IMPLICIT_BLOCK_667:
     nop
     ldnull
     ret
@@ -275,6 +441,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -285,6 +452,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -295,6 +463,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -305,6 +474,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -315,6 +485,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -325,6 +496,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -335,6 +507,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -354,6 +527,7 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -361,37 +535,37 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_248:
 .method private static hidebysig object 'IMPLICIT_BLOCK_TEST_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_245)
+    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_663)
     ldarg 0
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE391
+    brtrue TRUE828
     ldnull
-    br END392
-TRUE391:
+    br END829
+TRUE828:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S393'
-END392:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S830'
+END829:
     nop
     ldnull
     ceq
-    brtrue ELSE394
+    brtrue ELSE831
     ldstr "zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_245
-    leave BLOCK_END_IMPLICIT_BLOCK_TEST_244
-    br END395
-ELSE394:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_663
+    leave BLOCK_END_IMPLICIT_BLOCK_TEST_662
+    br END832
+ELSE831:
     nop
     ldnull
-END395:
+END832:
     nop
     pop
     ldstr "non-zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_245
-BLOCK_END_IMPLICIT_BLOCK_TEST_244:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_663
+BLOCK_END_IMPLICIT_BLOCK_TEST_662:
     nop
-    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_245
+    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_663
     ret
     ldnull
     ret
@@ -403,6 +577,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -413,6 +588,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -423,6 +599,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -433,6 +610,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -443,6 +621,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -453,6 +632,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -463,6 +643,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -473,6 +654,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -488,7 +670,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
 .method private static hidebysig object 'TEST_BLOCK_UWP_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object UWP_V63389, object UWP_V62388, object UWP_V61387, object UWP_V60386, object UWP_V59385, object UWP_V58384, object UWP_V57383, object UWP_V56382, object UWP_V55381, object UWP_V54380, object UWP_V53379, object UWP_V52378, object UWP_V51377, object UWP_V50376, object UWP_V49375, object UWP_V48374, object UWP_V47373, object UWP_V46372, object UWP_V45371, object UWP_V44370, object UWP_V43369, object UWP_V42368, object UWP_V41367, object UWP_V40366, object UWP_V39365, object UWP_V38364, object UWP_V37363, object UWP_V36362, object UWP_V35361, object UWP_V34360, object UWP_V33359, object UWP_V32358, object UWP_V31357, object UWP_V30356, object UWP_V29355, object UWP_V28354, object UWP_V27353, object UWP_V26352, object UWP_V25351, object UWP_V24350, object UWP_V23349, object UWP_V22348, object UWP_V21347, object UWP_V20346, object UWP_V19345, object UWP_V18344, object UWP_V17343, object UWP_V16342, object UWP_V15341, object UWP_V14340, object UWP_V13339, object UWP_V12338, object UWP_V11337, object UWP_V10336, object UWP_V9335, object UWP_V8334, object UWP_V7333, object UWP_V6332, object UWP_V5331, object UWP_V4330, object UWP_V3329, object UWP_V2328, object UWP_V1327, object UWP_COUNT326, object UWP_RESULT325, object BLOCK_RESULT_EXIT_240)
+    .locals init (object UWP_V63826, object UWP_V62825, object UWP_V61824, object UWP_V60823, object UWP_V59822, object UWP_V58821, object UWP_V57820, object UWP_V56819, object UWP_V55818, object UWP_V54817, object UWP_V53816, object UWP_V52815, object UWP_V51814, object UWP_V50813, object UWP_V49812, object UWP_V48811, object UWP_V47810, object UWP_V46809, object UWP_V45808, object UWP_V44807, object UWP_V43806, object UWP_V42805, object UWP_V41804, object UWP_V40803, object UWP_V39802, object UWP_V38801, object UWP_V37800, object UWP_V36799, object UWP_V35798, object UWP_V34797, object UWP_V33796, object UWP_V32795, object UWP_V31794, object UWP_V30793, object UWP_V29792, object UWP_V28791, object UWP_V27790, object UWP_V26789, object UWP_V25788, object UWP_V24787, object UWP_V23786, object UWP_V22785, object UWP_V21784, object UWP_V20783, object UWP_V19782, object UWP_V18781, object UWP_V17780, object UWP_V16779, object UWP_V15778, object UWP_V14777, object UWP_V13776, object UWP_V12775, object UWP_V11774, object UWP_V10773, object UWP_V9772, object UWP_V8771, object UWP_V7770, object UWP_V6769, object UWP_V5768, object UWP_V4767, object UWP_V3766, object UWP_V2765, object UWP_V1764, object UWP_COUNT763, object UWP_RESULT762, object BLOCK_RESULT_EXIT_657)
     ldstr "Testing block with unwind-protect..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -500,283 +682,283 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_244:
     ldnull
     pop
     ldstr "value from return-from"
-    stloc BLOCK_RESULT_EXIT_240
-    leave BLOCK_END_EXIT_239
-    stloc UWP_RESULT325
-    leave DONE390
+    stloc BLOCK_RESULT_EXIT_657
+    leave BLOCK_END_EXIT_656
+    stloc UWP_RESULT762
+    leave DONE827
     }
     finally
     {
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc UWP_COUNT326
+    stloc UWP_COUNT763
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc UWP_V1327
+    stloc UWP_V1764
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc UWP_V2328
+    stloc UWP_V2765
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc UWP_V3329
+    stloc UWP_V3766
     ldsfld object [LispBase]Lisp.Values::Value4
-    stloc UWP_V4330
+    stloc UWP_V4767
     ldsfld object [LispBase]Lisp.Values::Value5
-    stloc UWP_V5331
+    stloc UWP_V5768
     ldsfld object [LispBase]Lisp.Values::Value6
-    stloc UWP_V6332
+    stloc UWP_V6769
     ldsfld object [LispBase]Lisp.Values::Value7
-    stloc UWP_V7333
+    stloc UWP_V7770
     ldsfld object [LispBase]Lisp.Values::Value8
-    stloc UWP_V8334
+    stloc UWP_V8771
     ldsfld object [LispBase]Lisp.Values::Value9
-    stloc UWP_V9335
+    stloc UWP_V9772
     ldsfld object [LispBase]Lisp.Values::Value10
-    stloc UWP_V10336
+    stloc UWP_V10773
     ldsfld object [LispBase]Lisp.Values::Value11
-    stloc UWP_V11337
+    stloc UWP_V11774
     ldsfld object [LispBase]Lisp.Values::Value12
-    stloc UWP_V12338
+    stloc UWP_V12775
     ldsfld object [LispBase]Lisp.Values::Value13
-    stloc UWP_V13339
+    stloc UWP_V13776
     ldsfld object [LispBase]Lisp.Values::Value14
-    stloc UWP_V14340
+    stloc UWP_V14777
     ldsfld object [LispBase]Lisp.Values::Value15
-    stloc UWP_V15341
+    stloc UWP_V15778
     ldsfld object [LispBase]Lisp.Values::Value16
-    stloc UWP_V16342
+    stloc UWP_V16779
     ldsfld object [LispBase]Lisp.Values::Value17
-    stloc UWP_V17343
+    stloc UWP_V17780
     ldsfld object [LispBase]Lisp.Values::Value18
-    stloc UWP_V18344
+    stloc UWP_V18781
     ldsfld object [LispBase]Lisp.Values::Value19
-    stloc UWP_V19345
+    stloc UWP_V19782
     ldsfld object [LispBase]Lisp.Values::Value20
-    stloc UWP_V20346
+    stloc UWP_V20783
     ldsfld object [LispBase]Lisp.Values::Value21
-    stloc UWP_V21347
+    stloc UWP_V21784
     ldsfld object [LispBase]Lisp.Values::Value22
-    stloc UWP_V22348
+    stloc UWP_V22785
     ldsfld object [LispBase]Lisp.Values::Value23
-    stloc UWP_V23349
+    stloc UWP_V23786
     ldsfld object [LispBase]Lisp.Values::Value24
-    stloc UWP_V24350
+    stloc UWP_V24787
     ldsfld object [LispBase]Lisp.Values::Value25
-    stloc UWP_V25351
+    stloc UWP_V25788
     ldsfld object [LispBase]Lisp.Values::Value26
-    stloc UWP_V26352
+    stloc UWP_V26789
     ldsfld object [LispBase]Lisp.Values::Value27
-    stloc UWP_V27353
+    stloc UWP_V27790
     ldsfld object [LispBase]Lisp.Values::Value28
-    stloc UWP_V28354
+    stloc UWP_V28791
     ldsfld object [LispBase]Lisp.Values::Value29
-    stloc UWP_V29355
+    stloc UWP_V29792
     ldsfld object [LispBase]Lisp.Values::Value30
-    stloc UWP_V30356
+    stloc UWP_V30793
     ldsfld object [LispBase]Lisp.Values::Value31
-    stloc UWP_V31357
+    stloc UWP_V31794
     ldsfld object [LispBase]Lisp.Values::Value32
-    stloc UWP_V32358
+    stloc UWP_V32795
     ldsfld object [LispBase]Lisp.Values::Value33
-    stloc UWP_V33359
+    stloc UWP_V33796
     ldsfld object [LispBase]Lisp.Values::Value34
-    stloc UWP_V34360
+    stloc UWP_V34797
     ldsfld object [LispBase]Lisp.Values::Value35
-    stloc UWP_V35361
+    stloc UWP_V35798
     ldsfld object [LispBase]Lisp.Values::Value36
-    stloc UWP_V36362
+    stloc UWP_V36799
     ldsfld object [LispBase]Lisp.Values::Value37
-    stloc UWP_V37363
+    stloc UWP_V37800
     ldsfld object [LispBase]Lisp.Values::Value38
-    stloc UWP_V38364
+    stloc UWP_V38801
     ldsfld object [LispBase]Lisp.Values::Value39
-    stloc UWP_V39365
+    stloc UWP_V39802
     ldsfld object [LispBase]Lisp.Values::Value40
-    stloc UWP_V40366
+    stloc UWP_V40803
     ldsfld object [LispBase]Lisp.Values::Value41
-    stloc UWP_V41367
+    stloc UWP_V41804
     ldsfld object [LispBase]Lisp.Values::Value42
-    stloc UWP_V42368
+    stloc UWP_V42805
     ldsfld object [LispBase]Lisp.Values::Value43
-    stloc UWP_V43369
+    stloc UWP_V43806
     ldsfld object [LispBase]Lisp.Values::Value44
-    stloc UWP_V44370
+    stloc UWP_V44807
     ldsfld object [LispBase]Lisp.Values::Value45
-    stloc UWP_V45371
+    stloc UWP_V45808
     ldsfld object [LispBase]Lisp.Values::Value46
-    stloc UWP_V46372
+    stloc UWP_V46809
     ldsfld object [LispBase]Lisp.Values::Value47
-    stloc UWP_V47373
+    stloc UWP_V47810
     ldsfld object [LispBase]Lisp.Values::Value48
-    stloc UWP_V48374
+    stloc UWP_V48811
     ldsfld object [LispBase]Lisp.Values::Value49
-    stloc UWP_V49375
+    stloc UWP_V49812
     ldsfld object [LispBase]Lisp.Values::Value50
-    stloc UWP_V50376
+    stloc UWP_V50813
     ldsfld object [LispBase]Lisp.Values::Value51
-    stloc UWP_V51377
+    stloc UWP_V51814
     ldsfld object [LispBase]Lisp.Values::Value52
-    stloc UWP_V52378
+    stloc UWP_V52815
     ldsfld object [LispBase]Lisp.Values::Value53
-    stloc UWP_V53379
+    stloc UWP_V53816
     ldsfld object [LispBase]Lisp.Values::Value54
-    stloc UWP_V54380
+    stloc UWP_V54817
     ldsfld object [LispBase]Lisp.Values::Value55
-    stloc UWP_V55381
+    stloc UWP_V55818
     ldsfld object [LispBase]Lisp.Values::Value56
-    stloc UWP_V56382
+    stloc UWP_V56819
     ldsfld object [LispBase]Lisp.Values::Value57
-    stloc UWP_V57383
+    stloc UWP_V57820
     ldsfld object [LispBase]Lisp.Values::Value58
-    stloc UWP_V58384
+    stloc UWP_V58821
     ldsfld object [LispBase]Lisp.Values::Value59
-    stloc UWP_V59385
+    stloc UWP_V59822
     ldsfld object [LispBase]Lisp.Values::Value60
-    stloc UWP_V60386
+    stloc UWP_V60823
     ldsfld object [LispBase]Lisp.Values::Value61
-    stloc UWP_V61387
+    stloc UWP_V61824
     ldsfld object [LispBase]Lisp.Values::Value62
-    stloc UWP_V62388
+    stloc UWP_V62825
     ldsfld object [LispBase]Lisp.Values::Value63
-    stloc UWP_V63389
+    stloc UWP_V63826
     ldstr "Cleanup code run"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc UWP_COUNT326
+    ldloc UWP_COUNT763
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    ldloc UWP_V1327
+    ldloc UWP_V1764
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc UWP_V2328
+    ldloc UWP_V2765
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc UWP_V3329
+    ldloc UWP_V3766
     stsfld object [LispBase]Lisp.Values::Value3
-    ldloc UWP_V4330
+    ldloc UWP_V4767
     stsfld object [LispBase]Lisp.Values::Value4
-    ldloc UWP_V5331
+    ldloc UWP_V5768
     stsfld object [LispBase]Lisp.Values::Value5
-    ldloc UWP_V6332
+    ldloc UWP_V6769
     stsfld object [LispBase]Lisp.Values::Value6
-    ldloc UWP_V7333
+    ldloc UWP_V7770
     stsfld object [LispBase]Lisp.Values::Value7
-    ldloc UWP_V8334
+    ldloc UWP_V8771
     stsfld object [LispBase]Lisp.Values::Value8
-    ldloc UWP_V9335
+    ldloc UWP_V9772
     stsfld object [LispBase]Lisp.Values::Value9
-    ldloc UWP_V10336
+    ldloc UWP_V10773
     stsfld object [LispBase]Lisp.Values::Value10
-    ldloc UWP_V11337
+    ldloc UWP_V11774
     stsfld object [LispBase]Lisp.Values::Value11
-    ldloc UWP_V12338
+    ldloc UWP_V12775
     stsfld object [LispBase]Lisp.Values::Value12
-    ldloc UWP_V13339
+    ldloc UWP_V13776
     stsfld object [LispBase]Lisp.Values::Value13
-    ldloc UWP_V14340
+    ldloc UWP_V14777
     stsfld object [LispBase]Lisp.Values::Value14
-    ldloc UWP_V15341
+    ldloc UWP_V15778
     stsfld object [LispBase]Lisp.Values::Value15
-    ldloc UWP_V16342
+    ldloc UWP_V16779
     stsfld object [LispBase]Lisp.Values::Value16
-    ldloc UWP_V17343
+    ldloc UWP_V17780
     stsfld object [LispBase]Lisp.Values::Value17
-    ldloc UWP_V18344
+    ldloc UWP_V18781
     stsfld object [LispBase]Lisp.Values::Value18
-    ldloc UWP_V19345
+    ldloc UWP_V19782
     stsfld object [LispBase]Lisp.Values::Value19
-    ldloc UWP_V20346
+    ldloc UWP_V20783
     stsfld object [LispBase]Lisp.Values::Value20
-    ldloc UWP_V21347
+    ldloc UWP_V21784
     stsfld object [LispBase]Lisp.Values::Value21
-    ldloc UWP_V22348
+    ldloc UWP_V22785
     stsfld object [LispBase]Lisp.Values::Value22
-    ldloc UWP_V23349
+    ldloc UWP_V23786
     stsfld object [LispBase]Lisp.Values::Value23
-    ldloc UWP_V24350
+    ldloc UWP_V24787
     stsfld object [LispBase]Lisp.Values::Value24
-    ldloc UWP_V25351
+    ldloc UWP_V25788
     stsfld object [LispBase]Lisp.Values::Value25
-    ldloc UWP_V26352
+    ldloc UWP_V26789
     stsfld object [LispBase]Lisp.Values::Value26
-    ldloc UWP_V27353
+    ldloc UWP_V27790
     stsfld object [LispBase]Lisp.Values::Value27
-    ldloc UWP_V28354
+    ldloc UWP_V28791
     stsfld object [LispBase]Lisp.Values::Value28
-    ldloc UWP_V29355
+    ldloc UWP_V29792
     stsfld object [LispBase]Lisp.Values::Value29
-    ldloc UWP_V30356
+    ldloc UWP_V30793
     stsfld object [LispBase]Lisp.Values::Value30
-    ldloc UWP_V31357
+    ldloc UWP_V31794
     stsfld object [LispBase]Lisp.Values::Value31
-    ldloc UWP_V32358
+    ldloc UWP_V32795
     stsfld object [LispBase]Lisp.Values::Value32
-    ldloc UWP_V33359
+    ldloc UWP_V33796
     stsfld object [LispBase]Lisp.Values::Value33
-    ldloc UWP_V34360
+    ldloc UWP_V34797
     stsfld object [LispBase]Lisp.Values::Value34
-    ldloc UWP_V35361
+    ldloc UWP_V35798
     stsfld object [LispBase]Lisp.Values::Value35
-    ldloc UWP_V36362
+    ldloc UWP_V36799
     stsfld object [LispBase]Lisp.Values::Value36
-    ldloc UWP_V37363
+    ldloc UWP_V37800
     stsfld object [LispBase]Lisp.Values::Value37
-    ldloc UWP_V38364
+    ldloc UWP_V38801
     stsfld object [LispBase]Lisp.Values::Value38
-    ldloc UWP_V39365
+    ldloc UWP_V39802
     stsfld object [LispBase]Lisp.Values::Value39
-    ldloc UWP_V40366
+    ldloc UWP_V40803
     stsfld object [LispBase]Lisp.Values::Value40
-    ldloc UWP_V41367
+    ldloc UWP_V41804
     stsfld object [LispBase]Lisp.Values::Value41
-    ldloc UWP_V42368
+    ldloc UWP_V42805
     stsfld object [LispBase]Lisp.Values::Value42
-    ldloc UWP_V43369
+    ldloc UWP_V43806
     stsfld object [LispBase]Lisp.Values::Value43
-    ldloc UWP_V44370
+    ldloc UWP_V44807
     stsfld object [LispBase]Lisp.Values::Value44
-    ldloc UWP_V45371
+    ldloc UWP_V45808
     stsfld object [LispBase]Lisp.Values::Value45
-    ldloc UWP_V46372
+    ldloc UWP_V46809
     stsfld object [LispBase]Lisp.Values::Value46
-    ldloc UWP_V47373
+    ldloc UWP_V47810
     stsfld object [LispBase]Lisp.Values::Value47
-    ldloc UWP_V48374
+    ldloc UWP_V48811
     stsfld object [LispBase]Lisp.Values::Value48
-    ldloc UWP_V49375
+    ldloc UWP_V49812
     stsfld object [LispBase]Lisp.Values::Value49
-    ldloc UWP_V50376
+    ldloc UWP_V50813
     stsfld object [LispBase]Lisp.Values::Value50
-    ldloc UWP_V51377
+    ldloc UWP_V51814
     stsfld object [LispBase]Lisp.Values::Value51
-    ldloc UWP_V52378
+    ldloc UWP_V52815
     stsfld object [LispBase]Lisp.Values::Value52
-    ldloc UWP_V53379
+    ldloc UWP_V53816
     stsfld object [LispBase]Lisp.Values::Value53
-    ldloc UWP_V54380
+    ldloc UWP_V54817
     stsfld object [LispBase]Lisp.Values::Value54
-    ldloc UWP_V55381
+    ldloc UWP_V55818
     stsfld object [LispBase]Lisp.Values::Value55
-    ldloc UWP_V56382
+    ldloc UWP_V56819
     stsfld object [LispBase]Lisp.Values::Value56
-    ldloc UWP_V57383
+    ldloc UWP_V57820
     stsfld object [LispBase]Lisp.Values::Value57
-    ldloc UWP_V58384
+    ldloc UWP_V58821
     stsfld object [LispBase]Lisp.Values::Value58
-    ldloc UWP_V59385
+    ldloc UWP_V59822
     stsfld object [LispBase]Lisp.Values::Value59
-    ldloc UWP_V60386
+    ldloc UWP_V60823
     stsfld object [LispBase]Lisp.Values::Value60
-    ldloc UWP_V61387
+    ldloc UWP_V61824
     stsfld object [LispBase]Lisp.Values::Value61
-    ldloc UWP_V62388
+    ldloc UWP_V62825
     stsfld object [LispBase]Lisp.Values::Value62
-    ldloc UWP_V63389
+    ldloc UWP_V63826
     stsfld object [LispBase]Lisp.Values::Value63
     endfinally
     }
-DONE390:
-    ldloc UWP_RESULT325
-    stloc BLOCK_RESULT_EXIT_240
-BLOCK_END_EXIT_239:
+DONE827:
+    ldloc UWP_RESULT762
+    stloc BLOCK_RESULT_EXIT_657
+BLOCK_END_EXIT_656:
     nop
-    ldloc BLOCK_RESULT_EXIT_240
+    ldloc BLOCK_RESULT_EXIT_657
     ret
-BLOCK_END_TEST_BLOCK_UWP_237:
+BLOCK_END_TEST_BLOCK_UWP_653:
     nop
     ldnull
     ret
@@ -788,6 +970,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -798,6 +981,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -808,6 +992,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -818,6 +1003,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -828,6 +1014,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -838,6 +1025,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -848,6 +1036,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -858,6 +1047,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -873,7 +1063,7 @@ BLOCK_END_TEST_BLOCK_UWP_237:
 .method private static hidebysig object 'TEST_BLOCK_NESTED_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_OUTER_232)
+    .locals init (object BLOCK_RESULT_OUTER_646)
     ldstr "Testing nested blocks..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -887,27 +1077,27 @@ BLOCK_END_TEST_BLOCK_UWP_237:
     ldnull
     pop
     ldstr "exited from inner to outer"
-    stloc BLOCK_RESULT_OUTER_232
-    leave BLOCK_END_OUTER_231
+    stloc BLOCK_RESULT_OUTER_646
+    leave BLOCK_END_OUTER_645
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-BLOCK_END_INNER_233:
+BLOCK_END_INNER_648:
     nop
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_OUTER_232
-BLOCK_END_OUTER_231:
+    stloc BLOCK_RESULT_OUTER_646
+BLOCK_END_OUTER_645:
     nop
-    ldloc BLOCK_RESULT_OUTER_232
+    ldloc BLOCK_RESULT_OUTER_646
     pop
     ldstr "Back from outer block"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_NESTED_229:
+BLOCK_END_TEST_BLOCK_NESTED_642:
     nop
     ldnull
     ret
@@ -919,6 +1109,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -929,6 +1120,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -939,6 +1131,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -949,6 +1142,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -959,6 +1153,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -969,6 +1164,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -979,6 +1175,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -989,6 +1186,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -1004,7 +1202,7 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
 .method private static hidebysig object 'TEST_BLOCK_BASIC_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object VAL226, object BLOCK_RESULT_FOO_225)
+    .locals init (object VAL638, object BLOCK_RESULT_FOO_637)
     ldstr "Testing block basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -1014,25 +1212,25 @@ BLOCK_END_TEST_BLOCK_NESTED_229:
     ldnull
     pop
     ldstr "returned value"
-    stloc BLOCK_RESULT_FOO_225
-    leave BLOCK_END_FOO_224
+    stloc BLOCK_RESULT_FOO_637
+    leave BLOCK_END_FOO_636
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_FOO_225
-BLOCK_END_FOO_224:
+    stloc BLOCK_RESULT_FOO_637
+BLOCK_END_FOO_636:
     nop
-    ldloc BLOCK_RESULT_FOO_225
-    stloc VAL226
+    ldloc BLOCK_RESULT_FOO_637
+    stloc VAL638
     ldstr "Result (should be returned value):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc VAL226
+    ldloc VAL638
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_BASIC_222:
+BLOCK_END_TEST_BLOCK_BASIC_633:
     nop
     ldnull
     ret
@@ -1042,10 +1240,133 @@ BLOCK_END_TEST_BLOCK_BASIC_222:
 {
     .entrypoint
     .maxstack 8
+    call void [LispBase]Lisp.MopRuntime::'Initialize'()
     call object Program::'MAIN'()
     pop
     ret
 }
 
 } // end of class Program
+
+.class public auto ansi beforefieldinit L_686
+       extends [LispBase]Lisp.Closure
+{
+.method public hidebysig void '.ctor'() cil managed
+{
+    .maxstack 8
+    ldarg.0
+    call instance void [LispBase]Lisp.Closure::'.ctor'()
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'() cil managed
+{
+    .maxstack 8
+    ldstr "BLOCK_ID_ESCAPE_674"
+    ldstr "closure escaped"
+    call object[] [LispBase]Lisp.Values::'CaptureValues'()
+    newobj instance void [LispBase]Lisp.BlockExitException::'.ctor'(object, object, object[])
+    throw
+    ldnull
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldarg.0
+    tail.
+    callvirt instance object L_686::'InvokeBody'()
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_686
 

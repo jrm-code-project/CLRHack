@@ -135,7 +135,158 @@
     
     (is (not (null (search "Testing implicit function block..." output))))
     (is (not (null (search "zero" output))))
-    (is (not (null (search "non-zero" output))))))
+    (is (not (null (search "non-zero" output))))
+
+    (is (not (null (search "Testing non-local return-from through closure..." output))))
+    (is (not (null (search "closure escaped" output))))
+    (is (null (search "Should NOT print this closure path" output)))))
+
+(test lexical-exits-test
+  "Test lexical non-local return-from via closures, nested closures, unwind-protect, and multiple values."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-lexical-exits.lisp"))))
+    (is (not (null (search "Lexical return simple closure..." output))))
+    (is (not (null (search "Simple result:" output))))
+    (is (not (null (search "escaped-simple" output))))
+
+    (is (not (null (search "Lexical return nested closures..." output))))
+    (is (not (null (search "Nested result:" output))))
+    (is (not (null (search "escaped-nested" output))))
+
+    (is (not (null (search "Lexical return with unwind-protect..." output))))
+    (is (not (null (search "Cleanup from lexical unwind-protect" output))))
+    (is (not (null (search "UWP result:" output))))
+    (is (not (null (search "escaped-uwp" output))))
+    (is (not (null (search "Cleanup flag:" output))))
+    (is (not (null (search "T" output))))
+
+    (is (not (null (search "Lexical return with multiple values..." output))))
+    (is (not (null (search "MV primary:" output))))
+    (is (not (null (search "mv-primary" output))))
+    (is (not (null (search "MV second:" output))))
+    (is (not (null (search "22" output))))
+    (is (not (null (search "MV third:" output))))
+    (is (not (null (search "33" output))))
+
+    (is (null (search "Should NOT print simple path" output)))
+    (is (null (search "Should NOT print nested inner" output)))
+    (is (null (search "Should NOT print nested outer" output)))
+    (is (null (search "Should NOT print uwp path" output)))
+    (is (null (search "Should NOT print mv path" output)))))
+
+(test callable-hardening-test
+  "Test that calling undefined/non-function values raises descriptive errors instead of runtime null/cast failures."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-callable-hardening.lisp"))))
+    (is (not (null (search "--- test-undefined-global-function ---" output))))
+    (is (not (null (search "Undefined function: EQUAL" output))))
+    (is (not (null (search "Result:" output))))
+    (is (not (null (search "CAUGHT" output))))
+
+    (is (not (null (search "--- test-non-function-object-call ---" output))))
+    (is (not (null (search "Attempted to call non-function object" output))))
+
+    (is (not (null (search "--- test-nested-computed-operator-undefined ---" output))))
+    (is (not (null (search "Undefined function: <computed function>" output))))
+    (is (null (search "SHOULD-NOT-REACH" output)))))
+
+(test restart-bind-edge-cases-test
+  "Test restart-bind edge cases including visibility, shadowing, arity, interactive invocation, anonymous restarts, stack order, and unwind-protect cleanup."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-restart-bind-edge-cases.lisp"))))
+    (is (not (null (search "RBE:BEGIN:SUITE" output))))
+    (is (not (null (search "RBE:END:SUITE" output))))
+
+    (is (not (null (search "VISIBILITY:INSIDE-COUNT" output))))
+    (is (not (null (search "VISIBILITY:FIND-INSIDE" output))))
+    (is (not (null (search "VISIBILITY:INVOKE" output))))
+    (is (not (null (search "VISIBILITY:AFTER-COUNT" output))))
+    (is (not (null (search "VISIBILITY:FIND-AFTER" output))))
+
+    (is (not (null (search "SHADOWING:OUTER-RESTORED" output))))
+    (is (not (null (search "SHADOWING:INNER-WINS" output))))
+
+    (is (not (null (search "ARITY:ZERO" output))))
+    (is (not (null (search "ARITY:ONE" output))))
+    (is (not (null (search "ARITY:TWO" output))))
+    (is (not (null (search "ARITY:THREE" output))))
+
+    (is (not (null (search "INTERACTIVE:LIST" output))))
+    (is (not (null (search "INTERACTIVE:SCALAR" output))))
+
+    (is (not (null (search "ANONYMOUS:FIND" output))))
+    (is (not (null (search "ANONYMOUS:INVOKE-BY-OBJECT" output))))
+
+    (is (not (null (search "STACK-ORDER:INNER-FIRST" output))))
+    (is (not (null (search "STACK-ORDER:INNER-SECOND" output))))
+    (is (not (null (search "STACK-ORDER:RESTORED" output))))
+
+    (is (not (null (search "UNWIND-PROTECT:INVOKE" output))))
+    (is (not (null (search "UNWIND-PROTECT:CLEANUP-RAN" output))))
+    (is (not (null (search "UNWIND-PROTECT:COUNT-RESTORED" output))))
+    (is (not (null (search "UNWIND-PROTECT:NOT-VISIBLE-AFTER" output))))
+
+    (is (null (search "RBE:FAIL" output)))))
+
+(test handler-bind-edge-cases-test
+  "Test handler-bind edge cases including visibility, ordering, unwind-protect cleanup, and lexical non-local exits."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-handler-bind-edge-cases.lisp"))))
+    (is (not (null (search "HBE:BEGIN:SUITE" output))))
+    (is (not (null (search "HBE:END:SUITE" output))))
+
+    (is (not (null (search "VISIBILITY:INSIDE-COUNT" output))))
+    (is (not (null (search "VISIBILITY:CONDITION-TYPE" output))))
+    (is (not (null (search "VISIBILITY:AFTER-COUNT" output))))
+
+    (is (not (null (search "SIGNAL-ORDER:INNER-FIRST" output))))
+    (is (not (null (search "SIGNAL-ORDER:OUTER-SECOND" output))))
+    (is (not (null (search "SIGNAL-ORDER:COUNT" output))))
+
+    (is (not (null (search "NESTED-TYPES:A-COUNT" output))))
+    (is (not (null (search "NESTED-TYPES:B-COUNT" output))))
+
+    (is (not (null (search "UNWIND-PROTECT:INSIDE-COUNT" output))))
+    (is (not (null (search "UNWIND-PROTECT:CLEANUP-RAN" output))))
+    (is (not (null (search "UNWIND-PROTECT:AFTER-COUNT" output))))
+
+    (is (not (null (search "LEXICAL-EXIT:CLEANUP" output))))
+    (is (not (null (search "LEXICAL-EXIT:RESULT" output))))
+    (is (not (null (search "LEXICAL-EXIT:CLEANUP-RAN" output))))
+
+    (is (not (null (search "ERROR-FLOW:HANDLER-BIND-NOT-CALLED" output))))
+    (is (not (null (search "ERROR-FLOW:HANDLER-CASE-CAUGHT" output))))
+
+    (is (null (search "HBE:FAIL" output)))
+    (is (null (search ":should-not-reach" output)))))
+
+(test signal-error-edge-cases-test
+  "Test signal/error edge cases including handler order, escalation, unwind-protect, and lexical non-local exits."
+  (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-signal-error-edge-cases.lisp"))))
+    (is (not (null (search "SEE:BEGIN:SUITE" output))))
+    (is (not (null (search "SEE:END:SUITE" output))))
+
+    (is (not (null (search "SIGNAL-NO-HANDLER:RETURNS-NIL" output))))
+
+    (is (not (null (search "SIGNAL-ORDER:INNER-THEN-OUTER" output))))
+    (is (not (null (search "SIGNAL-ORDER:RESUMES" output))))
+
+    (is (not (null (search "SIGNAL-LEXICAL-UWP:CLEANUP" output))))
+    (is (not (null (search "SIGNAL-LEXICAL-UWP:RESULT" output))))
+    (is (not (null (search "SIGNAL-LEXICAL-UWP:CLEANUP-RAN" output))))
+
+    (is (not (null (search "ERROR-HANDLER-CASE:CAUGHT" output))))
+
+    (is (not (null (search "ERROR-HB-HC:HANDLER-BIND-NOT-CALLED" output))))
+    (is (not (null (search "ERROR-HB-HC:HANDLER-CASE-CAUGHT" output))))
+
+    (is (not (null (search "ERROR-DOTNET:MESSAGE" output))))
+
+    (is (not (null (search "SIGNAL-ESCALATE:CAUGHT-ERROR" output))))
+
+    (is (not (null (search "ERROR-LEXICAL-UWP:CLEANUP" output))))
+    (is (not (null (search "ERROR-LEXICAL-UWP:RESULT" output))))
+    (is (not (null (search "ERROR-LEXICAL-UWP:CLEANUP-RAN" output))))
+
+    (is (null (search "SEE:FAIL" output)))
+    (is (null (search ":signal-should-not-reach" output)))
+    (is (null (search ":error-should-not-reach" output)))))
 
 (test nboyer-test
   "Test the classic Gabriel nboyer theorem prover benchmark."

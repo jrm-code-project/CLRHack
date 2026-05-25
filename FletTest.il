@@ -7,34 +7,13 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'MAIN'
-    .field public static object 'TEST_FLET_NON_RECURSIVE'
-    .field public static object 'TEST_FLET'
-    .field public static object '_CTOR'
-    .field public static object 'PRINT'
-    .field public static object 'OUTER_HELPER'
     .field public static object 'TEMP_B'
-    .field public static object '_'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'MAIN'
-    ldnull
-    stsfld object Program::'TEST_FLET_NON_RECURSIVE'
-    ldnull
-    stsfld object Program::'TEST_FLET'
-    ldnull
-    stsfld object Program::'_CTOR'
-    ldnull
-    stsfld object Program::'PRINT'
-    ldnull
-    stsfld object Program::'OUTER_HELPER'
-    ldnull
     stsfld object Program::'TEMP_B'
-    ldnull
-    stsfld object Program::'_'
     ret
 }
 
@@ -44,6 +23,7 @@
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -54,6 +34,7 @@
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -64,6 +45,7 @@
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -74,6 +56,7 @@
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -84,6 +67,7 @@
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -94,6 +78,7 @@
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -104,6 +89,7 @@
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -114,6 +100,7 @@
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -133,7 +120,7 @@
     pop
     tail. call object Program::'TEST_FLET_NON_RECURSIVE'()
     ret
-BLOCK_END_MAIN_733:
+BLOCK_END_MAIN_1867:
     nop
     ldnull
     ret
@@ -145,6 +132,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -155,6 +143,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -165,6 +154,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -175,6 +165,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -185,6 +176,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -195,6 +187,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -205,6 +198,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -215,6 +209,7 @@ BLOCK_END_MAIN_733:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -230,26 +225,47 @@ BLOCK_END_MAIN_733:
 .method private static hidebysig object 'TEST_FLET_NON_RECURSIVE_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object OUTER_HELPER730)
+    .locals init (object FN_TMP1902, object OUTER_HELPER1863)
     ldstr "Testing flet non-recursivity..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_739::'.ctor'()
-    stloc OUTER_HELPER730
+    newobj instance void L_1873::'.ctor'()
+    stloc OUTER_HELPER1863
     ldstr "outer-helper 5 (should be 16):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc OUTER_HELPER730
-    castclass [LispBase]Lisp.Closure
+    ldloc OUTER_HELPER1863
+    stloc FN_TMP1902
+    ldloc FN_TMP1902
+    brtrue FN_NULL1903
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP1902
+FN_NULL1903:
+    nop
+    ldloc FN_TMP1902
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK1904
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK1904:
+    nop
+FN_AFTER1905:
+    nop
     ldc.i4 5
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
+BLOCK_END_TEST_FLET_NON_RECURSIVE_1859:
     nop
     ldnull
     ret
@@ -261,6 +277,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -271,6 +288,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -281,6 +299,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -291,6 +310,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -301,6 +321,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -311,6 +332,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -321,6 +343,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -331,6 +354,7 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     ldc.i4 0
     ldc.i4 1
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -346,21 +370,42 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
 .method private static hidebysig object 'TEST_FLET_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object DOUBLE723, object ADD_10720, object DOUBLE717)
+    .locals init (object FN_TMP1898, object FN_TMP1894, object FN_TMP1890, object DOUBLE1855, object ADD_101852, object DOUBLE1849)
     ldstr "Testing flet..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_736::'.ctor'()
-    stloc DOUBLE717
-    newobj instance void L_737::'.ctor'()
-    stloc ADD_10720
+    newobj instance void L_1870::'.ctor'()
+    stloc DOUBLE1849
+    newobj instance void L_1871::'.ctor'()
+    stloc ADD_101852
     ldstr "double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE717
-    castclass [LispBase]Lisp.Closure
+    ldloc DOUBLE1849
+    stloc FN_TMP1890
+    ldloc FN_TMP1890
+    brtrue FN_NULL1891
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP1890
+FN_NULL1891:
+    nop
+    ldloc FN_TMP1890
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK1892
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK1892:
+    nop
+FN_AFTER1893:
+    nop
     ldc.i4 5
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
@@ -371,29 +416,71 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_726:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ADD_10720
-    castclass [LispBase]Lisp.Closure
+    ldloc ADD_101852
+    stloc FN_TMP1894
+    ldloc FN_TMP1894
+    brtrue FN_NULL1895
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP1894
+FN_NULL1895:
+    nop
+    ldloc FN_TMP1894
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK1896
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK1896:
+    nop
+FN_AFTER1897:
+    nop
     ldc.i4 4
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_738::'.ctor'()
-    stloc DOUBLE723
+    newobj instance void L_1872::'.ctor'()
+    stloc DOUBLE1855
     ldstr "shadowed double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE723
-    castclass [LispBase]Lisp.Closure
+    ldloc DOUBLE1855
+    stloc FN_TMP1898
+    ldloc FN_TMP1898
+    brtrue FN_NULL1899
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP1898
+FN_NULL1899:
+    nop
+    ldloc FN_TMP1898
+    isinst [LispBase]Lisp.Closure
+    dup
+    brtrue FN_TYPE_OK1900
+    pop
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+FN_TYPE_OK1900:
+    nop
+FN_AFTER1901:
+    nop
     ldc.i4 5
     box int32
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_713:
+BLOCK_END_TEST_FLET_1845:
     nop
     ldnull
     ret
@@ -405,6 +492,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -415,6 +503,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -425,6 +514,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -435,6 +525,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -445,6 +536,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -455,6 +547,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -465,6 +558,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -484,6 +578,7 @@ BLOCK_END_TEST_FLET_713:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -501,7 +596,7 @@ BLOCK_END_TEST_FLET_713:
     add
     box int32
     ret
-BLOCK_END_OUTER_HELPER_709:
+BLOCK_END_OUTER_HELPER_1840:
     nop
     ldnull
     ret
@@ -511,6 +606,7 @@ BLOCK_END_OUTER_HELPER_709:
 {
     .entrypoint
     .maxstack 8
+    call void [LispBase]Lisp.MopRuntime::'Initialize'()
     call object Program::'MAIN'()
     pop
     ret
@@ -518,7 +614,7 @@ BLOCK_END_OUTER_HELPER_709:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_736
+.class public auto ansi beforefieldinit L_1870
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -551,6 +647,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -561,7 +658,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_736::'InvokeBody'(object)
+    callvirt instance object L_1870::'InvokeBody'(object)
     ret
 }
 
@@ -571,6 +668,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -581,6 +679,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -591,6 +690,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -601,6 +701,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -611,6 +712,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -621,6 +723,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -631,13 +734,14 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
-} // end of class L_736
+} // end of class L_1870
 
-.class public auto ansi beforefieldinit L_737
+.class public auto ansi beforefieldinit L_1871
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -671,6 +775,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -681,7 +786,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_737::'InvokeBody'(object)
+    callvirt instance object L_1871::'InvokeBody'(object)
     ret
 }
 
@@ -691,6 +796,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -701,6 +807,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -711,6 +818,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -721,6 +829,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -731,6 +840,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -741,6 +851,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -751,13 +862,14 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
-} // end of class L_737
+} // end of class L_1871
 
-.class public auto ansi beforefieldinit L_738
+.class public auto ansi beforefieldinit L_1872
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -791,6 +903,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -801,7 +914,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_738::'InvokeBody'(object)
+    callvirt instance object L_1872::'InvokeBody'(object)
     ret
 }
 
@@ -811,6 +924,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -821,6 +935,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -831,6 +946,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -841,6 +957,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -851,6 +968,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -861,6 +979,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -871,13 +990,14 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
-} // end of class L_738
+} // end of class L_1872
 
-.class public auto ansi beforefieldinit L_739
+.class public auto ansi beforefieldinit L_1873
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -912,6 +1032,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 0
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -922,7 +1043,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_739::'InvokeBody'(object)
+    callvirt instance object L_1873::'InvokeBody'(object)
     ret
 }
 
@@ -932,6 +1053,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 2
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -942,6 +1064,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 3
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -952,6 +1075,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 4
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -962,6 +1086,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 5
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -972,6 +1097,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 6
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -982,6 +1108,7 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 7
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
@@ -992,9 +1119,10 @@ BLOCK_END_OUTER_HELPER_709:
     ldc.i4 1
     ldc.i4 8
     newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
-} // end of class L_739
+} // end of class L_1873
 

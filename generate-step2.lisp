@@ -25,15 +25,34 @@
 (register-primitive-step2 
  '("%WRITE-LINE" "%WRITE-OBJECT" "%WRITE-INT" "PRINT" "%SUB" "-" "%MUL" "*" "%DIV" "/" "%ADD" "+" "=" "1+" "1-"
    "%LESSP" "<" "%NOT" "NOT" "%CONS" "CONS" "LIST" "%CAR" "CAR" "%CDR" "CDR" "%EQ" "EQ" "%NULL" "NULL"
-   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%SET-CELL-VALUE!" "%GET-ACTIVE-RESTARTS" "%GET-ACTIVE-HANDLERS"
-   "FIND-RESTART" "INVOKE-RESTART" "INVOKE-RESTART-INTERACTIVELY" "APPLY" "SIGNAL" "ERROR" "%BREAK")
+   "%CONSP" "CONSP" "%MAKE-CELL" "%CELL-VALUE" "%GET-ACTIVE-RESTARTS" "%GET-ACTIVE-HANDLERS"
+   "FIND-RESTART" "INVOKE-RESTART" "INVOKE-RESTART-INTERACTIVELY" "APPLY" "SIGNAL" "ERROR" "%BREAK"
+   "SLOT-VALUE" "SET-SLOT-VALUE")
  #'standard-step2-handler)
 
+(register-primitive-step2 "%SET-CELL-VALUE!"
+                          (lambda (node tail-p)
+                            (let* ((operands (ast-application-operands node))
+                                   (cell-form (first operands))
+                                   (value-form (second operands))
+                                   (cell-temp (register-local (string (gensym "CELL_TMP"))))
+                                   (value-temp (register-local (string (gensym "CELL_VAL_TMP"))))
+                                   (code (append (generate-step2 cell-form nil)
+                                                 (list (il:stloc cell-temp))
+                                                 (generate-step2 value-form nil)
+                                                 (list (il:stloc value-temp)
+                                                       (il:ldloc cell-temp)
+                                                       (il:castclass "[LispBase]Lisp.ValueCell")
+                                                       (il:ldloc value-temp)
+                                                       (il:stfld "object [LispBase]Lisp.ValueCell::Value")
+                                                       (il:ldloc value-temp)))))
+                              (if tail-p (append code (list (il:ret))) code))))
+
 (register-primitive-step2 "%INTERN"
-  (lambda (node tail-p)
-    (declare (ignore node))
-    (let ((code (ast-basic-block node)))
-      (if tail-p (append code (list (il:ret))) code))))
+                          (lambda (node tail-p)
+                            (declare (ignore node))
+                            (let ((code (ast-basic-block node)))
+                              (if tail-p (append code (list (il:ret))) code))))
 
 ;;; Step 2 Methods
 
@@ -45,11 +64,11 @@
   (let* ((alpha (ast-variable-alpha-name node))
          (alpha-str (string alpha))
          (block
-          (cond
-            ((and *current-lambda-class* (member alpha *current-lambda-free-vars*))
-             (list (il:ldarg.0)
-                   (il:ldfld (format nil "object ~A::'~A'" *current-lambda-class* (sanitize-identifier alpha-str)))))
-            (t (ast-basic-block node)))))
+             (cond
+               ((and *current-lambda-class* (member alpha *current-lambda-free-vars*))
+                (list (il:ldarg.0)
+                      (il:ldfld (format nil "object ~A::'~A'" *current-lambda-class* (sanitize-identifier alpha-str)))))
+               (t (ast-basic-block node)))))
     (if tail-p (append block (list (il:ret))) block)))
 
 (defmethod generate-step2 ((node ast-if) &optional tail-p)
@@ -89,7 +108,7 @@
                 if (or (typep form 'ast-throw) (typep form 'ast-return-from) (typep form 'ast-go))
                   do (return result)
                 else if (and (not is-last) code)
-                  do (setf result (append result (list (il:pop)))))
+                       do (setf result (append result (list (il:pop)))))
           result))))
 
 (defmethod generate-step2 ((node ast-setq) &optional tail-p)
@@ -97,16 +116,16 @@
          (alpha (ast-variable-alpha-name var))
          (alpha-str (string alpha))
          (store-code
-          (cond
-            ((and *current-lambda-class* (member alpha *current-lambda-free-vars*))
-             (let ((temp (register-local (gensym "TEMP"))))
-               (list (il:stloc temp)
-                     (il:ldarg.0)
-                     (il:ldloc temp)
-                     (il:stfld (format nil "object ~A::'~A'" *current-lambda-class* (sanitize-identifier alpha-str)))
-                     (il:ldloc temp))))
-            (t
-             (cons (il:dup) (ast-basic-block node))))))
+           (cond
+             ((and *current-lambda-class* (member alpha *current-lambda-free-vars*))
+              (let ((temp (register-local (gensym "TEMP"))))
+                (list (il:stloc temp)
+                      (il:ldarg.0)
+                      (il:ldloc temp)
+                      (il:stfld (format nil "object ~A::'~A'" *current-lambda-class* (sanitize-identifier alpha-str)))
+                      (il:ldloc temp))))
+             (t
+              (cons (il:dup) (ast-basic-block node))))))
     (let ((code (append (generate-step2 (ast-setq-value node) nil)
                         store-code)))
       (if tail-p (append code (list (il:ret))) code))))
@@ -119,14 +138,14 @@
                                        (ast-let-bindings node))))
         (forms (ast-let-body node)))
     (let ((body-code
-           (if (null forms)
-               (if tail-p (list (il:ldnull) (il:ret)) (list (il:ldnull)))
-               (loop for form in forms
-                     for i from 1
-                     for is-last = (= i (length forms))
-                     append (generate-step2 form (if is-last tail-p nil))
-                     when (not is-last)
-                       append (list (il:pop))))))
+            (if (null forms)
+                (if tail-p (list (il:ldnull) (il:ret)) (list (il:ldnull)))
+                (loop for form in forms
+                      for i from 1
+                      for is-last = (= i (length forms))
+                      append (generate-step2 form (if is-last tail-p nil))
+                      when (not is-last)
+                        append (list (il:pop))))))
       (append bindings-code body-code))))
 
 (defun generate-keyword-prologue (key-params rest-param allow-other-keys current-params is-closure)
@@ -148,33 +167,33 @@
           (key-local (register-local (gensym "KEY_TEMP")))
           (val-local (register-local (gensym "VAL_TEMP"))))
       (setf prologue (append prologue
-        (list (il:ldarg (if is-closure (1+ rest-idx) rest-idx))
-              (il:stloc rest-local)
-              (il:nop :label loop-label)
-              (il:ldloc rest-local)
-              (il:ldnull)
-              (il:ceq)
-              (il:brtrue done-label))))
+                             (list (il:ldarg (if is-closure (1+ rest-idx) rest-idx))
+                                   (il:stloc rest-local)
+                                   (il:nop :label loop-label)
+                                   (il:ldloc rest-local)
+                                   (il:ldnull)
+                                   (il:ceq)
+                                   (il:brtrue done-label))))
 
       ;; Inside loop: get key and value from ListCell
       (setf prologue (append prologue
-        (list (il:ldloc rest-local)
-              (il:castclass "[LispBase]Lisp.List/ListCell")
-              (il:ldfld "object [LispBase]Lisp.List/ListCell::first") ;; the key
-              (il:stloc key-local)
-              (il:ldloc rest-local)
-              (il:castclass "[LispBase]Lisp.List/ListCell")
-              (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
-              (il:castclass "[LispBase]Lisp.List/ListCell")
-              (il:ldfld "object [LispBase]Lisp.List/ListCell::first") ;; the value
-              (il:stloc val-local)
-              ;; Advance rest-param: rest = rest.rest.rest
-              (il:ldloc rest-local)
-              (il:castclass "[LispBase]Lisp.List/ListCell")
-              (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
-              (il:castclass "[LispBase]Lisp.List/ListCell")
-              (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
-              (il:stloc rest-local))))
+                             (list (il:ldloc rest-local)
+                                   (il:castclass "[LispBase]Lisp.List/ListCell")
+                                   (il:ldfld "object [LispBase]Lisp.List/ListCell::first") ;; the key
+                                   (il:stloc key-local)
+                                   (il:ldloc rest-local)
+                                   (il:castclass "[LispBase]Lisp.List/ListCell")
+                                   (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
+                                   (il:castclass "[LispBase]Lisp.List/ListCell")
+                                   (il:ldfld "object [LispBase]Lisp.List/ListCell::first") ;; the value
+                                   (il:stloc val-local)
+                                   ;; Advance rest-param: rest = rest.rest.rest
+                                   (il:ldloc rest-local)
+                                   (il:castclass "[LispBase]Lisp.List/ListCell")
+                                   (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
+                                   (il:castclass "[LispBase]Lisp.List/ListCell")
+                                   (il:ldfld "object [LispBase]Lisp.List/ListCell::rest")
+                                   (il:stloc rest-local))))
 
       ;; Match the key against each defined keyword
       (dolist (key key-params)
@@ -184,34 +203,34 @@
             (setf prologue (append prologue (list (il:ldloc key-local))))
             (setf prologue (append prologue (load-symbol-il kw)))
             (setf prologue (append prologue
-              (list (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object"))
-                    (il:brfalse next-kw)
-                    ;; MATCHED: store value
-                    (il:ldloc val-local)
-                    (il:stloc (sanitize-identifier (string alpha))))))
+                                   (list (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object"))
+                                         (il:brfalse next-kw)
+                                         ;; MATCHED: store value
+                                         (il:ldloc val-local)
+                                         (il:stloc (sanitize-identifier (string alpha))))))
             (when sup-alpha
               (setf prologue (append prologue (load-symbol-il "T")))
               (setf prologue (append prologue (list (il:stloc (sanitize-identifier (string sup-alpha)))))))
             (setf prologue (append prologue
-              (list (il:br loop-label)
-                    (il:nop :label next-kw)))))))
+                                   (list (il:br loop-label)
+                                         (il:nop :label next-kw)))))))
 
       ;; Handle :allow-other-keys or end of loop
       (let ((allow-ok (sanitize-identifier (string (gensym "ALLOW_OK")))))
         (setf prologue (append prologue (list (il:ldloc key-local))))
         (setf prologue (append prologue (load-symbol-il :allow-other-keys)))
         (setf prologue (append prologue
-          (list (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object"))
-                (il:brfalse allow-ok)
-                ;; MATCHED :allow-other-keys.
-                (il:br loop-label)
-                (il:nop :label allow-ok)))))
+                               (list (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object"))
+                                     (il:brfalse allow-ok)
+                                     ;; MATCHED :allow-other-keys.
+                                     (il:br loop-label)
+                                     (il:nop :label allow-ok)))))
 
       ;; If not matched and not &allow-other-keys, we should ideally signal an error.
       ;; For now, just continue.
       (setf prologue (append prologue
-        (list (il:br loop-label)
-              (il:nop :label done-label)))))
+                             (list (il:br loop-label)
+                                   (il:nop :label done-label)))))
     prologue))
 
 (defmethod generate-step2 ((node ast-lambda) &optional tail-p)
@@ -238,20 +257,20 @@
                    (done-label (sanitize-identifier (string (gensym "DONE"))))
                    (arg-idx (if *current-lambda-class* (1+ opt-idx) opt-idx)))
                (setf prologue (append prologue
-                 (list (il:ldarg arg-idx)
-                       (il:ldsfld "object [LispBase]Lisp.Undefined::Value")
-                       (il:bne.un supplied-label))
-                 ;; NOT SUPPLIED: Eval init-form and starg
-                 (generate-step2 init-ast nil)
-                 (list (il:starg arg-idx))))
+                                      (list (il:ldarg arg-idx)
+                                            (il:ldsfld "object [LispBase]Lisp.Undefined::Value")
+                                            (il:bne.un supplied-label))
+                                      ;; NOT SUPPLIED: Eval init-form and starg
+                                      (generate-step2 init-ast nil)
+                                      (list (il:starg arg-idx))))
                ;; Set sup-p to null
                (when sup-name
                  (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
                    (setf prologue (append prologue (list (il:ldnull))
                                           (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
                (setf prologue (append prologue
-                 (list (il:br done-label)
-                       (il:nop :label supplied-label))))
+                                      (list (il:br done-label)
+                                            (il:nop :label supplied-label))))
                ;; SUPPLIED: Set sup-p to T
                (when sup-name
                  (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
@@ -271,15 +290,15 @@
 
     ;; C. Generate Body
     (let ((body-code (if (and (null forms) (null prologue))
-                        (list (il:ldnull) (il:ret))
-                        (let ((res prologue))
-                          (loop for form in forms
-                                for i from 1
-                                for is-last = (= i (length forms))
-                                do (setf res (append res (generate-step2 form is-last)))
-                                when (not is-last)
-                                  do (setf res (append res (list (il:pop)))))
-                          (append res (list (il:ldnull) (il:ret)))))))
+                         (list (il:ldnull) (il:ret))
+                         (let ((res prologue))
+                           (loop for form in forms
+                                 for i from 1
+                                 for is-last = (= i (length forms))
+                                 do (setf res (append res (generate-step2 form is-last)))
+                                 when (not is-last)
+                                   do (setf res (append res (list (il:pop)))))
+                           (append res (list (il:ldnull) (il:ret)))))))
       (setf (ast-basic-block node) body-code)
       body-code)))
 
@@ -366,24 +385,24 @@
          (protected-code (append (let ((*in-try-block* t)) (generate-step2 (ast-unwind-protect-protected-form node) nil))
                                  (list (il:stloc result-temp)
                                        (il:leave done-label))))         (cleanup-code (append 
-                        ;; Save side-channel at start of finally
-                        (list (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
-                              (il:stloc count-temp))
-                        (loop for i from 1 below 64
-                              for temp in extra-temps
-                              append (list (il:ldsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))
-                                           (il:stloc temp)))
-                        ;; Cleanup forms
-                        (loop for f in (ast-unwind-protect-cleanup-forms node)
-                              append (append (generate-step2 f nil) (list (il:pop))))
-                        ;; Restore side-channel at end of finally
-                        (list (il:ldloc count-temp)
-                              (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount"))
-                        (loop for i from 1 below 64
-                              for temp in extra-temps
-                              append (list (il:ldloc temp)
-                                           (il:stsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))))
-                        (list (il:endfinally))))
+                                                                                       ;; Save side-channel at start of finally
+                                 (list (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
+                                       (il:stloc count-temp))
+                                 (loop for i from 1 below 64
+                                       for temp in extra-temps
+                                       append (list (il:ldsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))
+                                                    (il:stloc temp)))
+                                 ;; Cleanup forms
+                                 (loop for f in (ast-unwind-protect-cleanup-forms node)
+                                       append (append (generate-step2 f nil) (list (il:pop))))
+                                 ;; Restore side-channel at end of finally
+                                 (list (il:ldloc count-temp)
+                                       (il:stsfld "int32 [LispBase]Lisp.Values::ReturnCount"))
+                                 (loop for i from 1 below 64
+                                       for temp in extra-temps
+                                       append (list (il:ldloc temp)
+                                                    (il:stsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))))
+                                 (list (il:endfinally))))
          (code (list (il:try protected-code)
                      (il:finally cleanup-code)
                      (il:ldloc result-temp :label done-label))))
@@ -392,22 +411,44 @@
 (defmethod generate-step2 ((node ast-block) &optional tail-p)
   (let* ((forms (ast-block-body node))
          (result-temp (ast-block-result-temp node))
-         (needs-temp (block-needs-result-temp-p node))
+         (needs-catch (ast-block-needs-catch-frame-p node))
+         (needs-temp (or needs-catch (block-needs-result-temp-p node)))
+         (rethrow-label (when needs-catch (sanitize-identifier (string (gensym "BLOCK_RETHROW")))))
          (temp (when needs-temp (register-local result-temp)))
          (body-code
-          (if (null forms)
-              (if needs-temp (list (il:ldnull) (il:stloc temp)) (list (il:ldnull)))
-              (loop for form in forms
-                    for i from 1
-                    for is-last = (= i (length forms))
-                    append (generate-step2 form (if (and is-last (not needs-temp)) tail-p nil))
-                    if (and is-last needs-temp)
-                      append (list (il:stloc temp))
-                    else if (and (not is-last) (not (typep form 'ast-return-from)))
-                      append (list (il:pop))))))
-    (let ((code (append body-code
-                        (list (il:nop :label (sanitize-identifier (ast-block-end-label node))))
-                        (when needs-temp (list (il:ldloc temp))))))
+           (if (null forms)
+               (if needs-temp (list (il:ldnull) (il:stloc temp)) (list (il:ldnull)))
+               (loop for form in forms
+                     for i from 1
+                     for is-last = (= i (length forms))
+                     append (generate-step2 form (if (and is-last (not needs-temp)) tail-p nil))
+                     if (and is-last needs-temp)
+                       append (list (il:stloc temp))
+                     else if (and (not is-last) (not (typep form 'ast-return-from)))
+                            append (list (il:pop))))))
+    (let* ((end-label (sanitize-identifier (ast-block-end-label node)))
+           (try-code (append body-code (list (il:leave end-label))))
+           (code (append
+                  (if needs-catch
+                      (list
+                       (il:try try-code)
+                       (il:catch "[LispBase]Lisp.BlockExitException"
+                         (list (il:dup)
+                               (il:callvirt :method "get_BlockId" :class "[LispBase]Lisp.BlockExitException" :return "object" :args nil)
+                               (il:ldstr (ast-block-id node))
+                               (il:call :method "Equals" :class "[mscorlib]System.Object" :return "bool" :args '("object" "object"))
+                               (il:brfalse rethrow-label)
+                               (il:dup)
+                               (il:callvirt :method "get_CapturedValues" :class "[LispBase]Lisp.BlockExitException" :return "object[]" :args nil)
+                               (il:call :method "RestoreValues" :class "[LispBase]Lisp.Values" :return "void" :args '("object[]"))
+                               (il:callvirt :method "get_Value" :class "[LispBase]Lisp.BlockExitException" :return "object" :args nil)
+                               (il:stloc temp)
+                               (il:leave end-label)
+                               (il:pop :label rethrow-label)
+                               (il:rethrow))))
+                      body-code)
+                  (list (il:nop :label end-label))
+                  (when needs-temp (list (il:ldloc temp))))))
       (if (and tail-p (or needs-temp (null forms)))
           (append code (list (il:ret)))
           code))))
@@ -415,9 +456,15 @@
 (defmethod generate-step2 ((node ast-return-from) &optional tail-p)
   (declare (ignore tail-p))
   (let ((result-temp (ast-return-from-result-temp node)))
-    (append (generate-step2 (ast-return-from-value node) nil)
-            (list (il:stloc (sanitize-identifier result-temp))
-                  (il:leave (sanitize-identifier (ast-return-from-target-label node)))))))
+    (if (ast-return-from-non-local-p node)
+        (append (list (il:ldstr (ast-return-from-target-id node)))
+                (generate-step2 (ast-return-from-value node) nil)
+                (list (il:call :method "CaptureValues" :class "[LispBase]Lisp.Values" :return "object[]" :args nil)
+                      (il:newobj :method ".ctor" :class "[LispBase]Lisp.BlockExitException" :return "instance void" :args '("object" "object" "object[]"))
+                      (il:throw)))
+        (append (generate-step2 (ast-return-from-value node) nil)
+                (list (il:stloc (sanitize-identifier result-temp))
+                      (il:leave (sanitize-identifier (ast-return-from-target-label node))))))))
 
 (defmethod generate-step2 ((node ast-catch) &optional tail-p)
   (let* ((done-label (sanitize-identifier (string (gensym "CATCH_DONE"))))
@@ -512,26 +559,26 @@
           do (let ((skip-label (sanitize-identifier (string (gensym "SKIP_VAL"))))
                    (done-label (sanitize-identifier (string (gensym "DONE_VAL")))))
                (setf code (append code
-                 (list (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
-                       (il:ldc.i4 i)
-                       (il:ble skip-label)
-                       (il:ldsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))
-                       (il:stloc (sanitize-identifier (string var)))
-                       (il:br done-label)
-                       (il:nop :label skip-label)
-                       (il:ldnull)
-                       (il:stloc (sanitize-identifier (string var)))
-                       (il:nop :label done-label))))))
+                                  (list (il:ldsfld "int32 [LispBase]Lisp.Values::ReturnCount")
+                                        (il:ldc.i4 i)
+                                        (il:ble skip-label)
+                                        (il:ldsfld (format nil "object [LispBase]Lisp.Values::Value~D" i))
+                                        (il:stloc (sanitize-identifier (string var)))
+                                        (il:br done-label)
+                                        (il:nop :label skip-label)
+                                        (il:ldnull)
+                                        (il:stloc (sanitize-identifier (string var)))
+                                        (il:nop :label done-label))))))
     ;; 5. Evaluate body
     (let ((body-code
-           (if (null body)
-               (if tail-p (list (il:ldnull) (il:ret)) (list (il:ldnull)))
-               (loop for form in body
-                     for i from 1
-                     for is-last = (= i (length body))
-                     append (generate-step2 form (if is-last tail-p nil))
-                     when (not is-last)
-                       append (list (il:pop))))))
+            (if (null body)
+                (if tail-p (list (il:ldnull) (il:ret)) (list (il:ldnull)))
+                (loop for form in body
+                      for i from 1
+                      for is-last = (= i (length body))
+                      append (generate-step2 form (if is-last tail-p nil))
+                      when (not is-last)
+                        append (list (il:pop))))))
       (append code body-code))))
 
 (defmethod generate-step2 ((node ast-multiple-value-prog1) &optional tail-p)
@@ -801,7 +848,7 @@
          (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
          ;; Use already bound params if present (from pass1), otherwise construct them.
          (*current-lambda-params* (or *current-lambda-params*
-                                     (append req-params opt-names opt-supplied-names (when rest-param (list rest-param)))))
+                                      (append req-params opt-names opt-supplied-names (when rest-param (list rest-param)))))
          (forms (ast-toplevel-defun-body node))
          (prologue nil))
 
@@ -812,20 +859,20 @@
                    (done-label (sanitize-identifier (string (gensym "DONE"))))
                    (arg-idx (if *current-lambda-class* (1+ opt-idx) opt-idx)))
                (setf prologue (append prologue
-                 (list (il:ldarg arg-idx)
-                       (il:ldsfld "object [LispBase]Lisp.Undefined::Value")
-                       (il:bne.un supplied-label))
-                 ;; NOT SUPPLIED: Eval init-form and starg
-                 (generate-step2 init-ast nil)
-                 (list (il:starg arg-idx))))
+                                      (list (il:ldarg arg-idx)
+                                            (il:ldsfld "object [LispBase]Lisp.Undefined::Value")
+                                            (il:bne.un supplied-label))
+                                      ;; NOT SUPPLIED: Eval init-form and starg
+                                      (generate-step2 init-ast nil)
+                                      (list (il:starg arg-idx))))
                ;; Set sup-p to null
                (when sup-name
                  (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
                    (setf prologue (append prologue (list (il:ldnull))
                                           (list (il:starg (if *current-lambda-class* (1+ sup-idx) sup-idx)))))))
                (setf prologue (append prologue
-                 (list (il:br done-label)
-                       (il:nop :label supplied-label))))
+                                      (list (il:br done-label)
+                                            (il:nop :label supplied-label))))
                ;; SUPPLIED: Set sup-p to T
                (when sup-name
                  (let ((sup-idx (position sup-name *current-lambda-params* :test #'eq)))
@@ -845,15 +892,15 @@
 
     ;; C. Generate Body
     (let ((body-code (if (and (null forms) (null prologue))
-                        (list (il:ldnull) (il:ret))
-                        (let ((res prologue))
-                          (loop for form in forms
-                                for i from 1
-                                for is-last = (= i (length forms))
-                                do (setf res (append res (generate-step2 form is-last)))
-                                when (not is-last)
-                                  do (setf res (append res (list (il:pop)))))
-                          (append res (list (il:ldnull) (il:ret)))))))
+                         (list (il:ldnull) (il:ret))
+                         (let ((res prologue))
+                           (loop for form in forms
+                                 for i from 1
+                                 for is-last = (= i (length forms))
+                                 do (setf res (append res (generate-step2 form is-last)))
+                                 when (not is-last)
+                                   do (setf res (append res (list (il:pop)))))
+                           (append res (list (il:ldnull) (il:ret)))))))
       (setf (ast-basic-block node) body-code)
       body-code)))
 
@@ -873,15 +920,40 @@
                 (funcall handler node tail-p)
                 (if (and name (member (ast-variable-name operator) *toplevel-defuns* :test #'eq))
                     (standard-step2-handler node tail-p)
-                    (let ((operator-code (generate-step2 operator nil))
-                          (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) operands)))
-                          (bb (ast-basic-block node)))
+                    (let* ((fn-temp (register-local (string (gensym "FN_TMP"))))
+                           (null-label (sanitize-identifier (string (gensym "FN_NULL"))))
+                           (type-ok-label (sanitize-identifier (string (gensym "FN_TYPE_OK"))))
+                           (after-label (sanitize-identifier (string (gensym "FN_AFTER"))))
+                           (operator-code (generate-step2 operator nil))
+                           (operands-code (reduce #'append (mapcar (lambda (v) (generate-step2 v nil)) operands)))
+                           (bb (ast-basic-block node)))
                       (when (and tail-p (not *in-try-block*) bb)
                         (let ((last-inst (car (last bb))))
                           (when (and (typep last-inst 'cil-call-instruction)
                                      (member (get-opcode last-inst) '("call" "callvirt") :test #'string-equal))
                             (setf (get-tail-p last-inst) t))))
-                      (let ((code (append operator-code (list (il:castclass "[LispBase]Lisp.Closure")) operands-code bb)))
+                      (let ((code (append operator-code
+                                          (list (il:stloc fn-temp)
+                                                (il:ldloc fn-temp)
+                                                (il:brtrue null-label)
+                                                (il:ldstr (format nil "Undefined function: ~A" (or name "<computed function>")))
+                                                (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
+                                                (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                                (il:stloc fn-temp)
+                                                (il:nop :label null-label)
+                                                (il:ldloc fn-temp)
+                                                (il:isinst "[LispBase]Lisp.Closure")
+                                                (il:dup)
+                                                (il:brtrue type-ok-label)
+                                                (il:pop)
+                                                (il:ldstr (format nil "Attempted to call non-function object in ~A" (or name "<computed function>")))
+                                                (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
+                                                (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                                (il:isinst "[LispBase]Lisp.Closure")
+                                                (il:nop :label type-ok-label)
+                                                (il:nop :label after-label))
+                                          operands-code
+                                          bb)))
                         (if (and tail-p (not *in-try-block*)) (append code (list (il:ret))) code))))))))))
 
 ;;; ===========================================================================
@@ -906,11 +978,11 @@
                  (ast-class (push n classes))
                  (ast-toplevel-defun (mapc #'traverse (ast-toplevel-defun-body n)))
                  (ast-if (traverse (ast-if-test n))
-                         (traverse (ast-if-consequent n))
-                         (traverse (ast-if-alternate n)))
+                  (traverse (ast-if-consequent n))
+                  (traverse (ast-if-alternate n)))
                  (ast-progn (mapc #'traverse (ast-progn-forms n)))
                  (ast-let (mapc (lambda (b) (traverse (cadr b))) (ast-let-bindings n))
-                          (mapc #'traverse (ast-let-body n)))
+                  (mapc #'traverse (ast-let-body n)))
                  (ast-setq (traverse (ast-setq-value n)))
                  (ast-method (mapc #'traverse (ast-method-body n)))
                  (ast-application
@@ -1085,91 +1157,94 @@
 
 (defun generate-toplevel-methods (toplevel-defuns)
   (reduce #'append
-    (mapcar (lambda (defun-node)
-              (let* ((name (sanitize-identifier (string (ast-toplevel-defun-name defun-node))))
-                     (body-name (format nil "~A_Body" name))
-                     (req-params (ast-toplevel-defun-params defun-node))
-                     (optionals (ast-toplevel-defun-optional-params defun-node))
-                     (rest-param (ast-toplevel-defun-rest-param defun-node))
-                     (has-rest (not (null rest-param)))
-                     (opt-names (mapcar #'car optionals))
-                     (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
-                     (body-params (append req-params
-                                          opt-names
-                                          opt-supplied-names
-                                          (when has-rest (list rest-param))))
-                     (n-body-params (length body-params))
-                     (methods nil))
+          (mapcar (lambda (defun-node)
+                    (let* ((name (sanitize-identifier (string (ast-toplevel-defun-name defun-node))))
+                           (body-name (format nil "~A_Body" name))
+                           (req-params (ast-toplevel-defun-params defun-node))
+                           (optionals (ast-toplevel-defun-optional-params defun-node))
+                           (rest-param (ast-toplevel-defun-rest-param defun-node))
+                           (has-rest (not (null rest-param)))
+                           (opt-names (mapcar #'car optionals))
+                           (opt-supplied-names (loop for opt in optionals when (third opt) collect (third opt)))
+                           (body-params (append req-params
+                                                opt-names
+                                                opt-supplied-names
+                                                (when has-rest (list rest-param))))
+                           (n-body-params (length body-params))
+                           (methods nil))
                 
-                ;; 1. Generate Body
-                (multiple-value-bind (block locals) 
-                    (let ((*current-lambda-params* body-params)
-                          (*current-locals* nil))
-                      (generate-step1 defun-node)
-                      (values (generate-step2 defun-node t) *current-locals*))
-                  (let ((locals-decl (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)))
-                    (push (il:method :name body-name
-                                     :return-type "object"
-                                     :arg-types (make-list n-body-params :initial-element "object")
-                                     :locals locals-decl
-                                     :visibility :private
-                                     :static-p t
-                                     :instructions block)
-                          methods)))
+                      ;; 1. Generate Body
+                      (multiple-value-bind (block locals) 
+                          (let ((*current-lambda-params* body-params)
+                                (*current-locals* nil))
+                            (generate-step1 defun-node)
+                            (values (generate-step2 defun-node t) *current-locals*))
+                        (let ((locals-decl (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)))
+                          (push (il:method :name body-name
+                                           :return-type "object"
+                                           :arg-types (make-list n-body-params :initial-element "object")
+                                           :locals locals-decl
+                                           :visibility :private
+                                           :static-p t
+                                           :instructions block)
+                                methods)))
 
-                ;; 2. Generate Overloads (0 to 8)
-                (loop for m from 0 to 8 do
-                  (let* ((invoke-arg-types (make-list m :initial-element "object"))
-                         (too-few (< m (length req-params)))
-                         (has-keys (not (null (ast-toplevel-defun-key-params defun-node))))
-                         (too-many (and (not has-rest) (not has-keys) (> m (+ (length req-params) (length optionals)))))
-                         (n-extra (- m (+ (length req-params) (length optionals))))
-                         (insts (cond
-                                  ((or too-few too-many)
-                                   (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
-                                         (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
-                                         (il:tail.)
-                                         (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
-                                         (il:ret)))
-                                  ((and has-keys (oddp n-extra))
-                                   (list (il:ldstr "Odd number of keyword arguments")
-                                         (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
-                                         (il:tail.)
-                                         (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
-                                         (il:ret)))
+                      ;; 2. Generate Overloads (0 to 8)
+                      (loop for m from 0 to 8 do
+                        (let* ((invoke-arg-types (make-list m :initial-element "object"))
+                               (too-few (< m (length req-params)))
+                               (has-keys (not (null (ast-toplevel-defun-key-params defun-node))))
+                               (too-many (and (not has-rest) (not has-keys) (> m (+ (length req-params) (length optionals)))))
+                               (n-extra (- m (+ (length req-params) (length optionals))))
+                               (insts (cond
+                                        ((or too-few too-many)
+                                         (list (il:ldc.i4 (length req-params)) (il:ldc.i4 m)
+                                               (il:newobj :method ".ctor" :class "[LispBase]Lisp.WrongNumberOfArgumentsException" :return "instance void" :args '("int32" "int32"))
+                                               (il:tail.)
+                                               (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                               (il:ret)))
+                                        ((and has-keys (oddp n-extra))
+                                         (list (il:ldstr "Odd number of keyword arguments")
+                                               (il:newobj :method ".ctor" :class "[mscorlib]System.Exception" :return "instance void" :args '("string"))
+                                               (il:tail.)
+                                               (il:call :method "Error" :class "[LispBase]Lisp.HandlerControl" :return "object" :args '("object"))
+                                               (il:ret)))
 
-                                  (t
-                                   (let ((prep-code nil))
-                                     ;; Pass Requireds
-                                     (loop for i from 0 below (length req-params) do
-                                       (push (il:ldarg i) prep-code))
-                                     ;; Pass Optionals or Sentinel
-                                     (loop for i from 0 below (length optionals)
-                                           for arg-idx = (+ (length req-params) i)
-                                           do (if (< arg-idx m)
-                                                  (push (il:ldarg arg-idx) prep-code)
-                                                  (push (il:ldsfld "object [LispBase]Lisp.Undefined::Value") prep-code)))
-                                     ;; Pass nulls for supplied-p (Body will overwrite)
-                                     (loop repeat (length opt-supplied-names) do (push (il:ldnull) prep-code))
-                                     ;; Handle &rest (and keywords)
-                                     (when has-rest
-                                       (loop for i from (+ (length req-params) (length optionals)) below m do
-                                         (push (il:ldarg i) prep-code))
-                                       (push (il:ldnull) prep-code)
-                                       (loop repeat (max 0 n-extra) do
-                                         (push (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")) prep-code)))
+                                        (t
+                                         (let ((prep-code nil))
+                                           ;; Pass Requireds
+                                           (loop for i from 0 below (length req-params) do
+                                             (push (il:ldarg i) prep-code))
+                                           ;; Pass Optionals or Sentinel
+                                           (loop for i from 0 below (length optionals)
+                                                 for arg-idx = (+ (length req-params) i)
+                                                 do (if (< arg-idx m)
+                                                        (push (il:ldarg arg-idx) prep-code)
+                                                        (push (il:ldsfld "object [LispBase]Lisp.Undefined::Value") prep-code)))
+                                           ;; Pass nulls for supplied-p (Body will overwrite)
+                                           (loop repeat (length opt-supplied-names) do (push (il:ldnull) prep-code))
+                                           ;; Handle &rest (and keywords)
+                                           (when has-rest
+                                             (loop for i from (+ (length req-params) (length optionals)) below m do
+                                               (push (il:ldarg i) prep-code))
+                                             (push (il:ldnull) prep-code)
+                                             (loop repeat (max 0 n-extra) do
+                                               (push (il:newobj :method ".ctor" :class "[LispBase]Lisp.List/ListCell" :return "instance void" :args '("object" "object")) prep-code)))
                                      
-                                     (append (reverse prep-code)
-                                             (list (il:tail.)
-                                                   (il:call :method body-name :class "Program" :return "object" :args (make-list n-body-params :initial-element "object"))
-                                                   (il:ret))))))))
-                    (push (il:method :name name :return-type "object" :arg-types invoke-arg-types :visibility :public :static-p t :instructions insts) methods)))
-                (nreverse methods)))
-            toplevel-defuns)))
+                                           (append (reverse prep-code)
+                                                   (list (il:tail.)
+                                                         (il:call :method body-name :class "Program" :return "object" :args (make-list n-body-params :initial-element "object"))
+                                                         (il:ret))))))))
+                          (push (il:method :name name :return-type "object" :arg-types invoke-arg-types :visibility :public :static-p t :instructions insts) methods)))
+                      (nreverse methods)))
+                  toplevel-defuns)))
 
 (defun generate-program-class (ast toplevel-methods)
   (multiple-value-bind (main-insts locals) (generate ast)
-    (let* ((main-insts-final (append main-insts (list (il:pop) (il:ret))))
+    (let* ((main-insts-final (append 
+                              (list (il:call :method "Initialize" :class "[LispBase]Lisp.MopRuntime" :return "void" :args nil))
+                              main-insts 
+                              (list (il:pop) (il:ret))))
            (main-method (il:method :name "Main"
                                    :static-p t
                                    :locals (mapcar (lambda (loc) (format nil "object ~A" loc)) locals)

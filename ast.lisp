@@ -70,6 +70,8 @@
   ((name :initarg :name :accessor ast-class-name)
    (superclasses :initarg :superclasses :accessor ast-class-superclasses)
    (slots :initarg :slots :accessor ast-class-slots)
+  (canonical-slots :initarg :canonical-slots :initform nil :accessor ast-class-canonical-slots)
+  (canonical-default-initargs :initarg :canonical-default-initargs :initform nil :accessor ast-class-canonical-default-initargs)
    (options :initarg :options :initform nil :accessor ast-class-options))
   (:documentation "A DEFCLASS definition."))
 
@@ -190,13 +192,16 @@
 (defclass ast-block (ast-node)
   ((name :initarg :name :accessor ast-block-name)
    (body :initarg :body :accessor ast-block-body)
+  (id :initarg :id :accessor ast-block-id)
    (end-label :initarg :end-label :accessor ast-block-end-label)
-   (result-temp :initarg :result-temp :initform nil :accessor ast-block-result-temp))
+  (result-temp :initarg :result-temp :initform nil :accessor ast-block-result-temp)
+  (needs-catch-frame-p :initarg :needs-catch-frame-p :initform nil :accessor ast-block-needs-catch-frame-p))
   (:documentation "A named lexical block."))
 
 (defclass ast-return-from (ast-node)
   ((name :initarg :name :accessor ast-return-from-name)
    (value :initarg :value :accessor ast-return-from-value)
+  (target-id :initarg :target-id :accessor ast-return-from-target-id)
    (target-label :initarg :target-label :accessor ast-return-from-target-label)
    (result-temp :initarg :result-temp :accessor ast-return-from-result-temp)
    (non-local-p :initarg :non-local-p :accessor ast-return-from-non-local-p))
@@ -393,6 +398,9 @@
       (if format-string
           `(progn (print ,format-string) (print (list ,@args)) (%break))
           `(%break))))
+  (register-macro 'push
+    (lambda (item place)
+      `(setq ,place (cons ,item ,place))))
   (register-macro 'handler-case
 
     (lambda (expression &rest clauses)
@@ -938,13 +946,16 @@
 (defmethod closure-convert ((node ast-block))
   (make-instance 'ast-block
                  :name (ast-block-name node)
+                 :id (ast-block-id node)
                  :end-label (ast-block-end-label node)
                  :result-temp (ast-block-result-temp node)
+                 :needs-catch-frame-p (ast-block-needs-catch-frame-p node)
                  :body (mapcar #'closure-convert (ast-block-body node))))
 
 (defmethod closure-convert ((node ast-return-from))
   (make-instance 'ast-return-from
                  :name (ast-return-from-name node)
+                 :target-id (ast-return-from-target-id node)
                  :target-label (ast-return-from-target-label node)
                  :result-temp (ast-return-from-result-temp node)
                  :non-local-p (ast-return-from-non-local-p node)
@@ -1180,13 +1191,16 @@
 (defmethod lambda-lift ((node ast-block))
   (make-instance 'ast-block
                  :name (ast-block-name node)
+                 :id (ast-block-id node)
                  :end-label (ast-block-end-label node)
                  :result-temp (ast-block-result-temp node)
+                 :needs-catch-frame-p (ast-block-needs-catch-frame-p node)
                  :body (mapcar #'lambda-lift (ast-block-body node))))
 
 (defmethod lambda-lift ((node ast-return-from))
   (make-instance 'ast-return-from
                  :name (ast-return-from-name node)
+                 :target-id (ast-return-from-target-id node)
                  :target-label (ast-return-from-target-label node)
                  :result-temp (ast-return-from-result-temp node)
                  :non-local-p (ast-return-from-non-local-p node)
@@ -1380,6 +1394,121 @@
         (setf rest (gensym "REST_")))
       (values required-final optional-final rest key-final allow-other-keys aux-final new-env))))
 
+(defun collect-option-values (plist indicator)
+  (loop for (k v) on plist by #'cddr
+        when (eq k indicator)
+          collect v))
+
+(defun canonicalize-defclass-slot (slot-spec env tags-env blocks-env current-scope)
+  (let* ((name (if (consp slot-spec) (car slot-spec) slot-spec))
+         (options (if (consp slot-spec) (cdr slot-spec) nil))
+         (initform-specified-p (member :initform options :test #'eq))
+         (initform (when initform-specified-p (getf options :initform)))
+         (allocation (getf options :allocation :instance))
+         (type (getf options :type t))
+         (documentation (getf options :documentation nil))
+         (accessor (getf options :accessor nil))
+         (initargs (collect-option-values options :initarg))
+         (readers (append (collect-option-values options :reader)
+                          (when accessor (list accessor))))
+         (writers (append (collect-option-values options :writer)
+                          (when accessor (list `(setf ,accessor)))))
+         (initform-ast (when initform-specified-p
+                         (lisp->ast initform env tags-env blocks-env current-scope)))
+         ;; Captures lexical references by running regular AST analysis for the thunk body.
+         (initfunction-ast (when initform-specified-p
+                             (lisp->ast `(lambda () ,initform) env tags-env blocks-env current-scope))))
+    (list :name name
+          :allocation allocation
+          :type type
+          :documentation documentation
+          :initargs initargs
+          :readers readers
+          :writers writers
+          :initform-ast initform-ast
+          :initfunction-ast initfunction-ast
+          :raw slot-spec)))
+
+(defun canonicalize-defclass-slots (slots env tags-env blocks-env current-scope)
+  (mapcar (lambda (slot-spec)
+            (canonicalize-defclass-slot slot-spec env tags-env blocks-env current-scope))
+          slots))
+
+(defun canonicalize-default-initarg-specs (specs env tags-env blocks-env current-scope)
+  (cond
+    ((null specs) nil)
+    ((and (consp (first specs))
+          (not (keywordp (first specs))))
+     (mapcar (lambda (spec)
+               (let ((initarg (first spec))
+                     (initform (second spec)))
+                 (list :initarg initarg
+                       :initform-ast (lisp->ast initform env tags-env blocks-env current-scope)
+                       :initfunction-ast (lisp->ast `(lambda () ,initform) env tags-env blocks-env current-scope)
+                       :raw spec)))
+             specs))
+    (t
+     (loop for (initarg initform) on specs by #'cddr
+           collect (list :initarg initarg
+                         :initform-ast (lisp->ast initform env tags-env blocks-env current-scope)
+                         :initfunction-ast (lisp->ast `(lambda () ,initform) env tags-env blocks-env current-scope)
+                         :raw (list initarg initform))))))
+
+(defun canonicalize-defclass-default-initargs (options env tags-env blocks-env current-scope)
+  (let ((default-option (find-if (lambda (opt)
+                                   (and (consp opt)
+                                        (eq (car opt) :default-initargs)))
+                                 options)))
+    (canonicalize-default-initarg-specs (when default-option (cdr default-option))
+                                        env tags-env blocks-env current-scope)))
+
+(defun make-defclass-runtime-call-ast (name superclasses slots default-initargs options env tags-env blocks-env current-scope)
+  (make-instance 'ast-clr-call
+                 :type-name "[LispBase]Lisp.MopRuntime"
+                 :method-name "EnsureClassFromDefclassForm"
+                 :return-type "object"
+                 :arg-types '("object" "object" "object" "object" "object")
+                 :arguments (list (lisp->ast `(quote ,name) env tags-env blocks-env current-scope)
+                                  (lisp->ast `(quote ,superclasses) env tags-env blocks-env current-scope)
+                                  (lisp->ast `(quote ,slots) env tags-env blocks-env current-scope)
+                                  (lisp->ast `(quote ,default-initargs) env tags-env blocks-env current-scope)
+                                  (lisp->ast `(quote ,options) env tags-env blocks-env current-scope))))
+
+(defun make-defgeneric-runtime-call-ast (name lambda-list options env tags-env blocks-env current-scope)
+  (make-instance 'ast-clr-call
+                 :type-name "[LispBase]Lisp.MopRuntime"
+                 :method-name "EnsureGenericFunctionFromDefgenericForm"
+                 :return-type "object"
+                 :arg-types '("object" "object" "object")
+                 :arguments (list (lisp->ast `(quote ,name) env tags-env blocks-env current-scope)
+                                  (lisp->ast `(quote ,lambda-list) env tags-env blocks-env current-scope)
+                                  (lisp->ast `(quote ,options) env tags-env blocks-env current-scope))))
+
+(defun method-parameter-name-from-specializer (param-spec)
+  (if (consp param-spec)
+      (first param-spec)
+      param-spec))
+
+(defun make-defmethod-runtime-call-ast (name qualifiers specialized-lambda-list body options env tags-env blocks-env current-scope)
+  (let* ((method-lambda-list (mapcar #'method-parameter-name-from-specializer specialized-lambda-list))
+         (method-lambda-form
+          `(lambda ,method-lambda-list
+             (flet ((call-next-method (&rest args)
+                      (dotnet-call-static "Lisp.MopRuntime" "CallNextMethodFromLisp" args))
+                    (next-method-p ()
+                      (dotnet-call-static "Lisp.MopRuntime" "NextMethodP")))
+               ,@body))))
+    (make-instance 'ast-clr-call
+                   :type-name "[LispBase]Lisp.MopRuntime"
+                   :method-name "AddMethodFromDefmethodForm"
+                   :return-type "object"
+                   :arg-types '("object" "object" "object" "object" "object")
+                   :arguments (list (lisp->ast `(quote ,name) env tags-env blocks-env current-scope)
+                                    (lisp->ast `(quote ,qualifiers) env tags-env blocks-env current-scope)
+                                    (lisp->ast `(quote ,specialized-lambda-list) env tags-env blocks-env current-scope)
+                                    (lisp->ast method-lambda-form env tags-env blocks-env current-scope)
+                                    (lisp->ast `(quote ,options) env tags-env blocks-env current-scope)))))
+
 (defun lisp->ast (expr &optional env tags-env blocks-env current-scope)
   "Translates a Lisp s-expression into an AST node, applying alpha renaming and macroexpansion."
   (unless current-scope (setq current-scope (gensym "TOPLEVEL_SCOPE_")))
@@ -1473,23 +1602,31 @@
          (block
           (let* ((name (first args))
                  (sanitized-name (sanitize-identifier (format nil "~A" name)))
+              (block-id (string (gensym (format nil "BLOCK_ID_~A_" sanitized-name))))
                  (end-label (string (gensym (format nil "BLOCK_END_~A_" sanitized-name))))
                  (result-temp (string (gensym (format nil "BLOCK_RESULT_~A_" sanitized-name))))
-                 (new-blocks-env (cons (list name end-label result-temp current-scope) blocks-env)))
+              (needs-catch-cell (list nil))
+              (new-blocks-env (cons (list name block-id end-label result-temp needs-catch-cell current-scope) blocks-env))
+              (body-asts (mapcar (lambda (e) (lisp->ast e env tags-env new-blocks-env current-scope)) (rest args))))
             (make-instance 'ast-block
                            :name name
+                  :id block-id
                            :end-label end-label
                            :result-temp result-temp
-                           :body (mapcar (lambda (e) (lisp->ast e env tags-env new-blocks-env current-scope)) (rest args)))))
+                  :needs-catch-frame-p (car needs-catch-cell)
+                  :body body-asts)))
 
          (return-from
           (let* ((name (first args))
                  (info (assoc name blocks-env)))
             (unless info (error "RETURN-FROM: Block ~A not found in lexical environment." name))
-            (destructuring-bind (block-name end-label result-temp scope) info
+          (destructuring-bind (block-name block-id end-label result-temp needs-catch-cell scope) info
                (declare (ignore block-name))
+            (when (not (eq scope current-scope))
+              (setf (car needs-catch-cell) t))
                (make-instance 'ast-return-from
                               :name name
+                      :target-id block-id
                               :target-label end-label
                               :result-temp result-temp
                               :non-local-p (not (eq scope current-scope))
@@ -1673,16 +1810,82 @@
                          :field-name (first args)
                          :instance (lisp->ast (second args) env tags-env blocks-env current-scope)))
 
+          (clr-defclass
+           (let* ((name (first args))
+             (superclasses (second args))
+             (slots (third args))
+             (options (cdddr args))
+             (canonical-slots (canonicalize-defclass-slots slots env tags-env blocks-env current-scope))
+             (canonical-default-initargs (canonicalize-defclass-default-initargs options env tags-env blocks-env current-scope)))
+             (make-instance 'ast-class
+                  :name name
+                  :superclasses superclasses
+                  :slots slots
+                  :canonical-slots canonical-slots
+                  :canonical-default-initargs canonical-default-initargs
+                  :options options)))
+
          (defclass
           (let* ((name (first args))
                  (superclasses (second args))
                  (slots (third args))
-                 (options (cdddr args)))
-            (make-instance 'ast-class
-                           :name name
-                           :superclasses superclasses
-                           :slots slots
-                           :options options)))
+             (options (cdddr args))
+             (canonical-slots (canonicalize-defclass-slots slots env tags-env blocks-env current-scope))
+             (canonical-default-initargs (canonicalize-defclass-default-initargs options env tags-env blocks-env current-scope))
+             (default-option (find-if (lambda (opt)
+                    (and (consp opt)
+                    (eq (car opt) :default-initargs)))
+                  options))
+             (default-initargs-raw (when default-option (cdr default-option)))
+             (class-node (make-instance 'ast-class
+                    :name name
+                    :superclasses superclasses
+                    :slots slots
+                    :canonical-slots canonical-slots
+                    :canonical-default-initargs canonical-default-initargs
+                    :options options))
+             (runtime-call (make-defclass-runtime-call-ast
+                  name
+                  superclasses
+                  slots
+                  default-initargs-raw
+                  options
+                  env
+                  tags-env
+                  blocks-env
+                  current-scope)))
+             ;; Keep ast-class metadata for existing pipelines while evaluating DEFCLASS via MOP runtime.
+             (make-instance 'ast-progn :forms (list class-node runtime-call))))
+
+          (defgeneric
+           (let* ((name (first args))
+                (lambda-list (second args))
+                (options (cddr args))
+                (runtime-call (make-defgeneric-runtime-call-ast
+                         name
+                         lambda-list
+                         options
+                         env
+                         tags-env
+                         blocks-env
+                         current-scope)))
+             (make-instance 'ast-setq
+                            :name (make-instance 'ast-variable :name name :alpha-name name)
+                            :value runtime-call)))
+
+              (clr-defmethod
+               (let* ((name (first args))
+                 (rest-args (rest args))
+                 (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
+                 (after-qualifiers (nthcdr (length qualifiers) rest-args))
+                 (lambda-list (first after-qualifiers))
+                 (body (rest after-qualifiers))
+                 (new-scope (gensym "SCOPE_")))
+                 (make-instance 'ast-method
+                      :name name
+                      :qualifiers qualifiers
+                      :specialized-lambda-list lambda-list
+                      :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env new-scope)) body))))
 
          (defmethod
           (let* ((name (first args))
@@ -1690,13 +1893,24 @@
                  (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
                  (after-qualifiers (nthcdr (length qualifiers) rest-args))
                  (lambda-list (first after-qualifiers))
-                 (body (rest after-qualifiers))
-                 (new-scope (gensym "SCOPE_")))
-            (make-instance 'ast-method
-                           :name name
-                           :qualifiers qualifiers
-                           :specialized-lambda-list lambda-list
-                           :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env new-scope)) body))))
+                 (body (rest after-qualifiers)))
+            (let* ((new-scope (gensym "SCOPE_"))
+                   (method-node (make-instance 'ast-method
+                                     :name name
+                                     :qualifiers qualifiers
+                                     :specialized-lambda-list lambda-list
+                                     :body (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env new-scope)) body)))
+                   (runtime-call (make-defmethod-runtime-call-ast
+                             name
+                             qualifiers
+                             lambda-list
+                             body
+                             nil
+                             env
+                             tags-env
+                             blocks-env
+                             current-scope)))
+              (make-instance 'ast-progn :forms (list method-node runtime-call)))))
          (%let
           (let* ((new-env env)
                  (bindings (mapcar (lambda (b)
@@ -2132,14 +2346,17 @@
 (defmethod analyze-environment ((node ast-block) env &optional mutated)
   (make-instance 'ast-block
                  :name (ast-block-name node)
+                 :id (ast-block-id node)
                  :end-label (ast-block-end-label node)
                  :result-temp (ast-block-result-temp node)
+                 :needs-catch-frame-p (ast-block-needs-catch-frame-p node)
                  :body (mapcar (lambda (form) (analyze-environment form env mutated))
                                (ast-block-body node))))
 
 (defmethod analyze-environment ((node ast-return-from) env &optional mutated)
   (make-instance 'ast-return-from
                  :name (ast-return-from-name node)
+                 :target-id (ast-return-from-target-id node)
                  :target-label (ast-return-from-target-label node)
                  :result-temp (ast-return-from-result-temp node)
                  :non-local-p (ast-return-from-non-local-p node)
@@ -2301,3 +2518,16 @@
                          :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
                          :aux-params analyzed-aux-params
                          :body analyzed-body)))))
+
+(eval-when (:load-toplevel :execute)
+  (let* ((source (or *load-truename* *compile-file-truename*))
+         (asdf-package (find-package :asdf))
+         (source-directory-symbol (and asdf-package (find-symbol "SYSTEM-SOURCE-DIRECTORY" asdf-package)))
+         (dir (or (and source-directory-symbol
+                       (ignore-errors (funcall (symbol-function source-directory-symbol) :clrhack)))
+                  (and source (make-pathname :name nil :type nil :defaults source)))))
+    (when dir
+      (dolist (file '("generate-step1.lisp" "generate-step2.lisp"))
+        (let ((path (merge-pathnames file dir)))
+          (when (probe-file path)
+            (load path)))))))

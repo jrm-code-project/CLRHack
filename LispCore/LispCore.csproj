@@ -16,9 +16,7 @@
       <HintPath>HelloLisp.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\LispBase\LispBase.csproj" />
-    <Reference Include="CLSymbols">
-      <HintPath>..\CLSymbols\bin\Debug\net8.0\CLSymbols.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\CLSymbols\CLSymbols.csproj" />
   </ItemGroup>
 
 </Project>

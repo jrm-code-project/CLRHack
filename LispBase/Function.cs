@@ -29,15 +29,54 @@ namespace Lisp
 
         public static object Apply(object fn, object args)
         {
-            var closure = (Closure)fn;
+            var closure = RequireClosure(fn, "APPLY");
             var list = new System.Collections.Generic.List<object>();
             object current = args;
-            while (current is List.ListCell cell)
+            while (true)
             {
-                list.Add(cell.first);
-                current = cell.rest;
+                if (current is List l)
+                {
+                    if (l.EndP)
+                    {
+                        break;
+                    }
+
+                    list.Add(l.First());
+                    current = l.Rest();
+                    continue;
+                }
+
+                if (current is List.ListCell cell)
+                {
+                    list.Add(cell.first);
+                    current = cell.rest;
+                    continue;
+                }
+
+                if (current != null)
+                {
+                    list.Add(current);
+                }
+
+                break;
             }
             return closure.Invoke(list.ToArray());
+        }
+
+        public static Closure RequireClosure(object fn, string contextName)
+        {
+            if (fn is Closure closure)
+            {
+                return closure;
+            }
+
+            if (fn == null || ReferenceEquals(fn, Global.Unbound))
+            {
+                var target = string.IsNullOrEmpty(contextName) ? "<computed function>" : contextName;
+                throw new Exception($"Undefined function: {target}");
+            }
+
+            throw new Exception($"Attempted to call non-function object in {contextName}: {fn}");
         }
     }
 }

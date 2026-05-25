@@ -41,10 +41,22 @@
   (print "Result for 1:")
   (print (implicit-block-test 1)))
 
+(defun test-block-non-local-closure ()
+  (print "Testing non-local return-from through closure...")
+  (let ((result
+          (block escape
+            (let ((k (lambda ()
+                       (return-from escape "closure escaped"))))
+              (funcall k)
+              "Should NOT print this closure path"))))
+    (print "Closure result (should be closure escaped):")
+    (print result)))
+
 (defun main ()
   (test-block-basic)
   (test-block-nested)
   (test-block-uwp)
-  (test-implicit-block))
+  (test-implicit-block)
+  (test-block-non-local-closure))
 
 (main)
