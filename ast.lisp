@@ -279,10 +279,16 @@
 (defun clrhack-macroexpand-1 (form)
   "Host-side macroexpansion for the compiler."
   (if (and (consp form) (symbolp (car form)))
-      (let ((expander (clrhack-macro-function (car form))))
+      (let* ((op (car form))
+             (expander (clrhack-macro-function op))
+             (pkg (symbol-package op))
+             (pkg-name (and pkg (package-name pkg))))
         (if expander
             (values (apply expander (cdr form)) t)
-            (values form nil)))
+            ;; LOOP expansion traverses helper macros in SB-LOOP.
+            (if (and pkg-name (string= pkg-name "SB-LOOP"))
+                (macroexpand-1 form)
+                (values form nil))))
       (values form nil)))
 
 (defun setup-macro-environment ()
@@ -332,6 +338,9 @@
           (if (null (cdr args))
               (car args)
               `(if ,(car args) (and ,@(cdr args)) nil)))))
+  (register-macro 'loop
+    (lambda (&rest clauses)
+      (macroexpand-1 `(loop ,@clauses))))
   (register-macro 'return
     (lambda (&optional value)
       `(return-from nil ,value)))
@@ -527,7 +536,8 @@
     (lambda (sym ind val)
       `(clr-call-virt ,sym "[LispBase]Lisp.Symbol" "Put" ("void" "object" "object") ,ind ,val)))
   (register-macro 'make-array
-    (lambda (size)
+    (lambda (size &rest options)
+      (declare (ignore options))
       `(clr-call "[LispBase]Lisp.Vector" "MakeArray" ("object" "object") ,size)))
   (register-macro 'aref
     (lambda (arr idx)
@@ -1317,6 +1327,59 @@
     ((consp expr) `(%cons ,(expand-quote (car expr)) ,(expand-quote (cdr expr))))
     (t expr)))
 
+(defun comma-form-p (expr)
+  (and (consp expr)
+       (or (eq (car expr) 'comma)
+           (and (symbolp (car expr)) (string-equal (symbol-name (car expr)) "COMMA")))))
+
+(defun comma-at-form-p (expr)
+  (and (consp expr)
+       (or (eq (car expr) 'comma-at)
+           (and (symbolp (car expr)) (string-equal (symbol-name (car expr)) "COMMA-AT")))))
+
+(defun backquote-form-p (expr)
+  (and (consp expr)
+       (or (eq (car expr) 'backquote)
+           (and (symbolp (car expr)) (string-equal (symbol-name (car expr)) "BACKQUOTE")))))
+
+(defun expand-backquote-list (items)
+  (if (null items)
+      nil
+      (let ((head (car items))
+            (tail (cdr items)))
+        (cond
+          ((comma-at-form-p head)
+           `(append ,(second head) ,(expand-backquote-list tail)))
+          (t
+           `(%cons ,(expand-backquote head)
+                   ,(expand-backquote-list tail)))))))
+
+(defun expand-backquote (expr)
+  (cond
+    ((comma-form-p expr) (second expr))
+    ((comma-at-form-p expr)
+     (error "COMMA-AT is only valid in list context inside BACKQUOTE."))
+    ((consp expr) (expand-backquote-list expr))
+    (t `(quote ,expr))))
+
+(defun normalize-pseudo-backquote-form (form)
+  (cond
+    ((backquote-form-p form)
+     (expand-backquote (normalize-pseudo-backquote-form (second form))))
+    ((comma-form-p form)
+     (list 'comma (normalize-pseudo-backquote-form (second form))))
+    ((comma-at-form-p form)
+     (list 'comma-at (normalize-pseudo-backquote-form (second form))))
+    ((consp form)
+     (mapcar #'normalize-pseudo-backquote-form form))
+    (t form)))
+
+(defun strip-leading-docstring (forms)
+  (if (and (consp forms)
+           (stringp (first forms)))
+      (rest forms)
+      forms))
+
 ;;; Translation function
 
 (defun parse-lambda-list (raw-params env tags-env blocks-env current-scope)
@@ -1525,36 +1588,14 @@
     ((consp expr)
      (let ((op (car expr))
            (args (cdr expr)))
-       (case op
-         ((+ - * / %ADD %SUB %MUL %DIV)
-          (if (> (length args) 2)
-              (lisp->ast `(,op (,op ,(first args) ,(second args)) ,@(cddr args)) env tags-env blocks-env current-scope)
-              (make-instance 'ast-application
-                             :operator (lisp->ast op env tags-env blocks-env current-scope)
-                             :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args))))
-         (quote
-          (lisp->ast (expand-quote (car args)) env tags-env blocks-env current-scope))
-         (if
-          (make-instance 'ast-if
-                         :test (lisp->ast (first args) env tags-env blocks-env current-scope)
-                         :consequent (lisp->ast (second args) env tags-env blocks-env current-scope)
-                         :alternate (if (cddr args) (lisp->ast (third args) env tags-env blocks-env current-scope) (make-instance 'ast-literal :value nil))))
-         (progn
-          (make-instance 'ast-progn
-                         :forms (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args)))
-         (setq
-          (let* ((var-name (first args))
-                 (alpha (or (cdr (assoc var-name env)) var-name)))
-            (make-instance 'ast-setq
-                           :name (make-instance 'ast-variable :name var-name :alpha-name alpha)
-                           :value (lisp->ast (second args) env tags-env blocks-env current-scope))))
-         (defun
-          (let* ((name (first args))
-                 (raw-params (second args))
-                 (body (cddr args))
-                 (new-scope (gensym "SCOPE_")))
+       (when (and (symbolp op)
+                  (string-equal (symbol-name op) "DEFUN"))
+         (return-from lisp->ast
+           (let* ((name (first args))
+                  (raw-params (second args))
+                  (body (strip-leading-docstring (cddr args)))
+                  (new-scope (gensym "SCOPE_")))
              (if (null env)
-                 ;; Top-level DEFUN
                  (multiple-value-bind (required optional rest key allow-other-keys aux new-env)
                      (parse-lambda-list raw-params env tags-env blocks-env new-scope)
                    (make-instance 'ast-toplevel-defun
@@ -1566,9 +1607,35 @@
                                   :allow-other-keys allow-other-keys
                                   :aux-params aux
                                   :body (list (lisp->ast `(block ,name (progn ,@body)) new-env tags-env blocks-env new-scope))))
-                 ;; Local DEFUN (converted to setq lambda)
-                 (lisp->ast `(setq ,name (lambda ,raw-params (block ,name (progn ,@body)))) env tags-env blocks-env current-scope))))
-
+                 (lisp->ast `(setq ,name (lambda ,raw-params (block ,name (progn ,@body)))) env tags-env blocks-env current-scope)))))
+       (case op
+         ((+ - * / %ADD %SUB %MUL %DIV)
+          (if (> (length args) 2)
+              (lisp->ast `(,op (,op ,(first args) ,(second args)) ,@(cddr args)) env tags-env blocks-env current-scope)
+              (make-instance 'ast-application
+                             :operator (lisp->ast op env tags-env blocks-env current-scope)
+                             :operands (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args))))
+         ((backquote)
+          (lisp->ast (expand-backquote (car args)) env tags-env blocks-env current-scope))
+         (quote
+          (lisp->ast (expand-quote (car args)) env tags-env blocks-env current-scope))
+         (if
+          (make-instance 'ast-if
+                         :test (lisp->ast (first args) env tags-env blocks-env current-scope)
+                         :consequent (lisp->ast (second args) env tags-env blocks-env current-scope)
+                         :alternate (if (cddr args) (lisp->ast (third args) env tags-env blocks-env current-scope) (make-instance 'ast-literal :value nil))))
+         (progn
+          (make-instance 'ast-progn
+                         :forms (mapcar (lambda (e) (lisp->ast e env tags-env blocks-env current-scope)) args)))
+          ((declaim declare)
+           ;; Declarations are compile-time metadata only in this pipeline.
+           (make-instance 'ast-literal :value nil))
+         (setq
+          (let* ((var-name (first args))
+                 (alpha (or (cdr (assoc var-name env)) var-name)))
+            (make-instance 'ast-setq
+                           :name (make-instance 'ast-variable :name var-name :alpha-name alpha)
+                           :value (lisp->ast (second args) env tags-env blocks-env current-scope))))
          (tagbody
           (let* ((new-tags-env tags-env)
                  (tags (remove-if-not (lambda (x) (or (symbolp x) (integerp x))) args))
@@ -1744,7 +1811,8 @@
                 (params (second args))
                 (body (cddr args)))
             ;; Register macro at compile-time (host Lisp)
-            (let ((expander (eval `(lambda ,params (progn ,@body)))))
+            (let* ((normalized-body (mapcar #'normalize-pseudo-backquote-form body))
+                   (expander (eval `(lambda ,params (progn ,@normalized-body)))))
               (register-macro name expander))
             ;; Emit nil in AST (macro definition itself doesn't generate IL)
             (make-instance 'ast-literal :value nil)))
@@ -1879,7 +1947,7 @@
                  (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
                  (after-qualifiers (nthcdr (length qualifiers) rest-args))
                  (lambda-list (first after-qualifiers))
-                 (body (rest after-qualifiers))
+                  (body (strip-leading-docstring (rest after-qualifiers)))
                  (new-scope (gensym "SCOPE_")))
                  (make-instance 'ast-method
                       :name name
@@ -1893,7 +1961,7 @@
                  (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
                  (after-qualifiers (nthcdr (length qualifiers) rest-args))
                  (lambda-list (first after-qualifiers))
-                 (body (rest after-qualifiers)))
+             (body (strip-leading-docstring (rest after-qualifiers))))
             (let* ((new-scope (gensym "SCOPE_"))
                    (method-node (make-instance 'ast-method
                                      :name name
@@ -1927,6 +1995,7 @@
           (let ((new-scope (gensym "SCOPE_")))
             (multiple-value-bind (required optional rest key allow-other-keys aux new-env)
                 (parse-lambda-list (first args) env tags-env blocks-env new-scope)
+              (let ((body-forms (strip-leading-docstring (rest args))))
               (make-instance 'ast-lambda
                              :params required
                              :optional-params optional
@@ -1934,7 +2003,7 @@
                              :key-params key
                              :allow-other-keys allow-other-keys
                              :aux-params aux
-                             :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env new-scope)) (rest args))))))
+                             :body (mapcar (lambda (e) (lisp->ast e new-env tags-env blocks-env new-scope)) body-forms))))))
          (t
           (if (and (consp op)
                    (member (car op) '(dotnet-static-call dotnet-instance-call dotnet-property dotnet-instance-property dotnet-field dotnet-instance-field)))
