@@ -7,21 +7,28 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-.method public static hidebysig void 'Main'() cil managed
+.method public static hidebysig object 'InitializeModule'() cil managed
 {
-    .entrypoint
     .maxstack 8
-    .locals init (object MSG1907)
-    call void [LispBase]Lisp.MopRuntime::'Initialize'()
+    .locals init (object MSG1940)
     ldstr "Hello world from CLR-CALL"
-    stloc MSG1907
-    ldloc MSG1907
+    stloc MSG1940
+    ldloc MSG1940
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldstr "Hello from PRINT"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
+    ret
+}
+
+.method public static hidebysig void 'Main'() cil managed
+{
+    .entrypoint
+    .maxstack 8
+    call void [LispBase]Lisp.MopRuntime::'Initialize'()
+    call object Program::'InitializeModule'()
     pop
     ret
 }

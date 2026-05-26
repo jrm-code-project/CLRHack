@@ -1,0 +1,9 @@
+(defpackage "SEPARATE-MULTI-IMPORT-ERRORS"
+  (:use "CLRHACK"))
+
+(in-package "SEPARATE-MULTI-IMPORT-ERRORS")
+
+(import 'SEPARATE-MODULE-A:ADD2)
+(import 'SEPARATE-MODULE-A:DOES-NOT-EXIST)
+
+(print (add2 1))

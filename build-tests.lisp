@@ -68,6 +68,75 @@
     (let ((file (car test))
           (target (cdr test)))
       (format t "~%--- Compiling ~A to ~A ---~%" file target)
-      (clrhack:compile-file file :output-file target))))
+    (clrhack:compile-file file :output-file target)))
+
+    (format t "~%--- Compiling separate module fixture A ---~%")
+    (clrhack:compile-module "Tests/test-separate-module-a.lisp" :output-file "SeparateModuleA")
+
+    (format t "~%--- Compiling duplicate provider fixture for module A ---~%")
+    (clrhack:compile-module "Tests/test-separate-module-c.lisp" :output-file "SeparateModuleC")
+
+    (format t "~%--- Compiling separate module fixture B with dependency on A ---~%")
+    (clrhack:compile-module "Tests/test-separate-module-b.lisp"
+            :output-file "SeparateModuleB"
+            :dependency-manifests '("SeparateModuleA.clrhm"))
+
+    (format t "~%--- Linking separate module fixture ---~%")
+    (clrhack:link-program '("SeparateModuleA.clrhm" "SeparateModuleB.clrhm")
+          :output-file "SeparateLinked"
+                          :root-manifest "SeparateModuleB.clrhm")
+
+    (format t "~%--- Verifying invalid root manifest is rejected ---~%")
+    (handler-case
+        (progn
+          (clrhack:link-program '("SeparateModuleA.clrhm")
+                                :output-file "ShouldNotLink"
+                                :root-manifest "SeparateModuleB.clrhm")
+          (error "Expected invalid root-manifest link to fail, but it succeeded."))
+      (error (condition)
+        (unless (search "Root manifest" (princ-to-string condition))
+          (error "Expected root-manifest failure, got: ~A" condition))
+        (format t "Observed expected linker failure: ~A~%" condition)))
+
+    (format t "~%--- Verifying unresolved imported function is rejected ---~%")
+    (handler-case
+        (progn
+          (clrhack:compile-module "Tests/test-separate-missing-import.lisp"
+                                  :output-file "SeparateMissingImport"
+                                  :dependency-manifests '("SeparateModuleA.clrhm"))
+          (error "Expected unresolved imported function compile to fail, but it succeeded."))
+      (error (condition)
+        (unless (search "Unresolved imported function" (princ-to-string condition))
+          (error "Expected unresolved import failure, got: ~A" condition))
+        (format t "Observed expected compile failure: ~A~%" condition)))
+
+    (format t "~%--- Verifying duplicate providers for an imported function are rejected ---~%")
+    (handler-case
+        (progn
+          (clrhack:compile-module "Tests/test-separate-module-b.lisp"
+                                  :output-file "SeparateAmbiguousImport"
+                                  :dependency-manifests '("SeparateModuleA.clrhm" "SeparateModuleC.clrhm"))
+          (error "Expected ambiguous imported function compile to fail, but it succeeded."))
+      (error (condition)
+        (unless (search "Ambiguous imported function" (princ-to-string condition))
+          (error "Expected ambiguous import failure, got: ~A" condition))
+        (format t "Observed expected compile failure: ~A~%" condition)))
+
+    (format t "~%--- Verifying multiple import errors are reported together ---~%")
+    (handler-case
+        (progn
+          (clrhack:compile-module "Tests/test-separate-multi-import-errors.lisp"
+                                  :output-file "SeparateMultiImportErrors"
+                                  :dependency-manifests '("SeparateModuleA.clrhm" "SeparateModuleC.clrhm"))
+          (error "Expected multi-import resolution failure, but compile succeeded."))
+      (error (condition)
+        (let ((message (princ-to-string condition)))
+          (unless (search "Import resolution failed" message)
+            (error "Expected aggregate import failure header, got: ~A" condition))
+          (unless (search "Ambiguous imported function ADD2" message)
+            (error "Expected ambiguous import detail in aggregate failure, got: ~A" condition))
+          (unless (search "Unresolved imported function DOES-NOT-EXIST" message)
+            (error "Expected unresolved import detail in aggregate failure, got: ~A" condition)))
+        (format t "Observed expected compile failure: ~A~%" condition))))
 
 (sb-ext:exit)

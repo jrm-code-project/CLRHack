@@ -52,7 +52,7 @@ You need the .NET 8.0 SDK and the Microsoft IL Assembler (`ilasm`) to build the 
     *Note: A local installation of `ilasm` in your system path is required for the CIL generation steps.*
 
 2.  **Compiling to Standalone Executables**:
-    You can use the `clrhack:compile-file` function to translate a `.lisp` file into a self-contained Windows x64 executable. This process involves generating CIL assembly, assembling it with `ilasm`, and then using `dotnet publish` to produce the final EXE.
+    You can use the `clrhack:compile-file` function to translate a single `.lisp` file into a runnable .NET executable assembly. This process generates CIL, writes an IL SDK project, and builds the result into `bin/Release/net8.0/<name>.dll`.
 
     **From a Lisp REPL (e.g., SBCL)**:
     ```lisp
@@ -66,9 +66,45 @@ You need the .NET 8.0 SDK and the Microsoft IL Assembler (`ilasm`) to build the 
     ```bash
     sbcl --eval '(require :asdf)' --eval '(push (truename ".") asdf:*central-registry*)' --eval '(asdf:load-system :clrhack)' --eval '(clrhack:compile-file "hello.lisp")' --eval '(quit)'
     ```
-    The resulting standalone executable will be located in `bin/Release/net8.0/win-x64/publish/hello.exe`.
+    The resulting executable assembly will be located in `bin/Release/net8.0/hello.dll` and can be run with `dotnet bin/Release/net8.0/hello.dll`.
 
-3.  **Run the REPL**:
+3.  **Separate Compilation and Final Linking**:
+    CLRHack also supports compiling Lisp files as library modules and linking them into one final executable runner.
+
+    Use `clrhack:compile-module` to build a source file into a library DLL plus a manifest:
+    ```lisp
+    (require :asdf)
+    (push (truename ".") asdf:*central-registry*)
+    (asdf:load-system :clrhack)
+    (clrhack:compile-module "Tests/test-separate-module-a.lisp" :output-file "SeparateModuleA")
+    ```
+
+    If another module imports exported functions from that library, compile it with the dependency manifest list:
+    ```lisp
+    (clrhack:compile-module "Tests/test-separate-module-b.lisp"
+                            :output-file "SeparateModuleB"
+                            :dependency-manifests '("SeparateModuleA.clrhm"))
+    ```
+
+    Then link the compiled module manifests into one final executable with an explicit root manifest:
+    ```lisp
+    (clrhack:link-program '("SeparateModuleA.clrhm" "SeparateModuleB.clrhm")
+                          :output-file "SeparateLinked"
+                          :root-manifest "SeparateModuleB.clrhm")
+    ```
+
+    This produces `bin/Release/net8.0/SeparateLinked.dll`, which can be run with:
+    ```bash
+    dotnet bin/Release/net8.0/SeparateLinked.dll
+    ```
+
+    Current contract:
+    - `compile-module` defaults to library output and writes a `.clrhm` manifest next to the generated IL/project files.
+    - `dependency-manifests` drives compile-time imported-function resolution across separately compiled modules.
+    - `link-program` emits a thin runner that calls each module's `Program.InitializeModule()` in link order, with `:root-manifest` initialized last.
+    - Cross-file compile-time macro propagation is not part of this workflow yet.
+
+4.  **Run the REPL**:
     ```bash
     dotnet run --project Repl/Repl.csproj
     ```
@@ -78,7 +114,7 @@ You need the .NET 8.0 SDK and the Microsoft IL Assembler (`ilasm`) to build the 
     dotnet run --project Repl/Repl.csproj path/to/file.lisp
     ```
 
-3.  **Run Tests**:
+5.  **Run Tests**:
     ```bash
     dotnet test CLRHack.sln
     ```

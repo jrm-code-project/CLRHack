@@ -7,197 +7,461 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'TAG67796784'
-    .field public static object 'ID67786786'
-    .field public static object 'CONDITION67776785'
-    .field public static object 'TAG67596764'
-    .field public static object 'ID67586766'
-    .field public static object 'CONDITION67576765'
-    .field public static object 'TAG67406745'
-    .field public static object 'ID67396747'
-    .field public static object 'CONDITION67386746'
-    .field public static object 'HB_CALLED6733'
-    .field public static object 'TAG67166721'
-    .field public static object 'ID67156723'
-    .field public static object 'CONDITION67146722'
-    .field public static object 'EVENTS6690'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7427'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_ERR7426'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_CAUGHT_ESCALATED7349'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7346'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_WARN7345'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_ESCALATED_ERROR7341'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_CAUGHT7310'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_CAUGHT_SEE_ERROR7291'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ERROR_SHOULD_NOT_REACH7288'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7287'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_ERROR7286'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_SIGNAL_SHOULD_NOT_REACH7269'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7268'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_SIGNAL7267'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7186'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7182'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_COND7178'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7174'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7171'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ESCAPED_ERROR7169'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7168'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7162'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7155'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7148'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T7143'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7137'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ESCAPED_SIGNAL7135'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_INNER7131'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_OUTER7127'
+    .field public static object 'TAG63196324'
+    .field public static object 'ID63186326'
+    .field public static object 'CONDITION63176325'
+    .field public static object 'TAG62996304'
+    .field public static object 'ID62986306'
+    .field public static object 'CONDITION62976305'
+    .field public static object 'TAG62806285'
+    .field public static object 'ID62796287'
+    .field public static object 'CONDITION62786286'
+    .field public static object 'HB_CALLED6273'
+    .field public static object 'TAG62566261'
+    .field public static object 'ID62556263'
+    .field public static object 'CONDITION62546262'
+    .field public static object 'EVENTS6230'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6919'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_ERR6918'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_CAUGHT_ESCALATED6841'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6838'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_WARN6837'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_ESCALATED_ERROR6833'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_CAUGHT6802'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_CAUGHT_SEE_ERROR6783'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ERROR_SHOULD_NOT_REACH6780'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6779'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_ERROR6778'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_SIGNAL_SHOULD_NOT_REACH6761'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6760'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_SIGNAL6759'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6678'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6674'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_SEE_COND6670'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6666'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6663'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ESCAPED_ERROR6661'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6660'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6654'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6647'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6640'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T6635'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S6629'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ESCAPED_SIGNAL6627'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_INNER6623'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_OUTER6619'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'TAG67796784'
+    stsfld object Program::'TAG63196324'
     ldnull
-    stsfld object Program::'ID67786786'
+    stsfld object Program::'ID63186326'
     ldnull
-    stsfld object Program::'CONDITION67776785'
+    stsfld object Program::'CONDITION63176325'
     ldnull
-    stsfld object Program::'TAG67596764'
+    stsfld object Program::'TAG62996304'
     ldnull
-    stsfld object Program::'ID67586766'
+    stsfld object Program::'ID62986306'
     ldnull
-    stsfld object Program::'CONDITION67576765'
+    stsfld object Program::'CONDITION62976305'
     ldnull
-    stsfld object Program::'TAG67406745'
+    stsfld object Program::'TAG62806285'
     ldnull
-    stsfld object Program::'ID67396747'
+    stsfld object Program::'ID62796287'
     ldnull
-    stsfld object Program::'CONDITION67386746'
+    stsfld object Program::'CONDITION62786286'
     ldnull
-    stsfld object Program::'HB_CALLED6733'
+    stsfld object Program::'HB_CALLED6273'
     ldnull
-    stsfld object Program::'TAG67166721'
+    stsfld object Program::'TAG62566261'
     ldnull
-    stsfld object Program::'ID67156723'
+    stsfld object Program::'ID62556263'
     ldnull
-    stsfld object Program::'CONDITION67146722'
+    stsfld object Program::'CONDITION62546262'
     ldnull
-    stsfld object Program::'EVENTS6690'
+    stsfld object Program::'EVENTS6230'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-ERR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7427'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6919'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-ERR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERR7426'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERR6918'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "CAUGHT-ESCALATED"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_ESCALATED7349'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_ESCALATED6841'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-WARN"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7346'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6838'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-WARN"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_WARN7345'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_WARN6837'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-ESCALATED-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ESCALATED_ERROR7341'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ESCALATED_ERROR6833'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "CAUGHT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT7310'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT6802'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "CAUGHT-SEE-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_SEE_ERROR7291'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_SEE_ERROR6783'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "ERROR-SHOULD-NOT-REACH"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR_SHOULD_NOT_REACH7288'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR_SHOULD_NOT_REACH6780'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7287'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6779'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR7286'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR6778'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "SIGNAL-SHOULD-NOT-REACH"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SIGNAL_SHOULD_NOT_REACH7269'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SIGNAL_SHOULD_NOT_REACH6761'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-SIGNAL"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7268'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6760'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-SIGNAL"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_SIGNAL7267'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_SIGNAL6759'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-COND"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7182'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6674'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-COND"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_COND7178'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_COND6670'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7174'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6666'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-UNHANDLED"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7171'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6663'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "ESCAPED-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_ERROR7169'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_ERROR6661'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SEE-ESCALATED-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7168'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6660'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "SEE-ESCALATED-ERROR6780"
+    ldstr "SEE-ESCALATED-ERROR6320"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7162'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6654'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "System.Exception6760"
+    ldstr "System.Exception6300"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7155'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6647'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "SEE-ERROR6741"
+    ldstr "SEE-ERROR6281"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7148'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6640'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T7143'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T6635'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "SEE-ERROR6717"
+    ldstr "SEE-ERROR6257"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7137'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S6629'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "ESCAPED-SIGNAL"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_SIGNAL7135'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_SIGNAL6627'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "INNER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER7131'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER6623'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "OUTER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER7127'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER6619'
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'RUN_SIGNAL_ERROR_EDGE_CASES'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -322,9 +586,273 @@
     ldstr "SEE:END:SUITE"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_RUN_SIGNAL_ERROR_EDGE_CASES_6808:
+BLOCK_END_RUN_SIGNAL_ERROR_EDGE_CASES_6348:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -427,378 +955,378 @@ BLOCK_END_RUN_SIGNAL_ERROR_EDGE_CASES_6808:
 .method private static hidebysig object 'SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7438, object CELL_TMP7437, object BLOCK_RESULT_DONE_6802, object CELL_VAL_TMP7433, object CELL_TMP7432, object TEMP7429, object TEMP7428, object HANDLER_BIND_RESULT7425, object HANDLERS_LIST7424, object SAVED_HANDLERS7423, object UWP_V637422, object UWP_V627421, object UWP_V617420, object UWP_V607419, object UWP_V597418, object UWP_V587417, object UWP_V577416, object UWP_V567415, object UWP_V557414, object UWP_V547413, object UWP_V537412, object UWP_V527411, object UWP_V517410, object UWP_V507409, object UWP_V497408, object UWP_V487407, object UWP_V477406, object UWP_V467405, object UWP_V457404, object UWP_V447403, object UWP_V437402, object UWP_V427401, object UWP_V417400, object UWP_V407399, object UWP_V397398, object UWP_V387397, object UWP_V377396, object UWP_V367395, object UWP_V357394, object UWP_V347393, object UWP_V337392, object UWP_V327391, object UWP_V317390, object UWP_V307389, object UWP_V297388, object UWP_V287387, object UWP_V277386, object UWP_V267385, object UWP_V257384, object UWP_V247383, object UWP_V237382, object UWP_V227381, object UWP_V217380, object UWP_V207379, object UWP_V197378, object UWP_V187377, object UWP_V177376, object UWP_V167375, object UWP_V157374, object UWP_V147373, object UWP_V137372, object UWP_V127371, object UWP_V117370, object UWP_V107369, object UWP_V97368, object UWP_V87367, object UWP_V77366, object UWP_V67365, object UWP_V57364, object UWP_V47363, object UWP_V37362, object UWP_V27361, object UWP_V17360, object UWP_COUNT7359, object UWP_RESULT7358, object RESULT6799, object CLEANUP_RAN6798)
+    .locals init (object CELL_VAL_TMP6930, object CELL_TMP6929, object BLOCK_RESULT_DONE_6342, object CELL_VAL_TMP6925, object CELL_TMP6924, object TEMP6921, object TEMP6920, object HANDLER_BIND_RESULT6917, object HANDLERS_LIST6916, object SAVED_HANDLERS6915, object UWP_V636914, object UWP_V626913, object UWP_V616912, object UWP_V606911, object UWP_V596910, object UWP_V586909, object UWP_V576908, object UWP_V566907, object UWP_V556906, object UWP_V546905, object UWP_V536904, object UWP_V526903, object UWP_V516902, object UWP_V506901, object UWP_V496900, object UWP_V486899, object UWP_V476898, object UWP_V466897, object UWP_V456896, object UWP_V446895, object UWP_V436894, object UWP_V426893, object UWP_V416892, object UWP_V406891, object UWP_V396890, object UWP_V386889, object UWP_V376888, object UWP_V366887, object UWP_V356886, object UWP_V346885, object UWP_V336884, object UWP_V326883, object UWP_V316882, object UWP_V306881, object UWP_V296880, object UWP_V286879, object UWP_V276878, object UWP_V266877, object UWP_V256876, object UWP_V246875, object UWP_V236874, object UWP_V226873, object UWP_V216872, object UWP_V206871, object UWP_V196870, object UWP_V186869, object UWP_V176868, object UWP_V166867, object UWP_V156866, object UWP_V146865, object UWP_V136864, object UWP_V126863, object UWP_V116862, object UWP_V106861, object UWP_V96860, object UWP_V86859, object UWP_V76858, object UWP_V66857, object UWP_V56856, object UWP_V46855, object UWP_V36854, object UWP_V26853, object UWP_V16852, object UWP_COUNT6851, object UWP_RESULT6850, object RESULT6339, object CLEANUP_RAN6338)
     ldstr "SEE:BEGIN:ERROR-LEXICAL-UWP"
     call object Program::'SEE_MARKER'(object)
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CLEANUP_RAN6798
+    stloc CLEANUP_RAN6338
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc RESULT6799
-    ldloc RESULT6799
-    stloc CELL_TMP7432
+    stloc RESULT6339
+    ldloc RESULT6339
+    stloc CELL_TMP6924
     .try
     {
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7423
-    ldloc SAVED_HANDLERS7423
-    stloc HANDLERS_LIST7424
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERR7426'
-    newobj instance void L_6820::'.ctor'()
+    stloc SAVED_HANDLERS6915
+    ldloc SAVED_HANDLERS6915
+    stloc HANDLERS_LIST6916
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERR6918'
+    newobj instance void L_6360::'.ctor'()
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7424
+    ldloc HANDLERS_LIST6916
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7424
-    ldloc HANDLERS_LIST7424
+    stloc HANDLERS_LIST6916
+    ldloc HANDLERS_LIST6916
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7427'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6919'
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR_SHOULD_NOT_REACH7288'
-    stloc HANDLER_BIND_RESULT7425
-    leave DONE7436
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR_SHOULD_NOT_REACH6780'
+    stloc HANDLER_BIND_RESULT6917
+    leave DONE6928
     }
     finally
     {
-    ldloc SAVED_HANDLERS7423
+    ldloc SAVED_HANDLERS6915
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7436:
-    ldloc HANDLER_BIND_RESULT7425
-    stloc UWP_RESULT7358
-    leave DONE7435
+DONE6928:
+    ldloc HANDLER_BIND_RESULT6917
+    stloc UWP_RESULT6850
+    leave DONE6927
     }
     finally
     {
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc UWP_COUNT7359
+    stloc UWP_COUNT6851
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc UWP_V17360
+    stloc UWP_V16852
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc UWP_V27361
+    stloc UWP_V26853
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc UWP_V37362
+    stloc UWP_V36854
     ldsfld object [LispBase]Lisp.Values::Value4
-    stloc UWP_V47363
+    stloc UWP_V46855
     ldsfld object [LispBase]Lisp.Values::Value5
-    stloc UWP_V57364
+    stloc UWP_V56856
     ldsfld object [LispBase]Lisp.Values::Value6
-    stloc UWP_V67365
+    stloc UWP_V66857
     ldsfld object [LispBase]Lisp.Values::Value7
-    stloc UWP_V77366
+    stloc UWP_V76858
     ldsfld object [LispBase]Lisp.Values::Value8
-    stloc UWP_V87367
+    stloc UWP_V86859
     ldsfld object [LispBase]Lisp.Values::Value9
-    stloc UWP_V97368
+    stloc UWP_V96860
     ldsfld object [LispBase]Lisp.Values::Value10
-    stloc UWP_V107369
+    stloc UWP_V106861
     ldsfld object [LispBase]Lisp.Values::Value11
-    stloc UWP_V117370
+    stloc UWP_V116862
     ldsfld object [LispBase]Lisp.Values::Value12
-    stloc UWP_V127371
+    stloc UWP_V126863
     ldsfld object [LispBase]Lisp.Values::Value13
-    stloc UWP_V137372
+    stloc UWP_V136864
     ldsfld object [LispBase]Lisp.Values::Value14
-    stloc UWP_V147373
+    stloc UWP_V146865
     ldsfld object [LispBase]Lisp.Values::Value15
-    stloc UWP_V157374
+    stloc UWP_V156866
     ldsfld object [LispBase]Lisp.Values::Value16
-    stloc UWP_V167375
+    stloc UWP_V166867
     ldsfld object [LispBase]Lisp.Values::Value17
-    stloc UWP_V177376
+    stloc UWP_V176868
     ldsfld object [LispBase]Lisp.Values::Value18
-    stloc UWP_V187377
+    stloc UWP_V186869
     ldsfld object [LispBase]Lisp.Values::Value19
-    stloc UWP_V197378
+    stloc UWP_V196870
     ldsfld object [LispBase]Lisp.Values::Value20
-    stloc UWP_V207379
+    stloc UWP_V206871
     ldsfld object [LispBase]Lisp.Values::Value21
-    stloc UWP_V217380
+    stloc UWP_V216872
     ldsfld object [LispBase]Lisp.Values::Value22
-    stloc UWP_V227381
+    stloc UWP_V226873
     ldsfld object [LispBase]Lisp.Values::Value23
-    stloc UWP_V237382
+    stloc UWP_V236874
     ldsfld object [LispBase]Lisp.Values::Value24
-    stloc UWP_V247383
+    stloc UWP_V246875
     ldsfld object [LispBase]Lisp.Values::Value25
-    stloc UWP_V257384
+    stloc UWP_V256876
     ldsfld object [LispBase]Lisp.Values::Value26
-    stloc UWP_V267385
+    stloc UWP_V266877
     ldsfld object [LispBase]Lisp.Values::Value27
-    stloc UWP_V277386
+    stloc UWP_V276878
     ldsfld object [LispBase]Lisp.Values::Value28
-    stloc UWP_V287387
+    stloc UWP_V286879
     ldsfld object [LispBase]Lisp.Values::Value29
-    stloc UWP_V297388
+    stloc UWP_V296880
     ldsfld object [LispBase]Lisp.Values::Value30
-    stloc UWP_V307389
+    stloc UWP_V306881
     ldsfld object [LispBase]Lisp.Values::Value31
-    stloc UWP_V317390
+    stloc UWP_V316882
     ldsfld object [LispBase]Lisp.Values::Value32
-    stloc UWP_V327391
+    stloc UWP_V326883
     ldsfld object [LispBase]Lisp.Values::Value33
-    stloc UWP_V337392
+    stloc UWP_V336884
     ldsfld object [LispBase]Lisp.Values::Value34
-    stloc UWP_V347393
+    stloc UWP_V346885
     ldsfld object [LispBase]Lisp.Values::Value35
-    stloc UWP_V357394
+    stloc UWP_V356886
     ldsfld object [LispBase]Lisp.Values::Value36
-    stloc UWP_V367395
+    stloc UWP_V366887
     ldsfld object [LispBase]Lisp.Values::Value37
-    stloc UWP_V377396
+    stloc UWP_V376888
     ldsfld object [LispBase]Lisp.Values::Value38
-    stloc UWP_V387397
+    stloc UWP_V386889
     ldsfld object [LispBase]Lisp.Values::Value39
-    stloc UWP_V397398
+    stloc UWP_V396890
     ldsfld object [LispBase]Lisp.Values::Value40
-    stloc UWP_V407399
+    stloc UWP_V406891
     ldsfld object [LispBase]Lisp.Values::Value41
-    stloc UWP_V417400
+    stloc UWP_V416892
     ldsfld object [LispBase]Lisp.Values::Value42
-    stloc UWP_V427401
+    stloc UWP_V426893
     ldsfld object [LispBase]Lisp.Values::Value43
-    stloc UWP_V437402
+    stloc UWP_V436894
     ldsfld object [LispBase]Lisp.Values::Value44
-    stloc UWP_V447403
+    stloc UWP_V446895
     ldsfld object [LispBase]Lisp.Values::Value45
-    stloc UWP_V457404
+    stloc UWP_V456896
     ldsfld object [LispBase]Lisp.Values::Value46
-    stloc UWP_V467405
+    stloc UWP_V466897
     ldsfld object [LispBase]Lisp.Values::Value47
-    stloc UWP_V477406
+    stloc UWP_V476898
     ldsfld object [LispBase]Lisp.Values::Value48
-    stloc UWP_V487407
+    stloc UWP_V486899
     ldsfld object [LispBase]Lisp.Values::Value49
-    stloc UWP_V497408
+    stloc UWP_V496900
     ldsfld object [LispBase]Lisp.Values::Value50
-    stloc UWP_V507409
+    stloc UWP_V506901
     ldsfld object [LispBase]Lisp.Values::Value51
-    stloc UWP_V517410
+    stloc UWP_V516902
     ldsfld object [LispBase]Lisp.Values::Value52
-    stloc UWP_V527411
+    stloc UWP_V526903
     ldsfld object [LispBase]Lisp.Values::Value53
-    stloc UWP_V537412
+    stloc UWP_V536904
     ldsfld object [LispBase]Lisp.Values::Value54
-    stloc UWP_V547413
+    stloc UWP_V546905
     ldsfld object [LispBase]Lisp.Values::Value55
-    stloc UWP_V557414
+    stloc UWP_V556906
     ldsfld object [LispBase]Lisp.Values::Value56
-    stloc UWP_V567415
+    stloc UWP_V566907
     ldsfld object [LispBase]Lisp.Values::Value57
-    stloc UWP_V577416
+    stloc UWP_V576908
     ldsfld object [LispBase]Lisp.Values::Value58
-    stloc UWP_V587417
+    stloc UWP_V586909
     ldsfld object [LispBase]Lisp.Values::Value59
-    stloc UWP_V597418
+    stloc UWP_V596910
     ldsfld object [LispBase]Lisp.Values::Value60
-    stloc UWP_V607419
+    stloc UWP_V606911
     ldsfld object [LispBase]Lisp.Values::Value61
-    stloc UWP_V617420
+    stloc UWP_V616912
     ldsfld object [LispBase]Lisp.Values::Value62
-    stloc UWP_V627421
+    stloc UWP_V626913
     ldsfld object [LispBase]Lisp.Values::Value63
-    stloc UWP_V637422
-    ldloc CLEANUP_RAN6798
-    stloc CELL_TMP7437
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T7143'
-    stloc CELL_VAL_TMP7438
-    ldloc CELL_TMP7437
+    stloc UWP_V636914
+    ldloc CLEANUP_RAN6338
+    stloc CELL_TMP6929
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T6635'
+    stloc CELL_VAL_TMP6930
+    ldloc CELL_TMP6929
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7438
+    ldloc CELL_VAL_TMP6930
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7438
+    ldloc CELL_VAL_TMP6930
     pop
     ldstr "ERROR-LEXICAL-UWP:CLEANUP"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc UWP_COUNT7359
+    ldloc UWP_COUNT6851
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    ldloc UWP_V17360
+    ldloc UWP_V16852
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc UWP_V27361
+    ldloc UWP_V26853
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc UWP_V37362
+    ldloc UWP_V36854
     stsfld object [LispBase]Lisp.Values::Value3
-    ldloc UWP_V47363
+    ldloc UWP_V46855
     stsfld object [LispBase]Lisp.Values::Value4
-    ldloc UWP_V57364
+    ldloc UWP_V56856
     stsfld object [LispBase]Lisp.Values::Value5
-    ldloc UWP_V67365
+    ldloc UWP_V66857
     stsfld object [LispBase]Lisp.Values::Value6
-    ldloc UWP_V77366
+    ldloc UWP_V76858
     stsfld object [LispBase]Lisp.Values::Value7
-    ldloc UWP_V87367
+    ldloc UWP_V86859
     stsfld object [LispBase]Lisp.Values::Value8
-    ldloc UWP_V97368
+    ldloc UWP_V96860
     stsfld object [LispBase]Lisp.Values::Value9
-    ldloc UWP_V107369
+    ldloc UWP_V106861
     stsfld object [LispBase]Lisp.Values::Value10
-    ldloc UWP_V117370
+    ldloc UWP_V116862
     stsfld object [LispBase]Lisp.Values::Value11
-    ldloc UWP_V127371
+    ldloc UWP_V126863
     stsfld object [LispBase]Lisp.Values::Value12
-    ldloc UWP_V137372
+    ldloc UWP_V136864
     stsfld object [LispBase]Lisp.Values::Value13
-    ldloc UWP_V147373
+    ldloc UWP_V146865
     stsfld object [LispBase]Lisp.Values::Value14
-    ldloc UWP_V157374
+    ldloc UWP_V156866
     stsfld object [LispBase]Lisp.Values::Value15
-    ldloc UWP_V167375
+    ldloc UWP_V166867
     stsfld object [LispBase]Lisp.Values::Value16
-    ldloc UWP_V177376
+    ldloc UWP_V176868
     stsfld object [LispBase]Lisp.Values::Value17
-    ldloc UWP_V187377
+    ldloc UWP_V186869
     stsfld object [LispBase]Lisp.Values::Value18
-    ldloc UWP_V197378
+    ldloc UWP_V196870
     stsfld object [LispBase]Lisp.Values::Value19
-    ldloc UWP_V207379
+    ldloc UWP_V206871
     stsfld object [LispBase]Lisp.Values::Value20
-    ldloc UWP_V217380
+    ldloc UWP_V216872
     stsfld object [LispBase]Lisp.Values::Value21
-    ldloc UWP_V227381
+    ldloc UWP_V226873
     stsfld object [LispBase]Lisp.Values::Value22
-    ldloc UWP_V237382
+    ldloc UWP_V236874
     stsfld object [LispBase]Lisp.Values::Value23
-    ldloc UWP_V247383
+    ldloc UWP_V246875
     stsfld object [LispBase]Lisp.Values::Value24
-    ldloc UWP_V257384
+    ldloc UWP_V256876
     stsfld object [LispBase]Lisp.Values::Value25
-    ldloc UWP_V267385
+    ldloc UWP_V266877
     stsfld object [LispBase]Lisp.Values::Value26
-    ldloc UWP_V277386
+    ldloc UWP_V276878
     stsfld object [LispBase]Lisp.Values::Value27
-    ldloc UWP_V287387
+    ldloc UWP_V286879
     stsfld object [LispBase]Lisp.Values::Value28
-    ldloc UWP_V297388
+    ldloc UWP_V296880
     stsfld object [LispBase]Lisp.Values::Value29
-    ldloc UWP_V307389
+    ldloc UWP_V306881
     stsfld object [LispBase]Lisp.Values::Value30
-    ldloc UWP_V317390
+    ldloc UWP_V316882
     stsfld object [LispBase]Lisp.Values::Value31
-    ldloc UWP_V327391
+    ldloc UWP_V326883
     stsfld object [LispBase]Lisp.Values::Value32
-    ldloc UWP_V337392
+    ldloc UWP_V336884
     stsfld object [LispBase]Lisp.Values::Value33
-    ldloc UWP_V347393
+    ldloc UWP_V346885
     stsfld object [LispBase]Lisp.Values::Value34
-    ldloc UWP_V357394
+    ldloc UWP_V356886
     stsfld object [LispBase]Lisp.Values::Value35
-    ldloc UWP_V367395
+    ldloc UWP_V366887
     stsfld object [LispBase]Lisp.Values::Value36
-    ldloc UWP_V377396
+    ldloc UWP_V376888
     stsfld object [LispBase]Lisp.Values::Value37
-    ldloc UWP_V387397
+    ldloc UWP_V386889
     stsfld object [LispBase]Lisp.Values::Value38
-    ldloc UWP_V397398
+    ldloc UWP_V396890
     stsfld object [LispBase]Lisp.Values::Value39
-    ldloc UWP_V407399
+    ldloc UWP_V406891
     stsfld object [LispBase]Lisp.Values::Value40
-    ldloc UWP_V417400
+    ldloc UWP_V416892
     stsfld object [LispBase]Lisp.Values::Value41
-    ldloc UWP_V427401
+    ldloc UWP_V426893
     stsfld object [LispBase]Lisp.Values::Value42
-    ldloc UWP_V437402
+    ldloc UWP_V436894
     stsfld object [LispBase]Lisp.Values::Value43
-    ldloc UWP_V447403
+    ldloc UWP_V446895
     stsfld object [LispBase]Lisp.Values::Value44
-    ldloc UWP_V457404
+    ldloc UWP_V456896
     stsfld object [LispBase]Lisp.Values::Value45
-    ldloc UWP_V467405
+    ldloc UWP_V466897
     stsfld object [LispBase]Lisp.Values::Value46
-    ldloc UWP_V477406
+    ldloc UWP_V476898
     stsfld object [LispBase]Lisp.Values::Value47
-    ldloc UWP_V487407
+    ldloc UWP_V486899
     stsfld object [LispBase]Lisp.Values::Value48
-    ldloc UWP_V497408
+    ldloc UWP_V496900
     stsfld object [LispBase]Lisp.Values::Value49
-    ldloc UWP_V507409
+    ldloc UWP_V506901
     stsfld object [LispBase]Lisp.Values::Value50
-    ldloc UWP_V517410
+    ldloc UWP_V516902
     stsfld object [LispBase]Lisp.Values::Value51
-    ldloc UWP_V527411
+    ldloc UWP_V526903
     stsfld object [LispBase]Lisp.Values::Value52
-    ldloc UWP_V537412
+    ldloc UWP_V536904
     stsfld object [LispBase]Lisp.Values::Value53
-    ldloc UWP_V547413
+    ldloc UWP_V546905
     stsfld object [LispBase]Lisp.Values::Value54
-    ldloc UWP_V557414
+    ldloc UWP_V556906
     stsfld object [LispBase]Lisp.Values::Value55
-    ldloc UWP_V567415
+    ldloc UWP_V566907
     stsfld object [LispBase]Lisp.Values::Value56
-    ldloc UWP_V577416
+    ldloc UWP_V576908
     stsfld object [LispBase]Lisp.Values::Value57
-    ldloc UWP_V587417
+    ldloc UWP_V586909
     stsfld object [LispBase]Lisp.Values::Value58
-    ldloc UWP_V597418
+    ldloc UWP_V596910
     stsfld object [LispBase]Lisp.Values::Value59
-    ldloc UWP_V607419
+    ldloc UWP_V606911
     stsfld object [LispBase]Lisp.Values::Value60
-    ldloc UWP_V617420
+    ldloc UWP_V616912
     stsfld object [LispBase]Lisp.Values::Value61
-    ldloc UWP_V627421
+    ldloc UWP_V626913
     stsfld object [LispBase]Lisp.Values::Value62
-    ldloc UWP_V637422
+    ldloc UWP_V636914
     stsfld object [LispBase]Lisp.Values::Value63
     endfinally
     }
-DONE7435:
-    ldloc UWP_RESULT7358
-    stloc BLOCK_RESULT_DONE_6802
-    leave BLOCK_END_DONE_6801
+DONE6927:
+    ldloc UWP_RESULT6850
+    stloc BLOCK_RESULT_DONE_6342
+    leave BLOCK_END_DONE_6341
     }
     catch [LispBase]Lisp.BlockExitException
     {
     dup
     callvirt instance object [LispBase]Lisp.BlockExitException::'get_BlockId'()
-    ldstr "BLOCK_ID_DONE_6800"
+    ldstr "BLOCK_ID_DONE_6340"
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse BLOCK_RETHROW7434
+    brfalse BLOCK_RETHROW6926
     dup
     callvirt instance object[] [LispBase]Lisp.BlockExitException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.BlockExitException::'get_Value'()
-    stloc BLOCK_RESULT_DONE_6802
-    leave BLOCK_END_DONE_6801
-BLOCK_RETHROW7434:
+    stloc BLOCK_RESULT_DONE_6342
+    leave BLOCK_END_DONE_6341
+BLOCK_RETHROW6926:
     pop
     rethrow
     }
-BLOCK_END_DONE_6801:
+BLOCK_END_DONE_6341:
     nop
-    ldloc BLOCK_RESULT_DONE_6802
-    stloc CELL_VAL_TMP7433
-    ldloc CELL_TMP7432
+    ldloc BLOCK_RESULT_DONE_6342
+    stloc CELL_VAL_TMP6925
+    ldloc CELL_TMP6924
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7433
+    ldloc CELL_VAL_TMP6925
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7433
+    ldloc CELL_VAL_TMP6925
     pop
     ldstr "ERROR-LEXICAL-UWP:RESULT"
-    ldloc RESULT6799
+    ldloc RESULT6339
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_ERROR7169'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_ERROR6661'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7430
+    brtrue TRUE6922
     ldnull
-    br END7431
-TRUE7430:
+    br END6923
+TRUE6922:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7431:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6923:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "ERROR-LEXICAL-UWP:CLEANUP-RAN"
-    ldloc CLEANUP_RAN6798
+    ldloc CLEANUP_RAN6338
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call object Program::'SEE_CHECK'(object, object)
@@ -806,9 +1334,273 @@ END7431:
     ldstr "SEE:END:ERROR-LEXICAL-UWP"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT_6796:
+BLOCK_END_SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT_6336:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -911,158 +1703,422 @@ BLOCK_END_SEE_TEST_ERROR_LEXICAL_EXIT_WITH_UNWIND_PROTECT_6796:
 .method private static hidebysig object 'SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RES6792, object C6791, object HANDLER_BIND_RESULT7344, object HANDLERS_LIST7343, object SAVED_HANDLERS7342, object HANDLER_BIND_RESULT7340, object HANDLERS_LIST7339, object SAVED_HANDLERS7338, object CATCH_RESULT7337, object CATCH_TAG7336, object ID67786786, object CONDITION67776785, object TAG67796784, object BLOCK_RESULT_EXIT6776_6783)
+    .locals init (object RES6332, object C6331, object HANDLER_BIND_RESULT6836, object HANDLERS_LIST6835, object SAVED_HANDLERS6834, object HANDLER_BIND_RESULT6832, object HANDLERS_LIST6831, object SAVED_HANDLERS6830, object CATCH_RESULT6829, object CATCH_TAG6828, object ID63186326, object CONDITION63176325, object TAG63196324, object BLOCK_RESULT_EXIT6316_6323)
     ldstr "SEE:BEGIN:SIGNAL-ESCALATE"
     call object Program::'SEE_MARKER'(object)
     pop
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG67796784
+    stloc TAG63196324
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION67776785
+    stloc CONDITION63176325
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID67786786
-    ldloc TAG67796784
-    stloc CATCH_TAG7336
+    stloc ID63186326
+    ldloc TAG63196324
+    stloc CATCH_TAG6828
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7338
-    ldloc SAVED_HANDLERS7338
-    stloc HANDLERS_LIST7339
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ESCALATED_ERROR7341'
-    ldloc TAG67796784
-    ldloc CONDITION67776785
-    ldloc ID67786786
-    newobj instance void L_6818::'.ctor'(object, object, object)
+    stloc SAVED_HANDLERS6830
+    ldloc SAVED_HANDLERS6830
+    stloc HANDLERS_LIST6831
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ESCALATED_ERROR6833'
+    ldloc TAG63196324
+    ldloc CONDITION63176325
+    ldloc ID63186326
+    newobj instance void L_6358::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7339
+    ldloc HANDLERS_LIST6831
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7339
-    ldloc HANDLERS_LIST7339
+    stloc HANDLERS_LIST6831
+    ldloc HANDLERS_LIST6831
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7342
-    ldloc SAVED_HANDLERS7342
-    stloc HANDLERS_LIST7343
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_WARN7345'
-    newobj instance void L_6819::'.ctor'()
+    stloc SAVED_HANDLERS6834
+    ldloc SAVED_HANDLERS6834
+    stloc HANDLERS_LIST6835
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_WARN6837'
+    newobj instance void L_6359::'.ctor'()
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7343
+    ldloc HANDLERS_LIST6835
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7343
-    ldloc HANDLERS_LIST7343
+    stloc HANDLERS_LIST6835
+    ldloc HANDLERS_LIST6835
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7346'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6838'
     call object [LispBase]Lisp.HandlerControl::'Signal'(object)
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SIGNAL_SHOULD_NOT_REACH7269'
-    stloc HANDLER_BIND_RESULT7344
-    leave DONE7355
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SIGNAL_SHOULD_NOT_REACH6761'
+    stloc HANDLER_BIND_RESULT6836
+    leave DONE6847
     }
     finally
     {
-    ldloc SAVED_HANDLERS7342
+    ldloc SAVED_HANDLERS6834
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7355:
-    ldloc HANDLER_BIND_RESULT7344
-    stloc BLOCK_RESULT_EXIT6776_6783
-    leave BLOCK_END_EXIT6776_6782
-    stloc HANDLER_BIND_RESULT7340
-    leave DONE7354
+DONE6847:
+    ldloc HANDLER_BIND_RESULT6836
+    stloc BLOCK_RESULT_EXIT6316_6323
+    leave BLOCK_END_EXIT6316_6322
+    stloc HANDLER_BIND_RESULT6832
+    leave DONE6846
     }
     finally
     {
-    ldloc SAVED_HANDLERS7338
+    ldloc SAVED_HANDLERS6830
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7354:
-    ldloc HANDLER_BIND_RESULT7340
-    stloc CATCH_RESULT7337
-    leave CATCH_DONE7352
+DONE6846:
+    ldloc HANDLER_BIND_RESULT6832
+    stloc CATCH_RESULT6829
+    leave CATCH_DONE6844
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG7336
+    ldloc CATCH_TAG6828
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW7353
+    brfalse CATCH_RETHROW6845
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT7337
-    leave CATCH_DONE7352
-CATCH_RETHROW7353:
+    stloc CATCH_RESULT6829
+    leave CATCH_DONE6844
+CATCH_RETHROW6845:
     pop
     rethrow
     }
-CATCH_DONE7352:
-    ldloc CATCH_RESULT7337
+CATCH_DONE6844:
+    ldloc CATCH_RESULT6829
     pop
-    ldloc ID67786786
+    ldloc ID63186326
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7162'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6654'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7347
+    brtrue TRUE6839
     ldnull
-    br END7348
-TRUE7347:
+    br END6840
+TRUE6839:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7348:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6840:
     nop
     ldnull
     ceq
-    brtrue ELSE7356
-    ldloc CONDITION67776785
+    brtrue ELSE6848
+    ldloc CONDITION63176325
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C6791
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_ESCALATED7349'
-    br END7357
-ELSE7356:
+    stloc C6331
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_ESCALATED6841'
+    br END6849
+ELSE6848:
     nop
     ldnull
-END7357:
+END6849:
     nop
-    stloc BLOCK_RESULT_EXIT6776_6783
-BLOCK_END_EXIT6776_6782:
+    stloc BLOCK_RESULT_EXIT6316_6323
+BLOCK_END_EXIT6316_6322:
     nop
-    ldloc BLOCK_RESULT_EXIT6776_6783
-    stloc RES6792
+    ldloc BLOCK_RESULT_EXIT6316_6323
+    stloc RES6332
     ldstr "SIGNAL-ESCALATE:CAUGHT-ERROR"
-    ldloc RES6792
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_ESCALATED7349'
+    ldloc RES6332
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_ESCALATED6841'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7350
+    brtrue TRUE6842
     ldnull
-    br END7351
-TRUE7350:
+    br END6843
+TRUE6842:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7351:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6843:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "SEE:END:SIGNAL-ESCALATE"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR_6774:
+BLOCK_END_SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR_6314:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -1165,142 +2221,406 @@ BLOCK_END_SEE_TEST_SIGNAL_HANDLER_ESCALATES_TO_ERROR_6774:
 .method private static hidebysig object 'SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS7333, object MSG6770, object C6769, object HANDLER_BIND_RESULT7325, object HANDLERS_LIST7324, object SAVED_HANDLERS7323, object CATCH_RESULT7322, object CATCH_TAG7321, object ID67586766, object CONDITION67576765, object TAG67596764, object BLOCK_RESULT_EXIT6756_6763)
+    .locals init (object REFLECT_ARGS6825, object MSG6310, object C6309, object HANDLER_BIND_RESULT6817, object HANDLERS_LIST6816, object SAVED_HANDLERS6815, object CATCH_RESULT6814, object CATCH_TAG6813, object ID62986306, object CONDITION62976305, object TAG62996304, object BLOCK_RESULT_EXIT6296_6303)
     ldstr "SEE:BEGIN:ERROR-DOTNET"
     call object Program::'SEE_MARKER'(object)
     pop
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG67596764
+    stloc TAG62996304
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION67576765
+    stloc CONDITION62976305
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID67586766
-    ldloc TAG67596764
-    stloc CATCH_TAG7321
+    stloc ID62986306
+    ldloc TAG62996304
+    stloc CATCH_TAG6813
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7323
-    ldloc SAVED_HANDLERS7323
-    stloc HANDLERS_LIST7324
+    stloc SAVED_HANDLERS6815
+    ldloc SAVED_HANDLERS6815
+    stloc HANDLERS_LIST6816
     ldstr "System.Exception"
-    ldloc TAG67596764
-    ldloc CONDITION67576765
-    ldloc ID67586766
-    newobj instance void L_6817::'.ctor'(object, object, object)
+    ldloc TAG62996304
+    ldloc CONDITION62976305
+    ldloc ID62986306
+    newobj instance void L_6357::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7324
+    ldloc HANDLERS_LIST6816
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7324
-    ldloc HANDLERS_LIST7324
+    stloc HANDLERS_LIST6816
+    ldloc HANDLERS_LIST6816
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
     ldstr "System.Exception"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS7333
-    ldloc REFLECT_ARGS7333
+    stloc REFLECT_ARGS6825
+    ldloc REFLECT_ARGS6825
     ldc.i4 0
     ldstr "SEE .NET"
     stelem.ref
-    ldloc REFLECT_ARGS7333
+    ldloc REFLECT_ARGS6825
     call object [LispBase]Lisp.Reflection::'New'(object, object[])
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc BLOCK_RESULT_EXIT6756_6763
-    leave BLOCK_END_EXIT6756_6762
-    stloc HANDLER_BIND_RESULT7325
-    leave DONE7332
+    stloc BLOCK_RESULT_EXIT6296_6303
+    leave BLOCK_END_EXIT6296_6302
+    stloc HANDLER_BIND_RESULT6817
+    leave DONE6824
     }
     finally
     {
-    ldloc SAVED_HANDLERS7323
+    ldloc SAVED_HANDLERS6815
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7332:
-    ldloc HANDLER_BIND_RESULT7325
-    stloc CATCH_RESULT7322
-    leave CATCH_DONE7330
+DONE6824:
+    ldloc HANDLER_BIND_RESULT6817
+    stloc CATCH_RESULT6814
+    leave CATCH_DONE6822
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG7321
+    ldloc CATCH_TAG6813
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW7331
+    brfalse CATCH_RETHROW6823
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT7322
-    leave CATCH_DONE7330
-CATCH_RETHROW7331:
+    stloc CATCH_RESULT6814
+    leave CATCH_DONE6822
+CATCH_RETHROW6823:
     pop
     rethrow
     }
-CATCH_DONE7330:
-    ldloc CATCH_RESULT7322
+CATCH_DONE6822:
+    ldloc CATCH_RESULT6814
     pop
-    ldloc ID67586766
+    ldloc ID62986306
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7155'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6647'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7326
+    brtrue TRUE6818
     ldnull
-    br END7327
-TRUE7326:
+    br END6819
+TRUE6818:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7327:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6819:
     nop
     ldnull
     ceq
-    brtrue ELSE7334
-    ldloc CONDITION67576765
+    brtrue ELSE6826
+    ldloc CONDITION62976305
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C6769
-    ldloc C6769
+    stloc C6309
+    ldloc C6309
     ldstr "Message"
     call object [LispBase]Lisp.Reflection::'GetProperty'(object, string)
-    br END7335
-ELSE7334:
+    br END6827
+ELSE6826:
     nop
     ldnull
-END7335:
+END6827:
     nop
-    stloc BLOCK_RESULT_EXIT6756_6763
-BLOCK_END_EXIT6756_6762:
+    stloc BLOCK_RESULT_EXIT6296_6303
+BLOCK_END_EXIT6296_6302:
     nop
-    ldloc BLOCK_RESULT_EXIT6756_6763
-    stloc MSG6770
+    ldloc BLOCK_RESULT_EXIT6296_6303
+    stloc MSG6310
     ldstr "ERROR-DOTNET:MESSAGE"
-    ldloc MSG6770
+    ldloc MSG6310
     ldstr "SEE .NET"
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7328
+    brtrue TRUE6820
     ldnull
-    br END7329
-TRUE7328:
+    br END6821
+TRUE6820:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7329:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6821:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "SEE:END:ERROR-DOTNET"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH_6754:
+BLOCK_END_SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH_6294:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -1403,171 +2723,171 @@ BLOCK_END_SEE_TEST_ERROR_DOTNET_EXCEPTION_CATCH_6754:
 .method private static hidebysig object 'SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7318, object CELL_TMP7317, object TEMP7309, object C6750, object HANDLER_BIND_RESULT7306, object HANDLERS_LIST7305, object SAVED_HANDLERS7304, object CATCH_RESULT7303, object CATCH_TAG7302, object ID67396747, object CONDITION67386746, object TAG67406745, object BLOCK_RESULT_EXIT6737_6744, object HANDLER_BIND_RESULT7301, object HANDLERS_LIST7300, object SAVED_HANDLERS7299, object HC_CAUGHT6734, object HB_CALLED6733)
+    .locals init (object CELL_VAL_TMP6810, object CELL_TMP6809, object TEMP6801, object C6290, object HANDLER_BIND_RESULT6798, object HANDLERS_LIST6797, object SAVED_HANDLERS6796, object CATCH_RESULT6795, object CATCH_TAG6794, object ID62796287, object CONDITION62786286, object TAG62806285, object BLOCK_RESULT_EXIT6277_6284, object HANDLER_BIND_RESULT6793, object HANDLERS_LIST6792, object SAVED_HANDLERS6791, object HC_CAUGHT6274, object HB_CALLED6273)
     ldstr "SEE:BEGIN:ERROR-HB-HC"
     call object Program::'SEE_MARKER'(object)
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc HB_CALLED6733
+    stloc HB_CALLED6273
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc HC_CAUGHT6734
+    stloc HC_CAUGHT6274
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7299
-    ldloc SAVED_HANDLERS7299
-    stloc HANDLERS_LIST7300
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR7286'
-    ldloc HB_CALLED6733
-    newobj instance void L_6815::'.ctor'(object)
+    stloc SAVED_HANDLERS6791
+    ldloc SAVED_HANDLERS6791
+    stloc HANDLERS_LIST6792
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR6778'
+    ldloc HB_CALLED6273
+    newobj instance void L_6355::'.ctor'(object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7300
+    ldloc HANDLERS_LIST6792
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7300
-    ldloc HANDLERS_LIST7300
+    stloc HANDLERS_LIST6792
+    ldloc HANDLERS_LIST6792
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG67406745
+    stloc TAG62806285
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION67386746
+    stloc CONDITION62786286
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID67396747
-    ldloc TAG67406745
-    stloc CATCH_TAG7302
+    stloc ID62796287
+    ldloc TAG62806285
+    stloc CATCH_TAG6794
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7304
-    ldloc SAVED_HANDLERS7304
-    stloc HANDLERS_LIST7305
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR7286'
-    ldloc TAG67406745
-    ldloc CONDITION67386746
-    ldloc ID67396747
-    newobj instance void L_6816::'.ctor'(object, object, object)
+    stloc SAVED_HANDLERS6796
+    ldloc SAVED_HANDLERS6796
+    stloc HANDLERS_LIST6797
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR6778'
+    ldloc TAG62806285
+    ldloc CONDITION62786286
+    ldloc ID62796287
+    newobj instance void L_6356::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7305
+    ldloc HANDLERS_LIST6797
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7305
-    ldloc HANDLERS_LIST7305
+    stloc HANDLERS_LIST6797
+    ldloc HANDLERS_LIST6797
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7287'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6779'
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc BLOCK_RESULT_EXIT6737_6744
-    leave BLOCK_END_EXIT6737_6743
-    stloc HANDLER_BIND_RESULT7306
-    leave DONE7316
+    stloc BLOCK_RESULT_EXIT6277_6284
+    leave BLOCK_END_EXIT6277_6283
+    stloc HANDLER_BIND_RESULT6798
+    leave DONE6808
     }
     finally
     {
-    ldloc SAVED_HANDLERS7304
+    ldloc SAVED_HANDLERS6796
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7316:
-    ldloc HANDLER_BIND_RESULT7306
-    stloc CATCH_RESULT7303
-    leave CATCH_DONE7314
+DONE6808:
+    ldloc HANDLER_BIND_RESULT6798
+    stloc CATCH_RESULT6795
+    leave CATCH_DONE6806
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG7302
+    ldloc CATCH_TAG6794
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW7315
+    brfalse CATCH_RETHROW6807
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT7303
-    leave CATCH_DONE7314
-CATCH_RETHROW7315:
+    stloc CATCH_RESULT6795
+    leave CATCH_DONE6806
+CATCH_RETHROW6807:
     pop
     rethrow
     }
-CATCH_DONE7314:
-    ldloc CATCH_RESULT7303
+CATCH_DONE6806:
+    ldloc CATCH_RESULT6795
     pop
-    ldloc ID67396747
+    ldloc ID62796287
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7148'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6640'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7307
+    brtrue TRUE6799
     ldnull
-    br END7308
-TRUE7307:
+    br END6800
+TRUE6799:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7308:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6800:
     nop
     ldnull
     ceq
-    brtrue ELSE7319
-    ldloc CONDITION67386746
+    brtrue ELSE6811
+    ldloc CONDITION62786286
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C6750
-    ldloc HC_CAUGHT6734
-    stloc CELL_TMP7317
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T7143'
-    stloc CELL_VAL_TMP7318
-    ldloc CELL_TMP7317
+    stloc C6290
+    ldloc HC_CAUGHT6274
+    stloc CELL_TMP6809
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T6635'
+    stloc CELL_VAL_TMP6810
+    ldloc CELL_TMP6809
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7318
+    ldloc CELL_VAL_TMP6810
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7318
+    ldloc CELL_VAL_TMP6810
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT7310'
-    br END7320
-ELSE7319:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT6802'
+    br END6812
+ELSE6811:
     nop
     ldnull
-END7320:
+END6812:
     nop
-    stloc BLOCK_RESULT_EXIT6737_6744
-BLOCK_END_EXIT6737_6743:
+    stloc BLOCK_RESULT_EXIT6277_6284
+BLOCK_END_EXIT6277_6283:
     nop
-    ldloc BLOCK_RESULT_EXIT6737_6744
-    stloc HANDLER_BIND_RESULT7301
-    leave DONE7313
+    ldloc BLOCK_RESULT_EXIT6277_6284
+    stloc HANDLER_BIND_RESULT6793
+    leave DONE6805
     }
     finally
     {
-    ldloc SAVED_HANDLERS7299
+    ldloc SAVED_HANDLERS6791
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7313:
-    ldloc HANDLER_BIND_RESULT7301
+DONE6805:
+    ldloc HANDLER_BIND_RESULT6793
     pop
     ldstr "ERROR-HB-HC:HANDLER-BIND-NOT-CALLED"
-    ldloc HB_CALLED6733
+    ldloc HB_CALLED6273
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7311
+    brtrue TRUE6803
     ldnull
-    br END7312
-TRUE7311:
+    br END6804
+TRUE6803:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7174'
-END7312:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6666'
+END6804:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "ERROR-HB-HC:HANDLER-CASE-CAUGHT"
-    ldloc HC_CAUGHT6734
+    ldloc HC_CAUGHT6274
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call object Program::'SEE_CHECK'(object, object)
@@ -1575,9 +2895,273 @@ END7312:
     ldstr "SEE:END:ERROR-HB-HC"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE_6731:
+BLOCK_END_SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE_6271:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -1680,133 +3264,397 @@ BLOCK_END_SEE_TEST_ERROR_HANDLER_BIND_VS_HANDLER_CASE_6731:
 .method private static hidebysig object 'SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RES6727, object C6726, object HANDLER_BIND_RESULT7285, object HANDLERS_LIST7284, object SAVED_HANDLERS7283, object CATCH_RESULT7282, object CATCH_TAG7281, object ID67156723, object CONDITION67146722, object TAG67166721, object BLOCK_RESULT_EXIT6713_6720)
+    .locals init (object RES6267, object C6266, object HANDLER_BIND_RESULT6777, object HANDLERS_LIST6776, object SAVED_HANDLERS6775, object CATCH_RESULT6774, object CATCH_TAG6773, object ID62556263, object CONDITION62546262, object TAG62566261, object BLOCK_RESULT_EXIT6253_6260)
     ldstr "SEE:BEGIN:ERROR-HANDLER-CASE"
     call object Program::'SEE_MARKER'(object)
     pop
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG67166721
+    stloc TAG62566261
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION67146722
+    stloc CONDITION62546262
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID67156723
-    ldloc TAG67166721
-    stloc CATCH_TAG7281
+    stloc ID62556263
+    ldloc TAG62566261
+    stloc CATCH_TAG6773
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7283
-    ldloc SAVED_HANDLERS7283
-    stloc HANDLERS_LIST7284
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR7286'
-    ldloc TAG67166721
-    ldloc CONDITION67146722
-    ldloc ID67156723
-    newobj instance void L_6814::'.ctor'(object, object, object)
+    stloc SAVED_HANDLERS6775
+    ldloc SAVED_HANDLERS6775
+    stloc HANDLERS_LIST6776
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_ERROR6778'
+    ldloc TAG62566261
+    ldloc CONDITION62546262
+    ldloc ID62556263
+    newobj instance void L_6354::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7284
+    ldloc HANDLERS_LIST6776
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7284
-    ldloc HANDLERS_LIST7284
+    stloc HANDLERS_LIST6776
+    ldloc HANDLERS_LIST6776
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7287'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6779'
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR_SHOULD_NOT_REACH7288'
-    stloc BLOCK_RESULT_EXIT6713_6720
-    leave BLOCK_END_EXIT6713_6719
-    stloc HANDLER_BIND_RESULT7285
-    leave DONE7296
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR_SHOULD_NOT_REACH6780'
+    stloc BLOCK_RESULT_EXIT6253_6260
+    leave BLOCK_END_EXIT6253_6259
+    stloc HANDLER_BIND_RESULT6777
+    leave DONE6788
     }
     finally
     {
-    ldloc SAVED_HANDLERS7283
+    ldloc SAVED_HANDLERS6775
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7296:
-    ldloc HANDLER_BIND_RESULT7285
-    stloc CATCH_RESULT7282
-    leave CATCH_DONE7294
+DONE6788:
+    ldloc HANDLER_BIND_RESULT6777
+    stloc CATCH_RESULT6774
+    leave CATCH_DONE6786
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG7281
+    ldloc CATCH_TAG6773
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW7295
+    brfalse CATCH_RETHROW6787
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT7282
-    leave CATCH_DONE7294
-CATCH_RETHROW7295:
+    stloc CATCH_RESULT6774
+    leave CATCH_DONE6786
+CATCH_RETHROW6787:
     pop
     rethrow
     }
-CATCH_DONE7294:
-    ldloc CATCH_RESULT7282
+CATCH_DONE6786:
+    ldloc CATCH_RESULT6774
     pop
-    ldloc ID67156723
+    ldloc ID62556263
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7137'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6629'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7289
+    brtrue TRUE6781
     ldnull
-    br END7290
-TRUE7289:
+    br END6782
+TRUE6781:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7290:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6782:
     nop
     ldnull
     ceq
-    brtrue ELSE7297
-    ldloc CONDITION67146722
+    brtrue ELSE6789
+    ldloc CONDITION62546262
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C6726
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_SEE_ERROR7291'
-    br END7298
-ELSE7297:
+    stloc C6266
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_SEE_ERROR6783'
+    br END6790
+ELSE6789:
     nop
     ldnull
-END7298:
+END6790:
     nop
-    stloc BLOCK_RESULT_EXIT6713_6720
-BLOCK_END_EXIT6713_6719:
+    stloc BLOCK_RESULT_EXIT6253_6260
+BLOCK_END_EXIT6253_6259:
     nop
-    ldloc BLOCK_RESULT_EXIT6713_6720
-    stloc RES6727
+    ldloc BLOCK_RESULT_EXIT6253_6260
+    stloc RES6267
     ldstr "ERROR-HANDLER-CASE:CAUGHT"
-    ldloc RES6727
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_SEE_ERROR7291'
+    ldloc RES6267
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_CAUGHT_SEE_ERROR6783'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7292
+    brtrue TRUE6784
     ldnull
-    br END7293
-TRUE7292:
+    br END6785
+TRUE6784:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7293:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6785:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "SEE:END:ERROR-HANDLER-CASE"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH_6711:
+BLOCK_END_SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH_6251:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -1909,378 +3757,378 @@ BLOCK_END_SEE_TEST_ERROR_CAUGHT_AND_NO_FALLTHROUGH_6711:
 .method private static hidebysig object 'SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7280, object CELL_TMP7279, object BLOCK_RESULT_DONE_6705, object CELL_VAL_TMP7275, object CELL_TMP7274, object TEMP7271, object TEMP7270, object HANDLER_BIND_RESULT7266, object HANDLERS_LIST7265, object SAVED_HANDLERS7264, object UWP_V637263, object UWP_V627262, object UWP_V617261, object UWP_V607260, object UWP_V597259, object UWP_V587258, object UWP_V577257, object UWP_V567256, object UWP_V557255, object UWP_V547254, object UWP_V537253, object UWP_V527252, object UWP_V517251, object UWP_V507250, object UWP_V497249, object UWP_V487248, object UWP_V477247, object UWP_V467246, object UWP_V457245, object UWP_V447244, object UWP_V437243, object UWP_V427242, object UWP_V417241, object UWP_V407240, object UWP_V397239, object UWP_V387238, object UWP_V377237, object UWP_V367236, object UWP_V357235, object UWP_V347234, object UWP_V337233, object UWP_V327232, object UWP_V317231, object UWP_V307230, object UWP_V297229, object UWP_V287228, object UWP_V277227, object UWP_V267226, object UWP_V257225, object UWP_V247224, object UWP_V237223, object UWP_V227222, object UWP_V217221, object UWP_V207220, object UWP_V197219, object UWP_V187218, object UWP_V177217, object UWP_V167216, object UWP_V157215, object UWP_V147214, object UWP_V137213, object UWP_V127212, object UWP_V117211, object UWP_V107210, object UWP_V97209, object UWP_V87208, object UWP_V77207, object UWP_V67206, object UWP_V57205, object UWP_V47204, object UWP_V37203, object UWP_V27202, object UWP_V17201, object UWP_COUNT7200, object UWP_RESULT7199, object RESULT6702, object CLEANUP_RAN6701)
+    .locals init (object CELL_VAL_TMP6772, object CELL_TMP6771, object BLOCK_RESULT_DONE_6245, object CELL_VAL_TMP6767, object CELL_TMP6766, object TEMP6763, object TEMP6762, object HANDLER_BIND_RESULT6758, object HANDLERS_LIST6757, object SAVED_HANDLERS6756, object UWP_V636755, object UWP_V626754, object UWP_V616753, object UWP_V606752, object UWP_V596751, object UWP_V586750, object UWP_V576749, object UWP_V566748, object UWP_V556747, object UWP_V546746, object UWP_V536745, object UWP_V526744, object UWP_V516743, object UWP_V506742, object UWP_V496741, object UWP_V486740, object UWP_V476739, object UWP_V466738, object UWP_V456737, object UWP_V446736, object UWP_V436735, object UWP_V426734, object UWP_V416733, object UWP_V406732, object UWP_V396731, object UWP_V386730, object UWP_V376729, object UWP_V366728, object UWP_V356727, object UWP_V346726, object UWP_V336725, object UWP_V326724, object UWP_V316723, object UWP_V306722, object UWP_V296721, object UWP_V286720, object UWP_V276719, object UWP_V266718, object UWP_V256717, object UWP_V246716, object UWP_V236715, object UWP_V226714, object UWP_V216713, object UWP_V206712, object UWP_V196711, object UWP_V186710, object UWP_V176709, object UWP_V166708, object UWP_V156707, object UWP_V146706, object UWP_V136705, object UWP_V126704, object UWP_V116703, object UWP_V106702, object UWP_V96701, object UWP_V86700, object UWP_V76699, object UWP_V66698, object UWP_V56697, object UWP_V46696, object UWP_V36695, object UWP_V26694, object UWP_V16693, object UWP_COUNT6692, object UWP_RESULT6691, object RESULT6242, object CLEANUP_RAN6241)
     ldstr "SEE:BEGIN:SIGNAL-LEXICAL-UWP"
     call object Program::'SEE_MARKER'(object)
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CLEANUP_RAN6701
+    stloc CLEANUP_RAN6241
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc RESULT6702
-    ldloc RESULT6702
-    stloc CELL_TMP7274
+    stloc RESULT6242
+    ldloc RESULT6242
+    stloc CELL_TMP6766
     .try
     {
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7264
-    ldloc SAVED_HANDLERS7264
-    stloc HANDLERS_LIST7265
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_SIGNAL7267'
-    newobj instance void L_6813::'.ctor'()
+    stloc SAVED_HANDLERS6756
+    ldloc SAVED_HANDLERS6756
+    stloc HANDLERS_LIST6757
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_SIGNAL6759'
+    newobj instance void L_6353::'.ctor'()
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7265
+    ldloc HANDLERS_LIST6757
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7265
-    ldloc HANDLERS_LIST7265
+    stloc HANDLERS_LIST6757
+    ldloc HANDLERS_LIST6757
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7268'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6760'
     call object [LispBase]Lisp.HandlerControl::'Signal'(object)
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SIGNAL_SHOULD_NOT_REACH7269'
-    stloc HANDLER_BIND_RESULT7266
-    leave DONE7278
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SIGNAL_SHOULD_NOT_REACH6761'
+    stloc HANDLER_BIND_RESULT6758
+    leave DONE6770
     }
     finally
     {
-    ldloc SAVED_HANDLERS7264
+    ldloc SAVED_HANDLERS6756
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7278:
-    ldloc HANDLER_BIND_RESULT7266
-    stloc UWP_RESULT7199
-    leave DONE7277
+DONE6770:
+    ldloc HANDLER_BIND_RESULT6758
+    stloc UWP_RESULT6691
+    leave DONE6769
     }
     finally
     {
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc UWP_COUNT7200
+    stloc UWP_COUNT6692
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc UWP_V17201
+    stloc UWP_V16693
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc UWP_V27202
+    stloc UWP_V26694
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc UWP_V37203
+    stloc UWP_V36695
     ldsfld object [LispBase]Lisp.Values::Value4
-    stloc UWP_V47204
+    stloc UWP_V46696
     ldsfld object [LispBase]Lisp.Values::Value5
-    stloc UWP_V57205
+    stloc UWP_V56697
     ldsfld object [LispBase]Lisp.Values::Value6
-    stloc UWP_V67206
+    stloc UWP_V66698
     ldsfld object [LispBase]Lisp.Values::Value7
-    stloc UWP_V77207
+    stloc UWP_V76699
     ldsfld object [LispBase]Lisp.Values::Value8
-    stloc UWP_V87208
+    stloc UWP_V86700
     ldsfld object [LispBase]Lisp.Values::Value9
-    stloc UWP_V97209
+    stloc UWP_V96701
     ldsfld object [LispBase]Lisp.Values::Value10
-    stloc UWP_V107210
+    stloc UWP_V106702
     ldsfld object [LispBase]Lisp.Values::Value11
-    stloc UWP_V117211
+    stloc UWP_V116703
     ldsfld object [LispBase]Lisp.Values::Value12
-    stloc UWP_V127212
+    stloc UWP_V126704
     ldsfld object [LispBase]Lisp.Values::Value13
-    stloc UWP_V137213
+    stloc UWP_V136705
     ldsfld object [LispBase]Lisp.Values::Value14
-    stloc UWP_V147214
+    stloc UWP_V146706
     ldsfld object [LispBase]Lisp.Values::Value15
-    stloc UWP_V157215
+    stloc UWP_V156707
     ldsfld object [LispBase]Lisp.Values::Value16
-    stloc UWP_V167216
+    stloc UWP_V166708
     ldsfld object [LispBase]Lisp.Values::Value17
-    stloc UWP_V177217
+    stloc UWP_V176709
     ldsfld object [LispBase]Lisp.Values::Value18
-    stloc UWP_V187218
+    stloc UWP_V186710
     ldsfld object [LispBase]Lisp.Values::Value19
-    stloc UWP_V197219
+    stloc UWP_V196711
     ldsfld object [LispBase]Lisp.Values::Value20
-    stloc UWP_V207220
+    stloc UWP_V206712
     ldsfld object [LispBase]Lisp.Values::Value21
-    stloc UWP_V217221
+    stloc UWP_V216713
     ldsfld object [LispBase]Lisp.Values::Value22
-    stloc UWP_V227222
+    stloc UWP_V226714
     ldsfld object [LispBase]Lisp.Values::Value23
-    stloc UWP_V237223
+    stloc UWP_V236715
     ldsfld object [LispBase]Lisp.Values::Value24
-    stloc UWP_V247224
+    stloc UWP_V246716
     ldsfld object [LispBase]Lisp.Values::Value25
-    stloc UWP_V257225
+    stloc UWP_V256717
     ldsfld object [LispBase]Lisp.Values::Value26
-    stloc UWP_V267226
+    stloc UWP_V266718
     ldsfld object [LispBase]Lisp.Values::Value27
-    stloc UWP_V277227
+    stloc UWP_V276719
     ldsfld object [LispBase]Lisp.Values::Value28
-    stloc UWP_V287228
+    stloc UWP_V286720
     ldsfld object [LispBase]Lisp.Values::Value29
-    stloc UWP_V297229
+    stloc UWP_V296721
     ldsfld object [LispBase]Lisp.Values::Value30
-    stloc UWP_V307230
+    stloc UWP_V306722
     ldsfld object [LispBase]Lisp.Values::Value31
-    stloc UWP_V317231
+    stloc UWP_V316723
     ldsfld object [LispBase]Lisp.Values::Value32
-    stloc UWP_V327232
+    stloc UWP_V326724
     ldsfld object [LispBase]Lisp.Values::Value33
-    stloc UWP_V337233
+    stloc UWP_V336725
     ldsfld object [LispBase]Lisp.Values::Value34
-    stloc UWP_V347234
+    stloc UWP_V346726
     ldsfld object [LispBase]Lisp.Values::Value35
-    stloc UWP_V357235
+    stloc UWP_V356727
     ldsfld object [LispBase]Lisp.Values::Value36
-    stloc UWP_V367236
+    stloc UWP_V366728
     ldsfld object [LispBase]Lisp.Values::Value37
-    stloc UWP_V377237
+    stloc UWP_V376729
     ldsfld object [LispBase]Lisp.Values::Value38
-    stloc UWP_V387238
+    stloc UWP_V386730
     ldsfld object [LispBase]Lisp.Values::Value39
-    stloc UWP_V397239
+    stloc UWP_V396731
     ldsfld object [LispBase]Lisp.Values::Value40
-    stloc UWP_V407240
+    stloc UWP_V406732
     ldsfld object [LispBase]Lisp.Values::Value41
-    stloc UWP_V417241
+    stloc UWP_V416733
     ldsfld object [LispBase]Lisp.Values::Value42
-    stloc UWP_V427242
+    stloc UWP_V426734
     ldsfld object [LispBase]Lisp.Values::Value43
-    stloc UWP_V437243
+    stloc UWP_V436735
     ldsfld object [LispBase]Lisp.Values::Value44
-    stloc UWP_V447244
+    stloc UWP_V446736
     ldsfld object [LispBase]Lisp.Values::Value45
-    stloc UWP_V457245
+    stloc UWP_V456737
     ldsfld object [LispBase]Lisp.Values::Value46
-    stloc UWP_V467246
+    stloc UWP_V466738
     ldsfld object [LispBase]Lisp.Values::Value47
-    stloc UWP_V477247
+    stloc UWP_V476739
     ldsfld object [LispBase]Lisp.Values::Value48
-    stloc UWP_V487248
+    stloc UWP_V486740
     ldsfld object [LispBase]Lisp.Values::Value49
-    stloc UWP_V497249
+    stloc UWP_V496741
     ldsfld object [LispBase]Lisp.Values::Value50
-    stloc UWP_V507250
+    stloc UWP_V506742
     ldsfld object [LispBase]Lisp.Values::Value51
-    stloc UWP_V517251
+    stloc UWP_V516743
     ldsfld object [LispBase]Lisp.Values::Value52
-    stloc UWP_V527252
+    stloc UWP_V526744
     ldsfld object [LispBase]Lisp.Values::Value53
-    stloc UWP_V537253
+    stloc UWP_V536745
     ldsfld object [LispBase]Lisp.Values::Value54
-    stloc UWP_V547254
+    stloc UWP_V546746
     ldsfld object [LispBase]Lisp.Values::Value55
-    stloc UWP_V557255
+    stloc UWP_V556747
     ldsfld object [LispBase]Lisp.Values::Value56
-    stloc UWP_V567256
+    stloc UWP_V566748
     ldsfld object [LispBase]Lisp.Values::Value57
-    stloc UWP_V577257
+    stloc UWP_V576749
     ldsfld object [LispBase]Lisp.Values::Value58
-    stloc UWP_V587258
+    stloc UWP_V586750
     ldsfld object [LispBase]Lisp.Values::Value59
-    stloc UWP_V597259
+    stloc UWP_V596751
     ldsfld object [LispBase]Lisp.Values::Value60
-    stloc UWP_V607260
+    stloc UWP_V606752
     ldsfld object [LispBase]Lisp.Values::Value61
-    stloc UWP_V617261
+    stloc UWP_V616753
     ldsfld object [LispBase]Lisp.Values::Value62
-    stloc UWP_V627262
+    stloc UWP_V626754
     ldsfld object [LispBase]Lisp.Values::Value63
-    stloc UWP_V637263
-    ldloc CLEANUP_RAN6701
-    stloc CELL_TMP7279
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T7143'
-    stloc CELL_VAL_TMP7280
-    ldloc CELL_TMP7279
+    stloc UWP_V636755
+    ldloc CLEANUP_RAN6241
+    stloc CELL_TMP6771
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T6635'
+    stloc CELL_VAL_TMP6772
+    ldloc CELL_TMP6771
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7280
+    ldloc CELL_VAL_TMP6772
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7280
+    ldloc CELL_VAL_TMP6772
     pop
     ldstr "SIGNAL-LEXICAL-UWP:CLEANUP"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc UWP_COUNT7200
+    ldloc UWP_COUNT6692
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    ldloc UWP_V17201
+    ldloc UWP_V16693
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc UWP_V27202
+    ldloc UWP_V26694
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc UWP_V37203
+    ldloc UWP_V36695
     stsfld object [LispBase]Lisp.Values::Value3
-    ldloc UWP_V47204
+    ldloc UWP_V46696
     stsfld object [LispBase]Lisp.Values::Value4
-    ldloc UWP_V57205
+    ldloc UWP_V56697
     stsfld object [LispBase]Lisp.Values::Value5
-    ldloc UWP_V67206
+    ldloc UWP_V66698
     stsfld object [LispBase]Lisp.Values::Value6
-    ldloc UWP_V77207
+    ldloc UWP_V76699
     stsfld object [LispBase]Lisp.Values::Value7
-    ldloc UWP_V87208
+    ldloc UWP_V86700
     stsfld object [LispBase]Lisp.Values::Value8
-    ldloc UWP_V97209
+    ldloc UWP_V96701
     stsfld object [LispBase]Lisp.Values::Value9
-    ldloc UWP_V107210
+    ldloc UWP_V106702
     stsfld object [LispBase]Lisp.Values::Value10
-    ldloc UWP_V117211
+    ldloc UWP_V116703
     stsfld object [LispBase]Lisp.Values::Value11
-    ldloc UWP_V127212
+    ldloc UWP_V126704
     stsfld object [LispBase]Lisp.Values::Value12
-    ldloc UWP_V137213
+    ldloc UWP_V136705
     stsfld object [LispBase]Lisp.Values::Value13
-    ldloc UWP_V147214
+    ldloc UWP_V146706
     stsfld object [LispBase]Lisp.Values::Value14
-    ldloc UWP_V157215
+    ldloc UWP_V156707
     stsfld object [LispBase]Lisp.Values::Value15
-    ldloc UWP_V167216
+    ldloc UWP_V166708
     stsfld object [LispBase]Lisp.Values::Value16
-    ldloc UWP_V177217
+    ldloc UWP_V176709
     stsfld object [LispBase]Lisp.Values::Value17
-    ldloc UWP_V187218
+    ldloc UWP_V186710
     stsfld object [LispBase]Lisp.Values::Value18
-    ldloc UWP_V197219
+    ldloc UWP_V196711
     stsfld object [LispBase]Lisp.Values::Value19
-    ldloc UWP_V207220
+    ldloc UWP_V206712
     stsfld object [LispBase]Lisp.Values::Value20
-    ldloc UWP_V217221
+    ldloc UWP_V216713
     stsfld object [LispBase]Lisp.Values::Value21
-    ldloc UWP_V227222
+    ldloc UWP_V226714
     stsfld object [LispBase]Lisp.Values::Value22
-    ldloc UWP_V237223
+    ldloc UWP_V236715
     stsfld object [LispBase]Lisp.Values::Value23
-    ldloc UWP_V247224
+    ldloc UWP_V246716
     stsfld object [LispBase]Lisp.Values::Value24
-    ldloc UWP_V257225
+    ldloc UWP_V256717
     stsfld object [LispBase]Lisp.Values::Value25
-    ldloc UWP_V267226
+    ldloc UWP_V266718
     stsfld object [LispBase]Lisp.Values::Value26
-    ldloc UWP_V277227
+    ldloc UWP_V276719
     stsfld object [LispBase]Lisp.Values::Value27
-    ldloc UWP_V287228
+    ldloc UWP_V286720
     stsfld object [LispBase]Lisp.Values::Value28
-    ldloc UWP_V297229
+    ldloc UWP_V296721
     stsfld object [LispBase]Lisp.Values::Value29
-    ldloc UWP_V307230
+    ldloc UWP_V306722
     stsfld object [LispBase]Lisp.Values::Value30
-    ldloc UWP_V317231
+    ldloc UWP_V316723
     stsfld object [LispBase]Lisp.Values::Value31
-    ldloc UWP_V327232
+    ldloc UWP_V326724
     stsfld object [LispBase]Lisp.Values::Value32
-    ldloc UWP_V337233
+    ldloc UWP_V336725
     stsfld object [LispBase]Lisp.Values::Value33
-    ldloc UWP_V347234
+    ldloc UWP_V346726
     stsfld object [LispBase]Lisp.Values::Value34
-    ldloc UWP_V357235
+    ldloc UWP_V356727
     stsfld object [LispBase]Lisp.Values::Value35
-    ldloc UWP_V367236
+    ldloc UWP_V366728
     stsfld object [LispBase]Lisp.Values::Value36
-    ldloc UWP_V377237
+    ldloc UWP_V376729
     stsfld object [LispBase]Lisp.Values::Value37
-    ldloc UWP_V387238
+    ldloc UWP_V386730
     stsfld object [LispBase]Lisp.Values::Value38
-    ldloc UWP_V397239
+    ldloc UWP_V396731
     stsfld object [LispBase]Lisp.Values::Value39
-    ldloc UWP_V407240
+    ldloc UWP_V406732
     stsfld object [LispBase]Lisp.Values::Value40
-    ldloc UWP_V417241
+    ldloc UWP_V416733
     stsfld object [LispBase]Lisp.Values::Value41
-    ldloc UWP_V427242
+    ldloc UWP_V426734
     stsfld object [LispBase]Lisp.Values::Value42
-    ldloc UWP_V437243
+    ldloc UWP_V436735
     stsfld object [LispBase]Lisp.Values::Value43
-    ldloc UWP_V447244
+    ldloc UWP_V446736
     stsfld object [LispBase]Lisp.Values::Value44
-    ldloc UWP_V457245
+    ldloc UWP_V456737
     stsfld object [LispBase]Lisp.Values::Value45
-    ldloc UWP_V467246
+    ldloc UWP_V466738
     stsfld object [LispBase]Lisp.Values::Value46
-    ldloc UWP_V477247
+    ldloc UWP_V476739
     stsfld object [LispBase]Lisp.Values::Value47
-    ldloc UWP_V487248
+    ldloc UWP_V486740
     stsfld object [LispBase]Lisp.Values::Value48
-    ldloc UWP_V497249
+    ldloc UWP_V496741
     stsfld object [LispBase]Lisp.Values::Value49
-    ldloc UWP_V507250
+    ldloc UWP_V506742
     stsfld object [LispBase]Lisp.Values::Value50
-    ldloc UWP_V517251
+    ldloc UWP_V516743
     stsfld object [LispBase]Lisp.Values::Value51
-    ldloc UWP_V527252
+    ldloc UWP_V526744
     stsfld object [LispBase]Lisp.Values::Value52
-    ldloc UWP_V537253
+    ldloc UWP_V536745
     stsfld object [LispBase]Lisp.Values::Value53
-    ldloc UWP_V547254
+    ldloc UWP_V546746
     stsfld object [LispBase]Lisp.Values::Value54
-    ldloc UWP_V557255
+    ldloc UWP_V556747
     stsfld object [LispBase]Lisp.Values::Value55
-    ldloc UWP_V567256
+    ldloc UWP_V566748
     stsfld object [LispBase]Lisp.Values::Value56
-    ldloc UWP_V577257
+    ldloc UWP_V576749
     stsfld object [LispBase]Lisp.Values::Value57
-    ldloc UWP_V587258
+    ldloc UWP_V586750
     stsfld object [LispBase]Lisp.Values::Value58
-    ldloc UWP_V597259
+    ldloc UWP_V596751
     stsfld object [LispBase]Lisp.Values::Value59
-    ldloc UWP_V607260
+    ldloc UWP_V606752
     stsfld object [LispBase]Lisp.Values::Value60
-    ldloc UWP_V617261
+    ldloc UWP_V616753
     stsfld object [LispBase]Lisp.Values::Value61
-    ldloc UWP_V627262
+    ldloc UWP_V626754
     stsfld object [LispBase]Lisp.Values::Value62
-    ldloc UWP_V637263
+    ldloc UWP_V636755
     stsfld object [LispBase]Lisp.Values::Value63
     endfinally
     }
-DONE7277:
-    ldloc UWP_RESULT7199
-    stloc BLOCK_RESULT_DONE_6705
-    leave BLOCK_END_DONE_6704
+DONE6769:
+    ldloc UWP_RESULT6691
+    stloc BLOCK_RESULT_DONE_6245
+    leave BLOCK_END_DONE_6244
     }
     catch [LispBase]Lisp.BlockExitException
     {
     dup
     callvirt instance object [LispBase]Lisp.BlockExitException::'get_BlockId'()
-    ldstr "BLOCK_ID_DONE_6703"
+    ldstr "BLOCK_ID_DONE_6243"
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse BLOCK_RETHROW7276
+    brfalse BLOCK_RETHROW6768
     dup
     callvirt instance object[] [LispBase]Lisp.BlockExitException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.BlockExitException::'get_Value'()
-    stloc BLOCK_RESULT_DONE_6705
-    leave BLOCK_END_DONE_6704
-BLOCK_RETHROW7276:
+    stloc BLOCK_RESULT_DONE_6245
+    leave BLOCK_END_DONE_6244
+BLOCK_RETHROW6768:
     pop
     rethrow
     }
-BLOCK_END_DONE_6704:
+BLOCK_END_DONE_6244:
     nop
-    ldloc BLOCK_RESULT_DONE_6705
-    stloc CELL_VAL_TMP7275
-    ldloc CELL_TMP7274
+    ldloc BLOCK_RESULT_DONE_6245
+    stloc CELL_VAL_TMP6767
+    ldloc CELL_TMP6766
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7275
+    ldloc CELL_VAL_TMP6767
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7275
+    ldloc CELL_VAL_TMP6767
     pop
     ldstr "SIGNAL-LEXICAL-UWP:RESULT"
-    ldloc RESULT6702
+    ldloc RESULT6242
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_SIGNAL7135'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_SIGNAL6627'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7272
+    brtrue TRUE6764
     ldnull
-    br END7273
-TRUE7272:
+    br END6765
+TRUE6764:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7273:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6765:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "SIGNAL-LEXICAL-UWP:CLEANUP-RAN"
-    ldloc CLEANUP_RAN6701
+    ldloc CLEANUP_RAN6241
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call object Program::'SEE_CHECK'(object, object)
@@ -2288,9 +4136,273 @@ END7273:
     ldstr "SEE:END:SIGNAL-LEXICAL-UWP"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT_6699:
+BLOCK_END_SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT_6239:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -2393,121 +4505,121 @@ BLOCK_END_SEE_TEST_SIGNAL_LEXICAL_EXIT_WITH_UNWIND_PROTECT_6699:
 .method private static hidebysig object 'SEE_TEST_SIGNAL_ORDER_AND_RESUME_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7194, object CELL_TMP7193, object TEMP7183, object HANDLER_BIND_RESULT7181, object HANDLERS_LIST7180, object SAVED_HANDLERS7179, object HANDLER_BIND_RESULT7177, object HANDLERS_LIST7176, object SAVED_HANDLERS7175, object AFTER6691, object EVENTS6690)
+    .locals init (object CELL_VAL_TMP6686, object CELL_TMP6685, object TEMP6675, object HANDLER_BIND_RESULT6673, object HANDLERS_LIST6672, object SAVED_HANDLERS6671, object HANDLER_BIND_RESULT6669, object HANDLERS_LIST6668, object SAVED_HANDLERS6667, object AFTER6231, object EVENTS6230)
     ldstr "SEE:BEGIN:SIGNAL-ORDER"
     call object Program::'SEE_MARKER'(object)
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc EVENTS6690
+    stloc EVENTS6230
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc AFTER6691
+    stloc AFTER6231
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7175
-    ldloc SAVED_HANDLERS7175
-    stloc HANDLERS_LIST7176
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_COND7178'
-    ldloc EVENTS6690
-    newobj instance void L_6811::'.ctor'(object)
+    stloc SAVED_HANDLERS6667
+    ldloc SAVED_HANDLERS6667
+    stloc HANDLERS_LIST6668
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_COND6670'
+    ldloc EVENTS6230
+    newobj instance void L_6351::'.ctor'(object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7176
+    ldloc HANDLERS_LIST6668
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7176
-    ldloc HANDLERS_LIST7176
+    stloc HANDLERS_LIST6668
+    ldloc HANDLERS_LIST6668
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS7179
-    ldloc SAVED_HANDLERS7179
-    stloc HANDLERS_LIST7180
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_COND7178'
-    ldloc EVENTS6690
-    newobj instance void L_6812::'.ctor'(object)
+    stloc SAVED_HANDLERS6671
+    ldloc SAVED_HANDLERS6671
+    stloc HANDLERS_LIST6672
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_SEE_COND6670'
+    ldloc EVENTS6230
+    newobj instance void L_6352::'.ctor'(object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST7180
+    ldloc HANDLERS_LIST6672
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST7180
-    ldloc HANDLERS_LIST7180
+    stloc HANDLERS_LIST6672
+    ldloc HANDLERS_LIST6672
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7182'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6674'
     call object [LispBase]Lisp.HandlerControl::'Signal'(object)
     pop
-    ldloc AFTER6691
-    stloc CELL_TMP7193
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T7143'
-    stloc CELL_VAL_TMP7194
-    ldloc CELL_TMP7193
+    ldloc AFTER6231
+    stloc CELL_TMP6685
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T6635'
+    stloc CELL_VAL_TMP6686
+    ldloc CELL_TMP6685
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7194
+    ldloc CELL_VAL_TMP6686
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7194
-    stloc HANDLER_BIND_RESULT7181
-    leave DONE7192
+    ldloc CELL_VAL_TMP6686
+    stloc HANDLER_BIND_RESULT6673
+    leave DONE6684
     }
     finally
     {
-    ldloc SAVED_HANDLERS7179
+    ldloc SAVED_HANDLERS6671
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7192:
-    ldloc HANDLER_BIND_RESULT7181
-    stloc HANDLER_BIND_RESULT7177
-    leave DONE7191
+DONE6684:
+    ldloc HANDLER_BIND_RESULT6673
+    stloc HANDLER_BIND_RESULT6669
+    leave DONE6683
     }
     finally
     {
-    ldloc SAVED_HANDLERS7175
+    ldloc SAVED_HANDLERS6667
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE7191:
-    ldloc HANDLER_BIND_RESULT7177
+DONE6683:
+    ldloc HANDLER_BIND_RESULT6669
     pop
     ldstr "SIGNAL-ORDER:INNER-THEN-OUTER"
-    ldloc EVENTS6690
+    ldloc EVENTS6230
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER7127'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER6619'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7184
+    brtrue TRUE6676
     ldnull
-    br END7185
-TRUE7184:
+    br END6677
+TRUE6676:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7185:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6677:
     nop
     ldnull
     ceq
-    brtrue ELSE7197
-    ldloc EVENTS6690
+    brtrue ELSE6689
+    ldloc EVENTS6230
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER7131'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER6623'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7187
+    brtrue TRUE6679
     ldnull
-    br END7188
-TRUE7187:
+    br END6680
+TRUE6679:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7186'
-END7188:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6678'
+END6680:
     nop
     ldnull
     ceq
-    brtrue ELSE7195
-    ldloc EVENTS6690
+    brtrue ELSE6687
+    ldloc EVENTS6230
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     castclass [LispBase]Lisp.List/ListCell
@@ -2516,30 +4628,30 @@ END7188:
     ldfld object [LispBase]Lisp.List/ListCell::rest
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7189
+    brtrue TRUE6681
     ldnull
-    br END7190
-TRUE7189:
+    br END6682
+TRUE6681:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7174'
-END7190:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6666'
+END6682:
     nop
-    br END7196
-ELSE7195:
-    nop
-    ldnull
-END7196:
-    nop
-    br END7198
-ELSE7197:
+    br END6688
+ELSE6687:
     nop
     ldnull
-END7198:
+END6688:
+    nop
+    br END6690
+ELSE6689:
+    nop
+    ldnull
+END6690:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "SIGNAL-ORDER:RESUMES"
-    ldloc AFTER6691
+    ldloc AFTER6231
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call object Program::'SEE_CHECK'(object, object)
@@ -2547,9 +4659,273 @@ END7198:
     ldstr "SEE:END:SIGNAL-ORDER"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_SIGNAL_ORDER_AND_RESUME_6688:
+BLOCK_END_SEE_TEST_SIGNAL_ORDER_AND_RESUME_6228:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -2652,33 +5028,297 @@ BLOCK_END_SEE_TEST_SIGNAL_ORDER_AND_RESUME_6688:
 .method private static hidebysig object 'SEE_TEST_SIGNAL_NO_HANDLER_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RES6684)
+    .locals init (object RES6224)
     ldstr "SEE:BEGIN:SIGNAL-NO-HANDLER"
     call object Program::'SEE_MARKER'(object)
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7171'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6663'
     call object [LispBase]Lisp.HandlerControl::'Signal'(object)
-    stloc RES6684
+    stloc RES6224
     ldstr "SIGNAL-NO-HANDLER:RETURNS-NIL"
-    ldloc RES6684
+    ldloc RES6224
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7172
+    brtrue TRUE6664
     ldnull
-    br END7173
-TRUE7172:
+    br END6665
+TRUE6664:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7174'
-END7173:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6666'
+END6665:
     nop
     call object Program::'SEE_CHECK'(object, object)
     pop
     ldstr "SEE:END:SIGNAL-NO-HANDLER"
     tail. call object Program::'SEE_MARKER'(object)
     ret
-BLOCK_END_SEE_TEST_SIGNAL_NO_HANDLER_6682:
+BLOCK_END_SEE_TEST_SIGNAL_NO_HANDLER_6222:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_CHECK'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 2
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -2786,19 +5426,283 @@ BLOCK_END_SEE_TEST_SIGNAL_NO_HANDLER_6682:
     ldarg 1
     ldnull
     ceq
-    brtrue ELSE7170
+    brtrue ELSE6662
     ldarg 0
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE7170:
+ELSE6662:
     nop
     ldarg 0
     tail. call object Program::'SEE_FAIL'(object)
     ret
-BLOCK_END_SEE_CHECK_6677:
+BLOCK_END_SEE_CHECK_6217:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_FAIL'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -2910,9 +5814,273 @@ BLOCK_END_SEE_CHECK_6677:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_SEE_FAIL_6670:
+BLOCK_END_SEE_FAIL_6210:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public static hidebysig object 'SEE_MARKER'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
 }
 
@@ -3020,9 +6188,16 @@ BLOCK_END_SEE_FAIL_6670:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_SEE_MARKER_6664:
+BLOCK_END_SEE_MARKER_6204:
     nop
     ldnull
+    ret
+}
+
+.method public static hidebysig object 'InitializeModule'() cil managed
+{
+    .maxstack 8
+    call object Program::'RUN_SIGNAL_ERROR_EDGE_CASES'()
     ret
 }
 
@@ -3031,17 +6206,17 @@ BLOCK_END_SEE_MARKER_6664:
     .entrypoint
     .maxstack 8
     call void [LispBase]Lisp.MopRuntime::'Initialize'()
-    call object Program::'RUN_SIGNAL_ERROR_EDGE_CASES'()
+    call object Program::'InitializeModule'()
     pop
     ret
 }
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_6811
+.class public auto ansi beforefieldinit L_6351
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'EVENTS6690'
+    .field public object 'EVENTS6230'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -3050,29 +6225,29 @@ BLOCK_END_SEE_MARKER_6664:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_6811::'EVENTS6690'
+    stfld object L_6351::'EVENTS6230'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7130, object CELL_TMP7129, object TEMP7128)
+    .locals init (object CELL_VAL_TMP6622, object CELL_TMP6621, object TEMP6620)
     ldarg.0
-    ldfld object L_6811::'EVENTS6690'
-    stloc CELL_TMP7129
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER7127'
+    ldfld object L_6351::'EVENTS6230'
+    stloc CELL_TMP6621
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER6619'
     ldarg.0
-    ldfld object L_6811::'EVENTS6690'
+    ldfld object L_6351::'EVENTS6230'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc CELL_VAL_TMP7130
-    ldloc CELL_TMP7129
+    stloc CELL_VAL_TMP6622
+    ldloc CELL_TMP6621
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7130
+    ldloc CELL_VAL_TMP6622
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7130
+    ldloc CELL_VAL_TMP6622
     ret
     ldnull
     ret
@@ -3095,7 +6270,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6811::'InvokeBody'(object)
+    callvirt instance object L_6351::'InvokeBody'(object)
     ret
 }
 
@@ -3176,12 +6351,276 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6811
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6812
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6351
+
+.class public auto ansi beforefieldinit L_6352
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'EVENTS6690'
+    .field public object 'EVENTS6230'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -3190,29 +6629,29 @@ BLOCK_END_SEE_MARKER_6664:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_6812::'EVENTS6690'
+    stfld object L_6352::'EVENTS6230'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7134, object CELL_TMP7133, object TEMP7132)
+    .locals init (object CELL_VAL_TMP6626, object CELL_TMP6625, object TEMP6624)
     ldarg.0
-    ldfld object L_6812::'EVENTS6690'
-    stloc CELL_TMP7133
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER7131'
+    ldfld object L_6352::'EVENTS6230'
+    stloc CELL_TMP6625
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER6623'
     ldarg.0
-    ldfld object L_6812::'EVENTS6690'
+    ldfld object L_6352::'EVENTS6230'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc CELL_VAL_TMP7134
-    ldloc CELL_TMP7133
+    stloc CELL_VAL_TMP6626
+    ldloc CELL_TMP6625
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7134
+    ldloc CELL_VAL_TMP6626
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7134
+    ldloc CELL_VAL_TMP6626
     ret
     ldnull
     ret
@@ -3235,7 +6674,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6812::'InvokeBody'(object)
+    callvirt instance object L_6352::'InvokeBody'(object)
     ret
 }
 
@@ -3316,9 +6755,273 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6812
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6813
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6352
+
+.class public auto ansi beforefieldinit L_6353
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -3332,8 +7035,8 @@ BLOCK_END_SEE_MARKER_6664:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    ldstr "BLOCK_ID_DONE_6703"
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_SIGNAL7135'
+    ldstr "BLOCK_ID_DONE_6243"
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_SIGNAL6627'
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.BlockExitException::'.ctor'(object, object, object[])
     throw
@@ -3358,7 +7061,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6813::'InvokeBody'(object)
+    callvirt instance object L_6353::'InvokeBody'(object)
     ret
 }
 
@@ -3439,14 +7142,278 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6813
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6814
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6353
+
+.class public auto ansi beforefieldinit L_6354
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG67166721'
-    .field public object 'CONDITION67146722'
-    .field public object 'ID67156723'
+    .field public object 'TAG62566261'
+    .field public object 'CONDITION62546262'
+    .field public object 'ID62556263'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -3455,44 +7422,44 @@ BLOCK_END_SEE_MARKER_6664:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_6814::'TAG67166721'
+    stfld object L_6354::'TAG62566261'
     ldarg.0
     ldarg 2
-    stfld object L_6814::'CONDITION67146722'
+    stfld object L_6354::'CONDITION62546262'
     ldarg.0
     ldarg 3
-    stfld object L_6814::'ID67156723'
+    stfld object L_6354::'ID62556263'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7142, object CELL_TMP7141, object CELL_VAL_TMP7140, object CELL_TMP7139, object TEMP7138, object TEMP7136)
+    .locals init (object CELL_VAL_TMP6634, object CELL_TMP6633, object CELL_VAL_TMP6632, object CELL_TMP6631, object TEMP6630, object TEMP6628)
     ldarg.0
-    ldfld object L_6814::'CONDITION67146722'
-    stloc CELL_TMP7139
+    ldfld object L_6354::'CONDITION62546262'
+    stloc CELL_TMP6631
     ldarg 1
-    stloc CELL_VAL_TMP7140
-    ldloc CELL_TMP7139
+    stloc CELL_VAL_TMP6632
+    ldloc CELL_TMP6631
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7140
+    ldloc CELL_VAL_TMP6632
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7140
+    ldloc CELL_VAL_TMP6632
     pop
     ldarg.0
-    ldfld object L_6814::'ID67156723'
-    stloc CELL_TMP7141
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7137'
-    stloc CELL_VAL_TMP7142
-    ldloc CELL_TMP7141
+    ldfld object L_6354::'ID62556263'
+    stloc CELL_TMP6633
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6629'
+    stloc CELL_VAL_TMP6634
+    ldloc CELL_TMP6633
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7142
+    ldloc CELL_VAL_TMP6634
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7142
+    ldloc CELL_VAL_TMP6634
     pop
     ldarg.0
-    ldfld object L_6814::'TAG67166721'
+    ldfld object L_6354::'TAG62566261'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -3518,7 +7485,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6814::'InvokeBody'(object)
+    callvirt instance object L_6354::'InvokeBody'(object)
     ret
 }
 
@@ -3599,12 +7566,276 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6814
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6815
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6354
+
+.class public auto ansi beforefieldinit L_6355
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'HB_CALLED6733'
+    .field public object 'HB_CALLED6273'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -3613,24 +7844,24 @@ BLOCK_END_SEE_MARKER_6664:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_6815::'HB_CALLED6733'
+    stfld object L_6355::'HB_CALLED6273'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7146, object CELL_TMP7145, object TEMP7144)
+    .locals init (object CELL_VAL_TMP6638, object CELL_TMP6637, object TEMP6636)
     ldarg.0
-    ldfld object L_6815::'HB_CALLED6733'
-    stloc CELL_TMP7145
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T7143'
-    stloc CELL_VAL_TMP7146
-    ldloc CELL_TMP7145
+    ldfld object L_6355::'HB_CALLED6273'
+    stloc CELL_TMP6637
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T6635'
+    stloc CELL_VAL_TMP6638
+    ldloc CELL_TMP6637
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7146
+    ldloc CELL_VAL_TMP6638
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7146
+    ldloc CELL_VAL_TMP6638
     ret
     ldnull
     ret
@@ -3653,7 +7884,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6815::'InvokeBody'(object)
+    callvirt instance object L_6355::'InvokeBody'(object)
     ret
 }
 
@@ -3734,14 +7965,278 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6815
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6816
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6355
+
+.class public auto ansi beforefieldinit L_6356
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG67406745'
-    .field public object 'CONDITION67386746'
-    .field public object 'ID67396747'
+    .field public object 'TAG62806285'
+    .field public object 'CONDITION62786286'
+    .field public object 'ID62796287'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -3750,44 +8245,44 @@ BLOCK_END_SEE_MARKER_6664:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_6816::'TAG67406745'
+    stfld object L_6356::'TAG62806285'
     ldarg.0
     ldarg 2
-    stfld object L_6816::'CONDITION67386746'
+    stfld object L_6356::'CONDITION62786286'
     ldarg.0
     ldarg 3
-    stfld object L_6816::'ID67396747'
+    stfld object L_6356::'ID62796287'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7153, object CELL_TMP7152, object CELL_VAL_TMP7151, object CELL_TMP7150, object TEMP7149, object TEMP7147)
+    .locals init (object CELL_VAL_TMP6645, object CELL_TMP6644, object CELL_VAL_TMP6643, object CELL_TMP6642, object TEMP6641, object TEMP6639)
     ldarg.0
-    ldfld object L_6816::'CONDITION67386746'
-    stloc CELL_TMP7150
+    ldfld object L_6356::'CONDITION62786286'
+    stloc CELL_TMP6642
     ldarg 1
-    stloc CELL_VAL_TMP7151
-    ldloc CELL_TMP7150
+    stloc CELL_VAL_TMP6643
+    ldloc CELL_TMP6642
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7151
+    ldloc CELL_VAL_TMP6643
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7151
+    ldloc CELL_VAL_TMP6643
     pop
     ldarg.0
-    ldfld object L_6816::'ID67396747'
-    stloc CELL_TMP7152
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7148'
-    stloc CELL_VAL_TMP7153
-    ldloc CELL_TMP7152
+    ldfld object L_6356::'ID62796287'
+    stloc CELL_TMP6644
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6640'
+    stloc CELL_VAL_TMP6645
+    ldloc CELL_TMP6644
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7153
+    ldloc CELL_VAL_TMP6645
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7153
+    ldloc CELL_VAL_TMP6645
     pop
     ldarg.0
-    ldfld object L_6816::'TAG67406745'
+    ldfld object L_6356::'TAG62806285'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -3813,7 +8308,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6816::'InvokeBody'(object)
+    callvirt instance object L_6356::'InvokeBody'(object)
     ret
 }
 
@@ -3894,14 +8389,278 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6816
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6817
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6356
+
+.class public auto ansi beforefieldinit L_6357
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG67596764'
-    .field public object 'CONDITION67576765'
-    .field public object 'ID67586766'
+    .field public object 'TAG62996304'
+    .field public object 'CONDITION62976305'
+    .field public object 'ID62986306'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -3910,44 +8669,44 @@ BLOCK_END_SEE_MARKER_6664:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_6817::'TAG67596764'
+    stfld object L_6357::'TAG62996304'
     ldarg.0
     ldarg 2
-    stfld object L_6817::'CONDITION67576765'
+    stfld object L_6357::'CONDITION62976305'
     ldarg.0
     ldarg 3
-    stfld object L_6817::'ID67586766'
+    stfld object L_6357::'ID62986306'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7160, object CELL_TMP7159, object CELL_VAL_TMP7158, object CELL_TMP7157, object TEMP7156, object TEMP7154)
+    .locals init (object CELL_VAL_TMP6652, object CELL_TMP6651, object CELL_VAL_TMP6650, object CELL_TMP6649, object TEMP6648, object TEMP6646)
     ldarg.0
-    ldfld object L_6817::'CONDITION67576765'
-    stloc CELL_TMP7157
+    ldfld object L_6357::'CONDITION62976305'
+    stloc CELL_TMP6649
     ldarg 1
-    stloc CELL_VAL_TMP7158
-    ldloc CELL_TMP7157
+    stloc CELL_VAL_TMP6650
+    ldloc CELL_TMP6649
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7158
+    ldloc CELL_VAL_TMP6650
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7158
+    ldloc CELL_VAL_TMP6650
     pop
     ldarg.0
-    ldfld object L_6817::'ID67586766'
-    stloc CELL_TMP7159
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7155'
-    stloc CELL_VAL_TMP7160
-    ldloc CELL_TMP7159
+    ldfld object L_6357::'ID62986306'
+    stloc CELL_TMP6651
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6647'
+    stloc CELL_VAL_TMP6652
+    ldloc CELL_TMP6651
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7160
+    ldloc CELL_VAL_TMP6652
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7160
+    ldloc CELL_VAL_TMP6652
     pop
     ldarg.0
-    ldfld object L_6817::'TAG67596764'
+    ldfld object L_6357::'TAG62996304'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -3973,7 +8732,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6817::'InvokeBody'(object)
+    callvirt instance object L_6357::'InvokeBody'(object)
     ret
 }
 
@@ -4054,14 +8813,278 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6817
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6818
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6357
+
+.class public auto ansi beforefieldinit L_6358
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG67796784'
-    .field public object 'CONDITION67776785'
-    .field public object 'ID67786786'
+    .field public object 'TAG63196324'
+    .field public object 'CONDITION63176325'
+    .field public object 'ID63186326'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -4070,44 +9093,44 @@ BLOCK_END_SEE_MARKER_6664:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_6818::'TAG67796784'
+    stfld object L_6358::'TAG63196324'
     ldarg.0
     ldarg 2
-    stfld object L_6818::'CONDITION67776785'
+    stfld object L_6358::'CONDITION63176325'
     ldarg.0
     ldarg 3
-    stfld object L_6818::'ID67786786'
+    stfld object L_6358::'ID63186326'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7167, object CELL_TMP7166, object CELL_VAL_TMP7165, object CELL_TMP7164, object TEMP7163, object TEMP7161)
+    .locals init (object CELL_VAL_TMP6659, object CELL_TMP6658, object CELL_VAL_TMP6657, object CELL_TMP6656, object TEMP6655, object TEMP6653)
     ldarg.0
-    ldfld object L_6818::'CONDITION67776785'
-    stloc CELL_TMP7164
+    ldfld object L_6358::'CONDITION63176325'
+    stloc CELL_TMP6656
     ldarg 1
-    stloc CELL_VAL_TMP7165
-    ldloc CELL_TMP7164
+    stloc CELL_VAL_TMP6657
+    ldloc CELL_TMP6656
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7165
+    ldloc CELL_VAL_TMP6657
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7165
+    ldloc CELL_VAL_TMP6657
     pop
     ldarg.0
-    ldfld object L_6818::'ID67786786'
-    stloc CELL_TMP7166
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7162'
-    stloc CELL_VAL_TMP7167
-    ldloc CELL_TMP7166
+    ldfld object L_6358::'ID63186326'
+    stloc CELL_TMP6658
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6654'
+    stloc CELL_VAL_TMP6659
+    ldloc CELL_TMP6658
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7167
+    ldloc CELL_VAL_TMP6659
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7167
+    ldloc CELL_VAL_TMP6659
     pop
     ldarg.0
-    ldfld object L_6818::'TAG67796784'
+    ldfld object L_6358::'TAG63196324'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -4133,7 +9156,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6818::'InvokeBody'(object)
+    callvirt instance object L_6358::'InvokeBody'(object)
     ret
 }
 
@@ -4214,9 +9237,273 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6818
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6819
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6358
+
+.class public auto ansi beforefieldinit L_6359
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -4230,7 +9517,7 @@ BLOCK_END_SEE_MARKER_6664:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7168'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S6660'
     tail. call object [LispBase]Lisp.HandlerControl::'Error'(object)
     ret
     ldnull
@@ -4254,7 +9541,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6819::'InvokeBody'(object)
+    callvirt instance object L_6359::'InvokeBody'(object)
     ret
 }
 
@@ -4335,9 +9622,273 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6819
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
 
-.class public auto ansi beforefieldinit L_6820
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6359
+
+.class public auto ansi beforefieldinit L_6360
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -4351,8 +9902,8 @@ BLOCK_END_SEE_MARKER_6664:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    ldstr "BLOCK_ID_DONE_6800"
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_ERROR7169'
+    ldstr "BLOCK_ID_DONE_6340"
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ESCAPED_ERROR6661'
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.BlockExitException::'.ctor'(object, object, object[])
     throw
@@ -4377,7 +9928,7 @@ BLOCK_END_SEE_MARKER_6664:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_6820::'InvokeBody'(object)
+    callvirt instance object L_6360::'InvokeBody'(object)
     ret
 }
 
@@ -4458,5 +10009,269 @@ BLOCK_END_SEE_MARKER_6664:
     ret
 }
 
-} // end of class L_6820
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_6360
 

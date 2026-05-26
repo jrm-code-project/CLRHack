@@ -108,9 +108,20 @@
 
 (defun clr-parse-token (token any-escape escapes)
   ;; Check for Javadot syntax first
-  (let ((dot-pos (position #\. token)))
+  (let ((dot-pos (position #\. token))
+    (dot-count (count #\. token))
+    (starts-with-dot (and (> (length token) 0)
+                (char= (char token 0) #\.)))
+    (has-uppercase (some #'upper-case-p token)))
     (when (and dot-pos
                (not (and any-escape (aref escapes dot-pos)))
+         ;; Treat opcode-like dotted tokens as regular symbols (e.g., cgt.un,
+         ;; ldarg.0, ldc.i4.0, tail.). Reserve Javadot parsing for explicit
+         ;; instance-call syntax (.Foo) and CLR-style static designators that
+         ;; include uppercase segments (System.Console.WriteLine).
+         (or starts-with-dot
+           (and (> dot-count 1)
+            has-uppercase))
                (not (string= token "."))) ; The standard consing dot is not a Javadot
       ;; It's a Javadot. Case-sensitive, so we use the original token.
       (return-from clr-parse-token (clr-parse-javadot token))))

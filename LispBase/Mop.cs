@@ -1,7 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading;
 
 namespace Lisp
 {
@@ -12,6 +17,9 @@ namespace Lisp
         private static readonly Dictionary<object, EqlSpecializerMetaobject> EqlSpecializers = new Dictionary<object, EqlSpecializerMetaobject>();
         private static readonly MethodCombinationMetaobject StandardMethodCombination = new MethodCombinationMetaobject { Name = "STANDARD" };
         private static EqlSpecializerMetaobject NullEqlSpecializer;
+        private static int gensymCounter;
+        [ThreadStatic] private static object? lastGethashTable;
+        [ThreadStatic] private static object? lastGethashKey;
 
         private sealed class NativeClosure : Closure
         {
@@ -26,7 +34,277 @@ namespace Lisp
             public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5 });
             public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6 });
             public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28, object arg29) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28, object arg29, object arg30) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29, arg30 });
+            public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28, object arg29, object arg30, object arg31) => _func(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29, arg30, arg31 });
             public override object Invoke(params object[] args) => _func(args);
+        }
+
+        public static Closure CreateNativeClosure(Func<object[], object> func)
+        {
+            return new NativeClosure(func);
+        }
+
+        private static object ClrReadPrimitive(object[] args)
+        {
+            if (args.Length < 1 || args[0] is not TextReader reader)
+            {
+                throw new Exception("CLR-READ requires a text stream as its first argument.");
+            }
+
+            var eofErrorP = args.Length < 2 || args[1] != null;
+            var eofValue = args.Length > 2 ? args[2] : null;
+            return ReadForm(reader, eofErrorP, eofValue);
+        }
+
+        private static object ReadForm(TextReader reader, bool eofErrorP, object eofValue)
+        {
+            SkipWhitespaceAndComments(reader);
+            var next = reader.Peek();
+            if (next < 0)
+            {
+                if (eofErrorP)
+                {
+                    throw new EndOfStreamException("Unexpected EOF while reading form.");
+                }
+
+                return eofValue;
+            }
+
+            var ch = (char)next;
+            if (ch == '(')
+            {
+                reader.Read();
+                return ReadList(reader);
+            }
+
+            if (ch == '\'')
+            {
+                reader.Read();
+                var quoted = ReadForm(reader, true, null);
+                var quoteSym = Package.CommonLisp.Intern("QUOTE");
+                return new List.ListCell(quoteSym, new List.ListCell(quoted, null));
+            }
+
+            if (ch == '"')
+            {
+                return ReadStringLiteral(reader);
+            }
+
+            if (ch == ')')
+            {
+                throw new Exception("Unexpected ')' while reading form.");
+            }
+
+            var token = ReadToken(reader);
+            return ParseAtom(token);
+        }
+
+        private static object ReadList(TextReader reader)
+        {
+            var items = new List<object>();
+            object tail = null;
+
+            while (true)
+            {
+                SkipWhitespaceAndComments(reader);
+                var next = reader.Peek();
+                if (next < 0)
+                {
+                    throw new EndOfStreamException("Unexpected EOF while reading list.");
+                }
+
+                var ch = (char)next;
+                if (ch == ')')
+                {
+                    reader.Read();
+                    return BuildList(items, tail);
+                }
+
+                if (ch == '.')
+                {
+                    reader.Read();
+                    tail = ReadForm(reader, true, null);
+                    SkipWhitespaceAndComments(reader);
+                    if (reader.Read() != ')')
+                    {
+                        throw new Exception("Dotted list must end with ')'.");
+                    }
+
+                    return BuildList(items, tail);
+                }
+
+                items.Add(ReadForm(reader, true, null));
+            }
+        }
+
+        private static object BuildList(List<object> items, object tail)
+        {
+            object result = tail;
+            for (var i = items.Count - 1; i >= 0; i--)
+            {
+                result = new List.ListCell(items[i], result);
+            }
+
+            return result;
+        }
+
+        private static void SkipWhitespaceAndComments(TextReader reader)
+        {
+            while (true)
+            {
+                var next = reader.Peek();
+                if (next < 0)
+                {
+                    return;
+                }
+
+                var ch = (char)next;
+                if (char.IsWhiteSpace(ch))
+                {
+                    reader.Read();
+                    continue;
+                }
+
+                if (ch == ';')
+                {
+                    reader.Read();
+                    while (true)
+                    {
+                        var c = reader.Read();
+                        if (c < 0 || c == '\n' || c == '\r')
+                        {
+                            break;
+                        }
+                    }
+
+                    continue;
+                }
+
+                return;
+            }
+        }
+
+        private static string ReadToken(TextReader reader)
+        {
+            var sb = new StringBuilder();
+            while (true)
+            {
+                var next = reader.Peek();
+                if (next < 0)
+                {
+                    break;
+                }
+
+                var ch = (char)next;
+                if (char.IsWhiteSpace(ch) || ch == '(' || ch == ')' || ch == '\'' || ch == '"' || ch == ';')
+                {
+                    break;
+                }
+
+                sb.Append((char)reader.Read());
+            }
+
+            if (sb.Length == 0)
+            {
+                throw new Exception("Expected token while reading form.");
+            }
+
+            return sb.ToString();
+        }
+
+        private static object ReadStringLiteral(TextReader reader)
+        {
+            if (reader.Read() != '"')
+            {
+                throw new Exception("Internal reader error: string literal expected.");
+            }
+
+            var sb = new StringBuilder();
+            while (true)
+            {
+                var c = reader.Read();
+                if (c < 0)
+                {
+                    throw new EndOfStreamException("Unexpected EOF in string literal.");
+                }
+
+                var ch = (char)c;
+                if (ch == '"')
+                {
+                    return sb.ToString();
+                }
+
+                if (ch == '\\')
+                {
+                    var escaped = reader.Read();
+                    if (escaped < 0)
+                    {
+                        throw new EndOfStreamException("Unexpected EOF in string escape sequence.");
+                    }
+
+                    sb.Append((char)escaped);
+                }
+                else
+                {
+                    sb.Append(ch);
+                }
+            }
+        }
+
+        private static object ParseAtom(string token)
+        {
+            var up = token.ToUpperInvariant();
+            if (up == "NIL")
+            {
+                return null;
+            }
+
+            if (int.TryParse(token, out var intValue))
+            {
+                return intValue;
+            }
+
+            if (double.TryParse(token, out var floatValue))
+            {
+                return floatValue;
+            }
+
+            if (up.StartsWith(":", StringComparison.Ordinal))
+            {
+                return Package.Keyword.Intern(up.Substring(1));
+            }
+
+            var packageSplit = up.Split(':');
+            if (packageSplit.Length == 2)
+            {
+                var package = Package.Find(packageSplit[0]) ?? Package.Create(packageSplit[0]);
+                return package.Intern(packageSplit[1]);
+            }
+
+            var current = Package.Current ?? Package.CommonLispUser;
+            return current.Intern(up);
         }
 
         public static void Initialize()
@@ -34,6 +312,1127 @@ namespace Lisp
             var cl = Package.CommonLisp;
             if (cl != null)
             {
+                // Register package namespace operators needed during compiler/module bootstrap.
+                var exportSym = cl.Intern("EXPORT");
+                cl.Export(exportSym);
+                exportSym.Function = new NativeClosure(args => {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("EXPORT requires at least one argument.");
+                    }
+
+                    var package = ResolvePackageDesignator(args.Length > 1 ? args[1] : null);
+                    foreach (var symbol in CoerceSymbolDesignators(args[0], package))
+                    {
+                        package.Export(symbol);
+                    }
+
+                    return null;
+                });
+
+                var importSym = cl.Intern("IMPORT");
+                cl.Export(importSym);
+                importSym.Function = new NativeClosure(args => {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("IMPORT requires at least one argument.");
+                    }
+
+                    var package = ResolvePackageDesignator(args.Length > 1 ? args[1] : null);
+                    foreach (var symbol in CoerceSymbolDesignators(args[0], package))
+                    {
+                        package.Import(symbol);
+                    }
+
+                    return null;
+                });
+
+                var shadowingImportSym = cl.Intern("SHADOWING-IMPORT");
+                cl.Export(shadowingImportSym);
+                shadowingImportSym.Function = new NativeClosure(args => {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("SHADOWING-IMPORT requires at least one argument.");
+                    }
+
+                    var package = ResolvePackageDesignator(args.Length > 1 ? args[1] : null);
+                    foreach (var symbol in CoerceSymbolDesignators(args[0], package))
+                    {
+                        package.ShadowingImport(symbol);
+                    }
+
+                    return null;
+                });
+
+                var makeHashTableSym = cl.Intern("MAKE-HASH-TABLE");
+                cl.Export(makeHashTableSym);
+                makeHashTableSym.Function = new NativeClosure(args => {
+                    return new Dictionary<object, object>();
+                });
+
+                var findPackageSym = cl.Intern("FIND-PACKAGE");
+                cl.Export(findPackageSym);
+                findPackageSym.Function = new NativeClosure(args => {
+                    if (args.Length < 1 || args[0] == null)
+                    {
+                        return Package.Current;
+                    }
+
+                    return args[0] switch
+                    {
+                        Package package => package,
+                        Symbol symbol => Package.Find(symbol.Name),
+                        string name => Package.Find(name),
+                        _ => throw new Exception($"Unsupported package designator: {args[0]}")
+                    };
+                });
+
+                var defstructSym = cl.Intern("DEFSTRUCT");
+                cl.Export(defstructSym);
+                defstructSym.Function = new NativeClosure(args => {
+                    if (args.Length < 1 || args[0] is not Symbol structNameSym)
+                    {
+                        throw new Exception("DEFSTRUCT requires a structure name symbol.");
+                    }
+
+                    var structureName = structNameSym.Name;
+                    var targetPackages = new List<Package>();
+                    if (structNameSym.Package != null)
+                    {
+                        targetPackages.Add(structNameSym.Package);
+                    }
+
+                    var clrhackPackage = Package.Find("CLRHACK");
+                    if (clrhackPackage != null)
+                    {
+                        targetPackages.Add(clrhackPackage);
+                    }
+
+                    if (Package.Current != null)
+                    {
+                        targetPackages.Add(Package.Current);
+                    }
+
+                    targetPackages.Add(cl);
+                    targetPackages = targetPackages.Distinct().ToList();
+                    var slotNames = new List<string>();
+
+                    for (var i = 1; i < args.Length; i++)
+                    {
+                        if (args[i] is Symbol slotSym)
+                        {
+                            slotNames.Add(slotSym.Name);
+                        }
+                    }
+
+                    var constructorName = $"MAKE-{structureName}";
+                    var constructorClosure = new NativeClosure(ctorArgs => {
+                        var instance = new Dictionary<string, object>(StringComparer.Ordinal);
+                        foreach (var slot in slotNames)
+                        {
+                            instance[slot] = null;
+                        }
+
+                        for (var i = 0; i + 1 < ctorArgs.Length; i += 2)
+                        {
+                            var keyName = ctorArgs[i] switch
+                            {
+                                Symbol keySym => keySym.Name,
+                                string keyString => keyString.TrimStart(':').ToUpperInvariant(),
+                                _ => null
+                            };
+
+                            if (!string.IsNullOrEmpty(keyName))
+                            {
+                                instance[keyName] = ctorArgs[i + 1];
+                            }
+                        }
+
+                        return instance;
+                    });
+
+                    foreach (var targetPackage in targetPackages)
+                    {
+                        var constructorSym = targetPackage.Intern(constructorName);
+                        targetPackage.Export(constructorSym);
+                        constructorSym.Function = constructorClosure;
+                    }
+
+                    foreach (var slot in slotNames)
+                    {
+                        var accessorName = $"{structureName}-{slot}";
+                        var accessorClosure = new NativeClosure(accessorArgs => {
+                            if (accessorArgs.Length < 1 || accessorArgs[0] == null)
+                            {
+                                return null;
+                            }
+
+                            if (accessorArgs[0] is Dictionary<string, object> dict && dict.TryGetValue(slot, out var value))
+                            {
+                                return value;
+                            }
+
+                            return null;
+                        });
+
+                        foreach (var targetPackage in targetPackages)
+                        {
+                            var accessorSym = targetPackage.Intern(accessorName);
+                            targetPackage.Export(accessorSym);
+                            accessorSym.Function = accessorClosure;
+                        }
+                    }
+
+                    return structNameSym;
+                });
+
+                var listpSym = cl.Intern("LISTP");
+                cl.Export(listpSym);
+                listpSym.Function = new NativeClosure(args => {
+                    var isList = args.Length > 0 && (args[0] == null || args[0] is List || args[0] is List.ListCell);
+                    return isList ? cl.Intern("T") : null;
+                });
+
+                var endpSym = cl.Intern("ENDP");
+                cl.Export(endpSym);
+                endpSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1 || args[0] == null)
+                    {
+                        return cl.Intern("T");
+                    }
+
+                    if (args[0] is List list)
+                    {
+                        return list.EndP ? cl.Intern("T") : null;
+                    }
+
+                    if (args[0] is List.ListCell)
+                    {
+                        return null;
+                    }
+
+                    throw new Exception("ENDP requires a list argument.");
+                });
+
+                    var symbolNameSym = cl.Intern("SYMBOL-NAME");
+                    cl.Export(symbolNameSym);
+                    symbolNameSym.Function = new NativeClosure(args =>
+                    {
+                        if (args.Length < 1 || args[0] is not Symbol symbol)
+                        {
+                            throw new Exception("SYMBOL-NAME requires a symbol argument.");
+                        }
+
+                        return symbol.Name;
+                    });
+
+                    var symbolPackageSym = cl.Intern("SYMBOL-PACKAGE");
+                    cl.Export(symbolPackageSym);
+                    symbolPackageSym.Function = new NativeClosure(args =>
+                    {
+                        if (args.Length < 1 || args[0] is not Symbol symbol)
+                        {
+                            throw new Exception("SYMBOL-PACKAGE requires a symbol argument.");
+                        }
+
+                        return symbol.Package;
+                    });
+
+                var stringSym = cl.Intern("STRING");
+                cl.Export(stringSym);
+                stringSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1 || args[0] == null)
+                    {
+                        return "";
+                    }
+
+                    return args[0] switch
+                    {
+                        string value => value,
+                        Symbol symbol => symbol.Name,
+                        _ => args[0].ToString() ?? ""
+                    };
+                });
+
+                var stringpSym = cl.Intern("STRINGP");
+                cl.Export(stringpSym);
+                stringpSym.Function = new NativeClosure(args =>
+                {
+                    var isString = args.Length > 0 && args[0] is string;
+                    return isString ? cl.Intern("T") : null;
+                });
+
+                var stringDowncaseSym = cl.Intern("STRING-DOWNCASE");
+                cl.Export(stringDowncaseSym);
+                stringDowncaseSym.Function = new NativeClosure(args =>
+                {
+                    var value = args.Length > 0 && args[0] != null ? args[0].ToString() ?? "" : "";
+                    return value.ToLowerInvariant();
+                });
+
+                var stringUpcaseSym = cl.Intern("STRING-UPCASE");
+                cl.Export(stringUpcaseSym);
+                stringUpcaseSym.Function = new NativeClosure(args =>
+                {
+                    var value = args.Length > 0 && args[0] != null ? args[0].ToString() ?? "" : "";
+                    return value.ToUpperInvariant();
+                });
+
+                var stringEqualsSym = cl.Intern("STRING=");
+                cl.Export(stringEqualsSym);
+                stringEqualsSym.Function = new NativeClosure(args => {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("STRING= requires at least two arguments.");
+                    }
+
+                    var left = args[0]?.ToString() ?? "";
+                    var right = args[1]?.ToString() ?? "";
+                    return string.Equals(left, right, StringComparison.Ordinal) ? cl.Intern("T") : null;
+                });
+
+                var theStarSym = cl.Intern("THE*");
+                cl.Export(theStarSym);
+                theStarSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length == 0)
+                    {
+                        return null;
+                    }
+
+                    // Bootstrap identity for lowered THE forms: (THE* type value) => value.
+                    return args.Length >= 2 ? args[1] : args[0];
+                });
+
+                var formatSym = cl.Intern("FORMAT");
+                cl.Export(formatSym);
+                formatSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("FORMAT requires at least destination and control string.");
+                    }
+
+                    var destination = args[0];
+                    var control = args[1]?.ToString() ?? string.Empty;
+                    var values = args.Skip(2).ToArray();
+                    var valueIndex = 0;
+                    var output = new StringBuilder();
+
+                    for (var i = 0; i < control.Length; i++)
+                    {
+                        var ch = control[i];
+                        if (ch != '~' || i + 1 >= control.Length)
+                        {
+                            output.Append(ch);
+                            continue;
+                        }
+
+                        var directive = control[++i];
+                        switch (char.ToUpperInvariant(directive))
+                        {
+                            case 'A':
+                                output.Append(valueIndex < values.Length ? values[valueIndex++]?.ToString() ?? string.Empty : string.Empty);
+                                break;
+                            case '%':
+                                output.AppendLine();
+                                break;
+                            case '~':
+                                output.Append('~');
+                                break;
+                            case '(':
+                                {
+                                    var close = control.IndexOf("~)", i + 1, StringComparison.Ordinal);
+                                    if (close >= 0)
+                                    {
+                                        var inner = control.Substring(i + 1, close - (i + 1));
+                                        var rendered = inner;
+                                        if (string.Equals(inner, "~A", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            rendered = valueIndex < values.Length ? values[valueIndex++]?.ToString() ?? string.Empty : string.Empty;
+                                        }
+
+                                        output.Append(rendered.ToLowerInvariant());
+                                        i = close + 1;
+                                    }
+                                    else
+                                    {
+                                        output.Append("~(");
+                                    }
+
+                                    break;
+                                }
+                            default:
+                                output.Append('~').Append(directive);
+                                break;
+                        }
+                    }
+
+                    var renderedOutput = output.ToString();
+
+                    if (destination == null)
+                    {
+                        return renderedOutput;
+                    }
+
+                    if (destination is Symbol destinationSymbol && string.Equals(destinationSymbol.Name, "T", StringComparison.Ordinal))
+                    {
+                        Console.Write(renderedOutput);
+                        return null;
+                    }
+
+                    if (destination is TextWriter writer)
+                    {
+                        writer.Write(renderedOutput);
+                        return null;
+                    }
+
+                    return renderedOutput;
+                });
+
+                static string PathDesignatorToString(object? value)
+                {
+                    return value switch
+                    {
+                        null => string.Empty,
+                        string s => s,
+                        Symbol symbol => symbol.Name,
+                        _ => value.ToString() ?? string.Empty
+                    };
+                }
+
+                var pathnameSym = cl.Intern("PATHNAME");
+                cl.Export(pathnameSym);
+                pathnameSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("PATHNAME requires one argument.");
+                    }
+
+                    return PathDesignatorToString(args[0]);
+                });
+
+                var namestringSym = cl.Intern("NAMESTRING");
+                cl.Export(namestringSym);
+                namestringSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("NAMESTRING requires one argument.");
+                    }
+
+                    return PathDesignatorToString(args[0]);
+                });
+
+                var pathnameNameSym = cl.Intern("PATHNAME-NAME");
+                cl.Export(pathnameNameSym);
+                pathnameNameSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("PATHNAME-NAME requires one argument.");
+                    }
+
+                    var path = PathDesignatorToString(args[0]);
+                    var stem = Path.GetFileNameWithoutExtension(path);
+                    return string.IsNullOrEmpty(stem) ? null : stem;
+                });
+
+                var packageNameSym = cl.Intern("PACKAGE-NAME");
+                cl.Export(packageNameSym);
+                packageNameSym.Function = new NativeClosure(args =>
+                {
+                    var package = ResolvePackageDesignator(args.Length > 0 ? args[0] : null);
+                    return package.Name;
+                });
+
+                var nreverseSym = cl.Intern("NREVERSE");
+                cl.Export(nreverseSym);
+                nreverseSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("NREVERSE requires one argument.");
+                    }
+
+                    object current = args[0];
+                    object reversed = null;
+
+                    while (current is List.ListCell cell)
+                    {
+                        reversed = new List.ListCell(cell.first, reversed);
+                        current = cell.rest;
+                    }
+
+                    if (current is List list)
+                    {
+                        foreach (var item in list)
+                        {
+                            reversed = new List.ListCell(item, reversed);
+                        }
+                    }
+
+                    return reversed;
+                });
+
+                var appendSym = cl.Intern("APPEND");
+                cl.Export(appendSym);
+                appendSym.Function = new NativeClosure(args =>
+                {
+                    var items = new List<object>();
+                    foreach (var arg in args)
+                    {
+                        object current = arg;
+                        while (current is List.ListCell cell)
+                        {
+                            items.Add(cell.first);
+                            current = cell.rest;
+                        }
+
+                        if (current is List list)
+                        {
+                            foreach (var item in list)
+                            {
+                                items.Add(item);
+                            }
+                        }
+                    }
+
+                    object appended = null;
+                    for (var i = items.Count - 1; i >= 0; i--)
+                    {
+                        appended = new List.ListCell(items[i], appended);
+                    }
+
+                    return appended;
+                });
+
+                var removeDuplicatesSym = cl.Intern("REMOVE-DUPLICATES");
+                cl.Export(removeDuplicatesSym);
+                removeDuplicatesSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("REMOVE-DUPLICATES requires a sequence argument.");
+                    }
+
+                    var items = new List<object>();
+                    object sequence = args[0];
+                    object current = sequence;
+                    while (current is List.ListCell cell)
+                    {
+                        items.Add(cell.first);
+                        current = cell.rest;
+                    }
+
+                    if (current is List list)
+                    {
+                        foreach (var item in list)
+                        {
+                            items.Add(item);
+                        }
+                    }
+
+                    Closure testClosure = null;
+                    for (var i = 1; i + 1 < args.Length; i += 2)
+                    {
+                        if (args[i] is Symbol key && string.Equals(key.Name, "TEST", StringComparison.Ordinal))
+                        {
+                            if (args[i + 1] is Closure closure)
+                            {
+                                testClosure = closure;
+                            }
+                            else if (args[i + 1] is Symbol fnSymbol && fnSymbol.Function is Closure fnClosure)
+                            {
+                                testClosure = fnClosure;
+                            }
+                        }
+                    }
+
+                    bool Same(object left, object right)
+                    {
+                        if (testClosure != null)
+                        {
+                            return testClosure.Invoke(left, right) != null;
+                        }
+
+                        return Equals(left, right);
+                    }
+
+                    var deduped = new List<object>();
+                    foreach (var item in items)
+                    {
+                        var seen = false;
+                        foreach (var existing in deduped)
+                        {
+                            if (!Same(item, existing))
+                            {
+                                continue;
+                            }
+
+                            seen = true;
+                            break;
+                        }
+
+                        if (!seen)
+                        {
+                            deduped.Add(item);
+                        }
+                    }
+
+                    object result = null;
+                    for (var i = deduped.Count - 1; i >= 0; i--)
+                    {
+                        result = new List.ListCell(deduped[i], result);
+                    }
+
+                    return result;
+                });
+
+                var memberSym = cl.Intern("MEMBER");
+                cl.Export(memberSym);
+                memberSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("MEMBER requires at least two arguments.");
+                    }
+
+                    var item = args[0];
+                    var sequence = args[1];
+                    Closure testClosure = null;
+
+                    for (var i = 2; i + 1 < args.Length; i += 2)
+                    {
+                        if (args[i] is Symbol key && string.Equals(key.Name, "TEST", StringComparison.Ordinal))
+                        {
+                            if (args[i + 1] is Closure closure)
+                            {
+                                testClosure = closure;
+                            }
+                            else if (args[i + 1] is Symbol fnSymbol && fnSymbol.Function is Closure fnClosure)
+                            {
+                                testClosure = fnClosure;
+                            }
+                        }
+                    }
+
+                    bool Match(object candidate)
+                    {
+                        if (testClosure != null)
+                        {
+                            return testClosure.Invoke(item, candidate) != null;
+                        }
+
+                        return Equals(item, candidate);
+                    }
+
+                    object current = sequence;
+                    while (current is List.ListCell cell)
+                    {
+                        if (Match(cell.first))
+                        {
+                            return current;
+                        }
+
+                        current = cell.rest;
+                    }
+
+                    if (current is List list)
+                    {
+                        var listCursor = list;
+                        while (!listCursor.EndP)
+                        {
+                            if (Match(listCursor.First()))
+                            {
+                                return listCursor;
+                            }
+
+                            var rest = listCursor.Rest();
+                            if (rest is List nextList)
+                            {
+                                listCursor = nextList;
+                                continue;
+                            }
+
+                            break;
+                        }
+                    }
+
+                    return null;
+                });
+
+                var mapcSym = cl.Intern("MAPC");
+                cl.Export(mapcSym);
+                mapcSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("MAPC requires at least two arguments.");
+                    }
+
+                    Closure fn = args[0] switch
+                    {
+                        Closure closure => closure,
+                        Symbol fnSymbol when fnSymbol.FBoundP && fnSymbol.Function is Closure symbolClosure => symbolClosure,
+                        _ => throw new Exception("MAPC requires a function designator as first argument.")
+                    };
+
+                    object sequence = args[1];
+                    object current = sequence;
+                    while (current is List.ListCell cell)
+                    {
+                        _ = fn.Invoke(cell.first);
+                        current = cell.rest;
+                    }
+
+                    if (current is List list)
+                    {
+                        foreach (var item in list)
+                        {
+                            _ = fn.Invoke(item);
+                        }
+                    }
+
+                    return sequence;
+                });
+
+                var getfSym = cl.Intern("GETF");
+                cl.Export(getfSym);
+                getfSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("GETF requires at least plist and indicator arguments.");
+                    }
+
+                    var plist = args[0];
+                    var indicator = args[1];
+                    var defaultValue = args.Length > 2 ? args[2] : null;
+
+                    object current = plist;
+                    while (current is List.ListCell keyCell)
+                    {
+                        var key = keyCell.first;
+                        var rest = keyCell.rest;
+                        if (rest is not List.ListCell valueCell)
+                        {
+                            break;
+                        }
+
+                        if (Equals(key, indicator))
+                        {
+                            return valueCell.first;
+                        }
+
+                        current = valueCell.rest;
+                    }
+
+                    return defaultValue;
+                });
+
+                var mapcarSym = cl.Intern("MAPCAR");
+                cl.Export(mapcarSym);
+                mapcarSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("MAPCAR requires at least two arguments.");
+                    }
+
+                    Closure fn = args[0] switch
+                    {
+                        Closure closure => closure,
+                        Symbol fnSymbol when fnSymbol.FBoundP && fnSymbol.Function is Closure symbolClosure => symbolClosure,
+                        _ => throw new Exception("MAPCAR requires a function designator as first argument.")
+                    };
+
+                    var results = new List<object>();
+                    object current = args[1];
+                    while (current is List.ListCell cell)
+                    {
+                        results.Add(fn.Invoke(cell.first));
+                        current = cell.rest;
+                    }
+
+                    if (current is List list)
+                    {
+                        foreach (var item in list)
+                        {
+                            results.Add(fn.Invoke(item));
+                        }
+                    }
+
+                    object mapped = null;
+                    for (var i = results.Count - 1; i >= 0; i--)
+                    {
+                        mapped = new List.ListCell(results[i], mapped);
+                    }
+
+                    return mapped;
+                });
+
+                var secondSym = cl.Intern("SECOND");
+                cl.Export(secondSym);
+                secondSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        return null;
+                    }
+
+                    if (args[0] is List.ListCell cell)
+                    {
+                        return cell.rest is List.ListCell restCell ? restCell.first : null;
+                    }
+
+                    if (args[0] is List list && !list.EndP)
+                    {
+                        var rest = list.Rest();
+                        if (rest is List restList && !restList.EndP)
+                        {
+                            return restList.First();
+                        }
+
+                        if (rest is List.ListCell restCell)
+                        {
+                            return restCell.first;
+                        }
+                    }
+
+                    return null;
+                });
+
+                var openSym = cl.Intern("OPEN");
+                cl.Export(openSym);
+                openSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("OPEN requires at least one argument.");
+                    }
+
+                    var path = PathDesignatorToString(args[0]);
+                    string direction = "INPUT";
+                    string ifExists = "ERROR";
+
+                    for (var i = 1; i + 1 < args.Length; i += 2)
+                    {
+                        if (args[i] is Symbol key)
+                        {
+                            if (string.Equals(key.Name, "DIRECTION", StringComparison.OrdinalIgnoreCase))
+                            {
+                                direction = args[i + 1] switch
+                                {
+                                    Symbol valueSym => valueSym.Name,
+                                    string valueString => valueString.TrimStart(':').ToUpperInvariant(),
+                                    _ => direction
+                                };
+                            }
+
+                            if (string.Equals(key.Name, "IF-EXISTS", StringComparison.OrdinalIgnoreCase))
+                            {
+                                ifExists = args[i + 1] switch
+                                {
+                                    Symbol valueSym => valueSym.Name,
+                                    string valueString => valueString.TrimStart(':').ToUpperInvariant(),
+                                    _ => ifExists
+                                };
+                            }
+                        }
+                    }
+
+                    if (string.Equals(direction, "OUTPUT", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var append = string.Equals(ifExists, "APPEND", StringComparison.OrdinalIgnoreCase);
+                        return new StreamWriter(path, append);
+                    }
+
+                    if (string.Equals(direction, "IO", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                    }
+
+                    return new StreamReader(path);
+                });
+
+                var closeSym = cl.Intern("CLOSE");
+                cl.Export(closeSym);
+                closeSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("CLOSE requires at least one argument.");
+                    }
+
+                    if (args[0] is IDisposable disposable)
+                    {
+                        disposable.Dispose();
+                        return cl.Intern("T");
+                    }
+
+                    return null;
+                });
+
+                object RunProgramImpl(object[] args)
+                {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("RUN-PROGRAM requires a command argument.");
+                    }
+
+                    static List<string> ToArgList(object commandObject)
+                    {
+                        var collected = new List<string>();
+                        object current = commandObject;
+                        while (current is List.ListCell cell)
+                        {
+                            collected.Add(cell.first?.ToString() ?? string.Empty);
+                            current = cell.rest;
+                        }
+
+                        if (current is List list)
+                        {
+                            foreach (var item in list)
+                            {
+                                collected.Add(item?.ToString() ?? string.Empty);
+                            }
+                        }
+                        else if (collected.Count == 0)
+                        {
+                            collected.Add(commandObject?.ToString() ?? string.Empty);
+                        }
+
+                        return collected;
+                    }
+
+                    var argv = ToArgList(args[0]);
+                    if (argv.Count == 0 || string.IsNullOrWhiteSpace(argv[0]))
+                    {
+                        return 1;
+                    }
+
+                    var psi = new ProcessStartInfo
+                    {
+                        FileName = argv[0],
+                        UseShellExecute = false,
+                        RedirectStandardOutput = false,
+                        RedirectStandardError = false
+                    };
+
+                    for (var i = 1; i < argv.Count; i++)
+                    {
+                        psi.ArgumentList.Add(argv[i]);
+                    }
+
+                    using var process = Process.Start(psi);
+                    if (process == null)
+                    {
+                        return 1;
+                    }
+
+                    process.WaitForExit();
+                    return process.ExitCode;
+                }
+
+                var runProgramSym = cl.Intern("RUN-PROGRAM");
+                cl.Export(runProgramSym);
+                runProgramSym.Function = new NativeClosure(RunProgramImpl);
+
+                var uiopPackage = Package.Find("UIOP") ?? new Package("UIOP");
+                uiopPackage.UsePackage(cl);
+                var uiopRunProgramSym = uiopPackage.Intern("RUN-PROGRAM");
+                uiopPackage.Export(uiopRunProgramSym);
+                uiopRunProgramSym.Function = new NativeClosure(RunProgramImpl);
+
+                var clrhackPackage = Package.Find("CLRHACK") ?? new Package("CLRHACK");
+                clrhackPackage.UsePackage(cl);
+
+                var clrhackTheStarSym = clrhackPackage.Intern("THE*");
+                clrhackPackage.Export(clrhackTheStarSym);
+                clrhackTheStarSym.Function = theStarSym.Function;
+
+                var ilPackage = Package.Find("IL") ?? new Package("IL");
+                ilPackage.UsePackage(cl);
+                var ilTheStarSym = ilPackage.Intern("THE*");
+                ilPackage.Export(ilTheStarSym);
+                ilTheStarSym.Function = theStarSym.Function;
+
+                var clUserPackage = Package.CommonLispUser;
+                var clUserTheStarSym = clUserPackage.Intern("THE*");
+                clUserPackage.Export(clUserTheStarSym);
+                clUserTheStarSym.Function = theStarSym.Function;
+
+                var sbKernelPackage = Package.Find("SB-KERNEL") ?? new Package("SB-KERNEL");
+                sbKernelPackage.UsePackage(cl);
+                var sbKernelTheStarSym = sbKernelPackage.Intern("THE*");
+                sbKernelPackage.Export(sbKernelTheStarSym);
+                sbKernelTheStarSym.Function = theStarSym.Function;
+
+                var clrReadSym = clrhackPackage.Intern("CLR-READ");
+                clrhackPackage.Export(clrReadSym);
+                clrReadSym.Function = new NativeClosure(ClrReadPrimitive);
+
+                var readSym = cl.Intern("READ");
+                cl.Export(readSym);
+                readSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 1 || args[0] is not TextReader)
+                    {
+                        throw new Exception("READ requires a stream argument.");
+                    }
+
+                    // READ stream &optional eof-error-p eof-value recursive-p
+                    // We ignore recursive-p in this bootstrap implementation.
+                    var eofErrorP = args.Length < 2 || args[1] != null;
+                    var eofValue = args.Length > 2 ? args[2] : null;
+                    return ClrReadPrimitive(new[] { args[0], eofErrorP ? Package.CommonLisp.Intern("T") : null, eofValue });
+                });
+
+                var gethashSym = cl.Intern("GETHASH");
+                cl.Export(gethashSym);
+                gethashSym.Function = new NativeClosure(args => {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("GETHASH requires at least key and table arguments.");
+                    }
+
+                    object keyObject = args[0];
+                    object tableObject = args[1];
+
+                    if (tableObject is Symbol tableSymbol)
+                    {
+                        tableObject = tableSymbol.Value;
+                    }
+
+                    if (tableObject is ValueCell tableCell)
+                    {
+                        tableObject = tableCell.Value;
+                    }
+
+                    if (tableObject is not IDictionary && keyObject is IDictionary)
+                    {
+                        (keyObject, tableObject) = (tableObject, keyObject);
+                    }
+
+                    if (tableObject is Symbol swappedTableSymbol)
+                    {
+                        tableObject = swappedTableSymbol.Value;
+                    }
+
+                    if (tableObject is ValueCell swappedTableCell)
+                    {
+                        tableObject = swappedTableCell.Value;
+                    }
+
+                    if (tableObject is Dictionary<object, object> genericTable)
+                    {
+                        lastGethashTable = genericTable;
+                        lastGethashKey = keyObject;
+                        return genericTable.TryGetValue(keyObject, out var value) ? value : null;
+                    }
+
+                    if (tableObject is IDictionary dictionary)
+                    {
+                        lastGethashTable = dictionary;
+                        lastGethashKey = keyObject;
+                        return dictionary.Contains(keyObject) ? dictionary[keyObject] : null;
+                    }
+
+                    lastGethashTable = null;
+                    lastGethashKey = null;
+                    return null;
+                });
+
+                var setfSym = cl.Intern("SETF");
+                cl.Export(setfSym);
+                setfSym.Function = new NativeClosure(args => {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("SETF requires place and value arguments.");
+                    }
+
+                    var value = args[1];
+
+                    if (lastGethashTable is Dictionary<object, object> genericTable)
+                    {
+                        genericTable[lastGethashKey!] = value;
+                        return value;
+                    }
+
+                    if (lastGethashTable is IDictionary dictionary)
+                    {
+                        dictionary[lastGethashKey!] = value;
+                        return value;
+                    }
+
+                    if (args[0] is Symbol symbol)
+                    {
+                        symbol.Value = value;
+                        return value;
+                    }
+
+                    if (args[0] is ValueCell cell)
+                    {
+                        cell.Value = value;
+                        return value;
+                    }
+
+                    return value;
+                });
+
+                var clrhashSym = cl.Intern("CLRHASH");
+                cl.Export(clrhashSym);
+                clrhashSym.Function = new NativeClosure(args => {
+                    if (args.Length < 1)
+                    {
+                        throw new Exception("CLRHASH requires a hash table argument.");
+                    }
+
+                    object tableObject = args[0];
+                    if (tableObject is ValueCell valueCell)
+                    {
+                        tableObject = valueCell.Value;
+                    }
+
+                    if (tableObject is Dictionary<object, object> genericTable)
+                    {
+                        genericTable.Clear();
+                        return genericTable;
+                    }
+
+                    if (tableObject is IDictionary dictionary)
+                    {
+                        dictionary.Clear();
+                        return dictionary;
+                    }
+
+                    throw new Exception("CLRHASH expects a dictionary-compatible hash table.");
+                });
+
+                var evalWhenSym = cl.Intern("EVAL-WHEN");
+                cl.Export(evalWhenSym);
+                evalWhenSym.Function = new NativeClosure(args => null);
+
+                var loadToplevelSym = cl.Intern("LOAD-TOPLEVEL");
+                cl.Export(loadToplevelSym);
+                loadToplevelSym.Function = new NativeClosure(args => null);
+
+                var keywordPackage = Package.Keyword;
+                if (keywordPackage != null)
+                {
+                    var keywordLoadToplevelSym = keywordPackage.Intern("LOAD-TOPLEVEL");
+                    keywordPackage.Export(keywordLoadToplevelSym);
+                    keywordLoadToplevelSym.Function = new NativeClosure(args => null);
+                }
+
+                var gensymCounterSym = cl.Intern("*GENSYM-COUNTER*");
+                cl.Export(gensymCounterSym);
+                gensymCounterSym.Value = gensymCounter;
+
                 // Register MAKE-INSTANCE
                 var makeInstanceSym = cl.Intern("MAKE-INSTANCE");
                 cl.Export(makeInstanceSym);
@@ -55,7 +1454,120 @@ namespace Lisp
                 var findMCSym = cl.Intern("FIND-METHOD-COMBINATION");
                 cl.Export(findMCSym);
                 findMCSym.Function = new NativeClosure(args => FindMethodCombination(args[0]));
+
+                // Register GENSYM
+                var gensymSym = cl.Intern("GENSYM");
+                cl.Export(gensymSym);
+                gensymSym.Function = new NativeClosure(args => {
+                    string prefix = "G";
+                    int suffix;
+
+                    if (args.Length > 0 && args[0] != null)
+                    {
+                        switch (args[0])
+                        {
+                            case string s:
+                                prefix = s;
+                                suffix = Interlocked.Increment(ref gensymCounter);
+                                break;
+                            case Symbol sym:
+                                prefix = sym.Name;
+                                suffix = Interlocked.Increment(ref gensymCounter);
+                                break;
+                            case int i:
+                                suffix = i;
+                                break;
+                            case long l:
+                                suffix = checked((int)l);
+                                break;
+                            default:
+                                prefix = args[0].ToString() ?? "G";
+                                suffix = Interlocked.Increment(ref gensymCounter);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        suffix = Interlocked.Increment(ref gensymCounter);
+                    }
+
+                    gensymCounterSym.Value = gensymCounter;
+                    return new Symbol($"{prefix}{suffix}");
+                });
             }
+        }
+
+        private static Package ResolvePackageDesignator(object designator)
+        {
+            if (designator == null)
+            {
+                return Package.Current ?? throw new Exception("No current package is set.");
+            }
+
+            if (designator is Package p)
+            {
+                return p;
+            }
+
+            if (designator is Symbol s)
+            {
+                return Package.Find(s.Name) ?? new Package(s.Name);
+            }
+
+            if (designator is string name)
+            {
+                return Package.Find(name) ?? new Package(name);
+            }
+
+            throw new Exception($"Unsupported package designator: {designator}");
+        }
+
+        private static Symbol CoerceSymbolDesignator(object designator, Package package)
+        {
+            if (designator is Symbol sym)
+            {
+                return sym;
+            }
+
+            if (designator is string name)
+            {
+                return package.Intern(name);
+            }
+
+            throw new Exception($"Unsupported symbol designator: {designator}");
+        }
+
+        private static IEnumerable<Symbol> CoerceSymbolDesignators(object designatorOrList, Package package)
+        {
+            if (designatorOrList is List list)
+            {
+                object current = list;
+                while (true)
+                {
+                    if (current is List l)
+                    {
+                        if (l.EndP)
+                        {
+                            yield break;
+                        }
+
+                        yield return CoerceSymbolDesignator(l.First(), package);
+                        current = l.Rest();
+                        continue;
+                    }
+
+                    if (current is List.ListCell cell)
+                    {
+                        yield return CoerceSymbolDesignator(cell.first, package);
+                        current = cell.rest;
+                        continue;
+                    }
+
+                    throw new Exception("Malformed symbol designator list.");
+                }
+            }
+
+            yield return CoerceSymbolDesignator(designatorOrList, package);
         }
 
         [ThreadStatic]
@@ -754,6 +2266,12 @@ namespace Lisp
             throw new InvalidOperationException($"No class named {className} is registered.");
         }
 
+        private static readonly ClassMetaobject NullFallbackClass = new ForwardReferencedClassMetaobject { Name = "NULL" };
+        private static readonly ClassMetaobject SymbolFallbackClass = new ForwardReferencedClassMetaobject { Name = "SYMBOL" };
+        private static readonly ClassMetaobject NumberFallbackClass = new ForwardReferencedClassMetaobject { Name = "NUMBER" };
+        private static readonly ClassMetaobject StringFallbackClass = new ForwardReferencedClassMetaobject { Name = "STRING" };
+        private static readonly ClassMetaobject TFallbackClass = new ForwardReferencedClassMetaobject { Name = "T" };
+
         public static ClassMetaobject ResolveClassOfObject(object obj)
         {
             if (obj is StandardObjectInstance instance)
@@ -761,12 +2279,13 @@ namespace Lisp
                 return instance.Class;
             }
 
-            if (obj == null) return FindClass("NULL", errorp: false) ?? FindClass("T", errorp: false);
-            if (obj is Symbol) return FindClass("SYMBOL", errorp: false) ?? FindClass("T", errorp: false);
-            if (obj is int || obj is long || obj is double) return FindClass("NUMBER", errorp: false) ?? FindClass("T", errorp: false);
-            if (obj is string) return FindClass("STRING", errorp: false) ?? FindClass("T", errorp: false);
+            if (obj == null) return FindClass("NULL", errorp: false) ?? NullFallbackClass;
+            if (obj is Symbol) return FindClass("SYMBOL", errorp: false) ?? SymbolFallbackClass;
+            if (obj is int || obj is long || obj is double || obj is float || obj is decimal) 
+                return FindClass("NUMBER", errorp: false) ?? NumberFallbackClass;
+            if (obj is string) return FindClass("STRING", errorp: false) ?? StringFallbackClass;
 
-            return FindClass("T", errorp: false);
+            return FindClass("T", errorp: false) ?? TFallbackClass;
         }
 
         public static bool TryFindClass(object className, out ClassMetaobject classMetaobject)
@@ -2755,6 +4274,7 @@ namespace Lisp
     public readonly struct InvocationCacheKey : IEquatable<InvocationCacheKey>
     {
         private readonly object[] keys;
+        private readonly bool[] eqlMask;
         private readonly int hashCode;
 
         public InvocationCacheKey(object[] arguments, bool[] eqlSpecializedPositions)
@@ -2762,15 +4282,17 @@ namespace Lisp
             if (arguments == null || arguments.Length == 0)
             {
                 keys = Array.Empty<object>();
+                eqlMask = Array.Empty<bool>();
                 hashCode = 0;
                 return;
             }
 
             keys = new object[arguments.Length];
+            eqlMask = eqlSpecializedPositions ?? Array.Empty<bool>();
             for (var i = 0; i < arguments.Length; i++)
             {
                 var arg = arguments[i];
-                bool isEqlPosition = eqlSpecializedPositions != null && i < eqlSpecializedPositions.Length && eqlSpecializedPositions[i];
+                bool isEqlPosition = i < eqlMask.Length && eqlMask[i];
 
                 if (isEqlPosition)
                 {
@@ -2784,10 +4306,10 @@ namespace Lisp
                 }
             }
 
-            hashCode = ComputeHashCode(keys);
+            hashCode = ComputeHashCode(keys, eqlMask);
         }
 
-        private static int ComputeHashCode(object[] keys)
+        private static int ComputeHashCode(object[] keys, bool[] mask)
         {
             unchecked
             {
@@ -2795,6 +4317,14 @@ namespace Lisp
                 for (var i = 0; i < keys.Length; i++)
                 {
                     hash = (hash * 31) + (keys[i]?.GetHashCode() ?? 0);
+                }
+                // Mix in the mask to distinguish EQL vs Class lookups for same-valued keys
+                if (mask != null)
+                {
+                    for (var i = 0; i < mask.Length; i++)
+                    {
+                        hash = (hash * 31) + (mask[i] ? 1 : 0);
+                    }
                 }
                 return hash;
             }
@@ -2807,10 +4337,27 @@ namespace Lisp
                 return false;
             }
 
+            // Masks must also match for the dispatch context to be identical
+            if (eqlMask.Length != other.eqlMask.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < eqlMask.Length; i++)
+            {
+                if (eqlMask[i] != other.eqlMask[i]) return false;
+            }
+
             for (var i = 0; i < keys.Length; i++)
             {
                 var k1 = keys[i];
                 var k2 = other.keys[i];
+
+                if (k1 == null || k2 == null)
+                {
+                    if (!ReferenceEquals(k1, k2)) return false;
+                    continue;
+                }
 
                 if (k1 is ClassMetaobject c1 && k2 is ClassMetaobject c2)
                 {
@@ -2888,6 +4435,126 @@ namespace Lisp
         public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7)
         {
             return GenericFunction.Invoke(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28, object arg29)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28, object arg29, object arg30)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29, arg30 });
+        }
+
+        public override object Invoke(object arg0, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6, object arg7, object arg8, object arg9, object arg10, object arg11, object arg12, object arg13, object arg14, object arg15, object arg16, object arg17, object arg18, object arg19, object arg20, object arg21, object arg22, object arg23, object arg24, object arg25, object arg26, object arg27, object arg28, object arg29, object arg30, object arg31)
+        {
+            return GenericFunction.Invoke(new[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29, arg30, arg31 });
         }
 
         public override object Invoke(params object[] args)

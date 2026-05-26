@@ -12,8 +12,10 @@
 (defvar *current-lambda-params* nil)
 (defvar *current-lambda-free-vars* nil)
 (defvar *global-variables* nil)
+(defvar *function-globals* nil)
 (defvar *quoted-symbols* nil)
 (defvar *toplevel-defuns* nil)
+(defvar *imported-function-bindings* nil)
 (defvar *in-try-block* nil)
 
 (defvar *primitive-handlers-step1* (make-hash-table :test #'equalp))
@@ -43,6 +45,21 @@
   (let ((sanitized (sanitize-identifier (string name))))
     (pushnew sanitized *global-variables* :test #'string=)
     sanitized))
+
+(defun register-function-global (symbol field-name)
+  (when (symbolp symbol)
+    (pushnew (cons symbol field-name)
+             *function-globals*
+             :test (lambda (left right)
+                     (and (eq (car left) (car right))
+                          (string= (cdr left) (cdr right)))))))
+
+(defun symbols-same-name-package-p (left right)
+  (and (symbolp left)
+       (symbolp right)
+       (string= (symbol-name left) (symbol-name right))
+       (string= (or (and (symbol-package left) (package-name (symbol-package left))) "")
+                (or (and (symbol-package right) (package-name (symbol-package right))) ""))))
 
 (defun load-symbol-il (symbol)
   (let* ((field-name (cdr (assoc symbol *quoted-symbols*))))
@@ -368,6 +385,7 @@
     (setf (ast-basic-block node)
           (typecase val
             (integer (list (il:ldc.i4 val) (il:box "int32")))
+            (character (list (il:ldc.i4 (char-code val)) (il:box "char")))
             (string (list (il:ldstr val)))
             (null (list (il:ldnull)))
             (t (load-symbol-il val))))))
@@ -653,13 +671,13 @@
   (let ((target-label (ast-block-end-label node))
         (found nil))
     (labels ((scan (n)
-               (when found (return-from scan))
-               (typecase n
-                 (ast-return-from 
-                  (if (string-equal (ast-return-from-target-label n) target-label)
-                      (setf found t)
-                      (scan (ast-return-from-value n))))
-                 (t (map-ast-children #'scan n)))))
+               (unless found
+                 (typecase n
+                   (ast-return-from 
+                    (if (string-equal (ast-return-from-target-label n) target-label)
+                        (setf found t)
+                        (scan (ast-return-from-value n))))
+                   (t (map-ast-children #'scan n))))))
       (mapc #'scan (ast-block-body node))
       found)))
 
@@ -760,21 +778,37 @@
                                    :class (if (typep cls 'ast-literal) (format nil "~A" (ast-literal-value cls)) (string (ast-variable-name cls)))
                                    :return "instance void"
                                    :args (make-list (length (cdr operands)) :initial-element "object"))))))
-        (let ((name (when (typep operator 'ast-global-variable)
-                      (symbol-name (ast-variable-name operator)))))
-          (let ((handler (when name (lookup-primitive-step1 name))))
-            (if handler
-                (setf (ast-basic-block node) (funcall handler node operands))
-                (if (and name (member (ast-variable-name operator) *toplevel-defuns* :test #'eq))
-                    (progn
-                      (mapc #'generate-step1 operands)
-                      (setf (ast-basic-block node)
-                            (list (il:call :method (sanitize-identifier (string (ast-variable-name operator)))
-                                           :class "Program"
-                                           :return "object"
-                                           :args (make-list (length operands) :initial-element "object")))))
-                    (progn
-                      (generate-step1 operator)
-                      (mapc #'generate-step1 operands)
-                      (setf (ast-basic-block node)
-                            (list (il:callvirt :method "Invoke" :class "[LispBase]Lisp.Closure" :return "instance object" :args (make-list (length operands) :initial-element "object"))))))))))))
+        (let* ((name (when (typep operator 'ast-global-variable)
+                       (symbol-name (ast-variable-name operator))))
+               (handler (when name (lookup-primitive-step1 name)))
+               (imported-binding (and (typep operator 'ast-global-variable)
+                                      (imported-function-binding (ast-variable-name operator)))))
+          (cond
+            (handler
+             (setf (ast-basic-block node) (funcall handler node operands)))
+            ((and name (member (ast-variable-name operator) *toplevel-defuns* :test #'symbols-same-name-package-p))
+             (mapc #'generate-step1 operands)
+             (setf (ast-basic-block node)
+                   (list (il:call :method (sanitize-identifier (string (ast-variable-name operator)))
+                                  :class "Program"
+                                  :return "object"
+                                  :args (make-list (length operands) :initial-element "object")))))
+            (imported-binding
+             (mapc #'generate-step1 operands)
+             (setf (ast-basic-block node)
+                   (list (il:call :method (getf imported-binding :method-name)
+                                  :class (format nil "[~A]~A" (getf imported-binding :assembly-name)
+                                                 (getf imported-binding :class-name))
+                                  :return "object"
+                                  :args (make-list (length operands) :initial-element "object")))))
+            (t
+             (when (typep operator 'ast-global-variable)
+               (register-function-global (ast-variable-name operator)
+                                         (sanitize-identifier (string (ast-variable-alpha-name operator)))))
+             (generate-step1 operator)
+             (mapc #'generate-step1 operands)
+             (setf (ast-basic-block node)
+                   (list (il:callvirt :method "Invoke"
+                                      :class "[LispBase]Lisp.Closure"
+                                      :return "instance object"
+                                      :args (make-list (length operands) :initial-element "object"))))))))))

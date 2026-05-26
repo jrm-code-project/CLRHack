@@ -7,7 +7,10 @@
   (:shadow "COMPILE-FILE")
   (:use "ALEXANDRIA" "CL" "FIVEAM" "FOLD" "FUNCTION" "NAMED-LET" "SERIES")
   (:export
+    "COMPILE-MODULE"
    "COMPILE-FILE"
+    "LINK-PROGRAM"
+    "READ-COMPILATION-MANIFEST"
    "LISP->AST"))
 
 (defpackage "IL"

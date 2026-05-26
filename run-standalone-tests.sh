@@ -46,6 +46,7 @@ tests=(
   TriangBenchmark
   MopCombinationsTest
   MopBenchmark
+  SeparateLinked
   UwpTest
 )
 

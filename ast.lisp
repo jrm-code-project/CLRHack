@@ -274,7 +274,19 @@
   (setf (gethash name *macro-environment*) expander))
 
 (defun clrhack-macro-function (name)
-  (gethash name *macro-environment*))
+  (or (gethash name *macro-environment*)
+      ;; Allow host-expanded forms (often CL package symbols) to resolve
+      ;; against CLRHACK-registered macro names by symbol-name.
+      (let ((target-name (and (symbolp name) (symbol-name name)))
+            (found nil))
+        (when target-name
+          (maphash (lambda (macro-name expander)
+                     (when (and (symbolp macro-name)
+                                (string= (symbol-name macro-name) target-name)
+                                (null found))
+                       (setf found expander)))
+                   *macro-environment*))
+        found)))
 
 (defun clrhack-macroexpand-1 (form)
   "Host-side macroexpansion for the compiler."
@@ -282,11 +294,18 @@
       (let* ((op (car form))
              (expander (clrhack-macro-function op))
              (pkg (symbol-package op))
-             (pkg-name (and pkg (package-name pkg))))
+       (pkg-name (and pkg (package-name pkg)))
+       (op-name (string-upcase (symbol-name op))))
         (if expander
             (values (apply expander (cdr form)) t)
-            ;; LOOP expansion traverses helper macros in SB-LOOP.
-            (if (and pkg-name (string= pkg-name "SB-LOOP"))
+      ;; Expand selected host macros needed by compiler execution paths.
+      ;; Keep this scoped to avoid pulling in arbitrary implementation objects.
+      (if (and (macro-function op)
+           (or (and pkg-name (string= pkg-name "SB-LOOP"))
+             (and pkg-name
+                (string= pkg-name "COMMON-LISP")
+                (member op-name '("LOOP" "WITH-OPEN-FILE" "DOLIST" "DOTIMES")
+                    :test #'string=))))
                 (macroexpand-1 form)
                 (values form nil))))
       (values form nil)))
@@ -300,10 +319,12 @@
     (lambda (test &rest body)
       `(if ,test nil (progn ,@body))))
   (register-macro 'defvar
-    (lambda (name &optional value)
+    (lambda (name &optional value docstring)
+      (declare (ignore docstring))
       `(setq ,name ,value)))
   (register-macro 'defparameter
-    (lambda (name value)
+    (lambda (name value &optional docstring)
+      (declare (ignore docstring))
       `(setq ,name ,value)))
   (register-macro 'funcall
     (lambda (fn &rest args)
@@ -338,6 +359,54 @@
           (if (null (cdr args))
               (car args)
               `(if ,(car args) (and ,@(cdr args)) nil)))))
+  (register-macro 'case
+    (lambda (keyform &rest clauses)
+      (let ((key-var (gensym "CASE_KEY_")))
+        (labels ((expand-case-clause (clause fallback)
+                   (let ((keys (car clause))
+                         (body (cdr clause)))
+                     (cond
+                       ((or (eq keys 'otherwise) (eq keys t))
+                        `(progn ,@body))
+                       ((consp keys)
+                        `(if (or ,@(mapcar (lambda (key) `(eq ,key-var ',key)) keys))
+                             (progn ,@body)
+                             ,fallback))
+                       (t
+                        `(if (eq ,key-var ',keys)
+                             (progn ,@body)
+                             ,fallback)))))
+                 (expand-case-clauses (rest-clauses)
+                   (if (null rest-clauses)
+                       nil
+                       (expand-case-clause (car rest-clauses)
+                                           (expand-case-clauses (cdr rest-clauses))))))
+           `(let ((,key-var ,keyform))
+             ,(expand-case-clauses clauses))))))
+  (register-macro 'ecase
+    (lambda (keyform &rest clauses)
+      (let ((key-var (gensym "ECASE_KEY_")))
+        (labels ((expand-ecase-clause (clause fallback)
+                   (let ((keys (car clause))
+                         (body (cdr clause)))
+                     (cond
+                       ((or (eq keys 'otherwise) (eq keys t))
+                        `(progn ,@body))
+                       ((consp keys)
+                        `(if (or ,@(mapcar (lambda (key) `(eq ,key-var ',key)) keys))
+                             (progn ,@body)
+                             ,fallback))
+                       (t
+                        `(if (eq ,key-var ',keys)
+                             (progn ,@body)
+                             ,fallback)))))
+                 (expand-ecase-clauses (rest-clauses)
+                   (if (null rest-clauses)
+                       `(error "ECASE fell through for ~A" ,key-var)
+                       (expand-ecase-clause (car rest-clauses)
+                                            (expand-ecase-clauses (cdr rest-clauses))))))
+           `(let ((,key-var ,keyform))
+             ,(expand-ecase-clauses clauses))))))
   (register-macro 'loop
     (lambda (&rest clauses)
       (macroexpand-1 `(loop ,@clauses))))
@@ -1319,6 +1388,12 @@
                      c
                      #\_))
        name))
+
+(defun %cons (first rest)
+  (cons first rest))
+
+(defun %intern (name)
+  (intern name *package*))
 
 (defun expand-quote (expr)
   (cond

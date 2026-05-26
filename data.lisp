@@ -351,7 +351,8 @@
     
     (labels ((flatten-insts (insts)
                (loop for inst in insts
-                     do (if (typep inst 'cil-block)
+          do (if (or (typep inst 'cil-block)
+                (typep inst 'cil-structured-block))
                             (let ((hdr (get-header inst)))
                               (cond ((and (> (length hdr) 5) (string-equal (subseq hdr 0 5) "catch"))
                                      (push (length flat-insts) block-entries)
@@ -368,46 +369,60 @@
                               (vector-push-extend inst flat-insts))))))
       (flatten-insts instructions))
       
-    (let ((n (length flat-insts))
-          (max-depth 0)
-          (depths (make-array (length flat-insts) :initial-element nil))
-          (queue (list (cons 0 0))))
+    (labels ((conservative-maxstack ()
+               ;; Fall back to a safe upper bound if the control-flow walk
+               ;; becomes too expensive. Any sufficiently large maxstack is
+               ;; valid IL; precision is only an optimization here.
+               (max 8
+                    (loop for i from 0 below (length flat-insts)
+                          for inst = (aref flat-insts i)
+                          unless (keywordp inst)
+                            sum (max 0 (get-stack-effect inst))))))
+      (let ((n (length flat-insts))
+            (max-depth 0)
+            (depths (make-array (length flat-insts) :initial-element nil))
+            (queue (list (cons 0 0)))
+            (visit-count 0)
+            (visit-budget (max 100000 (* 20 (max 1 (length flat-insts))))))
           
-      (dolist (idx block-entries)
-        (let ((marker (aref flat-insts idx)))
-          (if (eq marker :catch-entry)
-              (push (cons (1+ idx) 1) queue)
-              (push (cons (1+ idx) 0) queue))))
+        (dolist (idx block-entries)
+          (let ((marker (aref flat-insts idx)))
+            (if (eq marker :catch-entry)
+                (push (cons (1+ idx) 1) queue)
+                (push (cons (1+ idx) 0) queue))))
               
-      (loop while queue do
-        (let* ((item (pop queue))
-               (idx (car item))
-               (depth (cdr item)))
-          (when (and (< idx n)
-                     (or (null (aref depths idx))
-                         (> depth (aref depths idx))))
-            (setf (aref depths idx) depth)
-            (let ((inst (aref flat-insts idx)))
-              (cond ((keywordp inst) ; skipped catch/finally entry marker
-                     (push (cons (1+ idx) depth) queue))
-                    (t
-                     (let ((new-depth (+ depth (get-stack-effect inst))))
-                       (setf max-depth (max max-depth new-depth))
-                       (let ((opcode (get-opcode inst)))
-                         (cond ((member opcode '("br" "leave") :test #'string-equal)
-                                (let ((target (gethash (get-operand inst) label-to-index)))
-                                  (when target
-                                    (push (cons target new-depth) queue))))
-                               ((member opcode '("ret" "throw" "rethrow" "endfinally") :test #'string-equal)
-                                nil)
-                               ((typep inst 'cil-branch-instruction)
-                                (let ((target (gethash (get-operand inst) label-to-index)))
-                                  (when target
-                                    (push (cons target new-depth) queue)))
-                                (push (cons (1+ idx) new-depth) queue))
-                               (t
-                                (push (cons (1+ idx) new-depth) queue)))))))))))
-      (max 8 max-depth))))
+        (loop while queue do
+          (incf visit-count)
+          (when (> visit-count visit-budget)
+            (return-from compute-maxstack (conservative-maxstack)))
+          (let* ((item (pop queue))
+                 (idx (car item))
+                 (depth (cdr item)))
+            (when (and (< idx n)
+                       (or (null (aref depths idx))
+                           (> depth (aref depths idx))))
+              (setf (aref depths idx) depth)
+              (let ((inst (aref flat-insts idx)))
+                (cond ((keywordp inst) ; skipped catch/finally entry marker
+                       (push (cons (1+ idx) depth) queue))
+                      (t
+                       (let ((new-depth (+ depth (get-stack-effect inst))))
+                         (setf max-depth (max max-depth new-depth))
+                         (let ((opcode (get-opcode inst)))
+                           (cond ((member opcode '("br" "leave") :test #'string-equal)
+                                  (let ((target (gethash (get-operand inst) label-to-index)))
+                                    (when target
+                                      (push (cons target new-depth) queue))))
+                                 ((member opcode '("ret" "throw" "rethrow" "endfinally") :test #'string-equal)
+                                  nil)
+                                 ((typep inst 'cil-branch-instruction)
+                                  (let ((target (gethash (get-operand inst) label-to-index)))
+                                    (when target
+                                      (push (cons target new-depth) queue)))
+                                  (push (cons (1+ idx) new-depth) queue))
+                                 (t
+                                  (push (cons (1+ idx) new-depth) queue)))))))))))
+        (max 8 max-depth)))))
 
 ;;; --- Helper to push instructions into the vector ---
 
@@ -704,25 +719,25 @@
   (declare (ignore assembly))
   t)
 
-(defclass cil-block (cil-instruction)
+(defclass cil-structured-block (cil-instruction)
   ((header       :initarg :header :accessor get-header)
    (instructions :initarg :instructions :accessor get-instructions))
   (:documentation "A block of instructions wrapped in braces, preceded by a header like .try or finally."))
 
-(defmethod emit-instruction ((inst cil-block) stream)
+(defmethod emit-instruction ((inst cil-structured-block) stream)
   (format stream "~A~%    {~%" (get-header inst))
   (dolist (sub-inst (get-instructions inst))
     (emit-instruction sub-inst stream))
   (format stream "    }"))
 
 (defun il::try (instructions)
-  (make-instance 'cil-block :header ".try" :instructions instructions))
+  (make-instance 'cil-structured-block :header ".try" :instructions instructions))
 
 (defun il::finally (instructions)
-  (make-instance 'cil-block :header "finally" :instructions instructions))
+  (make-instance 'cil-structured-block :header "finally" :instructions instructions))
 
 (defun il::catch (type instructions)
-  (make-instance 'cil-block :header (format nil "catch ~A" type) :instructions instructions))
+  (make-instance 'cil-structured-block :header (format nil "catch ~A" type) :instructions instructions))
 
 (defun il::newarr (type-name)
   (make-instance 'cil-type-instruction :opcode "newarr" :operand type-name :label nil :stack-effect 0))
