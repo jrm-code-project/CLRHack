@@ -20,7 +20,13 @@
     "ast.lisp"
     "ast-walker.lisp"
     "generate-step1.lisp"
-    "generate-step2.lisp"))
+    "generate-step2.lisp"
+    "compiler-driver.lisp"))
+
+(defparameter *bootstrap-required-files*
+  '("clrhack.asd"
+    "LispBase/LispBase.csproj"
+    "dotnet-tools.json"))
 
 (defun sanitize-bootstrap-assembly-fragment (name)
   (map 'string (lambda (c)
@@ -43,8 +49,45 @@
         (push source missing)))
     (nreverse missing)))
 
+(defun validate-bootstrap-preflight ()
+  (let ((issues nil))
+    (let ((dotnet-present-p
+            (ignore-errors
+              (zerop (sb-ext:process-exit-code
+                      (sb-ext:run-program "/bin/sh"
+                                          (list "-lc" "command -v dotnet >/dev/null 2>&1")
+                                          :search t
+                                          :output nil
+                                          :error nil))))))
+      (unless dotnet-present-p
+        (push "Missing required executable: dotnet" issues)))
+    (dolist (path *bootstrap-required-files*)
+      (unless (probe-file path)
+        (push (format nil "Missing required file: ~A" path) issues)))
+    (nreverse issues)))
+
+(defun bootstrap-module-artifact-paths (assembly-name)
+  (list (format nil "~A.il" assembly-name)
+        (format nil "~A.ilproj" assembly-name)
+        (format nil "~A.clrhm" assembly-name)
+        (format nil "bin/Release/net8.0/~A.dll" assembly-name)))
+
+(defun assert-bootstrap-module-artifacts (assembly-name)
+  (let ((missing nil))
+    (dolist (artifact (bootstrap-module-artifact-paths assembly-name))
+      (unless (probe-file artifact)
+        (push artifact missing)))
+    (when missing
+      (error "Module ~A missing expected artifacts: ~{~A~^, ~}"
+             assembly-name
+             (nreverse missing)))))
+
 (defun run-bootstrap-dry-run (source-files)
   (format t "~%--- Self-host bootstrap dry-run ---~%")
+  (let ((preflight-issues (validate-bootstrap-preflight)))
+    (if preflight-issues
+        (error "Bootstrap preflight failed:~%~{ - ~A~%~}" preflight-issues)
+        (format t "Preflight checks passed.~%")))
   (format t "Compiler source inventory (~D files):~%" (length source-files))
   (dolist (source source-files)
     (format t "  - ~A -> ~A~%"
@@ -65,6 +108,7 @@
               (clrhack:compile-module source
                                       :output-file assembly-name
                                       :dependency-manifests manifest-paths)
+            (assert-bootstrap-module-artifacts assembly-name)
               (setf manifest-paths (append manifest-paths (list manifest-name))
                     last-manifest manifest-name))
           (error (condition)
@@ -81,6 +125,8 @@
     (clrhack:link-program manifest-paths
                           :output-file "SelfHostCompilerGen1"
                           :root-manifest last-manifest)
+    (unless (probe-file "bin/Release/net8.0/SelfHostCompilerGen1.dll")
+      (error "Link stage completed but expected artifact is missing: bin/Release/net8.0/SelfHostCompilerGen1.dll"))
     (format t "Self-host Gen1 artifact linked: bin/Release/net8.0/SelfHostCompilerGen1.dll~%")))
 
 (let* ((argv #+sbcl sb-ext:*posix-argv* #-sbcl nil)

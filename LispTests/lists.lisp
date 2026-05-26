@@ -272,28 +272,35 @@ not destructively modified. Keys are compared using EQ."
   (declare (optimize (speed 3)))
   ;; FIXME: possible optimization: (remove-from-plist '(:x 0 :a 1 :b 2) :a)
   ;; could return the tail without consing up a new list.
-  (loop for (key . rest) on plist by #'cddr
-        do (assert rest () "Expected a proper plist, got ~S" plist)
-        unless (member key keys :test #'eq)
-        collect key and collect (first rest)))
+  (let ((results nil))
+    (do ((tail plist (cddr tail)))
+        ((null tail))
+      (let ((key (car tail))
+            (rest (cdr tail)))
+        (assert rest () "Expected a proper plist, got ~S" plist)
+        (unless (member key keys :test #'eq)
+          (push key results)
+          (push (car rest) results))))
+    (nreverse results)))
 
 (defun delete-from-plist (plist &rest keys)
   "Just like REMOVE-FROM-PLIST, but this version may destructively modify the
 provided PLIST."
   (declare (optimize speed))
-  (loop with head = plist
-        with tail = nil   ; a nil tail means an empty result so far
-        for (key . rest) on plist by #'cddr
-        do (assert rest () "Expected a proper plist, got ~S" plist)
-           (if (member key keys :test #'eq)
-               ;; skip over this pair
-               (let ((next (cdr rest)))
-                 (if tail
-                     (setf (cdr tail) next)
-                     (setf head next)))
-               ;; keep this pair
-               (setf tail rest))
-        finally (return head)))
+  (let ((head plist)
+        (tail nil))
+    (do ((curr plist (cddr curr)))
+        ((null curr))
+      (let ((key (car curr))
+            (rest (cdr curr)))
+        (assert rest () "Expected a proper plist, got ~S" plist)
+        (if (member key keys :test #'eq)
+            (let ((next (cdr rest)))
+              (if tail
+                  (setf (cdr tail) next)
+                  (setf head next)))
+            (setf tail rest))))
+    head))
 
 (define-modify-macro remove-from-plistf (&rest keys) remove-from-plist
                      "Modify macro for REMOVE-FROM-PLIST.")
@@ -308,8 +315,7 @@ provided PLIST."
 (defun mappend (function &rest lists)
   "Applies FUNCTION to respective element(s) of each LIST, appending all the
 all the result list to a single list. FUNCTION must return a list."
-  (loop for results in (apply #'mapcar function lists)
-        append results))
+  (reduce #'append (apply #'mapcar function lists) :initial-value nil))
 
 (defun setp (object &key (test #'eql) (key #'identity))
   "Returns true if OBJECT is a list that denotes a set, NIL otherwise. A list

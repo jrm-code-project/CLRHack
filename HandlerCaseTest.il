@@ -7,106 +7,106 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'TAG57375742'
-    .field public static object 'ID57365744'
-    .field public static object 'CONDITION57355743'
-    .field public static object 'TAG57245729'
-    .field public static object 'ID57235731'
-    .field public static object 'CONDITION57225730'
-    .field public static object 'TAG57045709'
-    .field public static object 'ID57035711'
-    .field public static object 'CONDITION57025710'
-    .field public static object 'TAG56845689'
-    .field public static object 'ID56835691'
-    .field public static object 'CONDITION56825690'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5884'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_OUTER_ERROR5883'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_INNER_ERROR5877'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5866'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5853'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5852'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5849'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_MY_ERROR5848'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5837'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5830'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5823'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S5816'
+    .field public static object 'TAG58355840'
+    .field public static object 'ID58345842'
+    .field public static object 'CONDITION58335841'
+    .field public static object 'TAG58225827'
+    .field public static object 'ID58215829'
+    .field public static object 'CONDITION58205828'
+    .field public static object 'TAG58025807'
+    .field public static object 'ID58015809'
+    .field public static object 'CONDITION58005808'
+    .field public static object 'TAG57825787'
+    .field public static object 'ID57815789'
+    .field public static object 'CONDITION57805788'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5982'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_OUTER_ERROR5981'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_INNER_ERROR5975'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5964'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5951'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5950'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5947'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_MY_ERROR5946'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5935'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5928'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5921'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S5914'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'TAG57375742'
+    stsfld object Program::'TAG58355840'
     ldnull
-    stsfld object Program::'ID57365744'
+    stsfld object Program::'ID58345842'
     ldnull
-    stsfld object Program::'CONDITION57355743'
+    stsfld object Program::'CONDITION58335841'
     ldnull
-    stsfld object Program::'TAG57245729'
+    stsfld object Program::'TAG58225827'
     ldnull
-    stsfld object Program::'ID57235731'
+    stsfld object Program::'ID58215829'
     ldnull
-    stsfld object Program::'CONDITION57225730'
+    stsfld object Program::'CONDITION58205828'
     ldnull
-    stsfld object Program::'TAG57045709'
+    stsfld object Program::'TAG58025807'
     ldnull
-    stsfld object Program::'ID57035711'
+    stsfld object Program::'ID58015809'
     ldnull
-    stsfld object Program::'CONDITION57025710'
+    stsfld object Program::'CONDITION58005808'
     ldnull
-    stsfld object Program::'TAG56845689'
+    stsfld object Program::'TAG57825787'
     ldnull
-    stsfld object Program::'ID56835691'
+    stsfld object Program::'ID57815789'
     ldnull
-    stsfld object Program::'CONDITION56825690'
+    stsfld object Program::'CONDITION57805788'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "INNER-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5884'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5982'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "OUTER-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER_ERROR5883'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER_ERROR5981'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "INNER-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER_ERROR5877'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER_ERROR5975'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "SHOULD-NOT-HAPPEN"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5866'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5964'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "CAUGHT-IT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5853'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5951'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5852'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5950'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "MY-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5849'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5947'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "MY-ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_MY_ERROR5848'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_MY_ERROR5946'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "OUTER-ERROR5738"
+    ldstr "OUTER-ERROR5836"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5837'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5935'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "INNER-ERROR5725"
+    ldstr "INNER-ERROR5823"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5830'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5928'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "MY-ERROR5705"
+    ldstr "MY-ERROR5803"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5823'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5921'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "MY-ERROR5685"
+    ldstr "MY-ERROR5783"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5816'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S5914'
     ret
 }
 
@@ -473,7 +473,7 @@
 .method private static hidebysig object 'TEST_HANDLER_CASE_NESTED_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object C5748, object C5747, object HANDLER_BIND_RESULT5882, object HANDLERS_LIST5881, object SAVED_HANDLERS5880, object CATCH_RESULT5879, object CATCH_TAG5878, object ID57365744, object CONDITION57355743, object TAG57375742, object BLOCK_RESULT_EXIT5734_5741, object HANDLER_BIND_RESULT5876, object HANDLERS_LIST5875, object SAVED_HANDLERS5874, object CATCH_RESULT5873, object CATCH_TAG5872, object ID57235731, object CONDITION57225730, object TAG57245729, object BLOCK_RESULT_EXIT5721_5728)
+    .locals init (object C5846, object C5845, object HANDLER_BIND_RESULT5980, object HANDLERS_LIST5979, object SAVED_HANDLERS5978, object CATCH_RESULT5977, object CATCH_TAG5976, object ID58345842, object CONDITION58335841, object TAG58355840, object BLOCK_RESULT_EXIT5832_5839, object HANDLER_BIND_RESULT5974, object HANDLERS_LIST5973, object SAVED_HANDLERS5972, object CATCH_RESULT5971, object CATCH_TAG5970, object ID58215829, object CONDITION58205828, object TAG58225827, object BLOCK_RESULT_EXIT5819_5826)
     ldstr "--- test-handler-case-nested ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -481,207 +481,207 @@
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG57245729
+    stloc TAG58225827
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION57225730
+    stloc CONDITION58205828
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID57235731
-    ldloc TAG57245729
-    stloc CATCH_TAG5872
+    stloc ID58215829
+    ldloc TAG58225827
+    stloc CATCH_TAG5970
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS5874
-    ldloc SAVED_HANDLERS5874
-    stloc HANDLERS_LIST5875
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER_ERROR5877'
-    ldloc TAG57245729
-    ldloc CONDITION57225730
-    ldloc ID57235731
-    newobj instance void L_5752::'.ctor'(object, object, object)
+    stloc SAVED_HANDLERS5972
+    ldloc SAVED_HANDLERS5972
+    stloc HANDLERS_LIST5973
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_INNER_ERROR5975'
+    ldloc TAG58225827
+    ldloc CONDITION58205828
+    ldloc ID58215829
+    newobj instance void L_5850::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST5875
+    ldloc HANDLERS_LIST5973
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST5875
-    ldloc HANDLERS_LIST5875
+    stloc HANDLERS_LIST5973
+    ldloc HANDLERS_LIST5973
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG57375742
+    stloc TAG58355840
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION57355743
+    stloc CONDITION58335841
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID57365744
-    ldloc TAG57375742
-    stloc CATCH_TAG5878
+    stloc ID58345842
+    ldloc TAG58355840
+    stloc CATCH_TAG5976
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS5880
-    ldloc SAVED_HANDLERS5880
-    stloc HANDLERS_LIST5881
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER_ERROR5883'
-    ldloc TAG57375742
-    ldloc CONDITION57355743
-    ldloc ID57365744
-    newobj instance void L_5753::'.ctor'(object, object, object)
+    stloc SAVED_HANDLERS5978
+    ldloc SAVED_HANDLERS5978
+    stloc HANDLERS_LIST5979
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_OUTER_ERROR5981'
+    ldloc TAG58355840
+    ldloc CONDITION58335841
+    ldloc ID58345842
+    newobj instance void L_5851::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST5881
+    ldloc HANDLERS_LIST5979
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST5881
-    ldloc HANDLERS_LIST5881
+    stloc HANDLERS_LIST5979
+    ldloc HANDLERS_LIST5979
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5884'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5982'
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc BLOCK_RESULT_EXIT5734_5741
-    leave BLOCK_END_EXIT5734_5740
-    stloc HANDLER_BIND_RESULT5882
-    leave DONE5894
+    stloc BLOCK_RESULT_EXIT5832_5839
+    leave BLOCK_END_EXIT5832_5838
+    stloc HANDLER_BIND_RESULT5980
+    leave DONE5992
     }
     finally
     {
-    ldloc SAVED_HANDLERS5880
+    ldloc SAVED_HANDLERS5978
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE5894:
-    ldloc HANDLER_BIND_RESULT5882
-    stloc CATCH_RESULT5879
-    leave CATCH_DONE5892
+DONE5992:
+    ldloc HANDLER_BIND_RESULT5980
+    stloc CATCH_RESULT5977
+    leave CATCH_DONE5990
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG5878
+    ldloc CATCH_TAG5976
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW5893
+    brfalse CATCH_RETHROW5991
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT5879
-    leave CATCH_DONE5892
-CATCH_RETHROW5893:
+    stloc CATCH_RESULT5977
+    leave CATCH_DONE5990
+CATCH_RETHROW5991:
     pop
     rethrow
     }
-CATCH_DONE5892:
-    ldloc CATCH_RESULT5879
+CATCH_DONE5990:
+    ldloc CATCH_RESULT5977
     pop
-    ldloc ID57365744
+    ldloc ID58345842
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5837'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5935'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE5885
+    brtrue TRUE5983
     ldnull
-    br END5886
-TRUE5885:
+    br END5984
+TRUE5983:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5852'
-END5886:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5950'
+END5984:
     nop
     ldnull
     ceq
-    brtrue ELSE5895
-    ldloc CONDITION57355743
+    brtrue ELSE5993
+    ldloc CONDITION58335841
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C5747
+    stloc C5845
     ldstr "Caught outer in inner (wrong!)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END5896
-ELSE5895:
+    br END5994
+ELSE5993:
     nop
     ldnull
-END5896:
+END5994:
     nop
-    stloc BLOCK_RESULT_EXIT5734_5741
-BLOCK_END_EXIT5734_5740:
+    stloc BLOCK_RESULT_EXIT5832_5839
+BLOCK_END_EXIT5832_5838:
     nop
-    ldloc BLOCK_RESULT_EXIT5734_5741
-    stloc BLOCK_RESULT_EXIT5721_5728
-    leave BLOCK_END_EXIT5721_5727
-    stloc HANDLER_BIND_RESULT5876
-    leave DONE5891
+    ldloc BLOCK_RESULT_EXIT5832_5839
+    stloc BLOCK_RESULT_EXIT5819_5826
+    leave BLOCK_END_EXIT5819_5825
+    stloc HANDLER_BIND_RESULT5974
+    leave DONE5989
     }
     finally
     {
-    ldloc SAVED_HANDLERS5874
+    ldloc SAVED_HANDLERS5972
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE5891:
-    ldloc HANDLER_BIND_RESULT5876
-    stloc CATCH_RESULT5873
-    leave CATCH_DONE5889
+DONE5989:
+    ldloc HANDLER_BIND_RESULT5974
+    stloc CATCH_RESULT5971
+    leave CATCH_DONE5987
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG5872
+    ldloc CATCH_TAG5970
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW5890
+    brfalse CATCH_RETHROW5988
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT5873
-    leave CATCH_DONE5889
-CATCH_RETHROW5890:
+    stloc CATCH_RESULT5971
+    leave CATCH_DONE5987
+CATCH_RETHROW5988:
     pop
     rethrow
     }
-CATCH_DONE5889:
-    ldloc CATCH_RESULT5873
+CATCH_DONE5987:
+    ldloc CATCH_RESULT5971
     pop
-    ldloc ID57235731
+    ldloc ID58215829
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5830'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5928'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE5887
+    brtrue TRUE5985
     ldnull
-    br END5888
-TRUE5887:
+    br END5986
+TRUE5985:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5852'
-END5888:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5950'
+END5986:
     nop
     ldnull
     ceq
-    brtrue ELSE5897
-    ldloc CONDITION57225730
+    brtrue ELSE5995
+    ldloc CONDITION58205828
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C5748
+    stloc C5846
     ldstr "Caught inner in outer (correct!)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END5898
-ELSE5897:
+    br END5996
+ELSE5995:
     nop
     ldnull
-END5898:
+END5996:
     nop
-    stloc BLOCK_RESULT_EXIT5721_5728
-BLOCK_END_EXIT5721_5727:
+    stloc BLOCK_RESULT_EXIT5819_5826
+BLOCK_END_EXIT5819_5825:
     nop
-    ldloc BLOCK_RESULT_EXIT5721_5728
+    ldloc BLOCK_RESULT_EXIT5819_5826
     ret
-BLOCK_END_TEST_HANDLER_CASE_NESTED_5719:
+BLOCK_END_TEST_HANDLER_CASE_NESTED_5817:
     nop
     ldnull
     ret
@@ -1050,7 +1050,7 @@ BLOCK_END_TEST_HANDLER_CASE_NESTED_5719:
 .method private static hidebysig object 'TEST_HANDLER_CASE_NO_CATCH_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RESULT5715, object C5714, object HANDLER_BIND_RESULT5863, object HANDLERS_LIST5862, object SAVED_HANDLERS5861, object CATCH_RESULT5860, object CATCH_TAG5859, object ID57035711, object CONDITION57025710, object TAG57045709, object BLOCK_RESULT_EXIT5701_5708)
+    .locals init (object RESULT5813, object C5812, object HANDLER_BIND_RESULT5961, object HANDLERS_LIST5960, object SAVED_HANDLERS5959, object CATCH_RESULT5958, object CATCH_TAG5957, object ID58015809, object CONDITION58005808, object TAG58025807, object BLOCK_RESULT_EXIT5799_5806)
     ldstr "--- test-handler-case-no-catch ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -1058,31 +1058,31 @@ BLOCK_END_TEST_HANDLER_CASE_NESTED_5719:
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG57045709
+    stloc TAG58025807
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION57025710
+    stloc CONDITION58005808
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID57035711
-    ldloc TAG57045709
-    stloc CATCH_TAG5859
+    stloc ID58015809
+    ldloc TAG58025807
+    stloc CATCH_TAG5957
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS5861
-    ldloc SAVED_HANDLERS5861
-    stloc HANDLERS_LIST5862
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_MY_ERROR5848'
-    ldloc TAG57045709
-    ldloc CONDITION57025710
-    ldloc ID57035711
-    newobj instance void L_5751::'.ctor'(object, object, object)
+    stloc SAVED_HANDLERS5959
+    ldloc SAVED_HANDLERS5959
+    stloc HANDLERS_LIST5960
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_MY_ERROR5946'
+    ldloc TAG58025807
+    ldloc CONDITION58005808
+    ldloc ID58015809
+    newobj instance void L_5849::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST5862
+    ldloc HANDLERS_LIST5960
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST5862
-    ldloc HANDLERS_LIST5862
+    stloc HANDLERS_LIST5960
+    ldloc HANDLERS_LIST5960
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
@@ -1092,83 +1092,83 @@ BLOCK_END_TEST_HANDLER_CASE_NESTED_5719:
     pop
     ldc.i4 42
     box int32
-    stloc BLOCK_RESULT_EXIT5701_5708
-    leave BLOCK_END_EXIT5701_5707
-    stloc HANDLER_BIND_RESULT5863
-    leave DONE5869
+    stloc BLOCK_RESULT_EXIT5799_5806
+    leave BLOCK_END_EXIT5799_5805
+    stloc HANDLER_BIND_RESULT5961
+    leave DONE5967
     }
     finally
     {
-    ldloc SAVED_HANDLERS5861
+    ldloc SAVED_HANDLERS5959
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE5869:
-    ldloc HANDLER_BIND_RESULT5863
-    stloc CATCH_RESULT5860
-    leave CATCH_DONE5867
+DONE5967:
+    ldloc HANDLER_BIND_RESULT5961
+    stloc CATCH_RESULT5958
+    leave CATCH_DONE5965
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG5859
+    ldloc CATCH_TAG5957
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW5868
+    brfalse CATCH_RETHROW5966
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT5860
-    leave CATCH_DONE5867
-CATCH_RETHROW5868:
+    stloc CATCH_RESULT5958
+    leave CATCH_DONE5965
+CATCH_RETHROW5966:
     pop
     rethrow
     }
-CATCH_DONE5867:
-    ldloc CATCH_RESULT5860
+CATCH_DONE5965:
+    ldloc CATCH_RESULT5958
     pop
-    ldloc ID57035711
+    ldloc ID58015809
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5823'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5921'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE5864
+    brtrue TRUE5962
     ldnull
-    br END5865
-TRUE5864:
+    br END5963
+TRUE5962:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5852'
-END5865:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5950'
+END5963:
     nop
     ldnull
     ceq
-    brtrue ELSE5870
-    ldloc CONDITION57025710
+    brtrue ELSE5968
+    ldloc CONDITION58005808
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C5714
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5866'
-    br END5871
-ELSE5870:
+    stloc C5812
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5964'
+    br END5969
+ELSE5968:
     nop
     ldnull
-END5871:
+END5969:
     nop
-    stloc BLOCK_RESULT_EXIT5701_5708
-BLOCK_END_EXIT5701_5707:
+    stloc BLOCK_RESULT_EXIT5799_5806
+BLOCK_END_EXIT5799_5805:
     nop
-    ldloc BLOCK_RESULT_EXIT5701_5708
-    stloc RESULT5715
+    ldloc BLOCK_RESULT_EXIT5799_5806
+    stloc RESULT5813
     ldstr "Result:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RESULT5715
+    ldloc RESULT5813
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_HANDLER_CASE_NO_CATCH_5699:
+BLOCK_END_TEST_HANDLER_CASE_NO_CATCH_5797:
     nop
     ldnull
     ret
@@ -1537,7 +1537,7 @@ BLOCK_END_TEST_HANDLER_CASE_NO_CATCH_5699:
 .method private static hidebysig object 'TEST_HANDLER_CASE_SIMPLE_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RESULT5695, object C5694, object HANDLER_BIND_RESULT5847, object HANDLERS_LIST5846, object SAVED_HANDLERS5845, object CATCH_RESULT5844, object CATCH_TAG5843, object ID56835691, object CONDITION56825690, object TAG56845689, object BLOCK_RESULT_EXIT5681_5688)
+    .locals init (object RESULT5793, object C5792, object HANDLER_BIND_RESULT5945, object HANDLERS_LIST5944, object SAVED_HANDLERS5943, object CATCH_RESULT5942, object CATCH_TAG5941, object ID57815789, object CONDITION57805788, object TAG57825787, object BLOCK_RESULT_EXIT5779_5786)
     ldstr "--- test-handler-case-simple ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -1545,31 +1545,31 @@ BLOCK_END_TEST_HANDLER_CASE_NO_CATCH_5699:
     ldnull
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc TAG56845689
+    stloc TAG57825787
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc CONDITION56825690
+    stloc CONDITION57805788
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ID56835691
-    ldloc TAG56845689
-    stloc CATCH_TAG5843
+    stloc ID57815789
+    ldloc TAG57825787
+    stloc CATCH_TAG5941
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS5845
-    ldloc SAVED_HANDLERS5845
-    stloc HANDLERS_LIST5846
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_MY_ERROR5848'
-    ldloc TAG56845689
-    ldloc CONDITION56825690
-    ldloc ID56835691
-    newobj instance void L_5750::'.ctor'(object, object, object)
+    stloc SAVED_HANDLERS5943
+    ldloc SAVED_HANDLERS5943
+    stloc HANDLERS_LIST5944
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_MY_ERROR5946'
+    ldloc TAG57825787
+    ldloc CONDITION57805788
+    ldloc ID57815789
+    newobj instance void L_5848::'.ctor'(object, object, object)
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST5846
+    ldloc HANDLERS_LIST5944
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST5846
-    ldloc HANDLERS_LIST5846
+    stloc HANDLERS_LIST5944
+    ldloc HANDLERS_LIST5944
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
@@ -1577,93 +1577,93 @@ BLOCK_END_TEST_HANDLER_CASE_NO_CATCH_5699:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5849'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5947'
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc BLOCK_RESULT_EXIT5681_5688
-    leave BLOCK_END_EXIT5681_5687
-    stloc HANDLER_BIND_RESULT5847
-    leave DONE5856
+    stloc BLOCK_RESULT_EXIT5779_5786
+    leave BLOCK_END_EXIT5779_5785
+    stloc HANDLER_BIND_RESULT5945
+    leave DONE5954
     }
     finally
     {
-    ldloc SAVED_HANDLERS5845
+    ldloc SAVED_HANDLERS5943
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE5856:
-    ldloc HANDLER_BIND_RESULT5847
-    stloc CATCH_RESULT5844
-    leave CATCH_DONE5854
+DONE5954:
+    ldloc HANDLER_BIND_RESULT5945
+    stloc CATCH_RESULT5942
+    leave CATCH_DONE5952
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG5843
+    ldloc CATCH_TAG5941
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW5855
+    brfalse CATCH_RETHROW5953
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT5844
-    leave CATCH_DONE5854
-CATCH_RETHROW5855:
+    stloc CATCH_RESULT5942
+    leave CATCH_DONE5952
+CATCH_RETHROW5953:
     pop
     rethrow
     }
-CATCH_DONE5854:
-    ldloc CATCH_RESULT5844
+CATCH_DONE5952:
+    ldloc CATCH_RESULT5942
     pop
-    ldloc ID56835691
+    ldloc ID57815789
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5816'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5914'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE5850
+    brtrue TRUE5948
     ldnull
-    br END5851
-TRUE5850:
+    br END5949
+TRUE5948:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5852'
-END5851:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5950'
+END5949:
     nop
     ldnull
     ceq
-    brtrue ELSE5857
-    ldloc CONDITION56825690
+    brtrue ELSE5955
+    ldloc CONDITION57805788
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc C5694
+    stloc C5792
     ldstr "Caught my-error:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc C5694
+    ldloc C5792
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5853'
-    br END5858
-ELSE5857:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5951'
+    br END5956
+ELSE5955:
     nop
     ldnull
-END5858:
+END5956:
     nop
-    stloc BLOCK_RESULT_EXIT5681_5688
-BLOCK_END_EXIT5681_5687:
+    stloc BLOCK_RESULT_EXIT5779_5786
+BLOCK_END_EXIT5779_5785:
     nop
-    ldloc BLOCK_RESULT_EXIT5681_5688
-    stloc RESULT5695
+    ldloc BLOCK_RESULT_EXIT5779_5786
+    stloc RESULT5793
     ldstr "Result:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RESULT5695
+    ldloc RESULT5793
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
+BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5777:
     nop
     ldnull
     ret
@@ -1692,12 +1692,12 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_5750
+.class public auto ansi beforefieldinit L_5848
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG56845689'
-    .field public object 'CONDITION56825690'
-    .field public object 'ID56835691'
+    .field public object 'TAG57825787'
+    .field public object 'CONDITION57805788'
+    .field public object 'ID57815789'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -1706,44 +1706,44 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_5750::'TAG56845689'
+    stfld object L_5848::'TAG57825787'
     ldarg.0
     ldarg 2
-    stfld object L_5750::'CONDITION56825690'
+    stfld object L_5848::'CONDITION57805788'
     ldarg.0
     ldarg 3
-    stfld object L_5750::'ID56835691'
+    stfld object L_5848::'ID57815789'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP5821, object CELL_TMP5820, object CELL_VAL_TMP5819, object CELL_TMP5818, object TEMP5817, object TEMP5815)
+    .locals init (object CELL_VAL_TMP5919, object CELL_TMP5918, object CELL_VAL_TMP5917, object CELL_TMP5916, object TEMP5915, object TEMP5913)
     ldarg.0
-    ldfld object L_5750::'CONDITION56825690'
-    stloc CELL_TMP5818
+    ldfld object L_5848::'CONDITION57805788'
+    stloc CELL_TMP5916
     ldarg 1
-    stloc CELL_VAL_TMP5819
-    ldloc CELL_TMP5818
+    stloc CELL_VAL_TMP5917
+    ldloc CELL_TMP5916
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5819
+    ldloc CELL_VAL_TMP5917
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5819
+    ldloc CELL_VAL_TMP5917
     pop
     ldarg.0
-    ldfld object L_5750::'ID56835691'
-    stloc CELL_TMP5820
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5816'
-    stloc CELL_VAL_TMP5821
-    ldloc CELL_TMP5820
+    ldfld object L_5848::'ID57815789'
+    stloc CELL_TMP5918
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5914'
+    stloc CELL_VAL_TMP5919
+    ldloc CELL_TMP5918
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5821
+    ldloc CELL_VAL_TMP5919
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5821
+    ldloc CELL_VAL_TMP5919
     pop
     ldarg.0
-    ldfld object L_5750::'TAG56845689'
+    ldfld object L_5848::'TAG57825787'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -1769,7 +1769,7 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_5750::'InvokeBody'(object)
+    callvirt instance object L_5848::'InvokeBody'(object)
     ret
 }
 
@@ -2114,14 +2114,14 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ret
 }
 
-} // end of class L_5750
+} // end of class L_5848
 
-.class public auto ansi beforefieldinit L_5751
+.class public auto ansi beforefieldinit L_5849
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG57045709'
-    .field public object 'CONDITION57025710'
-    .field public object 'ID57035711'
+    .field public object 'TAG58025807'
+    .field public object 'CONDITION58005808'
+    .field public object 'ID58015809'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -2130,44 +2130,44 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_5751::'TAG57045709'
+    stfld object L_5849::'TAG58025807'
     ldarg.0
     ldarg 2
-    stfld object L_5751::'CONDITION57025710'
+    stfld object L_5849::'CONDITION58005808'
     ldarg.0
     ldarg 3
-    stfld object L_5751::'ID57035711'
+    stfld object L_5849::'ID58015809'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP5828, object CELL_TMP5827, object CELL_VAL_TMP5826, object CELL_TMP5825, object TEMP5824, object TEMP5822)
+    .locals init (object CELL_VAL_TMP5926, object CELL_TMP5925, object CELL_VAL_TMP5924, object CELL_TMP5923, object TEMP5922, object TEMP5920)
     ldarg.0
-    ldfld object L_5751::'CONDITION57025710'
-    stloc CELL_TMP5825
+    ldfld object L_5849::'CONDITION58005808'
+    stloc CELL_TMP5923
     ldarg 1
-    stloc CELL_VAL_TMP5826
-    ldloc CELL_TMP5825
+    stloc CELL_VAL_TMP5924
+    ldloc CELL_TMP5923
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5826
+    ldloc CELL_VAL_TMP5924
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5826
+    ldloc CELL_VAL_TMP5924
     pop
     ldarg.0
-    ldfld object L_5751::'ID57035711'
-    stloc CELL_TMP5827
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5823'
-    stloc CELL_VAL_TMP5828
-    ldloc CELL_TMP5827
+    ldfld object L_5849::'ID58015809'
+    stloc CELL_TMP5925
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5921'
+    stloc CELL_VAL_TMP5926
+    ldloc CELL_TMP5925
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5828
+    ldloc CELL_VAL_TMP5926
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5828
+    ldloc CELL_VAL_TMP5926
     pop
     ldarg.0
-    ldfld object L_5751::'TAG57045709'
+    ldfld object L_5849::'TAG58025807'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -2193,7 +2193,7 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_5751::'InvokeBody'(object)
+    callvirt instance object L_5849::'InvokeBody'(object)
     ret
 }
 
@@ -2538,14 +2538,14 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ret
 }
 
-} // end of class L_5751
+} // end of class L_5849
 
-.class public auto ansi beforefieldinit L_5752
+.class public auto ansi beforefieldinit L_5850
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG57245729'
-    .field public object 'CONDITION57225730'
-    .field public object 'ID57235731'
+    .field public object 'TAG58225827'
+    .field public object 'CONDITION58205828'
+    .field public object 'ID58215829'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -2554,44 +2554,44 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_5752::'TAG57245729'
+    stfld object L_5850::'TAG58225827'
     ldarg.0
     ldarg 2
-    stfld object L_5752::'CONDITION57225730'
+    stfld object L_5850::'CONDITION58205828'
     ldarg.0
     ldarg 3
-    stfld object L_5752::'ID57235731'
+    stfld object L_5850::'ID58215829'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP5835, object CELL_TMP5834, object CELL_VAL_TMP5833, object CELL_TMP5832, object TEMP5831, object TEMP5829)
+    .locals init (object CELL_VAL_TMP5933, object CELL_TMP5932, object CELL_VAL_TMP5931, object CELL_TMP5930, object TEMP5929, object TEMP5927)
     ldarg.0
-    ldfld object L_5752::'CONDITION57225730'
-    stloc CELL_TMP5832
+    ldfld object L_5850::'CONDITION58205828'
+    stloc CELL_TMP5930
     ldarg 1
-    stloc CELL_VAL_TMP5833
-    ldloc CELL_TMP5832
+    stloc CELL_VAL_TMP5931
+    ldloc CELL_TMP5930
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5833
+    ldloc CELL_VAL_TMP5931
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5833
+    ldloc CELL_VAL_TMP5931
     pop
     ldarg.0
-    ldfld object L_5752::'ID57235731'
-    stloc CELL_TMP5834
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5830'
-    stloc CELL_VAL_TMP5835
-    ldloc CELL_TMP5834
+    ldfld object L_5850::'ID58215829'
+    stloc CELL_TMP5932
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5928'
+    stloc CELL_VAL_TMP5933
+    ldloc CELL_TMP5932
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5835
+    ldloc CELL_VAL_TMP5933
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5835
+    ldloc CELL_VAL_TMP5933
     pop
     ldarg.0
-    ldfld object L_5752::'TAG57245729'
+    ldfld object L_5850::'TAG58225827'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -2617,7 +2617,7 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_5752::'InvokeBody'(object)
+    callvirt instance object L_5850::'InvokeBody'(object)
     ret
 }
 
@@ -2962,14 +2962,14 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ret
 }
 
-} // end of class L_5752
+} // end of class L_5850
 
-.class public auto ansi beforefieldinit L_5753
+.class public auto ansi beforefieldinit L_5851
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TAG57375742'
-    .field public object 'CONDITION57355743'
-    .field public object 'ID57365744'
+    .field public object 'TAG58355840'
+    .field public object 'CONDITION58335841'
+    .field public object 'ID58345842'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -2978,44 +2978,44 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_5753::'TAG57375742'
+    stfld object L_5851::'TAG58355840'
     ldarg.0
     ldarg 2
-    stfld object L_5753::'CONDITION57355743'
+    stfld object L_5851::'CONDITION58335841'
     ldarg.0
     ldarg 3
-    stfld object L_5753::'ID57365744'
+    stfld object L_5851::'ID58345842'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP5842, object CELL_TMP5841, object CELL_VAL_TMP5840, object CELL_TMP5839, object TEMP5838, object TEMP5836)
+    .locals init (object CELL_VAL_TMP5940, object CELL_TMP5939, object CELL_VAL_TMP5938, object CELL_TMP5937, object TEMP5936, object TEMP5934)
     ldarg.0
-    ldfld object L_5753::'CONDITION57355743'
-    stloc CELL_TMP5839
+    ldfld object L_5851::'CONDITION58335841'
+    stloc CELL_TMP5937
     ldarg 1
-    stloc CELL_VAL_TMP5840
-    ldloc CELL_TMP5839
+    stloc CELL_VAL_TMP5938
+    ldloc CELL_TMP5937
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5840
+    ldloc CELL_VAL_TMP5938
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5840
+    ldloc CELL_VAL_TMP5938
     pop
     ldarg.0
-    ldfld object L_5753::'ID57365744'
-    stloc CELL_TMP5841
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5837'
-    stloc CELL_VAL_TMP5842
-    ldloc CELL_TMP5841
+    ldfld object L_5851::'ID58345842'
+    stloc CELL_TMP5939
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S5935'
+    stloc CELL_VAL_TMP5940
+    ldloc CELL_TMP5939
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP5842
+    ldloc CELL_VAL_TMP5940
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP5842
+    ldloc CELL_VAL_TMP5940
     pop
     ldarg.0
-    ldfld object L_5753::'TAG57375742'
+    ldfld object L_5851::'TAG58355840'
     ldnull
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -3041,7 +3041,7 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_5753::'InvokeBody'(object)
+    callvirt instance object L_5851::'InvokeBody'(object)
     ret
 }
 
@@ -3386,5 +3386,5 @@ BLOCK_END_TEST_HANDLER_CASE_SIMPLE_5679:
     ret
 }
 
-} // end of class L_5753
+} // end of class L_5851
 

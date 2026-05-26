@@ -45,9 +45,10 @@
   (let ((output (run-test-file (asdf:system-relative-pathname "clrhack" "Tests/test-church.lisp"))))
     (is (not (null (search "Computing 2 + 3 ticks:" output))))
     (is (not (null (search "Computing 2 * 3 ticks:" output))))
-    (is (= 13 (loop for pos = (search "tick" output) then (search "tick" output :start2 (+ pos 4))
-                    while pos
-                    count t)))))
+    (is (= 13 (let ((count 0))
+                (do ((pos (search "tick" output) (search "tick" output :start2 (+ pos 4))))
+                    ((null pos) count)
+                  (incf count)))))))
 
 (test closure-test
   "Test simple closures and captured variables."

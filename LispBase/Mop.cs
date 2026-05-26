@@ -24,7 +24,13 @@ namespace Lisp
         private sealed class NativeClosure : Closure
         {
             private readonly Func<object[], object> _func;
-            public NativeClosure(Func<object[], object> func) { _func = func; }
+            public override bool IsLazyResolver { get; }
+
+            public NativeClosure(Func<object[], object> func, bool isLazyResolver = false)
+            {
+                _func = func;
+                IsLazyResolver = isLazyResolver;
+            }
             public override object Invoke() => _func(Array.Empty<object>());
             public override object Invoke(object arg0) => _func(new[] { arg0 });
             public override object Invoke(object arg0, object arg1) => _func(new[] { arg0, arg1 });
@@ -61,9 +67,9 @@ namespace Lisp
             public override object Invoke(params object[] args) => _func(args);
         }
 
-        public static Closure CreateNativeClosure(Func<object[], object> func)
+        public static Closure CreateNativeClosure(Func<object[], object> func, bool isLazyResolver = false)
         {
-            return new NativeClosure(func);
+            return new NativeClosure(func, isLazyResolver);
         }
 
         private static object ClrReadPrimitive(object[] args)
@@ -486,6 +492,18 @@ namespace Lisp
                     return structNameSym;
                 });
 
+                var getCommandLineArgsSym = cl.Intern("GET-COMMAND-LINE-ARGS");
+                cl.Export(getCommandLineArgsSym);
+                getCommandLineArgsSym.Function = new NativeClosure(args => {
+                    var argv = Environment.GetCommandLineArgs();
+                    object result = null;
+                    for (var i = argv.Length - 1; i >= 0; i--)
+                    {
+                        result = new List.ListCell(argv[i], result);
+                    }
+                    return result;
+                });
+
                 var listpSym = cl.Intern("LISTP");
                 cl.Export(listpSym);
                 listpSym.Function = new NativeClosure(args => {
@@ -539,6 +557,18 @@ namespace Lisp
                         return symbol.Package;
                     });
 
+                    var macroFunctionSym = cl.Intern("MACRO-FUNCTION");
+                    cl.Export(macroFunctionSym);
+                    macroFunctionSym.Function = new NativeClosure(args =>
+                    {
+                        if (args.Length < 1 || args[0] is not Symbol symbol)
+                        {
+                            return null;
+                        }
+
+                        return symbol.FBoundP ? symbol.Function : null;
+                    });
+
                 var stringSym = cl.Intern("STRING");
                 cl.Export(stringSym);
                 stringSym.Function = new NativeClosure(args =>
@@ -562,6 +592,54 @@ namespace Lisp
                 {
                     var isString = args.Length > 0 && args[0] is string;
                     return isString ? cl.Intern("T") : null;
+                });
+
+                var symbolpSym = cl.Intern("SYMBOLP");
+                cl.Export(symbolpSym);
+                symbolpSym.Function = new NativeClosure(args =>
+                {
+                    var isSymbol = args.Length > 0 && args[0] is Symbol;
+                    return isSymbol ? cl.Intern("T") : null;
+                });
+
+                var keywordpSym = cl.Intern("KEYWORDP");
+                cl.Export(keywordpSym);
+                keywordpSym.Function = new NativeClosure(args =>
+                {
+                    var isKeyword = args.Length > 0 && args[0] is Symbol keywordSymbol && keywordSymbol.Package == Package.Keyword;
+                    return isKeyword ? cl.Intern("T") : null;
+                });
+
+                var numberpSym = cl.Intern("NUMBERP");
+                cl.Export(numberpSym);
+                numberpSym.Function = new NativeClosure(args =>
+                {
+                    var isNumber = args.Length > 0 && args[0] is sbyte or byte or short or ushort or int or uint or long or ulong or float or double or decimal;
+                    return isNumber ? cl.Intern("T") : null;
+                });
+
+                var integerpSym = cl.Intern("INTEGERP");
+                cl.Export(integerpSym);
+                integerpSym.Function = new NativeClosure(args =>
+                {
+                    var isInteger = args.Length > 0 && args[0] is sbyte or byte or short or ushort or int or uint or long or ulong;
+                    return isInteger ? cl.Intern("T") : null;
+                });
+
+                var characterpSym = cl.Intern("CHARACTERP");
+                cl.Export(characterpSym);
+                characterpSym.Function = new NativeClosure(args =>
+                {
+                    var isCharacter = args.Length > 0 && args[0] is char;
+                    return isCharacter ? cl.Intern("T") : null;
+                });
+
+                var vectorpSym = cl.Intern("VECTORP");
+                cl.Export(vectorpSym);
+                vectorpSym.Function = new NativeClosure(args =>
+                {
+                    var isVector = args.Length > 0 && (args[0] is Array || args[0] is string);
+                    return isVector ? cl.Intern("T") : null;
                 });
 
                 var stringDowncaseSym = cl.Intern("STRING-DOWNCASE");
@@ -591,6 +669,20 @@ namespace Lisp
                     var left = args[0]?.ToString() ?? "";
                     var right = args[1]?.ToString() ?? "";
                     return string.Equals(left, right, StringComparison.Ordinal) ? cl.Intern("T") : null;
+                });
+
+                var stringEqualSym = cl.Intern("STRING-EQUAL");
+                cl.Export(stringEqualSym);
+                stringEqualSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("STRING-EQUAL requires at least two arguments.");
+                    }
+
+                    var left = args[0]?.ToString() ?? "";
+                    var right = args[1]?.ToString() ?? "";
+                    return string.Equals(left, right, StringComparison.OrdinalIgnoreCase) ? cl.Intern("T") : null;
                 });
 
                 var theStarSym = cl.Intern("THE*");
@@ -1255,6 +1347,95 @@ namespace Lisp
                 clrhackPackage.Export(clrhackTheStarSym);
                 clrhackTheStarSym.Function = theStarSym.Function;
 
+                var clrhackAnalyzeEnvironmentSym = clrhackPackage.Intern("ANALYZE-ENVIRONMENT");
+                clrhackPackage.Export(clrhackAnalyzeEnvironmentSym);
+                if (!clrhackAnalyzeEnvironmentSym.FBoundP)
+                {
+                    clrhackAnalyzeEnvironmentSym.Function = new NativeClosure(args =>
+                    {
+                        // Bootstrap fallback: preserve node when full environment analysis is unavailable.
+                        return args.Length > 0 ? args[0] : null;
+                    });
+                }
+
+                var clrhackComputeFreeVarsSym = clrhackPackage.Intern("COMPUTE-FREE-VARS");
+                clrhackPackage.Export(clrhackComputeFreeVarsSym);
+                if (!clrhackComputeFreeVarsSym.FBoundP)
+                {
+                    clrhackComputeFreeVarsSym.Function = new NativeClosure(args =>
+                    {
+                        // Bootstrap fallback: no-op return for compute-free-vars when unavailable.
+                        return args.Length > 0 ? args[0] : null;
+                    });
+                }
+
+                var clrhackClosureConvertSym = clrhackPackage.Intern("CLOSURE-CONVERT");
+                clrhackPackage.Export(clrhackClosureConvertSym);
+                if (!clrhackClosureConvertSym.FBoundP)
+                {
+                    clrhackClosureConvertSym.Function = new NativeClosure(args =>
+                    {
+                        // Bootstrap fallback: preserve node when closure conversion is unavailable.
+                        return args.Length > 0 ? args[0] : null;
+                    });
+                }
+
+                var clrhackAstToplevelDefunNameSym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-NAME");
+                clrhackPackage.Export(clrhackAstToplevelDefunNameSym);
+                if (!clrhackAstToplevelDefunNameSym.FBoundP)
+                {
+                    clrhackAstToplevelDefunNameSym.Function = new NativeClosure(_ => null);
+                }
+
+                var clrhackAstToplevelDefunParamsSym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-PARAMS");
+                clrhackPackage.Export(clrhackAstToplevelDefunParamsSym);
+                if (!clrhackAstToplevelDefunParamsSym.FBoundP)
+                {
+                    clrhackAstToplevelDefunParamsSym.Function = new NativeClosure(_ => null);
+                }
+
+                var clrhackAstToplevelDefunOptionalParamsSym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-OPTIONAL-PARAMS");
+                clrhackPackage.Export(clrhackAstToplevelDefunOptionalParamsSym);
+                if (!clrhackAstToplevelDefunOptionalParamsSym.FBoundP)
+                {
+                    clrhackAstToplevelDefunOptionalParamsSym.Function = new NativeClosure(_ => null);
+                }
+
+                var clrhackAstToplevelDefunRestParamSym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-REST-PARAM");
+                clrhackPackage.Export(clrhackAstToplevelDefunRestParamSym);
+                if (!clrhackAstToplevelDefunRestParamSym.FBoundP)
+                {
+                    clrhackAstToplevelDefunRestParamSym.Function = new NativeClosure(_ => null);
+                }
+
+                var clrhackAstToplevelDefunKeyParamsSym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-KEY-PARAMS");
+                clrhackPackage.Export(clrhackAstToplevelDefunKeyParamsSym);
+                if (!clrhackAstToplevelDefunKeyParamsSym.FBoundP)
+                {
+                    clrhackAstToplevelDefunKeyParamsSym.Function = new NativeClosure(_ => null);
+                }
+
+                var clrhackAstToplevelDefunAllowOtherKeysSym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-ALLOW-OTHER-KEYS");
+                clrhackPackage.Export(clrhackAstToplevelDefunAllowOtherKeysSym);
+                if (!clrhackAstToplevelDefunAllowOtherKeysSym.FBoundP)
+                {
+                    clrhackAstToplevelDefunAllowOtherKeysSym.Function = new NativeClosure(_ => null);
+                }
+
+                var clrhackAstToplevelDefunAuxParamsSym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-AUX-PARAMS");
+                clrhackPackage.Export(clrhackAstToplevelDefunAuxParamsSym);
+                if (!clrhackAstToplevelDefunAuxParamsSym.FBoundP)
+                {
+                    clrhackAstToplevelDefunAuxParamsSym.Function = new NativeClosure(_ => null);
+                }
+
+                var clrhackAstToplevelDefunBodySym = clrhackPackage.Intern("AST-TOPLEVEL-DEFUN-BODY");
+                clrhackPackage.Export(clrhackAstToplevelDefunBodySym);
+                if (!clrhackAstToplevelDefunBodySym.FBoundP)
+                {
+                    clrhackAstToplevelDefunBodySym.Function = new NativeClosure(_ => null);
+                }
+
                 var ilPackage = Package.Find("IL") ?? new Package("IL");
                 ilPackage.UsePackage(cl);
                 var ilTheStarSym = ilPackage.Intern("THE*");
@@ -1411,6 +1592,66 @@ namespace Lisp
                     }
 
                     throw new Exception("CLRHASH expects a dictionary-compatible hash table.");
+                });
+
+                var maphashSym = cl.Intern("MAPHASH");
+                cl.Export(maphashSym);
+                maphashSym.Function = new NativeClosure(args =>
+                {
+                    if (args.Length < 2)
+                    {
+                        throw new Exception("MAPHASH requires function and table arguments.");
+                    }
+
+                    object functionObject = args[0];
+                    object tableObject = args[1];
+
+                    if (functionObject is Symbol functionSymbol)
+                    {
+                        functionObject = functionSymbol.Function ?? functionSymbol.Value;
+                    }
+
+                    if (functionObject is ValueCell functionCell)
+                    {
+                        functionObject = functionCell.Value;
+                    }
+
+                    if (tableObject is Symbol tableSymbol)
+                    {
+                        tableObject = tableSymbol.Value;
+                    }
+
+                    if (tableObject is ValueCell tableCell)
+                    {
+                        tableObject = tableCell.Value;
+                    }
+
+                    if (functionObject is not Closure closure)
+                    {
+                        throw new Exception("MAPHASH requires a callable function designator.");
+                    }
+
+                    if (tableObject is Dictionary<object, object> genericTable)
+                    {
+                        foreach (var entry in genericTable)
+                        {
+                            closure.Invoke(entry.Key, entry.Value);
+                        }
+
+                        return null;
+                    }
+
+                    if (tableObject is IDictionary dictionary)
+                    {
+                        foreach (DictionaryEntry entry in dictionary)
+                        {
+                            closure.Invoke(entry.Key!, entry.Value);
+                        }
+
+                        return null;
+                    }
+
+                    throw new Exception("MAPHASH expects a dictionary-compatible hash table.");
                 });
 
                 var evalWhenSym = cl.Intern("EVAL-WHEN");

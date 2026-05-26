@@ -67,10 +67,11 @@ which is only sent to WITH-OPEN-FILE when it's not NIL."
         (element-type (stream-element-type stream)))
     (with-output-to-string (datum nil :element-type element-type)
       (let ((buffer (make-array buffer-size :element-type element-type)))
-        (loop
-          :for bytes-read = (read-sequence buffer stream)
-          :do (write-sequence buffer datum :start 0 :end bytes-read)
-          :while (= bytes-read buffer-size))))))
+        (do ((bytes-read (read-sequence buffer stream) (read-sequence buffer stream)))
+            (nil)
+          (write-sequence buffer datum :start 0 :end bytes-read)
+          (unless (= bytes-read buffer-size)
+            (return)))))))
 
 (defun read-file-into-string (pathname &key (buffer-size 4096) external-format)
   "Return the contents of the file denoted by PATHNAME as a fresh string.
@@ -100,7 +101,8 @@ unless it's NIL, which means the system default."
   (setf initial-size (or length initial-size))
   (let ((result (make-array initial-size :element-type '(unsigned-byte 8)))
         (bytes-read 0))
-    (loop
+    (do ()
+        (nil)
       (setf bytes-read (read-sequence result stream :start bytes-read))
       (when (and length (>= bytes-read length))
         (return))
@@ -161,28 +163,30 @@ compatible element-types."
         (input-position 0))
     (unless (zerop start)
       ;; FIXME add platform specific optimization to skip seekable streams
-      (loop while (< input-position start)
-            do (let ((n (read-sequence buffer input
-                                       :end (min (length buffer)
-                                                 (- start input-position)))))
-                 (when (zerop n)
-                   (error "~@<Could not read enough bytes from the input to fulfill ~
-                           the :START ~S requirement in ~S.~:@>" 'copy-stream start))
-                 (incf input-position n))))
+      (do ()
+          ((>= input-position start))
+        (let ((n (read-sequence buffer input
+                                   :end (min (length buffer)
+                                             (- start input-position)))))
+             (when (zerop n)
+               (error "~@<Could not read enough bytes from the input to fulfill ~
+                       the :START ~S requirement in ~S.~:@>" 'copy-stream start))
+             (incf input-position n))))
     (assert (= input-position start))
-    (loop while (or (null end) (< input-position end))
-          do (let ((n (read-sequence buffer input
-                                     :end (when end
-                                            (min (length buffer)
-                                                 (- end input-position))))))
-               (when (zerop n)
-                 (if end
-                     (error "~@<Could not read enough bytes from the input to fulfill ~
-                          the :END ~S requirement in ~S.~:@>" 'copy-stream end)
-                     (return)))
-               (incf input-position n)
-               (write-sequence buffer output :end n)
-               (incf output-position n)))
+    (do ()
+        ((not (or (null end) (< input-position end))))
+      (let ((n (read-sequence buffer input
+                                 :end (when end
+                                        (min (length buffer)
+                                             (- end input-position))))))
+           (when (zerop n)
+             (if end
+                 (error "~@<Could not read enough bytes from the input to fulfill ~
+                      the :END ~S requirement in ~S.~:@>" 'copy-stream end)
+                 (return)))
+           (incf input-position n)
+           (write-sequence buffer output :end n)
+           (incf output-position n)))
     (when finish-output
       (finish-output output))
     output-position))

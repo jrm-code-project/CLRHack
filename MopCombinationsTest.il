@@ -11,30 +11,30 @@
     .field public static object 'NEXT_METHOD_P'
     .field public static object 'TEST_GF'
     .field public static object '_CALL_LOG_'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8171'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8170'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8169'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8168'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8167'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8166'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8165'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8164'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8157'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S8154'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_DERIVED_END8147'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_DERIVED_START8146'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_BASE_END8139'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_BASE_START8138'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_DERIVED_RESULT8125'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_PRIMARY_DERIVED_NEXT8124'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_NO_NEXT8123'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_PRIMARY_DERIVED8122'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_BASE_RESULT8119'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_PRIMARY_BASE8118'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_AFTER_DERIVED8115'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_AFTER_BASE8112'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_BEFORE_DERIVED8109'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_BEFORE_BASE8106'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8315'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8314'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8313'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8312'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8311'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8310'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8309'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8308'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8300'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8297'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_DERIVED_END8289'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_DERIVED_START8288'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_BASE_END8280'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_AROUND_BASE_START8279'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_DERIVED_RESULT8264'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_PRIMARY_DERIVED_NEXT8263'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_NO_NEXT8262'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_PRIMARY_DERIVED8261'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_BASE_RESULT8258'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_PRIMARY_BASE8257'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_AFTER_DERIVED8254'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_AFTER_BASE8251'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_BEFORE_DERIVED8248'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_BEFORE_BASE8245'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -50,99 +50,99 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "AROUND"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8171'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8315'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "AFTER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8170'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8314'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "BEFORE"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8169'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8313'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "STANDARD"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8168'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8312'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "METHOD-COMBINATION"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8167'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8311'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "OBJ"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "TEST-GF"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "TEST-BASE"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8164'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8308'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8157'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8300'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "TEST-DERIVED"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8154'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8297'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "AROUND-DERIVED-END"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_END8147'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_END8289'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "AROUND-DERIVED-START"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_START8146'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_START8288'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "AROUND-BASE-END"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_END8139'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_END8280'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "AROUND-BASE-START"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_START8138'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_START8279'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "DERIVED-RESULT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_DERIVED_RESULT8125'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_DERIVED_RESULT8264'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "PRIMARY-DERIVED-NEXT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED_NEXT8124'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED_NEXT8263'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "NO-NEXT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_NO_NEXT8123'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_NO_NEXT8262'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "PRIMARY-DERIVED"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED8122'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED8261'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "BASE-RESULT"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_BASE_RESULT8119'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_BASE_RESULT8258'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "PRIMARY-BASE"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_BASE8118'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_BASE8257'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "AFTER-DERIVED"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_DERIVED8115'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_DERIVED8254'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "AFTER-BASE"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_BASE8112'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_BASE8251'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "BEFORE-DERIVED"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_DERIVED8109'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_DERIVED8248'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "BEFORE-BASE"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_BASE8106'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_BASE8245'
     ret
 }
 
@@ -509,49 +509,57 @@
 .method private static hidebysig object 'RUN_COMBINATION_TEST_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP8162, object FN_TMP8158, object RESULT7949, object OBJ7948)
+    .locals init (object ARG_TMP8306, object FN_TMP8301, object RESULT8084, object OBJ8083)
     ldnull
     dup
     stsfld object Program::'_CALL_LOG_'
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8154'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8297'
     call object Program::'MAKE_INSTANCE'(object)
-    stloc OBJ7948
+    stloc OBJ8083
     ldsfld object Program::'TEST_GF'
-    stloc FN_TMP8158
-    ldloc FN_TMP8158
-    brtrue FN_NULL8159
+    stloc FN_TMP8301
+    ldloc FN_TMP8301
+    brtrue FN_NULL8302
     ldstr "Undefined function: TEST-GF"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP8158
-FN_NULL8159:
+    stloc FN_TMP8301
+FN_NULL8302:
     nop
-    ldloc FN_TMP8158
+    ldloc FN_TMP8301
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8158
-    ldloc FN_TMP8158
-    brtrue FN_TYPE_OK8160
+    brtrue FN_TYPE_OK8304
     ldstr "Attempted to call non-function object in TEST-GF"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8158
-FN_TYPE_OK8160:
+    stloc FN_TMP8301
+FN_TYPE_OK8304:
     nop
-FN_AFTER8161:
+    ldloc FN_TMP8301
+    castclass [LispBase]Lisp.Closure
+    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
+    brfalse FN_LAZY_OK8303
+    ldstr "Undefined function: TEST-GF"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP8301
+FN_LAZY_OK8303:
     nop
-    ldloc OBJ7948
-    stloc ARG_TMP8162
-    ldloc FN_TMP8158
-    ldloc ARG_TMP8162
+FN_AFTER8305:
+    nop
+    ldloc OBJ8083
+    stloc ARG_TMP8306
+    ldloc FN_TMP8301
+    castclass [LispBase]Lisp.Closure
+    ldloc ARG_TMP8306
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc RESULT7949
+    stloc RESULT8084
     ldstr "Result:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RESULT7949
+    ldloc RESULT8084
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -563,31 +571,31 @@ FN_AFTER8161:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RESULT7949
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_DERIVED_RESULT8125'
+    ldloc RESULT8084
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_DERIVED_RESULT8264'
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE8155
+    brtrue TRUE8298
     ldnull
-    br END8156
-TRUE8155:
+    br END8299
+TRUE8298:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8157'
-END8156:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8300'
+END8299:
     nop
     ldnull
     ceq
-    brtrue ELSE8163
+    brtrue ELSE8307
     ldstr "SUCCESS: Result matches"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE8163:
+ELSE8307:
     nop
     ldstr "FAILURE: Result mismatch"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_RUN_COMBINATION_TEST_7946:
+BLOCK_END_RUN_COMBINATION_TEST_8081:
     nop
     ldnull
     ret
@@ -958,24 +966,24 @@ BLOCK_END_RUN_COMBINATION_TEST_7946:
 .method private static hidebysig object 'SLOT_VALUE_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8153)
+    .locals init (object REFLECT_ARGS8296)
     ldstr "Lisp.MopRuntime"
     ldstr "SlotValueFromLisp"
     ldc.i4 2
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8153
-    ldloc REFLECT_ARGS8153
+    stloc REFLECT_ARGS8296
+    ldloc REFLECT_ARGS8296
     ldc.i4 0
     ldarg 0
     stelem.ref
-    ldloc REFLECT_ARGS8153
+    ldloc REFLECT_ARGS8296
     ldc.i4 1
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8153
+    ldloc REFLECT_ARGS8296
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
-BLOCK_END_SLOT_VALUE_7941:
+BLOCK_END_SLOT_VALUE_8076:
     nop
     ldnull
     ret
@@ -2307,24 +2315,24 @@ BLOCK_END_SLOT_VALUE_7941:
 .method private static hidebysig object 'MAKE_INSTANCE_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8152)
+    .locals init (object REFLECT_ARGS8295)
     ldstr "Lisp.MopRuntime"
     ldstr "MakeInstanceFromLisp"
     ldc.i4 2
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8152
-    ldloc REFLECT_ARGS8152
+    stloc REFLECT_ARGS8295
+    ldloc REFLECT_ARGS8295
     ldc.i4 0
     ldarg 0
     stelem.ref
-    ldloc REFLECT_ARGS8152
+    ldloc REFLECT_ARGS8295
     ldc.i4 1
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8152
+    ldloc REFLECT_ARGS8295
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
-BLOCK_END_MAKE_INSTANCE_7934:
+BLOCK_END_MAKE_INSTANCE_8069:
     nop
     ldnull
     ret
@@ -2333,7 +2341,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object RES8012, object RES8002, object NEXT_RES7992)
+    .locals init (object RES8147, object RES8137, object NEXT_RES8127)
     ldstr "COMMON-LISP"
     ldstr "CALL-NEXT-METHOD"
     call object [LispBase]Lisp.Closure::'ResolveFunction'(string, string)
@@ -2348,7 +2356,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     stsfld object Program::'TEST_GF'
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8164'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8308'
     ldnull
     ldnull
     ldnull
@@ -2357,8 +2365,8 @@ BLOCK_END_MAKE_INSTANCE_7934:
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8154'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8164'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8297'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8308'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
@@ -2366,12 +2374,12 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldnull
     call object [LispBase]Lisp.MopRuntime::'EnsureClassFromDefclassForm'(object, object, object, object, object)
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8167'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8168'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8311'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8312'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -2387,133 +2395,133 @@ BLOCK_END_MAKE_INSTANCE_7934:
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8169'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8313'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8164'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8308'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8023::'.ctor'()
+    newobj instance void L_8158::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8169'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8313'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8154'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8297'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8026::'.ctor'()
+    newobj instance void L_8161::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8170'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8314'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8164'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8308'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8029::'.ctor'()
+    newobj instance void L_8164::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8170'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8314'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8154'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8297'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8032::'.ctor'()
+    newobj instance void L_8167::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
     ldnull
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8164'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8308'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8035::'.ctor'()
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void L_8170::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
     ldnull
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8154'
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8297'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8038::'.ctor'()
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void L_8173::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8171'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8315'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8164'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8308'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8041::'.ctor'()
+    newobj instance void L_8176::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8165'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8171'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8309'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8315'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8166'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8154'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8310'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8297'
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void L_8044::'.ctor'()
+    newobj instance void L_8179::'.ctor'()
     ldnull
     call object [LispBase]Lisp.MopRuntime::'AddMethodFromDefmethodForm'(object, object, object, object, object)
     pop
@@ -2559,7 +2567,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
 
 } // end of class TEST_DERIVED
 
-.class public auto ansi beforefieldinit L_8021
+.class public auto ansi beforefieldinit L_8156
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -2573,17 +2581,17 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8104)
+    .locals init (object REFLECT_ARGS8243)
     ldstr "Lisp.MopRuntime"
     ldstr "CallNextMethodFromLisp"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8104
-    ldloc REFLECT_ARGS8104
+    stloc REFLECT_ARGS8243
+    ldloc REFLECT_ARGS8243
     ldc.i4 0
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8104
+    ldloc REFLECT_ARGS8243
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -2596,7 +2604,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2608,7 +2616,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2622,7 +2630,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2638,7 +2646,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2656,7 +2664,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2676,7 +2684,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2698,7 +2706,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2722,7 +2730,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2748,7 +2756,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2776,7 +2784,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2806,7 +2814,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2838,7 +2846,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2872,7 +2880,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2908,7 +2916,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2946,7 +2954,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -2986,7 +2994,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3028,7 +3036,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3072,7 +3080,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3118,7 +3126,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3166,7 +3174,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3216,7 +3224,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3268,7 +3276,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3322,7 +3330,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3378,7 +3386,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3436,7 +3444,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3496,7 +3504,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3558,7 +3566,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3622,7 +3630,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3688,7 +3696,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3756,7 +3764,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3826,7 +3834,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3898,7 +3906,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
@@ -3972,13 +3980,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8021::'InvokeBody'(object)
+    callvirt instance object L_8156::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_8021
+} // end of class L_8156
 
-.class public auto ansi beforefieldinit L_8022
+.class public auto ansi beforefieldinit L_8157
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -3992,13 +4000,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8105)
+    .locals init (object REFLECT_ARGS8244)
     ldstr "Lisp.MopRuntime"
     ldstr "NextMethodP"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8105
-    ldloc REFLECT_ARGS8105
+    stloc REFLECT_ARGS8244
+    ldloc REFLECT_ARGS8244
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -4010,7 +4018,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_8022::'InvokeBody'()
+    callvirt instance object L_8157::'InvokeBody'()
     ret
 }
 
@@ -4366,9 +4374,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8022
+} // end of class L_8157
 
-.class public auto ansi beforefieldinit L_8023
+.class public auto ansi beforefieldinit L_8158
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -4382,12 +4390,12 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object NEXT_METHOD_P7958, object CALL_NEXT_METHOD7956)
-    newobj instance void L_8021::'.ctor'()
-    stloc CALL_NEXT_METHOD7956
-    newobj instance void L_8022::'.ctor'()
-    stloc NEXT_METHOD_P7958
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_BASE8106'
+    .locals init (object NEXT_METHOD_P8093, object CALL_NEXT_METHOD8091)
+    newobj instance void L_8156::'.ctor'()
+    stloc CALL_NEXT_METHOD8091
+    newobj instance void L_8157::'.ctor'()
+    stloc NEXT_METHOD_P8093
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_BASE8245'
     ldsfld object Program::'_CALL_LOG_'
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     dup
@@ -4414,7 +4422,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_8023::'InvokeBody'(object)
+    callvirt instance object L_8158::'InvokeBody'(object)
     ret
 }
 
@@ -4759,9 +4767,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8023
+} // end of class L_8158
 
-.class public auto ansi beforefieldinit L_8024
+.class public auto ansi beforefieldinit L_8159
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -4775,17 +4783,17 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8107)
+    .locals init (object REFLECT_ARGS8246)
     ldstr "Lisp.MopRuntime"
     ldstr "CallNextMethodFromLisp"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8107
-    ldloc REFLECT_ARGS8107
+    stloc REFLECT_ARGS8246
+    ldloc REFLECT_ARGS8246
     ldc.i4 0
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8107
+    ldloc REFLECT_ARGS8246
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -4798,7 +4806,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4810,7 +4818,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4824,7 +4832,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4840,7 +4848,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4858,7 +4866,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4878,7 +4886,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4900,7 +4908,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4924,7 +4932,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4950,7 +4958,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -4978,7 +4986,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5008,7 +5016,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5040,7 +5048,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5074,7 +5082,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5110,7 +5118,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5148,7 +5156,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5188,7 +5196,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5230,7 +5238,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5274,7 +5282,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5320,7 +5328,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5368,7 +5376,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5418,7 +5426,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5470,7 +5478,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5524,7 +5532,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5580,7 +5588,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5638,7 +5646,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5698,7 +5706,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5760,7 +5768,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5824,7 +5832,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5890,7 +5898,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -5958,7 +5966,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -6028,7 +6036,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -6100,7 +6108,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
@@ -6174,13 +6182,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8024::'InvokeBody'(object)
+    callvirt instance object L_8159::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_8024
+} // end of class L_8159
 
-.class public auto ansi beforefieldinit L_8025
+.class public auto ansi beforefieldinit L_8160
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -6194,13 +6202,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8108)
+    .locals init (object REFLECT_ARGS8247)
     ldstr "Lisp.MopRuntime"
     ldstr "NextMethodP"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8108
-    ldloc REFLECT_ARGS8108
+    stloc REFLECT_ARGS8247
+    ldloc REFLECT_ARGS8247
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -6212,7 +6220,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_8025::'InvokeBody'()
+    callvirt instance object L_8160::'InvokeBody'()
     ret
 }
 
@@ -6568,9 +6576,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8025
+} // end of class L_8160
 
-.class public auto ansi beforefieldinit L_8026
+.class public auto ansi beforefieldinit L_8161
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -6584,12 +6592,12 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object NEXT_METHOD_P7966, object CALL_NEXT_METHOD7964)
-    newobj instance void L_8024::'.ctor'()
-    stloc CALL_NEXT_METHOD7964
-    newobj instance void L_8025::'.ctor'()
-    stloc NEXT_METHOD_P7966
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_DERIVED8109'
+    .locals init (object NEXT_METHOD_P8101, object CALL_NEXT_METHOD8099)
+    newobj instance void L_8159::'.ctor'()
+    stloc CALL_NEXT_METHOD8099
+    newobj instance void L_8160::'.ctor'()
+    stloc NEXT_METHOD_P8101
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_BEFORE_DERIVED8248'
     ldsfld object Program::'_CALL_LOG_'
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     dup
@@ -6616,7 +6624,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_8026::'InvokeBody'(object)
+    callvirt instance object L_8161::'InvokeBody'(object)
     ret
 }
 
@@ -6961,9 +6969,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8026
+} // end of class L_8161
 
-.class public auto ansi beforefieldinit L_8027
+.class public auto ansi beforefieldinit L_8162
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -6977,17 +6985,17 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8110)
+    .locals init (object REFLECT_ARGS8249)
     ldstr "Lisp.MopRuntime"
     ldstr "CallNextMethodFromLisp"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8110
-    ldloc REFLECT_ARGS8110
+    stloc REFLECT_ARGS8249
+    ldloc REFLECT_ARGS8249
     ldc.i4 0
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8110
+    ldloc REFLECT_ARGS8249
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -7000,7 +7008,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7012,7 +7020,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7026,7 +7034,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7042,7 +7050,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7060,7 +7068,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7080,7 +7088,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7102,7 +7110,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7126,7 +7134,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7152,7 +7160,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7180,7 +7188,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7210,7 +7218,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7242,7 +7250,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7276,7 +7284,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7312,7 +7320,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7350,7 +7358,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7390,7 +7398,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7432,7 +7440,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7476,7 +7484,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7522,7 +7530,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7570,7 +7578,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7620,7 +7628,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7672,7 +7680,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7726,7 +7734,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7782,7 +7790,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7840,7 +7848,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7900,7 +7908,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -7962,7 +7970,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -8026,7 +8034,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -8092,7 +8100,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -8160,7 +8168,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -8230,7 +8238,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -8302,7 +8310,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
@@ -8376,13 +8384,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8027::'InvokeBody'(object)
+    callvirt instance object L_8162::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_8027
+} // end of class L_8162
 
-.class public auto ansi beforefieldinit L_8028
+.class public auto ansi beforefieldinit L_8163
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -8396,13 +8404,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8111)
+    .locals init (object REFLECT_ARGS8250)
     ldstr "Lisp.MopRuntime"
     ldstr "NextMethodP"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8111
-    ldloc REFLECT_ARGS8111
+    stloc REFLECT_ARGS8250
+    ldloc REFLECT_ARGS8250
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -8414,7 +8422,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_8028::'InvokeBody'()
+    callvirt instance object L_8163::'InvokeBody'()
     ret
 }
 
@@ -8770,9 +8778,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8028
+} // end of class L_8163
 
-.class public auto ansi beforefieldinit L_8029
+.class public auto ansi beforefieldinit L_8164
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -8786,12 +8794,12 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object NEXT_METHOD_P7974, object CALL_NEXT_METHOD7972)
-    newobj instance void L_8027::'.ctor'()
-    stloc CALL_NEXT_METHOD7972
-    newobj instance void L_8028::'.ctor'()
-    stloc NEXT_METHOD_P7974
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_BASE8112'
+    .locals init (object NEXT_METHOD_P8109, object CALL_NEXT_METHOD8107)
+    newobj instance void L_8162::'.ctor'()
+    stloc CALL_NEXT_METHOD8107
+    newobj instance void L_8163::'.ctor'()
+    stloc NEXT_METHOD_P8109
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_BASE8251'
     ldsfld object Program::'_CALL_LOG_'
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     dup
@@ -8818,7 +8826,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_8029::'InvokeBody'(object)
+    callvirt instance object L_8164::'InvokeBody'(object)
     ret
 }
 
@@ -9163,9 +9171,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8029
+} // end of class L_8164
 
-.class public auto ansi beforefieldinit L_8030
+.class public auto ansi beforefieldinit L_8165
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -9179,17 +9187,17 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8113)
+    .locals init (object REFLECT_ARGS8252)
     ldstr "Lisp.MopRuntime"
     ldstr "CallNextMethodFromLisp"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8113
-    ldloc REFLECT_ARGS8113
+    stloc REFLECT_ARGS8252
+    ldloc REFLECT_ARGS8252
     ldc.i4 0
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8113
+    ldloc REFLECT_ARGS8252
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -9202,7 +9210,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9214,7 +9222,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9228,7 +9236,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9244,7 +9252,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9262,7 +9270,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9282,7 +9290,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9304,7 +9312,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9328,7 +9336,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9354,7 +9362,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9382,7 +9390,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9412,7 +9420,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9444,7 +9452,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9478,7 +9486,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9514,7 +9522,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9552,7 +9560,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9592,7 +9600,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9634,7 +9642,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9678,7 +9686,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9724,7 +9732,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9772,7 +9780,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9822,7 +9830,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9874,7 +9882,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9928,7 +9936,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -9984,7 +9992,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10042,7 +10050,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10102,7 +10110,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10164,7 +10172,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10228,7 +10236,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10294,7 +10302,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10362,7 +10370,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10432,7 +10440,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10504,7 +10512,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
@@ -10578,13 +10586,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8030::'InvokeBody'(object)
+    callvirt instance object L_8165::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_8030
+} // end of class L_8165
 
-.class public auto ansi beforefieldinit L_8031
+.class public auto ansi beforefieldinit L_8166
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -10598,13 +10606,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8114)
+    .locals init (object REFLECT_ARGS8253)
     ldstr "Lisp.MopRuntime"
     ldstr "NextMethodP"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8114
-    ldloc REFLECT_ARGS8114
+    stloc REFLECT_ARGS8253
+    ldloc REFLECT_ARGS8253
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -10616,7 +10624,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_8031::'InvokeBody'()
+    callvirt instance object L_8166::'InvokeBody'()
     ret
 }
 
@@ -10972,9 +10980,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8031
+} // end of class L_8166
 
-.class public auto ansi beforefieldinit L_8032
+.class public auto ansi beforefieldinit L_8167
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -10988,12 +10996,12 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object NEXT_METHOD_P7982, object CALL_NEXT_METHOD7980)
-    newobj instance void L_8030::'.ctor'()
-    stloc CALL_NEXT_METHOD7980
-    newobj instance void L_8031::'.ctor'()
-    stloc NEXT_METHOD_P7982
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_DERIVED8115'
+    .locals init (object NEXT_METHOD_P8117, object CALL_NEXT_METHOD8115)
+    newobj instance void L_8165::'.ctor'()
+    stloc CALL_NEXT_METHOD8115
+    newobj instance void L_8166::'.ctor'()
+    stloc NEXT_METHOD_P8117
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AFTER_DERIVED8254'
     ldsfld object Program::'_CALL_LOG_'
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     dup
@@ -11020,7 +11028,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_8032::'InvokeBody'(object)
+    callvirt instance object L_8167::'InvokeBody'(object)
     ret
 }
 
@@ -11365,9 +11373,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8032
+} // end of class L_8167
 
-.class public auto ansi beforefieldinit L_8033
+.class public auto ansi beforefieldinit L_8168
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -11381,17 +11389,17 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8116)
+    .locals init (object REFLECT_ARGS8255)
     ldstr "Lisp.MopRuntime"
     ldstr "CallNextMethodFromLisp"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8116
-    ldloc REFLECT_ARGS8116
+    stloc REFLECT_ARGS8255
+    ldloc REFLECT_ARGS8255
     ldc.i4 0
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8116
+    ldloc REFLECT_ARGS8255
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -11404,7 +11412,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11416,7 +11424,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11430,7 +11438,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11446,7 +11454,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11464,7 +11472,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11484,7 +11492,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11506,7 +11514,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11530,7 +11538,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11556,7 +11564,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11584,7 +11592,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11614,7 +11622,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11646,7 +11654,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11680,7 +11688,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11716,7 +11724,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11754,7 +11762,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11794,7 +11802,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11836,7 +11844,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11880,7 +11888,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11926,7 +11934,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -11974,7 +11982,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12024,7 +12032,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12076,7 +12084,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12130,7 +12138,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12186,7 +12194,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12244,7 +12252,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12304,7 +12312,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12366,7 +12374,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12430,7 +12438,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12496,7 +12504,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12564,7 +12572,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12634,7 +12642,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12706,7 +12714,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
@@ -12780,13 +12788,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8033::'InvokeBody'(object)
+    callvirt instance object L_8168::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_8033
+} // end of class L_8168
 
-.class public auto ansi beforefieldinit L_8034
+.class public auto ansi beforefieldinit L_8169
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -12800,13 +12808,13 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8117)
+    .locals init (object REFLECT_ARGS8256)
     ldstr "Lisp.MopRuntime"
     ldstr "NextMethodP"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8117
-    ldloc REFLECT_ARGS8117
+    stloc REFLECT_ARGS8256
+    ldloc REFLECT_ARGS8256
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -12818,7 +12826,7 @@ BLOCK_END_MAKE_INSTANCE_7934:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_8034::'InvokeBody'()
+    callvirt instance object L_8169::'InvokeBody'()
     ret
 }
 
@@ -13174,9 +13182,9 @@ BLOCK_END_MAKE_INSTANCE_7934:
     ret
 }
 
-} // end of class L_8034
+} // end of class L_8169
 
-.class public auto ansi beforefieldinit L_8035
+.class public auto ansi beforefieldinit L_8170
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -13190,2285 +13198,2301 @@ BLOCK_END_MAKE_INSTANCE_7934:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object NEXT_METHOD_P7990, object CALL_NEXT_METHOD7988)
-    newobj instance void L_8033::'.ctor'()
-    stloc CALL_NEXT_METHOD7988
-    newobj instance void L_8034::'.ctor'()
-    stloc NEXT_METHOD_P7990
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_BASE8118'
-    ldsfld object Program::'_CALL_LOG_'
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    dup
-    stsfld object Program::'_CALL_LOG_'
-    pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_BASE_RESULT8119'
-    ret
-    ldnull
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 0
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldarg 1
-    tail.
-    callvirt instance object L_8035::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 2
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 3
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 4
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 5
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 6
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 7
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 8
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 9
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 10
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 11
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 12
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 13
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 14
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 15
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 16
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 17
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 18
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 19
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 20
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 21
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 22
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 23
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 24
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 25
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 26
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 27
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 28
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 29
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 30
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 31
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 1
-    ldc.i4 32
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-} // end of class L_8035
-
-.class public auto ansi beforefieldinit L_8036
-       extends [LispBase]Lisp.Closure
-{
-.method public hidebysig void '.ctor'() cil managed
-{
-    .maxstack 8
-    ldarg.0
-    call instance void [LispBase]Lisp.Closure::'.ctor'()
-    ret
-}
-
-.method private hidebysig object 'InvokeBody'(object) cil managed
-{
-    .maxstack 8
-    .locals init (object REFLECT_ARGS8120)
-    ldstr "Lisp.MopRuntime"
-    ldstr "CallNextMethodFromLisp"
-    ldc.i4 1
-    newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8120
-    ldloc REFLECT_ARGS8120
-    ldc.i4 0
-    ldarg 1
-    stelem.ref
-    ldloc REFLECT_ARGS8120
-    call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
-    ret
-    ldnull
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldnull
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldarg 1
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object) cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 9
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 10
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 11
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 12
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 13
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 14
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 15
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 16
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 17
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 18
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 19
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 20
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 21
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 22
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 23
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 24
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 25
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 26
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 27
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 28
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldarg 26
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 29
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldarg 26
-    ldarg 27
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 30
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldarg 26
-    ldarg 27
-    ldarg 28
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 31
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldarg 26
-    ldarg 27
-    ldarg 28
-    ldarg 29
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 32
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldarg 26
-    ldarg 27
-    ldarg 28
-    ldarg 29
-    ldarg 30
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 33
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldarg 26
-    ldarg 27
-    ldarg 28
-    ldarg 29
-    ldarg 30
-    ldarg 31
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 34
-    ldarg.0
-    ldarg 1
-    ldarg 2
-    ldarg 3
-    ldarg 4
-    ldarg 5
-    ldarg 6
-    ldarg 7
-    ldarg 8
-    ldarg 9
-    ldarg 10
-    ldarg 11
-    ldarg 12
-    ldarg 13
-    ldarg 14
-    ldarg 15
-    ldarg 16
-    ldarg 17
-    ldarg 18
-    ldarg 19
-    ldarg 20
-    ldarg 21
-    ldarg 22
-    ldarg 23
-    ldarg 24
-    ldarg 25
-    ldarg 26
-    ldarg 27
-    ldarg 28
-    ldarg 29
-    ldarg 30
-    ldarg 31
-    ldarg 32
-    ldnull
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    tail.
-    callvirt instance object L_8036::'InvokeBody'(object)
-    ret
-}
-
-} // end of class L_8036
-
-.class public auto ansi beforefieldinit L_8037
-       extends [LispBase]Lisp.Closure
-{
-.method public hidebysig void '.ctor'() cil managed
-{
-    .maxstack 8
-    ldarg.0
-    call instance void [LispBase]Lisp.Closure::'.ctor'()
-    ret
-}
-
-.method private hidebysig object 'InvokeBody'() cil managed
-{
-    .maxstack 8
-    .locals init (object REFLECT_ARGS8121)
-    ldstr "Lisp.MopRuntime"
-    ldstr "NextMethodP"
-    ldc.i4 0
-    newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8121
-    ldloc REFLECT_ARGS8121
-    call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
-    ret
-    ldnull
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'() cil managed
-{
-    .maxstack 8
-    ldarg.0
-    tail.
-    callvirt instance object L_8037::'InvokeBody'()
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 1
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 2
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 3
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 4
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 5
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 6
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 7
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 8
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 9
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 10
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 11
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 12
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 13
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 14
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 15
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 16
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 17
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 18
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 19
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 20
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 21
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 22
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 23
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 24
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 25
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 26
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 27
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 28
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 29
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 30
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 31
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
-{
-    .maxstack 8
-    ldc.i4 0
-    ldc.i4 32
-    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
-    tail.
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    ret
-}
-
-} // end of class L_8037
-
-.class public auto ansi beforefieldinit L_8038
-       extends [LispBase]Lisp.Closure
-{
-.method public hidebysig void '.ctor'() cil managed
-{
-    .maxstack 8
-    ldarg.0
-    call instance void [LispBase]Lisp.Closure::'.ctor'()
-    ret
-}
-
-.method private hidebysig object 'InvokeBody'(object) cil managed
-{
-    .maxstack 8
-    .locals init (object FN_TMP8130, object FN_TMP8126, object NEXT_RES8000, object NEXT_METHOD_P7999, object CALL_NEXT_METHOD7997)
-    newobj instance void L_8036::'.ctor'()
-    stloc CALL_NEXT_METHOD7997
-    newobj instance void L_8037::'.ctor'()
-    stloc NEXT_METHOD_P7999
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED8122'
+    .locals init (object NEXT_METHOD_P8125, object CALL_NEXT_METHOD8123)
+    newobj instance void L_8168::'.ctor'()
+    stloc CALL_NEXT_METHOD8123
+    newobj instance void L_8169::'.ctor'()
+    stloc NEXT_METHOD_P8125
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_BASE8257'
     ldsfld object Program::'_CALL_LOG_'
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     dup
     stsfld object Program::'_CALL_LOG_'
     pop
-    ldloc NEXT_METHOD_P7999
-    stloc FN_TMP8126
-    ldloc FN_TMP8126
-    brtrue FN_NULL8127
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_BASE_RESULT8258'
+    ret
+    ldnull
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 0
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    tail.
+    callvirt instance object L_8170::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 1
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_8170
+
+.class public auto ansi beforefieldinit L_8171
+       extends [LispBase]Lisp.Closure
+{
+.method public hidebysig void '.ctor'() cil managed
+{
+    .maxstack 8
+    ldarg.0
+    call instance void [LispBase]Lisp.Closure::'.ctor'()
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    .locals init (object REFLECT_ARGS8259)
+    ldstr "Lisp.MopRuntime"
+    ldstr "CallNextMethodFromLisp"
+    ldc.i4 1
+    newarr [mscorlib]System.Object
+    stloc REFLECT_ARGS8259
+    ldloc REFLECT_ARGS8259
+    ldc.i4 0
+    ldarg 1
+    stelem.ref
+    ldloc REFLECT_ARGS8259
+    call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
+    ret
+    ldnull
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldnull
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 9
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 10
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 11
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 12
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 13
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 14
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 15
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 16
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 17
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 18
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 19
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 20
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 21
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 22
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 23
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 24
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 25
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 26
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 27
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 28
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldarg 26
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 29
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldarg 26
+    ldarg 27
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 30
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldarg 26
+    ldarg 27
+    ldarg 28
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 31
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldarg 26
+    ldarg 27
+    ldarg 28
+    ldarg 29
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 32
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldarg 26
+    ldarg 27
+    ldarg 28
+    ldarg 29
+    ldarg 30
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 33
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldarg 26
+    ldarg 27
+    ldarg 28
+    ldarg 29
+    ldarg 30
+    ldarg 31
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 34
+    ldarg.0
+    ldarg 1
+    ldarg 2
+    ldarg 3
+    ldarg 4
+    ldarg 5
+    ldarg 6
+    ldarg 7
+    ldarg 8
+    ldarg 9
+    ldarg 10
+    ldarg 11
+    ldarg 12
+    ldarg 13
+    ldarg 14
+    ldarg 15
+    ldarg 16
+    ldarg 17
+    ldarg 18
+    ldarg 19
+    ldarg 20
+    ldarg 21
+    ldarg 22
+    ldarg 23
+    ldarg 24
+    ldarg 25
+    ldarg 26
+    ldarg 27
+    ldarg 28
+    ldarg 29
+    ldarg 30
+    ldarg 31
+    ldarg 32
+    ldnull
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    tail.
+    callvirt instance object L_8171::'InvokeBody'(object)
+    ret
+}
+
+} // end of class L_8171
+
+.class public auto ansi beforefieldinit L_8172
+       extends [LispBase]Lisp.Closure
+{
+.method public hidebysig void '.ctor'() cil managed
+{
+    .maxstack 8
+    ldarg.0
+    call instance void [LispBase]Lisp.Closure::'.ctor'()
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'() cil managed
+{
+    .maxstack 8
+    .locals init (object REFLECT_ARGS8260)
+    ldstr "Lisp.MopRuntime"
+    ldstr "NextMethodP"
+    ldc.i4 0
+    newarr [mscorlib]System.Object
+    stloc REFLECT_ARGS8260
+    ldloc REFLECT_ARGS8260
+    call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
+    ret
+    ldnull
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'() cil managed
+{
+    .maxstack 8
+    ldarg.0
+    tail.
+    callvirt instance object L_8172::'InvokeBody'()
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 1
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 2
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 3
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 4
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 5
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 6
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 7
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 8
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 9
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 10
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 11
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 12
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 13
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 14
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 15
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 16
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 17
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 18
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 19
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 20
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 21
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 22
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 23
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 24
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 25
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 26
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 27
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 28
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 29
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 30
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 31
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+.method public virtual hidebysig object 'Invoke'(object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object) cil managed
+{
+    .maxstack 8
+    ldc.i4 0
+    ldc.i4 32
+    newobj instance void [LispBase]Lisp.WrongNumberOfArgumentsException::'.ctor'(int32, int32)
+    tail.
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    ret
+}
+
+} // end of class L_8172
+
+.class public auto ansi beforefieldinit L_8173
+       extends [LispBase]Lisp.Closure
+{
+.method public hidebysig void '.ctor'() cil managed
+{
+    .maxstack 8
+    ldarg.0
+    call instance void [LispBase]Lisp.Closure::'.ctor'()
+    ret
+}
+
+.method private hidebysig object 'InvokeBody'(object) cil managed
+{
+    .maxstack 8
+    .locals init (object FN_TMP8270, object FN_TMP8265, object NEXT_RES8135, object NEXT_METHOD_P8134, object CALL_NEXT_METHOD8132)
+    newobj instance void L_8171::'.ctor'()
+    stloc CALL_NEXT_METHOD8132
+    newobj instance void L_8172::'.ctor'()
+    stloc NEXT_METHOD_P8134
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED8261'
+    ldsfld object Program::'_CALL_LOG_'
+    newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
+    dup
+    stsfld object Program::'_CALL_LOG_'
+    pop
+    ldloc NEXT_METHOD_P8134
+    stloc FN_TMP8265
+    ldloc FN_TMP8265
+    brtrue FN_NULL8266
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP8126
-FN_NULL8127:
+    stloc FN_TMP8265
+FN_NULL8266:
     nop
-    ldloc FN_TMP8126
+    ldloc FN_TMP8265
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8126
-    ldloc FN_TMP8126
-    brtrue FN_TYPE_OK8128
+    brtrue FN_TYPE_OK8268
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8126
-FN_TYPE_OK8128:
+    stloc FN_TMP8265
+FN_TYPE_OK8268:
     nop
-FN_AFTER8129:
+    ldloc FN_TMP8265
+    castclass [LispBase]Lisp.Closure
+    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
+    brfalse FN_LAZY_OK8267
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP8265
+FN_LAZY_OK8267:
     nop
-    ldloc FN_TMP8126
+FN_AFTER8269:
+    nop
+    ldloc FN_TMP8265
+    castclass [LispBase]Lisp.Closure
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     ldnull
     ceq
-    brtrue ELSE8134
-    ldloc CALL_NEXT_METHOD7997
-    stloc FN_TMP8130
-    ldloc FN_TMP8130
-    brtrue FN_NULL8131
+    brtrue ELSE8275
+    ldloc CALL_NEXT_METHOD8132
+    stloc FN_TMP8270
+    ldloc FN_TMP8270
+    brtrue FN_NULL8271
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP8130
-FN_NULL8131:
+    stloc FN_TMP8270
+FN_NULL8271:
     nop
-    ldloc FN_TMP8130
+    ldloc FN_TMP8270
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8130
-    ldloc FN_TMP8130
-    brtrue FN_TYPE_OK8132
+    brtrue FN_TYPE_OK8273
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8130
-FN_TYPE_OK8132:
+    stloc FN_TMP8270
+FN_TYPE_OK8273:
     nop
-FN_AFTER8133:
+    ldloc FN_TMP8270
+    castclass [LispBase]Lisp.Closure
+    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
+    brfalse FN_LAZY_OK8272
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP8270
+FN_LAZY_OK8272:
     nop
-    ldloc FN_TMP8130
+FN_AFTER8274:
+    nop
+    ldloc FN_TMP8270
+    castclass [LispBase]Lisp.Closure
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
-    br END8135
-ELSE8134:
+    br END8276
+ELSE8275:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_NO_NEXT8123'
-END8135:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_NO_NEXT8262'
+END8276:
     nop
-    stloc NEXT_RES8000
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED_NEXT8124'
-    ldloc NEXT_RES8000
+    stloc NEXT_RES8135
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_PRIMARY_DERIVED_NEXT8263'
+    ldloc NEXT_RES8135
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -15477,7 +15501,7 @@ END8135:
     dup
     stsfld object Program::'_CALL_LOG_'
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_DERIVED_RESULT8125'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_DERIVED_RESULT8264'
     ret
     ldnull
     ret
@@ -15500,7 +15524,7 @@ END8135:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_8038::'InvokeBody'(object)
+    callvirt instance object L_8173::'InvokeBody'(object)
     ret
 }
 
@@ -15845,9 +15869,9 @@ END8135:
     ret
 }
 
-} // end of class L_8038
+} // end of class L_8173
 
-.class public auto ansi beforefieldinit L_8039
+.class public auto ansi beforefieldinit L_8174
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -15861,17 +15885,17 @@ END8135:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8136)
+    .locals init (object REFLECT_ARGS8277)
     ldstr "Lisp.MopRuntime"
     ldstr "CallNextMethodFromLisp"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8136
-    ldloc REFLECT_ARGS8136
+    stloc REFLECT_ARGS8277
+    ldloc REFLECT_ARGS8277
     ldc.i4 0
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8136
+    ldloc REFLECT_ARGS8277
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -15884,7 +15908,7 @@ END8135:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -15896,7 +15920,7 @@ END8135:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -15910,7 +15934,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -15926,7 +15950,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -15944,7 +15968,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -15964,7 +15988,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -15986,7 +16010,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16010,7 +16034,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16036,7 +16060,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16064,7 +16088,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16094,7 +16118,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16126,7 +16150,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16160,7 +16184,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16196,7 +16220,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16234,7 +16258,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16274,7 +16298,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16316,7 +16340,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16360,7 +16384,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16406,7 +16430,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16454,7 +16478,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16504,7 +16528,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16556,7 +16580,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16610,7 +16634,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16666,7 +16690,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16724,7 +16748,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16784,7 +16808,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16846,7 +16870,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16910,7 +16934,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -16976,7 +17000,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -17044,7 +17068,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -17114,7 +17138,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -17186,7 +17210,7 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
@@ -17260,13 +17284,13 @@ END8135:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8039::'InvokeBody'(object)
+    callvirt instance object L_8174::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_8039
+} // end of class L_8174
 
-.class public auto ansi beforefieldinit L_8040
+.class public auto ansi beforefieldinit L_8175
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -17280,13 +17304,13 @@ END8135:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8137)
+    .locals init (object REFLECT_ARGS8278)
     ldstr "Lisp.MopRuntime"
     ldstr "NextMethodP"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8137
-    ldloc REFLECT_ARGS8137
+    stloc REFLECT_ARGS8278
+    ldloc REFLECT_ARGS8278
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -17298,7 +17322,7 @@ END8135:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_8040::'InvokeBody'()
+    callvirt instance object L_8175::'InvokeBody'()
     ret
 }
 
@@ -17654,9 +17678,9 @@ END8135:
     ret
 }
 
-} // end of class L_8040
+} // end of class L_8175
 
-.class public auto ansi beforefieldinit L_8041
+.class public auto ansi beforefieldinit L_8176
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -17670,46 +17694,54 @@ END8135:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object FN_TMP8140, object RES8010, object NEXT_METHOD_P8009, object CALL_NEXT_METHOD8007)
-    newobj instance void L_8039::'.ctor'()
-    stloc CALL_NEXT_METHOD8007
-    newobj instance void L_8040::'.ctor'()
-    stloc NEXT_METHOD_P8009
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_START8138'
+    .locals init (object FN_TMP8281, object RES8145, object NEXT_METHOD_P8144, object CALL_NEXT_METHOD8142)
+    newobj instance void L_8174::'.ctor'()
+    stloc CALL_NEXT_METHOD8142
+    newobj instance void L_8175::'.ctor'()
+    stloc NEXT_METHOD_P8144
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_START8279'
     ldsfld object Program::'_CALL_LOG_'
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     dup
     stsfld object Program::'_CALL_LOG_'
     pop
-    ldloc CALL_NEXT_METHOD8007
-    stloc FN_TMP8140
-    ldloc FN_TMP8140
-    brtrue FN_NULL8141
+    ldloc CALL_NEXT_METHOD8142
+    stloc FN_TMP8281
+    ldloc FN_TMP8281
+    brtrue FN_NULL8282
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP8140
-FN_NULL8141:
+    stloc FN_TMP8281
+FN_NULL8282:
     nop
-    ldloc FN_TMP8140
+    ldloc FN_TMP8281
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8140
-    ldloc FN_TMP8140
-    brtrue FN_TYPE_OK8142
+    brtrue FN_TYPE_OK8284
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8140
-FN_TYPE_OK8142:
+    stloc FN_TMP8281
+FN_TYPE_OK8284:
     nop
-FN_AFTER8143:
+    ldloc FN_TMP8281
+    castclass [LispBase]Lisp.Closure
+    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
+    brfalse FN_LAZY_OK8283
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP8281
+FN_LAZY_OK8283:
     nop
-    ldloc FN_TMP8140
+FN_AFTER8285:
+    nop
+    ldloc FN_TMP8281
+    castclass [LispBase]Lisp.Closure
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
-    stloc RES8010
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_END8139'
-    ldloc RES8010
+    stloc RES8145
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_BASE_END8280'
+    ldloc RES8145
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -17718,7 +17750,7 @@ FN_AFTER8143:
     dup
     stsfld object Program::'_CALL_LOG_'
     pop
-    ldloc RES8010
+    ldloc RES8145
     ret
     ldnull
     ret
@@ -17741,7 +17773,7 @@ FN_AFTER8143:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_8041::'InvokeBody'(object)
+    callvirt instance object L_8176::'InvokeBody'(object)
     ret
 }
 
@@ -18086,9 +18118,9 @@ FN_AFTER8143:
     ret
 }
 
-} // end of class L_8041
+} // end of class L_8176
 
-.class public auto ansi beforefieldinit L_8042
+.class public auto ansi beforefieldinit L_8177
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -18102,17 +18134,17 @@ FN_AFTER8143:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8144)
+    .locals init (object REFLECT_ARGS8286)
     ldstr "Lisp.MopRuntime"
     ldstr "CallNextMethodFromLisp"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8144
-    ldloc REFLECT_ARGS8144
+    stloc REFLECT_ARGS8286
+    ldloc REFLECT_ARGS8286
     ldc.i4 0
     ldarg 1
     stelem.ref
-    ldloc REFLECT_ARGS8144
+    ldloc REFLECT_ARGS8286
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -18125,7 +18157,7 @@ FN_AFTER8143:
     ldarg.0
     ldnull
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18137,7 +18169,7 @@ FN_AFTER8143:
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18151,7 +18183,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18167,7 +18199,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18185,7 +18217,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18205,7 +18237,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18227,7 +18259,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18251,7 +18283,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18277,7 +18309,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18305,7 +18337,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18335,7 +18367,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18367,7 +18399,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18401,7 +18433,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18437,7 +18469,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18475,7 +18507,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18515,7 +18547,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18557,7 +18589,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18601,7 +18633,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18647,7 +18679,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18695,7 +18727,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18745,7 +18777,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18797,7 +18829,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18851,7 +18883,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18907,7 +18939,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -18965,7 +18997,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19025,7 +19057,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19087,7 +19119,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19151,7 +19183,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19217,7 +19249,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19285,7 +19317,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19355,7 +19387,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19427,7 +19459,7 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
@@ -19501,13 +19533,13 @@ FN_AFTER8143:
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     tail.
-    callvirt instance object L_8042::'InvokeBody'(object)
+    callvirt instance object L_8177::'InvokeBody'(object)
     ret
 }
 
-} // end of class L_8042
+} // end of class L_8177
 
-.class public auto ansi beforefieldinit L_8043
+.class public auto ansi beforefieldinit L_8178
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -19521,13 +19553,13 @@ FN_AFTER8143:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS8145)
+    .locals init (object REFLECT_ARGS8287)
     ldstr "Lisp.MopRuntime"
     ldstr "NextMethodP"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS8145
-    ldloc REFLECT_ARGS8145
+    stloc REFLECT_ARGS8287
+    ldloc REFLECT_ARGS8287
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     ret
     ldnull
@@ -19539,7 +19571,7 @@ FN_AFTER8143:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_8043::'InvokeBody'()
+    callvirt instance object L_8178::'InvokeBody'()
     ret
 }
 
@@ -19895,9 +19927,9 @@ FN_AFTER8143:
     ret
 }
 
-} // end of class L_8043
+} // end of class L_8178
 
-.class public auto ansi beforefieldinit L_8044
+.class public auto ansi beforefieldinit L_8179
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -19911,46 +19943,54 @@ FN_AFTER8143:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object FN_TMP8148, object RES8020, object NEXT_METHOD_P8019, object CALL_NEXT_METHOD8017)
-    newobj instance void L_8042::'.ctor'()
-    stloc CALL_NEXT_METHOD8017
-    newobj instance void L_8043::'.ctor'()
-    stloc NEXT_METHOD_P8019
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_START8146'
+    .locals init (object FN_TMP8290, object RES8155, object NEXT_METHOD_P8154, object CALL_NEXT_METHOD8152)
+    newobj instance void L_8177::'.ctor'()
+    stloc CALL_NEXT_METHOD8152
+    newobj instance void L_8178::'.ctor'()
+    stloc NEXT_METHOD_P8154
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_START8288'
     ldsfld object Program::'_CALL_LOG_'
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     dup
     stsfld object Program::'_CALL_LOG_'
     pop
-    ldloc CALL_NEXT_METHOD8017
-    stloc FN_TMP8148
-    ldloc FN_TMP8148
-    brtrue FN_NULL8149
+    ldloc CALL_NEXT_METHOD8152
+    stloc FN_TMP8290
+    ldloc FN_TMP8290
+    brtrue FN_NULL8291
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP8148
-FN_NULL8149:
+    stloc FN_TMP8290
+FN_NULL8291:
     nop
-    ldloc FN_TMP8148
+    ldloc FN_TMP8290
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8148
-    ldloc FN_TMP8148
-    brtrue FN_TYPE_OK8150
+    brtrue FN_TYPE_OK8293
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    isinst [LispBase]Lisp.Closure
-    stloc FN_TMP8148
-FN_TYPE_OK8150:
+    stloc FN_TMP8290
+FN_TYPE_OK8293:
     nop
-FN_AFTER8151:
+    ldloc FN_TMP8290
+    castclass [LispBase]Lisp.Closure
+    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
+    brfalse FN_LAZY_OK8292
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP8290
+FN_LAZY_OK8292:
     nop
-    ldloc FN_TMP8148
+FN_AFTER8294:
+    nop
+    ldloc FN_TMP8290
+    castclass [LispBase]Lisp.Closure
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
-    stloc RES8020
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_END8147'
-    ldloc RES8020
+    stloc RES8155
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_AROUND_DERIVED_END8289'
+    ldloc RES8155
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
@@ -19959,7 +19999,7 @@ FN_AFTER8151:
     dup
     stsfld object Program::'_CALL_LOG_'
     pop
-    ldloc RES8020
+    ldloc RES8155
     ret
     ldnull
     ret
@@ -19982,7 +20022,7 @@ FN_AFTER8151:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_8044::'InvokeBody'(object)
+    callvirt instance object L_8179::'InvokeBody'(object)
     ret
 }
 
@@ -20327,5 +20367,5 @@ FN_AFTER8151:
     ret
 }
 
-} // end of class L_8044
+} // end of class L_8179
 

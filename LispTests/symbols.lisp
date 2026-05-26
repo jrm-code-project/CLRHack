@@ -47,9 +47,11 @@ string as the argument."
 (defun make-gensym-list (length &optional (x "G"))
   "Returns a list of LENGTH gensyms, each generated as if with a call to MAKE-GENSYM,
 using the second (optional, defaulting to \"G\") argument."
-  (let ((g (if (typep x '(integer 0)) x (string x))))
-    (loop repeat length
-          collect (gensym g))))
+  (let ((g (if (typep x '(integer 0)) x (string x)))
+        (results nil))
+    (dotimes (_ length)
+      (push (gensym g) results))
+    (nreverse results)))
 
 (defun symbolicate (&rest things)
   "Concatenate together the names of some strings and symbols,

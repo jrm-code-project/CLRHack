@@ -50,8 +50,9 @@ a default value for required keyword arguments."
 list determines which specific conditions are to be ignored."
   `(handler-case
        (progn ,@body)
-     ,@(loop for condition in conditions collect
-             `(,condition (c) (values nil c)))))
+     ,@(mapcar (lambda (condition)
+                 `(,condition (c) (values nil c)))
+               conditions)))
 
 (defmacro unwind-protect-case ((&optional abort-flag) protected-form &body clauses)
   "Like CL:UNWIND-PROTECT, but you can specify the circumstances that
@@ -84,8 +85,11 @@ Examples:
     `(let ((,gflag t))
        (unwind-protect (multiple-value-prog1 ,protected-form (setf ,gflag nil))
 	 (let ,(and abort-flag `((,abort-flag ,gflag)))
-	   ,@(loop for (cleanup-kind . forms) in clauses
-		   collect (ecase cleanup-kind
-			     (:normal `(when (not ,gflag) ,@forms))
-			     (:abort  `(when ,gflag ,@forms))
-			     (:always `(progn ,@forms)))))))))
+	   ,@(mapcar (lambda (clause)
+                       (let ((cleanup-kind (car clause))
+                             (forms (cdr clause)))
+                         (ecase cleanup-kind
+                           (:normal `(when (not ,gflag) ,@forms))
+                           (:abort  `(when ,gflag ,@forms))
+                           (:always `(progn ,@forms)))))
+                     clauses)))))

@@ -7,11 +7,11 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S919'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S910'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S903'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S900'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S895'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S889'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S880'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S873'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S870'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S865'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -19,23 +19,23 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "MY-TAG"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S919'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S889'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "BAR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S910'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S880'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "INNER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S903'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S873'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "OUTER"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S900'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S870'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "FOO"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S895'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S865'
     ret
 }
 
@@ -410,7 +410,7 @@
     pop
     tail. call object Program::'TEST_CATCH_NON_LOCAL'()
     ret
-BLOCK_END_MAIN_873:
+BLOCK_END_MAIN_843:
     nop
     ldnull
     ret
@@ -779,50 +779,50 @@ BLOCK_END_MAIN_873:
 .method private static hidebysig object 'TEST_CATCH_NON_LOCAL_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RES869, object CATCH_RESULT918, object CATCH_TAG917)
+    .locals init (object RES839, object CATCH_RESULT888, object CATCH_TAG887)
     ldstr "Testing truly non-local throw..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S919'
-    stloc CATCH_TAG917
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S889'
+    stloc CATCH_TAG887
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S919'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S889'
     ldstr "final result"
     call object Program::'NON_LOCAL_THROW_HELPER'(object, object)
-    stloc CATCH_RESULT918
-    leave CATCH_DONE920
+    stloc CATCH_RESULT888
+    leave CATCH_DONE890
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG917
+    ldloc CATCH_TAG887
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW921
+    brfalse CATCH_RETHROW891
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT918
-    leave CATCH_DONE920
-CATCH_RETHROW921:
+    stloc CATCH_RESULT888
+    leave CATCH_DONE890
+CATCH_RETHROW891:
     pop
     rethrow
     }
-CATCH_DONE920:
-    ldloc CATCH_RESULT918
-    stloc RES869
+CATCH_DONE890:
+    ldloc CATCH_RESULT888
+    stloc RES839
     ldstr "Result of non-local throw:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RES869
+    ldloc RES839
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_NON_LOCAL_867:
+BLOCK_END_TEST_CATCH_NON_LOCAL_837:
     nop
     ldnull
     ret
@@ -1202,7 +1202,7 @@ BLOCK_END_TEST_CATCH_NON_LOCAL_867:
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
     throw
-BLOCK_END_NON_LOCAL_THROW_HELPER_862:
+BLOCK_END_NON_LOCAL_THROW_HELPER_832:
     nop
     ldnull
     ret
@@ -1571,24 +1571,24 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_862:
 .method private static hidebysig object 'TEST_CATCH_MISMATCH_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT912, object CATCH_TAG911, object CATCH_RESULT909, object CATCH_TAG908)
+    .locals init (object CATCH_RESULT882, object CATCH_TAG881, object CATCH_RESULT879, object CATCH_TAG878)
     ldstr "Testing catch mismatch..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S910'
-    stloc CATCH_TAG908
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S880'
+    stloc CATCH_TAG878
     .try
     {
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S895'
-    stloc CATCH_TAG911
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S865'
+    stloc CATCH_TAG881
     .try
     {
     ldstr "Throwing to bar from inner foo"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S910'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S880'
     ldstr "reached bar"
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -1597,52 +1597,52 @@ BLOCK_END_NON_LOCAL_THROW_HELPER_862:
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT912
-    leave CATCH_DONE915
+    stloc CATCH_RESULT882
+    leave CATCH_DONE885
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG911
+    ldloc CATCH_TAG881
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW916
+    brfalse CATCH_RETHROW886
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT912
-    leave CATCH_DONE915
-CATCH_RETHROW916:
+    stloc CATCH_RESULT882
+    leave CATCH_DONE885
+CATCH_RETHROW886:
     pop
     rethrow
     }
-CATCH_DONE915:
-    ldloc CATCH_RESULT912
-    stloc CATCH_RESULT909
-    leave CATCH_DONE913
+CATCH_DONE885:
+    ldloc CATCH_RESULT882
+    stloc CATCH_RESULT879
+    leave CATCH_DONE883
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG908
+    ldloc CATCH_TAG878
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW914
+    brfalse CATCH_RETHROW884
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT909
-    leave CATCH_DONE913
-CATCH_RETHROW914:
+    stloc CATCH_RESULT879
+    leave CATCH_DONE883
+CATCH_RETHROW884:
     pop
     rethrow
     }
-CATCH_DONE913:
-    ldloc CATCH_RESULT909
+CATCH_DONE883:
+    ldloc CATCH_RESULT879
     ret
-BLOCK_END_TEST_CATCH_MISMATCH_855:
+BLOCK_END_TEST_CATCH_MISMATCH_825:
     nop
     ldnull
     ret
@@ -2011,28 +2011,28 @@ BLOCK_END_TEST_CATCH_MISMATCH_855:
 .method private static hidebysig object 'TEST_CATCH_NESTED_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CATCH_RESULT902, object CATCH_TAG901, object CATCH_RESULT899, object CATCH_TAG898)
+    .locals init (object CATCH_RESULT872, object CATCH_TAG871, object CATCH_RESULT869, object CATCH_TAG868)
     ldstr "Testing nested catch..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S900'
-    stloc CATCH_TAG898
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S870'
+    stloc CATCH_TAG868
     .try
     {
     ldstr "Outer start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S903'
-    stloc CATCH_TAG901
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S873'
+    stloc CATCH_TAG871
     .try
     {
     ldstr "Inner start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S900'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S870'
     ldstr "thrown to outer"
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -2041,60 +2041,60 @@ BLOCK_END_TEST_CATCH_MISMATCH_855:
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT902
-    leave CATCH_DONE906
+    stloc CATCH_RESULT872
+    leave CATCH_DONE876
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG901
+    ldloc CATCH_TAG871
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW907
+    brfalse CATCH_RETHROW877
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT902
-    leave CATCH_DONE906
-CATCH_RETHROW907:
+    stloc CATCH_RESULT872
+    leave CATCH_DONE876
+CATCH_RETHROW877:
     pop
     rethrow
     }
-CATCH_DONE906:
-    ldloc CATCH_RESULT902
+CATCH_DONE876:
+    ldloc CATCH_RESULT872
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT899
-    leave CATCH_DONE904
+    stloc CATCH_RESULT869
+    leave CATCH_DONE874
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG898
+    ldloc CATCH_TAG868
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW905
+    brfalse CATCH_RETHROW875
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT899
-    leave CATCH_DONE904
-CATCH_RETHROW905:
+    stloc CATCH_RESULT869
+    leave CATCH_DONE874
+CATCH_RETHROW875:
     pop
     rethrow
     }
-CATCH_DONE904:
-    ldloc CATCH_RESULT899
+CATCH_DONE874:
+    ldloc CATCH_RESULT869
     pop
     ldstr "Back from outer catch"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_NESTED_850:
+BLOCK_END_TEST_CATCH_NESTED_820:
     nop
     ldnull
     ret
@@ -2463,20 +2463,20 @@ BLOCK_END_TEST_CATCH_NESTED_850:
 .method private static hidebysig object 'TEST_CATCH_BASIC_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object VAL846, object CATCH_RESULT894, object CATCH_TAG893)
+    .locals init (object VAL816, object CATCH_RESULT864, object CATCH_TAG863)
     ldstr "Testing catch basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S895'
-    stloc CATCH_TAG893
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S865'
+    stloc CATCH_TAG863
     .try
     {
     ldstr "Inside catch"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S895'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S865'
     ldstr "thrown value"
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.CatchThrowException::'.ctor'(object, object, object[])
@@ -2485,38 +2485,38 @@ BLOCK_END_TEST_CATCH_NESTED_850:
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc CATCH_RESULT894
-    leave CATCH_DONE896
+    stloc CATCH_RESULT864
+    leave CATCH_DONE866
     }
     catch [LispBase]Lisp.CatchThrowException
     {
     dup
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Tag'()
-    ldloc CATCH_TAG893
+    ldloc CATCH_TAG863
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse CATCH_RETHROW897
+    brfalse CATCH_RETHROW867
     dup
     callvirt instance object[] [LispBase]Lisp.CatchThrowException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.CatchThrowException::'get_Value'()
-    stloc CATCH_RESULT894
-    leave CATCH_DONE896
-CATCH_RETHROW897:
+    stloc CATCH_RESULT864
+    leave CATCH_DONE866
+CATCH_RETHROW867:
     pop
     rethrow
     }
-CATCH_DONE896:
-    ldloc CATCH_RESULT894
-    stloc VAL846
+CATCH_DONE866:
+    ldloc CATCH_RESULT864
+    stloc VAL816
     ldstr "Result (should be thrown value):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc VAL846
+    ldloc VAL816
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_CATCH_BASIC_844:
+BLOCK_END_TEST_CATCH_BASIC_814:
     nop
     ldnull
     ret

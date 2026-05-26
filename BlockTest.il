@@ -7,7 +7,7 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S833'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S802'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -15,7 +15,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S833'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S802'
     ret
 }
 
@@ -392,7 +392,7 @@
     pop
     tail. call object Program::'TEST_BLOCK_NON_LOCAL_CLOSURE'()
     ret
-BLOCK_END_MAIN_694:
+BLOCK_END_MAIN_663:
     nop
     ldnull
     ret
@@ -761,76 +761,84 @@ BLOCK_END_MAIN_694:
 .method private static hidebysig object 'TEST_BLOCK_NON_LOCAL_CLOSURE_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object FN_TMP837, object BLOCK_RESULT_ESCAPE_687, object RESULT690, object K689)
+    .locals init (object FN_TMP806, object BLOCK_RESULT_ESCAPE_656, object RESULT659, object K658)
     ldstr "Testing non-local return-from through closure..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     .try
     {
-    newobj instance void L_697::'.ctor'()
-    stloc K689
-    ldloc K689
-    stloc FN_TMP837
-    ldloc FN_TMP837
-    brtrue FN_NULL838
+    newobj instance void L_666::'.ctor'()
+    stloc K658
+    ldloc K658
+    stloc FN_TMP806
+    ldloc FN_TMP806
+    brtrue FN_NULL807
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP837
-FN_NULL838:
+    stloc FN_TMP806
+FN_NULL807:
     nop
-    ldloc FN_TMP837
+    ldloc FN_TMP806
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP837
-    ldloc FN_TMP837
-    brtrue FN_TYPE_OK839
+    brtrue FN_TYPE_OK809
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    isinst [LispBase]Lisp.Closure
-    stloc FN_TMP837
-FN_TYPE_OK839:
+    stloc FN_TMP806
+FN_TYPE_OK809:
     nop
-FN_AFTER840:
+    ldloc FN_TMP806
+    castclass [LispBase]Lisp.Closure
+    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
+    brfalse FN_LAZY_OK808
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP806
+FN_LAZY_OK808:
     nop
-    ldloc FN_TMP837
+FN_AFTER810:
+    nop
+    ldloc FN_TMP806
+    castclass [LispBase]Lisp.Closure
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     pop
     ldstr "Should NOT print this closure path"
-    stloc BLOCK_RESULT_ESCAPE_687
-    leave BLOCK_END_ESCAPE_686
+    stloc BLOCK_RESULT_ESCAPE_656
+    leave BLOCK_END_ESCAPE_655
     }
     catch [LispBase]Lisp.BlockExitException
     {
     dup
     callvirt instance object [LispBase]Lisp.BlockExitException::'get_BlockId'()
-    ldstr "BLOCK_ID_ESCAPE_685"
+    ldstr "BLOCK_ID_ESCAPE_654"
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brfalse BLOCK_RETHROW836
+    brfalse BLOCK_RETHROW805
     dup
     callvirt instance object[] [LispBase]Lisp.BlockExitException::'get_CapturedValues'()
     call void [LispBase]Lisp.Values::'RestoreValues'(object[])
     callvirt instance object [LispBase]Lisp.BlockExitException::'get_Value'()
-    stloc BLOCK_RESULT_ESCAPE_687
-    leave BLOCK_END_ESCAPE_686
-BLOCK_RETHROW836:
+    stloc BLOCK_RESULT_ESCAPE_656
+    leave BLOCK_END_ESCAPE_655
+BLOCK_RETHROW805:
     pop
     rethrow
     }
-BLOCK_END_ESCAPE_686:
+BLOCK_END_ESCAPE_655:
     nop
-    ldloc BLOCK_RESULT_ESCAPE_687
-    stloc RESULT690
+    ldloc BLOCK_RESULT_ESCAPE_656
+    stloc RESULT659
     ldstr "Closure result (should be closure escaped):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RESULT690
+    ldloc RESULT659
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_NON_LOCAL_CLOSURE_683:
+BLOCK_END_TEST_BLOCK_NON_LOCAL_CLOSURE_652:
     nop
     ldnull
     ret
@@ -1223,7 +1231,7 @@ BLOCK_END_TEST_BLOCK_NON_LOCAL_CLOSURE_683:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_IMPLICIT_BLOCK_678:
+BLOCK_END_TEST_IMPLICIT_BLOCK_647:
     nop
     ldnull
     ret
@@ -1593,37 +1601,37 @@ BLOCK_END_TEST_IMPLICIT_BLOCK_678:
 .method private static hidebysig object 'IMPLICIT_BLOCK_TEST_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_674)
+    .locals init (object BLOCK_RESULT_IMPLICIT_BLOCK_TEST_643)
     ldarg 0
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE831
+    brtrue TRUE800
     ldnull
-    br END832
-TRUE831:
+    br END801
+TRUE800:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S833'
-END832:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S802'
+END801:
     nop
     ldnull
     ceq
-    brtrue ELSE834
+    brtrue ELSE803
     ldstr "zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_674
-    leave BLOCK_END_IMPLICIT_BLOCK_TEST_673
-    br END835
-ELSE834:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_643
+    leave BLOCK_END_IMPLICIT_BLOCK_TEST_642
+    br END804
+ELSE803:
     nop
     ldnull
-END835:
+END804:
     nop
     pop
     ldstr "non-zero"
-    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_674
-BLOCK_END_IMPLICIT_BLOCK_TEST_673:
+    stloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_643
+BLOCK_END_IMPLICIT_BLOCK_TEST_642:
     nop
-    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_674
+    ldloc BLOCK_RESULT_IMPLICIT_BLOCK_TEST_643
     ret
     ldnull
     ret
@@ -1992,7 +2000,7 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_673:
 .method private static hidebysig object 'TEST_BLOCK_UWP_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object UWP_V63829, object UWP_V62828, object UWP_V61827, object UWP_V60826, object UWP_V59825, object UWP_V58824, object UWP_V57823, object UWP_V56822, object UWP_V55821, object UWP_V54820, object UWP_V53819, object UWP_V52818, object UWP_V51817, object UWP_V50816, object UWP_V49815, object UWP_V48814, object UWP_V47813, object UWP_V46812, object UWP_V45811, object UWP_V44810, object UWP_V43809, object UWP_V42808, object UWP_V41807, object UWP_V40806, object UWP_V39805, object UWP_V38804, object UWP_V37803, object UWP_V36802, object UWP_V35801, object UWP_V34800, object UWP_V33799, object UWP_V32798, object UWP_V31797, object UWP_V30796, object UWP_V29795, object UWP_V28794, object UWP_V27793, object UWP_V26792, object UWP_V25791, object UWP_V24790, object UWP_V23789, object UWP_V22788, object UWP_V21787, object UWP_V20786, object UWP_V19785, object UWP_V18784, object UWP_V17783, object UWP_V16782, object UWP_V15781, object UWP_V14780, object UWP_V13779, object UWP_V12778, object UWP_V11777, object UWP_V10776, object UWP_V9775, object UWP_V8774, object UWP_V7773, object UWP_V6772, object UWP_V5771, object UWP_V4770, object UWP_V3769, object UWP_V2768, object UWP_V1767, object UWP_COUNT766, object UWP_RESULT765, object BLOCK_RESULT_EXIT_668)
+    .locals init (object UWP_V63798, object UWP_V62797, object UWP_V61796, object UWP_V60795, object UWP_V59794, object UWP_V58793, object UWP_V57792, object UWP_V56791, object UWP_V55790, object UWP_V54789, object UWP_V53788, object UWP_V52787, object UWP_V51786, object UWP_V50785, object UWP_V49784, object UWP_V48783, object UWP_V47782, object UWP_V46781, object UWP_V45780, object UWP_V44779, object UWP_V43778, object UWP_V42777, object UWP_V41776, object UWP_V40775, object UWP_V39774, object UWP_V38773, object UWP_V37772, object UWP_V36771, object UWP_V35770, object UWP_V34769, object UWP_V33768, object UWP_V32767, object UWP_V31766, object UWP_V30765, object UWP_V29764, object UWP_V28763, object UWP_V27762, object UWP_V26761, object UWP_V25760, object UWP_V24759, object UWP_V23758, object UWP_V22757, object UWP_V21756, object UWP_V20755, object UWP_V19754, object UWP_V18753, object UWP_V17752, object UWP_V16751, object UWP_V15750, object UWP_V14749, object UWP_V13748, object UWP_V12747, object UWP_V11746, object UWP_V10745, object UWP_V9744, object UWP_V8743, object UWP_V7742, object UWP_V6741, object UWP_V5740, object UWP_V4739, object UWP_V3738, object UWP_V2737, object UWP_V1736, object UWP_COUNT735, object UWP_RESULT734, object BLOCK_RESULT_EXIT_637)
     ldstr "Testing block with unwind-protect..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -2004,283 +2012,283 @@ BLOCK_END_IMPLICIT_BLOCK_TEST_673:
     ldnull
     pop
     ldstr "value from return-from"
-    stloc BLOCK_RESULT_EXIT_668
-    leave BLOCK_END_EXIT_667
-    stloc UWP_RESULT765
-    leave DONE830
+    stloc BLOCK_RESULT_EXIT_637
+    leave BLOCK_END_EXIT_636
+    stloc UWP_RESULT734
+    leave DONE799
     }
     finally
     {
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc UWP_COUNT766
+    stloc UWP_COUNT735
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc UWP_V1767
+    stloc UWP_V1736
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc UWP_V2768
+    stloc UWP_V2737
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc UWP_V3769
+    stloc UWP_V3738
     ldsfld object [LispBase]Lisp.Values::Value4
-    stloc UWP_V4770
+    stloc UWP_V4739
     ldsfld object [LispBase]Lisp.Values::Value5
-    stloc UWP_V5771
+    stloc UWP_V5740
     ldsfld object [LispBase]Lisp.Values::Value6
-    stloc UWP_V6772
+    stloc UWP_V6741
     ldsfld object [LispBase]Lisp.Values::Value7
-    stloc UWP_V7773
+    stloc UWP_V7742
     ldsfld object [LispBase]Lisp.Values::Value8
-    stloc UWP_V8774
+    stloc UWP_V8743
     ldsfld object [LispBase]Lisp.Values::Value9
-    stloc UWP_V9775
+    stloc UWP_V9744
     ldsfld object [LispBase]Lisp.Values::Value10
-    stloc UWP_V10776
+    stloc UWP_V10745
     ldsfld object [LispBase]Lisp.Values::Value11
-    stloc UWP_V11777
+    stloc UWP_V11746
     ldsfld object [LispBase]Lisp.Values::Value12
-    stloc UWP_V12778
+    stloc UWP_V12747
     ldsfld object [LispBase]Lisp.Values::Value13
-    stloc UWP_V13779
+    stloc UWP_V13748
     ldsfld object [LispBase]Lisp.Values::Value14
-    stloc UWP_V14780
+    stloc UWP_V14749
     ldsfld object [LispBase]Lisp.Values::Value15
-    stloc UWP_V15781
+    stloc UWP_V15750
     ldsfld object [LispBase]Lisp.Values::Value16
-    stloc UWP_V16782
+    stloc UWP_V16751
     ldsfld object [LispBase]Lisp.Values::Value17
-    stloc UWP_V17783
+    stloc UWP_V17752
     ldsfld object [LispBase]Lisp.Values::Value18
-    stloc UWP_V18784
+    stloc UWP_V18753
     ldsfld object [LispBase]Lisp.Values::Value19
-    stloc UWP_V19785
+    stloc UWP_V19754
     ldsfld object [LispBase]Lisp.Values::Value20
-    stloc UWP_V20786
+    stloc UWP_V20755
     ldsfld object [LispBase]Lisp.Values::Value21
-    stloc UWP_V21787
+    stloc UWP_V21756
     ldsfld object [LispBase]Lisp.Values::Value22
-    stloc UWP_V22788
+    stloc UWP_V22757
     ldsfld object [LispBase]Lisp.Values::Value23
-    stloc UWP_V23789
+    stloc UWP_V23758
     ldsfld object [LispBase]Lisp.Values::Value24
-    stloc UWP_V24790
+    stloc UWP_V24759
     ldsfld object [LispBase]Lisp.Values::Value25
-    stloc UWP_V25791
+    stloc UWP_V25760
     ldsfld object [LispBase]Lisp.Values::Value26
-    stloc UWP_V26792
+    stloc UWP_V26761
     ldsfld object [LispBase]Lisp.Values::Value27
-    stloc UWP_V27793
+    stloc UWP_V27762
     ldsfld object [LispBase]Lisp.Values::Value28
-    stloc UWP_V28794
+    stloc UWP_V28763
     ldsfld object [LispBase]Lisp.Values::Value29
-    stloc UWP_V29795
+    stloc UWP_V29764
     ldsfld object [LispBase]Lisp.Values::Value30
-    stloc UWP_V30796
+    stloc UWP_V30765
     ldsfld object [LispBase]Lisp.Values::Value31
-    stloc UWP_V31797
+    stloc UWP_V31766
     ldsfld object [LispBase]Lisp.Values::Value32
-    stloc UWP_V32798
+    stloc UWP_V32767
     ldsfld object [LispBase]Lisp.Values::Value33
-    stloc UWP_V33799
+    stloc UWP_V33768
     ldsfld object [LispBase]Lisp.Values::Value34
-    stloc UWP_V34800
+    stloc UWP_V34769
     ldsfld object [LispBase]Lisp.Values::Value35
-    stloc UWP_V35801
+    stloc UWP_V35770
     ldsfld object [LispBase]Lisp.Values::Value36
-    stloc UWP_V36802
+    stloc UWP_V36771
     ldsfld object [LispBase]Lisp.Values::Value37
-    stloc UWP_V37803
+    stloc UWP_V37772
     ldsfld object [LispBase]Lisp.Values::Value38
-    stloc UWP_V38804
+    stloc UWP_V38773
     ldsfld object [LispBase]Lisp.Values::Value39
-    stloc UWP_V39805
+    stloc UWP_V39774
     ldsfld object [LispBase]Lisp.Values::Value40
-    stloc UWP_V40806
+    stloc UWP_V40775
     ldsfld object [LispBase]Lisp.Values::Value41
-    stloc UWP_V41807
+    stloc UWP_V41776
     ldsfld object [LispBase]Lisp.Values::Value42
-    stloc UWP_V42808
+    stloc UWP_V42777
     ldsfld object [LispBase]Lisp.Values::Value43
-    stloc UWP_V43809
+    stloc UWP_V43778
     ldsfld object [LispBase]Lisp.Values::Value44
-    stloc UWP_V44810
+    stloc UWP_V44779
     ldsfld object [LispBase]Lisp.Values::Value45
-    stloc UWP_V45811
+    stloc UWP_V45780
     ldsfld object [LispBase]Lisp.Values::Value46
-    stloc UWP_V46812
+    stloc UWP_V46781
     ldsfld object [LispBase]Lisp.Values::Value47
-    stloc UWP_V47813
+    stloc UWP_V47782
     ldsfld object [LispBase]Lisp.Values::Value48
-    stloc UWP_V48814
+    stloc UWP_V48783
     ldsfld object [LispBase]Lisp.Values::Value49
-    stloc UWP_V49815
+    stloc UWP_V49784
     ldsfld object [LispBase]Lisp.Values::Value50
-    stloc UWP_V50816
+    stloc UWP_V50785
     ldsfld object [LispBase]Lisp.Values::Value51
-    stloc UWP_V51817
+    stloc UWP_V51786
     ldsfld object [LispBase]Lisp.Values::Value52
-    stloc UWP_V52818
+    stloc UWP_V52787
     ldsfld object [LispBase]Lisp.Values::Value53
-    stloc UWP_V53819
+    stloc UWP_V53788
     ldsfld object [LispBase]Lisp.Values::Value54
-    stloc UWP_V54820
+    stloc UWP_V54789
     ldsfld object [LispBase]Lisp.Values::Value55
-    stloc UWP_V55821
+    stloc UWP_V55790
     ldsfld object [LispBase]Lisp.Values::Value56
-    stloc UWP_V56822
+    stloc UWP_V56791
     ldsfld object [LispBase]Lisp.Values::Value57
-    stloc UWP_V57823
+    stloc UWP_V57792
     ldsfld object [LispBase]Lisp.Values::Value58
-    stloc UWP_V58824
+    stloc UWP_V58793
     ldsfld object [LispBase]Lisp.Values::Value59
-    stloc UWP_V59825
+    stloc UWP_V59794
     ldsfld object [LispBase]Lisp.Values::Value60
-    stloc UWP_V60826
+    stloc UWP_V60795
     ldsfld object [LispBase]Lisp.Values::Value61
-    stloc UWP_V61827
+    stloc UWP_V61796
     ldsfld object [LispBase]Lisp.Values::Value62
-    stloc UWP_V62828
+    stloc UWP_V62797
     ldsfld object [LispBase]Lisp.Values::Value63
-    stloc UWP_V63829
+    stloc UWP_V63798
     ldstr "Cleanup code run"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc UWP_COUNT766
+    ldloc UWP_COUNT735
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    ldloc UWP_V1767
+    ldloc UWP_V1736
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc UWP_V2768
+    ldloc UWP_V2737
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc UWP_V3769
+    ldloc UWP_V3738
     stsfld object [LispBase]Lisp.Values::Value3
-    ldloc UWP_V4770
+    ldloc UWP_V4739
     stsfld object [LispBase]Lisp.Values::Value4
-    ldloc UWP_V5771
+    ldloc UWP_V5740
     stsfld object [LispBase]Lisp.Values::Value5
-    ldloc UWP_V6772
+    ldloc UWP_V6741
     stsfld object [LispBase]Lisp.Values::Value6
-    ldloc UWP_V7773
+    ldloc UWP_V7742
     stsfld object [LispBase]Lisp.Values::Value7
-    ldloc UWP_V8774
+    ldloc UWP_V8743
     stsfld object [LispBase]Lisp.Values::Value8
-    ldloc UWP_V9775
+    ldloc UWP_V9744
     stsfld object [LispBase]Lisp.Values::Value9
-    ldloc UWP_V10776
+    ldloc UWP_V10745
     stsfld object [LispBase]Lisp.Values::Value10
-    ldloc UWP_V11777
+    ldloc UWP_V11746
     stsfld object [LispBase]Lisp.Values::Value11
-    ldloc UWP_V12778
+    ldloc UWP_V12747
     stsfld object [LispBase]Lisp.Values::Value12
-    ldloc UWP_V13779
+    ldloc UWP_V13748
     stsfld object [LispBase]Lisp.Values::Value13
-    ldloc UWP_V14780
+    ldloc UWP_V14749
     stsfld object [LispBase]Lisp.Values::Value14
-    ldloc UWP_V15781
+    ldloc UWP_V15750
     stsfld object [LispBase]Lisp.Values::Value15
-    ldloc UWP_V16782
+    ldloc UWP_V16751
     stsfld object [LispBase]Lisp.Values::Value16
-    ldloc UWP_V17783
+    ldloc UWP_V17752
     stsfld object [LispBase]Lisp.Values::Value17
-    ldloc UWP_V18784
+    ldloc UWP_V18753
     stsfld object [LispBase]Lisp.Values::Value18
-    ldloc UWP_V19785
+    ldloc UWP_V19754
     stsfld object [LispBase]Lisp.Values::Value19
-    ldloc UWP_V20786
+    ldloc UWP_V20755
     stsfld object [LispBase]Lisp.Values::Value20
-    ldloc UWP_V21787
+    ldloc UWP_V21756
     stsfld object [LispBase]Lisp.Values::Value21
-    ldloc UWP_V22788
+    ldloc UWP_V22757
     stsfld object [LispBase]Lisp.Values::Value22
-    ldloc UWP_V23789
+    ldloc UWP_V23758
     stsfld object [LispBase]Lisp.Values::Value23
-    ldloc UWP_V24790
+    ldloc UWP_V24759
     stsfld object [LispBase]Lisp.Values::Value24
-    ldloc UWP_V25791
+    ldloc UWP_V25760
     stsfld object [LispBase]Lisp.Values::Value25
-    ldloc UWP_V26792
+    ldloc UWP_V26761
     stsfld object [LispBase]Lisp.Values::Value26
-    ldloc UWP_V27793
+    ldloc UWP_V27762
     stsfld object [LispBase]Lisp.Values::Value27
-    ldloc UWP_V28794
+    ldloc UWP_V28763
     stsfld object [LispBase]Lisp.Values::Value28
-    ldloc UWP_V29795
+    ldloc UWP_V29764
     stsfld object [LispBase]Lisp.Values::Value29
-    ldloc UWP_V30796
+    ldloc UWP_V30765
     stsfld object [LispBase]Lisp.Values::Value30
-    ldloc UWP_V31797
+    ldloc UWP_V31766
     stsfld object [LispBase]Lisp.Values::Value31
-    ldloc UWP_V32798
+    ldloc UWP_V32767
     stsfld object [LispBase]Lisp.Values::Value32
-    ldloc UWP_V33799
+    ldloc UWP_V33768
     stsfld object [LispBase]Lisp.Values::Value33
-    ldloc UWP_V34800
+    ldloc UWP_V34769
     stsfld object [LispBase]Lisp.Values::Value34
-    ldloc UWP_V35801
+    ldloc UWP_V35770
     stsfld object [LispBase]Lisp.Values::Value35
-    ldloc UWP_V36802
+    ldloc UWP_V36771
     stsfld object [LispBase]Lisp.Values::Value36
-    ldloc UWP_V37803
+    ldloc UWP_V37772
     stsfld object [LispBase]Lisp.Values::Value37
-    ldloc UWP_V38804
+    ldloc UWP_V38773
     stsfld object [LispBase]Lisp.Values::Value38
-    ldloc UWP_V39805
+    ldloc UWP_V39774
     stsfld object [LispBase]Lisp.Values::Value39
-    ldloc UWP_V40806
+    ldloc UWP_V40775
     stsfld object [LispBase]Lisp.Values::Value40
-    ldloc UWP_V41807
+    ldloc UWP_V41776
     stsfld object [LispBase]Lisp.Values::Value41
-    ldloc UWP_V42808
+    ldloc UWP_V42777
     stsfld object [LispBase]Lisp.Values::Value42
-    ldloc UWP_V43809
+    ldloc UWP_V43778
     stsfld object [LispBase]Lisp.Values::Value43
-    ldloc UWP_V44810
+    ldloc UWP_V44779
     stsfld object [LispBase]Lisp.Values::Value44
-    ldloc UWP_V45811
+    ldloc UWP_V45780
     stsfld object [LispBase]Lisp.Values::Value45
-    ldloc UWP_V46812
+    ldloc UWP_V46781
     stsfld object [LispBase]Lisp.Values::Value46
-    ldloc UWP_V47813
+    ldloc UWP_V47782
     stsfld object [LispBase]Lisp.Values::Value47
-    ldloc UWP_V48814
+    ldloc UWP_V48783
     stsfld object [LispBase]Lisp.Values::Value48
-    ldloc UWP_V49815
+    ldloc UWP_V49784
     stsfld object [LispBase]Lisp.Values::Value49
-    ldloc UWP_V50816
+    ldloc UWP_V50785
     stsfld object [LispBase]Lisp.Values::Value50
-    ldloc UWP_V51817
+    ldloc UWP_V51786
     stsfld object [LispBase]Lisp.Values::Value51
-    ldloc UWP_V52818
+    ldloc UWP_V52787
     stsfld object [LispBase]Lisp.Values::Value52
-    ldloc UWP_V53819
+    ldloc UWP_V53788
     stsfld object [LispBase]Lisp.Values::Value53
-    ldloc UWP_V54820
+    ldloc UWP_V54789
     stsfld object [LispBase]Lisp.Values::Value54
-    ldloc UWP_V55821
+    ldloc UWP_V55790
     stsfld object [LispBase]Lisp.Values::Value55
-    ldloc UWP_V56822
+    ldloc UWP_V56791
     stsfld object [LispBase]Lisp.Values::Value56
-    ldloc UWP_V57823
+    ldloc UWP_V57792
     stsfld object [LispBase]Lisp.Values::Value57
-    ldloc UWP_V58824
+    ldloc UWP_V58793
     stsfld object [LispBase]Lisp.Values::Value58
-    ldloc UWP_V59825
+    ldloc UWP_V59794
     stsfld object [LispBase]Lisp.Values::Value59
-    ldloc UWP_V60826
+    ldloc UWP_V60795
     stsfld object [LispBase]Lisp.Values::Value60
-    ldloc UWP_V61827
+    ldloc UWP_V61796
     stsfld object [LispBase]Lisp.Values::Value61
-    ldloc UWP_V62828
+    ldloc UWP_V62797
     stsfld object [LispBase]Lisp.Values::Value62
-    ldloc UWP_V63829
+    ldloc UWP_V63798
     stsfld object [LispBase]Lisp.Values::Value63
     endfinally
     }
-DONE830:
-    ldloc UWP_RESULT765
-    stloc BLOCK_RESULT_EXIT_668
-BLOCK_END_EXIT_667:
+DONE799:
+    ldloc UWP_RESULT734
+    stloc BLOCK_RESULT_EXIT_637
+BLOCK_END_EXIT_636:
     nop
-    ldloc BLOCK_RESULT_EXIT_668
+    ldloc BLOCK_RESULT_EXIT_637
     ret
-BLOCK_END_TEST_BLOCK_UWP_664:
+BLOCK_END_TEST_BLOCK_UWP_633:
     nop
     ldnull
     ret
@@ -2649,7 +2657,7 @@ BLOCK_END_TEST_BLOCK_UWP_664:
 .method private static hidebysig object 'TEST_BLOCK_NESTED_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object BLOCK_RESULT_OUTER_657)
+    .locals init (object BLOCK_RESULT_OUTER_626)
     ldstr "Testing nested blocks..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -2663,27 +2671,27 @@ BLOCK_END_TEST_BLOCK_UWP_664:
     ldnull
     pop
     ldstr "exited from inner to outer"
-    stloc BLOCK_RESULT_OUTER_657
-    leave BLOCK_END_OUTER_656
+    stloc BLOCK_RESULT_OUTER_626
+    leave BLOCK_END_OUTER_625
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-BLOCK_END_INNER_659:
+BLOCK_END_INNER_628:
     nop
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_OUTER_657
-BLOCK_END_OUTER_656:
+    stloc BLOCK_RESULT_OUTER_626
+BLOCK_END_OUTER_625:
     nop
-    ldloc BLOCK_RESULT_OUTER_657
+    ldloc BLOCK_RESULT_OUTER_626
     pop
     ldstr "Back from outer block"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_NESTED_653:
+BLOCK_END_TEST_BLOCK_NESTED_622:
     nop
     ldnull
     ret
@@ -3052,7 +3060,7 @@ BLOCK_END_TEST_BLOCK_NESTED_653:
 .method private static hidebysig object 'TEST_BLOCK_BASIC_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object VAL649, object BLOCK_RESULT_FOO_648)
+    .locals init (object VAL618, object BLOCK_RESULT_FOO_617)
     ldstr "Testing block basic..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -3062,25 +3070,25 @@ BLOCK_END_TEST_BLOCK_NESTED_653:
     ldnull
     pop
     ldstr "returned value"
-    stloc BLOCK_RESULT_FOO_648
-    leave BLOCK_END_FOO_647
+    stloc BLOCK_RESULT_FOO_617
+    leave BLOCK_END_FOO_616
     ldstr "Should NOT print this"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc BLOCK_RESULT_FOO_648
-BLOCK_END_FOO_647:
+    stloc BLOCK_RESULT_FOO_617
+BLOCK_END_FOO_616:
     nop
-    ldloc BLOCK_RESULT_FOO_648
-    stloc VAL649
+    ldloc BLOCK_RESULT_FOO_617
+    stloc VAL618
     ldstr "Result (should be returned value):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc VAL649
+    ldloc VAL618
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_BLOCK_BASIC_644:
+BLOCK_END_TEST_BLOCK_BASIC_613:
     nop
     ldnull
     ret
@@ -3105,7 +3113,7 @@ BLOCK_END_TEST_BLOCK_BASIC_644:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_697
+.class public auto ansi beforefieldinit L_666
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -3119,7 +3127,7 @@ BLOCK_END_TEST_BLOCK_BASIC_644:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    ldstr "BLOCK_ID_ESCAPE_685"
+    ldstr "BLOCK_ID_ESCAPE_654"
     ldstr "closure escaped"
     call object[] [LispBase]Lisp.Values::'CaptureValues'()
     newobj instance void [LispBase]Lisp.BlockExitException::'.ctor'(object, object, object[])
@@ -3133,7 +3141,7 @@ BLOCK_END_TEST_BLOCK_BASIC_644:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_697::'InvokeBody'()
+    callvirt instance object L_666::'InvokeBody'()
     ret
 }
 
@@ -3489,5 +3497,5 @@ BLOCK_END_TEST_BLOCK_BASIC_644:
     ret
 }
 
-} // end of class L_697
+} // end of class L_666
 

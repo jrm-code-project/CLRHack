@@ -23,13 +23,14 @@ similarly if MAX is negative it should be close to zero."
          `(<= (or min ,x) ,x (or max ,x)) ))
     (labels
         ((gauss ()
-           (loop
-                 for x1 = (- (random 2.0d0) 1.0d0)
-                 for x2 = (- (random 2.0d0) 1.0d0)
-                 for w = (+ (expt x1 2) (expt x2 2))
-                 when (< w 1.0d0)
-                 do (let ((v (sqrt (/ (* -2.0d0 (log w)) w))))
-                      (return (values (* x1 v) (* x2 v))))))
+           (do ()
+               (nil)
+             (let* ((x1 (- (random 2.0d0) 1.0d0))
+                    (x2 (- (random 2.0d0) 1.0d0))
+                    (w (+ (expt x1 2) (expt x2 2))))
+               (when (< w 1.0d0)
+                 (let ((v (sqrt (/ (* -2.0d0 (log w)) w))))
+                   (return (values (* x1 v) (* x2 v))))))))
          (guard (x)
            (unless (valid x)
              (tagbody
@@ -61,10 +62,12 @@ Examples:
   (iota 3 :start -1 :step -1/2) => (-1 -3/2 -2)
 "
   (declare (type (integer 0) n) (number start step))
-  (loop ;; KLUDGE: get numeric contagion right for the first element too
-        for i = (+ (- (+ start step) step)) then (+ i step)
-        repeat n
-        collect i))
+  (let ((results nil)
+        (i (+ (- (+ start step) step))))
+    (dotimes (_ n)
+      (push i results)
+      (setf i (+ i step)))
+    (nreverse results)))
 
 (declaim (inline map-iota))
 (defun map-iota (function n &key (start 0) (step 1))
@@ -80,10 +83,10 @@ Examples:
     ;;; 3.0
 "
   (declare (type (integer 0) n) (number start step))
-  (loop ;; KLUDGE: get numeric contagion right for the first element too
-        for i = (+ start (- step step)) then (+ i step)
-        repeat n
-        do (funcall function i))
+  (let ((i (+ start (- step step))))
+    (dotimes (_ n)
+      (funcall function i)
+      (setf i (+ i step))))
   n)
 
 (declaim (inline lerp))
@@ -122,7 +125,8 @@ interpolation coefficient V."
                  (let ((pivot-i (randint-in-range start-i end-i)))
                    (rotatef (aref vec start-i) (aref vec pivot-i))
                    (let ((swap-i end-i))
-                     (loop for i from swap-i downto (1+ start-i) do
+                     (do ((i swap-i (1- i)))
+                         ((< i (1+ start-i)))
                        (when (>= (aref vec i) (aref vec start-i))
                          (rotatef (aref vec i) (aref vec swap-i))
                          (decf swap-i)))
@@ -135,11 +139,11 @@ interpolation coefficient V."
            (i 0)
            (j (1- len)))
 
-      (loop for correct-pos = (partition vector i j)
-            while (/= correct-pos mid-i) do
-              (if (< correct-pos mid-i)
-                  (setf i (1+ correct-pos))
-                  (setf j (1- correct-pos))))
+      (do ((correct-pos (partition vector i j) (partition vector i j)))
+          ((= correct-pos mid-i))
+        (if (< correct-pos mid-i)
+            (setf i (1+ correct-pos))
+            (setf j (1- correct-pos))))
 
       (if (oddp len)
           (aref vector mid-i)

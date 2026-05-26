@@ -6,6 +6,7 @@ using System.Reflection;
 namespace Lisp
 {
     public abstract class Closure {
+        public virtual bool IsLazyResolver => false;
         public abstract object Invoke ();
         public abstract object Invoke (object arg0);
         public abstract object Invoke (object arg0, object arg1);
@@ -144,7 +145,23 @@ namespace Lisp
                 }
             }
 
-            return ResolveFromSelfHostAssemblies(packageName, symbolName);
+            var selfHost = ResolveFromSelfHostAssemblies(packageName, symbolName);
+            if (selfHost != null) return selfHost;
+
+            // If not found yet, return a lazy resolver that will try again at call time.
+            // This is crucial for functions defined by DEFSTRUCT or other top-level forms
+            // during module initialization.
+            return MopRuntime.CreateNativeClosure(args => {
+                var fn = ResolveFunction(packageName, symbolName);
+                if (fn is Closure closure && !closure.IsLazyResolver)
+                {
+                    // Found a real function, call it.
+                    // We don't update the static field in the calling module here, 
+                    // but subsequent calls will hit this lazy resolver and find the real function.
+                    return closure.Invoke(args);
+                }
+                throw new Exception($"Undefined function: {(string.IsNullOrEmpty(packageName) ? "" : packageName + ":")}{symbolName}");
+            }, isLazyResolver: true);
         }
 
         private static readonly Dictionary<string, Closure?> SelfHostFunctionCache = new Dictionary<string, Closure?>();

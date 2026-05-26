@@ -10,10 +10,10 @@
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object MSG1940)
+    .locals init (object MSG2006)
     ldstr "Hello world from CLR-CALL"
-    stloc MSG1940
-    ldloc MSG1940
+    stloc MSG2006
+    ldloc MSG2006
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop

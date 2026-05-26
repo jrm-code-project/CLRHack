@@ -105,14 +105,16 @@ Signals an error if SEQUENCE is not a proper sequence."
              (replace sublist (shuffle intermediate-vector))))))
     (vector
      (let ((end (or end (length sequence))))
-       (loop for i from start below end
-             do (rotatef (aref sequence i)
-                         (aref sequence (+ i (random (- end i))))))))
+       (do ((i start (1+ i)))
+           ((>= i end))
+         (rotatef (aref sequence i)
+                  (aref sequence (+ i (random (- end i))))))))
     (sequence
      (let ((end (or end (length sequence))))
-       (loop for i from (- end 1) downto start
-             do (rotatef (elt sequence i)
-                         (elt sequence (+ i (random (- end i)))))))))
+       (do ((i (1- end) (1- i)))
+           ((< i start))
+         (rotatef (elt sequence i)
+                  (elt sequence (+ i (random (- end i)))))))))
   sequence)
 
 (defun random-elt (sequence &key (start 0) end)
@@ -227,17 +229,13 @@ is a literal integer."
                   `((unless (integerp ,current)
                       (setf ,current (length ,current)))))
               (and
-               ,@(loop
-                    :for sequence :in sequences
-                    :collect `(progn
-                                (setf ,tmp ,sequence)
-                                (if (integerp ,tmp)
-                                    (= ,tmp ,(if optimizedp
-                                                 length
-                                                 current))
-                                    (sequence-of-length-p ,tmp ,(if optimizedp
-                                                                    length
-                                                                    current)))))))))))))
+               ,@(mapcar (lambda (sequence)
+                           `(progn
+                              (setf ,tmp ,sequence)
+                              (if (integerp ,tmp)
+                                  (= ,tmp ,(if optimizedp length current))
+                                  (sequence-of-length-p ,tmp ,(if optimizedp length current)))))
+                         sequences)))))))))
 
 (defun copy-sequence (type sequence)
   "Returns a fresh sequence of TYPE, which has the same elements as
@@ -352,11 +350,14 @@ the last (length SUFFIX) elements of SEQUENCE are equal to SUFFIX."
     (when (< sequence-length suffix-length)
       ;; if SEQUENCE is shorter than SUFFIX, then SEQUENCE can't end with SUFFIX.
       (return-from ends-with-subseq nil))
-    (loop for sequence-index from (- sequence-length suffix-length) below sequence-length
-          for suffix-index from 0 below suffix-length
-          when (not (funcall test (elt sequence sequence-index) (elt suffix suffix-index)))
-          do (return-from ends-with-subseq nil)
-          finally (return t))))
+    (let ((i (- sequence-length suffix-length))
+          (j 0))
+      (do ()
+          ((>= j suffix-length) t)
+        (unless (funcall test (elt sequence i) (elt suffix j))
+          (return-from ends-with-subseq nil))
+        (incf i)
+        (incf j)))))
 
 (defun starts-with (object sequence &key (test #'eql) (key #'identity))
   "Returns true if SEQUENCE is a sequence whose first element is EQL to OBJECT.
@@ -425,19 +426,21 @@ unspecified if a combination is modified by FUNCTION."
              (labels ((combine (count start)
                         (if (zerop count)
                             (call)
-                            (loop for i from start below end
-                                  do (let ((j (- count 1)))
-                                       (setf (aref combination j) (aref sequence i))
-                                       (combine j (+ i 1)))))))
+                            (do ((i start (1+ i)))
+                                ((>= i end))
+                              (let ((j (- count 1)))
+                                (setf (aref combination j) (aref sequence i))
+                                (combine j (+ i 1)))))))
                (combine length start)))
             (sequence
              (labels ((combine (count start)
                         (if (zerop count)
                             (call)
-                            (loop for i from start below end
-                                  do (let ((j (- count 1)))
-                                       (setf (elt combination j) (elt sequence i))
-                                       (combine j (+ i 1)))))))
+                            (do ((i start (1+ i)))
+                                ((>= i end))
+                              (let ((j (- count 1)))
+                                (setf (elt combination j) (elt sequence i))
+                                (combine j (+ i 1)))))))
                (combine length start)))))))
   sequence)
 
@@ -455,11 +458,12 @@ length of the delimited subsequence."
                      (funcall function (if copy
                                            (copy-seq seq)
                                            seq))
-                     (loop for i from 0 upto n-1
-                           do (permute seq n-1)
-                           (if (evenp n-1)
-                               (rotatef (elt seq 0) (elt seq n-1))
-                               (rotatef (elt seq i) (elt seq n-1)))))))
+                     (do ((i 0 (1+ i)))
+                         ((> i n-1))
+                       (permute seq n-1)
+                       (if (evenp n-1)
+                           (rotatef (elt seq 0) (elt seq n-1))
+                           (rotatef (elt seq i) (elt seq n-1)))))))
              (permute-sequence (seq)
                (permute seq length)))
       (if (= length size)
@@ -508,13 +512,13 @@ if calling FUNCTION modifies either the derangement or SEQUENCE."
                    ;; deranged by an earlier call put the element from
                    ;; PLACE to I, mark I as deranged, and recurse,
                    ;; finally removing the mark.
-                   (loop for i from 0 below size
-                         do
-                         (unless (or (= place (+ i start)) (not (zerop (bit mask i))))
-                           (setf (elt derangement i) (elt sequence place)
-                                 (bit mask i) 1)
-                           (derange (1+ place) (1- n))
-                           (setf (bit mask i) 0))))))
+                   (do ((i 0 (1+ i)))
+                       ((>= i size))
+                     (unless (or (= place (+ i start)) (not (zerop (bit mask i))))
+                       (setf (elt derangement i) (elt sequence place)
+                             (bit mask i) 1)
+                       (derange (1+ place) (1- n))
+                       (setf (bit mask i) 0))))))
       (derange start size)
       sequence)))
 

@@ -76,8 +76,7 @@ and then calling the next one with the primary value of the last."
                  `(apply ,(car funs) arguments))))
     (let* ((args (cons function more-functions))
            (funs (make-gensym-list (length args) "COMPOSE")))
-      `(let ,(loop for f in funs for arg in args
-		   collect `(,f (ensure-function ,arg)))
+      `(let ,(mapcar (lambda (f arg) `(,f (ensure-function ,arg))) funs args)
          (declare (optimize (speed 3) (safety 1) (debug 1)))
          (lambda (&rest arguments)
            (declare (dynamic-extent arguments))

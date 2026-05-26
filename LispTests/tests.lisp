@@ -979,9 +979,8 @@
     (handler-case
         (sb-ext:with-timeout 2
           (progn
-            (loop
-              :repeat 10000
-              :do (gaussian-random 0 nil))
+            (dotimes (_ 10000)
+              (gaussian-random 0 nil))
             'done))
       (sb-ext:timeout ()
         'timed-out))
@@ -1517,31 +1516,35 @@
                        (apply ,fn (list ,@(substitute arg '_ args))))))))
       (let ((circular-list (make-circular-list 5 :initial-element :foo))
             (dotted-list (list* 'a 'b 'c 'd)))
-        (loop for nth from 0
-              for fn in (list
-                         (cut #'lastcar _)
-                         (cut #'rotate _ 3)
-                         (cut #'rotate _ -3)
-                         (cut #'shuffle _)
-                         (cut #'random-elt _)
-                         (cut #'last-elt _)
-                         (cut #'ends-with :foo _))
-              nconcing
-                 (let ((on-circular-p (signals-error-p (funcall fn circular-list)))
-                       (on-dotted-p (signals-error-p (funcall fn dotted-list))))
-                   (when (or (not on-circular-p) (not on-dotted-p))
-                     (append
-                      (unless on-circular-p
-                        (let ((*print-circle* t))
-                          (list
-                           (format nil
-                                   "No appropriate error signalled when passing ~S to ~Ath entry."
-                                   circular-list nth))))
-                      (unless on-dotted-p
-                        (list
-                         (format nil
-                                 "No appropriate error signalled when passing ~S to ~Ath entry."
-                                 dotted-list nth)))))))))
+        (let ((results nil)
+              (nth 0))
+          (dolist (fn (list
+                       (cut #'lastcar _)
+                       (cut #'rotate _ 3)
+                       (cut #'rotate _ -3)
+                       (cut #'shuffle _)
+                       (cut #'random-elt _)
+                       (cut #'last-elt _)
+                       (cut #'ends-with :foo _)))
+            (setf results
+                  (nconc results
+                         (let ((on-circular-p (signals-error-p (funcall fn circular-list)))
+                               (on-dotted-p (signals-error-p (funcall fn dotted-list))))
+                           (when (or (not on-circular-p) (not on-dotted-p))
+                             (append
+                              (unless on-circular-p
+                                (let ((*print-circle* t))
+                                  (list
+                                   (format nil
+                                           "No appropriate error signalled when passing ~S to ~Ath entry."
+                                           circular-list nth))))
+                              (unless on-dotted-p
+                                (list
+                                 (format nil
+                                         "No appropriate error signalled when passing ~S to ~Ath entry."
+                                         dotted-list nth))))))))
+            (incf nth))
+          results)
   nil)
 
 ;;;; IO

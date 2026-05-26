@@ -14,9 +14,9 @@
     .field public static object '_SEQUENCE_'
     .field public static object '_BOARD_'
     .field public static object 'TEMP_B'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T7904'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7900'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7896'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T8039'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8035'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8031'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -38,15 +38,15 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T7904'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T8039'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7900'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8035'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7896'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8031'
     ret
 }
 
@@ -413,7 +413,7 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object RESULT7876)
+    .locals init (object RESULT8011)
     call object Program::'INIT_ARRAYS'()
     pop
     ldstr "Running triang benchmark..."
@@ -425,16 +425,16 @@
     ldc.i4 1
     box int32
     call object Program::'TRIANG_TEST'(object, object)
-    stloc RESULT7876
+    stloc RESULT8011
     ldstr "Result:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc RESULT7876
+    ldloc RESULT8011
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_7874:
+BLOCK_END_MAIN_8009:
     nop
     ldnull
     ret
@@ -817,7 +817,7 @@ BLOCK_END_MAIN_7874:
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
     ret
-BLOCK_END_TRIANG_TEST_7869:
+BLOCK_END_TRIANG_TEST_8004:
     nop
     ldnull
     ret
@@ -1188,22 +1188,22 @@ BLOCK_END_TRIANG_TEST_7869:
 .method private static hidebysig object 'ATTEMPT_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7926, object CELL_TMP7925, object CELL_VAL_TMP7922, object CELL_TMP7921, object TEMP7914, object TEMP7913, object FOUND7861, object NEXT_DEPTH7860, object J7859)
+    .locals init (object CELL_VAL_TMP8061, object CELL_TMP8060, object CELL_VAL_TMP8057, object CELL_TMP8056, object TEMP8049, object TEMP8048, object FOUND7996, object NEXT_DEPTH7995, object J7994)
     ldarg 1
     ldc.i4 14
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7902
+    brtrue TRUE8037
     ldnull
-    br END7903
-TRUE7902:
+    br END8038
+TRUE8037:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7900'
-END7903:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8035'
+END8038:
     nop
     ldnull
     ceq
-    brtrue ELSE7928
+    brtrue ELSE8063
     ldsfld object Program::'_SEQUENCE_'
     ldc.i4 1
     box int32
@@ -1215,9 +1215,9 @@ END7903:
     dup
     stsfld object Program::'_ANSWER_'
     pop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T7904'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T8039'
     ret
-ELSE7928:
+ELSE8063:
     nop
     ldc.i4 1
     box int32
@@ -1227,17 +1227,17 @@ ELSE7928:
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7905
+    brtrue TRUE8040
     ldnull
-    br END7906
-TRUE7905:
+    br END8041
+TRUE8040:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7900'
-END7906:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8035'
+END8041:
     nop
     ldnull
     ceq
-    brtrue ELSE7917
+    brtrue ELSE8052
     ldc.i4 1
     box int32
     ldsfld object Program::'_BOARD_'
@@ -1246,17 +1246,17 @@ END7906:
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7907
+    brtrue TRUE8042
     ldnull
-    br END7908
-TRUE7907:
+    br END8043
+TRUE8042:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7900'
-END7908:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8035'
+END8043:
     nop
     ldnull
     ceq
-    brtrue ELSE7915
+    brtrue ELSE8050
     ldc.i4 0
     box int32
     ldsfld object Program::'_BOARD_'
@@ -1265,29 +1265,29 @@ END7908:
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     call object [LispBase]Lisp.Vector::'Aref'(object, object)
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7909
+    brtrue TRUE8044
     ldnull
-    br END7910
-TRUE7909:
+    br END8045
+TRUE8044:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7900'
-END7910:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8035'
+END8045:
     nop
-    br END7916
-ELSE7915:
-    nop
-    ldnull
-END7916:
-    nop
-    br END7918
-ELSE7917:
+    br END8051
+ELSE8050:
     nop
     ldnull
-END7918:
+END8051:
+    nop
+    br END8053
+ELSE8052:
+    nop
+    ldnull
+END8053:
     nop
     ldnull
     ceq
-    brtrue ELSE7927
+    brtrue ELSE8062
     ldsfld object Program::'_BOARD_'
     ldsfld object Program::'_A_'
     ldarg 0
@@ -1320,7 +1320,7 @@ END7918:
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc J7859
+    stloc J7994
     ldarg 1
     ldc.i4 1
     box int32
@@ -1330,66 +1330,66 @@ END7918:
     unbox.any int32
     add
     box int32
-    stloc NEXT_DEPTH7860
+    stloc NEXT_DEPTH7995
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc FOUND7861
-TAG_LOOP_7862:
+    stloc FOUND7996
+TAG_LOOP_7997:
     nop
-    ldloc J7859
+    ldloc J7994
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 36
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7911
+    brtrue TRUE8046
     ldnull
-    br END7912
-TRUE7911:
+    br END8047
+TRUE8046:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7900'
-END7912:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8035'
+END8047:
     nop
     ldnull
     ceq
-    brtrue ELSE7919
-    leave TAG_DONE_7863
-    br END7920
-ELSE7919:
+    brtrue ELSE8054
+    leave TAG_DONE_7998
+    br END8055
+ELSE8054:
     nop
     ldnull
-END7920:
+END8055:
     nop
     pop
-    ldloc J7859
+    ldloc J7994
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    ldloc NEXT_DEPTH7860
+    ldloc NEXT_DEPTH7995
     call object Program::'ATTEMPT'(object, object)
     ldnull
     ceq
-    brtrue ELSE7923
-    ldloc FOUND7861
-    stloc CELL_TMP7921
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T7904'
-    stloc CELL_VAL_TMP7922
-    ldloc CELL_TMP7921
+    brtrue ELSE8058
+    ldloc FOUND7996
+    stloc CELL_TMP8056
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T8039'
+    stloc CELL_VAL_TMP8057
+    ldloc CELL_TMP8056
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7922
+    ldloc CELL_VAL_TMP8057
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7922
+    ldloc CELL_VAL_TMP8057
     pop
-    leave TAG_DONE_7863
-    br END7924
-ELSE7923:
+    leave TAG_DONE_7998
+    br END8059
+ELSE8058:
     nop
     ldnull
-END7924:
+END8059:
     nop
     pop
-    ldloc J7859
-    stloc CELL_TMP7925
-    ldloc J7859
+    ldloc J7994
+    stloc CELL_TMP8060
+    ldloc J7994
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1400,16 +1400,16 @@ END7924:
     unbox.any int32
     add
     box int32
-    stloc CELL_VAL_TMP7926
-    ldloc CELL_TMP7925
+    stloc CELL_VAL_TMP8061
+    ldloc CELL_TMP8060
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7926
+    ldloc CELL_VAL_TMP8061
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7926
+    ldloc CELL_VAL_TMP8061
     pop
-    leave TAG_LOOP_7862
+    leave TAG_LOOP_7997
     pop
-TAG_DONE_7863:
+TAG_DONE_7998:
     nop
     ldnull
     pop
@@ -1439,11 +1439,11 @@ TAG_DONE_7863:
     pop
     ldnull
     ret
-ELSE7927:
+ELSE8062:
     nop
     ldnull
     ret
-BLOCK_END_ATTEMPT_7857:
+BLOCK_END_ATTEMPT_7992:
     nop
     ldnull
     ret
@@ -1818,20 +1818,20 @@ BLOCK_END_ATTEMPT_7857:
     ldarg 1
     ldarg 2
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7898
+    brtrue TRUE8033
     ldnull
-    br END7899
-TRUE7898:
+    br END8034
+TRUE8033:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7900'
-END7899:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8035'
+END8034:
     nop
     ldnull
     ceq
-    brtrue ELSE7901
+    brtrue ELSE8036
     ldnull
     ret
-ELSE7901:
+ELSE8036:
     nop
     ldarg 0
     ldarg 1
@@ -1850,7 +1850,7 @@ ELSE7901:
     call object Program::'ARRAY_TO_LIST'(object, object, object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_ARRAY_TO_LIST_7850:
+BLOCK_END_ARRAY_TO_LIST_7985:
     nop
     ldnull
     ret
@@ -2672,7 +2672,7 @@ BLOCK_END_ARRAY_TO_LIST_7850:
     box int32
     tail. call object Program::'LIST_TO_ARRAY'(object, object, object)
     ret
-BLOCK_END_INIT_ARRAYS_7842:
+BLOCK_END_INIT_ARRAYS_7977:
     nop
     ldnull
     ret
@@ -3047,20 +3047,20 @@ BLOCK_END_INIT_ARRAYS_7842:
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7894
+    brtrue TRUE8029
     ldnull
-    br END7895
-TRUE7894:
+    br END8030
+TRUE8029:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7896'
-END7895:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8031'
+END8030:
     nop
     ldnull
     ceq
-    brtrue ELSE7897
+    brtrue ELSE8032
     ldarg 1
     ret
-ELSE7897:
+ELSE8032:
     nop
     ldarg 1
     ldarg 2
@@ -3084,7 +3084,7 @@ ELSE7897:
     box int32
     tail. call object Program::'LIST_TO_ARRAY'(object, object, object)
     ret
-BLOCK_END_LIST_TO_ARRAY_7837:
+BLOCK_END_LIST_TO_ARRAY_7972:
     nop
     ldnull
     ret
