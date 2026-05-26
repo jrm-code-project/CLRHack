@@ -12,6 +12,14 @@
 (push (truename ".") asdf:*central-registry*)
 (asdf:load-system :clrhack)
 
+(defun rebuild-project (project-file)
+  (let ((project-file project-file))
+    (format t "~%--- Building ~A ---~%" project-file)
+    (uiop:run-program (list "dotnet" "build" project-file "-c" "Release" "-t:Rebuild")
+                      :output t
+                      :error-output t
+                      :ignore-error-status nil)))
+
 (let ((tests '(
                ("Tests/test-advanced.lisp" . "AdvancedTest")
                ;; ("test-aux.lisp" . "AuxTest")
@@ -137,6 +145,15 @@
             (error "Expected ambiguous import detail in aggregate failure, got: ~A" condition))
           (unless (search "Unresolved imported function DOES-NOT-EXIST" message)
             (error "Expected unresolved import detail in aggregate failure, got: ~A" condition)))
-        (format t "Observed expected compile failure: ~A~%" condition))))
+        (format t "Observed expected compile failure: ~A~%" condition)))
+
+    (format t "~%--- Rebuilding standalone projects ---~%")
+    (rebuild-project "LispBase/LispBase.csproj")
+    (dolist (target (append (mapcar #'cdr tests)
+                            '("SeparateModuleA"
+                              "SeparateModuleC"
+                              "SeparateModuleB"
+                              "SeparateLinked")))
+      (rebuild-project (format nil "~A.ilproj" target))))
 
 (sb-ext:exit)

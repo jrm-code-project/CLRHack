@@ -407,13 +407,9 @@
                                             (expand-ecase-clauses (cdr rest-clauses))))))
            `(let ((,key-var ,keyform))
              ,(expand-ecase-clauses clauses))))))
-  (register-macro 'loop
-    (lambda (&rest clauses)
-      (macroexpand-1 `(loop ,@clauses))))
   (register-macro 'return
     (lambda (&optional value)
-      `(return-from nil ,value)))
-  (register-macro 'atom (lambda (x) `(not (consp ,x))))
+      `(return-from nil ,value)))  (register-macro 'atom (lambda (x) `(not (consp ,x))))
   (register-macro 'caar (lambda (x) `(car (car ,x))))
   (register-macro 'cadr (lambda (x) `(car (cdr ,x))))
   (register-macro 'cdar (lambda (x) `(cdr (car ,x))))
@@ -438,38 +434,40 @@
                  (,id-var nil))
              (catch ,tag-var
                (restart-bind
-                   ,(loop for clause in clauses
-                          for id in clause-ids
-                          collect (let ((name (car clause))
-                                        (report nil)
-                                        (interactive nil)
-                                        (test nil)
-                                        (curr (cddr clause)))
-                                    (loop while (and curr (keywordp (car curr)))
-                                          do (case (car curr)
-                                               (:report (setf report (second curr) curr (cddr curr)))
-                                               (:interactive (setf interactive (second curr) curr (cddr curr)))
-                                               (:test (setf test (second curr) curr (cddr curr)))
-                                               (t (return))))
-                                    `(,name (lambda (&rest args)
-                                              (setq ,args-var args)
-                                              (setq ,id-var ',id)
-                                              (throw ,tag-var nil))
-                                            ,@(when report `(:report-function ,(if (stringp report) `(lambda (s) (print ,report)) report)))
-                                            ,@(when interactive `(:interactive-function ,interactive))
-                                            ,@(when test `(:test-function ,test)))))
+                   ,(mapcar (lambda (clause id)
+                              (let ((name (car clause))
+                                    (report nil)
+                                    (interactive nil)
+                                    (test nil)
+                                    (curr (cddr clause)))
+                                (do ()
+                                    ((not (and curr (keywordp (car curr)))))
+                                  (case (car curr)
+                                    (:report (setf report (second curr) curr (cddr curr)))
+                                    (:interactive (setf interactive (second curr) curr (cddr curr)))
+                                    (:test (setf test (second curr) curr (cddr curr)))
+                                    (t (return))))
+                                `(,name (lambda (&rest args)
+                                          (setq ,args-var args)
+                                          (setq ,id-var ',id)
+                                          (throw ,tag-var nil))
+                                        ,@(when report `(:report-function ,(if (stringp report) `(lambda (s) (print ,report)) report)))
+                                        ,@(when interactive `(:interactive-function ,interactive))
+                                        ,@(when test `(:test-function ,test)))))
+                            clauses clause-ids)
                  (return-from ,exit-tag ,expression)))
              (cond
-               ,@(loop for clause in clauses
-                       for id in clause-ids
-                       collect (let ((lambda-list (second clause))
-                                     (forms nil)
-                                     (curr (cddr clause)))
-                                 (loop while (and curr (keywordp (car curr)))
-                                       do (setf curr (cddr curr)))
-                                 (setf forms curr)
-                                 `((eq ,id-var ',id)
-                                   (apply (lambda ,lambda-list ,@forms) ,args-var))))))))))
+               ,@(mapcar (lambda (clause id)
+                           (let ((lambda-list (second clause))
+                                 (forms nil)
+                                 (curr (cddr clause)))
+                             (do ()
+                                 ((not (and curr (keywordp (car curr)))))
+                               (setf curr (cddr curr)))
+                             (setf forms curr)
+                             `((eq ,id-var ',id)
+                               (apply (lambda ,lambda-list ,@forms) ,args-var))))
+                         clauses clause-ids)))))))
 
   (register-macro 'break
     (lambda (&optional format-string &rest args)
@@ -493,22 +491,22 @@
                  (,id-var nil))
              (catch ,tag-var
                (handler-bind
-                   ,(loop for clause in clauses
-                          for id in clause-ids
-                          collect (let ((type (car clause)))
-                                    `(,type (lambda (c)
-                                              (setq ,condition-var c)
-                                              (setq ,id-var ',id)
-                                              (throw ,tag-var nil)))))
+                   ,(mapcar (lambda (clause id)
+                              (let ((type (car clause)))
+                                `(,type (lambda (c)
+                                          (setq ,condition-var c)
+                                          (setq ,id-var ',id)
+                                          (throw ,tag-var nil)))))
+                            clauses clause-ids)
                  (return-from ,exit-tag ,expression)))
              (cond
-               ,@(loop for clause in clauses
-                       for id in clause-ids
-                       collect (let ((var (car (second clause)))
-                                     (body (cddr clause)))
-                                 `((eq ,id-var ',id)
-                                   (let ((,var ,condition-var))
-                                     ,@body))))))))))
+               ,@(mapcar (lambda (clause id)
+                           (let ((var (car (second clause)))
+                                 (body (cddr clause)))
+                             `((eq ,id-var ',id)
+                               (let ((,var ,condition-var))
+                                 ,@body))))
+                         clauses clause-ids)))))))
 
   (register-macro 'dotnet-new (lambda (type &rest args) `(reflect :new ,type ,@args)))
   (register-macro 'dotnet-call (lambda (obj method &rest args) `(reflect :call-instance ,obj ,method ,@args)))
@@ -684,15 +682,18 @@
          (key-params (ast-lambda-key-params node))
          (aux-params (ast-lambda-aux-params node))
          (all-bound (append params
-                            (loop for (alpha init sup) in opt-params
-                                  collect alpha
-                                  when sup collect sup)
+                            (mapcan (lambda (p)
+                                      (if (third p)
+                                          (list (car p) (third p))
+                                          (list (car p))))
+                                    opt-params)
                             (when rest-param (list rest-param))
-                            (loop for (kw alpha init sup) in key-params
-                                  collect alpha
-                                  when sup collect sup)
-                            (loop for (alpha init) in aux-params
-                                  collect alpha)))
+                            (mapcan (lambda (p)
+                                      (if (fourth p)
+                                          (list (second p) (fourth p))
+                                          (list (second p))))
+                                    key-params)
+                            (mapcar #'car aux-params)))
          (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                  (ast-lambda-body node)
                                  :initial-value nil))
@@ -866,15 +867,18 @@
          (key-params (ast-toplevel-defun-key-params node))
          (aux-params (ast-toplevel-defun-aux-params node))
          (all-bound (append params
-                            (loop for (alpha init sup) in opt-params
-                                  collect alpha
-                                  when sup collect sup)
+                            (mapcan (lambda (p)
+                                      (if (third p)
+                                          (list (car p) (third p))
+                                          (list (car p))))
+                                    opt-params)
                             (when rest-param (list rest-param))
-                            (loop for (kw alpha init sup) in key-params
-                                  collect alpha
-                                  when sup collect sup)
-                            (loop for (alpha init) in aux-params
-                                  collect alpha)))
+                            (mapcan (lambda (p)
+                                      (if (fourth p)
+                                          (list (second p) (fourth p))
+                                          (list (second p))))
+                                    key-params)
+                            (mapcar #'car aux-params)))
          (body-free-vars (reduce (lambda (a b) (union a (compute-free-vars b)))
                                  (ast-toplevel-defun-body node)
                                  :initial-value nil))
@@ -921,12 +925,12 @@
 
 (defmethod closure-convert ((node ast-lambda))
   (let ((new-body (mapcar #'closure-convert (ast-lambda-body node)))
-        (new-opt-params (loop for (alpha init sup) in (ast-lambda-optional-params node)
-                              collect (list alpha (closure-convert init) sup)))
-        (new-key-params (loop for (kw alpha init sup) in (ast-lambda-key-params node)
-                              collect (list kw alpha (closure-convert init) sup)))
-        (new-aux-params (loop for (alpha init) in (ast-lambda-aux-params node)
-                              collect (list alpha (closure-convert init))))
+        (new-opt-params (mapcar (lambda (p) (list (first p) (closure-convert (second p)) (third p)))
+                                (ast-lambda-optional-params node)))
+        (new-key-params (mapcar (lambda (p) (list (first p) (second p) (closure-convert (third p)) (fourth p)))
+                                (ast-lambda-key-params node)))
+        (new-aux-params (mapcar (lambda (p) (list (first p) (closure-convert (second p))))
+                                (ast-lambda-aux-params node)))
         (free-vars (ast-lambda-free-vars node)))
     (setf (ast-lambda-body node) new-body)
     (setf (ast-lambda-optional-params node) new-opt-params)
@@ -1122,14 +1126,14 @@
   (make-instance 'ast-toplevel-defun
                  :name (ast-toplevel-defun-name node)
                  :params (ast-toplevel-defun-params node)
-                 :optional-params (loop for (alpha init sup) in (ast-toplevel-defun-optional-params node)
-                                        collect (list alpha (closure-convert init) sup))
+                 :optional-params (mapcar (lambda (p) (list (first p) (closure-convert (second p)) (third p)))
+                                          (ast-toplevel-defun-optional-params node))
                  :rest-param (ast-toplevel-defun-rest-param node)
-                 :key-params (loop for (kw alpha init sup) in (ast-toplevel-defun-key-params node)
-                                   collect (list kw alpha (closure-convert init) sup))
+                 :key-params (mapcar (lambda (p) (list (first p) (second p) (closure-convert (third p)) (fourth p)))
+                                     (ast-toplevel-defun-key-params node))
                  :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
-                 :aux-params (loop for (alpha init) in (ast-toplevel-defun-aux-params node)
-                                   collect (list alpha (closure-convert init)))
+                 :aux-params (mapcar (lambda (p) (list (first p) (closure-convert (second p))))
+                                     (ast-toplevel-defun-aux-params node))
                  :body (mapcar #'closure-convert (ast-toplevel-defun-body node))))
 
 ;;; Lambda Lifting
@@ -1169,12 +1173,12 @@
 
 (defmethod lambda-lift ((node ast-lambda))
   (let ((new-body (mapcar #'lambda-lift (ast-lambda-body node)))
-        (new-opt-params (loop for (alpha init sup) in (ast-lambda-optional-params node)
-                              collect (list alpha (lambda-lift init) sup)))
-        (new-key-params (loop for (kw alpha init sup) in (ast-lambda-key-params node)
-                              collect (list kw alpha (lambda-lift init) sup)))
-        (new-aux-params (loop for (alpha init) in (ast-lambda-aux-params node)
-                              collect (list alpha (lambda-lift init))))
+        (new-opt-params (mapcar (lambda (p) (list (first p) (lambda-lift (second p)) (third p)))
+                                (ast-lambda-optional-params node)))
+        (new-key-params (mapcar (lambda (p) (list (first p) (second p) (lambda-lift (third p)) (fourth p)))
+                                (ast-lambda-key-params node)))
+        (new-aux-params (mapcar (lambda (p) (list (first p) (lambda-lift (second p))))
+                                (ast-lambda-aux-params node)))
         (lifted-name (gensym "L_")))
     (setf (ast-lambda-body node) new-body)
     (setf (ast-lambda-optional-params node) new-opt-params)
@@ -1367,14 +1371,14 @@
   (make-instance 'ast-toplevel-defun
                  :name (ast-toplevel-defun-name node)
                  :params (ast-toplevel-defun-params node)
-                 :optional-params (loop for (alpha init sup) in (ast-toplevel-defun-optional-params node)
-                                        collect (list alpha (lambda-lift init) sup))
+                 :optional-params (mapcar (lambda (p) (list (first p) (lambda-lift (second p)) (third p)))
+                                          (ast-toplevel-defun-optional-params node))
                  :rest-param (ast-toplevel-defun-rest-param node)
-                 :key-params (loop for (kw alpha init sup) in (ast-toplevel-defun-key-params node)
-                                   collect (list kw alpha (lambda-lift init) sup))
+                 :key-params (mapcar (lambda (p) (list (first p) (second p) (lambda-lift (third p)) (fourth p)))
+                                     (ast-toplevel-defun-key-params node))
                  :allow-other-keys (ast-toplevel-defun-allow-other-keys node)
-                 :aux-params (loop for (alpha init) in (ast-toplevel-defun-aux-params node)
-                                   collect (list alpha (lambda-lift init)))
+                 :aux-params (mapcar (lambda (p) (list (first p) (lambda-lift (second p))))
+                                     (ast-toplevel-defun-aux-params node))
                  :body (mapcar #'lambda-lift (ast-toplevel-defun-body node))))
 
 (defun perform-lambda-lifting (ast)
@@ -1533,9 +1537,14 @@
       (values required-final optional-final rest key-final allow-other-keys aux-final new-env))))
 
 (defun collect-option-values (plist indicator)
-  (loop for (k v) on plist by #'cddr
-        when (eq k indicator)
-          collect v))
+  (let ((results nil))
+    (do ((tail plist (cddr tail)))
+        ((null tail))
+      (let ((k (car tail))
+            (v (cadr tail)))
+        (when (eq k indicator)
+          (push v results))))
+    (nreverse results)))
 
 (defun canonicalize-defclass-slot (slot-spec env tags-env blocks-env current-scope)
   (let* ((name (if (consp slot-spec) (car slot-spec) slot-spec))
@@ -1586,11 +1595,17 @@
                        :raw spec)))
              specs))
     (t
-     (loop for (initarg initform) on specs by #'cddr
-           collect (list :initarg initarg
-                         :initform-ast (lisp->ast initform env tags-env blocks-env current-scope)
-                         :initfunction-ast (lisp->ast `(lambda () ,initform) env tags-env blocks-env current-scope)
-                         :raw (list initarg initform))))))
+     (let ((results nil))
+       (do ((tail specs (cddr tail)))
+           ((null tail))
+         (let ((initarg (car tail))
+               (initform (cadr tail)))
+           (push (list :initarg initarg
+                       :initform-ast (lisp->ast initform env tags-env blocks-env current-scope)
+                       :initfunction-ast (lisp->ast `(lambda () ,initform) env tags-env blocks-env current-scope)
+                       :raw (list initarg initform))
+                 results)))
+      (nreverse results)))))
 
 (defun canonicalize-defclass-default-initargs (options env tags-env blocks-env current-scope)
   (let ((default-option (find-if (lambda (opt)
@@ -1733,7 +1748,7 @@
          (go
           (let* ((tag (first args))
                  (info (assoc tag tags-env)))
-            (unless info (error "GO: Tag ~A not found in lexical environment." tag))
+            (unless info (error "GO: Tag not found in lexical environment."))
             (destructuring-bind (tag-name label tag-id scope) info
                (declare (ignore tag-name))
                (make-instance 'ast-go 
@@ -2019,7 +2034,11 @@
               (clr-defmethod
                (let* ((name (first args))
                  (rest-args (rest args))
-                 (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
+                 (qualifiers (let ((results nil))
+                               (do ((tail rest-args (cdr tail)))
+                                   ((or (null tail) (not (and (atom (car tail)) (not (null (car tail)))))))
+                                 (push (car tail) results))
+                               (nreverse results)))
                  (after-qualifiers (nthcdr (length qualifiers) rest-args))
                  (lambda-list (first after-qualifiers))
                   (body (strip-leading-docstring (rest after-qualifiers)))
@@ -2033,7 +2052,11 @@
          (defmethod
           (let* ((name (first args))
                  (rest-args (rest args))
-                 (qualifiers (loop for x in rest-args while (and (atom x) (not (null x))) collect x))
+                 (qualifiers (let ((results nil))
+                               (do ((tail rest-args (cdr tail)))
+                                   ((or (null tail) (not (and (atom (car tail)) (not (null (car tail)))))))
+                                 (push (car tail) results))
+                               (nreverse results)))
                  (after-qualifiers (nthcdr (length qualifiers) rest-args))
                  (lambda-list (first after-qualifiers))
              (body (strip-leading-docstring (rest after-qualifiers))))
@@ -2139,15 +2162,10 @@
                        (key-params (ast-lambda-key-params n))
                        (aux-params (ast-lambda-aux-params n))
                        (all-bound-vars (append params
-                                               (loop for (alpha init sup) in opt-params
-                                                     collect alpha
-                                                     when sup collect sup)
+                                               (mapcan (lambda (p) (if (third p) (list (first p) (third p)) (list (first p)))) opt-params)
                                                (when rest-param (list rest-param))
-                                               (loop for (kw alpha init sup) in key-params
-                                                     collect alpha
-                                                     when sup collect sup)
-                                               (loop for (alpha init) in aux-params
-                                                     collect alpha)))
+                                               (mapcan (lambda (p) (if (fourth p) (list (second p) (fourth p)) (list (second p)))) key-params)
+                                               (mapcar #'car aux-params)))
                        (inner-env (cons (cons :lambda all-bound-vars) curr-env)))
                   (append (reduce #'append (mapcar (lambda (opt) (traverse (second opt) inner-env)) opt-params))
                           (reduce #'append (mapcar (lambda (key) (traverse (third key) inner-env)) key-params))
@@ -2160,15 +2178,10 @@
                        (key-params (ast-toplevel-defun-key-params n))
                        (aux-params (ast-toplevel-defun-aux-params n))
                        (all-bound-vars (append params
-                                               (loop for (alpha init sup) in opt-params
-                                                     collect alpha
-                                                     when sup collect sup)
+                                               (mapcan (lambda (p) (if (third p) (list (first p) (third p)) (list (first p)))) opt-params)
                                                (when rest-param (list rest-param))
-                                               (loop for (kw alpha init sup) in key-params
-                                                     collect alpha
-                                                     when sup collect sup)
-                                               (loop for (alpha init) in aux-params
-                                                     collect alpha)))
+                                               (mapcan (lambda (p) (if (fourth p) (list (second p) (fourth p)) (list (second p)))) key-params)
+                                               (mapcar #'car aux-params)))
                        (inner-env (cons (cons :lambda all-bound-vars) curr-env)))
                   (append (reduce #'append (mapcar (lambda (opt) (traverse (second opt) inner-env)) opt-params))
                           (reduce #'append (mapcar (lambda (key) (traverse (third key) inner-env)) key-params))
@@ -2343,25 +2356,17 @@
          (key-params (ast-lambda-key-params node))
          (aux-params (ast-lambda-aux-params node))
          (all-params (append params
-                             (loop for (alpha init sup) in opt-params
-                                   collect alpha
-                                   when sup collect sup)
+                             (mapcan (lambda (p) (if (third p) (list (first p) (third p)) (list (first p)))) opt-params)
                              (when rest-param (list rest-param))
-                             (loop for (kw alpha init sup) in key-params
-                                   collect alpha
-                                   when sup collect sup)
-                             (loop for (alpha init) in aux-params
-                                   collect alpha)))
+                             (mapcan (lambda (p) (if (fourth p) (list (second p) (fourth p)) (list (second p)))) key-params)
+                             (mapcar #'car aux-params)))
          (inner-env (cons (cons :lambda all-params) env))
          (analyzed-opt-params
-          (loop for (alpha init sup) in opt-params
-                collect (list alpha (analyze-environment init inner-env mutated) sup)))
+          (mapcar (lambda (p) (list (first p) (analyze-environment (second p) inner-env mutated) (third p))) opt-params))
          (analyzed-key-params
-          (loop for (kw alpha init sup) in key-params
-                collect (list kw alpha (analyze-environment init inner-env mutated) sup)))
+          (mapcar (lambda (p) (list (first p) (second p) (analyze-environment (third p) inner-env mutated) (fourth p))) key-params))
          (analyzed-aux-params
-          (loop for (alpha init) in aux-params
-                collect (list alpha (analyze-environment init inner-env mutated))))
+          (mapcar (lambda (p) (list (first p) (analyze-environment (second p) inner-env mutated))) aux-params))
          (mutated-params (remove-if-not (lambda (p) (member p mutated :test #'eq)) all-params)))
     (if mutated-params
         (let* ((let-env (cons (cons :let mutated-params) inner-env))
@@ -2616,25 +2621,17 @@
          (key-params (ast-toplevel-defun-key-params node))
          (aux-params (ast-toplevel-defun-aux-params node))
          (all-params (append params
-                             (loop for (alpha init sup) in opt-params
-                                   collect alpha
-                                   when sup collect sup)
+                             (mapcan (lambda (p) (if (third p) (list (first p) (third p)) (list (first p)))) opt-params)
                              (when rest-param (list rest-param))
-                             (loop for (kw alpha init sup) in key-params
-                                   collect alpha
-                                   when sup collect sup)
-                             (loop for (alpha init) in aux-params
-                                   collect alpha)))
+                             (mapcan (lambda (p) (if (fourth p) (list (second p) (fourth p)) (list (second p)))) key-params)
+                             (mapcar #'car aux-params)))
          (inner-env (cons (cons :lambda all-params) env))
          (analyzed-opt-params
-          (loop for (alpha init sup) in opt-params
-                collect (list alpha (analyze-environment init inner-env mutated) sup)))
+          (mapcar (lambda (p) (list (first p) (analyze-environment (second p) inner-env mutated) (third p))) opt-params))
          (analyzed-key-params
-          (loop for (kw alpha init sup) in key-params
-                collect (list kw alpha (analyze-environment init inner-env mutated) sup)))
+          (mapcar (lambda (p) (list (first p) (second p) (analyze-environment (third p) inner-env mutated) (fourth p))) key-params))
          (analyzed-aux-params
-          (loop for (alpha init) in aux-params
-                collect (list alpha (analyze-environment init inner-env mutated))))
+          (mapcar (lambda (p) (list (first p) (analyze-environment (second p) inner-env mutated))) aux-params))
          (analyzed-body (mapcar (lambda (form) (analyze-environment form inner-env mutated))
                                 (ast-toplevel-defun-body node))))
     (let ((mutated-params (intersection all-params mutated :test #'eq)))

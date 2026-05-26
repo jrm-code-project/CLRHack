@@ -45,7 +45,7 @@ namespace CLRHack.Tests
             beforeOld.Function = new Func<object[], object>(_ =>
             {
                 trace.Add("before-old");
-                return null;
+                return null!;
             });
 
             var beforeNew = new StandardMethodMetaobject();
@@ -55,7 +55,7 @@ namespace CLRHack.Tests
             beforeNew.Function = new Func<object[], object>(_ =>
             {
                 trace.Add("before-new");
-                return null;
+                return null!;
             });
 
             var primary = new StandardMethodMetaobject();
@@ -74,7 +74,7 @@ namespace CLRHack.Tests
             afterOld.Function = new Func<object[], object>(_ =>
             {
                 trace.Add("after-old");
-                return null;
+                return null!;
             });
 
             var afterNew = new StandardMethodMetaobject();
@@ -84,7 +84,7 @@ namespace CLRHack.Tests
             afterNew.Function = new Func<object[], object>(_ =>
             {
                 trace.Add("after-new");
-                return null;
+                return null!;
             });
 
             MopRuntime.AddMethod(gf, beforeOld);

@@ -58,17 +58,18 @@
 
 (defmacro define-simple-instruction-makers (&rest defs)
   `(progn
-     ,@(loop for def in defs
-             for op = (if (consp def) (car def) def)
-             for effect = (if (consp def) (cadr def) 0)
-             for func-name = (intern (symbol-name op) (find-package "IL"))
-             collect `(progn
-                        (export ',func-name "IL")
-                        (defun ,func-name (&key label)
-                          (make-instance 'cil-simple-instruction
-                                         :opcode ,(string-downcase (string op))
-                                         :stack-effect ,effect
-                                         :label label))))))
+     ,@(mapcar (lambda (def)
+                 (let* ((op (if (consp def) (car def) def))
+                        (effect (if (consp def) (cadr def) 0))
+                        (func-name (intern (symbol-name op) (find-package "IL"))))
+                   `(progn
+                      (export ',func-name "IL")
+                      (defun ,func-name (&key label)
+                        (make-instance 'cil-simple-instruction
+                                       :opcode ,(string-downcase (string op))
+                                       :stack-effect ,effect
+                                       :label label)))))
+               defs)))
 
 (define-simple-instruction-makers 
   (add -1) (sub -1) (mul -1) (div -1) (rem -1) 
@@ -108,19 +109,20 @@
 
 (defmacro define-operand-instruction-makers (class-name &rest defs)
   `(progn
-     ,@(loop for def in defs
-             for op = (if (consp def) (car def) def)
-             for effect = (if (consp def) (cadr def) 0)
-             for func-name = (intern (symbol-name op) (find-package "IL"))
-             collect `(progn
-                        (export ',func-name "IL")
-                        (defun ,func-name (operand &rest kwargs &key label &allow-other-keys)
-                          (declare (ignore label))
-                          (apply #'make-instance ',class-name
-                                 :opcode ,(string-downcase (string op))
-                                 :stack-effect ,effect
-                                 :operand operand
-                                 kwargs))))))
+     ,@(mapcar (lambda (def)
+                 (let* ((op (if (consp def) (car def) def))
+                        (effect (if (consp def) (cadr def) 0))
+                        (func-name (intern (symbol-name op) (find-package "IL"))))
+                   `(progn
+                      (export ',func-name "IL")
+                      (defun ,func-name (operand &rest kwargs &key label &allow-other-keys)
+                        (declare (ignore label))
+                        (apply #'make-instance ',class-name
+                               :opcode ,(string-downcase (string op))
+                               :stack-effect ,effect
+                               :operand operand
+                               kwargs)))))
+               defs)))
 
 ;;; --- Specialized Payloads ---
 
@@ -350,34 +352,35 @@
          (block-entries '()))
     
     (labels ((flatten-insts (insts)
-               (loop for inst in insts
-          do (if (or (typep inst 'cil-block)
-                (typep inst 'cil-structured-block))
-                            (let ((hdr (get-header inst)))
-                              (cond ((and (> (length hdr) 5) (string-equal (subseq hdr 0 5) "catch"))
-                                     (push (length flat-insts) block-entries)
-                                     (vector-push-extend :catch-entry flat-insts)
-                                     (flatten-insts (get-instructions inst)))
-                                    ((string-equal hdr "finally")
-                                     (push (length flat-insts) block-entries)
-                                     (vector-push-extend :finally-entry flat-insts)
-                                     (flatten-insts (get-instructions inst)))
-                                    (t (flatten-insts (get-instructions inst)))))
-                            (progn
-                              (when (get-label inst)
-                                (setf (gethash (get-label inst) label-to-index) (length flat-insts)))
-                              (vector-push-extend inst flat-insts))))))
+               (dolist (inst insts)
+                 (if (or (typep inst 'cil-block)
+                         (typep inst 'cil-structured-block))
+                     (let ((hdr (get-header inst)))
+                       (cond ((and (> (length hdr) 5) (string-equal (subseq hdr 0 5) "catch"))
+                              (push (length flat-insts) block-entries)
+                              (vector-push-extend :catch-entry flat-insts)
+                              (flatten-insts (get-instructions inst)))
+                             ((string-equal hdr "finally")
+                              (push (length flat-insts) block-entries)
+                              (vector-push-extend :finally-entry flat-insts)
+                              (flatten-insts (get-instructions inst)))
+                             (t (flatten-insts (get-instructions inst)))))
+                     (progn
+                       (when (get-label inst)
+                         (setf (gethash (get-label inst) label-to-index) (length flat-insts)))
+                       (vector-push-extend inst flat-insts))))))
       (flatten-insts instructions))
       
     (labels ((conservative-maxstack ()
                ;; Fall back to a safe upper bound if the control-flow walk
                ;; becomes too expensive. Any sufficiently large maxstack is
                ;; valid IL; precision is only an optimization here.
-               (max 8
-                    (loop for i from 0 below (length flat-insts)
-                          for inst = (aref flat-insts i)
-                          unless (keywordp inst)
-                            sum (max 0 (get-stack-effect inst))))))
+               (let ((sum 0))
+                 (dotimes (i (length flat-insts))
+                   (let ((inst (aref flat-insts i)))
+                     (unless (keywordp inst)
+                       (incf sum (max 0 (get-stack-effect inst))))))
+                 (max 8 sum))))
       (let ((n (length flat-insts))
             (max-depth 0)
             (depths (make-array (length flat-insts) :initial-element nil))
@@ -391,7 +394,8 @@
                 (push (cons (1+ idx) 1) queue)
                 (push (cons (1+ idx) 0) queue))))
               
-        (loop while queue do
+        (do ()
+            ((null queue))
           (incf visit-count)
           (when (> visit-count visit-budget)
             (return-from compute-maxstack (conservative-maxstack)))
@@ -450,10 +454,8 @@
   (when (get-locals method)
     (format stream "    .locals init (~{~A~^, ~})~%" (get-locals method)))
   (let ((insts (get-instructions method)))
-    (loop for i from 0 below (length insts)
-          for inst = (aref insts i)
-          do (emit-instruction inst stream)))
-  (format stream "}~%~%"))
+    (dotimes (i (length insts))
+      (emit-instruction (aref insts i) stream)))  (format stream "}~%~%"))
 
 (defun il::method (&key name (return-type "void") arg-types
                         (visibility :public) static-p (hidebysig-p t) virtual-p
@@ -594,20 +596,17 @@
   (format stream "{~%")
   (let ((fields (get-fields class)))
     (when (> (length fields) 0)
-      (loop for i from 0 below (length fields)
-            for field = (aref fields i)
-            do (emit-field field stream))
+      (dotimes (i (length fields))
+        (emit-field (aref fields i) stream))
       (format stream "~%"))) 
   (let ((properties (get-class-properties class)))
     (when (> (length properties) 0)
-      (loop for i from 0 below (length properties)
-            for prop = (aref properties i)
-            do (emit-property prop stream (get-name class)))
+      (dotimes (i (length properties))
+        (emit-property (aref properties i) stream (get-name class)))
       (format stream "~%")))
   (let ((methods (get-methods class)))
-    (loop for i from 0 below (length methods)
-          for method = (aref methods i)
-          do (emit-method method stream)))
+    (dotimes (i (length methods))
+      (emit-method (aref methods i) stream)))
   (format stream "} // end of class ~A~%~%" (get-name class)))
 
 (defmethod print-object ((class cil-class) stream)
@@ -674,8 +673,8 @@
   "Dumps the entire compiled universe into a stream ready for ilasm."
   
   ;; 1. External dependencies
-  (loop for ext in (get-externs assembly) do
-        (format stream ".assembly extern ~A {}~%" ext))
+  (dolist (ext (get-externs assembly))
+    (format stream ".assembly extern ~A {}~%" ext))
   (format stream "~%")
   
   ;; 2. Assembly declaration
@@ -688,9 +687,8 @@
     
   ;; 4. Emit all classes
   (let ((classes (get-classes assembly)))
-    (loop for i from 0 below (length classes)
-          for class = (aref classes i)
-          do (emit-class class stream))))
+    (dotimes (i (length classes))
+      (emit-class (aref classes i) stream))))
 
 (defmethod print-object ((assembly cil-assembly) stream)
   "Prints the high-level assembly summary."
