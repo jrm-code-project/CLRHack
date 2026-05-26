@@ -4,90 +4,154 @@
 
 Produce a trusted bootstrap chain where CLRHack compiles the compiler source set into a Gen1 compiler artifact, then uses Gen1 to produce Gen2 with equivalent behavior.
 
-## Scope and Assumptions
+## Current Baseline
 
-- Scope in this document is the Lisp compiler frontend and codegen pipeline.
-- Runtime validation remains the existing .NET build and standalone harness.
-- Self-hosting is introduced as an additive lane; host SBCL remains fallback until gates are green.
+- `dotnet test CLRHack.sln` is green.
+- `sbcl --script build-tests.lisp` is green and still exercises the standalone compile/link lane.
+- The existing bootstrap driver already reaches `SelfHostCompilerGen1` according to the current incompatibility log.
+- The bootstrap source inventory is currently the eight-file compiler lane in `bootstrap-selfhost.lisp`.
 
-## Milestones
+## Known Blockers For The Next Milestone
 
-### M0. Bootstrap Contract
+- Gen2 is not yet established as a standing, repeatable bootstrap target.
+- The bootstrap lane still depends on host SBCL for orchestration, macro expansion, and error reporting.
+- Deterministic source order and artifact comparison are not yet enforced as hard bootstrap contracts.
 
-Deliverables:
-- Stable source inventory and build order.
-- Named artifacts: `SelfHostCompilerGen1`, `SelfHostCompilerGen2`.
-- Pass criteria and reproducibility checks.
+## Incremental Strategy
 
-Exit criteria:
-- Contract agreed and committed.
+The strategy is to make each bootstrap step independently shippable before widening scope:
 
-### M1. Bootstrap Driver
+1. Freeze the compiler source inventory and make the bootstrap driver deterministic.
+2. Keep host-based execute mode as the only implementation until the source order and failure reporting are reproducible.
+3. Use Gen1 to compile the same source set into Gen2 only after the current inventory is stable and the first failing form is logged precisely.
+4. Add equivalence checks only after Gen2 exists and can be compared to Gen1 without changing the bootstrap surface.
 
-Deliverables:
-- Scripted driver to compile compiler modules and link a runner.
-- Safe dry-run mode for inventory validation.
-- Explicit execute mode for full compile attempts.
+## Phases
 
-Exit criteria:
-- Driver validates inventory in dry-run mode.
-- Driver can start execute mode and emit partial artifacts for debugging.
+### Phase 0. Contract and Inventory Freeze
 
-### M2. Source Boundary Hardening
+Goal:
+- Define the bootstrap contract as a concrete inventory plus named artifacts: `SelfHostCompilerGen1` and `SelfHostCompilerGen2`.
 
-Deliverables:
-- Deterministic source roots and path handling.
-- Canonical source order for compiler modules.
+Code areas:
+- `bootstrap-selfhost.lisp`
 
-Exit criteria:
-- No load-order ambiguity.
-- Same source inventory works from clean checkout.
-
-### M3. Gen1 Build
-
-Deliverables:
-- Full module compile of compiler source set.
-- Linked `SelfHostCompilerGen1` runner.
+Runtime implications:
+- None beyond the existing host SBCL lane.
 
 Exit criteria:
-- Gen1 build completes end-to-end from host invocation.
+- The compiler source list is explicit, ordered, and documented.
+- Dry-run and execute mode use the same inventory.
+- The driver reports missing files and preflight issues before compilation starts.
 
-### M4. Gen2 Build (Self-Compile)
+New tests:
+- A bootstrap dry-run check that asserts the source list and order.
+- A preflight check for required files and `dotnet` availability.
 
-Deliverables:
-- Gen1 compiles same source set and links `SelfHostCompilerGen2`.
+### Phase 1. Source Boundary Hardening
+
+Goal:
+- Remove path, naming, and load-order ambiguity from the bootstrap lane.
+
+Code areas:
+- `bootstrap-selfhost.lisp`
+- Source-file handling in the Lisp compiler front end if inventory discovery needs support.
+
+Runtime implications:
+- None unless a source-boundary bug exposes a missing reader or path primitive.
 
 Exit criteria:
-- Gen2 build completes without host-only codepaths.
+- Clean checkout and repeated runs produce the same source order and artifact names.
+- Failure reports name the exact source form that stopped the lane.
 
-### M5. Equivalence and Trust
+New tests:
+- Inventory determinism test.
+- Artifact-name sanitization test.
+- Regression test for the first unsupported source form reporting path.
 
-Deliverables:
-- Behavioral parity checks across baseline suite.
-- Artifact comparison policy (manifest and normalized IL-level checks).
+### Phase 2. Gen1 As A Real Compiler Host
+
+Goal:
+- Use the current compiler source set to produce a complete Gen1 artifact without relying on ad hoc manual repair.
+
+Code areas:
+- Compiler source files that still require host-specific macros or reader behavior.
+- `bootstrap-selfhost.lisp` execute mode.
+
+Runtime implications:
+- Only add runtime support if a compiler-source requirement proves the runtime is the controlling blocker.
 
 Exit criteria:
-- No behavioral regressions between Gen1 and Gen2.
+- `SelfHostCompilerGen1` builds end-to-end from the host lane on demand.
+- The execute mode logs every failing source in a single run instead of stopping silently.
+
+New tests:
+- Gen1 build smoke test.
+- First-failure aggregation test for execute mode.
+- Minimal post-link smoke run for the Gen1 artifact.
+
+### Phase 3. Gen2 Self-Compile Lane
+
+Goal:
+- Have Gen1 compile the same source set and link `SelfHostCompilerGen2`.
+
+Code areas:
+- Any compiler-source form that still assumes host-only behavior during self-compilation.
+- Bootstrap link and manifest handling, if Gen2 needs a separate root or dependency shape.
+
+Runtime implications:
+- Keep runtime changes minimal and justified by a concrete self-hosting blocker.
+
+Exit criteria:
+- Gen1 can build Gen2 with the same source inventory.
+- Gen2 runs the same smoke checks as Gen1.
+
+New tests:
+- Gen1-to-Gen2 compile smoke test.
+- Manifest-link test for Gen2 output.
+- Simple behavioral parity test on one or two tiny compiler-input fixtures.
+
+### Phase 4. Equivalence And Trust
+
+Goal:
+- Prove that Gen1 and Gen2 are behaviorally equivalent for the supported compiler surface.
+
+Code areas:
+- Bootstrap comparison helpers and any artifact normalization utilities.
+
+Runtime implications:
+- None unless the comparison needs additional metadata from the runtime.
+
+Exit criteria:
+- The baseline suite passes under the self-host lane.
+- Any Gen1 versus Gen2 drift is tracked as a real regression, not an artifact-order artifact.
+
+New tests:
+- Normalized artifact comparison test.
+- Bootstrap replay test from clean checkout.
+- Re-run of the existing standalone suite against Gen1 and Gen2 outputs.
 
 ## Validation Gates
 
 1. `dotnet test CLRHack.sln` remains green.
 2. `sbcl --script build-tests.lisp` remains green.
-3. Bootstrap lane dry-run passes.
+3. Bootstrap lane dry-run passes and reports the same inventory each time.
 4. Bootstrap lane execute mode reaches Gen1 link.
 5. Gen1 can build Gen2.
+6. Standalone execution remains green for any codegen or runtime change touched by a phase.
 
-## Risks to Watch
+## Risks To Watch
 
-- Compiler source forms outside currently compiled Lisp surface.
-- Hidden host assumptions in path and package setup.
+- Compiler source forms outside the current compiled Lisp surface.
+- Host SBCL assumptions leaking into path handling, package setup, or macro expansion.
 - Non-deterministic artifact content obscuring real regressions.
+- Adding runtime features before a compiler-source requirement proves they are necessary.
 
 ## Immediate Next Tasks
 
-1. Keep the compiler source inventory current in the driver script.
-2. Run dry-run mode from clean checkout and validate file discovery.
-3. Begin execute-mode attempts and record first unsupported source form.
+1. Keep the compiler source inventory current in the bootstrap driver.
+2. Add a reproducible dry-run check if the inventory or order changes.
+3. When the next bootstrap failure appears, log the first unsupported source form before changing runtime code.
 
 ## Bootstrap Incompatibility Log
 

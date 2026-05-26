@@ -49,6 +49,22 @@
         (push source missing)))
     (nreverse missing)))
 
+(defun assert-bootstrap-source-contract (source-files)
+  (assert (plusp (length source-files)) () "Bootstrap source inventory is empty.")
+  (let ((seen-assembly-names (make-hash-table :test #'equal)))
+    (dolist (source source-files)
+      (let ((assembly-name (bootstrap-assembly-name source)))
+        (assert (and (stringp source)
+                     (plusp (length source)))
+                ()
+                "Bootstrap source has an invalid name: ~A"
+                source)
+        (assert (not (gethash assembly-name seen-assembly-names))
+                ()
+                "Bootstrap source collision maps multiple files to the same assembly name: ~A"
+                assembly-name)
+        (setf (gethash assembly-name seen-assembly-names) source)))))
+
 (defun validate-bootstrap-preflight ()
   (let ((issues nil))
     (let ((dotnet-present-p
@@ -84,6 +100,7 @@
 
 (defun run-bootstrap-dry-run (source-files)
   (format t "~%--- Self-host bootstrap dry-run ---~%")
+  (assert-bootstrap-source-contract source-files)
   (let ((preflight-issues (validate-bootstrap-preflight)))
     (if preflight-issues
         (error "Bootstrap preflight failed:~%~{ - ~A~%~}" preflight-issues)
@@ -96,6 +113,7 @@
 
 (defun run-bootstrap-execute (source-files)
   (format t "~%--- Self-host bootstrap execute mode ---~%")
+  (assert-bootstrap-source-contract source-files)
   (let ((manifest-paths nil)
         (last-manifest nil)
         (failures nil))

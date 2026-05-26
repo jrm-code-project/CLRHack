@@ -6,6 +6,19 @@ using System.Reflection;
 namespace Lisp
 {
     public abstract class Closure {
+        private static bool RuntimeInitialized;
+
+        private static void EnsureRuntimeInitialized()
+        {
+            if (RuntimeInitialized)
+            {
+                return;
+            }
+
+            MopRuntime.Initialize();
+            RuntimeInitialized = true;
+        }
+
         public virtual bool IsLazyResolver => false;
         public abstract object Invoke ();
         public abstract object Invoke (object arg0);
@@ -135,6 +148,46 @@ namespace Lisp
 
         public static object ResolveFunction(string? packageName, string symbolName)
         {
+            EnsureRuntimeInitialized();
+
+            if (string.Equals(packageName, "CLRHACK", StringComparison.OrdinalIgnoreCase)
+                && string.Equals(symbolName, "ANALYZE-ENVIRONMENT", StringComparison.OrdinalIgnoreCase))
+            {
+                var selfHostAst = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a =>
+                                      string.Equals(a.GetName().Name, "SelfHost_ast", StringComparison.OrdinalIgnoreCase));
+                if (selfHostAst == null)
+                {
+                    var baseDir = AppContext.BaseDirectory;
+                    if (!string.IsNullOrEmpty(baseDir))
+                    {
+                        var astPath = System.IO.Path.Combine(baseDir, "SelfHost_ast.dll");
+                        if (System.IO.File.Exists(astPath))
+                        {
+                            selfHostAst = Assembly.LoadFrom(astPath);
+                        }
+                    }
+                }
+                if (selfHostAst != null)
+                {
+                    var programType = selfHostAst.GetType("Program");
+                    var field = programType?
+                        .GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                        .FirstOrDefault(f => string.Equals(f.Name, "ANALYZE_ENVIRONMENT", StringComparison.OrdinalIgnoreCase));
+                    var fieldValue = field?.GetValue(null);
+                    if (fieldValue is Closure analyzeClosure)
+                    {
+                        return analyzeClosure;
+                    }
+                }
+            }
+
+            if (string.Equals(symbolName, "CLRHASH", StringComparison.OrdinalIgnoreCase)
+                && (string.IsNullOrEmpty(packageName)
+                    || string.Equals(packageName, "CLRHACK", StringComparison.OrdinalIgnoreCase)))
+            {
+                return ResolveFunction("COMMON-LISP", "CLRHASH");
+            }
+
             var package = string.IsNullOrEmpty(packageName) ? Package.Current : Package.Find(packageName);
             if (package != null)
             {
@@ -182,14 +235,151 @@ namespace Lisp
             }
 
             var methodName = SanitizeIdentifier(symbolName);
-            var candidates = AppDomain.CurrentDomain.GetAssemblies()
+            object? ResolveFromPackageNow()
+            {
+                var package = string.IsNullOrEmpty(packageName) ? Package.Current : Package.Find(packageName);
+                if (package == null)
+                {
+                    return null;
+                }
+
+                var (symbol, status) = package.FindSymbol(symbolName);
+                if (status != SymbolStatus.None && symbol != null && symbol.FBoundP)
+                {
+                    return symbol.Function;
+                }
+
+                return null;
+            }
+
+            Closure? FindFieldCandidate()
+            {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()
+                             .Where(a => !a.IsDynamic)
+                             .Where(a => a.GetName().Name != null && a.GetName().Name.StartsWith("SelfHost_", StringComparison.Ordinal)))
+                {
+                    var programType = assembly.GetType("Program");
+                    if (programType == null)
+                    {
+                        continue;
+                    }
+
+                    var field = programType
+                        .GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                        .FirstOrDefault(f => string.Equals(f.Name, methodName, StringComparison.OrdinalIgnoreCase));
+
+                    if (field == null)
+                    {
+                        continue;
+                    }
+
+                    var fieldValue = field.GetValue(null);
+                    if (fieldValue is Closure closure)
+                    {
+                        return closure;
+                    }
+
+                    if (fieldValue != null)
+                    {
+                        var invokeMethods = fieldValue.GetType()
+                            .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                            .Where(m => string.Equals(m.Name, "Invoke", StringComparison.Ordinal))
+                            .ToArray();
+
+                        if (invokeMethods.Length > 0)
+                        {
+                            var adapted = MopRuntime.CreateNativeClosure(args =>
+                            {
+                                var invoke = invokeMethods.FirstOrDefault(m =>
+                                {
+                                    var p = m.GetParameters();
+                                    return p.Length == args.Length;
+                                });
+
+                                if (invoke != null)
+                                {
+                                    return invoke.Invoke(fieldValue, args);
+                                }
+
+                                var variadic = invokeMethods.FirstOrDefault(m =>
+                                {
+                                    var p = m.GetParameters();
+                                    return p.Length == 1 && p[0].ParameterType == typeof(object[]);
+                                });
+
+                                if (variadic != null)
+                                {
+                                    return variadic.Invoke(fieldValue, new object[] { args });
+                                }
+
+                                throw new Exception($"Field {field.Name} is not invokable for {symbolName}.");
+                            });
+
+                            return adapted;
+                        }
+                    }
+                }
+
+                return null;
+            }
+
+            MethodInfo[] FindCandidates() => AppDomain.CurrentDomain.GetAssemblies()
                 .Where(a => !a.IsDynamic)
                 .Where(a => a.GetName().Name != null && a.GetName().Name.StartsWith("SelfHost_", StringComparison.Ordinal))
                 .Select(a => a.GetType("Program"))
                 .Where(t => t != null)
-                .SelectMany(t => t!.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                    .Where(m => string.Equals(m.Name, methodName, StringComparison.OrdinalIgnoreCase)))
+                .SelectMany(t => t!.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                    .Where(m => string.Equals(m.Name, methodName, StringComparison.OrdinalIgnoreCase))
+                    .Where(m => !string.Equals(m.Name, "InitializeModule", StringComparison.OrdinalIgnoreCase)
+                                && !m.Name.StartsWith("InitializeModuleChunk", StringComparison.OrdinalIgnoreCase)
+                                && !string.Equals(m.Name, "INITIALIZE_MODULE", StringComparison.OrdinalIgnoreCase)
+                                && !m.Name.StartsWith("INITIALIZE_MODULE_CHUNK", StringComparison.OrdinalIgnoreCase)))
                 .ToArray();
+
+            var candidates = FindCandidates();
+            var fieldCandidate = FindFieldCandidate();
+            if (fieldCandidate != null)
+            {
+                SelfHostFunctionCache[cacheKey] = fieldCandidate;
+                return fieldCandidate;
+            }
+
+            if (candidates.Length == 0)
+            {
+                var baseDir = AppContext.BaseDirectory;
+                if (!string.IsNullOrEmpty(baseDir) && System.IO.Directory.Exists(baseDir))
+                {
+                    foreach (var path in System.IO.Directory.EnumerateFiles(baseDir, "SelfHost_*.dll"))
+                    {
+                        try
+                        {
+                            var fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+                            _ = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a =>
+                                string.Equals(a.GetName().Name, fileName, StringComparison.OrdinalIgnoreCase))
+                                ?? Assembly.LoadFrom(path);
+                        }
+                        catch
+                        {
+                            // Ignore preload failures and continue searching already-loaded assemblies.
+                        }
+                    }
+                }
+
+                var packageResolved = ResolveFromPackageNow();
+                if (packageResolved != null)
+                {
+                    return packageResolved as Closure;
+                }
+
+                fieldCandidate = FindFieldCandidate();
+                if (fieldCandidate != null)
+                {
+                    SelfHostFunctionCache[cacheKey] = fieldCandidate;
+                    return fieldCandidate;
+                }
+
+                candidates = FindCandidates();
+            }
 
             if (candidates.Length == 0)
             {
