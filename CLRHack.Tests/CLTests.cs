@@ -17,9 +17,11 @@ namespace CLRHack.Tests
             
             Assert.NotNull(CL._Pls);
             Assert.Equal("+", CL._Pls.Name);
-            
-            Assert.NotNull(CL._Nil);
-            Assert.Equal("NIL", CL._Nil.Name);
+
+            Assert.Null(CL.Nil);
+            var (nilSym, nilStatus) = Package.CommonLisp.FindSymbol("NIL");
+            Assert.Null(nilSym);
+            Assert.Equal(SymbolStatus.External, nilStatus);
             
             Assert.NotNull(CL._T);
             Assert.Equal("T", CL._T.Name);

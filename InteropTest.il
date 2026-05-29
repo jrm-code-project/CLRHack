@@ -10,12 +10,12 @@
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object LIST2009, object CLR_VIRT_INST_TEMP, object SYM2008)
+    .locals init (object LIST1928, object CLR_VIRT_INST_TEMP, object SYM1927)
     ldstr "FOO"
     ldnull
     newobj instance void [LispBase]Lisp.Symbol::'.ctor'(string, class [LispBase]Lisp.Package)
-    stloc SYM2008
-    ldloc SYM2008
+    stloc SYM1927
+    ldloc SYM1927
     castclass [LispBase]Lisp.Symbol
     callvirt instance string [LispBase]Lisp.Symbol::'get_Name'()
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -24,8 +24,8 @@
     ldstr "head"
     ldnull
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc LIST2009
-    ldloc LIST2009
+    stloc LIST1928
+    ldloc LIST1928
     ldfld object [LispBase]Lisp.List/ListCell::'first'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull

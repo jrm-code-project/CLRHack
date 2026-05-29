@@ -7,73 +7,65 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'COUNT406'
-    .field public static object 'TRACKER407'
+    .field public static object 'COUNT434'
+    .field public static object 'TRACKER435'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'COUNT406'
+    stsfld object Program::'COUNT434'
     ldnull
-    stsfld object Program::'TRACKER407'
+    stsfld object Program::'TRACKER435'
     ret
 }
 
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP458, object ARG_TMP457, object FN_TMP452, object LOOP_FN412, object TRACKER407, object COUNT406)
+    .locals init (object ARG_TMP482, object ARG_TMP481, object FN_TMP477, object LOOP_FN440, object TRACKER435, object COUNT434)
     ldc.i4 5
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc COUNT406
+    stloc COUNT434
     ldstr "Start"
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc TRACKER407
-    ldloc TRACKER407
-    ldloc COUNT406
-    newobj instance void L_414::'.ctor'(object, object)
-    stloc LOOP_FN412
-    ldloc LOOP_FN412
-    stloc FN_TMP452
-    ldloc FN_TMP452
-    brtrue FN_NULL453
+    stloc TRACKER435
+    ldloc TRACKER435
+    ldloc COUNT434
+    newobj instance void L_442::'.ctor'(object, object)
+    stloc LOOP_FN440
+    ldloc LOOP_FN440
+    stloc FN_TMP477
+    ldloc FN_TMP477
+    brtrue FN_NULL478
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP452
-FN_NULL453:
+    stloc FN_TMP477
+FN_NULL478:
     nop
-    ldloc FN_TMP452
+    ldloc FN_TMP477
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK455
+    stloc FN_TMP477
+    ldloc FN_TMP477
+    brtrue FN_TYPE_OK479
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP452
-FN_TYPE_OK455:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP477
+FN_TYPE_OK479:
     nop
-    ldloc FN_TMP452
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK454
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP452
-FN_LAZY_OK454:
+FN_AFTER480:
     nop
-FN_AFTER456:
-    nop
-    ldloc LOOP_FN412
-    stloc ARG_TMP457
+    ldloc LOOP_FN440
+    stloc ARG_TMP481
     ldstr "start"
-    stloc ARG_TMP458
-    ldloc FN_TMP452
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP457
-    ldloc ARG_TMP458
+    stloc ARG_TMP482
+    ldloc FN_TMP477
+    ldloc ARG_TMP481
+    ldloc ARG_TMP482
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
     ret
 }
@@ -90,11 +82,11 @@ FN_AFTER456:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_414
+.class public auto ansi beforefieldinit L_442
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'TRACKER407'
-    .field public object 'COUNT406'
+    .field public object 'TRACKER435'
+    .field public object 'COUNT434'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -103,111 +95,103 @@ FN_AFTER456:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_414::'TRACKER407'
+    stfld object L_442::'TRACKER435'
     ldarg.0
     ldarg 2
-    stfld object L_414::'COUNT406'
+    stfld object L_442::'COUNT434'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP449, object ARG_TMP448, object FN_TMP443, object CELL_VAL_TMP442, object CELL_TMP441, object CELL_VAL_TMP440, object CELL_TMP439, object TEMP438, object TEMP437, object NEXT_VAL411)
+    .locals init (object ARG_TMP474, object ARG_TMP473, object FN_TMP469, object CELL_VAL_TMP468, object CELL_TMP467, object CELL_VAL_TMP466, object CELL_TMP465, object TEMP464, object TEMP463, object NEXT_VAL439)
     ldarg 2
     ldnull
     ceq
-    brtrue ELSE451
+    brtrue ELSE476
     ldstr "continue"
-    stloc NEXT_VAL411
+    stloc NEXT_VAL439
     ldstr "Counting down..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_414::'TRACKER407'
+    ldfld object L_442::'TRACKER435'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldarg.0
-    ldfld object L_414::'TRACKER407'
-    stloc CELL_TMP439
+    ldfld object L_442::'TRACKER435'
+    stloc CELL_TMP465
     ldstr "Mutated in flight!"
-    stloc CELL_VAL_TMP440
-    ldloc CELL_TMP439
+    stloc CELL_VAL_TMP466
+    ldloc CELL_TMP465
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP440
+    ldloc CELL_VAL_TMP466
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP440
+    ldloc CELL_VAL_TMP466
     pop
     ldarg.0
-    ldfld object L_414::'COUNT406'
+    ldfld object L_442::'COUNT434'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldnull
     ceq
-    brtrue ELSE450
+    brtrue ELSE475
     ldarg.0
-    ldfld object L_414::'COUNT406'
-    stloc CELL_TMP441
+    ldfld object L_442::'COUNT434'
+    stloc CELL_TMP467
     ldnull
-    stloc CELL_VAL_TMP442
-    ldloc CELL_TMP441
+    stloc CELL_VAL_TMP468
+    ldloc CELL_TMP467
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP442
+    ldloc CELL_VAL_TMP468
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP442
+    ldloc CELL_VAL_TMP468
     pop
     ldarg 1
-    stloc FN_TMP443
-    ldloc FN_TMP443
-    brtrue FN_NULL444
+    stloc FN_TMP469
+    ldloc FN_TMP469
+    brtrue FN_NULL470
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP443
-FN_NULL444:
+    stloc FN_TMP469
+FN_NULL470:
     nop
-    ldloc FN_TMP443
+    ldloc FN_TMP469
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK446
+    stloc FN_TMP469
+    ldloc FN_TMP469
+    brtrue FN_TYPE_OK471
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP443
-FN_TYPE_OK446:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP469
+FN_TYPE_OK471:
     nop
-    ldloc FN_TMP443
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK445
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP443
-FN_LAZY_OK445:
-    nop
-FN_AFTER447:
+FN_AFTER472:
     nop
     ldarg 1
-    stloc ARG_TMP448
+    stloc ARG_TMP473
     ldstr "recurse"
-    stloc ARG_TMP449
-    ldloc FN_TMP443
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP448
-    ldloc ARG_TMP449
+    stloc ARG_TMP474
+    ldloc FN_TMP469
+    ldloc ARG_TMP473
+    ldloc ARG_TMP474
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
     ret
-ELSE450:
+ELSE475:
     nop
     ldstr "Done!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE451:
+ELSE476:
     nop
     ldstr "Error"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -246,7 +230,7 @@ ELSE451:
     ldarg 1
     ldarg 2
     tail.
-    callvirt instance object L_414::'InvokeBody'(object, object)
+    callvirt instance object L_442::'InvokeBody'(object, object)
     ret
 }
 
@@ -580,5 +564,5 @@ ELSE451:
     ret
 }
 
-} // end of class L_414
+} // end of class L_442
 

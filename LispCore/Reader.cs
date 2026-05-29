@@ -24,7 +24,7 @@ namespace Lisp
             var result = ReadInternal(eofErrorP, eofValue, recursiveP);
             if (result == null) return null;
             if (result == CloseParenMarker) return result;
-            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            if (CL.StrReadSuppressStr != null) return null;
             return result;
         }
 
@@ -166,7 +166,7 @@ namespace Lisp
         public object? HandleConditional(bool onFeaturePresent)
         {
             var oldSuppress = CL.StrReadSuppressStr;
-            CL.StrReadSuppressStr = CL.Nil;
+            CL.StrReadSuppressStr = null;
             object? featureExpr;
             try
             {
@@ -261,10 +261,10 @@ namespace Lisp
             return bits.ToArray();
         }
 
-        public object HandleVector()
+        public object? HandleVector()
         {
             var listObj = ReadList();
-            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            if (CL.StrReadSuppressStr != null) return null;
             var list = (List)listObj;
             var items = new List<object>();
             foreach(var item in list)
@@ -274,16 +274,16 @@ namespace Lisp
             return items.ToArray();
         }
 
-        public object HandleArray(int? rank)
+        public object? HandleArray(int? rank)
         {
             if (rank == 2) return ReadArray2D();
             throw new NotImplementedException($"Array rank {rank} is not implemented.");
         }
 
-        public object ReadArray2D()
+        public object? ReadArray2D()
         {
             var listObj = ReadInternal(true, null, false);
-            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            if (CL.StrReadSuppressStr != null) return null;
             var list = (List)listObj!;
             var rows = new List<List<object>>();
             int cols = -1;
@@ -311,10 +311,10 @@ namespace Lisp
             return array;
         }
 
-        public object HandleComplex()
+        public object? HandleComplex()
         {
             var listObj = ReadInternal(true, null, false);
-            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            if (CL.StrReadSuppressStr != null) return null;
             if (!(listObj is List list)) throw new InvalidOperationException("Invalid complex number syntax.");
 
             var real = list.First();
@@ -470,7 +470,7 @@ namespace Lisp
         public object? ReadSingleObject()
         {
             var obj = ReadInternal(eofErrorP: false, eofValue: null, recursiveP: false);
-            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            if (CL.StrReadSuppressStr != null) return null;
 
             while (true)
             {
@@ -768,7 +768,7 @@ namespace Lisp
 
         private object? ParseNumber(string token)
         {
-            if (CL.StrReadSuppressStr != null && CL.StrReadSuppressStr != CL.Nil) return CL.Nil;
+            if (CL.StrReadSuppressStr != null) return null;
 
             int readBase = 10;
             var baseVal = CL.StrReadBaseStr;

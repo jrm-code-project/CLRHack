@@ -7,9 +7,9 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S3244'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S3241'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S3240'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S3138'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S3135'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S3134'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -17,15 +17,15 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S3244'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S3138'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "INTERLOPER-2"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S3241'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S3135'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "INTERLOPER-1"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S3240'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S3134'
     ret
 }
 
@@ -392,168 +392,168 @@
 .method private static hidebysig object 'TEST_CORRUPTION_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object VALUES_TEMP_33239, object VALUES_TEMP_23238, object VALUES_TEMP_13237, object V43220, object V33219, object V23218, object V13217)
+    .locals init (object VALUES_TEMP_33133, object VALUES_TEMP_23132, object VALUES_TEMP_13131, object V43114, object V33113, object V23112, object V13111)
     ldc.i4.1
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
     box int32
     ldc.i4 2
     box int32
-    stloc VALUES_TEMP_13237
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3240'
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3241'
+    stloc VALUES_TEMP_13131
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3134'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3135'
     call object Program::'RETURN_TWO'(object, object)
     pop
     ldc.i4 3
     box int32
-    stloc VALUES_TEMP_23238
+    stloc VALUES_TEMP_23132
     ldc.i4 4
     box int32
-    stloc VALUES_TEMP_33239
-    ldloc VALUES_TEMP_13237
+    stloc VALUES_TEMP_33133
+    ldloc VALUES_TEMP_13131
     stsfld object [LispBase]Lisp.Values::Value1
-    ldloc VALUES_TEMP_23238
+    ldloc VALUES_TEMP_23132
     stsfld object [LispBase]Lisp.Values::Value2
-    ldloc VALUES_TEMP_33239
+    ldloc VALUES_TEMP_33133
     stsfld object [LispBase]Lisp.Values::Value3
     ldc.i4 4
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
-    stloc V13217
+    stloc V13111
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 1
-    ble SKIP_VAL3251
+    ble SKIP_VAL3145
     ldsfld object [LispBase]Lisp.Values::Value1
-    stloc V23218
-    br DONE_VAL3252
-SKIP_VAL3251:
+    stloc V23112
+    br DONE_VAL3146
+SKIP_VAL3145:
     nop
     ldnull
-    stloc V23218
-DONE_VAL3252:
+    stloc V23112
+DONE_VAL3146:
     nop
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 2
-    ble SKIP_VAL3253
+    ble SKIP_VAL3147
     ldsfld object [LispBase]Lisp.Values::Value2
-    stloc V33219
-    br DONE_VAL3254
-SKIP_VAL3253:
+    stloc V33113
+    br DONE_VAL3148
+SKIP_VAL3147:
     nop
     ldnull
-    stloc V33219
-DONE_VAL3254:
+    stloc V33113
+DONE_VAL3148:
     nop
     ldsfld int32 [LispBase]Lisp.Values::ReturnCount
     ldc.i4 3
-    ble SKIP_VAL3255
+    ble SKIP_VAL3149
     ldsfld object [LispBase]Lisp.Values::Value3
-    stloc V43220
-    br DONE_VAL3256
-SKIP_VAL3255:
+    stloc V43114
+    br DONE_VAL3150
+SKIP_VAL3149:
     nop
     ldnull
-    stloc V43220
-DONE_VAL3256:
+    stloc V43114
+DONE_VAL3150:
     nop
-    ldloc V13217
+    ldloc V13111
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc V23218
+    ldloc V23112
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc V33219
+    ldloc V33113
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc V43220
+    ldloc V43114
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc V13217
+    ldloc V13111
     ldc.i4 1
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE3242
+    brtrue TRUE3136
     ldnull
-    br END3243
-TRUE3242:
+    br END3137
+TRUE3136:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3244'
-END3243:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3138'
+END3137:
     nop
     ldnull
     ceq
-    brtrue ELSE3261
-    ldloc V23218
+    brtrue ELSE3155
+    ldloc V23112
     ldc.i4 2
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE3245
+    brtrue TRUE3139
     ldnull
-    br END3246
-TRUE3245:
+    br END3140
+TRUE3139:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3244'
-END3246:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3138'
+END3140:
     nop
     ldnull
     ceq
-    brtrue ELSE3259
-    ldloc V33219
+    brtrue ELSE3153
+    ldloc V33113
     ldc.i4 3
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE3247
+    brtrue TRUE3141
     ldnull
-    br END3248
-TRUE3247:
+    br END3142
+TRUE3141:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3244'
-END3248:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3138'
+END3142:
     nop
     ldnull
     ceq
-    brtrue ELSE3257
-    ldloc V43220
+    brtrue ELSE3151
+    ldloc V43114
     ldc.i4 4
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE3249
+    brtrue TRUE3143
     ldnull
-    br END3250
-TRUE3249:
+    br END3144
+TRUE3143:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3244'
-END3250:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S3138'
+END3144:
     nop
-    br END3258
-ELSE3257:
-    nop
-    ldnull
-END3258:
-    nop
-    br END3260
-ELSE3259:
+    br END3152
+ELSE3151:
     nop
     ldnull
-END3260:
+END3152:
     nop
-    br END3262
-ELSE3261:
+    br END3154
+ELSE3153:
     nop
     ldnull
-END3262:
+END3154:
+    nop
+    br END3156
+ELSE3155:
+    nop
+    ldnull
+END3156:
     nop
     ldnull
     ceq
-    brtrue ELSE3263
+    brtrue ELSE3157
     ldstr "SUCCESS"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE3263:
+ELSE3157:
     nop
     ldstr "FAILURE"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -562,7 +562,7 @@ ELSE3263:
     call void [mscorlib]System.Diagnostics.Debugger::'Break'()
     ldnull
     ret
-BLOCK_END_TEST_CORRUPTION_3215:
+BLOCK_END_TEST_CORRUPTION_3109:
     nop
     ldnull
     ret
@@ -933,16 +933,16 @@ BLOCK_END_TEST_CORRUPTION_3215:
 .method private static hidebysig object 'RETURN_TWO_Body'(object, object) cil managed
 {
     .maxstack 8
-    .locals init (object VALUES_TEMP_13236)
+    .locals init (object VALUES_TEMP_13130)
     ldarg 0
     ldarg 1
-    stloc VALUES_TEMP_13236
-    ldloc VALUES_TEMP_13236
+    stloc VALUES_TEMP_13130
+    ldloc VALUES_TEMP_13130
     stsfld object [LispBase]Lisp.Values::Value1
     ldc.i4 2
     stsfld int32 [LispBase]Lisp.Values::ReturnCount
     ret
-BLOCK_END_RETURN_TWO_3210:
+BLOCK_END_RETURN_TWO_3104:
     nop
     ldnull
     ret

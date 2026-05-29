@@ -21,8 +21,8 @@
     .field public static object 'NAME'
     .field public static object 'PERSON'
     .field public static object 'CLR_DEFCLASS'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S1202'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ACCESSOR1199'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1199'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ACCESSOR1196'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -58,18 +58,18 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1202'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1199'
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::Keyword
     ldstr "ACCESSOR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ACCESSOR1199'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ACCESSOR1196'
     ret
 }
 
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1308, object ARG_TMP1307, object ARG_TMP1306, object ARG_TMP1305, object FN_TMP1300, object ARG_TMP1299, object ARG_TMP1298, object ARG_TMP1297, object ARG_TMP1296, object FN_TMP1291, object ARG_TMP1290, object FN_TMP1285, object ARG_TMP1284, object ARG_TMP1283, object ARG_TMP1282, object ARG_TMP1281, object ARG_TMP1280, object FN_TMP1275, object ARG_TMP1274, object FN_TMP1269, object ARG_TMP1268, object ARG_TMP1267, object ARG_TMP1266, object ARG_TMP1265, object ARG_TMP1264, object FN_TMP1259, object ARG_TMP1258, object ARG_TMP1257, object FN_TMP1252, object ARG_TMP1251, object FN_TMP1246, object FN_TMP1241, object ARG_TMP1240, object ARG_TMP1239, object ARG_TMP1238, object FN_TMP1233, object ARG_TMP1232, object ARG_TMP1231, object FN_TMP1226, object ARG_TMP1225, object ARG_TMP1224, object ARG_TMP1223, object FN_TMP1218, object FN_TMP1213, object ARG_TMP1212, object ARG_TMP1211, object ARG_TMP1210, object FN_TMP1205)
+    .locals init (object ARG_TMP1291, object ARG_TMP1290, object ARG_TMP1289, object ARG_TMP1288, object FN_TMP1284, object ARG_TMP1283, object ARG_TMP1282, object ARG_TMP1281, object ARG_TMP1280, object FN_TMP1276, object ARG_TMP1275, object FN_TMP1271, object ARG_TMP1270, object ARG_TMP1269, object ARG_TMP1268, object ARG_TMP1267, object ARG_TMP1266, object FN_TMP1262, object ARG_TMP1261, object FN_TMP1257, object ARG_TMP1256, object ARG_TMP1255, object ARG_TMP1254, object ARG_TMP1253, object ARG_TMP1252, object FN_TMP1248, object ARG_TMP1247, object ARG_TMP1246, object FN_TMP1242, object ARG_TMP1241, object FN_TMP1237, object FN_TMP1233, object ARG_TMP1232, object ARG_TMP1231, object ARG_TMP1230, object FN_TMP1226, object ARG_TMP1225, object ARG_TMP1224, object FN_TMP1220, object ARG_TMP1219, object ARG_TMP1218, object ARG_TMP1217, object FN_TMP1213, object FN_TMP1209, object ARG_TMP1208, object ARG_TMP1207, object ARG_TMP1206, object FN_TMP1202)
     ldstr "COMMON-LISP-USER"
     ldstr "CLR-CALL-VIRT"
     call object [LispBase]Lisp.Closure::'ResolveFunction'(string, string)
@@ -99,84 +99,38 @@
     call object [LispBase]Lisp.Closure::'ResolveFunction'(string, string)
     stsfld object Program::'CLR_DEFCLASS'
     ldsfld object Program::'CLR_DEFCLASS'
-    stloc FN_TMP1205
-    ldloc FN_TMP1205
-    brtrue FN_NULL1206
+    stloc FN_TMP1202
+    ldloc FN_TMP1202
+    brtrue FN_NULL1203
     ldstr "Undefined function: CLR-DEFCLASS"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1205
-FN_NULL1206:
+    stloc FN_TMP1202
+FN_NULL1203:
     nop
-    ldloc FN_TMP1205
+    ldloc FN_TMP1202
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1208
+    stloc FN_TMP1202
+    ldloc FN_TMP1202
+    brtrue FN_TYPE_OK1204
     ldstr "Attempted to call non-function object in CLR-DEFCLASS"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1205
-FN_TYPE_OK1208:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1202
+FN_TYPE_OK1204:
     nop
-    ldloc FN_TMP1205
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1207
-    ldstr "Undefined function: CLR-DEFCLASS"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1205
-FN_LAZY_OK1207:
-    nop
-FN_AFTER1209:
+FN_AFTER1205:
     nop
     ldsfld object Program::'PERSON'
-    stloc ARG_TMP1210
+    stloc ARG_TMP1206
     ldnull
-    stloc ARG_TMP1211
+    stloc ARG_TMP1207
     ldsfld object Program::'NAME'
-    stloc FN_TMP1218
-    ldloc FN_TMP1218
-    brtrue FN_NULL1219
-    ldstr "Undefined function: NAME"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1218
-FN_NULL1219:
-    nop
-    ldloc FN_TMP1218
-    isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1221
-    ldstr "Attempted to call non-function object in NAME"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1218
-FN_TYPE_OK1221:
-    nop
-    ldloc FN_TMP1218
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1220
-    ldstr "Undefined function: NAME"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1218
-FN_LAZY_OK1220:
-    nop
-FN_AFTER1222:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ACCESSOR1199'
-    stloc ARG_TMP1223
-    ldsfld object Program::'PERSON_NAME'
-    stloc ARG_TMP1224
-    ldloc FN_TMP1218
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1223
-    ldloc ARG_TMP1224
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
     stloc FN_TMP1213
     ldloc FN_TMP1213
     brtrue FN_NULL1214
-    ldstr "Undefined function: <computed function>"
+    ldstr "Undefined function: NAME"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     stloc FN_TMP1213
@@ -184,30 +138,97 @@ FN_NULL1214:
     nop
     ldloc FN_TMP1213
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1216
-    ldstr "Attempted to call non-function object in <computed function>"
+    stloc FN_TMP1213
+    ldloc FN_TMP1213
+    brtrue FN_TYPE_OK1215
+    ldstr "Attempted to call non-function object in NAME"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
     stloc FN_TMP1213
-FN_TYPE_OK1216:
+FN_TYPE_OK1215:
     nop
+FN_AFTER1216:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ACCESSOR1196'
+    stloc ARG_TMP1217
+    ldsfld object Program::'PERSON_NAME'
+    stloc ARG_TMP1218
     ldloc FN_TMP1213
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1215
+    ldloc ARG_TMP1217
+    ldloc ARG_TMP1218
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
+    stloc FN_TMP1209
+    ldloc FN_TMP1209
+    brtrue FN_NULL1210
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1213
-FN_LAZY_OK1215:
+    stloc FN_TMP1209
+FN_NULL1210:
     nop
-FN_AFTER1217:
+    ldloc FN_TMP1209
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1209
+    ldloc FN_TMP1209
+    brtrue FN_TYPE_OK1211
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1209
+FN_TYPE_OK1211:
+    nop
+FN_AFTER1212:
     nop
     ldsfld object Program::'AGE'
+    stloc FN_TMP1220
+    ldloc FN_TMP1220
+    brtrue FN_NULL1221
+    ldstr "Undefined function: AGE"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP1220
+FN_NULL1221:
+    nop
+    ldloc FN_TMP1220
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1220
+    ldloc FN_TMP1220
+    brtrue FN_TYPE_OK1222
+    ldstr "Attempted to call non-function object in AGE"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1220
+FN_TYPE_OK1222:
+    nop
+FN_AFTER1223:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ACCESSOR1196'
+    stloc ARG_TMP1224
+    ldsfld object Program::'PERSON_AGE'
+    stloc ARG_TMP1225
+    ldloc FN_TMP1220
+    ldloc ARG_TMP1224
+    ldloc ARG_TMP1225
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
+    stloc ARG_TMP1219
+    ldloc FN_TMP1209
+    ldloc ARG_TMP1219
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    stloc ARG_TMP1208
+    ldloc FN_TMP1202
+    ldloc ARG_TMP1206
+    ldloc ARG_TMP1207
+    ldloc ARG_TMP1208
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object)
+    pop
+    ldsfld object Program::'CLR_DEFMETHOD'
     stloc FN_TMP1226
     ldloc FN_TMP1226
     brtrue FN_NULL1227
-    ldstr "Undefined function: AGE"
+    ldstr "Undefined function: CLR-DEFMETHOD"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     stloc FN_TMP1226
@@ -215,52 +236,53 @@ FN_NULL1227:
     nop
     ldloc FN_TMP1226
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1229
-    ldstr "Attempted to call non-function object in AGE"
+    stloc FN_TMP1226
+    ldloc FN_TMP1226
+    brtrue FN_TYPE_OK1228
+    ldstr "Attempted to call non-function object in CLR-DEFMETHOD"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
     stloc FN_TMP1226
-FN_TYPE_OK1229:
+FN_TYPE_OK1228:
     nop
-    ldloc FN_TMP1226
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1228
-    ldstr "Undefined function: AGE"
+FN_AFTER1229:
+    nop
+    ldsfld object Program::'PERSON_INLINE_METHOD'
+    stloc ARG_TMP1230
+    ldsfld object Program::'SELF'
+    stloc FN_TMP1237
+    ldloc FN_TMP1237
+    brtrue FN_NULL1238
+    ldstr "Undefined function: SELF"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1226
-FN_LAZY_OK1228:
+    stloc FN_TMP1237
+FN_NULL1238:
     nop
-FN_AFTER1230:
+    ldloc FN_TMP1237
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1237
+    ldloc FN_TMP1237
+    brtrue FN_TYPE_OK1239
+    ldstr "Attempted to call non-function object in SELF"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1237
+FN_TYPE_OK1239:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ACCESSOR1199'
-    stloc ARG_TMP1231
-    ldsfld object Program::'PERSON_AGE'
-    stloc ARG_TMP1232
-    ldloc FN_TMP1226
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1231
-    ldloc ARG_TMP1232
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
-    stloc ARG_TMP1225
-    ldloc FN_TMP1213
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1225
+FN_AFTER1240:
+    nop
+    ldsfld object Program::'PERSON'
+    stloc ARG_TMP1241
+    ldloc FN_TMP1237
+    ldloc ARG_TMP1241
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc ARG_TMP1212
-    ldloc FN_TMP1205
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1210
-    ldloc ARG_TMP1211
-    ldloc ARG_TMP1212
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object)
-    pop
-    ldsfld object Program::'CLR_DEFMETHOD'
     stloc FN_TMP1233
     ldloc FN_TMP1233
     brtrue FN_NULL1234
-    ldstr "Undefined function: CLR-DEFMETHOD"
+    ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     stloc FN_TMP1233
@@ -268,264 +290,226 @@ FN_NULL1234:
     nop
     ldloc FN_TMP1233
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1236
-    ldstr "Attempted to call non-function object in CLR-DEFMETHOD"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
     stloc FN_TMP1233
-FN_TYPE_OK1236:
-    nop
     ldloc FN_TMP1233
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1235
-    ldstr "Undefined function: CLR-DEFMETHOD"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1233
-FN_LAZY_OK1235:
-    nop
-FN_AFTER1237:
-    nop
-    ldsfld object Program::'PERSON_INLINE_METHOD'
-    stloc ARG_TMP1238
-    ldsfld object Program::'SELF'
-    stloc FN_TMP1246
-    ldloc FN_TMP1246
-    brtrue FN_NULL1247
-    ldstr "Undefined function: SELF"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1246
-FN_NULL1247:
-    nop
-    ldloc FN_TMP1246
-    isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1249
-    ldstr "Attempted to call non-function object in SELF"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1246
-FN_TYPE_OK1249:
-    nop
-    ldloc FN_TMP1246
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1248
-    ldstr "Undefined function: SELF"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1246
-FN_LAZY_OK1248:
-    nop
-FN_AFTER1250:
-    nop
-    ldsfld object Program::'PERSON'
-    stloc ARG_TMP1251
-    ldloc FN_TMP1246
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1251
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc FN_TMP1241
-    ldloc FN_TMP1241
-    brtrue FN_NULL1242
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1241
-FN_NULL1242:
-    nop
-    ldloc FN_TMP1241
-    isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1244
+    brtrue FN_TYPE_OK1235
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1241
-FN_TYPE_OK1244:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1233
+FN_TYPE_OK1235:
     nop
-    ldloc FN_TMP1241
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1243
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1241
-FN_LAZY_OK1243:
+FN_AFTER1236:
     nop
-FN_AFTER1245:
-    nop
-    ldloc FN_TMP1241
-    castclass [LispBase]Lisp.Closure
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
-    stloc ARG_TMP1239
-    ldstr "INLINE-METHOD-OK"
-    stloc ARG_TMP1240
     ldloc FN_TMP1233
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1238
-    ldloc ARG_TMP1239
-    ldloc ARG_TMP1240
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
+    stloc ARG_TMP1231
+    ldstr "INLINE-METHOD-OK"
+    stloc ARG_TMP1232
+    ldloc FN_TMP1226
+    ldloc ARG_TMP1230
+    ldloc ARG_TMP1231
+    ldloc ARG_TMP1232
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object)
     pop
     ldsfld object Program::'CLR_NEW'
-    stloc FN_TMP1252
-    ldloc FN_TMP1252
-    brtrue FN_NULL1253
+    stloc FN_TMP1242
+    ldloc FN_TMP1242
+    brtrue FN_NULL1243
     ldstr "Undefined function: CLR-NEW"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1252
-FN_NULL1253:
+    stloc FN_TMP1242
+FN_NULL1243:
     nop
-    ldloc FN_TMP1252
+    ldloc FN_TMP1242
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1255
+    stloc FN_TMP1242
+    ldloc FN_TMP1242
+    brtrue FN_TYPE_OK1244
     ldstr "Attempted to call non-function object in CLR-NEW"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1252
-FN_TYPE_OK1255:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1242
+FN_TYPE_OK1244:
     nop
-    ldloc FN_TMP1252
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1254
-    ldstr "Undefined function: CLR-NEW"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1252
-FN_LAZY_OK1254:
-    nop
-FN_AFTER1256:
+FN_AFTER1245:
     nop
     ldstr "PERSON"
-    stloc ARG_TMP1257
+    stloc ARG_TMP1246
     ldnull
-    stloc ARG_TMP1258
-    ldloc FN_TMP1252
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1257
-    ldloc ARG_TMP1258
+    stloc ARG_TMP1247
+    ldloc FN_TMP1242
+    ldloc ARG_TMP1246
+    ldloc ARG_TMP1247
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object)
     dup
     stsfld object Program::'P'
     pop
     ldsfld object Program::'CLR_CALL_VIRT'
-    stloc FN_TMP1259
-    ldloc FN_TMP1259
-    brtrue FN_NULL1260
+    stloc FN_TMP1248
+    ldloc FN_TMP1248
+    brtrue FN_NULL1249
     ldstr "Undefined function: CLR-CALL-VIRT"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1259
-FN_NULL1260:
+    stloc FN_TMP1248
+FN_NULL1249:
     nop
-    ldloc FN_TMP1259
+    ldloc FN_TMP1248
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1262
+    stloc FN_TMP1248
+    ldloc FN_TMP1248
+    brtrue FN_TYPE_OK1250
     ldstr "Attempted to call non-function object in CLR-CALL-VIRT"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1259
-FN_TYPE_OK1262:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1248
+FN_TYPE_OK1250:
     nop
-    ldloc FN_TMP1259
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1261
-    ldstr "Undefined function: CLR-CALL-VIRT"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1259
-FN_LAZY_OK1261:
-    nop
-FN_AFTER1263:
+FN_AFTER1251:
     nop
     ldsfld object Program::'P'
-    stloc ARG_TMP1264
+    stloc ARG_TMP1252
     ldstr "PERSON"
-    stloc ARG_TMP1265
+    stloc ARG_TMP1253
     ldstr "set_person_name"
-    stloc ARG_TMP1266
+    stloc ARG_TMP1254
     ldstr "void"
-    stloc FN_TMP1269
-    ldloc FN_TMP1269
-    brtrue FN_NULL1270
+    stloc FN_TMP1257
+    ldloc FN_TMP1257
+    brtrue FN_NULL1258
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1269
-FN_NULL1270:
+    stloc FN_TMP1257
+FN_NULL1258:
     nop
-    ldloc FN_TMP1269
+    ldloc FN_TMP1257
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1272
+    stloc FN_TMP1257
+    ldloc FN_TMP1257
+    brtrue FN_TYPE_OK1259
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1269
-FN_TYPE_OK1272:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1257
+FN_TYPE_OK1259:
     nop
-    ldloc FN_TMP1269
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1271
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1269
-FN_LAZY_OK1271:
-    nop
-FN_AFTER1273:
+FN_AFTER1260:
     nop
     ldstr "object"
-    stloc ARG_TMP1274
-    ldloc FN_TMP1269
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1274
+    stloc ARG_TMP1261
+    ldloc FN_TMP1257
+    ldloc ARG_TMP1261
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc ARG_TMP1267
+    stloc ARG_TMP1255
     ldstr "Ada"
-    stloc ARG_TMP1268
-    ldloc FN_TMP1259
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1264
-    ldloc ARG_TMP1265
-    ldloc ARG_TMP1266
-    ldloc ARG_TMP1267
-    ldloc ARG_TMP1268
+    stloc ARG_TMP1256
+    ldloc FN_TMP1248
+    ldloc ARG_TMP1252
+    ldloc ARG_TMP1253
+    ldloc ARG_TMP1254
+    ldloc ARG_TMP1255
+    ldloc ARG_TMP1256
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object, object, object)
     pop
     ldsfld object Program::'CLR_CALL_VIRT'
-    stloc FN_TMP1275
-    ldloc FN_TMP1275
-    brtrue FN_NULL1276
+    stloc FN_TMP1262
+    ldloc FN_TMP1262
+    brtrue FN_NULL1263
     ldstr "Undefined function: CLR-CALL-VIRT"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1275
-FN_NULL1276:
+    stloc FN_TMP1262
+FN_NULL1263:
     nop
-    ldloc FN_TMP1275
+    ldloc FN_TMP1262
     isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1262
+    ldloc FN_TMP1262
+    brtrue FN_TYPE_OK1264
+    ldstr "Attempted to call non-function object in CLR-CALL-VIRT"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1262
+FN_TYPE_OK1264:
+    nop
+FN_AFTER1265:
+    nop
+    ldsfld object Program::'P'
+    stloc ARG_TMP1266
+    ldstr "PERSON"
+    stloc ARG_TMP1267
+    ldstr "set_person_age"
+    stloc ARG_TMP1268
+    ldstr "void"
+    stloc FN_TMP1271
+    ldloc FN_TMP1271
+    brtrue FN_NULL1272
+    ldstr "Undefined function: <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP1271
+FN_NULL1272:
+    nop
+    ldloc FN_TMP1271
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1271
+    ldloc FN_TMP1271
+    brtrue FN_TYPE_OK1273
+    ldstr "Attempted to call non-function object in <computed function>"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1271
+FN_TYPE_OK1273:
+    nop
+FN_AFTER1274:
+    nop
+    ldstr "object"
+    stloc ARG_TMP1275
+    ldloc FN_TMP1271
+    ldloc ARG_TMP1275
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
+    stloc ARG_TMP1269
+    ldc.i4 42
+    box int32
+    stloc ARG_TMP1270
+    ldloc FN_TMP1262
+    ldloc ARG_TMP1266
+    ldloc ARG_TMP1267
+    ldloc ARG_TMP1268
+    ldloc ARG_TMP1269
+    ldloc ARG_TMP1270
+    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object, object, object)
+    pop
+    ldsfld object Program::'CLR_CALL_VIRT'
+    stloc FN_TMP1276
+    ldloc FN_TMP1276
+    brtrue FN_NULL1277
+    ldstr "Undefined function: CLR-CALL-VIRT"
+    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
+    call object [LispBase]Lisp.HandlerControl::'Error'(object)
+    stloc FN_TMP1276
+FN_NULL1277:
+    nop
+    ldloc FN_TMP1276
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1276
+    ldloc FN_TMP1276
     brtrue FN_TYPE_OK1278
     ldstr "Attempted to call non-function object in CLR-CALL-VIRT"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1275
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1276
 FN_TYPE_OK1278:
-    nop
-    ldloc FN_TMP1275
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1277
-    ldstr "Undefined function: CLR-CALL-VIRT"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1275
-FN_LAZY_OK1277:
     nop
 FN_AFTER1279:
     nop
@@ -533,152 +517,56 @@ FN_AFTER1279:
     stloc ARG_TMP1280
     ldstr "PERSON"
     stloc ARG_TMP1281
-    ldstr "set_person_age"
+    ldstr "get_person_name"
     stloc ARG_TMP1282
-    ldstr "void"
-    stloc FN_TMP1285
-    ldloc FN_TMP1285
-    brtrue FN_NULL1286
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1285
-FN_NULL1286:
-    nop
-    ldloc FN_TMP1285
-    isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1288
-    ldstr "Attempted to call non-function object in <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1285
-FN_TYPE_OK1288:
-    nop
-    ldloc FN_TMP1285
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1287
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1285
-FN_LAZY_OK1287:
-    nop
-FN_AFTER1289:
-    nop
     ldstr "object"
-    stloc ARG_TMP1290
-    ldloc FN_TMP1285
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1290
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     stloc ARG_TMP1283
-    ldc.i4 42
-    box int32
-    stloc ARG_TMP1284
-    ldloc FN_TMP1275
-    castclass [LispBase]Lisp.Closure
+    ldloc FN_TMP1276
     ldloc ARG_TMP1280
     ldloc ARG_TMP1281
     ldloc ARG_TMP1282
     ldloc ARG_TMP1283
-    ldloc ARG_TMP1284
-    callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object, object, object)
-    pop
-    ldsfld object Program::'CLR_CALL_VIRT'
-    stloc FN_TMP1291
-    ldloc FN_TMP1291
-    brtrue FN_NULL1292
-    ldstr "Undefined function: CLR-CALL-VIRT"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1291
-FN_NULL1292:
-    nop
-    ldloc FN_TMP1291
-    isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1294
-    ldstr "Attempted to call non-function object in CLR-CALL-VIRT"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1291
-FN_TYPE_OK1294:
-    nop
-    ldloc FN_TMP1291
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1293
-    ldstr "Undefined function: CLR-CALL-VIRT"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1291
-FN_LAZY_OK1293:
-    nop
-FN_AFTER1295:
-    nop
-    ldsfld object Program::'P'
-    stloc ARG_TMP1296
-    ldstr "PERSON"
-    stloc ARG_TMP1297
-    ldstr "get_person_name"
-    stloc ARG_TMP1298
-    ldstr "object"
-    stloc ARG_TMP1299
-    ldloc FN_TMP1291
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1296
-    ldloc ARG_TMP1297
-    ldloc ARG_TMP1298
-    ldloc ARG_TMP1299
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object, object)
     dup
     stsfld object Program::'N'
     pop
     ldsfld object Program::'CLR_CALL_VIRT'
-    stloc FN_TMP1300
-    ldloc FN_TMP1300
-    brtrue FN_NULL1301
+    stloc FN_TMP1284
+    ldloc FN_TMP1284
+    brtrue FN_NULL1285
     ldstr "Undefined function: CLR-CALL-VIRT"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1300
-FN_NULL1301:
+    stloc FN_TMP1284
+FN_NULL1285:
     nop
-    ldloc FN_TMP1300
+    ldloc FN_TMP1284
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1303
+    stloc FN_TMP1284
+    ldloc FN_TMP1284
+    brtrue FN_TYPE_OK1286
     ldstr "Attempted to call non-function object in CLR-CALL-VIRT"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1300
-FN_TYPE_OK1303:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1284
+FN_TYPE_OK1286:
     nop
-    ldloc FN_TMP1300
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1302
-    ldstr "Undefined function: CLR-CALL-VIRT"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1300
-FN_LAZY_OK1302:
-    nop
-FN_AFTER1304:
+FN_AFTER1287:
     nop
     ldsfld object Program::'P'
-    stloc ARG_TMP1305
+    stloc ARG_TMP1288
     ldstr "PERSON"
-    stloc ARG_TMP1306
+    stloc ARG_TMP1289
     ldstr "get_person_age"
-    stloc ARG_TMP1307
+    stloc ARG_TMP1290
     ldstr "object"
-    stloc ARG_TMP1308
-    ldloc FN_TMP1300
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1305
-    ldloc ARG_TMP1306
-    ldloc ARG_TMP1307
-    ldloc ARG_TMP1308
+    stloc ARG_TMP1291
+    ldloc FN_TMP1284
+    ldloc ARG_TMP1288
+    ldloc ARG_TMP1289
+    ldloc ARG_TMP1290
+    ldloc ARG_TMP1291
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object, object, object, object)
     dup
     stsfld object Program::'A'
@@ -686,44 +574,44 @@ FN_AFTER1304:
     ldsfld object Program::'N'
     ldstr "Ada"
     call bool [mscorlib]System.Object::'Equals'(object, object)
+    brtrue TRUE1197
+    ldnull
+    br END1198
+TRUE1197:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1199'
+END1198:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE1294
+    ldsfld object Program::'A'
+    ldc.i4 42
+    box int32
+    call bool [mscorlib]System.Object::'Equals'(object, object)
     brtrue TRUE1200
     ldnull
     br END1201
 TRUE1200:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1202'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1199'
 END1201:
     nop
     ldnull
     ceq
-    brtrue ELSE1311
-    ldsfld object Program::'A'
-    ldc.i4 42
-    box int32
-    call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1203
-    ldnull
-    br END1204
-TRUE1203:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1202'
-END1204:
-    nop
-    ldnull
-    ceq
-    brtrue ELSE1309
+    brtrue ELSE1292
     ldstr "CLR-EXPLICIT-FORMS-OK"
-    br END1310
-ELSE1309:
+    br END1293
+ELSE1292:
     nop
     ldstr "CLR-EXPLICIT-FORMS-BAD-AGE"
-END1310:
+END1293:
     nop
-    br END1312
-ELSE1311:
+    br END1295
+ELSE1294:
     nop
     ldstr "CLR-EXPLICIT-FORMS-BAD-NAME"
-END1312:
+END1295:
     nop
     ret
 }

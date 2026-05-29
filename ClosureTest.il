@@ -7,172 +7,140 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'G1609'
+    .field public static object 'G1552'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'G1609'
+    stsfld object Program::'G1552'
     ret
 }
 
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1664, object FN_TMP1659, object ARG_TMP1658, object FN_TMP1653, object ARG_TMP1652, object FN_TMP1647, object ARG_TMP1646, object FN_TMP1641, object GREET_BONJOUR1614, object GREET_HELLO1613, object MAKE_GREETER1612)
-    newobj instance void L_1616::'.ctor'()
-    stloc MAKE_GREETER1612
-    ldloc MAKE_GREETER1612
-    stloc FN_TMP1641
-    ldloc FN_TMP1641
-    brtrue FN_NULL1642
+    .locals init (object ARG_TMP1599, object FN_TMP1595, object ARG_TMP1594, object FN_TMP1590, object ARG_TMP1589, object FN_TMP1585, object ARG_TMP1584, object FN_TMP1580, object GREET_BONJOUR1557, object GREET_HELLO1556, object MAKE_GREETER1555)
+    newobj instance void L_1559::'.ctor'()
+    stloc MAKE_GREETER1555
+    ldloc MAKE_GREETER1555
+    stloc FN_TMP1580
+    ldloc FN_TMP1580
+    brtrue FN_NULL1581
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1641
-FN_NULL1642:
+    stloc FN_TMP1580
+FN_NULL1581:
     nop
-    ldloc FN_TMP1641
+    ldloc FN_TMP1580
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1644
+    stloc FN_TMP1580
+    ldloc FN_TMP1580
+    brtrue FN_TYPE_OK1582
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1641
-FN_TYPE_OK1644:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1580
+FN_TYPE_OK1582:
     nop
-    ldloc FN_TMP1641
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1643
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1641
-FN_LAZY_OK1643:
-    nop
-FN_AFTER1645:
+FN_AFTER1583:
     nop
     ldstr "Hello"
-    stloc ARG_TMP1646
-    ldloc FN_TMP1641
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1646
+    stloc ARG_TMP1584
+    ldloc FN_TMP1580
+    ldloc ARG_TMP1584
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc GREET_HELLO1613
-    ldloc MAKE_GREETER1612
-    stloc FN_TMP1647
-    ldloc FN_TMP1647
-    brtrue FN_NULL1648
+    stloc GREET_HELLO1556
+    ldloc MAKE_GREETER1555
+    stloc FN_TMP1585
+    ldloc FN_TMP1585
+    brtrue FN_NULL1586
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1647
-FN_NULL1648:
+    stloc FN_TMP1585
+FN_NULL1586:
     nop
-    ldloc FN_TMP1647
+    ldloc FN_TMP1585
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1650
+    stloc FN_TMP1585
+    ldloc FN_TMP1585
+    brtrue FN_TYPE_OK1587
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1647
-FN_TYPE_OK1650:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1585
+FN_TYPE_OK1587:
     nop
-    ldloc FN_TMP1647
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1649
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1647
-FN_LAZY_OK1649:
-    nop
-FN_AFTER1651:
+FN_AFTER1588:
     nop
     ldstr "Bonjour"
-    stloc ARG_TMP1652
-    ldloc FN_TMP1647
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1652
+    stloc ARG_TMP1589
+    ldloc FN_TMP1585
+    ldloc ARG_TMP1589
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc GREET_BONJOUR1614
-    ldloc GREET_HELLO1613
-    stloc FN_TMP1653
-    ldloc FN_TMP1653
-    brtrue FN_NULL1654
+    stloc GREET_BONJOUR1557
+    ldloc GREET_HELLO1556
+    stloc FN_TMP1590
+    ldloc FN_TMP1590
+    brtrue FN_NULL1591
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1653
-FN_NULL1654:
+    stloc FN_TMP1590
+FN_NULL1591:
     nop
-    ldloc FN_TMP1653
+    ldloc FN_TMP1590
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1656
+    stloc FN_TMP1590
+    ldloc FN_TMP1590
+    brtrue FN_TYPE_OK1592
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1653
-FN_TYPE_OK1656:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1590
+FN_TYPE_OK1592:
     nop
-    ldloc FN_TMP1653
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1655
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1653
-FN_LAZY_OK1655:
-    nop
-FN_AFTER1657:
+FN_AFTER1593:
     nop
     ldstr "Alice"
-    stloc ARG_TMP1658
-    ldloc FN_TMP1653
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1658
+    stloc ARG_TMP1594
+    ldloc FN_TMP1590
+    ldloc ARG_TMP1594
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     pop
-    ldloc GREET_BONJOUR1614
-    stloc FN_TMP1659
-    ldloc FN_TMP1659
-    brtrue FN_NULL1660
+    ldloc GREET_BONJOUR1557
+    stloc FN_TMP1595
+    ldloc FN_TMP1595
+    brtrue FN_NULL1596
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1659
-FN_NULL1660:
+    stloc FN_TMP1595
+FN_NULL1596:
     nop
-    ldloc FN_TMP1659
+    ldloc FN_TMP1595
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK1662
+    stloc FN_TMP1595
+    ldloc FN_TMP1595
+    brtrue FN_TYPE_OK1597
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1659
-FN_TYPE_OK1662:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP1595
+FN_TYPE_OK1597:
     nop
-    ldloc FN_TMP1659
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK1661
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1659
-FN_LAZY_OK1661:
-    nop
-FN_AFTER1663:
+FN_AFTER1598:
     nop
     ldstr "Bob"
-    stloc ARG_TMP1664
-    ldloc FN_TMP1659
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP1664
+    stloc ARG_TMP1599
+    ldloc FN_TMP1595
+    ldloc ARG_TMP1599
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
 }
@@ -189,10 +157,10 @@ FN_AFTER1663:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_1615
+.class public auto ansi beforefieldinit L_1558
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'G1609'
+    .field public object 'G1552'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -201,7 +169,7 @@ FN_AFTER1663:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_1615::'G1609'
+    stfld object L_1558::'G1552'
     ret
 }
 
@@ -209,7 +177,7 @@ FN_AFTER1663:
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_1615::'G1609'
+    ldfld object L_1558::'G1552'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -238,7 +206,7 @@ FN_AFTER1663:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1615::'InvokeBody'(object)
+    callvirt instance object L_1558::'InvokeBody'(object)
     ret
 }
 
@@ -583,9 +551,9 @@ FN_AFTER1663:
     ret
 }
 
-} // end of class L_1615
+} // end of class L_1558
 
-.class public auto ansi beforefieldinit L_1616
+.class public auto ansi beforefieldinit L_1559
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -599,11 +567,11 @@ FN_AFTER1663:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object G1609)
+    .locals init (object G1552)
     ldarg 1
-    stloc G1609
-    ldloc G1609
-    newobj instance void L_1615::'.ctor'(object)
+    stloc G1552
+    ldloc G1552
+    newobj instance void L_1558::'.ctor'(object)
     ret
     ldnull
     ret
@@ -626,7 +594,7 @@ FN_AFTER1663:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1616::'InvokeBody'(object)
+    callvirt instance object L_1559::'InvokeBody'(object)
     ret
 }
 
@@ -971,5 +939,5 @@ FN_AFTER1663:
     ret
 }
 
-} // end of class L_1616
+} // end of class L_1559
 

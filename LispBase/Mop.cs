@@ -537,7 +537,17 @@ namespace Lisp
                     cl.Export(symbolNameSym);
                     symbolNameSym.Function = new NativeClosure(args =>
                     {
-                        if (args.Length < 1 || args[0] is not Symbol symbol)
+                        if (args.Length < 1)
+                        {
+                            throw new Exception("SYMBOL-NAME requires a symbol argument.");
+                        }
+
+                        if (args[0] is null)
+                        {
+                            return "NIL";
+                        }
+
+                        if (args[0] is not Symbol symbol)
                         {
                             throw new Exception("SYMBOL-NAME requires a symbol argument.");
                         }
@@ -549,7 +559,17 @@ namespace Lisp
                     cl.Export(symbolPackageSym);
                     symbolPackageSym.Function = new NativeClosure(args =>
                     {
-                        if (args.Length < 1 || args[0] is not Symbol symbol)
+                        if (args.Length < 1)
+                        {
+                            throw new Exception("SYMBOL-PACKAGE requires a symbol argument.");
+                        }
+
+                        if (args[0] is null)
+                        {
+                            return Package.CommonLisp;
+                        }
+
+                        if (args[0] is not Symbol symbol)
                         {
                             throw new Exception("SYMBOL-PACKAGE requires a symbol argument.");
                         }
@@ -566,7 +586,7 @@ namespace Lisp
                             throw new Exception("SYMBOLP requires one argument.");
                         }
 
-                        return args[0] is Symbol ? cl.Intern("T") : null;
+                        return args[0] is null || args[0] is Symbol ? cl.Intern("T") : null;
                     });
 
                     var macroFunctionSym = cl.Intern("MACRO-FUNCTION");

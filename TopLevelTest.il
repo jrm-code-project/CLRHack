@@ -7,13 +7,13 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'FACTOR7749'
+    .field public static object 'FACTOR7612'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'FACTOR7749'
+    stsfld object Program::'FACTOR7612'
     ret
 }
 
@@ -380,52 +380,44 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7768, object FN_TMP7763, object MUL_BY_107760)
+    .locals init (object ARG_TMP7630, object FN_TMP7626, object MUL_BY_107623)
     ldstr "TopLevelTest"
     call object Program::'SAY_HELLO'(object)
     pop
     ldstr "10"
     call object Program::'MAKE_MULTIPLIER'(object)
-    stloc MUL_BY_107760
-    ldloc MUL_BY_107760
-    stloc FN_TMP7763
-    ldloc FN_TMP7763
-    brtrue FN_NULL7764
+    stloc MUL_BY_107623
+    ldloc MUL_BY_107623
+    stloc FN_TMP7626
+    ldloc FN_TMP7626
+    brtrue FN_NULL7627
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7763
-FN_NULL7764:
+    stloc FN_TMP7626
+FN_NULL7627:
     nop
-    ldloc FN_TMP7763
+    ldloc FN_TMP7626
     isinst [LispBase]Lisp.Closure
-    brtrue FN_TYPE_OK7766
+    stloc FN_TMP7626
+    ldloc FN_TMP7626
+    brtrue FN_TYPE_OK7628
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7763
-FN_TYPE_OK7766:
+    isinst [LispBase]Lisp.Closure
+    stloc FN_TMP7626
+FN_TYPE_OK7628:
     nop
-    ldloc FN_TMP7763
-    castclass [LispBase]Lisp.Closure
-    callvirt instance bool [LispBase]Lisp.Closure::'get_IsLazyResolver'()
-    brfalse FN_LAZY_OK7765
-    ldstr "Undefined function: <computed function>"
-    newobj instance void [mscorlib]System.Exception::'.ctor'(string)
-    call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7763
-FN_LAZY_OK7765:
-    nop
-FN_AFTER7767:
+FN_AFTER7629:
     nop
     ldstr "5"
-    stloc ARG_TMP7768
-    ldloc FN_TMP7763
-    castclass [LispBase]Lisp.Closure
-    ldloc ARG_TMP7768
+    stloc ARG_TMP7630
+    ldloc FN_TMP7626
+    ldloc ARG_TMP7630
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-BLOCK_END_MAIN_7758:
+BLOCK_END_MAIN_7621:
     nop
     ldnull
     ret
@@ -796,9 +788,9 @@ BLOCK_END_MAIN_7758:
 {
     .maxstack 8
     ldarg 0
-    newobj instance void L_7762::'.ctor'(object)
+    newobj instance void L_7625::'.ctor'(object)
     ret
-BLOCK_END_MAKE_MULTIPLIER_7751:
+BLOCK_END_MAKE_MULTIPLIER_7614:
     nop
     ldnull
     ret
@@ -1176,7 +1168,7 @@ BLOCK_END_MAKE_MULTIPLIER_7751:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_SAY_HELLO_7745:
+BLOCK_END_SAY_HELLO_7608:
     nop
     ldnull
     ret
@@ -1201,10 +1193,10 @@ BLOCK_END_SAY_HELLO_7745:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_7762
+.class public auto ansi beforefieldinit L_7625
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'FACTOR7749'
+    .field public object 'FACTOR7612'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -1213,7 +1205,7 @@ BLOCK_END_SAY_HELLO_7745:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7762::'FACTOR7749'
+    stfld object L_7625::'FACTOR7612'
     ret
 }
 
@@ -1225,7 +1217,7 @@ BLOCK_END_SAY_HELLO_7745:
     ldnull
     pop
     ldarg.0
-    ldfld object L_7762::'FACTOR7749'
+    ldfld object L_7625::'FACTOR7612'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -1254,7 +1246,7 @@ BLOCK_END_SAY_HELLO_7745:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7762::'InvokeBody'(object)
+    callvirt instance object L_7625::'InvokeBody'(object)
     ret
 }
 
@@ -1599,5 +1591,5 @@ BLOCK_END_SAY_HELLO_7745:
     ret
 }
 
-} // end of class L_7762
+} // end of class L_7625
 

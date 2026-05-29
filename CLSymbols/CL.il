@@ -333,7 +333,6 @@
   .field public static class [LispBase]Lisp.Symbol '_StrRandomStateStr'
   .field public static class [LispBase]Lisp.Symbol '_Readtable'
   .field public static class [LispBase]Lisp.Symbol '_FindSymbol'
-  .field public static class [LispBase]Lisp.Symbol '_Nil'
   .field public static class [LispBase]Lisp.Symbol '_ArrayDimensions'
   .field public static class [LispBase]Lisp.Symbol '_Elt'
   .field public static class [LispBase]Lisp.Symbol '_ParseInteger'
@@ -8808,30 +8807,6 @@
   {
     .get object Lisp.CL::'get_FindSymbol'()
     .set void Lisp.CL::'set_FindSymbol'(object)
-  }
-
-.method public hidebysig specialname static object 'get_Nil' () cil managed
-{
-  .maxstack 1
-  ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
-  tail. callvirt instance object [LispBase]Lisp.Symbol::get_Value()
-
-  ret
-}
-
-.method public hidebysig specialname static void 'set_Nil'(object 'value') cil managed
-{
-  .maxstack 2
-  ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
-  ldarg.0
-  tail. callvirt instance void [LispBase]Lisp.Symbol::set_Value(object)
-
-  ret
-}
-  .property object 'Nil'()
-  {
-    .get object Lisp.CL::'get_Nil'()
-    .set void Lisp.CL::'set_Nil'(object)
   }
 
 .method public hidebysig specialname static object 'get_ArrayDimensions' () cil managed
@@ -24458,6 +24433,25 @@
     .set void Lisp.CL::'set_DescribeObject'(object)
   }
 
+.method public hidebysig specialname static object 'get_Nil' () cil managed
+{
+  .maxstack 1
+  ldnull
+
+  ret
+}
+
+.method public hidebysig specialname static void 'set_Nil'(object 'value') cil managed
+{
+  .maxstack 1
+  ret
+}
+  .property object 'Nil'()
+  {
+    .get object Lisp.CL::'get_Nil'()
+    .set void Lisp.CL::'set_Nil'(object)
+  }
+
   // =============================================================
   // The Static Class Constructor
   // =============================================================
@@ -28714,13 +28708,6 @@
     ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_NextMethodP'
     callvirt instance void [LispBase]Lisp.Package::Export(class [LispBase]Lisp.Symbol)
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::CommonLisp
-    ldstr "NIL"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::Intern(string)
-    stsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
-    ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::CommonLisp
-    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
-    callvirt instance void [LispBase]Lisp.Package::Export(class [LispBase]Lisp.Symbol)
-    ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::CommonLisp
     ldstr "NINTERSECTION"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::Intern(string)
     stsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nintersection'
@@ -31310,8 +31297,6 @@
     ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::CommonLisp
     ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Zerop'
     callvirt instance void [LispBase]Lisp.Package::Export(class [LispBase]Lisp.Symbol)
-    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
-    call void Lisp.CL::'set_Nil'(object)
     ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_T'
     call void Lisp.CL::'set_T'(object)
     call valuetype [LispBase]Lisp.List [LispBase]Lisp.List::get_Empty()
@@ -31320,11 +31305,11 @@
     ldc.i4.s 10
     box [mscorlib]System.Int32
     call void Lisp.CL::'set_StrReadBaseStr'(object)
-    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
+    ldnull
     call void Lisp.CL::'set_StrReadSuppressStr'(object)
-    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
+    ldnull
     call void Lisp.CL::'set_StrPrintLengthStr'(object)
-    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'
+    ldnull
     call void Lisp.CL::'set_StrPrintLevelStr'(object)
     call class [LispCore]Lisp.Readtable [LispCore]Lisp.Readtable::get_StandardReadtable()
     call void Lisp.CL::'set_StrReadtableStr'(object)

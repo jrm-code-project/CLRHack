@@ -1,4 +1,22 @@
-#+sbcl (declaim (sb-ext:muffle-conditions style-warning))
+;; ===============================================
+;; SELF-HOSTING TARGET CONFIGURATION
+;; Update these three constants to match your target framework/version.
+;; ===============================================
+(defconstant SELFHOST-TARGET "net8.0") ; Example: net9.0, net6.0
+(defconstant BUILD-PROFILE "Release")   ; Example: Debug, Release
+(defconstant OUTPUT-DIR "bin")          ; Base directory for build outputs
+
+;; Function to construct the full output path for a given version/target structure.
+(defun get-output-path (version)
+  (format nil "~a/~a/~a/" 
+            "~d" ; Use this if you need the major version number
+            BUILD-PROFILE
+            SELFHOST-TARGET))
+
+;; Helper function for specific artifacts, like linking outputs.
+(defun get-artifact-path (filename)
+  (format nil "~a/~a/SelfHostCompilerGen1.dll~%l" 
+            OUTPUT-DIR BUILD-PROFILE filename))#+sbcl (declaim (sb-ext:muffle-conditions style-warning))
 ;;; -*- Mode: Lisp; coding: utf-8; -*-
 
 (in-package "CLRHACK")
@@ -42,13 +60,6 @@
        (string= (symbol-name symbol) (getf entry :name))
        (string= (or (symbol-package-name symbol) "")
                 (or (getf entry :package) ""))))
-
-(defun symbols-same-name-package-p (left right)
-  (and (symbolp left)
-       (symbolp right)
-       (string= (symbol-name left) (symbol-name right))
-       (string= (or (symbol-package-name left) "")
-                (or (symbol-package-name right) ""))))
 
 (defun package-control-form-p (form)
   (and (consp form)

@@ -7,7 +7,7 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static class [LispBase]Lisp.Symbol 'SYM_ERROR5123'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_ERROR5013'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -15,7 +15,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "ERROR"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR5123'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR5013'
     ret
 }
 
@@ -382,50 +382,50 @@
 .method private static hidebysig object 'TEST_HANDLER_BIND_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object HANDLERS5114, object TEMP_ARG, object INST_TEMP, object ARGS_TEMP, object H5113, object HANDLERS5112, object HANDLER_BIND_RESULT5122, object HANDLERS_LIST5121, object SAVED_HANDLERS5120, object HANDLERS5109)
+    .locals init (object HANDLERS5004, object TEMP_ARG, object INST_TEMP, object ARGS_TEMP, object H5003, object HANDLERS5002, object HANDLER_BIND_RESULT5012, object HANDLERS_LIST5011, object SAVED_HANDLERS5010, object HANDLERS4999)
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc HANDLERS5109
+    stloc HANDLERS4999
     ldstr "Initial handlers:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS5109
+    ldloc HANDLERS4999
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc SAVED_HANDLERS5120
-    ldloc SAVED_HANDLERS5120
-    stloc HANDLERS_LIST5121
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR5123'
-    newobj instance void L_5116::'.ctor'()
+    stloc SAVED_HANDLERS5010
+    ldloc SAVED_HANDLERS5010
+    stloc HANDLERS_LIST5011
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_ERROR5013'
+    newobj instance void L_5006::'.ctor'()
     newobj instance void [LispBase]Lisp.Handler::'.ctor'(object, object)
-    ldloc HANDLERS_LIST5121
+    ldloc HANDLERS_LIST5011
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc HANDLERS_LIST5121
-    ldloc HANDLERS_LIST5121
+    stloc HANDLERS_LIST5011
+    ldloc HANDLERS_LIST5011
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     .try
     {
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc HANDLERS5112
+    stloc HANDLERS5002
     ldstr "Inside handler-bind:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS5112
+    ldloc HANDLERS5002
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS5112
+    ldloc HANDLERS5002
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    stloc H5113
+    stloc H5003
     ldstr "Handler condition type:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc H5113
+    ldloc H5003
     ldc.i4 0
     newarr [mscorlib]System.Object
     stloc ARGS_TEMP
@@ -436,29 +436,29 @@
     call object [LispBase]Lisp.Interop::'InstanceCall'(string, object, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    stloc HANDLER_BIND_RESULT5122
-    leave DONE5124
+    stloc HANDLER_BIND_RESULT5012
+    leave DONE5014
     }
     finally
     {
-    ldloc SAVED_HANDLERS5120
+    ldloc SAVED_HANDLERS5010
     call void [LispBase]Lisp.HandlerControl::'SetActiveHandlers'(object)
     endfinally
     }
-DONE5124:
-    ldloc HANDLER_BIND_RESULT5122
+DONE5014:
+    ldloc HANDLER_BIND_RESULT5012
     pop
     call object [LispBase]Lisp.HandlerControl::'GetActiveHandlers'()
-    stloc HANDLERS5114
+    stloc HANDLERS5004
     ldstr "After handler-bind:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc HANDLERS5114
+    ldloc HANDLERS5004
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_HANDLER_BIND_5107:
+BLOCK_END_TEST_HANDLER_BIND_4997:
     nop
     ldnull
     ret
@@ -483,7 +483,7 @@ BLOCK_END_TEST_HANDLER_BIND_5107:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_5116
+.class public auto ansi beforefieldinit L_5006
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -522,7 +522,7 @@ BLOCK_END_TEST_HANDLER_BIND_5107:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_5116::'InvokeBody'(object)
+    callvirt instance object L_5006::'InvokeBody'(object)
     ret
 }
 
@@ -867,5 +867,5 @@ BLOCK_END_TEST_HANDLER_BIND_5107:
     ret
 }
 
-} // end of class L_5116
+} // end of class L_5006
 

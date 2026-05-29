@@ -143,6 +143,10 @@ namespace Lisp
 
         public (Symbol? symbol, SymbolStatus status) FindSymbol(string name)
         {
+            if (this == CommonLisp && name == "NIL") {
+                return (null, SymbolStatus.External);
+            }
+
             // 1. Check present symbols
             if (presentSymbols.TryGetValue(name, out var symbol))
             {
@@ -171,6 +175,15 @@ namespace Lisp
 
         public void Export(Symbol symbol)
         {
+            if (symbol == null)
+            {
+                if (this == CommonLisp)
+                {
+                    return;
+                }
+
+                throw new InvalidOperationException("Cannot export NIL as a concrete symbol in non-COMMON-LISP packages.");
+            }
 
             var name = symbol.Name;
             var (existing, status) = FindSymbol(name);
@@ -190,6 +203,16 @@ namespace Lisp
 
         public void Import(Symbol symbol)
         {
+            if (symbol == null)
+            {
+                if (this == CommonLisp)
+                {
+                    return;
+                }
+
+                throw new InvalidOperationException("Cannot import NIL as a concrete symbol in non-COMMON-LISP packages.");
+            }
+
             var name = symbol.Name;
             var (existing, status) = FindSymbol(name);
 
@@ -203,6 +226,16 @@ namespace Lisp
 
         public void ShadowingImport(Symbol symbol)
         {
+            if (symbol == null)
+            {
+                if (this == CommonLisp)
+                {
+                    return;
+                }
+
+                throw new InvalidOperationException("Cannot shadowing-import NIL as a concrete symbol in non-COMMON-LISP packages.");
+            }
+
             var name = symbol.Name;
             shadowingSymbolNames.Add(name);
             presentSymbols[name] = symbol;
@@ -210,6 +243,16 @@ namespace Lisp
 
         public bool Unintern(Symbol symbol)
         {
+            if (symbol == null)
+            {
+                if (this == CommonLisp)
+                {
+                    return false;
+                }
+
+                throw new InvalidOperationException("Cannot unintern NIL as a concrete symbol in non-COMMON-LISP packages.");
+            }
+
             var name = symbol.Name;
             bool wasPresent = presentSymbols.Remove(name);
             externalSymbolNames.Remove(name);

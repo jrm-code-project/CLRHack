@@ -8,8 +8,8 @@
        extends [mscorlib]System.Object
 {
     .field public static object 'TEMP_B'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7739'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7736'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S7602'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S7599'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -19,11 +19,11 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7739'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7602'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7736'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7599'
     ret
 }
 
@@ -400,7 +400,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_7727:
+BLOCK_END_MAIN_7590:
     nop
     ldnull
     ret
@@ -779,30 +779,30 @@ BLOCK_END_MAIN_7727:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE7734
+    brtrue TRUE7597
     ldnull
-    br END7735
-TRUE7734:
+    br END7598
+TRUE7597:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7736'
-END7735:
-    nop
-    ldnull
-    ceq
-    brtrue TRUE7737
-    ldnull
-    br END7738
-TRUE7737:
-    nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7739'
-END7738:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7599'
+END7598:
     nop
     ldnull
     ceq
-    brtrue ELSE7740
+    brtrue TRUE7600
+    ldnull
+    br END7601
+TRUE7600:
+    nop
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7602'
+END7601:
+    nop
+    ldnull
+    ceq
+    brtrue ELSE7603
     ldarg 2
     ret
-ELSE7740:
+ELSE7603:
     nop
     ldarg 0
     ldc.i4 1
@@ -842,7 +842,7 @@ ELSE7740:
     call object Program::'TAK'(object, object, object)
     tail. call object Program::'TAK'(object, object, object)
     ret
-BLOCK_END_TAK_7722:
+BLOCK_END_TAK_7585:
     nop
     ldnull
     ret

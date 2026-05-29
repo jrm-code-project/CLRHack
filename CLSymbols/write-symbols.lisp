@@ -67,8 +67,10 @@
     (format stream "       extends [mscorlib]System.Object~%")
     (format stream "{~%")
     (do-external-symbols (sym (find-package "CL"))
-      (format stream "  .field public static class [LispBase]Lisp.Symbol '_~a'~%" (encode sym)))
+      (unless (string= (symbol-name sym) "NIL")
+        (format stream "  .field public static class [LispBase]Lisp.Symbol '_~a'~%" (encode sym))))
     (do-external-symbols (sym (find-package "CL"))
+      (unless (string= (symbol-name sym) "NIL")
       (format stream "~&~%.method public hidebysig specialname static object 'get_~a' () cil managed~%" (encode sym))
       (format stream "~&{~%")
       (format stream "~&  .maxstack 1")
@@ -89,7 +91,26 @@
       (format stream "  {~%")
       (format stream "    .get object Lisp.CL::'get_~a'()~%" (encode sym))
       (format stream "    .set void Lisp.CL::'set_~a'(object)~%" (encode sym))
-      (format stream "  }~%"))
+      (format stream "  }~%")))
+
+    ;; NIL is represented as CLR null and has no backing Symbol field.
+    (format stream "~&~%.method public hidebysig specialname static object 'get_Nil' () cil managed~%")
+    (format stream "~&{~%")
+    (format stream "~&  .maxstack 1")
+    (format stream "~&  ldnull~%")
+    (format stream "~%  ret~%")
+    (format stream "~&}~%")
+
+    (format stream "~&~%.method public hidebysig specialname static void 'set_Nil'(object 'value') cil managed~%")
+    (format stream "~&{~%")
+    (format stream "~&  .maxstack 1")
+    (format stream "~&  ret~%")
+    (format stream "~&}~%")
+    (format stream "  .property object 'Nil'()~%")
+    (format stream "  {~%")
+    (format stream "    .get object Lisp.CL::'get_Nil'()~%")
+    (format stream "    .set void Lisp.CL::'set_Nil'(object)~%")
+    (format stream "  }~%")
 
     (format stream "~%  // =============================================================~%")
     (format stream "  // The Static Class Constructor~%")
@@ -101,6 +122,7 @@
     (let ((symbols ()))
       (do-external-symbols (sym (find-package "CL"))
         (push sym symbols))
+      (setf symbols (remove-if (lambda (sym) (string= (symbol-name sym) "NIL")) symbols))
       (setf symbols (sort symbols #'string< :key #'symbol-name))
       (dolist (sym symbols)
         (let ((encoded (encode sym)))
@@ -111,9 +133,6 @@
           (format stream "    ldsfld class [LispBase]Lisp.Package [LispBase]Lisp.Package::CommonLisp~%")
           (format stream "    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_~a'~%" encoded)
           (format stream "    callvirt instance void [LispBase]Lisp.Package::Export(class [LispBase]Lisp.Symbol)~%"))))
-    
-    (format stream "    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'~%")
-    (format stream "    call void Lisp.CL::'set_Nil'(object)~%")
     
     (format stream "    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_T'~%")
     (format stream "    call void Lisp.CL::'set_T'(object)~%")
@@ -126,13 +145,13 @@
     (format stream "    box [mscorlib]System.Int32~%")
     (format stream "    call void Lisp.CL::'set_StrReadBaseStr'(object)~%")
     
-    (format stream "    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'~%")
+    (format stream "    ldnull~%")
     (format stream "    call void Lisp.CL::'set_StrReadSuppressStr'(object)~%")
     
-    (format stream "    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'~%")
+    (format stream "    ldnull~%")
     (format stream "    call void Lisp.CL::'set_StrPrintLengthStr'(object)~%")
     
-    (format stream "    ldsfld class [LispBase]Lisp.Symbol Lisp.CL::'_Nil'~%")
+    (format stream "    ldnull~%")
     (format stream "    call void Lisp.CL::'set_StrPrintLevelStr'(object)~%")
     
     (format stream "    call class [LispCore]Lisp.Readtable [LispCore]Lisp.Readtable::get_StandardReadtable()~%")
