@@ -391,7 +391,7 @@
     add
     box int32
     ret
-BLOCK_END_ADD2_8619:
+BLOCK_END_ADD2_9142:
     nop
     ldnull
     ret

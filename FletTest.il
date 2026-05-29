@@ -384,7 +384,7 @@
     pop
     tail. call object Program::'TEST_FLET_NON_RECURSIVE'()
     ret
-BLOCK_END_MAIN_1897:
+BLOCK_END_MAIN_1956:
     nop
     ldnull
     ret
@@ -753,51 +753,51 @@ BLOCK_END_MAIN_1897:
 .method private static hidebysig object 'TEST_FLET_NON_RECURSIVE_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1923, object FN_TMP1919, object OUTER_HELPER1893)
+    .locals init (object ARG_TMP1982, object FN_TMP1978, object OUTER_HELPER1952)
     ldstr "Testing flet non-recursivity..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_1903::'.ctor'()
-    stloc OUTER_HELPER1893
+    newobj instance void L_1962::'.ctor'()
+    stloc OUTER_HELPER1952
     ldstr "outer-helper 5 (should be 16):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc OUTER_HELPER1893
-    stloc FN_TMP1919
-    ldloc FN_TMP1919
-    brtrue FN_NULL1920
+    ldloc OUTER_HELPER1952
+    stloc FN_TMP1978
+    ldloc FN_TMP1978
+    brtrue FN_NULL1979
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1919
-FN_NULL1920:
+    stloc FN_TMP1978
+FN_NULL1979:
     nop
-    ldloc FN_TMP1919
+    ldloc FN_TMP1978
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1919
-    ldloc FN_TMP1919
-    brtrue FN_TYPE_OK1921
+    stloc FN_TMP1978
+    ldloc FN_TMP1978
+    brtrue FN_TYPE_OK1980
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1919
-FN_TYPE_OK1921:
+    stloc FN_TMP1978
+FN_TYPE_OK1980:
     nop
-FN_AFTER1922:
+FN_AFTER1981:
     nop
     ldc.i4 5
     box int32
-    stloc ARG_TMP1923
-    ldloc FN_TMP1919
-    ldloc ARG_TMP1923
+    stloc ARG_TMP1982
+    ldloc FN_TMP1978
+    ldloc ARG_TMP1982
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_NON_RECURSIVE_1889:
+BLOCK_END_TEST_FLET_NON_RECURSIVE_1948:
     nop
     ldnull
     ret
@@ -1166,48 +1166,48 @@ BLOCK_END_TEST_FLET_NON_RECURSIVE_1889:
 .method private static hidebysig object 'TEST_FLET_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1918, object FN_TMP1914, object ARG_TMP1913, object FN_TMP1909, object ARG_TMP1908, object FN_TMP1904, object DOUBLE1885, object ADD_101882, object DOUBLE1879)
+    .locals init (object ARG_TMP1977, object FN_TMP1973, object ARG_TMP1972, object FN_TMP1968, object ARG_TMP1967, object FN_TMP1963, object DOUBLE1944, object ADD_101941, object DOUBLE1938)
     ldstr "Testing flet..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_1900::'.ctor'()
-    stloc DOUBLE1879
-    newobj instance void L_1901::'.ctor'()
-    stloc ADD_101882
+    newobj instance void L_1959::'.ctor'()
+    stloc DOUBLE1938
+    newobj instance void L_1960::'.ctor'()
+    stloc ADD_101941
     ldstr "double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE1879
-    stloc FN_TMP1904
-    ldloc FN_TMP1904
-    brtrue FN_NULL1905
+    ldloc DOUBLE1938
+    stloc FN_TMP1963
+    ldloc FN_TMP1963
+    brtrue FN_NULL1964
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1904
-FN_NULL1905:
+    stloc FN_TMP1963
+FN_NULL1964:
     nop
-    ldloc FN_TMP1904
+    ldloc FN_TMP1963
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1904
-    ldloc FN_TMP1904
-    brtrue FN_TYPE_OK1906
+    stloc FN_TMP1963
+    ldloc FN_TMP1963
+    brtrue FN_TYPE_OK1965
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1904
-FN_TYPE_OK1906:
+    stloc FN_TMP1963
+FN_TYPE_OK1965:
     nop
-FN_AFTER1907:
+FN_AFTER1966:
     nop
     ldc.i4 5
     box int32
-    stloc ARG_TMP1908
-    ldloc FN_TMP1904
-    ldloc ARG_TMP1908
+    stloc ARG_TMP1967
+    ldloc FN_TMP1963
+    ldloc ARG_TMP1967
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -1216,79 +1216,79 @@ FN_AFTER1907:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc ADD_101882
-    stloc FN_TMP1909
-    ldloc FN_TMP1909
-    brtrue FN_NULL1910
+    ldloc ADD_101941
+    stloc FN_TMP1968
+    ldloc FN_TMP1968
+    brtrue FN_NULL1969
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1909
-FN_NULL1910:
+    stloc FN_TMP1968
+FN_NULL1969:
     nop
-    ldloc FN_TMP1909
+    ldloc FN_TMP1968
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1909
-    ldloc FN_TMP1909
-    brtrue FN_TYPE_OK1911
+    stloc FN_TMP1968
+    ldloc FN_TMP1968
+    brtrue FN_TYPE_OK1970
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1909
-FN_TYPE_OK1911:
+    stloc FN_TMP1968
+FN_TYPE_OK1970:
     nop
-FN_AFTER1912:
+FN_AFTER1971:
     nop
     ldc.i4 4
     box int32
-    stloc ARG_TMP1913
-    ldloc FN_TMP1909
-    ldloc ARG_TMP1913
+    stloc ARG_TMP1972
+    ldloc FN_TMP1968
+    ldloc ARG_TMP1972
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_1902::'.ctor'()
-    stloc DOUBLE1885
+    newobj instance void L_1961::'.ctor'()
+    stloc DOUBLE1944
     ldstr "shadowed double 5:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc DOUBLE1885
-    stloc FN_TMP1914
-    ldloc FN_TMP1914
-    brtrue FN_NULL1915
+    ldloc DOUBLE1944
+    stloc FN_TMP1973
+    ldloc FN_TMP1973
+    brtrue FN_NULL1974
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1914
-FN_NULL1915:
+    stloc FN_TMP1973
+FN_NULL1974:
     nop
-    ldloc FN_TMP1914
+    ldloc FN_TMP1973
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1914
-    ldloc FN_TMP1914
-    brtrue FN_TYPE_OK1916
+    stloc FN_TMP1973
+    ldloc FN_TMP1973
+    brtrue FN_TYPE_OK1975
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1914
-FN_TYPE_OK1916:
+    stloc FN_TMP1973
+FN_TYPE_OK1975:
     nop
-FN_AFTER1917:
+FN_AFTER1976:
     nop
     ldc.i4 5
     box int32
-    stloc ARG_TMP1918
-    ldloc FN_TMP1914
-    ldloc ARG_TMP1918
+    stloc ARG_TMP1977
+    ldloc FN_TMP1973
+    ldloc ARG_TMP1977
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_FLET_1875:
+BLOCK_END_TEST_FLET_1934:
     nop
     ldnull
     ret
@@ -1668,7 +1668,7 @@ BLOCK_END_TEST_FLET_1875:
     add
     box int32
     ret
-BLOCK_END_OUTER_HELPER_1870:
+BLOCK_END_OUTER_HELPER_1929:
     nop
     ldnull
     ret
@@ -1693,7 +1693,7 @@ BLOCK_END_OUTER_HELPER_1870:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_1900
+.class public auto ansi beforefieldinit L_1959
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1737,7 +1737,7 @@ BLOCK_END_OUTER_HELPER_1870:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1900::'InvokeBody'(object)
+    callvirt instance object L_1959::'InvokeBody'(object)
     ret
 }
 
@@ -2082,9 +2082,9 @@ BLOCK_END_OUTER_HELPER_1870:
     ret
 }
 
-} // end of class L_1900
+} // end of class L_1959
 
-.class public auto ansi beforefieldinit L_1901
+.class public auto ansi beforefieldinit L_1960
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -2129,7 +2129,7 @@ BLOCK_END_OUTER_HELPER_1870:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1901::'InvokeBody'(object)
+    callvirt instance object L_1960::'InvokeBody'(object)
     ret
 }
 
@@ -2474,9 +2474,9 @@ BLOCK_END_OUTER_HELPER_1870:
     ret
 }
 
-} // end of class L_1901
+} // end of class L_1960
 
-.class public auto ansi beforefieldinit L_1902
+.class public auto ansi beforefieldinit L_1961
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -2521,7 +2521,7 @@ BLOCK_END_OUTER_HELPER_1870:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1902::'InvokeBody'(object)
+    callvirt instance object L_1961::'InvokeBody'(object)
     ret
 }
 
@@ -2866,9 +2866,9 @@ BLOCK_END_OUTER_HELPER_1870:
     ret
 }
 
-} // end of class L_1902
+} // end of class L_1961
 
-.class public auto ansi beforefieldinit L_1903
+.class public auto ansi beforefieldinit L_1962
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -2914,7 +2914,7 @@ BLOCK_END_OUTER_HELPER_1870:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1903::'InvokeBody'(object)
+    callvirt instance object L_1962::'InvokeBody'(object)
     ret
 }
 
@@ -3259,5 +3259,5 @@ BLOCK_END_OUTER_HELPER_1870:
     ret
 }
 
-} // end of class L_1903
+} // end of class L_1962
 

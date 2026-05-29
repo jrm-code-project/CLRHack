@@ -8,7 +8,7 @@
        extends [mscorlib]System.Object
 {
     .field public static object 'TEMP_B'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S7573'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S8084'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -18,7 +18,7 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S7573'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S8084'
     ret
 }
 
@@ -389,7 +389,7 @@
     pop
     tail. call object Program::'TEST_TAGBODY_NESTING'()
     ret
-BLOCK_END_MAIN_7565:
+BLOCK_END_MAIN_8076:
     nop
     ldnull
     ret
@@ -762,25 +762,25 @@ BLOCK_END_MAIN_7565:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-TAG_OUTER_START_7558:
+TAG_OUTER_START_8069:
     nop
     ldstr "Outer start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-TAG_INNER_START_7560:
+TAG_INNER_START_8071:
     nop
     ldstr "Inner start"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    leave TAG_INNER_END_7561
+    leave TAG_INNER_END_8072
     pop
     ldstr "Should NOT print this (inner)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-TAG_INNER_END_7561:
+TAG_INNER_END_8072:
     nop
     ldstr "Inner end"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -792,13 +792,13 @@ TAG_INNER_END_7561:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    leave TAG_OUTER_END_7559
+    leave TAG_OUTER_END_8070
     pop
     ldstr "Should NOT print this (outer)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-TAG_OUTER_END_7559:
+TAG_OUTER_END_8070:
     nop
     ldstr "Outer end"
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -806,7 +806,7 @@ TAG_OUTER_END_7559:
     pop
     ldnull
     ret
-BLOCK_END_TEST_TAGBODY_NESTING_7556:
+BLOCK_END_TEST_TAGBODY_NESTING_8067:
     nop
     ldnull
     ret
@@ -1175,7 +1175,7 @@ BLOCK_END_TEST_TAGBODY_NESTING_7556:
 .method private static hidebysig object 'TEST_TAGBODY_LOOP_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP7578, object CELL_TMP7577, object TEMP7574, object I7550)
+    .locals init (object CELL_VAL_TMP8089, object CELL_TMP8088, object TEMP8085, object I8061)
     ldstr "Testing tagbody loop..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -1183,43 +1183,43 @@ BLOCK_END_TEST_TAGBODY_NESTING_7556:
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I7550
-TAG_START_7551:
+    stloc I8061
+TAG_START_8062:
     nop
-    ldloc I7550
+    ldloc I8061
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 10
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE7571
+    brtrue TRUE8082
     ldnull
-    br END7572
-TRUE7571:
+    br END8083
+TRUE8082:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S7573'
-END7572:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S8084'
+END8083:
     nop
     ldnull
     ceq
-    brtrue ELSE7575
-    leave TAG_END_7552
-    br END7576
-ELSE7575:
+    brtrue ELSE8086
+    leave TAG_END_8063
+    br END8087
+ELSE8086:
     nop
     ldnull
-END7576:
+END8087:
     nop
     pop
-    ldloc I7550
+    ldloc I8061
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc I7550
-    stloc CELL_TMP7577
-    ldloc I7550
+    ldloc I8061
+    stloc CELL_TMP8088
+    ldloc I8061
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1230,16 +1230,16 @@ END7576:
     unbox.any int32
     add
     box int32
-    stloc CELL_VAL_TMP7578
-    ldloc CELL_TMP7577
+    stloc CELL_VAL_TMP8089
+    ldloc CELL_TMP8088
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP7578
+    ldloc CELL_VAL_TMP8089
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP7578
+    ldloc CELL_VAL_TMP8089
     pop
-    leave TAG_START_7551
+    leave TAG_START_8062
     pop
-TAG_END_7552:
+TAG_END_8063:
     nop
     ldnull
     pop
@@ -1251,13 +1251,13 @@ TAG_END_7552:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc I7550
+    ldloc I8061
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_TAGBODY_LOOP_7548:
+BLOCK_END_TEST_TAGBODY_LOOP_8059:
     nop
     ldnull
     ret

@@ -9,8 +9,8 @@
 {
     .field public static object '_TEST_PARAM_'
     .field public static object 'TEMP_B'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T2385'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S2378'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T2444'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S2437'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -22,22 +22,22 @@
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T2385'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T2444'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2378'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2437'
     ret
 }
 
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP2400, object FN_TMP2396, object F2351, object B2348, object A2347, object Y2346, object X2345)
+    .locals init (object ARG_TMP2459, object FN_TMP2455, object F2410, object B2407, object A2406, object Y2405, object X2404)
     ldc.i4 10
     box int32
-    stloc X2345
-    ldloc X2345
+    stloc X2404
+    ldloc X2404
     ldc.i4 20
     box int32
     stsfld object Program::'TEMP_B'
@@ -45,31 +45,31 @@
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE2376
+    brtrue TRUE2435
     ldnull
-    br END2377
-TRUE2376:
+    br END2436
+TRUE2435:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2378'
-END2377:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2437'
+END2436:
     nop
     ldnull
     ceq
-    brtrue ELSE2386
+    brtrue ELSE2445
     ldstr "X is less than 20 (via built-in WHEN)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END2387
-ELSE2386:
+    br END2446
+ELSE2445:
     nop
     ldnull
-END2387:
+END2446:
     nop
     pop
     ldc.i4 30
     box int32
-    stloc Y2346
-    ldloc Y2346
+    stloc Y2405
+    ldloc Y2405
     ldc.i4 20
     box int32
     stsfld object Program::'TEMP_B'
@@ -77,31 +77,31 @@ END2387:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE2379
+    brtrue TRUE2438
     ldnull
-    br END2380
-TRUE2379:
+    br END2439
+TRUE2438:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2378'
-END2380:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2437'
+END2439:
     nop
     ldnull
     ceq
-    brtrue ELSE2388
+    brtrue ELSE2447
     ldnull
-    br END2389
-ELSE2388:
+    br END2448
+ELSE2447:
     nop
     ldstr "Y is NOT less than 20 (via built-in UNLESS)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END2389:
+END2448:
     nop
     pop
     ldc.i4 5
     box int32
-    stloc A2347
-    ldloc A2347
+    stloc A2406
+    ldloc A2406
     ldc.i4 10
     box int32
     stsfld object Program::'TEMP_B'
@@ -110,12 +110,12 @@ END2389:
     unbox.any int32
     add
     box int32
-    stloc B2348
+    stloc B2407
     ldstr "A + 10 is (via LET*):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc B2348
+    ldloc B2407
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -136,22 +136,22 @@ END2389:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE2381
+    brtrue TRUE2440
     ldnull
-    br END2382
-TRUE2381:
+    br END2441
+TRUE2440:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2378'
-END2382:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2437'
+END2441:
     nop
     ldnull
     ceq
-    brtrue ELSE2394
+    brtrue ELSE2453
     ldstr "Failure"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END2395
-ELSE2394:
+    br END2454
+ELSE2453:
     nop
     ldc.i4 5
     box int32
@@ -162,76 +162,76 @@ ELSE2394:
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE2383
+    brtrue TRUE2442
     ldnull
-    br END2384
-TRUE2383:
+    br END2443
+TRUE2442:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2378'
-END2384:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2437'
+END2443:
     nop
     ldnull
     ceq
-    brtrue ELSE2392
+    brtrue ELSE2451
     ldstr "Success (via COND)!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END2393
-ELSE2392:
+    br END2452
+ELSE2451:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T2385'
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T2444'
     ldnull
     ceq
-    brtrue ELSE2390
+    brtrue ELSE2449
     ldstr "Fallthrough"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END2391
-ELSE2390:
+    br END2450
+ELSE2449:
     nop
     ldnull
-END2391:
+END2450:
     nop
-END2393:
+END2452:
     nop
-END2395:
+END2454:
     nop
     pop
-    newobj instance void L_2352::'.ctor'()
-    stloc F2351
+    newobj instance void L_2411::'.ctor'()
+    stloc F2410
     ldstr "Funcall result (10 + 1):"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc F2351
-    stloc FN_TMP2396
-    ldloc FN_TMP2396
-    brtrue FN_NULL2397
+    ldloc F2410
+    stloc FN_TMP2455
+    ldloc FN_TMP2455
+    brtrue FN_NULL2456
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP2396
-FN_NULL2397:
+    stloc FN_TMP2455
+FN_NULL2456:
     nop
-    ldloc FN_TMP2396
+    ldloc FN_TMP2455
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP2396
-    ldloc FN_TMP2396
-    brtrue FN_TYPE_OK2398
+    stloc FN_TMP2455
+    ldloc FN_TMP2455
+    brtrue FN_TYPE_OK2457
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP2396
-FN_TYPE_OK2398:
+    stloc FN_TMP2455
+FN_TYPE_OK2457:
     nop
-FN_AFTER2399:
+FN_AFTER2458:
     nop
     ldc.i4 10
     box int32
-    stloc ARG_TMP2400
-    ldloc FN_TMP2396
-    ldloc ARG_TMP2400
+    stloc ARG_TMP2459
+    ldloc FN_TMP2455
+    ldloc ARG_TMP2459
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -250,7 +250,7 @@ FN_AFTER2399:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_2352
+.class public auto ansi beforefieldinit L_2411
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -295,7 +295,7 @@ FN_AFTER2399:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_2352::'InvokeBody'(object)
+    callvirt instance object L_2411::'InvokeBody'(object)
     ret
 }
 
@@ -640,5 +640,5 @@ FN_AFTER2399:
     ret
 }
 
-} // end of class L_2352
+} // end of class L_2411
 

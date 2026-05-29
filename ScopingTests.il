@@ -7,42 +7,42 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'X7417'
-    .field public static object 'F7411'
-    .field public static object 'X7413'
-    .field public static object 'PREFIX7405'
-    .field public static object 'X7400'
-    .field public static object 'MSG7395'
+    .field public static object 'X7928'
+    .field public static object 'F7922'
+    .field public static object 'X7924'
+    .field public static object 'PREFIX7916'
+    .field public static object 'X7911'
+    .field public static object 'MSG7906'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'X7417'
+    stsfld object Program::'X7928'
     ldnull
-    stsfld object Program::'F7411'
+    stsfld object Program::'F7922'
     ldnull
-    stsfld object Program::'X7413'
+    stsfld object Program::'X7924'
     ldnull
-    stsfld object Program::'PREFIX7405'
+    stsfld object Program::'PREFIX7916'
     ldnull
-    stsfld object Program::'X7400'
+    stsfld object Program::'X7911'
     ldnull
-    stsfld object Program::'MSG7395'
+    stsfld object Program::'MSG7906'
     ret
 }
 
 .method public static hidebysig object 'InitializeModule'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7544, object FN_TMP7540, object ARG_TMP7539, object FN_TMP7535, object FN_TMP7531, object FN_TMP7527, object Y7420, object FORMAT_TEST7409, object MAKE_FORMATTER7408, object F7403, object X7398, object F7397, object MSG7395, object MSG7394)
+    .locals init (object ARG_TMP8055, object FN_TMP8051, object ARG_TMP8050, object FN_TMP8046, object FN_TMP8042, object FN_TMP8038, object Y7931, object FORMAT_TEST7920, object MAKE_FORMATTER7919, object F7914, object X7909, object F7908, object MSG7906, object MSG7905)
     ldstr "--- Test 1: Baseline Bindings ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldstr "Straight-line let binding successful."
-    stloc MSG7394
-    ldloc MSG7394
+    stloc MSG7905
+    ldloc MSG7905
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -51,35 +51,35 @@
     ldnull
     pop
     ldstr "Basic closure captured successfully."
-    stloc MSG7395
-    ldloc MSG7395
-    newobj instance void L_7421::'.ctor'(object)
-    stloc F7397
-    ldloc F7397
-    stloc FN_TMP7527
-    ldloc FN_TMP7527
-    brtrue FN_NULL7528
+    stloc MSG7906
+    ldloc MSG7906
+    newobj instance void L_7932::'.ctor'(object)
+    stloc F7908
+    ldloc F7908
+    stloc FN_TMP8038
+    ldloc FN_TMP8038
+    brtrue FN_NULL8039
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7527
-FN_NULL7528:
+    stloc FN_TMP8038
+FN_NULL8039:
     nop
-    ldloc FN_TMP7527
+    ldloc FN_TMP8038
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7527
-    ldloc FN_TMP7527
-    brtrue FN_TYPE_OK7529
+    stloc FN_TMP8038
+    ldloc FN_TMP8038
+    brtrue FN_TYPE_OK8040
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7527
-FN_TYPE_OK7529:
+    stloc FN_TMP8038
+FN_TYPE_OK8040:
     nop
-FN_AFTER7530:
+FN_AFTER8041:
     nop
-    ldloc FN_TMP7527
+    ldloc FN_TMP8038
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     pop
     ldstr "--- Test 3: Lexical Shadowing ---"
@@ -87,108 +87,108 @@ FN_AFTER7530:
     ldnull
     pop
     ldstr "OUTER SCOPE - FAILURE"
-    stloc X7398
-    newobj instance void L_7423::'.ctor'()
-    stloc F7403
-    ldloc F7403
-    stloc FN_TMP7531
-    ldloc FN_TMP7531
-    brtrue FN_NULL7532
+    stloc X7909
+    newobj instance void L_7934::'.ctor'()
+    stloc F7914
+    ldloc F7914
+    stloc FN_TMP8042
+    ldloc FN_TMP8042
+    brtrue FN_NULL8043
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7531
-FN_NULL7532:
+    stloc FN_TMP8042
+FN_NULL8043:
     nop
-    ldloc FN_TMP7531
+    ldloc FN_TMP8042
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7531
-    ldloc FN_TMP7531
-    brtrue FN_TYPE_OK7533
+    stloc FN_TMP8042
+    ldloc FN_TMP8042
+    brtrue FN_TYPE_OK8044
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7531
-FN_TYPE_OK7533:
+    stloc FN_TMP8042
+FN_TYPE_OK8044:
     nop
-FN_AFTER7534:
+FN_AFTER8045:
     nop
-    ldloc FN_TMP7531
+    ldloc FN_TMP8042
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     pop
     ldstr "--- Test 4: Multi-level Captures ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_7425::'.ctor'()
-    stloc MAKE_FORMATTER7408
-    ldloc MAKE_FORMATTER7408
-    stloc FN_TMP7535
-    ldloc FN_TMP7535
-    brtrue FN_NULL7536
+    newobj instance void L_7936::'.ctor'()
+    stloc MAKE_FORMATTER7919
+    ldloc MAKE_FORMATTER7919
+    stloc FN_TMP8046
+    ldloc FN_TMP8046
+    brtrue FN_NULL8047
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7535
-FN_NULL7536:
+    stloc FN_TMP8046
+FN_NULL8047:
     nop
-    ldloc FN_TMP7535
+    ldloc FN_TMP8046
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7535
-    ldloc FN_TMP7535
-    brtrue FN_TYPE_OK7537
+    stloc FN_TMP8046
+    ldloc FN_TMP8046
+    brtrue FN_TYPE_OK8048
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7535
-FN_TYPE_OK7537:
+    stloc FN_TMP8046
+FN_TYPE_OK8048:
     nop
-FN_AFTER7538:
+FN_AFTER8049:
     nop
     ldstr "Prefix Bound."
-    stloc ARG_TMP7539
-    ldloc FN_TMP7535
-    ldloc ARG_TMP7539
+    stloc ARG_TMP8050
+    ldloc FN_TMP8046
+    ldloc ARG_TMP8050
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc FORMAT_TEST7409
-    ldloc FORMAT_TEST7409
-    stloc FN_TMP7540
-    ldloc FN_TMP7540
-    brtrue FN_NULL7541
+    stloc FORMAT_TEST7920
+    ldloc FORMAT_TEST7920
+    stloc FN_TMP8051
+    ldloc FN_TMP8051
+    brtrue FN_NULL8052
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7540
-FN_NULL7541:
+    stloc FN_TMP8051
+FN_NULL8052:
     nop
-    ldloc FN_TMP7540
+    ldloc FN_TMP8051
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7540
-    ldloc FN_TMP7540
-    brtrue FN_TYPE_OK7542
+    stloc FN_TMP8051
+    ldloc FN_TMP8051
+    brtrue FN_TYPE_OK8053
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7540
-FN_TYPE_OK7542:
+    stloc FN_TMP8051
+FN_TYPE_OK8053:
     nop
-FN_AFTER7543:
+FN_AFTER8054:
     nop
     ldstr "Suffix Bound."
-    stloc ARG_TMP7544
-    ldloc FN_TMP7540
-    ldloc ARG_TMP7544
+    stloc ARG_TMP8055
+    ldloc FN_TMP8051
+    ldloc ARG_TMP8055
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     pop
     ldstr "--- Test 5: Y-Combinator Compilation ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    newobj instance void L_7430::'.ctor'()
-    stloc Y7420
+    newobj instance void L_7941::'.ctor'()
+    stloc Y7931
     ldstr "Y-Combinator successfully compiled to verifiable IL closures!"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -207,10 +207,10 @@ FN_AFTER7543:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_7421
+.class public auto ansi beforefieldinit L_7932
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'MSG7395'
+    .field public object 'MSG7906'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -219,7 +219,7 @@ FN_AFTER7543:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7421::'MSG7395'
+    stfld object L_7932::'MSG7906'
     ret
 }
 
@@ -227,7 +227,7 @@ FN_AFTER7543:
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_7421::'MSG7395'
+    ldfld object L_7932::'MSG7906'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
@@ -240,7 +240,7 @@ FN_AFTER7543:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_7421::'InvokeBody'()
+    callvirt instance object L_7932::'InvokeBody'()
     ret
 }
 
@@ -596,12 +596,12 @@ FN_AFTER7543:
     ret
 }
 
-} // end of class L_7421
+} // end of class L_7932
 
-.class public auto ansi beforefieldinit L_7422
+.class public auto ansi beforefieldinit L_7933
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'X7400'
+    .field public object 'X7911'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -610,7 +610,7 @@ FN_AFTER7543:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7422::'X7400'
+    stfld object L_7933::'X7911'
     ret
 }
 
@@ -618,7 +618,7 @@ FN_AFTER7543:
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_7422::'X7400'
+    ldfld object L_7933::'X7911'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
@@ -631,7 +631,7 @@ FN_AFTER7543:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_7422::'InvokeBody'()
+    callvirt instance object L_7933::'InvokeBody'()
     ret
 }
 
@@ -987,9 +987,9 @@ FN_AFTER7543:
     ret
 }
 
-} // end of class L_7422
+} // end of class L_7933
 
-.class public auto ansi beforefieldinit L_7423
+.class public auto ansi beforefieldinit L_7934
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1003,37 +1003,37 @@ FN_AFTER7543:
 .method private hidebysig object 'InvokeBody'() cil managed
 {
     .maxstack 8
-    .locals init (object FN_TMP7488, object G7402, object X7400)
+    .locals init (object FN_TMP7999, object G7913, object X7911)
     ldstr "INNER SCOPE - SUCCESS"
-    stloc X7400
-    ldloc X7400
-    newobj instance void L_7422::'.ctor'(object)
-    stloc G7402
-    ldloc G7402
-    stloc FN_TMP7488
-    ldloc FN_TMP7488
-    brtrue FN_NULL7489
+    stloc X7911
+    ldloc X7911
+    newobj instance void L_7933::'.ctor'(object)
+    stloc G7913
+    ldloc G7913
+    stloc FN_TMP7999
+    ldloc FN_TMP7999
+    brtrue FN_NULL8000
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7488
-FN_NULL7489:
+    stloc FN_TMP7999
+FN_NULL8000:
     nop
-    ldloc FN_TMP7488
+    ldloc FN_TMP7999
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7488
-    ldloc FN_TMP7488
-    brtrue FN_TYPE_OK7490
+    stloc FN_TMP7999
+    ldloc FN_TMP7999
+    brtrue FN_TYPE_OK8001
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7488
-FN_TYPE_OK7490:
+    stloc FN_TMP7999
+FN_TYPE_OK8001:
     nop
-FN_AFTER7491:
+FN_AFTER8002:
     nop
-    ldloc FN_TMP7488
+    ldloc FN_TMP7999
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'()
     ret
     ldnull
@@ -1045,7 +1045,7 @@ FN_AFTER7491:
     .maxstack 8
     ldarg.0
     tail.
-    callvirt instance object L_7423::'InvokeBody'()
+    callvirt instance object L_7934::'InvokeBody'()
     ret
 }
 
@@ -1401,12 +1401,12 @@ FN_AFTER7491:
     ret
 }
 
-} // end of class L_7423
+} // end of class L_7934
 
-.class public auto ansi beforefieldinit L_7424
+.class public auto ansi beforefieldinit L_7935
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'PREFIX7405'
+    .field public object 'PREFIX7916'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -1415,7 +1415,7 @@ FN_AFTER7491:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7424::'PREFIX7405'
+    stfld object L_7935::'PREFIX7916'
     ret
 }
 
@@ -1423,7 +1423,7 @@ FN_AFTER7491:
 {
     .maxstack 8
     ldarg.0
-    ldfld object L_7424::'PREFIX7405'
+    ldfld object L_7935::'PREFIX7916'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -1452,7 +1452,7 @@ FN_AFTER7491:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7424::'InvokeBody'(object)
+    callvirt instance object L_7935::'InvokeBody'(object)
     ret
 }
 
@@ -1797,9 +1797,9 @@ FN_AFTER7491:
     ret
 }
 
-} // end of class L_7424
+} // end of class L_7935
 
-.class public auto ansi beforefieldinit L_7425
+.class public auto ansi beforefieldinit L_7936
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -1814,7 +1814,7 @@ FN_AFTER7491:
 {
     .maxstack 8
     ldarg 1
-    newobj instance void L_7424::'.ctor'(object)
+    newobj instance void L_7935::'.ctor'(object)
     ret
     ldnull
     ret
@@ -1837,7 +1837,7 @@ FN_AFTER7491:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7425::'InvokeBody'(object)
+    callvirt instance object L_7936::'InvokeBody'(object)
     ret
 }
 
@@ -2182,12 +2182,12 @@ FN_AFTER7491:
     ret
 }
 
-} // end of class L_7425
+} // end of class L_7936
 
-.class public auto ansi beforefieldinit L_7426
+.class public auto ansi beforefieldinit L_7937
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'X7413'
+    .field public object 'X7924'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -2196,72 +2196,72 @@ FN_AFTER7491:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7426::'X7413'
+    stfld object L_7937::'X7924'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7501, object ARG_TMP7500, object FN_TMP7496, object FN_TMP7492)
+    .locals init (object ARG_TMP8012, object ARG_TMP8011, object FN_TMP8007, object FN_TMP8003)
     ldarg.0
-    ldfld object L_7426::'X7413'
-    stloc FN_TMP7496
-    ldloc FN_TMP7496
-    brtrue FN_NULL7497
+    ldfld object L_7937::'X7924'
+    stloc FN_TMP8007
+    ldloc FN_TMP8007
+    brtrue FN_NULL8008
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7496
-FN_NULL7497:
+    stloc FN_TMP8007
+FN_NULL8008:
     nop
-    ldloc FN_TMP7496
+    ldloc FN_TMP8007
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7496
-    ldloc FN_TMP7496
-    brtrue FN_TYPE_OK7498
+    stloc FN_TMP8007
+    ldloc FN_TMP8007
+    brtrue FN_TYPE_OK8009
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7496
-FN_TYPE_OK7498:
+    stloc FN_TMP8007
+FN_TYPE_OK8009:
     nop
-FN_AFTER7499:
+FN_AFTER8010:
     nop
     ldarg.0
-    ldfld object L_7426::'X7413'
-    stloc ARG_TMP7500
-    ldloc FN_TMP7496
-    ldloc ARG_TMP7500
+    ldfld object L_7937::'X7924'
+    stloc ARG_TMP8011
+    ldloc FN_TMP8007
+    ldloc ARG_TMP8011
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc FN_TMP7492
-    ldloc FN_TMP7492
-    brtrue FN_NULL7493
+    stloc FN_TMP8003
+    ldloc FN_TMP8003
+    brtrue FN_NULL8004
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7492
-FN_NULL7493:
+    stloc FN_TMP8003
+FN_NULL8004:
     nop
-    ldloc FN_TMP7492
+    ldloc FN_TMP8003
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7492
-    ldloc FN_TMP7492
-    brtrue FN_TYPE_OK7494
+    stloc FN_TMP8003
+    ldloc FN_TMP8003
+    brtrue FN_TYPE_OK8005
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7492
-FN_TYPE_OK7494:
+    stloc FN_TMP8003
+FN_TYPE_OK8005:
     nop
-FN_AFTER7495:
+FN_AFTER8006:
     nop
     ldarg 1
-    stloc ARG_TMP7501
-    ldloc FN_TMP7492
-    ldloc ARG_TMP7501
+    stloc ARG_TMP8012
+    ldloc FN_TMP8003
+    ldloc ARG_TMP8012
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -2285,7 +2285,7 @@ FN_AFTER7495:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7426::'InvokeBody'(object)
+    callvirt instance object L_7937::'InvokeBody'(object)
     ret
 }
 
@@ -2630,12 +2630,12 @@ FN_AFTER7495:
     ret
 }
 
-} // end of class L_7426
+} // end of class L_7937
 
-.class public auto ansi beforefieldinit L_7427
+.class public auto ansi beforefieldinit L_7938
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'F7411'
+    .field public object 'F7922'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -2644,44 +2644,44 @@ FN_AFTER7495:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7427::'F7411'
+    stfld object L_7938::'F7922'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7506, object FN_TMP7502)
+    .locals init (object ARG_TMP8017, object FN_TMP8013)
     ldarg.0
-    ldfld object L_7427::'F7411'
-    stloc FN_TMP7502
-    ldloc FN_TMP7502
-    brtrue FN_NULL7503
+    ldfld object L_7938::'F7922'
+    stloc FN_TMP8013
+    ldloc FN_TMP8013
+    brtrue FN_NULL8014
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7502
-FN_NULL7503:
+    stloc FN_TMP8013
+FN_NULL8014:
     nop
-    ldloc FN_TMP7502
+    ldloc FN_TMP8013
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7502
-    ldloc FN_TMP7502
-    brtrue FN_TYPE_OK7504
+    stloc FN_TMP8013
+    ldloc FN_TMP8013
+    brtrue FN_TYPE_OK8015
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7502
-FN_TYPE_OK7504:
+    stloc FN_TMP8013
+FN_TYPE_OK8015:
     nop
-FN_AFTER7505:
+FN_AFTER8016:
     nop
     ldarg 1
-    newobj instance void L_7426::'.ctor'(object)
-    stloc ARG_TMP7506
-    ldloc FN_TMP7502
-    ldloc ARG_TMP7506
+    newobj instance void L_7937::'.ctor'(object)
+    stloc ARG_TMP8017
+    ldloc FN_TMP8013
+    ldloc ARG_TMP8017
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -2705,7 +2705,7 @@ FN_AFTER7505:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7427::'InvokeBody'(object)
+    callvirt instance object L_7938::'InvokeBody'(object)
     ret
 }
 
@@ -3050,12 +3050,12 @@ FN_AFTER7505:
     ret
 }
 
-} // end of class L_7427
+} // end of class L_7938
 
-.class public auto ansi beforefieldinit L_7428
+.class public auto ansi beforefieldinit L_7939
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'X7417'
+    .field public object 'X7928'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -3064,72 +3064,72 @@ FN_AFTER7505:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7428::'X7417'
+    stfld object L_7939::'X7928'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7516, object ARG_TMP7515, object FN_TMP7511, object FN_TMP7507)
+    .locals init (object ARG_TMP8027, object ARG_TMP8026, object FN_TMP8022, object FN_TMP8018)
     ldarg.0
-    ldfld object L_7428::'X7417'
-    stloc FN_TMP7511
-    ldloc FN_TMP7511
-    brtrue FN_NULL7512
+    ldfld object L_7939::'X7928'
+    stloc FN_TMP8022
+    ldloc FN_TMP8022
+    brtrue FN_NULL8023
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7511
-FN_NULL7512:
+    stloc FN_TMP8022
+FN_NULL8023:
     nop
-    ldloc FN_TMP7511
+    ldloc FN_TMP8022
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7511
-    ldloc FN_TMP7511
-    brtrue FN_TYPE_OK7513
+    stloc FN_TMP8022
+    ldloc FN_TMP8022
+    brtrue FN_TYPE_OK8024
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7511
-FN_TYPE_OK7513:
+    stloc FN_TMP8022
+FN_TYPE_OK8024:
     nop
-FN_AFTER7514:
+FN_AFTER8025:
     nop
     ldarg.0
-    ldfld object L_7428::'X7417'
-    stloc ARG_TMP7515
-    ldloc FN_TMP7511
-    ldloc ARG_TMP7515
+    ldfld object L_7939::'X7928'
+    stloc ARG_TMP8026
+    ldloc FN_TMP8022
+    ldloc ARG_TMP8026
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
-    stloc FN_TMP7507
-    ldloc FN_TMP7507
-    brtrue FN_NULL7508
+    stloc FN_TMP8018
+    ldloc FN_TMP8018
+    brtrue FN_NULL8019
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7507
-FN_NULL7508:
+    stloc FN_TMP8018
+FN_NULL8019:
     nop
-    ldloc FN_TMP7507
+    ldloc FN_TMP8018
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7507
-    ldloc FN_TMP7507
-    brtrue FN_TYPE_OK7509
+    stloc FN_TMP8018
+    ldloc FN_TMP8018
+    brtrue FN_TYPE_OK8020
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7507
-FN_TYPE_OK7509:
+    stloc FN_TMP8018
+FN_TYPE_OK8020:
     nop
-FN_AFTER7510:
+FN_AFTER8021:
     nop
     ldarg 1
-    stloc ARG_TMP7516
-    ldloc FN_TMP7507
-    ldloc ARG_TMP7516
+    stloc ARG_TMP8027
+    ldloc FN_TMP8018
+    ldloc ARG_TMP8027
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -3153,7 +3153,7 @@ FN_AFTER7510:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7428::'InvokeBody'(object)
+    callvirt instance object L_7939::'InvokeBody'(object)
     ret
 }
 
@@ -3498,12 +3498,12 @@ FN_AFTER7510:
     ret
 }
 
-} // end of class L_7428
+} // end of class L_7939
 
-.class public auto ansi beforefieldinit L_7429
+.class public auto ansi beforefieldinit L_7940
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'F7411'
+    .field public object 'F7922'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -3512,44 +3512,44 @@ FN_AFTER7510:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7429::'F7411'
+    stfld object L_7940::'F7922'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7521, object FN_TMP7517)
+    .locals init (object ARG_TMP8032, object FN_TMP8028)
     ldarg.0
-    ldfld object L_7429::'F7411'
-    stloc FN_TMP7517
-    ldloc FN_TMP7517
-    brtrue FN_NULL7518
+    ldfld object L_7940::'F7922'
+    stloc FN_TMP8028
+    ldloc FN_TMP8028
+    brtrue FN_NULL8029
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7517
-FN_NULL7518:
+    stloc FN_TMP8028
+FN_NULL8029:
     nop
-    ldloc FN_TMP7517
+    ldloc FN_TMP8028
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7517
-    ldloc FN_TMP7517
-    brtrue FN_TYPE_OK7519
+    stloc FN_TMP8028
+    ldloc FN_TMP8028
+    brtrue FN_TYPE_OK8030
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7517
-FN_TYPE_OK7519:
+    stloc FN_TMP8028
+FN_TYPE_OK8030:
     nop
-FN_AFTER7520:
+FN_AFTER8031:
     nop
     ldarg 1
-    newobj instance void L_7428::'.ctor'(object)
-    stloc ARG_TMP7521
-    ldloc FN_TMP7517
-    ldloc ARG_TMP7521
+    newobj instance void L_7939::'.ctor'(object)
+    stloc ARG_TMP8032
+    ldloc FN_TMP8028
+    ldloc ARG_TMP8032
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -3573,7 +3573,7 @@ FN_AFTER7520:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7429::'InvokeBody'(object)
+    callvirt instance object L_7940::'InvokeBody'(object)
     ret
 }
 
@@ -3918,9 +3918,9 @@ FN_AFTER7520:
     ret
 }
 
-} // end of class L_7429
+} // end of class L_7940
 
-.class public auto ansi beforefieldinit L_7430
+.class public auto ansi beforefieldinit L_7941
        extends [LispBase]Lisp.Closure
 {
 .method public hidebysig void '.ctor'() cil managed
@@ -3934,37 +3934,37 @@ FN_AFTER7520:
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7526, object FN_TMP7522)
+    .locals init (object ARG_TMP8037, object FN_TMP8033)
     ldarg 1
-    newobj instance void L_7427::'.ctor'(object)
-    stloc FN_TMP7522
-    ldloc FN_TMP7522
-    brtrue FN_NULL7523
+    newobj instance void L_7938::'.ctor'(object)
+    stloc FN_TMP8033
+    ldloc FN_TMP8033
+    brtrue FN_NULL8034
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7522
-FN_NULL7523:
+    stloc FN_TMP8033
+FN_NULL8034:
     nop
-    ldloc FN_TMP7522
+    ldloc FN_TMP8033
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7522
-    ldloc FN_TMP7522
-    brtrue FN_TYPE_OK7524
+    stloc FN_TMP8033
+    ldloc FN_TMP8033
+    brtrue FN_TYPE_OK8035
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7522
-FN_TYPE_OK7524:
+    stloc FN_TMP8033
+FN_TYPE_OK8035:
     nop
-FN_AFTER7525:
+FN_AFTER8036:
     nop
     ldarg 1
-    newobj instance void L_7429::'.ctor'(object)
-    stloc ARG_TMP7526
-    ldloc FN_TMP7522
-    ldloc ARG_TMP7526
+    newobj instance void L_7940::'.ctor'(object)
+    stloc ARG_TMP8037
+    ldloc FN_TMP8033
+    ldloc ARG_TMP8037
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -3988,7 +3988,7 @@ FN_AFTER7525:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7430::'InvokeBody'(object)
+    callvirt instance object L_7941::'InvokeBody'(object)
     ret
 }
 
@@ -4333,5 +4333,5 @@ FN_AFTER7525:
     ret
 }
 
-} // end of class L_7430
+} // end of class L_7941
 

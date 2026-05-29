@@ -7,13 +7,13 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'FACTOR7612'
+    .field public static object 'FACTOR8123'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'FACTOR7612'
+    stsfld object Program::'FACTOR8123'
     ret
 }
 
@@ -380,44 +380,44 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP7630, object FN_TMP7626, object MUL_BY_107623)
+    .locals init (object ARG_TMP8141, object FN_TMP8137, object MUL_BY_108134)
     ldstr "TopLevelTest"
     call object Program::'SAY_HELLO'(object)
     pop
     ldstr "10"
     call object Program::'MAKE_MULTIPLIER'(object)
-    stloc MUL_BY_107623
-    ldloc MUL_BY_107623
-    stloc FN_TMP7626
-    ldloc FN_TMP7626
-    brtrue FN_NULL7627
+    stloc MUL_BY_108134
+    ldloc MUL_BY_108134
+    stloc FN_TMP8137
+    ldloc FN_TMP8137
+    brtrue FN_NULL8138
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP7626
-FN_NULL7627:
+    stloc FN_TMP8137
+FN_NULL8138:
     nop
-    ldloc FN_TMP7626
+    ldloc FN_TMP8137
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7626
-    ldloc FN_TMP7626
-    brtrue FN_TYPE_OK7628
+    stloc FN_TMP8137
+    ldloc FN_TMP8137
+    brtrue FN_TYPE_OK8139
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP7626
-FN_TYPE_OK7628:
+    stloc FN_TMP8137
+FN_TYPE_OK8139:
     nop
-FN_AFTER7629:
+FN_AFTER8140:
     nop
     ldstr "5"
-    stloc ARG_TMP7630
-    ldloc FN_TMP7626
-    ldloc ARG_TMP7630
+    stloc ARG_TMP8141
+    ldloc FN_TMP8137
+    ldloc ARG_TMP8141
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-BLOCK_END_MAIN_7621:
+BLOCK_END_MAIN_8132:
     nop
     ldnull
     ret
@@ -788,9 +788,9 @@ BLOCK_END_MAIN_7621:
 {
     .maxstack 8
     ldarg 0
-    newobj instance void L_7625::'.ctor'(object)
+    newobj instance void L_8136::'.ctor'(object)
     ret
-BLOCK_END_MAKE_MULTIPLIER_7614:
+BLOCK_END_MAKE_MULTIPLIER_8125:
     nop
     ldnull
     ret
@@ -1168,7 +1168,7 @@ BLOCK_END_MAKE_MULTIPLIER_7614:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_SAY_HELLO_7608:
+BLOCK_END_SAY_HELLO_8119:
     nop
     ldnull
     ret
@@ -1193,10 +1193,10 @@ BLOCK_END_SAY_HELLO_7608:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_7625
+.class public auto ansi beforefieldinit L_8136
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'FACTOR7612'
+    .field public object 'FACTOR8123'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -1205,7 +1205,7 @@ BLOCK_END_SAY_HELLO_7608:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_7625::'FACTOR7612'
+    stfld object L_8136::'FACTOR8123'
     ret
 }
 
@@ -1217,7 +1217,7 @@ BLOCK_END_SAY_HELLO_7608:
     ldnull
     pop
     ldarg.0
-    ldfld object L_7625::'FACTOR7612'
+    ldfld object L_8136::'FACTOR8123'
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
@@ -1246,7 +1246,7 @@ BLOCK_END_SAY_HELLO_7608:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_7625::'InvokeBody'(object)
+    callvirt instance object L_8136::'InvokeBody'(object)
     ret
 }
 
@@ -1591,5 +1591,5 @@ BLOCK_END_SAY_HELLO_7608:
     ret
 }
 
-} // end of class L_7625
+} // end of class L_8136
 

@@ -7,29 +7,29 @@
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
-    .field public static object 'EVEN_1934'
+    .field public static object 'EVEN_1993'
     .field public static object 'TEMP_B'
-    .field public static object 'ODD_1935'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_T1970'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S1969'
+    .field public static object 'ODD_1994'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_T2029'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S2028'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
     .maxstack 8
     ldnull
-    stsfld object Program::'EVEN_1934'
+    stsfld object Program::'EVEN_1993'
     ldnull
     stsfld object Program::'TEMP_B'
     ldnull
-    stsfld object Program::'ODD_1935'
+    stsfld object Program::'ODD_1994'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T1970'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_T2029'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1969'
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S2028'
     ret
 }
 
@@ -398,7 +398,7 @@
     .maxstack 8
     tail. call object Program::'TEST_LABELS'()
     ret
-BLOCK_END_MAIN_1943:
+BLOCK_END_MAIN_2002:
     nop
     ldnull
     ret
@@ -767,132 +767,132 @@ BLOCK_END_MAIN_1943:
 .method private static hidebysig object 'TEST_LABELS_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP2002, object FN_TMP1998, object ARG_TMP1995, object FN_TMP1991, object CELL_VAL_TMP1990, object CELL_TMP1989, object CELL_VAL_TMP1988, object CELL_TMP1987, object TEMP1986, object TEMP1985, object ODD_1935, object EVEN_1934)
+    .locals init (object ARG_TMP2061, object FN_TMP2057, object ARG_TMP2054, object FN_TMP2050, object CELL_VAL_TMP2049, object CELL_TMP2048, object CELL_VAL_TMP2047, object CELL_TMP2046, object TEMP2045, object TEMP2044, object ODD_1994, object EVEN_1993)
     ldstr "Testing labels..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc EVEN_1934
+    stloc EVEN_1993
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc ODD_1935
-    ldloc EVEN_1934
-    stloc CELL_TMP1987
-    ldloc ODD_1935
-    newobj instance void L_1946::'.ctor'(object)
-    stloc CELL_VAL_TMP1988
-    ldloc CELL_TMP1987
+    stloc ODD_1994
+    ldloc EVEN_1993
+    stloc CELL_TMP2046
+    ldloc ODD_1994
+    newobj instance void L_2005::'.ctor'(object)
+    stloc CELL_VAL_TMP2047
+    ldloc CELL_TMP2046
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1988
+    ldloc CELL_VAL_TMP2047
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1988
+    ldloc CELL_VAL_TMP2047
     pop
-    ldloc ODD_1935
-    stloc CELL_TMP1989
-    ldloc EVEN_1934
-    newobj instance void L_1947::'.ctor'(object)
-    stloc CELL_VAL_TMP1990
-    ldloc CELL_TMP1989
+    ldloc ODD_1994
+    stloc CELL_TMP2048
+    ldloc EVEN_1993
+    newobj instance void L_2006::'.ctor'(object)
+    stloc CELL_VAL_TMP2049
+    ldloc CELL_TMP2048
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1990
+    ldloc CELL_VAL_TMP2049
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1990
+    ldloc CELL_VAL_TMP2049
     pop
-    ldloc EVEN_1934
+    ldloc EVEN_1993
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1991
-    ldloc FN_TMP1991
-    brtrue FN_NULL1992
+    stloc FN_TMP2050
+    ldloc FN_TMP2050
+    brtrue FN_NULL2051
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1991
-FN_NULL1992:
+    stloc FN_TMP2050
+FN_NULL2051:
     nop
-    ldloc FN_TMP1991
+    ldloc FN_TMP2050
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1991
-    ldloc FN_TMP1991
-    brtrue FN_TYPE_OK1993
+    stloc FN_TMP2050
+    ldloc FN_TMP2050
+    brtrue FN_TYPE_OK2052
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1991
-FN_TYPE_OK1993:
+    stloc FN_TMP2050
+FN_TYPE_OK2052:
     nop
-FN_AFTER1994:
+FN_AFTER2053:
     nop
     ldc.i4 10
     box int32
-    stloc ARG_TMP1995
-    ldloc FN_TMP1991
-    ldloc ARG_TMP1995
+    stloc ARG_TMP2054
+    ldloc FN_TMP2050
+    ldloc ARG_TMP2054
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE1996
+    brtrue ELSE2055
     ldstr "even? 10 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-    br END1997
-ELSE1996:
+    br END2056
+ELSE2055:
     nop
     ldstr "even? 10 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
-END1997:
+END2056:
     nop
     pop
-    ldloc ODD_1935
+    ldloc ODD_1994
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1998
-    ldloc FN_TMP1998
-    brtrue FN_NULL1999
+    stloc FN_TMP2057
+    ldloc FN_TMP2057
+    brtrue FN_NULL2058
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1998
-FN_NULL1999:
+    stloc FN_TMP2057
+FN_NULL2058:
     nop
-    ldloc FN_TMP1998
+    ldloc FN_TMP2057
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1998
-    ldloc FN_TMP1998
-    brtrue FN_TYPE_OK2000
+    stloc FN_TMP2057
+    ldloc FN_TMP2057
+    brtrue FN_TYPE_OK2059
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1998
-FN_TYPE_OK2000:
+    stloc FN_TMP2057
+FN_TYPE_OK2059:
     nop
-FN_AFTER2001:
+FN_AFTER2060:
     nop
     ldc.i4 11
     box int32
-    stloc ARG_TMP2002
-    ldloc FN_TMP1998
-    ldloc ARG_TMP2002
+    stloc ARG_TMP2061
+    ldloc FN_TMP2057
+    ldloc ARG_TMP2061
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ldnull
     ceq
-    brtrue ELSE2003
+    brtrue ELSE2062
     ldstr "odd? 11 is T (Correct)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-ELSE2003:
+ELSE2062:
     nop
     ldstr "odd? 11 is NIL (Error)"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_LABELS_1932:
+BLOCK_END_TEST_LABELS_1991:
     nop
     ldnull
     ret
@@ -917,10 +917,10 @@ BLOCK_END_TEST_LABELS_1932:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_1946
+.class public auto ansi beforefieldinit L_2005
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'ODD_1935'
+    .field public object 'ODD_1994'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -929,59 +929,59 @@ BLOCK_END_TEST_LABELS_1932:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_1946::'ODD_1935'
+    stfld object L_2005::'ODD_1994'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1975, object FN_TMP1971)
+    .locals init (object ARG_TMP2034, object FN_TMP2030)
     ldarg 1
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1967
+    brtrue TRUE2026
     ldnull
-    br END1968
-TRUE1967:
+    br END2027
+TRUE2026:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1969'
-END1968:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2028'
+END2027:
     nop
     ldnull
     ceq
-    brtrue ELSE1976
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T1970'
+    brtrue ELSE2035
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_T2029'
     ret
-ELSE1976:
+ELSE2035:
     nop
     ldarg.0
-    ldfld object L_1946::'ODD_1935'
+    ldfld object L_2005::'ODD_1994'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1971
-    ldloc FN_TMP1971
-    brtrue FN_NULL1972
+    stloc FN_TMP2030
+    ldloc FN_TMP2030
+    brtrue FN_NULL2031
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1971
-FN_NULL1972:
+    stloc FN_TMP2030
+FN_NULL2031:
     nop
-    ldloc FN_TMP1971
+    ldloc FN_TMP2030
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1971
-    ldloc FN_TMP1971
-    brtrue FN_TYPE_OK1973
+    stloc FN_TMP2030
+    ldloc FN_TMP2030
+    brtrue FN_TYPE_OK2032
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1971
-FN_TYPE_OK1973:
+    stloc FN_TMP2030
+FN_TYPE_OK2032:
     nop
-FN_AFTER1974:
+FN_AFTER2033:
     nop
     ldarg 1
     ldc.i4 1
@@ -992,9 +992,9 @@ FN_AFTER1974:
     unbox.any int32
     sub
     box int32
-    stloc ARG_TMP1975
-    ldloc FN_TMP1971
-    ldloc ARG_TMP1975
+    stloc ARG_TMP2034
+    ldloc FN_TMP2030
+    ldloc ARG_TMP2034
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -1018,7 +1018,7 @@ FN_AFTER1974:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1946::'InvokeBody'(object)
+    callvirt instance object L_2005::'InvokeBody'(object)
     ret
 }
 
@@ -1363,12 +1363,12 @@ FN_AFTER1974:
     ret
 }
 
-} // end of class L_1946
+} // end of class L_2005
 
-.class public auto ansi beforefieldinit L_1947
+.class public auto ansi beforefieldinit L_2006
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'EVEN_1934'
+    .field public object 'EVEN_1993'
 
 .method public hidebysig void '.ctor'(object) cil managed
 {
@@ -1377,59 +1377,59 @@ FN_AFTER1974:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_1947::'EVEN_1934'
+    stfld object L_2006::'EVEN_1993'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1983, object FN_TMP1979)
+    .locals init (object ARG_TMP2042, object FN_TMP2038)
     ldarg 1
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1977
+    brtrue TRUE2036
     ldnull
-    br END1978
-TRUE1977:
+    br END2037
+TRUE2036:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1969'
-END1978:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S2028'
+END2037:
     nop
     ldnull
     ceq
-    brtrue ELSE1984
+    brtrue ELSE2043
     ldnull
     ret
-ELSE1984:
+ELSE2043:
     nop
     ldarg.0
-    ldfld object L_1947::'EVEN_1934'
+    ldfld object L_2006::'EVEN_1993'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1979
-    ldloc FN_TMP1979
-    brtrue FN_NULL1980
+    stloc FN_TMP2038
+    ldloc FN_TMP2038
+    brtrue FN_NULL2039
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1979
-FN_NULL1980:
+    stloc FN_TMP2038
+FN_NULL2039:
     nop
-    ldloc FN_TMP1979
+    ldloc FN_TMP2038
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1979
-    ldloc FN_TMP1979
-    brtrue FN_TYPE_OK1981
+    stloc FN_TMP2038
+    ldloc FN_TMP2038
+    brtrue FN_TYPE_OK2040
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1979
-FN_TYPE_OK1981:
+    stloc FN_TMP2038
+FN_TYPE_OK2040:
     nop
-FN_AFTER1982:
+FN_AFTER2041:
     nop
     ldarg 1
     ldc.i4 1
@@ -1440,9 +1440,9 @@ FN_AFTER1982:
     unbox.any int32
     sub
     box int32
-    stloc ARG_TMP1983
-    ldloc FN_TMP1979
-    ldloc ARG_TMP1983
+    stloc ARG_TMP2042
+    ldloc FN_TMP2038
+    ldloc ARG_TMP2042
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -1466,7 +1466,7 @@ FN_AFTER1982:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1947::'InvokeBody'(object)
+    callvirt instance object L_2006::'InvokeBody'(object)
     ret
 }
 
@@ -1811,5 +1811,5 @@ FN_AFTER1982:
     ret
 }
 
-} // end of class L_1947
+} // end of class L_2006
 

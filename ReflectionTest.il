@@ -394,7 +394,7 @@
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_ENV_7031:
+BLOCK_END_TEST_ENV_7542:
     nop
     ldnull
     ret
@@ -763,7 +763,7 @@ BLOCK_END_TEST_ENV_7031:
 .method private static hidebysig object 'TEST_LIST_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS7039, object REFLECT_ARGS7038, object REFLECT_ARGS7037, object REFLECT_ARGS7036, object REFLECT_ARGS7035, object L7027)
+    .locals init (object REFLECT_ARGS7550, object REFLECT_ARGS7549, object REFLECT_ARGS7548, object REFLECT_ARGS7547, object REFLECT_ARGS7546, object L7538)
     ldstr "--- test-list ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -771,39 +771,39 @@ BLOCK_END_TEST_ENV_7031:
     ldstr "System.Collections.Generic.List`1[System.String]"
     ldc.i4 0
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS7035
-    ldloc REFLECT_ARGS7035
+    stloc REFLECT_ARGS7546
+    ldloc REFLECT_ARGS7546
     call object [LispBase]Lisp.Reflection::'New'(object, object[])
-    stloc L7027
-    ldloc L7027
+    stloc L7538
+    ldloc L7538
     ldstr "Add"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS7036
-    ldloc REFLECT_ARGS7036
+    stloc REFLECT_ARGS7547
+    ldloc REFLECT_ARGS7547
     ldc.i4 0
     ldstr "Hello"
     stelem.ref
-    ldloc REFLECT_ARGS7036
+    ldloc REFLECT_ARGS7547
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     pop
-    ldloc L7027
+    ldloc L7538
     ldstr "Add"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS7037
-    ldloc REFLECT_ARGS7037
+    stloc REFLECT_ARGS7548
+    ldloc REFLECT_ARGS7548
     ldc.i4 0
     ldstr "Reflection"
     stelem.ref
-    ldloc REFLECT_ARGS7037
+    ldloc REFLECT_ARGS7548
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     pop
     ldstr "List count:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc L7027
+    ldloc L7538
     ldstr "Count"
     call object [LispBase]Lisp.Reflection::'GetProperty'(object, string)
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -813,37 +813,37 @@ BLOCK_END_TEST_ENV_7031:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc L7027
+    ldloc L7538
     ldstr "get_Item"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS7038
-    ldloc REFLECT_ARGS7038
+    stloc REFLECT_ARGS7549
+    ldloc REFLECT_ARGS7549
     ldc.i4 0
     ldc.i4 0
     box int32
     stelem.ref
-    ldloc REFLECT_ARGS7038
+    ldloc REFLECT_ARGS7549
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     pop
-    ldloc L7027
+    ldloc L7538
     ldstr "get_Item"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS7039
-    ldloc REFLECT_ARGS7039
+    stloc REFLECT_ARGS7550
+    ldloc REFLECT_ARGS7550
     ldc.i4 0
     ldc.i4 1
     box int32
     stelem.ref
-    ldloc REFLECT_ARGS7039
+    ldloc REFLECT_ARGS7550
     call object [LispBase]Lisp.Reflection::'InvokeInstance'(object, string, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_LIST_7025:
+BLOCK_END_TEST_LIST_7536:
     nop
     ldnull
     ret
@@ -1212,7 +1212,7 @@ BLOCK_END_TEST_LIST_7025:
 .method private static hidebysig object 'TEST_MATH_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object REFLECT_ARGS7034)
+    .locals init (object REFLECT_ARGS7545)
     ldstr "--- test-math ---"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -1225,18 +1225,18 @@ BLOCK_END_TEST_LIST_7025:
     ldstr "Sqrt"
     ldc.i4 1
     newarr [mscorlib]System.Object
-    stloc REFLECT_ARGS7034
-    ldloc REFLECT_ARGS7034
+    stloc REFLECT_ARGS7545
+    ldloc REFLECT_ARGS7545
     ldc.i4 0
     ldc.i4 16
     box int32
     stelem.ref
-    ldloc REFLECT_ARGS7034
+    ldloc REFLECT_ARGS7545
     call object [LispBase]Lisp.Reflection::'InvokeStatic'(object, string, object[])
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_TEST_MATH_7020:
+BLOCK_END_TEST_MATH_7531:
     nop
     ldnull
     ret

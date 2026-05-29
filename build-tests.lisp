@@ -25,6 +25,7 @@
                ;; ("test-aux.lisp" . "AuxTest")
                ("Tests/bank-test.lisp" . "BankTest")
                ("Tests/test-block.lisp" . "BlockTest")
+               ("Tests/test-car-cdr-null.lisp" . "CarCdrNullTest")
                ("Tests/test-catch.lisp" . "CatchTest")
                ("Tests/test-callable-hardening.lisp" . "CallableHardeningTest")
                ("Tests/test-clr-explicit-forms.lisp" . "ClrExplicitFormsTest")

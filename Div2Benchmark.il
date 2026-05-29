@@ -8,15 +8,15 @@
        extends [mscorlib]System.Object
 {
     .field public static object '_L_'
-    .field public static object 'COUNT_LEN1736'
-    .field public static object 'COUNT1735'
-    .field public static object 'LOOP_K1692'
-    .field public static object 'L1691'
+    .field public static object 'COUNT_LEN1768'
+    .field public static object 'COUNT1767'
+    .field public static object 'LOOP_K1724'
+    .field public static object 'L1723'
     .field public static object 'TEMP_B'
-    .field public static object 'N1687'
+    .field public static object 'N1719'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1886'
+    .field public static class [LispBase]Lisp.Symbol 'SYM_S1839'
     .field public static class [LispBase]Lisp.Symbol 'SYM_S1827'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S1794'
-    .field public static class [LispBase]Lisp.Symbol 'SYM_S1782'
 
 .method public static hidebysig specialname rtspecialname void '.cctor'() cil managed
 {
@@ -24,29 +24,29 @@
     ldnull
     stsfld object Program::'_L_'
     ldnull
-    stsfld object Program::'COUNT_LEN1736'
+    stsfld object Program::'COUNT_LEN1768'
     ldnull
-    stsfld object Program::'COUNT1735'
+    stsfld object Program::'COUNT1767'
     ldnull
-    stsfld object Program::'LOOP_K1692'
+    stsfld object Program::'LOOP_K1724'
     ldnull
-    stsfld object Program::'L1691'
+    stsfld object Program::'L1723'
     ldnull
     stsfld object Program::'TEMP_B'
     ldnull
-    stsfld object Program::'N1687'
+    stsfld object Program::'N1719'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "T"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1886'
+    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
+    ldstr "T"
+    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
+    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1839'
     call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
     ldstr "T"
     callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
     stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1827'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "T"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1794'
-    call class [LispBase]Lisp.Package [LispBase]Lisp.Package::'get_Current'()
-    ldstr "T"
-    callvirt instance class [LispBase]Lisp.Symbol [LispBase]Lisp.Package::'Intern'(string)
-    stsfld class [LispBase]Lisp.Symbol Program::'SYM_S1782'
     ret
 }
 
@@ -413,7 +413,7 @@
 .method private static hidebysig object 'MAIN_Body'() cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1847, object FN_TMP1843, object CELL_VAL_TMP1842, object CELL_TMP1841, object TEMP1840, object COUNT_LEN1736, object COUNT1735, object RES1734)
+    .locals init (object ARG_TMP1906, object FN_TMP1902, object CELL_VAL_TMP1901, object CELL_TMP1900, object TEMP1899, object COUNT_LEN1768, object COUNT1767, object RES1766)
     ldstr "Testing iterative-div2..."
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -430,7 +430,7 @@
     pop
     ldsfld object Program::'_L_'
     call object Program::'ITERATIVE_DIV2'(object)
-    stloc RES1734
+    stloc RES1766
     ldstr "Length of div2 result should be 100:"
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
@@ -438,55 +438,55 @@
     ldc.i4 0
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc COUNT1735
+    stloc COUNT1767
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc COUNT_LEN1736
-    ldloc COUNT_LEN1736
-    stloc CELL_TMP1841
-    ldloc COUNT_LEN1736
-    ldloc COUNT1735
-    newobj instance void L_1741::'.ctor'(object, object)
-    stloc CELL_VAL_TMP1842
-    ldloc CELL_TMP1841
+    stloc COUNT_LEN1768
+    ldloc COUNT_LEN1768
+    stloc CELL_TMP1900
+    ldloc COUNT_LEN1768
+    ldloc COUNT1767
+    newobj instance void L_1773::'.ctor'(object, object)
+    stloc CELL_VAL_TMP1901
+    ldloc CELL_TMP1900
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1842
+    ldloc CELL_VAL_TMP1901
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1842
+    ldloc CELL_VAL_TMP1901
     pop
-    ldloc COUNT_LEN1736
+    ldloc COUNT_LEN1768
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1843
-    ldloc FN_TMP1843
-    brtrue FN_NULL1844
+    stloc FN_TMP1902
+    ldloc FN_TMP1902
+    brtrue FN_NULL1903
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1843
-FN_NULL1844:
+    stloc FN_TMP1902
+FN_NULL1903:
     nop
-    ldloc FN_TMP1843
+    ldloc FN_TMP1902
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1843
-    ldloc FN_TMP1843
-    brtrue FN_TYPE_OK1845
+    stloc FN_TMP1902
+    ldloc FN_TMP1902
+    brtrue FN_TYPE_OK1904
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1843
-FN_TYPE_OK1845:
+    stloc FN_TMP1902
+FN_TYPE_OK1904:
     nop
-FN_AFTER1846:
+FN_AFTER1905:
     nop
-    ldloc RES1734
-    stloc ARG_TMP1847
-    ldloc FN_TMP1843
-    ldloc ARG_TMP1847
+    ldloc RES1766
+    stloc ARG_TMP1906
+    ldloc FN_TMP1902
+    ldloc ARG_TMP1906
     callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     pop
-    ldloc COUNT1735
+    ldloc COUNT1767
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     call void [mscorlib]System.Console::'WriteLine'(object)
@@ -496,7 +496,7 @@ FN_AFTER1846:
     call void [mscorlib]System.Console::'WriteLine'(object)
     ldnull
     ret
-BLOCK_END_MAIN_1732:
+BLOCK_END_MAIN_1764:
     nop
     ldnull
     ret
@@ -866,36 +866,36 @@ BLOCK_END_MAIN_1732:
 .method private static hidebysig object 'TEST_2_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP1839, object CELL_TMP1838, object TEMP1835, object I1726)
+    .locals init (object CELL_VAL_TMP1898, object CELL_TMP1897, object TEMP1894, object I1758)
     ldc.i4 300
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I1726
-TAG_LOOP_1727:
+    stloc I1758
+TAG_LOOP_1759:
     nop
-    ldloc I1726
+    ldloc I1758
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1833
+    brtrue TRUE1892
     ldnull
-    br END1834
-TRUE1833:
+    br END1893
+TRUE1892:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1827'
-END1834:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1886'
+END1893:
     nop
     ldnull
     ceq
-    brtrue ELSE1836
-    leave TAG_DONE_1728
-    br END1837
-ELSE1836:
+    brtrue ELSE1895
+    leave TAG_DONE_1760
+    br END1896
+ELSE1895:
     nop
     ldnull
-END1837:
+END1896:
     nop
     pop
     ldarg 0
@@ -910,9 +910,9 @@ END1837:
     ldarg 0
     call object Program::'RECURSIVE_DIV2'(object)
     pop
-    ldloc I1726
-    stloc CELL_TMP1838
-    ldloc I1726
+    ldloc I1758
+    stloc CELL_TMP1897
+    ldloc I1758
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -923,20 +923,20 @@ END1837:
     unbox.any int32
     sub
     box int32
-    stloc CELL_VAL_TMP1839
-    ldloc CELL_TMP1838
+    stloc CELL_VAL_TMP1898
+    ldloc CELL_TMP1897
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1839
+    ldloc CELL_VAL_TMP1898
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1839
+    ldloc CELL_VAL_TMP1898
     pop
-    leave TAG_LOOP_1727
+    leave TAG_LOOP_1759
     pop
-TAG_DONE_1728:
+TAG_DONE_1760:
     nop
     ldnull
     ret
-BLOCK_END_TEST_2_1724:
+BLOCK_END_TEST_2_1756:
     nop
     ldnull
     ret
@@ -1306,36 +1306,36 @@ BLOCK_END_TEST_2_1724:
 .method private static hidebysig object 'TEST_1_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP1832, object CELL_TMP1831, object TEMP1828, object I1717)
+    .locals init (object CELL_VAL_TMP1891, object CELL_TMP1890, object TEMP1887, object I1749)
     ldc.i4 300
     box int32
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc I1717
-TAG_LOOP_1718:
+    stloc I1749
+TAG_LOOP_1750:
     nop
-    ldloc I1717
+    ldloc I1749
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 0
     box int32
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1825
+    brtrue TRUE1884
     ldnull
-    br END1826
-TRUE1825:
+    br END1885
+TRUE1884:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1827'
-END1826:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1886'
+END1885:
     nop
     ldnull
     ceq
-    brtrue ELSE1829
-    leave TAG_DONE_1719
-    br END1830
-ELSE1829:
+    brtrue ELSE1888
+    leave TAG_DONE_1751
+    br END1889
+ELSE1888:
     nop
     ldnull
-END1830:
+END1889:
     nop
     pop
     ldarg 0
@@ -1350,9 +1350,9 @@ END1830:
     ldarg 0
     call object Program::'ITERATIVE_DIV2'(object)
     pop
-    ldloc I1717
-    stloc CELL_TMP1831
-    ldloc I1717
+    ldloc I1749
+    stloc CELL_TMP1890
+    ldloc I1749
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -1363,20 +1363,20 @@ END1830:
     unbox.any int32
     sub
     box int32
-    stloc CELL_VAL_TMP1832
-    ldloc CELL_TMP1831
+    stloc CELL_VAL_TMP1891
+    ldloc CELL_TMP1890
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1832
+    ldloc CELL_VAL_TMP1891
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1832
+    ldloc CELL_VAL_TMP1891
     pop
-    leave TAG_LOOP_1718
+    leave TAG_LOOP_1750
     pop
-TAG_DONE_1719:
+TAG_DONE_1751:
     nop
     ldnull
     ret
-BLOCK_END_TEST_1_1715:
+BLOCK_END_TEST_1_1747:
     nop
     ldnull
     ret
@@ -1749,33 +1749,60 @@ BLOCK_END_TEST_1_1715:
     ldarg 0
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1822
+    brtrue TRUE1875
     ldnull
-    br END1823
-TRUE1822:
+    br END1876
+TRUE1875:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1794'
-END1823:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1839'
+END1876:
     nop
     ldnull
     ceq
-    brtrue ELSE1824
+    brtrue ELSE1883
     ldnull
     ret
-ELSE1824:
+ELSE1883:
     nop
     ldarg 0
+    dup
+    brfalse CAR_NULL1877
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
+    br CAR_END1878
+CAR_NULL1877:
+    nop
+    pop
+    ldnull
+CAR_END1878:
+    nop
     ldarg 0
+    dup
+    brfalse CDR_NULL1879
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
+    br CDR_END1880
+CDR_NULL1879:
+    nop
+    pop
+    ldnull
+CDR_END1880:
+    nop
+    dup
+    brfalse CDR_NULL1881
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
+    br CDR_END1882
+CDR_NULL1881:
+    nop
+    pop
+    ldnull
+CDR_END1882:
+    nop
     call object Program::'RECURSIVE_DIV2'(object)
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
     ret
-BLOCK_END_RECURSIVE_DIV2_1709:
+BLOCK_END_RECURSIVE_DIV2_1741:
     nop
     ldnull
     ret
@@ -2145,84 +2172,111 @@ BLOCK_END_RECURSIVE_DIV2_1709:
 .method private static hidebysig object 'ITERATIVE_DIV2_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object CELL_VAL_TMP1821, object CELL_TMP1820, object CELL_VAL_TMP1819, object CELL_TMP1818, object TEMP1815, object TEMP1814, object A1702, object L_PTR1701)
+    .locals init (object CELL_VAL_TMP1874, object CELL_TMP1873, object CELL_VAL_TMP1872, object CELL_TMP1871, object TEMP1868, object TEMP1863, object A1734, object L_PTR1733)
     ldarg 0
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc L_PTR1701
+    stloc L_PTR1733
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc A1702
-TAG_LOOP_1703:
+    stloc A1734
+TAG_LOOP_1735:
     nop
-    ldloc L_PTR1701
+    ldloc L_PTR1733
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1812
+    brtrue TRUE1859
     ldnull
-    br END1813
-TRUE1812:
+    br END1860
+TRUE1859:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1794'
-END1813:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1839'
+END1860:
     nop
     ldnull
     ceq
-    brtrue ELSE1816
-    leave TAG_DONE_1704
-    br END1817
-ELSE1816:
+    brtrue ELSE1869
+    leave TAG_DONE_1736
+    br END1870
+ELSE1869:
     nop
     ldnull
-END1817:
+END1870:
     nop
     pop
-    ldloc A1702
-    stloc CELL_TMP1818
-    ldloc L_PTR1701
+    ldloc A1734
+    stloc CELL_TMP1871
+    ldloc L_PTR1733
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
+    dup
+    brfalse CAR_NULL1861
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::first
-    ldloc A1702
+    br CAR_END1862
+CAR_NULL1861:
+    nop
+    pop
+    ldnull
+CAR_END1862:
+    nop
+    ldloc A1734
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc CELL_VAL_TMP1819
-    ldloc CELL_TMP1818
+    stloc CELL_VAL_TMP1872
+    ldloc CELL_TMP1871
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1819
+    ldloc CELL_VAL_TMP1872
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1819
+    ldloc CELL_VAL_TMP1872
     pop
-    ldloc L_PTR1701
-    stloc CELL_TMP1820
-    ldloc L_PTR1701
+    ldloc L_PTR1733
+    stloc CELL_TMP1873
+    ldloc L_PTR1733
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
+    dup
+    brfalse CDR_NULL1864
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
+    br CDR_END1865
+CDR_NULL1864:
+    nop
+    pop
+    ldnull
+CDR_END1865:
+    nop
+    dup
+    brfalse CDR_NULL1866
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc CELL_VAL_TMP1821
-    ldloc CELL_TMP1820
+    br CDR_END1867
+CDR_NULL1866:
+    nop
+    pop
+    ldnull
+CDR_END1867:
+    nop
+    stloc CELL_VAL_TMP1874
+    ldloc CELL_TMP1873
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1821
+    ldloc CELL_VAL_TMP1874
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1821
+    ldloc CELL_VAL_TMP1874
     pop
-    leave TAG_LOOP_1703
+    leave TAG_LOOP_1735
     pop
-TAG_DONE_1704:
+TAG_DONE_1736:
     nop
     ldnull
     pop
-    ldloc A1702
+    ldloc A1734
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
-BLOCK_END_ITERATIVE_DIV2_1699:
+BLOCK_END_ITERATIVE_DIV2_1731:
     nop
     ldnull
     ret
@@ -2592,60 +2646,60 @@ BLOCK_END_ITERATIVE_DIV2_1699:
 .method private static hidebysig object 'CREATE_N_Body'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1811, object FN_TMP1807, object CELL_VAL_TMP1806, object CELL_TMP1805, object TEMP1804, object LOOP_K1692, object L1691)
+    .locals init (object ARG_TMP1858, object FN_TMP1854, object CELL_VAL_TMP1853, object CELL_TMP1852, object TEMP1851, object LOOP_K1724, object L1723)
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc L1691
+    stloc L1723
     ldnull
     newobj instance void [LispBase]Lisp.ValueCell::'.ctor'(object)
-    stloc LOOP_K1692
-    ldloc LOOP_K1692
-    stloc CELL_TMP1805
+    stloc LOOP_K1724
+    ldloc LOOP_K1724
+    stloc CELL_TMP1852
     ldarg 0
-    ldloc LOOP_K1692
-    ldloc L1691
-    newobj instance void L_1740::'.ctor'(object, object, object)
-    stloc CELL_VAL_TMP1806
-    ldloc CELL_TMP1805
+    ldloc LOOP_K1724
+    ldloc L1723
+    newobj instance void L_1772::'.ctor'(object, object, object)
+    stloc CELL_VAL_TMP1853
+    ldloc CELL_TMP1852
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1806
+    ldloc CELL_VAL_TMP1853
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1806
+    ldloc CELL_VAL_TMP1853
     pop
-    ldloc LOOP_K1692
+    ldloc LOOP_K1724
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1807
-    ldloc FN_TMP1807
-    brtrue FN_NULL1808
+    stloc FN_TMP1854
+    ldloc FN_TMP1854
+    brtrue FN_NULL1855
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1807
-FN_NULL1808:
+    stloc FN_TMP1854
+FN_NULL1855:
     nop
-    ldloc FN_TMP1807
+    ldloc FN_TMP1854
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1807
-    ldloc FN_TMP1807
-    brtrue FN_TYPE_OK1809
+    stloc FN_TMP1854
+    ldloc FN_TMP1854
+    brtrue FN_TYPE_OK1856
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1807
-FN_TYPE_OK1809:
+    stloc FN_TMP1854
+FN_TYPE_OK1856:
     nop
-FN_AFTER1810:
+FN_AFTER1857:
     nop
     ldc.i4 0
     box int32
-    stloc ARG_TMP1811
-    ldloc FN_TMP1807
-    ldloc ARG_TMP1811
+    stloc ARG_TMP1858
+    ldloc FN_TMP1854
+    ldloc ARG_TMP1858
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-BLOCK_END_CREATE_N_1689:
+BLOCK_END_CREATE_N_1721:
     nop
     ldnull
     ret
@@ -2676,12 +2730,12 @@ BLOCK_END_CREATE_N_1689:
 
 } // end of class Program
 
-.class public auto ansi beforefieldinit L_1740
+.class public auto ansi beforefieldinit L_1772
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'N1687'
-    .field public object 'LOOP_K1692'
-    .field public object 'L1691'
+    .field public object 'N1719'
+    .field public object 'LOOP_K1724'
+    .field public object 'L1723'
 
 .method public hidebysig void '.ctor'(object, object, object) cil managed
 {
@@ -2690,81 +2744,81 @@ BLOCK_END_CREATE_N_1689:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_1740::'N1687'
+    stfld object L_1772::'N1719'
     ldarg.0
     ldarg 2
-    stfld object L_1740::'LOOP_K1692'
+    stfld object L_1772::'LOOP_K1724'
     ldarg.0
     ldarg 3
-    stfld object L_1740::'L1691'
+    stfld object L_1772::'L1723'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1790, object FN_TMP1786, object CELL_VAL_TMP1785, object CELL_TMP1784, object TEMP1783)
+    .locals init (object ARG_TMP1835, object FN_TMP1831, object CELL_VAL_TMP1830, object CELL_TMP1829, object TEMP1828)
     ldarg 1
     ldarg.0
-    ldfld object L_1740::'N1687'
+    ldfld object L_1772::'N1719'
     stsfld object Program::'TEMP_B'
     unbox.any int32
     ldsfld object Program::'TEMP_B'
     unbox.any int32
     clt
-    brtrue TRUE1780
+    brtrue TRUE1825
     ldnull
-    br END1781
-TRUE1780:
+    br END1826
+TRUE1825:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1782'
-END1781:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1827'
+END1826:
     nop
     ldnull
     ceq
-    brtrue ELSE1791
+    brtrue ELSE1836
     ldarg.0
-    ldfld object L_1740::'L1691'
-    stloc CELL_TMP1784
+    ldfld object L_1772::'L1723'
+    stloc CELL_TMP1829
     ldnull
     ldarg.0
-    ldfld object L_1740::'L1691'
+    ldfld object L_1772::'L1723'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     newobj instance void [LispBase]Lisp.List/ListCell::'.ctor'(object, object)
-    stloc CELL_VAL_TMP1785
-    ldloc CELL_TMP1784
+    stloc CELL_VAL_TMP1830
+    ldloc CELL_TMP1829
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1785
+    ldloc CELL_VAL_TMP1830
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1785
+    ldloc CELL_VAL_TMP1830
     pop
     ldarg.0
-    ldfld object L_1740::'LOOP_K1692'
+    ldfld object L_1772::'LOOP_K1724'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1786
-    ldloc FN_TMP1786
-    brtrue FN_NULL1787
+    stloc FN_TMP1831
+    ldloc FN_TMP1831
+    brtrue FN_NULL1832
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1786
-FN_NULL1787:
+    stloc FN_TMP1831
+FN_NULL1832:
     nop
-    ldloc FN_TMP1786
+    ldloc FN_TMP1831
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1786
-    ldloc FN_TMP1786
-    brtrue FN_TYPE_OK1788
+    stloc FN_TMP1831
+    ldloc FN_TMP1831
+    brtrue FN_TYPE_OK1833
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1786
-FN_TYPE_OK1788:
+    stloc FN_TMP1831
+FN_TYPE_OK1833:
     nop
-FN_AFTER1789:
+FN_AFTER1834:
     nop
     ldarg 1
     ldc.i4 1
@@ -2775,15 +2829,15 @@ FN_AFTER1789:
     unbox.any int32
     add
     box int32
-    stloc ARG_TMP1790
-    ldloc FN_TMP1786
-    ldloc ARG_TMP1790
+    stloc ARG_TMP1835
+    ldloc FN_TMP1831
+    ldloc ARG_TMP1835
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
-ELSE1791:
+ELSE1836:
     nop
     ldarg.0
-    ldfld object L_1740::'L1691'
+    ldfld object L_1772::'L1723'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ret
@@ -2808,7 +2862,7 @@ ELSE1791:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1740::'InvokeBody'(object)
+    callvirt instance object L_1772::'InvokeBody'(object)
     ret
 }
 
@@ -3153,13 +3207,13 @@ ELSE1791:
     ret
 }
 
-} // end of class L_1740
+} // end of class L_1772
 
-.class public auto ansi beforefieldinit L_1741
+.class public auto ansi beforefieldinit L_1773
        extends [LispBase]Lisp.Closure
 {
-    .field public object 'COUNT_LEN1736'
-    .field public object 'COUNT1735'
+    .field public object 'COUNT_LEN1768'
+    .field public object 'COUNT1767'
 
 .method public hidebysig void '.ctor'(object, object) cil managed
 {
@@ -3168,40 +3222,40 @@ ELSE1791:
     call instance void [LispBase]Lisp.Closure::'.ctor'()
     ldarg.0
     ldarg 1
-    stfld object L_1741::'COUNT_LEN1736'
+    stfld object L_1773::'COUNT_LEN1768'
     ldarg.0
     ldarg 2
-    stfld object L_1741::'COUNT1735'
+    stfld object L_1773::'COUNT1767'
     ret
 }
 
 .method private hidebysig object 'InvokeBody'(object) cil managed
 {
     .maxstack 8
-    .locals init (object ARG_TMP1802, object FN_TMP1798, object CELL_VAL_TMP1797, object CELL_TMP1796, object TEMP1795)
+    .locals init (object ARG_TMP1849, object FN_TMP1845, object CELL_VAL_TMP1844, object CELL_TMP1843, object TEMP1840)
     ldarg 1
     ldnull
     call bool [mscorlib]System.Object::'Equals'(object, object)
-    brtrue TRUE1792
+    brtrue TRUE1837
     ldnull
-    br END1793
-TRUE1792:
+    br END1838
+TRUE1837:
     nop
-    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1794'
-END1793:
+    ldsfld class [LispBase]Lisp.Symbol Program::'SYM_S1839'
+END1838:
     nop
     ldnull
     ceq
-    brtrue ELSE1803
+    brtrue ELSE1850
     ldnull
     ret
-ELSE1803:
+ELSE1850:
     nop
     ldarg.0
-    ldfld object L_1741::'COUNT1735'
-    stloc CELL_TMP1796
+    ldfld object L_1773::'COUNT1767'
+    stloc CELL_TMP1843
     ldarg.0
-    ldfld object L_1741::'COUNT1735'
+    ldfld object L_1773::'COUNT1767'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
     ldc.i4 1
@@ -3212,46 +3266,55 @@ ELSE1803:
     unbox.any int32
     add
     box int32
-    stloc CELL_VAL_TMP1797
-    ldloc CELL_TMP1796
+    stloc CELL_VAL_TMP1844
+    ldloc CELL_TMP1843
     castclass [LispBase]Lisp.ValueCell
-    ldloc CELL_VAL_TMP1797
+    ldloc CELL_VAL_TMP1844
     stfld object [LispBase]Lisp.ValueCell::Value
-    ldloc CELL_VAL_TMP1797
+    ldloc CELL_VAL_TMP1844
     pop
     ldarg.0
-    ldfld object L_1741::'COUNT_LEN1736'
+    ldfld object L_1773::'COUNT_LEN1768'
     castclass [LispBase]Lisp.ValueCell
     ldfld object [LispBase]Lisp.ValueCell::Value
-    stloc FN_TMP1798
-    ldloc FN_TMP1798
-    brtrue FN_NULL1799
+    stloc FN_TMP1845
+    ldloc FN_TMP1845
+    brtrue FN_NULL1846
     ldstr "Undefined function: <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
-    stloc FN_TMP1798
-FN_NULL1799:
+    stloc FN_TMP1845
+FN_NULL1846:
     nop
-    ldloc FN_TMP1798
+    ldloc FN_TMP1845
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1798
-    ldloc FN_TMP1798
-    brtrue FN_TYPE_OK1800
+    stloc FN_TMP1845
+    ldloc FN_TMP1845
+    brtrue FN_TYPE_OK1847
     ldstr "Attempted to call non-function object in <computed function>"
     newobj instance void [mscorlib]System.Exception::'.ctor'(string)
     call object [LispBase]Lisp.HandlerControl::'Error'(object)
     isinst [LispBase]Lisp.Closure
-    stloc FN_TMP1798
-FN_TYPE_OK1800:
+    stloc FN_TMP1845
+FN_TYPE_OK1847:
     nop
-FN_AFTER1801:
+FN_AFTER1848:
     nop
     ldarg 1
+    dup
+    brfalse CDR_NULL1841
     castclass [LispBase]Lisp.List/ListCell
     ldfld object [LispBase]Lisp.List/ListCell::rest
-    stloc ARG_TMP1802
-    ldloc FN_TMP1798
-    ldloc ARG_TMP1802
+    br CDR_END1842
+CDR_NULL1841:
+    nop
+    pop
+    ldnull
+CDR_END1842:
+    nop
+    stloc ARG_TMP1849
+    ldloc FN_TMP1845
+    ldloc ARG_TMP1849
     tail. callvirt instance object [LispBase]Lisp.Closure::'Invoke'(object)
     ret
     ldnull
@@ -3275,7 +3338,7 @@ FN_AFTER1801:
     ldarg.0
     ldarg 1
     tail.
-    callvirt instance object L_1741::'InvokeBody'(object)
+    callvirt instance object L_1773::'InvokeBody'(object)
     ret
 }
 
@@ -3620,5 +3683,5 @@ FN_AFTER1801:
     ret
 }
 
-} // end of class L_1741
+} // end of class L_1773
 
