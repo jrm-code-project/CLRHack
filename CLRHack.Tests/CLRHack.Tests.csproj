@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LispCore\LispCore.csproj" />
+    <ProjectReference Include="..\Repl\Repl.csproj" />
     <Reference Include="CLSymbols">
       <HintPath>..\CLSymbols\bin\Debug\net8.0\CLSymbols.dll</HintPath>
     </Reference>
